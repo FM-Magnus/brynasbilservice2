@@ -15,10 +15,12 @@ interface Booking {
   service_price: number // Added service_price field
   date: string
   time: string
-  status: 'pending' | 'confirmed' | 'completed' | 'cancelled'
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled' | 'erased'
   created_at: string
   customer_email?: string
   customer_phone?: string
+  comment_customer?: string
+  comment_admin?: string
 }
 
 export function BookingManagement() {
@@ -30,6 +32,7 @@ export function BookingManagement() {
   const [statusFilter, setStatusFilter] = useState('all')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null)
+  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null)
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -64,13 +67,26 @@ export function BookingManagement() {
   });
 
   const sortedBookings = useMemo(() => {
-    if (!sortConfig) return bookings;
+    let filtered = bookings.filter(b => b.status !== 'erased');
 
-    const sorted = [...bookings].sort((a, b) => {
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      filtered = filtered.filter(b =>
+        b.customer_name.toLowerCase().includes(term) ||
+        b.service_name.toLowerCase().includes(term)
+      );
+    }
+
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(b => b.status === statusFilter);
+    }
+
+    if (!sortConfig) return filtered;
+
+    const sorted = [...filtered].sort((a, b) => {
       if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1;
       if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1;
 
-      // Secondary sorting by 'time' if primary key is 'date'
       if (sortConfig.key === 'date') {
         if (a.time < b.time) return -1;
         if (a.time > b.time) return 1;
@@ -80,7 +96,7 @@ export function BookingManagement() {
     });
 
     return sorted;
-  }, [bookings, sortConfig]);
+  }, [bookings, sortConfig, searchTerm, statusFilter]);
 
   const updateBookingStatus = async (id: number, status: Booking['status']) => {
     try {
@@ -100,19 +116,25 @@ export function BookingManagement() {
     }
   }
 
-  const deleteBooking = async (id: number) => {
+  const confirmDelete = (id: number) => {
+    setDeleteConfirmId(id)
+  }
+
+  const deleteBooking = async () => {
+    if (deleteConfirmId === null) return
     try {
       const token = localStorage.getItem('adminToken')
-      await axiosInstance.delete(`/api/admin/bookings/${id}`, {
+      await axiosInstance.delete(`/api/admin/bookings/${deleteConfirmId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
-      // Remove locally
-      setBookings(bookings.filter(booking => booking.id !== id))
+      setBookings(bookings.filter(booking => booking.id !== deleteConfirmId))
     } catch (error) {
       setError('Failed to delete booking')
       console.error(error)
+    } finally {
+      setDeleteConfirmId(null)
     }
   }
 
@@ -373,7 +395,7 @@ export function BookingManagement() {
                       <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        deleteBooking(booking.id);
+                        confirmDelete(booking.id);
                       }}
                       className="text-red-600 hover:text-red-900"
                     >
@@ -450,7 +472,8 @@ export function BookingManagement() {
                           </div>
                           <div className="mb-4 w-1/2 pr-2">
                             <div className="uppercase text-gray-500">{t('phone')}</div>
-                            <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedBooking.customer_phone || t('notAvailable')}</div>
+                            {/* <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedBooking.customer_phone || t('notAvailable')}</div> */}
+                            <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedBooking.customer_phone ? <a href={`tel:${selectedBooking.customer_phone}`}>{selectedBooking.customer_phone}</a> : t('notAvailable')}</div>                            
                           </div>
                           </div>
 
@@ -505,7 +528,27 @@ export function BookingManagement() {
                               <div className="uppercase text-gray-500">{t('time')}</div>
                               <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedBooking.time}</div>
                             </div>
-                          </div>                          
+                          </div>
+
+                          <div className="mb-4">
+                            <div className="uppercase text-gray-500">{t('customerComment')}</div>
+                            <textarea
+                              value={selectedBooking.comment_customer || ''}
+                              readOnly
+                              className="w-full p-2 rounded-md border border-gray-300 dark:border-brynas-dark-3 dark:bg-brynas-dark dark:text-white text-sm"
+                              rows={3}
+                            />
+                          </div>
+
+                          <div className="mb-4">
+                            <div className="uppercase text-gray-500">{t('adminComment')}</div>
+                            <textarea
+                              value={selectedBooking.comment_admin || ''}
+                              readOnly
+                              className="w-full p-2 rounded-md border border-gray-300 dark:border-brynas-dark-3 dark:bg-brynas-dark dark:text-white text-sm"
+                              rows={3}
+                            />
+                          </div>
                           </div>                          
 
 
@@ -526,6 +569,27 @@ export function BookingManagement() {
                   </button>
                 </div>
               </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition.Root>
+
+      {/* Delete confirmation modal */}
+      <Transition.Root show={deleteConfirmId !== null} as={Fragment}>
+        <Dialog as="div" className="relative z-50" onClose={() => setDeleteConfirmId(null)}>
+          <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-150" leaveFrom="opacity-100" leaveTo="opacity-0">
+            <div className="fixed inset-0 bg-black/40" />
+          </Transition.Child>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-150" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+              <Dialog.Panel className="w-full max-w-sm rounded-lg bg-white dark:bg-brynas-dark-2 p-6 shadow-xl">
+                <Dialog.Title className="text-lg font-semibold text-gray-900 dark:text-white">{t('confirmDelete')}</Dialog.Title>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{t('confirmDeleteMessage')}</p>
+                <div className="mt-5 flex justify-end gap-3">
+                  <button onClick={() => setDeleteConfirmId(null)} className="rounded-md px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-brynas-dark-3">{t('cancel')}</button>
+                  <button onClick={deleteBooking} className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700">{t('delete')}</button>
+                </div>
+              </Dialog.Panel>
             </Transition.Child>
           </div>
         </Dialog>

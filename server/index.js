@@ -134,10 +134,11 @@ const authenticateAdmin = (req, res, next) => {
 // Get all bookings
 app.get('/api/admin/bookings', authenticateAdmin, (req, res) => {
   const query = `
-    SELECT b.id, c.name as customer_name, c.email as customer_email, c.phone as customer_phone, s.name as service_name, s.price_hourly as service_price, s.price_starting as service_price_starting, b.date, b.time, b.status, b.created_at
+    SELECT b.id, c.name as customer_name, c.email as customer_email, c.phone as customer_phone, s.name as service_name, s.price_hourly as service_price, s.price_starting as service_price_starting, b.date, b.time, b.status, b.created_at, b.comment_customer, b.comment_admin
     FROM bookings b
     JOIN customers c ON b.customer_id = c.id
     JOIN services s ON b.service = s.id
+    WHERE b.status != 'erased'
     ORDER BY b.created_at DESC
   `;
 
@@ -167,17 +168,17 @@ app.put('/api/admin/bookings/:id', authenticateAdmin, (req, res) => {
   });
 });
 
-// Delete booking
+// Soft-delete booking (set status to 'erased')
 app.delete('/api/admin/bookings/:id', authenticateAdmin, (req, res) => {
   const { id } = req.params;
   
-  const query = 'DELETE FROM bookings WHERE id = ?';
-  db.query(query, [id], (err, results) => {
+  const query = 'UPDATE bookings SET status = ? WHERE id = ?';
+  db.query(query, ['erased', id], (err, results) => {
     if (err) {
-      console.error('Error deleting booking:', err);
-      res.status(500).json({ error: 'Failed to delete booking' });
+      console.error('Error erasing booking:', err);
+      res.status(500).json({ error: 'Failed to erase booking' });
     } else {
-      res.json({ message: 'Booking deleted successfully' });
+      res.json({ message: 'Booking erased successfully' });
     }
   });
 });

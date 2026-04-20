@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import axiosInstance from '../../api/axiosConfig'
 import { useLanguage } from '../../context/useLanguage'
-import { format } from 'date-fns';
-import { sv } from 'date-fns/locale';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { DialogBackdrop, DialogTitle } from '@headlessui/react';
@@ -28,6 +26,7 @@ export function ServiceManagement() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedService, setSelectedService] = useState<Service | null>(null)
+  const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null)
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -73,19 +72,25 @@ export function ServiceManagement() {
     setIsEditing(true)
   }
 
-  const handleDelete = async (id: number) => {
+  const confirmDelete = (id: number) => {
+    setDeleteConfirmId(id)
+  }
+
+  const executeDelete = async () => {
+    if (deleteConfirmId === null) return
     try {
       const token = localStorage.getItem('adminToken')
-      await axiosInstance.delete(`/api/admin/services/${id}`, {
+      await axiosInstance.delete(`/api/admin/services/${deleteConfirmId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
-      // Remove locally
-      setServices(services.filter(service => service.id !== id))
+      setServices(services.filter(service => service.id !== deleteConfirmId))
     } catch (error) {
       setError('Failed to delete service')
       console.error(error)
+    } finally {
+      setDeleteConfirmId(null)
     }
   }
 
@@ -355,7 +360,7 @@ export function ServiceManagement() {
                         <div className="text-sm text-gray-900 dark:text-gray-200">{service.price_starting != null ? `${service.price_starting}` : '—'}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right">
-                        <div className="text-sm text-gray-900 dark:text-gray-200">{service.price_hourly}</div>
+                        <div className="text-sm text-gray-900 dark:text-gray-200">{service.price_hourly != null ? `${service.price_hourly}` : '—'}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center gap-2">
@@ -372,7 +377,7 @@ export function ServiceManagement() {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleDelete(service.id);
+                            confirmDelete(service.id);
                           }}
                           className="text-red-600 hover:text-red-900"
                           title={t('deleteService')}
@@ -421,18 +426,41 @@ export function ServiceManagement() {
             >
               <div className="inline-block align-bottom bg-white dark:bg-brynas-dark-2 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
                 <div>
-                  <div className="mt-3 text-center sm:mt-5">
+                  <div className="mt-3 text-left sm:mt-5">
                     <DialogTitle as="h3" className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                       {t('serviceDetails')}
                     </DialogTitle>
                     <div className="mt-2">
                       {selectedService && (
                         <div className="text-sm text-gray-500 dark:text-brynas-muted">
-                          <p><strong>{t('serviceName')}:</strong> {selectedService.name}</p>
-                          <p><strong>{t('description')}:</strong> {selectedService.description}</p>
-                          <p><strong>{t('priceStarting')}:</strong> {selectedService.price_starting != null ? `${selectedService.price_starting} SEK` : '—'}</p>
-                          <p><strong>{t('priceHourly')}:</strong> {selectedService.price_hourly} SEK</p>
-                          <p><strong>{t('createdAt')}:</strong> {format(new Date(selectedService.created_at), 'EEEE, dd/MM HH:mm', { locale: sv })}</p>
+
+
+                          <div className='mb-4 flex'>
+                            <div className="mb-4 w-full">
+                              <div className="uppercase text-gray-500">{t('serviceName')}</div>
+                              <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedService.name}</div>
+                            </div>
+                          </div>
+
+                          <div className='mb-4 flex'>
+                            <div className="mb-4 w-full">
+                              <div className="uppercase text-gray-500">{t('description')}</div>
+                              <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedService.description}</div>
+                            </div>
+                          </div>
+
+
+                          <div className='mb-4 flex'>
+                            <div className="mb-4 w-1/2 pr-6">
+                              <div className="uppercase text-gray-500">{t('priceStarting')}</div>
+                              <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedService.price_starting ? selectedService.price_starting : "-"}</div>
+                            </div>
+                            <div className="mb-4 w-1/2">
+                              <div className="uppercase text-gray-500">{t('priceHourly')}</div>
+                              <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedService.price_hourly ? selectedService.price_hourly : "-"}</div>
+                            </div>
+                          </div>
+
                         </div>
                       )}
                     </div>
@@ -448,6 +476,27 @@ export function ServiceManagement() {
                   </button>
                 </div>
               </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition.Root>
+
+      {/* Delete confirmation modal */}
+      <Transition.Root show={deleteConfirmId !== null} as={Fragment}>
+        <Dialog as="div" className="relative z-50" onClose={() => setDeleteConfirmId(null)}>
+          <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-150" leaveFrom="opacity-100" leaveTo="opacity-0">
+            <div className="fixed inset-0 bg-black/40" />
+          </Transition.Child>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-150" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+              <Dialog.Panel className="w-full max-w-sm rounded-lg bg-white dark:bg-brynas-dark-2 p-6 shadow-xl">
+                <Dialog.Title className="text-lg font-semibold text-gray-900 dark:text-white">{t('confirmDelete')}</Dialog.Title>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{t('confirmDeleteMessage')}</p>
+                <div className="mt-5 flex justify-end gap-3">
+                  <button onClick={() => setDeleteConfirmId(null)} className="rounded-md px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-brynas-dark-3">{t('cancel')}</button>
+                  <button onClick={executeDelete} className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700">{t('delete')}</button>
+                </div>
+              </Dialog.Panel>
             </Transition.Child>
           </div>
         </Dialog>

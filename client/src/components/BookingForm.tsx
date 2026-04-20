@@ -16,6 +16,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void }
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
+  const [customerComment, setCustomerComment] = useState('');
 
   useEffect(() => {
     if (isOpen) {
@@ -35,6 +36,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void }
       serviceId: selectedService,
       date: selectedDate,
       time: selectedTime,
+      comment_customer: customerComment,
     };
 
     axios.post('/api/bookings', bookingData)
@@ -160,6 +162,23 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void }
                 placeholder='Ange ditt telefonnummer'
                 className="modal-input w-full"
                 required
+              />
+            </div>
+          </div>
+
+          <div className='mb-4 w-full'>
+            <div>
+              <label className="modal-label">
+                Kommentar
+              </label>
+            </div>
+            <div>
+              <textarea
+                value={customerComment}
+                onChange={(e) => setCustomerComment(e.target.value)}
+                placeholder='Skriv eventuella kommentarer här (valfritt)'
+                className="modal-input w-full"
+                rows={3}
               />
             </div>
           </div>
