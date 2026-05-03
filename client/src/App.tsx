@@ -39,9 +39,9 @@ export default function App() {
     <>
       <Header onBookingClick={openModal} />
       <Hero onBookingClick={openModal} />
+      <About />
       <Services />
       <ServiceList />
-      <About />
       <WhyUs />
       <EV />
       <CTABanner onBookingClick={openModal} />

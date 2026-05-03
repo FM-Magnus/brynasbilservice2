@@ -33,12 +33,6 @@ export function EV() {
                 </>
               }
             />
-            <p className="mb-8 leading-[1.8] text-(--color-text-muted)">
-              Vi är en av Gävleborgs få verkstäder med kompetens att serva nya kinesiska elbilsmärken som saknar auktoriserade verkstäder i Sverige. Våra mekaniker är utbildade att hantera högvoltssystem och moderna diagnostiksystem.<br /><br />
-            </p>
-            <p className="mb-8 leading-[1.8] text-(--color-text-muted)">
-              Vi samarbetar med <strong className="text-white">Däckleader</strong> och <strong className="text-white">Autobutler</strong> — beställ däck online och välj oss som monteringsstation, eller jämför priser via Autobutler.<br /><br />
-            </p>
             <a href="tel:0705533395" className="btn btn--primary">Ring för offert</a>
           </div>
           <div className="ev-brands">

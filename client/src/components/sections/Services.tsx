@@ -2,10 +2,13 @@ import mechBrakes2 from '../../assets/images/mech_inspects_brakes2.jpg'
 import tiresOnShelves from '../../assets/images/workshop_with_tires_on_shelves.jpg'
 import serviceTiles from '../../assets/images/service_tiles.jpg'
 import trailerWinter from '../../assets/images/trailer_in_winter.jpg'
+import sakarWorks from '../../assets/images/sakar_works.jpg'
 import { ArrowRightIcon } from '../icons/ArrowRightIcon'
 import { CarSaleIcon } from '../icons/CarSaleIcon'
 import { MonitorIcon } from '../icons/MonitorIcon'
+import { SnowflakeIcon } from '../icons/SnowflakeIcon'
 import { TireIcon } from '../icons/TireIcon'
+import { TruckIcon } from '../icons/TruckIcon'
 import { WrenchIcon } from '../icons/WrenchIcon'
 import { SectionHeader } from '../ui/SectionHeader'
 
@@ -21,16 +24,6 @@ const cards = [
     linkHref: '#booking-form',
   },
   {
-    img: tiresOnShelves,
-    alt: 'Däckverkstad med däck på hyllor',
-    w: 900, h: 674,
-    icon: <TireIcon />,
-    title: 'Däckservice & Däckhotell',
-    desc: 'Däckbyte, montering, balansering och hjulinställning. Vi erbjuder även däckhotell — vi förvarar dina däck säkert och tvättar dem inför säsongsskiftet.',
-    linkText: 'Boka tid',
-    linkHref: '#booking-form',
-  },
-  {
     img: serviceTiles,
     alt: '',
     w: 900, h: 502,
@@ -41,13 +34,43 @@ const cards = [
     linkHref: '#booking-form',
   },
   {
+    img: sakarWorks,
+    alt: '',
+    w: 900, h: 502,
+    icon: <SnowflakeIcon />,
+    title: 'AC-Service',
+    desc: 'Vi fyller på och servar AC-anläggningen på alla bilmärken. Regelbunden AC-service ger bättre komfort och förlänger systemets livslängd.',
+    linkText: 'BOKA TID',
+    linkHref: '#booking-form',
+  },
+  {
+    img: tiresOnShelves,
+    alt: 'Däckverkstad med däck på hyllor',
+    w: 900, h: 674,
+    icon: <TireIcon />,
+    title: 'Däckservice & Däckhotell',
+    desc: 'Däckbyte, montering, balansering och hjulinställning. Vi erbjuder även däckhotell — vi förvarar dina däck säkert och tvättar dem inför säsongsskiftet.',
+    linkText: 'Boka tid',
+    linkHref: '#booking-form',
+  },
+  {
+    img: trailerWinter,
+    alt: 'Husvagn och fordon till salu',
+    w: 900, h: 600,
+    icon: <TruckIcon />,
+    title: 'Bärgning & Transport',
+    desc: 'Vi hjälper dig när bilen inte går att köra. Vi erbjuder biltransport och bärgningshjälp i Gävleområdet.',
+    linkText: 'KONTAKTA OSS',
+    linkHref: '#kontakt',
+  },
+  {
     img: trailerWinter,
     alt: 'Husvagn och fordon till salu',
     w: 900, h: 600,
     icon: <CarSaleIcon />,
     title: 'Bilar till salu',
     desc: 'Vi säljer kvalitetskontrollerade begagnade bilar. Varje bil har gåtts igenom av våra mekaniker — du vet vad du köper.',
-    linkText: 'Se våra bilar',
+    linkText: 'SE VÅRA BILAR',
     linkHref: '#kontakt',
     isRedVariant: true,
   },
@@ -60,7 +83,7 @@ export function Services() {
         <div className="section-header">
           <SectionHeader
             eyebrow="Vad vi erbjuder"
-            title={<span>Våra <span className="title-accent">tjänster</span></span>}
+            title={<span><span className="text-white">Våra</span> <span className="title-accent">tjänster</span></span>}
             description="Vi utför alla typer av bilarbeten — från enkel service till komplexa motorreparationer. Alltid märkesoberoende, alltid ärliga priser."
           />
         </div>

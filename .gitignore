@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local files
+*.local
+
+# Design assets & instructions (personal, not for repo)
+_magnus/
+
+# Server build output (generated during deploy)
+server/public/
+

@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
-import logo1 from '../../assets/images/logo1.jpg'
-import { PhoneIcon } from '../icons/PhoneIcon'
+import newLogo from '../../assets/images/LOGOTYP_NY.svg'
 
-type HeaderProps = {
+ type HeaderProps = {
   onBookingClick: () => void;
 }
 
@@ -19,8 +18,10 @@ export function Header({ onBookingClick }: HeaderProps) {
   const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   const navLinks = [
+    { href: '#om-oss', label: 'Om oss' },
     { href: '#tjanster', label: 'Tjänster' },
-    { href: '#kontakt', label: 'Kontakt & Öppettider' },
+    { href: '#kontakt', label: 'Kontakt' },
+    { href: '#kontakt', label: 'Bilar till salu' }
   ]
 
   return (
@@ -28,23 +29,19 @@ export function Header({ onBookingClick }: HeaderProps) {
       <div className="container">
         <div className="header-inner">
           <a href="#" className="logo" aria-label="Brynäs Bilservice">
-            <img src={logo1} alt="Brynäs Bilservice" width="220" height="73" className="logo__img" loading="eager" />
+            <img src={newLogo} alt="Brynäs Bilservice" width="220" height="73" className="logo__img" loading="eager" />
           </a>
 
-          <nav aria-label="Huvudnavigation" style={{ marginLeft: 'auto' }}>
+          <nav className="main-nav" aria-label="Huvudnavigation">
             <ul className="nav__links">
-              {navLinks.map(l => (
-                <li key={l.href}><a href={l.href}>{l.label}</a></li>
+              {navLinks.map((l, i) => (
+                <li key={`${l.href}-${i}`}><a href={l.href}>{l.label}</a></li>
               ))}
             </ul>
           </nav>
 
           <div className="header-cta">
-            <a href="tel:0705533395" className="header-phone" aria-label="Ring oss">
-              <PhoneIcon />
-              070-553 33 95
-            </a>
-            <button onClick={onBookingClick} className="btn btn--primary">Boka tid</button>
+            <button onClick={onBookingClick} className="btn btn--primary">BOKA TID</button>
           </div>
 
           <button
@@ -61,8 +58,8 @@ export function Header({ onBookingClick }: HeaderProps) {
 
       <nav className={`mobile-nav${menuOpen ? ' open' : ''}`} id="mobile-nav" aria-label="Mobilnavigation">
         <ul>
-          {navLinks.map(l => (
-            <li key={l.href}><a href={l.href} onClick={closeMenu}>{l.label}</a></li>
+          {navLinks.map((l, i) => (
+            <li key={`${l.href}-${i}`}><a href={l.href} onClick={closeMenu}>{l.label}</a></li>
           ))}
         </ul>
         <div className="mobile-cta">

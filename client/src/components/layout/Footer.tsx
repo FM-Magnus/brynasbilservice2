@@ -1,4 +1,4 @@
-import logo2 from '../../assets/images/logo2.jpg'
+import newLogo from '../../assets/images/LOGOTYP_NY.svg'
 import { FacebookIcon } from '../icons/FacebookIcon'
 
 export function Footer() {
@@ -9,7 +9,7 @@ export function Footer() {
 
           <div className="footer-brand">
             <a href="#" className="logo" aria-label="Brynäs Bilservice">
-              <img src={logo2} alt="Brynäs Bilservice logotyp" width="80" height="76" className="logo__img" loading="lazy" />
+              <img src={newLogo} alt="Brynäs Bilservice logotyp" width="80" height="76" className="logo__img" loading="lazy" />
             </a>
             <p className="footer-desc">
               Din lokala bilverkstad i Brynäs, Gävle. Vi erbjuder professionell bilservice, reparationer och däckservice för alla bilmärken.
@@ -21,26 +21,13 @@ export function Footer() {
             </div>
           </div>
 
-          {/* <div>
-            <h3 className="footer-col-title">Tjänster</h3>
-            <ul className="footer-links">
-              <li><a href="#tjanster">Bilservice</a></li>
-              <li><a href="#tjanster">Däckservice</a></li>
-              <li><a href="#tjanster">AC-service</a></li>
-              <li><a href="#tjanster">Bromsbyte</a></li>
-              <li><a href="#tjanster">Felsökning</a></li>
-              <li><a href="#tjanster">Bilhandel</a></li>
-            </ul>
-          </div> */}
-
           <div>
             <h3 className="footer-col-title">Kontakt</h3>
             <ul className="footer-links">
               <li><a href="tel:+46705533395">070-553 33 95</a></li>
               <li><a href="mailto:info@brynasbilservice.se">info@brynasbilservice.se</a></li>
-              <li><a href="https://maps.google.com/?q=Utmarksvägen+21B+Gävle" target="_blank" rel="noopener noreferrer">Utmarksvägen 21B, Gävle</a></li>
+              <li><a href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle" target="_blank" rel="noopener noreferrer">Utmarksvägen 21B, Gävle</a></li>
             </ul>
-            {/* <br /> */}
             </div>
             <div>
             <h3 className="footer-col-title">Öppettider</h3>
