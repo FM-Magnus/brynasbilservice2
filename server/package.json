@@ -1,0 +1,21 @@
+{
+  "name": "brynasbilservice-server",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "if not exist dist mkdir dist && copy *.js dist"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "mysql2": "^3.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

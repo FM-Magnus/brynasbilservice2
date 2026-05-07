@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build output
+client/dist/
+server/dist/
+server/public/
+
+# Environment — never commit credentials
+server/.env
+.env
+.env.*
+
+# SSH keys — never commit
+client/fenrirm
+client/fenrirm.pub
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor
+.vscode/
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Claude local settings (personal overrides, not team-wide)
+.claude/settings.local.json
