@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import peugeot307_1 from '../assets/images/peugeot-307-cc-1.jpg'
+import peugeot307_2 from '../assets/images/peugeot-307-cc-2.jpg'
+import peugeot307_3 from '../assets/images/peugeot-307-cc-3.jpg'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
@@ -16,16 +19,14 @@ interface Car {
   price: number
   description: string
   color: string
-  image?: string
+  images?: string[]   // first image is the main one
   sold?: boolean
 }
 
 // ── Edit this list when stock changes ──────────────────────────────────────
-// Images: drop photos in client/src/assets/images/, import them above, then
-// set the `image` property on the car object. Example:
-//   import peugeot1 from '../assets/images/peugeot-307-cc-1.jpg'
-//   ...
-//   image: peugeot1,
+// To add a car: import photos at the top of the file, then add an entry here.
+// mileage is in km — displayed as mil automatically.
+// Add sold: true to move a car to the "Nyligen sålda" section.
 
 const cars: Car[] = [
   {
@@ -42,7 +43,7 @@ const cars: Car[] = [
       'Snygg och välskött cabriolet med elektriskt hopfällbart hardtop. Nybesiktigad maj 2026 och godkänd till juli 2027. ' +
       'Dragkrok. Aluminiumfälgar. Inga anmärkningar i senaste besiktning. ' +
       'Perfekt sommarbil — ring oss för att boka en provkörning.',
-    // image: peugeot1,   ← uncomment and set after adding photos to assets/images/
+    images: [peugeot307_3, peugeot307_1, peugeot307_2],
   },
 ]
 // ──────────────────────────────────────────────────────────────────────────
@@ -56,11 +57,20 @@ function formatMileage(km: number) {
 }
 
 function CarCard({ car }: { car: Car }) {
+  const [activeImg, setActiveImg] = useState(0)
+  const images = car.images ?? []
+  const mainImg = images[activeImg]
+
   return (
     <article className={`car-card${car.sold ? ' car-card--sold' : ''}`}>
       <div className="car-card__image-wrap">
-        {car.image ? (
-          <img src={car.image} alt={`${car.make} ${car.model}`} className="car-card__image" loading="lazy" />
+        {mainImg ? (
+          <img
+            src={mainImg}
+            alt={`${car.make} ${car.model}`}
+            className="car-card__image"
+            loading="lazy"
+          />
         ) : (
           <div className="car-card__image-placeholder">
             <svg viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -75,6 +85,22 @@ function CarCard({ car }: { car: Car }) {
         {car.sold && <div className="car-card__sold-badge">Såld</div>}
         <div className="car-card__price-badge">{formatPrice(car.price)}</div>
       </div>
+
+      {/* Thumbnail strip — only shown when there are multiple images */}
+      {images.length > 1 && (
+        <div className="car-card__thumbs">
+          {images.map((src, i) => (
+            <button
+              key={i}
+              className={`car-card__thumb${i === activeImg ? ' car-card__thumb--active' : ''}`}
+              onClick={() => setActiveImg(i)}
+              aria-label={`Bild ${i + 1}`}
+            >
+              <img src={src} alt="" loading="lazy" />
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="car-card__body">
         <div className="car-card__header">
