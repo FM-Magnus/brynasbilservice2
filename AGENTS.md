@@ -67,6 +67,7 @@ Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 - Fixed dead link on "Bilar till salu" service card (`#kontakt` → `/bilar-till-salu`)
 - Replaced all 6 service card images with new per-service photos (repair, diagnosis, AC, tyres, tow, carbuy)
 - Car interface changed from `image?: string` to `images?: string[]` to support multi-photo gallery
+- Fixed mobile padding bug on car card body: `--space-5` doesn't exist in design system, changed to `--space-6`
 - All builds verified clean throughout
 
 ### 2026-05-05 — Claude (claude-sonnet-4-6)
