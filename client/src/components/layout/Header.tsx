@@ -20,7 +20,7 @@ export function Header({ onBookingClick }: HeaderProps) {
   const navLinks = [
     { href: '#om-oss', label: 'Om oss' },
     { href: '#tjanster', label: 'Tjänster' },
-    { href: '#alla-tjanster', label: 'Bilar till salu' },
+    { href: '/bilar-till-salu', label: 'Bilar till salu' },
     { href: '#kontakt', label: 'Kontakt' },
   ]
 

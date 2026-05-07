@@ -6,6 +6,7 @@ import './css/index.css'
 import App from './App.tsx'
 import AdminDashboard from './pages/admin/Dashboard.tsx'
 import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
+import BilarTillSalu from './pages/BilarTillSalu.tsx'
 
 const basename = process.env.NODE_ENV === 'development' ? '/' : '/brynasbilservice'
 
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')!).render(
       <LanguageProvider>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/bilar-till-salu" element={<BilarTillSalu />} />
           <Route path="/admin" element={
             <ProtectedRoute>
               <AdminDashboard />

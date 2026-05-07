@@ -1366,3 +1366,289 @@ ul { list-style: none; }
   .footer-bottom { padding-top: var(--space-4); gap: var(--space-2); }
   .footer-copy { font-size: 0.7rem; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   BILAR TILL SALU PAGE
+═══════════════════════════════════════════════════════ */
+
+/* Page wrapper */
+.cars-page {
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+/* Hero / intro banner */
+.cars-page__hero {
+  padding-block: var(--space-20) var(--space-16);
+  background: linear-gradient(180deg, #0e0e0e 0%, var(--color-background) 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.cars-page__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  margin-bottom: var(--space-4);
+}
+
+.cars-page__subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  max-width: 56ch;
+  margin-bottom: var(--space-6);
+}
+
+.cars-page__subtitle .text-gold {
+  color: var(--color-gold);
+  text-decoration: none;
+  font-weight: 500;
+}
+.cars-page__subtitle .text-gold:hover { text-decoration: underline; }
+
+.cars-page__location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.cars-page__location svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+/* Listings section */
+.cars-page__listings {
+  padding-block: var(--space-16) var(--space-24);
+}
+
+/* Cars grid */
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-8);
+}
+
+.cars-grid--sold {
+  opacity: 0.6;
+}
+
+/* Empty state */
+.cars-page__empty {
+  text-align: center;
+  padding: var(--space-20) var(--space-8);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.cars-page__empty p { margin-bottom: var(--space-2); }
+
+/* Sold section heading */
+.cars-page__sold {
+  margin-top: var(--space-20);
+  padding-top: var(--space-12);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.cars-page__sold-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-8);
+}
+
+/* ── Car Card ─────────────────────────────────────── */
+.car-card {
+  background: var(--color-dark-2);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--dur-normal) var(--ease),
+              border-color var(--dur-normal) var(--ease),
+              box-shadow var(--dur-normal) var(--ease);
+}
+
+.car-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(240,184,0,0.3);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.car-card--sold {
+  pointer-events: none;
+}
+
+/* Image area */
+.car-card__image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-dark-3);
+}
+
+.car-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease);
+}
+
+.car-card:hover .car-card__image {
+  transform: scale(1.04);
+}
+
+/* Image placeholder */
+.car-card__image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  color: rgba(255,255,255,0.2);
+}
+
+.car-card__image-placeholder svg {
+  width: 80px;
+  height: 40px;
+}
+
+.car-card__image-placeholder span {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Price badge */
+.car-card__price-badge {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  background: var(--color-gold);
+  color: #000;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  line-height: 1.6;
+}
+
+/* Sold overlay badge */
+.car-card__sold-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.55);
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Card body */
+.car-card__body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--space-4);
+}
+
+.car-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.car-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.car-card__year {
+  font-size: 0.875rem;
+  color: var(--color-gold);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Specs row */
+.car-card__specs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.car-card__spec {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.car-card__spec-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+}
+
+/* Description */
+.car-card__desc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* CTA button */
+.car-card__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  margin-top: auto;
+}
+
+/* ── Cars page responsive ──────────────────────────── */
+@media (max-width: 768px) {
+  .cars-page__hero { padding-block: var(--space-16) var(--space-12); }
+  .cars-page__listings { padding-block: var(--space-12) var(--space-16); }
+  .cars-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .car-card__body { padding: var(--space-5); }
+}
+
+@media (max-width: 480px) {
+  .cars-page__hero { padding-block: var(--space-12) var(--space-8); }
+  .cars-page__title { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+  .car-card__price-badge { font-size: 0.85rem; }
+}
