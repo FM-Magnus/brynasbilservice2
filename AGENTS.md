@@ -21,12 +21,16 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 - "SE VÅRA BILAR" link on Bilar till salu service card routes correctly to `/bilar-till-salu`
 
 ### What is broken / incomplete
-1. **GoogleReviews has fake data** — hardcoded from a different business. Needs real Brynäs Bilservice reviews. Screenshots of real reviews are in `_magnus/REVIEWS/` (22 images).
-2. **comment_customer not saved** — BookingForm sends it in POST body but `server/index.js` `insertBooking()` does not include it in the INSERT query.
-3. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
-4. **schema.sql out of sync** — missing columns vs actual DB: `customer_name`, `comment_customer`, `comment_admin`; missing `'erased'` from status ENUM; `service` column is VARCHAR but stores an INT ID. The live DB may be correct — schema file just doesn't reflect it.
-5. **SSH keys in project folder** — `client/fenrirm` and `client/fenrirm.pub` should not be here (blocked by .gitignore, but still on disk).
-6. **Om oss images** — both main and accent image use `sakar_works.jpg`. Magnus wants to replace them. Main image: 1200×800px (3:2), accent image: 600×400px (3:2).
+1. **GitHub Actions deploy is silently broken** — `deploy.yml` lives at `client/.github/workflows/` but GitHub only looks at repo root `.github/workflows/`. Push to main does nothing. Needs to be moved before auto-deploy works.
+2. **No git remote configured** — `git remote -v` is empty. Repo is local-only until pushed to GitHub.
+3. **`.htaccess` discrepancy** — `server/.htaccess` says port 3000 + has `RewriteBase`. `docs/deployment.md` says port 3001 + explicitly forbids `RewriteBase`. One will fail at deploy. Sakar owns the resolution.
+4. **GoogleReviews has fake data** — hardcoded from a different business. Needs real Brynäs Bilservice reviews. Screenshots of real reviews are in `_magnus/REVIEWS/` (22 images).
+5. **comment_customer not saved** — BookingForm sends it in POST body but `server/index.js` `insertBooking()` does not include it in the INSERT query.
+6. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
+7. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
+8. **SSH keys in project folder** — `client/fenrirm` and `client/fenrirm.pub` should not be here (blocked by .gitignore, but still on disk).
+9. **Om oss images** — both main and accent image use `sakar_works.jpg`. Magnus wants to replace them. Main image: 1200×800px (3:2), accent image: 600×400px (3:2).
+10. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -51,12 +55,68 @@ Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 
 ### Files agents should NOT touch
 - `server/index.js` — owned by Sakar (Magnus's brother), backend developer
-- `server/database/schema.sql` — owned by Sakar
+- `server/database/schema.sql` — owned by Sakar (and stale; live DB is the truth)
+- `server/.htaccess` — owned by Sakar (also has known port/RewriteBase mismatch)
 - `server/.env` — credentials, never edit or read aloud
+- Root `package.json` / `vite.config.ts` / `tsconfig.json` / `index.html` — orphan scaffolding, do not act on them. Real frontend is in `client/`.
+
+---
+
+## Production environment (read this before any deploy or server work)
+
+| Item | Value |
+|---|---|
+| Live URL | https://labb.fenrirmedia.se/brynasbilservice/ |
+| Host | `194.14.207.224` (VPS) — Cloudflare → nginx → Apache → Express |
+| OS | CentOS 7, glibc 2.17 |
+| Node.js (production) | **16** — cannot upgrade (glibc constraint) |
+| Node.js (build) | 20 on GitHub Actions Ubuntu runner |
+| Express port (production) | **3001** (port 3000 is taken) |
+| Express port (local dev) | 3000 |
+| Process manager | PM2 via fnm |
+| Database | MySQL `fenrirm_brynasbilservice` on the VPS |
+| Local DB access | SSH tunnel: `ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224` |
+| `.env` location | Server only, preserved across deploys via backup/restore step |
+
+Auto-deploy is **currently broken** — see "What is broken" #1.
+
+---
+
+## API contract (server/index.js)
+
+All routes return JSON. No request validation, no error middleware, raw mysql2 callbacks.
+
+| Method | Route | Auth | Notes |
+|---|---|---|---|
+| GET | `/api/services` | public | — |
+| GET | `/api/available-dates` | public | queries `bookings WHERE available=1` |
+| POST | `/api/bookings` | public | body: `customerName, customerEmail, customerPhone, serviceId, date, time, comment_customer?` |
+| GET | `/api/admin/bookings` | admin | — |
+| PUT | `/api/admin/bookings/:id` | admin | body: `{ status }` (enum below) |
+| DELETE | `/api/admin/bookings/:id` | admin | soft-delete via `status='erased'` |
+| GET / POST | `/api/admin/services` | admin | list / create |
+| PUT / DELETE | `/api/admin/services/:id` | admin | update / delete |
+| GET | `/api/admin/customers` | admin | — |
+
+- Admin auth header: `Authorization: Bearer admin-secret-token` (hardcoded — not production-safe)
+- Customers are deduplicated by **email** in `POST /api/bookings`
+- Booking status enum: `pending`, `confirmed`, `completed`, `cancelled`, `erased`
+- Frontend uses `axios` via `client/src/api/axiosConfig.ts` — baseURL switches between `localhost:3000` (dev) and `/brynasbilservice` (prod)
 
 ---
 
 ## Session log
+
+### 2026-05-07 (later) — Claude (claude-opus-4-7)
+- Full repo audit comparing CLAUDE.md / AGENTS.md / instructions.md against actual code
+- Discovered: GitHub Actions deploy file in wrong location (silent broken deploy), no git remote, .htaccess port/RewriteBase mismatch, schema.sql heavily out of sync with live DB, orphan root project configs (React 19/Vite 8) confusing newer agents
+- Removed orphan files at repo root: `Hero_Bakground_warmer.jpg`, `LOGOTYP_NY.svg`, `New_old_logo.png`, `logo1-c66a10e4@0.5x.png`
+- Removed `client/src/service_card_carsale.jpg` (stray, not imported)
+- Removed `client/src/backup/` (only contained unused `Button.d.ts`)
+- Added Production environment section + full API contract section to AGENTS.md
+- Added Production environment + API contract + Database reality + Repo traps sections to CLAUDE.md
+- Added 3 new entries to "What is broken" (deploy, no remote, .htaccess mismatch)
+- Build verified clean after cleanup
 
 ### 2026-05-07 — Claude (claude-sonnet-4-6)
 - Built Bilar till salu subpage (`client/src/pages/BilarTillSalu.tsx`) — Car interface, CarCard component, gallery with thumbnail strip, sold section, empty state, full CSS

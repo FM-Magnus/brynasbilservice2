@@ -2,12 +2,25 @@
 
 ## Project overview
 Website for Brynäs Bilservice, a car repair shop in Gävle, Sweden. Full-stack:
-- **Client** — React + Vite + TypeScript + Tailwind, in `client/`
-- **Server** — Node.js + Express + MySQL, in `server/`
+- **Client** — React 18 + Vite 4 + TypeScript + Tailwind 3, in `client/`
+- **Server** — Node.js 16 + Express 4 + MySQL (raw `mysql2` callbacks, CommonJS, no ORM), in `server/`
 
 Two developers:
 - **Magnus** (frontend) — works on design, layout, components, CSS
-- **Sakar's brother** (backend) — owns `server/index.js`, `server/database/schema.sql`, MySQL
+- **Sakar** (backend, Magnus's brother) — owns `server/index.js`, `server/database/schema.sql`, MySQL
+
+## Production environment
+- **Live URL:** https://labb.fenrirmedia.se/brynasbilservice/
+- **Host:** VPS at `194.14.207.224` behind Cloudflare → nginx → Apache → Express
+- **OS:** CentOS 7 (glibc 2.17 — **cannot run Node 18+**, locked to Node 16)
+- **Build runtime:** Node 20 on GitHub Actions Ubuntu runner
+- **Production port:** Express runs on **3001** (port 3000 is taken by another tenant)
+- **Local dev port:** Express runs on **3000**
+- **Process manager:** PM2 via fnm
+- **Apache `.htaccess`:** proxies `/api/*` to Express, falls back to `public/index.html` for SPA routes
+- **Auto-deploy:** GitHub Actions on push to `main` (currently broken — workflow file is in wrong location, see `AGENTS.md`)
+- **Database access for local dev:** SSH tunnel required —
+  `ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224`
 
 ## Division of responsibility
 **Magnus owns (safe to edit freely):**
@@ -56,8 +69,37 @@ dist/             — server build output
 
 ### Routes
 - `/` — public site (App.tsx)
+- `/bilar-till-salu` — used cars subpage (BilarTillSalu.tsx)
 - `/admin` — admin dashboard (ProtectedRoute → Dashboard)
 - `/api/*` — Express API endpoints
+
+### API contract (server/index.js)
+All routes return JSON. No request validation, no error middleware — keep payloads tight.
+
+| Method | Route | Auth | Body / params |
+|---|---|---|---|
+| GET | `/api/services` | public | — |
+| GET | `/api/available-dates` | public | — (queries `bookings WHERE available=1`) |
+| POST | `/api/bookings` | public | `{ customerName, customerEmail, customerPhone, serviceId, date, time, comment_customer? }` |
+| GET | `/api/admin/bookings` | admin | — |
+| PUT | `/api/admin/bookings/:id` | admin | `{ status }` (enum: `pending`, `confirmed`, `completed`, `cancelled`, `erased`) |
+| DELETE | `/api/admin/bookings/:id` | admin | soft-delete via status=`erased` |
+| GET / POST | `/api/admin/services` | admin | list / create |
+| PUT / DELETE | `/api/admin/services/:id` | admin | update / delete |
+| GET | `/api/admin/customers` | admin | — |
+
+Admin auth header: `Authorization: Bearer admin-secret-token` (hardcoded — not production-safe).
+Customers are deduplicated by **email** in `POST /api/bookings`.
+
+### Database reality (live DB ≠ schema.sql)
+The `bookings` table on the live DB has more columns than `server/database/schema.sql` shows:
+- `service` is **INT** (FK to services.id), schema says VARCHAR
+- `available` BOOLEAN exists (used by `/api/available-dates`), missing from schema
+- `time` TIME exists, missing from schema
+- `customer_name`, `comment_customer`, `comment_admin` exist, missing from schema
+- `status` ENUM includes `'erased'` for soft-delete, schema is missing it
+
+**Do not edit `schema.sql` to "fix" this** — Sakar owns it and the live DB is the source of truth.
 
 ## Dev setup
 Two terminals required:
@@ -74,11 +116,20 @@ Open `http://localhost:5173` in browser.
 The Vite dev server proxies `/api` to `localhost:3000` automatically via axiosConfig.
 
 ## Deploy
+**Intended flow** (when GitHub Actions is fixed): push to `main` → workflow builds the client and tars it to `$DEPLOY_PATH/public/` over SSH → `.env` is preserved across deploys → PM2 restarts the server. See `docs/deployment.md` for the full pipeline and required GitHub Secrets.
+
+**Manual flow** (current, since auto-deploy is broken):
 ```bash
 cd client && npm run build
 # Copy client/dist/* to server/public/
 ```
 Server serves the built client from `server/public/` as static files.
+
+## Repo traps to avoid
+- **Don't touch root `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html`** — they reference React 19 / Vite 8 / Tailwind 4, none of which is what the project actually uses. They're orphan scaffolding from an earlier attempt and confuse new agents. The real frontend project lives in `client/`.
+- **`server/.htaccess` and `docs/deployment.md` disagree** about port and `RewriteBase`. The docs are correct (port 3001, no `RewriteBase`); `server/.htaccess` is stale. Sakar owns the resolution.
+- **`.github/workflows/deploy.yml` is in the wrong place** (lives at `client/.github/workflows/`, GitHub looks at repo root). Auto-deploy is silently broken until this is moved.
+- **No git remote is configured** as of this writing — `git remote -v` is empty. The repo is local-only until pushed to GitHub.
 
 ## Design system
 All CSS custom properties are in `client/src/css/index.css` under `:root`.
