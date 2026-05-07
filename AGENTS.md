@@ -34,6 +34,8 @@ Nav links: Om oss → Tjänster → Bilar till salu → Kontakt (Bilar till salu
 - Git repo initialised (`git init`), initial commit `34c858c`, mobile hero CSS fix committed
 - Bilar till salu subpage built: `client/src/pages/BilarTillSalu.tsx` + CSS + route + nav link (commit `f6b3a74`)
 - Header nav "Bilar till salu" now points to `/bilar-till-salu` (was `#alla-tjanster`)
+- Header nav section links changed to `/#om-oss` etc. so they work from subpages (commit `86f8dfa`)
+- Header logo link changed from `#` to `/`
 - Mobile hero spacing improved: `justify-content: space-between`, bigger google-reviews area
 - `.claude/settings.json` Stop hook created to remind agents to update AGENTS.md
 
@@ -51,7 +53,9 @@ Nav links: Om oss → Tjänster → Bilar till salu → Kontakt (Bilar till salu
 - Added full CSS block for `.cars-page__*`, `.cars-grid`, `.car-card*` to `client/src/css/index.css`
 - Added `/bilar-till-salu` route to `client/src/main.tsx`
 - Updated Header.tsx nav: "Bilar till salu" now links to `/bilar-till-salu` instead of `#alla-tjanster`
-- Build verified clean (0 errors), committed as `f6b3a74`
+- Fixed Header nav section links to use `/#om-oss`, `/#tjanster`, `/#kontakt` (were bare anchors, broke on subpages)
+- Fixed Header logo link from `#` to `/`
+- Build verified clean (0 errors), committed as `f6b3a74`, nav fix as `86f8dfa`
 - AGENTS.md updated
 
 ### 2026-05-05 — Claude (claude-sonnet-4-6)
