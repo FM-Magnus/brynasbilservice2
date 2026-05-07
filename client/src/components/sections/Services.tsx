@@ -71,7 +71,7 @@ const cards = [
     title: 'Bilar till salu',
     desc: 'Vi säljer kvalitetskontrollerade begagnade bilar. Varje bil har gåtts igenom av våra mekaniker — du vet vad du köper.',
     linkText: 'SE VÅRA BILAR',
-    linkHref: '#kontakt',
+    linkHref: '/bilar-till-salu',
     isRedVariant: true,
   },
 ]
