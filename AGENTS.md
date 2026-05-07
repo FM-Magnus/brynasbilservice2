@@ -9,14 +9,16 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 
 ### What is working
 - Full frontend renders: Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
-- Header with new logo (LOGOTYP_NY.svg), sticky scroll, mobile hamburger menu
+- Header with new logo (LOGOTYP_NY.svg), sticky scroll, mobile hamburger menu — all nav links work from subpages (`/#om-oss` etc.)
 - Booking form modal (DatePicker + TimePicker)
 - Admin panel at `/admin` — booking management, service CRUD, soft-delete, search/filter/sort
 - i18n context (Swedish/English) — LanguageProvider wraps the whole app in main.tsx
 - Dark mode via ThemeSwitcher + localStorage
 - Marquee component in hero — content driven from `client/src/data/marquee-items.txt`
 - GoogleReviews component in hero — currently shows placeholder data (not real Brynäs reviews)
-- **Bilar till salu subpage** at `/bilar-till-salu` — CarCard grid, sold section, empty state, full CSS
+- **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
+- **6 service cards** — each has its own photo (servicekort_repair/diagnosis/AC/tyres/tow/carbuy.jpg)
+- "SE VÅRA BILAR" link on Bilar till salu service card routes correctly to `/bilar-till-salu`
 
 ### What is broken / incomplete
 1. **GoogleReviews has fake data** — hardcoded from a different business. Needs real Brynäs Bilservice reviews. Screenshots of real reviews are in `_magnus/REVIEWS/` (22 images).
@@ -24,20 +26,28 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 3. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
 4. **schema.sql out of sync** — missing columns vs actual DB: `customer_name`, `comment_customer`, `comment_admin`; missing `'erased'` from status ENUM; `service` column is VARCHAR but stores an INT ID. The live DB may be correct — schema file just doesn't reflect it.
 5. **SSH keys in project folder** — `client/fenrirm` and `client/fenrirm.pub` should not be here (blocked by .gitignore, but still on disk).
-6. **Car images missing** — BilarTillSalu cars use SVG placeholder; real photos need to be added to `client/src/assets/images/` and set in the `cars` array in `BilarTillSalu.tsx`.
+6. **Om oss images** — both main and accent image use `sakar_works.jpg`. Magnus wants to replace them. Main image: 1200×800px (3:2), accent image: 600×400px (3:2).
+
+### Cars for sale (BilarTillSalu.tsx)
+- Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
+- Photos: `peugeot-307-cc-1/2/3.jpg` (main is -3, side profile shot)
+- To add more cars: import photos, add entry to `cars[]` array in `BilarTillSalu.tsx`
+- To mark sold: add `sold: true` to the car object
 
 ### Section and nav order
 Page scroll: Hero → About → Services → ServiceList → WhyUs → EV → CTABanner → Contact
-Nav links: Om oss → Tjänster → Bilar till salu → Kontakt (Bilar till salu now routes to `/bilar-till-salu`)
+Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 
 ### Recently changed (this session)
-- Git repo initialised (`git init`), initial commit `34c858c`, mobile hero CSS fix committed
-- Bilar till salu subpage built: `client/src/pages/BilarTillSalu.tsx` + CSS + route + nav link (commit `f6b3a74`)
-- Header nav "Bilar till salu" now points to `/bilar-till-salu` (was `#alla-tjanster`)
-- Header nav section links changed to `/#om-oss` etc. so they work from subpages (commit `86f8dfa`)
-- Header logo link changed from `#` to `/`
-- Mobile hero spacing improved: `justify-content: space-between`, bigger google-reviews area
+- Git repo initialised (`git init`), initial commit `34c858c`
+- Mobile hero spacing improved, google-reviews area enlarged
 - `.claude/settings.json` Stop hook created to remind agents to update AGENTS.md
+- Bilar till salu subpage built with full CSS, route, CarCard gallery (commits `f6b3a74`, `3b1ccf2`)
+- Header nav links fixed to use `/#section` for cross-page navigation, logo fixed to `/` (`86f8dfa`)
+- Real Peugeot 307 CC listing added, placeholder cars removed (`3e18b1e`)
+- 3 Peugeot photos added and wired up with clickable thumbnail strip (`3b1ccf2`)
+- "SE VÅRA BILAR" link on service card fixed from `#kontakt` to `/bilar-till-salu` (`7422eb8`)
+- All 6 service card images replaced with fitting photos (`b344b59`)
 
 ### Files agents should NOT touch
 - `server/index.js` — owned by Sakar (Magnus's brother), backend developer
@@ -49,14 +59,15 @@ Nav links: Om oss → Tjänster → Bilar till salu → Kontakt (Bilar till salu
 ## Session log
 
 ### 2026-05-07 — Claude (claude-sonnet-4-6)
-- Built Bilar till salu subpage: `client/src/pages/BilarTillSalu.tsx` (CarCard component, 3 placeholder cars, sold section, empty state)
-- Added full CSS block for `.cars-page__*`, `.cars-grid`, `.car-card*` to `client/src/css/index.css`
-- Added `/bilar-till-salu` route to `client/src/main.tsx`
-- Updated Header.tsx nav: "Bilar till salu" now links to `/bilar-till-salu` instead of `#alla-tjanster`
-- Fixed Header nav section links to use `/#om-oss`, `/#tjanster`, `/#kontakt` (were bare anchors, broke on subpages)
-- Fixed Header logo link from `#` to `/`
-- Build verified clean (0 errors), committed as `f6b3a74`, nav fix as `86f8dfa`
-- AGENTS.md updated
+- Built Bilar till salu subpage (`client/src/pages/BilarTillSalu.tsx`) — Car interface, CarCard component, gallery with thumbnail strip, sold section, empty state, full CSS
+- Added `/bilar-till-salu` route to `main.tsx`
+- Header nav: all section links changed to `/#section` format so they work from subpages; logo fixed to `/`
+- Replaced 3 fake placeholder cars with real Peugeot 307 CC 2.0 (2006, mörkgrå, 141 147 km, 39 900 kr)
+- Added 3 Peugeot photos (`peugeot-307-cc-1/2/3.jpg`), renamed from macOS screenshot names, wired into gallery
+- Fixed dead link on "Bilar till salu" service card (`#kontakt` → `/bilar-till-salu`)
+- Replaced all 6 service card images with new per-service photos (repair, diagnosis, AC, tyres, tow, carbuy)
+- Car interface changed from `image?: string` to `images?: string[]` to support multi-photo gallery
+- All builds verified clean throughout
 
 ### 2026-05-05 — Claude (claude-sonnet-4-6)
 - Full codebase review and analysis
