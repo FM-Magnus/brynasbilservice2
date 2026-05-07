@@ -21,42 +21,28 @@ interface Car {
 }
 
 // ── Edit this list when stock changes ──────────────────────────────────────
+// Images: drop photos in client/src/assets/images/, import them above, then
+// set the `image` property on the car object. Example:
+//   import peugeot1 from '../assets/images/peugeot-307-cc-1.jpg'
+//   ...
+//   image: peugeot1,
+
 const cars: Car[] = [
   {
     id: 1,
-    make: 'Volvo',
-    model: 'V70',
-    year: 2015,
-    mileage: 142000,
-    fuel: 'Diesel',
-    gearbox: 'Automat',
-    price: 89900,
-    color: 'Silver',
-    description: 'Välskött Volvo V70 med fullservicehistorik. Dragkrok, värmare och vinterdäck ingår. Besiktigad och klar.',
-  },
-  {
-    id: 2,
-    make: 'Toyota',
-    model: 'Yaris',
-    year: 2019,
-    mileage: 54000,
+    make: 'Peugeot',
+    model: '307 CC 2.0',
+    year: 2006,
+    mileage: 141147,
     fuel: 'Bensin',
     gearbox: 'Manuell',
-    price: 129900,
-    color: 'Vit',
-    description: 'Lågmilad Yaris i mycket fint skick. Ett ägare sedan ny, all service utförd hos Toyota. Sommarbil i toppskick.',
-  },
-  {
-    id: 3,
-    make: 'BMW',
-    model: '320d',
-    year: 2016,
-    mileage: 178000,
-    fuel: 'Diesel',
-    gearbox: 'Automat',
-    price: 119900,
-    color: 'Svart',
-    description: 'Sportiga 320d med M-ratt och backkamera. Nyservad och nybesiktigad. Körde glädje för lågt pris.',
+    price: 39900,
+    color: 'Mörkgrå',
+    description:
+      'Snygg och välskött cabriolet med elektriskt hopfällbart hardtop. Nybesiktigad maj 2026 och godkänd till juli 2027. ' +
+      'Dragkrok. Aluminiumfälgar. Inga anmärkningar i senaste besiktning. ' +
+      'Perfekt sommarbil — ring oss för att boka en provkörning.',
+    // image: peugeot1,   ← uncomment and set after adding photos to assets/images/
   },
 ]
 // ──────────────────────────────────────────────────────────────────────────
