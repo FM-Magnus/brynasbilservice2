@@ -18,17 +18,17 @@ export function Header({ onBookingClick }: HeaderProps) {
   const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   const navLinks = [
-    { href: '#om-oss', label: 'Om oss' },
-    { href: '#tjanster', label: 'Tjänster' },
+    { href: '/#om-oss', label: 'Om oss' },
+    { href: '/#tjanster', label: 'Tjänster' },
     { href: '/bilar-till-salu', label: 'Bilar till salu' },
-    { href: '#kontakt', label: 'Kontakt' },
+    { href: '/#kontakt', label: 'Kontakt' },
   ]
 
   return (
     <header className={`site-header${sticky ? ' scrolled' : ''}`} id="site-header">
       <div className="container">
         <div className="header-inner">
-          <a href="#" className="logo" aria-label="Brynäs Bilservice">
+          <a href="/" className="logo" aria-label="Brynäs Bilservice">
             <img src={newLogo} alt="Brynäs Bilservice" width="220" height="73" className="logo__img" loading="eager" />
           </a>
 
