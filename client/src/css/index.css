@@ -1678,7 +1678,7 @@ ul { list-style: none; }
   .cars-page__hero { padding-block: var(--space-16) var(--space-12); }
   .cars-page__listings { padding-block: var(--space-12) var(--space-16); }
   .cars-grid { grid-template-columns: 1fr; gap: var(--space-6); }
-  .car-card__body { padding: var(--space-5); }
+  .car-card__body { padding: var(--space-6); }
 }
 
 @media (max-width: 480px) {
