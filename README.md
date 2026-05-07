@@ -117,3 +117,42 @@ Key points:
 - [Admin Panel](docs/admin-panel.md) — features, auth flow, API endpoints
 - [Deployment](docs/deployment.md) — architecture, GitHub Actions, server ops
 - [SSH Setup](docs/ssh-setup.md) — key generation and server access
+
+## Working with AI assistants
+
+This project is developed with help from AI coding assistants (Claude Code, Codex, Kimi, etc.).
+To keep them productive across sessions and switching between tools, the repo has a small
+set of conventions:
+
+### The three documentation files
+
+| File | Audience | Purpose |
+|---|---|---|
+| [`CLAUDE.md`](CLAUDE.md) | AI assistants | Project rules, ownership boundaries, architecture, design tokens, known traps. Read once at session start. |
+| [`AGENTS.md`](AGENTS.md) | AI assistants (all of them) | Living state-of-the-project + chronological session log. Read first, updated last. |
+| [`instructions.md`](instructions.md) | Human developers | Practical "how do I run / change / deploy this" reference for Magnus. |
+
+### The session protocol
+
+Every AI session — Claude, Kimi, Codex, whichever — should:
+
+1. **Read `AGENTS.md` at the start** — it has the current "what works / what's broken" state and what the previous session changed.
+2. **Avoid touching the files marked "do not touch"** in `AGENTS.md` (Sakar's backend, orphan root configs, etc.).
+3. **Update `AGENTS.md` at the end** — rewrite the "Current state" section to reflect reality, append a new entry to the session log.
+
+For Claude Code specifically, this is enforced by a Stop hook in `.claude/settings.json`
+that prints a reminder before the session can finish. Other tools rely on the user pasting
+in the same instruction at the start of the conversation.
+
+### Multi-agent coordination
+
+`AGENTS.md` is the shared memory. As long as every agent reads it first and updates it last,
+they don't step on each other's work even when Magnus switches between Claude, Kimi, and Codex
+mid-feature. The session log preserves *why* something was done, not just *what*, which matters
+when the next agent walks in cold.
+
+### Ownership boundaries (also in CLAUDE.md)
+
+- **Magnus** — frontend (`client/src/`), assets, CSS, components
+- **Sakar** — backend (`server/index.js`, `server/database/`, `server/.htaccess`, `server/.env`)
+- AI agents do not modify Sakar's files without explicit instruction from Magnus

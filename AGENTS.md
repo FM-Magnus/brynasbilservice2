@@ -117,6 +117,8 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 - Added Production environment + API contract + Database reality + Repo traps sections to CLAUDE.md
 - Added 3 new entries to "What is broken" (deploy, no remote, .htaccess mismatch)
 - Build verified clean after cleanup
+- Proposed but **declined by Magnus**: moving `deploy.yml` to repo root (B), reconciling `.htaccess` (C), removing orphan root configs (D). All three remain as known issues — they involve Sakar's domain or risk breaking production. Future agents: do not act on these without Magnus explicitly asking.
+- Added "Working with AI assistants" section to README.md so the AI workflow (three docs, Stop hook, AGENTS.md as shared log) is discoverable from the project entry point
 
 ### 2026-05-07 — Claude (claude-sonnet-4-6)
 - Built Bilar till salu subpage (`client/src/pages/BilarTillSalu.tsx`) — Car interface, CarCard component, gallery with thumbnail strip, sold section, empty state, full CSS
