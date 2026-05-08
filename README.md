@@ -137,7 +137,7 @@ set of conventions:
 Every AI session — Claude, Kimi, Codex, whichever — should:
 
 1. **Read `AGENTS.md` at the start** — it has the current "what works / what's broken" state and what the previous session changed.
-2. **Avoid touching the files marked "do not touch"** in `AGENTS.md` (Sakar's backend, orphan root configs, etc.).
+2. **Avoid touching the files marked "do not touch"** in `AGENTS.md` (Johnny's backend, orphan root configs, etc.).
 3. **Update `AGENTS.md` at the end** — rewrite the "Current state" section to reflect reality, append a new entry to the session log.
 
 For Claude Code specifically, this is enforced by a Stop hook in `.claude/settings.json`
@@ -154,5 +154,5 @@ when the next agent walks in cold.
 ### Ownership boundaries (also in CLAUDE.md)
 
 - **Magnus** — frontend (`client/src/`), assets, CSS, components
-- **Sakar** — backend (`server/index.js`, `server/database/`, `server/.htaccess`, `server/.env`)
-- AI agents do not modify Sakar's files without explicit instruction from Magnus
+- **Johnny** — backend (`server/index.js`, `server/database/`, `server/.htaccess`, `server/.env`)
+- AI agents do not modify Johnny's files without explicit instruction from Magnus

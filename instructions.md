@@ -2,7 +2,7 @@
 
 ## Who does what
 - **Magnus** — frontend (React components, CSS, layout, design)
-- **Sakar / server owner** — backend (Express API, MySQL database)
+- **Johnny / server owner** — backend (Express API, MySQL database)
 
 ---
 

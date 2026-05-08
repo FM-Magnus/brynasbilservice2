@@ -7,7 +7,7 @@ Website for Brynäs Bilservice, a car repair shop in Gävle, Sweden. Full-stack:
 
 Two developers:
 - **Magnus** (frontend) — works on design, layout, components, CSS
-- **Sakar** (backend, Magnus's brother) — owns `server/index.js`, `server/database/schema.sql`, MySQL
+- **Johnny** (backend, Magnus's brother) — owns `server/index.js`, `server/database/schema.sql`, MySQL
 
 ## Production environment
 - **Live URL:** https://labb.fenrirmedia.se/brynasbilservice/
@@ -99,7 +99,7 @@ The `bookings` table on the live DB has more columns than `server/database/schem
 - `customer_name`, `comment_customer`, `comment_admin` exist, missing from schema
 - `status` ENUM includes `'erased'` for soft-delete, schema is missing it
 
-**Do not edit `schema.sql` to "fix" this** — Sakar owns it and the live DB is the source of truth.
+**Do not edit `schema.sql` to "fix" this** — Johnny owns it and the live DB is the source of truth.
 
 ## Dev setup
 Two terminals required:
@@ -127,7 +127,7 @@ Server serves the built client from `server/public/` as static files.
 
 ## Repo traps to avoid
 - **Don't touch root `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html`** — they reference React 19 / Vite 8 / Tailwind 4, none of which is what the project actually uses. They're orphan scaffolding from an earlier attempt and confuse new agents. The real frontend project lives in `client/`.
-- **`server/.htaccess` and `docs/deployment.md` disagree** about port and `RewriteBase`. The docs are correct (port 3001, no `RewriteBase`); `server/.htaccess` is stale. Sakar owns the resolution.
+- **`server/.htaccess` and `docs/deployment.md` disagree** about port and `RewriteBase`. The docs are correct (port 3001, no `RewriteBase`); `server/.htaccess` is stale. Johnny owns the resolution.
 - **`.github/workflows/deploy.yml` is in the wrong place** (lives at `client/.github/workflows/`, GitHub looks at repo root). Auto-deploy is silently broken until this is moved.
 - **No git remote is configured** as of this writing — `git remote -v` is empty. The repo is local-only until pushed to GitHub.
 

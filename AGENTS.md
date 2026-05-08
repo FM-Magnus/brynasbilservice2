@@ -23,7 +23,7 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 ### What is broken / incomplete
 1. **GitHub Actions deploy is silently broken** — `deploy.yml` lives at `client/.github/workflows/` but GitHub only looks at repo root `.github/workflows/`. Push to main does nothing. Needs to be moved before auto-deploy works.
 2. **No git remote configured** — `git remote -v` is empty. Repo is local-only until pushed to GitHub.
-3. **`.htaccess` discrepancy** — `server/.htaccess` says port 3000 + has `RewriteBase`. `docs/deployment.md` says port 3001 + explicitly forbids `RewriteBase`. One will fail at deploy. Sakar owns the resolution.
+3. **`.htaccess` discrepancy** — `server/.htaccess` says port 3000 + has `RewriteBase`. `docs/deployment.md` says port 3001 + explicitly forbids `RewriteBase`. One will fail at deploy. Johnny owns the resolution.
 4. **GoogleReviews has fake data** — hardcoded from a different business. Needs real Brynäs Bilservice reviews. Screenshots of real reviews are in `_magnus/REVIEWS/` (22 images).
 5. **comment_customer not saved** — BookingForm sends it in POST body but `server/index.js` `insertBooking()` does not include it in the INSERT query.
 6. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
@@ -54,9 +54,9 @@ Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 - All 6 service card images replaced with fitting photos (`b344b59`)
 
 ### Files agents should NOT touch
-- `server/index.js` — owned by Sakar (Magnus's brother), backend developer
-- `server/database/schema.sql` — owned by Sakar (and stale; live DB is the truth)
-- `server/.htaccess` — owned by Sakar (also has known port/RewriteBase mismatch)
+- `server/index.js` — owned by Johnny (Magnus's brother), backend developer
+- `server/database/schema.sql` — owned by Johnny (and stale; live DB is the truth)
+- `server/.htaccess` — owned by Johnny (also has known port/RewriteBase mismatch)
 - `server/.env` — credentials, never edit or read aloud
 - Root `package.json` / `vite.config.ts` / `tsconfig.json` / `index.html` — orphan scaffolding, do not act on them. Real frontend is in `client/`.
 
@@ -117,7 +117,7 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 - Added Production environment + API contract + Database reality + Repo traps sections to CLAUDE.md
 - Added 3 new entries to "What is broken" (deploy, no remote, .htaccess mismatch)
 - Build verified clean after cleanup
-- Proposed but **declined by Magnus**: moving `deploy.yml` to repo root (B), reconciling `.htaccess` (C), removing orphan root configs (D). All three remain as known issues — they involve Sakar's domain or risk breaking production. Future agents: do not act on these without Magnus explicitly asking.
+- Proposed but **declined by Magnus**: moving `deploy.yml` to repo root (B), reconciling `.htaccess` (C), removing orphan root configs (D). All three remain as known issues — they involve Johnny's domain or risk breaking production. Future agents: do not act on these without Magnus explicitly asking.
 - Added "Working with AI assistants" section to README.md so the AI workflow (three docs, Stop hook, AGENTS.md as shared log) is discoverable from the project entry point
 
 ### 2026-05-07 — Claude (claude-sonnet-4-6)
