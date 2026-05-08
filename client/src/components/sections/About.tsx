@@ -1,6 +1,9 @@
-import sakarWorks from '../../assets/images/sakar_works.jpg'
+import omoss1 from '../../assets/images/OMOSS_KENBURNS1.jpg'
+import omoss2 from '../../assets/images/OMOSS_KENBURNS2.jpg'
+import omoss3 from '../../assets/images/OMOSS_KENBURNS3.jpg'
 import { CheckIcon } from '../icons/CheckIcon'
 import { SectionHeader } from '../ui/SectionHeader'
+import { KenBurnsSlideshow } from '../ui/KenBurnsSlideshow'
 
 const features = [
   'Märkesoberoende — alla bilmärken',
@@ -17,8 +20,15 @@ export function About() {
       <div className="container">
         <div className="about__inner">
           <div className="about__images">
-            <img src={sakarWorks} alt="Sakar arbetar på motor i Brynäs Bilservice verkstad" width="900" height="502" loading="lazy" className="about__img-main" />
-            <img src={sakarWorks} alt="Ägaren Sakar Fouad vid arbetsbanken" width="900" height="502" loading="lazy" className="about__img-accent" />
+            <KenBurnsSlideshow
+              images={[omoss1, omoss2, omoss3]}
+              alts={[
+                'Brynäs Bilservice verkstad',
+                'Mekaniker arbetar på bil',
+                'Verkstadsmiljö och utrustning',
+              ]}
+              className="about__slideshow"
+            />
             <div className="about__badge">Grundat 2021</div>
           </div>
 
