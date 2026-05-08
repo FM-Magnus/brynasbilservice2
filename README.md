@@ -120,39 +120,34 @@ Key points:
 
 ## Working with AI assistants
 
-This project is developed with help from AI coding assistants (Claude Code, Codex, Kimi, etc.).
-To keep them productive across sessions and switching between tools, the repo has a small
-set of conventions:
+Magnus develops the frontend with help from AI coding assistants (Claude Code, Codex, Kimi,
+etc.). Johnny works on the backend by hand. To keep both ways of working from stepping on
+each other, the repo has three documentation files at the root.
 
-### The three documentation files
+### The three documentation files — at a glance
 
-| File | Audience | Purpose |
+| File | Who it's for | What's in it |
 |---|---|---|
-| [`CLAUDE.md`](CLAUDE.md) | AI assistants | Project rules, ownership boundaries, architecture, design tokens, known traps. Read once at session start. |
-| [`AGENTS.md`](AGENTS.md) | AI assistants (all of them) | Living state-of-the-project + chronological session log. Read first, updated last. |
-| [`instructions.md`](instructions.md) | Human developers | Practical "how do I run / change / deploy this" reference for Magnus. |
+| [`README.md`](README.md) | Anyone opening the repo | This file. High-level overview, tech stack, how to run it, links to deeper docs. |
+| [`instructions.md`](instructions.md) | Magnus (and any human dev) | Practical day-to-day reference: how to run locally, change content, build, deploy. No AI-specific stuff. |
+| [`CLAUDE.md`](CLAUDE.md) | AI assistants | Rules, ownership boundaries, architecture, the design system, API contract, known traps. AI tools read this once at session start. |
+| [`AGENTS.md`](AGENTS.md) | AI assistants (all of them) | Living state of the project + chronological session log. Each AI session reads it first and updates it last. |
 
-### The session protocol
+### What this means in practice
 
-Every AI session — Claude, Kimi, Codex, whichever — should:
+**For Johnny (backend):**
+- You don't need to use the AI tools — keep working in `server/` like you always have.
+- `AGENTS.md` lists `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, and `server/.env` as **"do not touch"** for AI assistants. They will not edit your files unless Magnus explicitly tells them to.
+- If you want to see what changed on the frontend recently, the **session log in `AGENTS.md`** is a chronological list of what Magnus's AI sessions did. The "What is broken / incomplete" section also flags backend-related issues that need your attention (schema-vs-live-DB drift, the `.htaccess` port mismatch, etc.).
+- You're welcome to add your own entries to the session log when you make backend changes — same format, just date and what you did. It helps the next AI session know what state the API/DB is in.
 
-1. **Read `AGENTS.md` at the start** — it has the current "what works / what's broken" state and what the previous session changed.
-2. **Avoid touching the files marked "do not touch"** in `AGENTS.md` (Johnny's backend, orphan root configs, etc.).
-3. **Update `AGENTS.md` at the end** — rewrite the "Current state" section to reflect reality, append a new entry to the session log.
+**For Magnus (frontend):**
+- Whichever AI tool you're using — Claude Code, Kimi, Codex — the workflow is the same: it reads `AGENTS.md` at the start of the session, you do the work, it updates `AGENTS.md` at the end.
+- For Claude Code specifically, a Stop hook in `.claude/settings.json` automatically reminds it to update `AGENTS.md` before finishing the session. Other tools rely on you starting with "read AGENTS.md first".
+- If you switch tools mid-feature (start with Claude, finish with Kimi) the session log gives the new tool full context on what's already been done.
 
-For Claude Code specifically, this is enforced by a Stop hook in `.claude/settings.json`
-that prints a reminder before the session can finish. Other tools rely on the user pasting
-in the same instruction at the start of the conversation.
+### Ownership boundaries (also documented in CLAUDE.md)
 
-### Multi-agent coordination
-
-`AGENTS.md` is the shared memory. As long as every agent reads it first and updates it last,
-they don't step on each other's work even when Magnus switches between Claude, Kimi, and Codex
-mid-feature. The session log preserves *why* something was done, not just *what*, which matters
-when the next agent walks in cold.
-
-### Ownership boundaries (also in CLAUDE.md)
-
-- **Magnus** — frontend (`client/src/`), assets, CSS, components
-- **Johnny** — backend (`server/index.js`, `server/database/`, `server/.htaccess`, `server/.env`)
-- AI agents do not modify Johnny's files without explicit instruction from Magnus
+- **Magnus** — `client/src/`, all frontend assets, CSS, components, the public site, the admin panel UI
+- **Johnny** — `server/index.js`, `server/database/`, `server/.htaccess`, `server/.env`, anything PM2/MySQL/Apache-related
+- AI assistants do not modify Johnny's files without explicit instruction from Magnus

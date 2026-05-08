@@ -19,6 +19,7 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 - **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
 - **6 service cards** — each has its own photo (servicekort_repair/diagnosis/AC/tyres/tow/carbuy.jpg)
 - "SE VÅRA BILAR" link on Bilar till salu service card routes correctly to `/bilar-till-salu`
+- **Om oss section** uses Ken Burns slideshow (`KenBurnsSlideshow.tsx`) cycling 3 images (`OMOSS_KENBURNS1/2/3.jpg`) with crossfade + slow pan/zoom; respects `prefers-reduced-motion`
 
 ### What is broken / incomplete
 1. **GitHub Actions deploy is silently broken** — `deploy.yml` lives at `client/.github/workflows/` but GitHub only looks at repo root `.github/workflows/`. Push to main does nothing. Needs to be moved before auto-deploy works.
@@ -29,8 +30,7 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 6. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
 7. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
 8. **SSH keys in project folder** — `client/fenrirm` and `client/fenrirm.pub` should not be here (blocked by .gitignore, but still on disk).
-9. **Om oss images** — both main and accent image use `sakar_works.jpg`. Magnus wants to replace them. Main image: 1200×800px (3:2), accent image: 600×400px (3:2).
-10. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
+9. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -106,6 +106,16 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-05-08 — Claude (claude-opus-4-7)
+- Built reusable `KenBurnsSlideshow` component (`client/src/components/ui/KenBurnsSlideshow.tsx`) — crossfading slideshow with continuous Ken Burns pan/zoom on each image, three pan variants rotating, respects `prefers-reduced-motion`
+- Replaced static About image with slideshow cycling `OMOSS_KENBURNS1/2/3.jpg` (7s visible per image, 1.5s crossfade)
+- Removed accent image and `sakar_works.jpg` entirely from the codebase
+- Removed obsolete `.about__img-main` and `.about__img-accent` CSS rules; added `.kenburns*` rules + 3 keyframe animations
+- Mobile slideshow height adjusted to 280px (was 240px on the static image — Ken Burns needs slightly more room for the pan)
+- **Name correction:** Magnus's brother (backend dev) is named **Johnny**, not Sakar. Fixed across `CLAUDE.md`, `AGENTS.md`, `README.md`, `instructions.md`. The asset filename `sakar_works.jpg` was deleted as part of the Ken Burns work so no leftover reference remains.
+- Rewrote the "Working with AI assistants" section in `README.md` to address both Magnus and Johnny — Johnny now has explicit guidance that the AI tools won't touch his backend files, and that he's welcome to add his own entries to the AGENTS.md session log
+- Two extra untracked images (`BARGNING_TRANSPORT.jpg`, `HAR_FINNS_VI.jpg`) ended up committed alongside the Ken Burns work because of `git add -A` — they're now in the repo waiting to be used in some future feature
 
 ### 2026-05-07 (later) — Claude (claude-opus-4-7)
 - Full repo audit comparing CLAUDE.md / AGENTS.md / instructions.md against actual code
