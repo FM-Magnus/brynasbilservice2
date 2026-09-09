@@ -111,6 +111,7 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 - Recovered Git continuity for `https://github.com/FM-Magnus/brynasbilservice2`: the previous unrelated GitHub `main` is preserved at `legacy/pre-live-site-2026-09-09`; the current local project history and verified frontend build are now canonical `main` (commit `1e5c5d4f`). A matching `recovery/live-site-2026-09-09` branch remains as an additional safety point.
 - This checkout's `origin` now tracks `FM-Magnus/brynasbilservice2`; the former `FM-Johnny/brynasbilservice` remote is retained locally as `johnny-archive` for reference only.
 - Removed 11 already-deleted unused `_magnus/` reference assets in the canonical recovery commit. The real frontend build (`client/npm run build`) passes. The root Vite scaffold is still not the application build target.
+- Added `docs/git-history-recovery.md` as the plain-language explanation of the recovery, safety branches, everyday Git workflow, and deployment boundary.
 
 ### 2026-05-08 — Claude (claude-opus-4-7)
 - Built reusable `KenBurnsSlideshow` component (`client/src/components/ui/KenBurnsSlideshow.tsx`) — crossfading slideshow with continuous Ken Burns pan/zoom on each image, three pan variants rotating, respects `prefers-reduced-motion`
