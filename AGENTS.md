@@ -5,7 +5,7 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 
 ---
 
-## Current state (last updated: 2026-05-07 by Claude)
+## Current state (last updated: 2026-09-09 by Codex)
 
 ### What is working
 - Full frontend renders: Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
@@ -23,14 +23,13 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 
 ### What is broken / incomplete
 1. **GitHub Actions deploy is silently broken** — `deploy.yml` lives at `client/.github/workflows/` but GitHub only looks at repo root `.github/workflows/`. Push to main does nothing. Needs to be moved before auto-deploy works.
-2. **No git remote configured** — `git remote -v` is empty. Repo is local-only until pushed to GitHub.
-3. **`.htaccess` discrepancy** — `server/.htaccess` says port 3000 + has `RewriteBase`. `docs/deployment.md` says port 3001 + explicitly forbids `RewriteBase`. One will fail at deploy. Johnny owns the resolution.
-4. **GoogleReviews has fake data** — hardcoded from a different business. Needs real Brynäs Bilservice reviews. Screenshots of real reviews are in `_magnus/REVIEWS/` (22 images).
-5. **comment_customer not saved** — BookingForm sends it in POST body but `server/index.js` `insertBooking()` does not include it in the INSERT query.
-6. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
-7. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
-8. **SSH keys in project folder** — `client/fenrirm` and `client/fenrirm.pub` should not be here (blocked by .gitignore, but still on disk).
-9. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
+2. **`.htaccess` discrepancy** — `server/.htaccess` says port 3000 + has `RewriteBase`. `docs/deployment.md` says port 3001 + explicitly forbids `RewriteBase`. One will fail at deploy. Johnny owns the resolution.
+3. **GoogleReviews has fake data** — hardcoded from a different business. Needs real Brynäs Bilservice reviews. Screenshots of real reviews are in `_magnus/REVIEWS/` (22 images).
+4. **comment_customer not saved** — BookingForm sends it in POST body but `server/index.js` `insertBooking()` does not include it in the INSERT query.
+5. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
+6. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
+7. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
+8. **GitHub Actions deployment is intentionally absent from the canonical branch** — the legacy workflow was retained only on `legacy/pre-live-site-2026-09-09` during Git history recovery. Do not restore or modify deployment files without Magnus and Johnny agreeing on the `.htaccess` and server configuration.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -106,6 +105,12 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-09 — Codex
+- Verified that the locally running frontend (including the Google Reviews hero) is the intended live-site version; `client/` was restored from its tracked local snapshot after a temporary working-tree deletion.
+- Recovered Git continuity for `https://github.com/FM-Magnus/brynasbilservice2`: the previous unrelated GitHub `main` is preserved at `legacy/pre-live-site-2026-09-09`; the current local project history and verified frontend build are now canonical `main` (commit `1e5c5d4f`). A matching `recovery/live-site-2026-09-09` branch remains as an additional safety point.
+- This checkout's `origin` now tracks `FM-Magnus/brynasbilservice2`; the former `FM-Johnny/brynasbilservice` remote is retained locally as `johnny-archive` for reference only.
+- Removed 11 already-deleted unused `_magnus/` reference assets in the canonical recovery commit. The real frontend build (`client/npm run build`) passes. The root Vite scaffold is still not the application build target.
 
 ### 2026-05-08 — Claude (claude-opus-4-7)
 - Built reusable `KenBurnsSlideshow` component (`client/src/components/ui/KenBurnsSlideshow.tsx`) — crossfading slideshow with continuous Ken Burns pan/zoom on each image, three pan variants rotating, respects `prefers-reduced-motion`
