@@ -9,13 +9,13 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 
 ### What is working
 - Full frontend renders: Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
-- Header with new logo (LOGOTYP_NY.svg), sticky scroll, mobile hamburger menu — all nav links work from subpages (`/#om-oss` etc.)
+- Phase 1A header and hero redesign — real SVG logo, floating navigation/booking controls, keyboard-usable mobile menu, unchanged hero copy and connected `background_hero.jpg`
 - Booking form modal (DatePicker + TimePicker)
 - Admin panel at `/admin` — booking management, service CRUD, soft-delete, search/filter/sort
 - i18n context (Swedish/English) — LanguageProvider wraps the whole app in main.tsx; public section copy is currently hardcoded Swedish
 - ThemeSwitcher + localStorage are used in admin; public sections use dark CSS tokens and have no visible theme switch
-- Marquee component in hero — content driven from `client/src/data/marquee-items.txt`
-- GoogleReviews component in hero — currently shows placeholder data (not real Brynäs reviews)
+- Hero marquee removed as part of the approved Phase 1A redesign
+- GoogleReviews component in hero — redesigned presentation with reduced-motion handling and placeholder data (not real Brynäs reviews)
 - **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
 - **6 service cards** — each has its own photo (servicekort_repair/diagnosis/AC/tyres/tow/carbuy.jpg)
 - "SE VÅRA BILAR" link on Bilar till salu service card routes correctly to `/bilar-till-salu`
@@ -30,9 +30,9 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 6. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
 7. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
 8. **Four service booking links are dead anchors** — `Services.tsx` points to `#booking-form`, but the modal has no matching id and is opened through callbacks elsewhere.
-9. **Existing mobile accessibility gaps** — hero CTA heights are about 38px; menu Escape does not close it; the booking modal clips above the 390×844 viewport and lacks focus/dialog handling. Phase 0 did not fix these.
-10. **Typography variables are undefined** — CSS references `--font-heading` and `--font-body`, but does not define them; browser baseline uses system sans despite Exo 2/Barlow loading in HTML.
-11. **Motion and semantics gaps** — marquee/review rotation lack full reduced-motion handling; About nests h2 headings. Existing Ken Burns reduced-motion support remains.
+9. **Booking-modal mobile accessibility gaps** — the modal clips above the 390×844 viewport and lacks focus/dialog handling. These remain deferred to Phase 1B.
+10. **Typography variables are undefined outside Phase 1A** — legacy CSS references `--font-heading` and `--font-body`, while the redesigned header and hero use scoped Barlow tokens.
+11. **Remaining semantics gap** — About nests h2 headings. Existing Ken Burns reduced-motion support remains.
 12. **Local booking API unavailable during Phase 0** — opening the modal produced a network error fetching services; no booking was submitted or backend changed.
 
 ### Cars for sale (BilarTillSalu.tsx)
@@ -46,10 +46,13 @@ Page scroll: Hero → About → Services → ServiceList → WhyUs → EV → CT
 Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 
 ### Recently changed (this session)
+- Phase 1A was visually approved by Magnus: the redesigned header, hero and Google-review presentation are implemented; `background_hero.jpg` is connected and the marquee is removed.
+- Visual verification passed at 1440, 768 and 390 px. Booking-modal accessibility/mobile issues remain deferred to Phase 1B.
+- Backend/API availability, authentic Google reviews and deployed production behavior remain unverified.
 - Redesign Phase 0 completed using all **seven** mockups, as explicitly clarified by Magnus; the handover's four-image limit is outdated.
 - Added `docs/redesign-phase-0/README.md` with component/content mapping, existing issues, Phase 1 file scope, decision points and acceptance criteria; saved desktop/tablet/mobile baselines in its `captures/` directory.
-- Magnus approved removing the marquee in the redesign; his supplied `background_hero.jpg` is now in `client/src/assets/images/`, visually checked and not yet wired into the hero.
-- No application source code changed. The build wrote ignored output under `client/dist/`, and screenshot capture created the approved baseline artifacts under `docs/redesign-phase-0/captures/`.
+- Magnus approved removing the marquee in the redesign; his supplied `background_hero.jpg` is in `client/src/assets/images/` and now wired into the hero.
+- The Phase 1A build wrote ignored output under `client/dist/`; no screenshots or ignored files are part of the Phase 1A change set.
 - `redesign/blue-teal-v1` is the intended redesign branch. It started at `1f8ab37b`, matching the locally stored `main` and `origin/main` refs. Having no upstream is intentional for the local baseline and is not a blocker; no push was performed.
 - External business facts, backend behavior, production-basename behavior and real Google review data remain unverified.
 - Correct local frontend is `http://127.0.0.1:5173/`. An older checkout separately listens on IPv6 localhost port 5173; avoid ambiguous `localhost` for this baseline.
@@ -107,6 +110,11 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-10 — Codex
+- Magnus visually approved Phase 1A. Implemented the redesigned header, hero and Google-review presentation; connected `background_hero.jpg`; removed the marquee.
+- Verified the approved visual result at 1440, 768 and 390 px, including the vehicle-sale header and mobile-menu behavior.
+- Booking-modal clipping and modal accessibility remain deferred to Phase 1B. Backend/API availability, authentic Google reviews and deployed production behavior remain unverified.
 
 ### 2026-09-10 — Codex
 - Completed redesign Phase 0 using all seven supplied design references and the local Vår Verkstad reference pack; added the report and nine baseline screenshots under `docs/redesign-phase-0/`.

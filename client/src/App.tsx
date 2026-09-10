@@ -37,7 +37,7 @@ export default function App() {
 
   return (
     <>
-      <Header onBookingClick={openModal} />
+      <Header onBookingClick={openModal} variant="hero" />
       <Hero onBookingClick={openModal} />
       <About />
       <Services />

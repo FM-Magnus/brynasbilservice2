@@ -30,9 +30,9 @@ const distribution = [
 
 function StarIcon({ filled, half }: { filled?: boolean; half?: boolean }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill={filled ? 'var(--color-gold)' : 'none'} stroke={filled ? 'var(--color-gold)' : 'var(--color-grey)'} strokeWidth="1.5">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill={filled ? 'var(--redesign-accent)' : 'none'} stroke={filled ? 'var(--redesign-accent)' : 'var(--hero-review-muted)'} strokeWidth="1.5" aria-hidden="true" focusable="false">
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-      {half && <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77V2z" fill="var(--color-gold)" stroke="none" />}
+      {half && <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77V2z" fill="var(--redesign-accent)" stroke="none" />}
     </svg>
   );
 }
@@ -50,35 +50,55 @@ export function GoogleReviews() {
   const [showSummary, setShowSummary] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => (
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ));
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    updatePreference();
+    mediaQuery.addEventListener('change', updatePreference);
+    return () => mediaQuery.removeEventListener('change', updatePreference);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setShowSummary(true);
+      setShowReviews(true);
+      return;
+    }
+
     const t1 = setTimeout(() => setShowSummary(true), 600);
     const t2 = setTimeout(() => setShowReviews(true), 1400);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (!showReviews) return;
     let idx = 0;
+    let transitionTimer: ReturnType<typeof setTimeout> | undefined;
     setActiveIndex(0);
 
-    const cycle = () => {
-      // Fade out current review to full transparency
-      setActiveIndex(-1);
+    if (prefersReducedMotion) return;
 
-      // Wait for fade-out + gap, then fade in next
-      setTimeout(() => {
+    const cycle = () => {
+      setActiveIndex(-1);
+      transitionTimer = setTimeout(() => {
         idx = (idx + 1) % reviews.length;
         setActiveIndex(idx);
       }, 1800);
     };
 
     const interval = setInterval(cycle, 8000);
-    return () => clearInterval(interval);
-  }, [showReviews]);
+    return () => {
+      clearInterval(interval);
+      if (transitionTimer) clearTimeout(transitionTimer);
+    };
+  }, [prefersReducedMotion, showReviews]);
 
   return (
-    <div className={`google-reviews ${showSummary ? 'visible' : ''}`}>
+    <div className={`google-reviews ${showSummary ? 'visible' : ''}`} role="region" aria-label="Google-recensioner">
       <div className="google-reviews__header">
         <div className="google-reviews__logo">Google</div>
         <div className="google-reviews__title">Sammanfattning av recensioner</div>
@@ -89,10 +109,11 @@ export function GoogleReviews() {
           {distribution.map((d) => (
             <div key={d.stars} className="google-reviews__bar-row">
               <span className="google-reviews__bar-label">{d.stars}</span>
-              <div className="google-reviews__bar-track">
+              <div className="google-reviews__bar-track" role="img" aria-label={`${d.stars} stjärnor: ${d.count} recensioner`}>
                 <div
                   className="google-reviews__bar-fill"
                   style={{ width: `${d.pct}%`, transitionDelay: `${(5 - d.stars) * 120}ms` }}
+                  aria-hidden="true"
                 />
               </div>
             </div>
@@ -110,6 +131,7 @@ export function GoogleReviews() {
           <div
             key={i}
             className={`google-reviews__item ${i === activeIndex ? 'active' : ''}`}
+            aria-hidden={i !== activeIndex}
           >
             <div className="google-reviews__item-header">
               <div className="google-reviews__avatar">{review.name.charAt(0)}</div>
