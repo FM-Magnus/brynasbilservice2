@@ -2,6 +2,7 @@
 
 This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at the end of every working session.
 **If you are an AI agent starting a session: read this file first.**
+For the approved redesign baseline and continuation rules, also read [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md).
 
 ---
 
