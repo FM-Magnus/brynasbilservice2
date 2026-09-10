@@ -10,17 +10,18 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ### What is working
 - Full frontend renders: Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
-- Phase 1A header and hero redesign — real SVG logo, floating navigation/booking controls, keyboard-usable mobile menu, unchanged hero copy and connected `background_hero.jpg`
+- Phase 1A header and hero redesign — real SVG logo (scaled +20–30%), floating navigation/booking controls, keyboard-usable mobile menu, unchanged hero copy and connected `background_hero.jpg`
 - Booking form modal (DatePicker + TimePicker) — Phase 1B improved mobile layout and accessibility
 - Admin panel at `/admin` — booking management, service CRUD, soft-delete, search/filter/sort
 - i18n context (Swedish/English) — LanguageProvider wraps the whole app in main.tsx; public section copy is currently hardcoded Swedish
 - ThemeSwitcher + localStorage are used in admin; public sections use dark CSS tokens and have no visible theme switch
 - Hero marquee removed as part of the approved Phase 1A redesign
-- GoogleReviews component in hero — redesigned presentation with reduced-motion handling and placeholder data (not real Brynäs reviews)
+- GoogleReviews component in hero — yellow accent stars and breakdown bars (`#FBBC04`), subtle drop shadows (`text-shadow` / `filter: drop-shadow`), comfortable card dimensions/padding for multi-line reviews without overflow, placeholder data (real Brynäs reviews in `_magnus/REVIEWS/`)
 - **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
 - **Slice 1 middle homepage sections** — Services, ServiceList, WhyUs, and EV redesigned with warm-white page surround, Barlow display typography, teal accents, and responsive layouts across desktop, tablet, and mobile. Dead booking links resolved via `onBookingClick` callback. Preserves all 6 service offers, all 19 detailed service items, all 4 reassurance points, and all 14 EV brands.
 - "SE VÅRA BILAR" link on Bilar till salu service card and ServiceList item routes correctly to `/bilar-till-salu`
 - **Om oss section** — Phase 2 redesign approved: two-column warm-white layout based on locked Mockup 7, authentic Ken Burns workshop slideshow (`OMOSS_KENBURNS1/2/3.jpg`), glass "Grundat 2021" badge, interactive slide indicator tab, single semantic `<h2>` heading, verified Swedish copy, teal CTA button linking to `#alla-tjanster`, and two white reassurance cards with custom SVG icons (`Tydlig kommunikation` & `Omsorg om din bil`). Respects `prefers-reduced-motion`.
+- **CTA Banner & Contact section redesign** — CTABanner with full-width dark card, gradient background, and primary/secondary CTAs; Contact section on light page background with 3 deep-blue contact cards ("Hitta oss", "Öppettider", "Ring oss"), verified Swedish copy and direct links. Header logo scaled up ~20-30% with seamless responsiveness across desktop, tablet, and mobile.
 
 ### What is broken / incomplete
 1. **GitHub Actions deployment is intentionally absent from canonical history** — the legacy misplaced workflow was preserved on `legacy/pre-live-site-2026-09-09`. Do not restore or modify deployment automation without Magnus and Johnny agreeing on the `.htaccess` and server configuration.
@@ -109,6 +110,14 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
+- Redesigned and aligned CTA Banner (`CTABanner.tsx`) and Contact section (`Contact.tsx`) matching EV-card aesthetic: dark gradient full-width CTA banner and 3 deep-blue cards ("Hitta oss", "Öppettider", "Ring oss") on the light page background.
+- Refactored hero Google Reviews overlay: updated stars and active breakdown bars to vibrant yellow accent (`#FBBC04`), scaled typography, expanded container dimensions and internal padding (`p-6` / `min-height: 195px`), preventing multi-line overflow (e.g. 4-line review).
+- Added subtle, crisp drop shadows (`text-shadow` / `filter: drop-shadow`) to Google Reviews overlay text and stars, lifting elements cleanly over dark dashboard background without harsh halos.
+- Scaled up the site header logo by +20–30% across desktop (`68px`), scrolled (`54px`), 1024px (`58px`), 768px (`50px`), and 480px/390px (`44px`), preserving aspect ratio and navbar alignment without container overflow.
+- Performed comparative analysis vs. Vår Verkstad (`varverkstad.com`), identifying strategic roadmap opportunities (4-step "Så här fungerar det" process, reg-nr input, quick quote request, real Google reviews).
+- Verified production build (`npm --prefix client run build`) and clean git diff check.
 
 ### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
 - Magnus visually approved the Slice 1 redesign of Services, ServiceList, WhyUs, and EV sections.

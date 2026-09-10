@@ -28,30 +28,53 @@ const distribution = [
   { stars: 1, count: 4, pct: 8 },
 ];
 
-function StarIcon({ filled, half }: { filled?: boolean; half?: boolean }) {
+function StarIcon({ filled, half, size = 20 }: { filled?: boolean; half?: boolean; size?: number }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill={filled ? 'var(--redesign-accent)' : 'none'} stroke={filled ? 'var(--redesign-accent)' : 'var(--hero-review-muted)'} strokeWidth="1.5" aria-hidden="true" focusable="false">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill={filled ? '#FBBC04' : 'none'}
+      stroke={filled ? '#FBBC04' : 'var(--hero-review-muted, rgba(255, 255, 255, 0.4))'}
+      strokeWidth="1.5"
+      aria-hidden="true"
+      focusable="false"
+    >
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-      {half && <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77V2z" fill="var(--redesign-accent)" stroke="none" />}
+      {half && <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77V2z" fill="#FBBC04" stroke="none" />}
     </svg>
   );
 }
 
-function Stars({ rating }: { rating: number }) {
+function Stars({ rating, showHalf }: { rating: number; showHalf?: boolean }) {
   const stars = [];
+  const fullStars = Math.floor(rating);
+  const hasHalf = showHalf && rating % 1 !== 0;
+
   for (let i = 1; i <= 5; i++) {
-    if (i <= rating) stars.push(<StarIcon key={i} filled />);
-    else stars.push(<StarIcon key={i} />);
+    if (i <= fullStars) {
+      stars.push(<StarIcon key={i} filled />);
+    } else if (i === fullStars + 1 && hasHalf) {
+      stars.push(<StarIcon key={i} half />);
+    } else {
+      stars.push(<StarIcon key={i} />);
+    }
   }
   return <div className="google-reviews__stars">{stars}</div>;
 }
 
 export function GoogleReviews() {
-  const [showSummary, setShowSummary] = useState(false);
-  const [showReviews, setShowReviews] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => (
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ));
+  const [showSummary, setShowSummary] = useState(() => (
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ));
+  const [showReviews, setShowReviews] = useState(() => (
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ));
+  const [activeIndex, setActiveIndex] = useState(() => (
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : -1
   ));
 
   useEffect(() => {
@@ -121,7 +144,7 @@ export function GoogleReviews() {
         </div>
         <div className="google-reviews__score">
           <div className="google-reviews__score-number">4,3</div>
-          <Stars rating={4} />
+          <Stars rating={4.3} showHalf />
           <div className="google-reviews__score-count">50 recensioner</div>
         </div>
       </div>
@@ -137,10 +160,10 @@ export function GoogleReviews() {
               <div className="google-reviews__avatar">{review.name.charAt(0)}</div>
               <div className="google-reviews__item-meta">
                 <div className="google-reviews__item-name">{review.name}</div>
+                <div className="google-reviews__item-rating">
+                  <Stars rating={review.rating} />
+                </div>
               </div>
-            </div>
-            <div className="google-reviews__item-rating">
-              <Stars rating={review.rating} />
             </div>
             <p className="google-reviews__item-text">{review.text}</p>
           </div>

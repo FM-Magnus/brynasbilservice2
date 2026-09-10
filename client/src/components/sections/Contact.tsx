@@ -31,31 +31,38 @@ export function Contact() {
   }, [])
 
   return (
-    <section className="contact-section" id="kontakt">
+    <section className="contact-section" id="kontakt" aria-labelledby="contact-title">
       <div className="container">
         <SectionHeader
-          eyebrow="Hitta oss"
+          eyebrow={
+            <>
+              <span className="eyebrow-line" aria-hidden="true" />
+              Hitta oss
+            </>
+          }
           title={<span>Kontakt &amp; <span className="title-accent">Öppettider</span></span>}
           description="Vi finns i Brynäs, Gävle. Välkommen att ringa eller komma förbi!"
+          titleId="contact-title"
         />
         <div className="contact-grid">
 
           <div className="contact-card">
-            <div className="contact-card__icon">
+            <div className="contact-card__icon" aria-hidden="true">
               <MapPinIcon />
             </div>
             <h3 className="contact-card__title">Hitta oss</h3>
             <div className="contact-card__content">
               <p>Utmarksvägen 21B</p>
               <p>802 91 Gävle</p>
-              <p className="mt-2 text-[0.85rem] text-(--color-text-muted)">Brynäs industriområde</p>
-              <br />
-              <a href="https://maps.google.com/?q=Utmarksvägen+21B+Gävle" target="_blank" rel="noopener noreferrer">Öppna i Google Maps →</a>
+              <p className="contact-card__subtext">Brynäs industriområde</p>
+              <a href="https://maps.google.com/?q=Utmarksvägen+21B+Gävle" target="_blank" rel="noopener noreferrer" className="contact-card__link">
+                Öppna i Google Maps →
+              </a>
             </div>
           </div>
 
           <div className="contact-card">
-            <div className="contact-card__icon">
+            <div className="contact-card__icon" aria-hidden="true">
               <ClockIcon />
             </div>
             <h3 className="contact-card__title">Öppettider</h3>
@@ -71,15 +78,19 @@ export function Contact() {
           </div>
 
           <div className="contact-card">
-            <div className="contact-card__icon">
+            <div className="contact-card__icon" aria-hidden="true">
               <PhoneIcon />
             </div>
             <h3 className="contact-card__title">Ring oss</h3>
             <div className="contact-card__content">
-              <p className="mb-2">Telefon:</p>
-              <p className="mb-4"><a href="tel:+46705533395" className="font-heading text-[1.2rem] font-bold">070-553 33 95</a></p>
-              <p className="mb-4 text-[0.85rem] text-(--color-text-muted)">Vi svarar vardagar 08:00–16:00</p>
-              <a href="https://www.facebook.com/p/Bryn%C3%A4s-Bilservice-AB-100076623266130/" target="_blank" rel="noopener noreferrer" className="text-[0.85rem] text-(--color-gold)">Följ oss på Facebook →</a>
+              <p className="contact-card__phone-label">Telefon:</p>
+              <p className="contact-card__phone-wrap">
+                <a href="tel:+46705533395" className="contact-card__phone">070-553 33 95</a>
+              </p>
+              <p className="contact-card__hours-note">Vi svarar vardagar 08:00–16:00</p>
+              <a href="https://www.facebook.com/p/Bryn%C3%A4s-Bilservice-AB-100076623266130/" target="_blank" rel="noopener noreferrer" className="contact-card__link">
+                Följ oss på Facebook →
+              </a>
             </div>
           </div>
 
