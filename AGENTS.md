@@ -5,15 +5,15 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 
 ---
 
-## Current state (last updated: 2026-09-09 by Codex)
+## Current state (last updated: 2026-09-10 by Codex)
 
 ### What is working
 - Full frontend renders: Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
 - Header with new logo (LOGOTYP_NY.svg), sticky scroll, mobile hamburger menu — all nav links work from subpages (`/#om-oss` etc.)
 - Booking form modal (DatePicker + TimePicker)
 - Admin panel at `/admin` — booking management, service CRUD, soft-delete, search/filter/sort
-- i18n context (Swedish/English) — LanguageProvider wraps the whole app in main.tsx
-- Dark mode via ThemeSwitcher + localStorage
+- i18n context (Swedish/English) — LanguageProvider wraps the whole app in main.tsx; public section copy is currently hardcoded Swedish
+- ThemeSwitcher + localStorage are used in admin; public sections use dark CSS tokens and have no visible theme switch
 - Marquee component in hero — content driven from `client/src/data/marquee-items.txt`
 - GoogleReviews component in hero — currently shows placeholder data (not real Brynäs reviews)
 - **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
@@ -22,14 +22,18 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 - **Om oss section** uses Ken Burns slideshow (`KenBurnsSlideshow.tsx`) cycling 3 images (`OMOSS_KENBURNS1/2/3.jpg`) with crossfade + slow pan/zoom; respects `prefers-reduced-motion`
 
 ### What is broken / incomplete
-1. **GitHub Actions deploy is silently broken** — `deploy.yml` lives at `client/.github/workflows/` but GitHub only looks at repo root `.github/workflows/`. Push to main does nothing. Needs to be moved before auto-deploy works.
+1. **GitHub Actions deployment is intentionally absent from canonical history** — the legacy misplaced workflow was preserved on `legacy/pre-live-site-2026-09-09`. Do not restore or modify deployment automation without Magnus and Johnny agreeing on the `.htaccess` and server configuration.
 2. **`.htaccess` discrepancy** — `server/.htaccess` says port 3000 + has `RewriteBase`. `docs/deployment.md` says port 3001 + explicitly forbids `RewriteBase`. One will fail at deploy. Johnny owns the resolution.
 3. **GoogleReviews has fake data** — hardcoded from a different business. Needs real Brynäs Bilservice reviews. Screenshots of real reviews are in `_magnus/REVIEWS/` (22 images).
 4. **comment_customer not saved** — BookingForm sends it in POST body but `server/index.js` `insertBooking()` does not include it in the INSERT query.
 5. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
 6. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
 7. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
-8. **GitHub Actions deployment is intentionally absent from the canonical branch** — the legacy workflow was retained only on `legacy/pre-live-site-2026-09-09` during Git history recovery. Do not restore or modify deployment files without Magnus and Johnny agreeing on the `.htaccess` and server configuration.
+8. **Four service booking links are dead anchors** — `Services.tsx` points to `#booking-form`, but the modal has no matching id and is opened through callbacks elsewhere.
+9. **Existing mobile accessibility gaps** — hero CTA heights are about 38px; menu Escape does not close it; the booking modal clips above the 390×844 viewport and lacks focus/dialog handling. Phase 0 did not fix these.
+10. **Typography variables are undefined** — CSS references `--font-heading` and `--font-body`, but does not define them; browser baseline uses system sans despite Exo 2/Barlow loading in HTML.
+11. **Motion and semantics gaps** — marquee/review rotation lack full reduced-motion handling; About nests h2 headings. Existing Ken Burns reduced-motion support remains.
+12. **Local booking API unavailable during Phase 0** — opening the modal produced a network error fetching services; no booking was submitted or backend changed.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -42,15 +46,13 @@ Page scroll: Hero → About → Services → ServiceList → WhyUs → EV → CT
 Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 
 ### Recently changed (this session)
-- Git repo initialised (`git init`), initial commit `34c858c`
-- Mobile hero spacing improved, google-reviews area enlarged
-- `.claude/settings.json` Stop hook created to remind agents to update AGENTS.md
-- Bilar till salu subpage built with full CSS, route, CarCard gallery (commits `f6b3a74`, `3b1ccf2`)
-- Header nav links fixed to use `/#section` for cross-page navigation, logo fixed to `/` (`86f8dfa`)
-- Real Peugeot 307 CC listing added, placeholder cars removed (`3e18b1e`)
-- 3 Peugeot photos added and wired up with clickable thumbnail strip (`3b1ccf2`)
-- "SE VÅRA BILAR" link on service card fixed from `#kontakt` to `/bilar-till-salu` (`7422eb8`)
-- All 6 service card images replaced with fitting photos (`b344b59`)
+- Redesign Phase 0 completed using all **seven** mockups, as explicitly clarified by Magnus; the handover's four-image limit is outdated.
+- Added `docs/redesign-phase-0/README.md` with component/content mapping, existing issues, Phase 1 file scope, decision points and acceptance criteria; saved desktop/tablet/mobile baselines in its `captures/` directory.
+- Magnus approved removing the marquee in the redesign; his supplied `background_hero.jpg` is now in `client/src/assets/images/`, visually checked and not yet wired into the hero.
+- No application source code changed. The build wrote ignored output under `client/dist/`, and screenshot capture created the approved baseline artifacts under `docs/redesign-phase-0/captures/`.
+- `redesign/blue-teal-v1` is the intended redesign branch. It started at `1f8ab37b`, matching the locally stored `main` and `origin/main` refs. Having no upstream is intentional for the local baseline and is not a blocker; no push was performed.
+- External business facts, backend behavior, production-basename behavior and real Google review data remain unverified.
+- Correct local frontend is `http://127.0.0.1:5173/`. An older checkout separately listens on IPv6 localhost port 5173; avoid ambiguous `localhost` for this baseline.
 
 ### Files agents should NOT touch
 - `server/index.js` — owned by Johnny (Magnus's brother), backend developer
@@ -77,7 +79,7 @@ Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 | Local DB access | SSH tunnel: `ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224` |
 | `.env` location | Server only, preserved across deploys via backup/restore step |
 
-Auto-deploy is **currently broken** — see "What is broken" #1.
+Auto-deploy is **intentionally absent from canonical history** — see "What is broken" #1.
 
 ---
 
@@ -105,6 +107,14 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-10 — Codex
+- Completed redesign Phase 0 using all seven supplied design references and the local Vår Verkstad reference pack; added the report and nine baseline screenshots under `docs/redesign-phase-0/`.
+- Verified clean starting worktree, origin and HEAD; existing redesign branch matches local main at `1f8ab37b`. Frontend build passes with the existing large-chunk warning.
+- Verified 1440/768/390 viewport baselines, mobile menu, modal opening/closing, car thumbnail switching and navigation from the car page. Recorded the unavailable services API and mobile modal clipping; no booking submitted.
+- Documented missing font variables, dead service anchors, motion/accessibility gaps and outdated theme/i18n claims. Magnus decided to remove the marquee in the redesign and supplied `background_hero.jpg`; moved it unchanged from repo root to `client/src/assets/images/` on his explicit instruction, without wiring it into the page.
+- Phase 0 changed documentation and approved artifacts only: the build wrote ignored `client/dist/` output and screenshot capture created nine files. No application source, backend or deployment code changed. External business facts, backend behavior, production-basename behavior and real Google review data remain unverified.
+- `redesign/blue-teal-v1` is the intended redesign branch. Its lack of upstream is intentional and not a blocker. No push was performed.
 
 ### 2026-09-09 — Codex
 - Verified that the locally running frontend (including the Google Reviews hero) is the intended live-site version; `client/` was restored from its tracked local snapshot after a temporary working-tree deletion.
