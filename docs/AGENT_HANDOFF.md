@@ -86,6 +86,21 @@ Phase 2 files:
 - `client/src/components/ui/KenBurnsSlideshow.tsx`
 - `client/src/components/icons/ChatDotsIcon.tsx`
 - `client/src/components/icons/ShieldHeartIcon.tsx`
+### Phase 3 — approved Slice 1 (Services, ServiceList, WhyUs, EV)
+
+- Redesigned `Services.tsx`: 6-card responsive grid matching Mockup 6 aesthetic, wired `onBookingClick` callback from `App.tsx` to cards 1-4 ("Boka tid") resolving dead anchor issue (#8), retained `#kontakt` and `/bilar-till-salu` targets.
+- Redesigned `ServiceList.tsx`: full 19-service offering in clean white cards with teal checkmarks (`CheckIcon`), EV lightning badges (`BoltIcon`), and link to `/bilar-till-salu`.
+- Redesigned `WhyUs.tsx`: 4 reassurance cards matching Mockup 6 bottom row with soft teal icon containers and verified Swedish copy.
+- Redesigned `EV.tsx`: high-tech dark card (`#101618`) on warm-white page surround, retaining all 14 brands, verified EV copy, Däckleader/Autobutler text, and direct phone CTA (`tel:0705533395`).
+- Cleaned legacy gold and red CSS rules and obsolete mobile overrides in `client/src/css/index.css`; added scoped responsive layout across desktop (1440px), tablet (768px), and mobile (390px) with zero horizontal overflow; supported `prefers-reduced-motion` for `.fade-up`.
+- Verified clean build (`cd client && npm run build`), `git diff --check`, and `/bilar-till-salu` subpage without regression.
+
+Phase 3 files:
+- `client/src/App.tsx`
+- `client/src/components/sections/Services.tsx`
+- `client/src/components/sections/ServiceList.tsx`
+- `client/src/components/sections/WhyUs.tsx`
+- `client/src/components/sections/EV.tsx`
 - `client/src/css/index.css`
 
 ## Architecture and preservation rules
@@ -102,7 +117,6 @@ Phase 2 files:
 - Local booking API availability and real booking submission remain unverified. `comment_customer` is not saved by the server; do not change payloads/endpoints without backend approval.
 - Backend/database behaviour, production deployment, production basename navigation, external business facts and opening hours remain unverified.
 - Deployment automation is intentionally absent from canonical history. `.htaccess` and deployment documentation disagree; do not resolve this without Magnus and Johnny.
-- Four service booking links remain dead anchors. Address them only in an approved services phase.
 
 
 ## Startup checklist

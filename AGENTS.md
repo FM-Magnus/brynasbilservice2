@@ -6,7 +6,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-10 by Codex)
+## Current state (last updated: 2026-09-10 by Antigravity)
 
 ### What is working
 - Full frontend renders: Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
@@ -18,8 +18,8 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - Hero marquee removed as part of the approved Phase 1A redesign
 - GoogleReviews component in hero — redesigned presentation with reduced-motion handling and placeholder data (not real Brynäs reviews)
 - **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
-- **6 service cards** — each has its own photo (servicekort_repair/diagnosis/AC/tyres/tow/carbuy.jpg)
-- "SE VÅRA BILAR" link on Bilar till salu service card routes correctly to `/bilar-till-salu`
+- **Slice 1 middle homepage sections** — Services, ServiceList, WhyUs, and EV redesigned with warm-white page surround, Barlow display typography, teal accents, and responsive layouts across desktop, tablet, and mobile. Dead booking links resolved via `onBookingClick` callback. Preserves all 6 service offers, all 19 detailed service items, all 4 reassurance points, and all 14 EV brands.
+- "SE VÅRA BILAR" link on Bilar till salu service card and ServiceList item routes correctly to `/bilar-till-salu`
 - **Om oss section** — Phase 2 redesign approved: two-column warm-white layout based on locked Mockup 7, authentic Ken Burns workshop slideshow (`OMOSS_KENBURNS1/2/3.jpg`), glass "Grundat 2021" badge, interactive slide indicator tab, single semantic `<h2>` heading, verified Swedish copy, teal CTA button linking to `#alla-tjanster`, and two white reassurance cards with custom SVG icons (`Tydlig kommunikation` & `Omsorg om din bil`). Respects `prefers-reduced-motion`.
 
 ### What is broken / incomplete
@@ -30,9 +30,8 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 5. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
 6. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
 7. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
-8. **Four service booking links are dead anchors** — `Services.tsx` points to `#booking-form`, but the modal has no matching id and is opened through callbacks elsewhere.
-9. **Booking modal backend limitation** — local API availability and real booking submission remain unverified. Phase 1B made no backend, payload or endpoint changes.
-10. **Typography variables are undefined outside Phase 1A/Phase 2** — legacy CSS references `--font-heading` and `--font-body`, while the redesigned sections use scoped Barlow tokens.
+8. **Booking modal backend limitation** — local API availability and real booking submission remain unverified. Phase 1B made no backend, payload or endpoint changes.
+9. **Typography variables are undefined outside redesigned sections** — legacy CSS references `--font-heading` and `--font-body`, while the redesigned sections use scoped Barlow tokens.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -110,6 +109,15 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
+- Magnus visually approved the Slice 1 redesign of Services, ServiceList, WhyUs, and EV sections.
+- Redesigned `Services.tsx`: 6-card responsive grid matching Mockup 6 aesthetic, wired `onBookingClick` from `App.tsx` to cards 1-4 ("Boka tid") resolving dead anchor issue (#8), retained `#kontakt` and `/bilar-till-salu` targets.
+- Redesigned `ServiceList.tsx`: full 19-service offering in clean white cards with teal checkmarks (`CheckIcon`), EV lightning badges (`BoltIcon`), and link to `/bilar-till-salu`.
+- Redesigned `WhyUs.tsx`: 4 reassurance cards matching Mockup 6 bottom row with soft teal icon containers and verified Swedish copy.
+- Redesigned `EV.tsx`: high-tech dark card (`#101618`) on warm-white page surround, retaining all 14 brands, verified EV copy, Däckleader/Autobutler text, and direct phone CTA (`tel:0705533395`).
+- Cleaned legacy gold and red CSS rules and obsolete mobile overrides in `client/src/css/index.css`; added scoped responsive layout across desktop (1440px), tablet (768px), and mobile (390px) with zero horizontal overflow; supported `prefers-reduced-motion` for `.fade-up`.
+- Verified clean build (`cd client && npm run build`), `git diff --check`, and `/bilar-till-salu` subpage without regression.
 
 ### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
 - Magnus visually approved the Phase 2 About section redesign.

@@ -40,7 +40,7 @@ export default function App() {
       <Header onBookingClick={openModal} variant="hero" />
       <Hero onBookingClick={openModal} />
       <About />
-      <Services />
+      <Services onBookingClick={openModal} />
       <ServiceList />
       <WhyUs />
       <EV />

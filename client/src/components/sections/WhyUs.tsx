@@ -2,7 +2,6 @@ import { ClockIcon } from '../icons/ClockIcon'
 import { DollarIcon } from '../icons/DollarIcon'
 import { ShieldIcon } from '../icons/ShieldIcon'
 import { UsersIcon } from '../icons/UsersIcon'
-import { SectionHeader } from '../ui/SectionHeader'
 
 const cards = [
   {
@@ -29,23 +28,29 @@ const cards = [
 
 export function WhyUs() {
   return (
-    <section className="why-us">
+    <section className="why-us" aria-labelledby="why-us-title">
       <div className="container">
-        <div className="section-header">
-          <SectionHeader
-            eyebrow="Varför Brynäs Bilservice"
-            title={<span>Det lilla extra som <span className="title-accent">gör skillnad</span></span>}
-          />
-        </div>
+        <header className="section-header">
+          <div className="section-eyebrow">
+            <span className="eyebrow-line" aria-hidden="true" />
+            Varför Brynäs Bilservice
+          </div>
+          <h2 className="section-title" id="why-us-title">
+            Det lilla extra som <span className="title-accent">gör skillnad</span>
+          </h2>
+          <p className="section-desc">
+            När du lämnar din bil hos oss kan du lita på ett personligt bemötande, snabba ledtider och ärliga priser utan krångel.
+          </p>
+        </header>
         <div className="why-grid">
           {cards.map(c => (
-            <div className="why-card fade-up" key={c.title}>
-              <div className="why-card__icon">
+            <article className="why-card fade-up" key={c.title}>
+              <div className="why-card__icon" aria-hidden="true">
                 {c.icon}
               </div>
               <h3 className="why-card__title">{c.title}</h3>
               <p className="why-card__desc">{c.desc}</p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
