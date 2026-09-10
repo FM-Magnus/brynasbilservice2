@@ -1,117 +1,242 @@
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Darker overlay for better contrast */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  inset: 0;
   z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding:
+    max(1rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(1rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+  background: rgba(8, 16, 17, 0.72);
 }
 
 .modal-container {
-  position: relative; /* Ensure the close button is positioned relative to the modal container */
-  background: #1a1a1a; /* Match the website's dark background */
-  color: #f5f5f5; /* Light text for contrast */
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  max-width: 600px;
-  width: 90%;
-  font-family: 'Arial', sans-serif; /* Match website font */
+  width: min(100%, 39rem);
+  max-height: calc(100dvh - max(2rem, env(safe-area-inset-top)) - max(2rem, env(safe-area-inset-bottom)));
+  margin: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid rgba(36, 150, 160, 0.22);
+  border-radius: 24px;
+  background: var(--redesign-page, #f8f7f3);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+  color: var(--redesign-ink, #101618);
+  font-family: var(--redesign-font-body, 'Barlow', Arial, sans-serif);
 }
 
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem; /* Move the close button to the right */
-  /*color: #f5f5f5; /* Light color for close button */
-  font-size: 2rem;
-  font-weight: bold;
-  cursor: pointer;
+.modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 1.75rem) 1rem;
+  background: var(--redesign-page, #f8f7f3);
 }
 
 .modal-title {
-  color: #ffd700; /* Match the yellow accent color */
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: left; /* Align the header to the left */
-  margin-bottom: 1.5rem;
+  margin: 0;
+  color: var(--redesign-ink, #101618);
+  font-family: var(--redesign-font-body, 'Barlow', Arial, sans-serif);
+  font-size: clamp(1.65rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
 }
 
-.modal-label {
-  color: #f5f5f5; /* Light text for labels */
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
-
-.modal-input {
-  padding: 0.8rem;
-  border: 1px solid #ffd700; /* Yellow border */
-  border-radius: 6px;
-  background: #2c2c2c; /* Dark input background */
-  color: #f5f5f5; /* Light text */
-}
-
-.modal-input:focus {
-  outline: none;
-  border-color: #ffcc00; /* Brighter yellow on focus */
-  box-shadow: 0 0 5px #ffcc00;
-}
-
-.modal-button {
-  background: #ffd700; /* Yellow button background */
-  color: #1a1a1a; /* Dark text for contrast */
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: bold;
+.modal-close {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  place-items: center;
+  border: 1px solid rgba(16, 22, 24, 0.18);
+  border-radius: 50%;
+  background: var(--redesign-surface, #ffffff);
+  color: var(--redesign-ink, #101618);
   cursor: pointer;
-  transition: background 0.3s;
+  font-size: 1.85rem;
+  line-height: 1;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
-.modal-button:hover {
-  background: #ffcc00; /* Brighter yellow on hover */
-}
-
-.modal-content {
-  background-color: #ffffff; /* Ensure background is white */
-  color: #000000; /* Ensure text color is black */
-}
-
-.react-time-picker__wrapper {
-  border: none;
-}
-
-.react-time-picker.react-time-picker--closed.react-time-picker--enabled.modal-input {
-  padding: 0.74rem;
+.modal-close:hover {
+  border-color: var(--redesign-accent, #2496a0);
+  background: rgba(36, 150, 160, 0.1);
+  color: var(--redesign-accent-dark, #1b747b);
 }
 
 .modal-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: flex-start; /* Align items to the right */
+  padding: 0 clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.booking-form__schedule {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.booking-form__field {
+  min-width: 0;
+}
+
+.modal-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--redesign-ink, #101618);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.modal-required {
+  color: var(--redesign-accent-dark, #1b747b);
+}
+
+.modal-input,
+.modal-container .react-datepicker__input-container input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid rgba(16, 22, 24, 0.2);
+  border-radius: 10px;
+  background: var(--redesign-surface, #ffffff);
+  color: var(--redesign-ink, #101618);
+  font: inherit;
+  line-height: 1.2;
+}
+
+.modal-container input.modal-input,
+.modal-container select.modal-input,
+.modal-container textarea.modal-input,
+.modal-container .react-datepicker__input-container input {
+  padding: 0.8rem 0.9rem;
+}
+
+.modal-container textarea.modal-input {
+  min-height: 6.25rem;
+  resize: vertical;
+}
+
+.modal-container .react-datepicker-wrapper,
+.modal-container .react-datepicker__input-container {
+  display: block;
+  width: 100%;
+}
+
+.modal-container .react-time-picker.modal-input {
+  display: flex;
+  padding: 0;
+}
+
+.modal-container .react-time-picker__wrapper {
+  width: 100%;
+  border: 0;
+}
+
+.modal-container .react-time-picker__inputGroup {
+  min-height: 46px;
+  padding: 0.75rem 0.9rem;
+}
+
+.modal-container .react-time-picker__inputGroup__input {
+  background: transparent;
+  color: var(--redesign-ink, #101618);
+}
+
+.modal-container .react-time-picker__inputGroup__input:invalid {
+  background: transparent;
+}
+
+.modal-container .react-time-picker__inputGroup__divider {
+  color: rgba(16, 22, 24, 0.68);
+}
+
+.modal-container .react-time-picker__clear-button {
+  min-width: 44px;
+}
+
+.modal-input::placeholder {
+  color: rgba(16, 22, 24, 0.55);
+}
+
+.modal-container .modal-input:focus-visible,
+.modal-container .react-datepicker__input-container input:focus-visible,
+.modal-container .react-time-picker:focus-within,
+.modal-close:focus-visible,
+.modal-submit:focus-visible {
+  outline: 3px solid #7ed9dd;
+  outline-offset: 2px;
+  border-color: var(--redesign-accent, #2496a0);
+}
+
+.booking-form__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.booking-form__required-note {
+  color: rgba(16, 22, 24, 0.65);
+  font-size: 0.82rem;
+  line-height: 1.35;
 }
 
 .modal-submit {
-  background: #ffd700; /* Yellow button background */
-  color: #1a1a1a; /* Dark text for contrast */
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: bold;
+  min-height: 48px;
+  flex: 0 0 auto;
+  border: 1px solid var(--redesign-accent-dark, #1b747b);
+  border-radius: 999px;
+  background: var(--redesign-accent-dark, #1b747b);
+  color: #ffffff;
   cursor: pointer;
-  transition: background 0.3s;
-  align-items: flex-end; /* Align the submit button to the right */
+  font-family: var(--redesign-font-body, 'Barlow', Arial, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  transition: background 150ms ease, border-color 150ms ease;
 }
 
 .modal-submit:hover {
-  background: #ffcc00; /* Brighter yellow on hover */
+  border-color: var(--redesign-accent, #2496a0);
+  background: var(--redesign-accent, #2496a0);
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    place-items: start center;
+    padding: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right)) max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
+  }
+
+  .modal-container {
+    max-height: calc(100dvh - max(1.5rem, env(safe-area-inset-top)) - max(1.5rem, env(safe-area-inset-bottom)));
+    border-radius: 20px;
+  }
+
+  .booking-form__schedule {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .booking-form__footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .modal-submit {
+    width: 100%;
+  }
 }

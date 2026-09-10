@@ -10,7 +10,7 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 ### What is working
 - Full frontend renders: Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
 - Phase 1A header and hero redesign — real SVG logo, floating navigation/booking controls, keyboard-usable mobile menu, unchanged hero copy and connected `background_hero.jpg`
-- Booking form modal (DatePicker + TimePicker)
+- Booking form modal (DatePicker + TimePicker) — Phase 1B improved mobile layout and accessibility
 - Admin panel at `/admin` — booking management, service CRUD, soft-delete, search/filter/sort
 - i18n context (Swedish/English) — LanguageProvider wraps the whole app in main.tsx; public section copy is currently hardcoded Swedish
 - ThemeSwitcher + localStorage are used in admin; public sections use dark CSS tokens and have no visible theme switch
@@ -30,10 +30,9 @@ This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at 
 6. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
 7. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
 8. **Four service booking links are dead anchors** — `Services.tsx` points to `#booking-form`, but the modal has no matching id and is opened through callbacks elsewhere.
-9. **Booking-modal mobile accessibility gaps** — the modal clips above the 390×844 viewport and lacks focus/dialog handling. These remain deferred to Phase 1B.
+9. **Booking modal backend limitation** — local API availability and real booking submission remain unverified. Phase 1B made no backend, payload or endpoint changes.
 10. **Typography variables are undefined outside Phase 1A** — legacy CSS references `--font-heading` and `--font-body`, while the redesigned header and hero use scoped Barlow tokens.
 11. **Remaining semantics gap** — About nests h2 headings. Existing Ken Burns reduced-motion support remains.
-12. **Local booking API unavailable during Phase 0** — opening the modal produced a network error fetching services; no booking was submitted or backend changed.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -47,7 +46,8 @@ Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 
 ### Recently changed (this session)
 - Phase 1A was visually approved by Magnus: the redesigned header, hero and Google-review presentation are implemented; `background_hero.jpg` is connected and the marquee is removed.
-- Visual verification passed at 1440, 768 and 390 px. Booking-modal accessibility/mobile issues remain deferred to Phase 1B.
+- Phase 1B was visually and functionally approved by Magnus: the booking-modal mobile layout and accessibility are improved with dialog semantics, focus trap, Escape handling, focus restoration and scroll lock.
+- Phase 1B verification passed at 1440, 768 and 390 px. Backend/API availability and real booking submission remain unverified; no backend, payload or endpoint changes were made.
 - Backend/API availability, authentic Google reviews and deployed production behavior remain unverified.
 - Redesign Phase 0 completed using all **seven** mockups, as explicitly clarified by Magnus; the handover's four-image limit is outdated.
 - Added `docs/redesign-phase-0/README.md` with component/content mapping, existing issues, Phase 1 file scope, decision points and acceptance criteria; saved desktop/tablet/mobile baselines in its `captures/` directory.
@@ -110,6 +110,10 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-10 — Codex
+- Magnus visually and functionally approved Phase 1B. Improved booking-modal mobile layout and accessibility with dialog semantics, focus trap, Escape handling, focus restoration and scroll lock.
+- Backend/API availability and real booking submission remain unverified. No backend, payload or endpoint changes were made.
 
 ### 2026-09-10 — Codex
 - Magnus visually approved Phase 1A. Implemented the redesigned header, hero and Google-review presentation; connected `background_hero.jpg`; removed the marquee.
