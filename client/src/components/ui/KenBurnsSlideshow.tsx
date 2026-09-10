@@ -11,6 +11,10 @@ interface KenBurnsSlideshowProps {
   fadeMs?: number
   /** Extra class name applied to the outer div (e.g. for sizing/border-radius). */
   className?: string
+  /** Optional callback notifying when the active slide index changes. */
+  onIndexChange?: (index: number) => void
+  /** Optional controlled active index */
+  activeIndex?: number
 }
 
 /**
@@ -24,13 +28,28 @@ export function KenBurnsSlideshow({
   intervalMs = 7000,
   fadeMs = 1500,
   className = '',
+  onIndexChange,
+  activeIndex: controlledIndex,
 }: KenBurnsSlideshowProps) {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [internalIndex, setInternalIndex] = useState(0)
+  const isControlled = typeof controlledIndex === 'number'
+  const activeIndex = isControlled ? controlledIndex : internalIndex
+
+  useEffect(() => {
+    onIndexChange?.(activeIndex)
+  }, [activeIndex, onIndexChange])
 
   useEffect(() => {
     if (images.length <= 1) return
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReducedMotion) return
+
     const id = setInterval(() => {
-      setActiveIndex(i => (i + 1) % images.length)
+      setInternalIndex(i => (i + 1) % images.length)
     }, intervalMs)
     return () => clearInterval(id)
   }, [images.length, intervalMs])

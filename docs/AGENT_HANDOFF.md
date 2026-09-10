@@ -71,12 +71,28 @@ Phase 1B files:
 - `client/src/components/BookingForm.tsx`
 - `client/src/components/BookingForm.css`
 
+### Phase 2 — approved About section
+
+- Redesigned `About.tsx` matching locked Mockup 7 (`exec-afb1248b-8fde-4274-97ff-554108c67955.png`): two-column layout on warm-white background (`#f8f7f3`).
+- Left column: large rounded card with Ken Burns workshop slideshow (`OMOSS_KENBURNS1/2/3.jpg`), frosted dark glass "Grundat 2021" badge, and bottom-right notch tab with active slide dot indicators.
+- Right column: subtle concentric rings watermark, teal dash eyebrow, bold two-tone headline (`LOKAL VERKSTAD.` / `PERSONLIG SERVICE.`), verified Swedish copy, uppercase teal pill CTA button (`LÄS MER OM OSS →` linking to `#alla-tjanster`), and two white reassurance cards with custom SVG icons (`ChatDotsIcon.tsx` and `ShieldHeartIcon.tsx`).
+- Enhanced `KenBurnsSlideshow.tsx` with `onIndexChange` callback and `prefers-reduced-motion` detection.
+- Fixed the legacy nested `<h2>` semantics bug; section now uses a single clean `<h2>` heading.
+- Verified at 1440, 768 and 390 CSS pixels.
+
+Phase 2 files:
+
+- `client/src/components/sections/About.tsx`
+- `client/src/components/ui/KenBurnsSlideshow.tsx`
+- `client/src/components/icons/ChatDotsIcon.tsx`
+- `client/src/components/icons/ShieldHeartIcon.tsx`
+- `client/src/css/index.css`
+
 ## Architecture and preservation rules
 
 - The frontend lives in `client/`; use `cd client && npm run build`. Do not use or edit the root Vite/React scaffolding.
 - `client/src/main.tsx` provides routing and `LanguageProvider`. Routes are `/`, `/bilar-till-salu`, and `/admin`; production uses the `/brynasbilservice` basename, which remains unverified.
 - `client/src/App.tsx` owns booking-modal state and renders: Header → Hero → About → Services → ServiceList → WhyUs → EV → CTA → Contact → Footer. Preserve that content and order unless a later approved phase says otherwise.
-- `About.tsx` and `ui/KenBurnsSlideshow.tsx` currently provide the About content and reduced-motion slideshow. The next phase should work only in this area.
 - Reuse existing Brynäs content, images, telephone/email/address, service data, booking callbacks and real vehicle data. Do not replace business facts with mockup text or invent routes, maps, FAQ answers, form recipients or dummy flows.
 - Do not change `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, `server/.env`, deployment files, or root project configs. Johnny owns backend/server decisions.
 
@@ -87,13 +103,7 @@ Phase 1B files:
 - Backend/database behaviour, production deployment, production basename navigation, external business facts and opening hours remain unverified.
 - Deployment automation is intentionally absent from canonical history. `.htaccess` and deployment documentation disagree; do not resolve this without Magnus and Johnny.
 - Four service booking links remain dead anchors. Address them only in an approved services phase.
-- The About section has a remaining nested-heading semantics issue; handle it within the next phase while preserving the existing content.
 
-## Next phase: About section only
-
-Redesign `client/src/components/sections/About.tsx` and only the styles/assets/components necessary for that section. Use locked mockup 7 as the visual reference. Preserve the verified About content and Ken Burns reduced-motion behaviour unless a specific change is approved. Do not redesign services, contact, CTA, footer, vehicle content, the modal, header or hero in this phase.
-
-For any visual work, verify at **1440**, **768** and **390 CSS pixels**, including no horizontal overflow, readable crop/text, keyboard use and reduced-motion behaviour where relevant. Run `git diff --check` and `cd client && npm run build`; visual approval from Magnus is required before committing.
 
 ## Startup checklist
 

@@ -20,7 +20,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
 - **6 service cards** — each has its own photo (servicekort_repair/diagnosis/AC/tyres/tow/carbuy.jpg)
 - "SE VÅRA BILAR" link on Bilar till salu service card routes correctly to `/bilar-till-salu`
-- **Om oss section** uses Ken Burns slideshow (`KenBurnsSlideshow.tsx`) cycling 3 images (`OMOSS_KENBURNS1/2/3.jpg`) with crossfade + slow pan/zoom; respects `prefers-reduced-motion`
+- **Om oss section** — Phase 2 redesign approved: two-column warm-white layout based on locked Mockup 7, authentic Ken Burns workshop slideshow (`OMOSS_KENBURNS1/2/3.jpg`), glass "Grundat 2021" badge, interactive slide indicator tab, single semantic `<h2>` heading, verified Swedish copy, teal CTA button linking to `#alla-tjanster`, and two white reassurance cards with custom SVG icons (`Tydlig kommunikation` & `Omsorg om din bil`). Respects `prefers-reduced-motion`.
 
 ### What is broken / incomplete
 1. **GitHub Actions deployment is intentionally absent from canonical history** — the legacy misplaced workflow was preserved on `legacy/pre-live-site-2026-09-09`. Do not restore or modify deployment automation without Magnus and Johnny agreeing on the `.htaccess` and server configuration.
@@ -32,8 +32,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 7. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
 8. **Four service booking links are dead anchors** — `Services.tsx` points to `#booking-form`, but the modal has no matching id and is opened through callbacks elsewhere.
 9. **Booking modal backend limitation** — local API availability and real booking submission remain unverified. Phase 1B made no backend, payload or endpoint changes.
-10. **Typography variables are undefined outside Phase 1A** — legacy CSS references `--font-heading` and `--font-body`, while the redesigned header and hero use scoped Barlow tokens.
-11. **Remaining semantics gap** — About nests h2 headings. Existing Ken Burns reduced-motion support remains.
+10. **Typography variables are undefined outside Phase 1A/Phase 2** — legacy CSS references `--font-heading` and `--font-body`, while the redesigned sections use scoped Barlow tokens.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -112,7 +111,16 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
+### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
+- Magnus visually approved the Phase 2 About section redesign.
+- Redesigned `About.tsx` matching locked Mockup 7: warm-white page background (`#f8f7f3`), dark rounded card for Ken Burns workshop slideshow, glass "Grundat 2021" badge, bottom-right slide indicator tab, single semantic `<h2>` without nested headings, verified Swedish business copy, uppercase teal pill CTA button linking smoothly to `#alla-tjanster`, and two white reassurance cards with custom SVG icons (`ChatDotsIcon.tsx` and `ShieldHeartIcon.tsx`).
+- Enhanced `KenBurnsSlideshow.tsx` with `onIndexChange` callback and `prefers-reduced-motion` detection.
+- Replaced legacy gold/black About CSS with scoped redesign tokens and responsive layout across desktop (1440px), tablet (768px), and mobile (390px).
+- Fixed the legacy nested `<h2>` semantics bug in About.
+- Production build verified with `cd client && npm run build` and `git diff --check`.
+
 ### 2026-09-10 — Codex
+
 - Magnus visually and functionally approved Phase 1B. Improved booking-modal mobile layout and accessibility with dialog semantics, focus trap, Escape handling, focus restoration and scroll lock.
 - Backend/API availability and real booking submission remain unverified. No backend, payload or endpoint changes were made.
 
