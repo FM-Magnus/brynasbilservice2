@@ -32,8 +32,8 @@ export function Footer() {
             <div>
             <h3 className="footer-col-title">Öppettider</h3>
             <ul className="footer-links">
-              <li>Tis – Fre: 08:00 – 16:00</li>
-              <li>Mån, Lör: Förfrågan</li>
+              <li>Mån – Fre: 08:00 – 17:00</li>
+              <li>Lördag: Förfrågan</li>
               <li>Söndag: Stängt</li>
             </ul>
           </div>

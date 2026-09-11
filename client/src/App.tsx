@@ -3,12 +3,9 @@ import { Header } from './components/layout/Header'
 import { Hero } from './components/sections/Hero'
 import { ContactIntro } from './components/sections/ContactIntro'
 import { Services } from './components/sections/Services'
-import { ServiceList } from './components/sections/ServiceList'
 import { About } from './components/sections/About'
-import { WhyUs } from './components/sections/WhyUs'
 import { EV } from './components/sections/EV'
 import { BookingFormModal } from './components/BookingForm'
-import { CTABanner } from './components/sections/CTABanner'
 import { Contact } from './components/sections/Contact'
 import { Footer } from './components/layout/Footer'
 
@@ -41,15 +38,12 @@ export default function App() {
       <Header onBookingClick={openModal} variant="hero" />
       <Hero onBookingClick={openModal} />
       <ContactIntro />
+      <EV />
       <About />
       <Services onBookingClick={openModal} />
-      <ServiceList />
-      <WhyUs />
-      <EV />
-      <CTABanner onBookingClick={openModal} />
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <Contact />
+      <Contact onBookingClick={openModal} />
       <Footer />
+      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   )
 }

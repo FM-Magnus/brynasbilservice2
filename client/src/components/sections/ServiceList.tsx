@@ -1,4 +1,3 @@
-import { BoltIcon } from '../icons/BoltIcon'
 import { CheckIcon } from '../icons/CheckIcon'
 
 const items = [
@@ -17,8 +16,7 @@ const items = [
   { name: 'Batteribyte & kontroll' },
   { name: 'Dragkroksmontage' },
   { name: 'Däckhotell — förvaring' },
-  { name: 'Elbilsservice — alla märken', isEV: true },
-  { name: 'Högvoltssystem & diagnostik', isEV: true },
+  { name: 'Bärgning & biltransport' },
   { name: 'Växellådsreparationer' },
   { name: 'Bilar till salu — begagnat', link: '/bilar-till-salu', linkText: 'Se bilar' },
 ]
@@ -41,16 +39,10 @@ export function ServiceList() {
         </header>
         <div className="service-list-grid">
           {items.map(item => (
-            <div
-              className={`service-item fade-up${item.isEV ? ' service-item--ev' : ''}`}
-              key={item.name}
-            >
+            <div className="service-item fade-up" key={item.name}>
               <div className="service-item__left">
-                <span
-                  className={`service-item__icon${item.isEV ? ' service-item__icon--ev' : ''}`}
-                  aria-hidden="true"
-                >
-                  {item.isEV ? <BoltIcon /> : <CheckIcon />}
+                <span className="service-item__icon" aria-hidden="true">
+                  <CheckIcon />
                 </span>
                 <span className="service-item__name">{item.name}</span>
               </div>

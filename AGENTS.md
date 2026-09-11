@@ -20,10 +20,11 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - GoogleReviews component in hero — yellow accent stars and breakdown bars (`#FBBC04`), subtle drop shadows (`text-shadow` / `filter: drop-shadow`), comfortable card dimensions/padding for multi-line reviews without overflow, placeholder data (real Brynäs reviews in `_magnus/REVIEWS/`)
 - **Contact intro section** (`ContactIntro.tsx`) — Responsive two-column contact and inquiry section positioned directly below Hero and above About, adhering to mockup `media_1789061551925.png`. Refactored layout to align right edge of teal form card flush with hero container (`0px` offset across 1920px down to 390px), broadened form card (844px at 1440px / 837px at 1920px), balanced gap (2–3rem), scaled left-column typography (`HÖR AV DIG TILL OSS` clamp 2.75rem–4.15rem, 58px icon badges), and reduced vertical top clearance (44px from hero frame).
 - **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
-- **Slice 1 middle homepage sections** — Services, ServiceList, WhyUs, and EV redesigned with warm-white page surround, Barlow display typography, teal accents, and responsive layouts across desktop, tablet, and mobile. Dead booking links resolved via `onBookingClick` callback. Preserves all 6 service offers, all 19 detailed service items, all 4 reassurance points, and all 14 EV brands.
+- **Workshop process section ("Så fungerar det")** (`EV.tsx`) — Repurposed former dark EV feature card into a compact 3-step workshop process card ("Från första kontakt till färdig bil") positioned directly below ContactIntro and directly above About. Removed all EV and high-voltage claims across About, ContactIntro, ServiceList, and CSS. Replaced EV items in ServiceList with authentic "Bärgning & biltransport", establishing a balanced 18-service grid.
+- **Slice 1 middle homepage sections** — Services, ServiceList, WhyUs redesigned with warm-white page surround, Archivo display typography, teal accents, and responsive layouts across desktop, tablet, and mobile. Dead booking links resolved via `onBookingClick` callback. Preserves all 6 service offers, all 18 detailed service items, and all 4 reassurance points.
 - "SE VÅRA BILAR" link on Bilar till salu service card and ServiceList item routes correctly to `/bilar-till-salu`
 - **Om oss section** — Phase 2 redesign approved: two-column warm-white layout based on locked Mockup 7, authentic Ken Burns workshop slideshow (`OMOSS_KENBURNS1/2/3.jpg`), glass "Grundat 2021" badge, interactive slide indicator tab, single semantic `<h2>` heading, verified Swedish copy, teal CTA button linking to `#alla-tjanster`, and two white reassurance cards with custom SVG icons (`Tydlig kommunikation` & `Omsorg om din bil`). Respects `prefers-reduced-motion`.
-- **CTA Banner & Contact section redesign** — CTABanner with full-width dark card, gradient background, and primary/secondary CTAs; Contact section on light page background with 3 deep-blue contact cards ("Hitta oss", "Öppettider", "Ring oss"), verified Swedish copy and direct links. Header logo scaled up ~20-30% with seamless responsiveness across desktop, tablet, and mobile.
+- **Combined Closing Contact Section** (`Contact.tsx`) — Replaced former separate `CTABanner` and 3-card contact section with one substantial rounded dark ink card (`#101618`) directly above the footer. Features eyebrow `Kontakt & Öppettider`, Archivo 800 title `Behöver din bil hjälp?`, Swedish lead, primary `Boka tid` button opening `BookingFormModal`, secondary `Ring: 070-553 33 95` link, and right-hand inset panel with verified address (`Utmarksvägen 21B, 802 91 Gävle` with Google Maps link), verified phone (`070-553 33 95`), verified email (`info@brynasbilservice.se`), and verified opening hours (`Måndag – Fredag 08:00–17:00`, `Lördag Förfrågan`, `Söndag Stängt`).
 
 ### What is broken / incomplete
 1. **GitHub Actions deployment is intentionally absent from canonical history** — the legacy misplaced workflow was preserved on `legacy/pre-live-site-2026-09-09`. Do not restore or modify deployment automation without Magnus and Johnny agreeing on the `.htaccess` and server configuration.
@@ -42,7 +43,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - To mark sold: add `sold: true` to the car object
 
 ### Section and nav order
-Page scroll: Hero → ContactIntro → About → Services → ServiceList → WhyUs → EV → CTABanner → Contact
+Page scroll: Hero → ContactIntro → Process ("Så fungerar det") → About → Services (compact preview) → Contact (combined closing section) → Footer
 Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 
 ### Recently changed (this session)
@@ -111,6 +112,52 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-11 (latest) — Antigravity (Gemini 3.8 Flash)
+- Replaced two separate repeating homepage sections ("Redo att boka service?" `CTABanner.tsx` and "Kontakt & öppettider" 3-card `Contact.tsx`) with a single substantial, compact closing contact section (`Contact.tsx`) directly above the footer.
+- Designed one unified dark ink card (`#101618`, `border: 1px solid rgba(255, 255, 255, 0.08)`, `border-radius: var(--redesign-radius-card)`, subtle radial teal corner glows):
+  - Left column: Eyebrow `Kontakt & Öppettider`, Archivo 800 title `Behöver din bil hjälp?`, Swedish lead sentence, Primary CTA `Boka tid` with arrow disc triggering `BookingFormModal`, Secondary CTA `Ring: 070-553 33 95` (`tel:+46705533395`).
+  - Right column: Inset dark panel (`rgba(255, 255, 255, 0.03)`) grouping verified address (`Utmarksvägen 21B, 802 91 Gävle`) with Google Maps link, verified phone (`070-553 33 95`), verified email (`info@brynasbilservice.se`), and compact 3-row opening hours (`Måndag – Fredag 08:00 – 17:00`, `Lördag Förfrågan`, `Söndag Stängt`).
+- Corrected opening hours across `Contact.tsx`, `Footer.tsx`, and `CTABanner.tsx` per owner confirmation: all weekdays open 08:00–17:00 (not closed on Monday), Saturday on inquiry ("Förfrågan"), Sunday closed ("Stängt").
+- Removed `CTABanner` from `App.tsx` and passed `onBookingClick={openModal}` to `<Contact />`. Preserved `CTABanner.tsx` on disk.
+- Retained `#kontakt` anchor id so all nav and footer links scroll seamlessly to the combined closing contact section.
+- Scoped responsive layout across desktop (1440px), tablet (768px), and mobile (390px) with minimum 50px tap target button heights and zero horizontal overflow. Respects `prefers-reduced-motion`.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, modal opening behavior, and captured screenshots (`contact-combined-1440.png`, `contact-combined-768.png`, `contact-combined-390.png`). No git commit or push performed.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Replaced homepage's six large photographic service cards (`Services.tsx`) and full 18-item list (`ServiceList.tsx`) with a single compact four-item service preview section (`Services.tsx`).
+- Connected primary CTA button `SE ALLA TJÄNSTER` to the dedicated verified services page (`/tjanster`) with arrow disc badge; retained non-competing secondary booking CTA `Boka tid för service` triggering `BookingFormModal`.
+- Structured 4 verified workshop categories in a responsive 2x2 grid: "Bilservice och reparationer", "Felsökning och diagnostik", "Däckservice och däckhotell", and "AC-service", each with authentic icons, titles, and concise descriptions. Zero EV/high-voltage claims.
+- Dramatically streamlined homepage vertical length:
+  - 1440px desktop: 6,523 px → 5,230 px (-1,293 px / -19.8%).
+  - 768px tablet: 8,849 px → 7,226 px (-1,623 px / -18.3%).
+  - 390px mobile: 10,593 px → 7,341 px (-3,252 px / -30.7%).
+- Maintained dedicated services page (`/tjanster`) completely intact with all 5 comprehensive categories.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, browser back navigation, and zero horizontal overflow across 1440, 768, and 390 px.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Styled the large category cards on the dedicated `/tjanster` page to match the old card design:
+  - Deep dark blue / ink background (`#101618`) with subtle border (`1px solid rgba(255, 255, 255, 0.08)`) and radial turquoise corner glow (`radial-gradient`).
+  - Crisp white display headings (`#ffffff`, Archivo 800) and white subheadings ("Det här ingår & utförs", "Vanliga tecken på att du behöver hjälp").
+  - Teal/light-blue subtitle and accent checkmarks/bullets (`var(--redesign-accent)`).
+  - High-contrast readable white body text (`rgba(255, 255, 255, 0.84)`).
+  - Light-blue / teal CTA button (`var(--redesign-accent)`) with bold uppercase white text and circular arrow badge disc (`rgba(255, 255, 255, 0.2)`).
+  - Numbered pill badge (`01`, `02`, etc.) in the top-right corner of each card media image.
+  - Card hover state with lift, glowing box shadow, and image zoom.
+  - Sits on the warm-white page background (`#f8f7f3`) without changing card dimensions, grid layout, or content.
+- Verified across desktop (1440px), tablet (768px), and mobile (390px) viewports with zero horizontal overflow. Clean build and passes `git diff --check`.
+
+### 2026-09-11 (later) — Antigravity (Gemini 3.8 Flash)
+- Repurposed existing dark EV feature card into a compact "Så fungerar det" process section (`EV.tsx`) and moved it directly below `ContactIntro` and directly above `About`.
+- Removed every public claim of EV or high-voltage competence from the landing page:
+  - `EV.tsx`: completely replaced EV content, brand badges, and partners text with the 3-step workshop process ("Från första kontakt till färdig bil").
+  - `About.tsx`: removed sentence claiming specialist competence on next-generation electric vehicles.
+  - `ContactIntro.tsx`: replaced `Elbil & hybrid` dropdown option with genuine `Bärgning & transport`.
+  - `ServiceList.tsx`: removed `Elbilsservice — alla märken` and `Högvoltssystem & diagnostik`; added authentic `Bärgning & biltransport`, resulting in a balanced 18-service grid.
+  - `index.css`: removed EV-specific classes and styles, added compact process panel and step styles.
+- Maintained exact visual design language: dark rounded container (`#101618`), turquoise radial corner highlight, turquoise pill button with phone link (`tel:0705533395`), inset dark panel with subtle border, restrained turquoise step badges (`01`, `02`, `03`), white Archivo 800 titles, and Manrope 400 descriptions.
+- Responsive layout verified without horizontal overflow across desktop (1440px), tablet (768px, stacked intro over steps), and mobile (390px, full-width button).
+- Confirmed zero regressions on `/bilar-till-salu` and booking/contact interactions. Clean build and zero TypeScript errors.
 
 ### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
 - Refactored site typography to a two-tier **Archivo / Manrope** system via centralized theme tokens without editing any component files.

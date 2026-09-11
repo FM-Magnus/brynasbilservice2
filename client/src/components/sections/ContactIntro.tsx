@@ -225,7 +225,7 @@ export function ContactIntro() {
                         <option value="bromsar">Bromsar</option>
                         <option value="dack">Däckservice &amp; hjulinställning</option>
                         <option value="ac">AC-service</option>
-                        <option value="elbil">Elbil &amp; hybrid</option>
+                        <option value="bargning">Bärgning &amp; transport</option>
                         <option value="prisforfragan">Offert / Prisförfrågan</option>
                         <option value="ovrigt">Övrigt</option>
                       </select>

@@ -66,7 +66,7 @@ export function About() {
             </p>
 
             <p className="about__sub">
-              Vi servar alla bilmärken och är en av regionens få verkstäder med specialistkompetens på nästa generations elbilar. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
+              Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
             </p>
 
             <div className="about__action">

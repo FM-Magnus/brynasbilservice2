@@ -14,7 +14,7 @@ export function CTABanner({ onBookingClick }: CTABannerProps) {
             Redo att boka <span className="title-accent">service?</span>
           </h2>
           <p className="cta-banner__desc">
-            Ring oss direkt på 070-553 33 95 — vi svarar vardagar 08–16 och hittar en tid som passar dig.
+            Ring oss direkt på 070-553 33 95 — vi svarar vardagar 08–17 och hittar en tid som passar dig.
           </p>
           <div className="cta-banner__actions">
             <Button onClick={onBookingClick} variant="primary" className="cta-banner__btn cta-banner__btn--primary">
