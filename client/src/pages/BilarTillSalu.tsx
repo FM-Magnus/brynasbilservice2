@@ -7,6 +7,10 @@ import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
+import { ClockIcon } from '../components/icons/ClockIcon'
+import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
+import { CheckIcon } from '../components/icons/CheckIcon'
+import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 
 interface Car {
   id: number
@@ -92,9 +96,10 @@ function CarCard({ car }: { car: Car }) {
           {images.map((src, i) => (
             <button
               key={i}
+              type="button"
               className={`car-card__thumb${i === activeImg ? ' car-card__thumb--active' : ''}`}
               onClick={() => setActiveImg(i)}
-              aria-label={`Bild ${i + 1}`}
+              aria-label={`Visa bild ${i + 1}`}
             >
               <img src={src} alt="" loading="lazy" />
             </button>
@@ -120,9 +125,9 @@ function CarCard({ car }: { car: Car }) {
 
         <p className="car-card__desc">{car.description}</p>
 
-        <a href="tel:+46705533395" className="car-card__cta btn btn--primary">
-          <PhoneIcon className="w-4 h-4" />
-          Ring för mer info
+        <a href="tel:+46705533395" className="car-card__cta">
+          <PhoneIcon className="car-card__cta-icon" />
+          <span>Ring för mer info & provkörning</span>
         </a>
       </div>
     </article>
@@ -139,20 +144,89 @@ export default function BilarTillSalu() {
       <Header onBookingClick={() => setIsModalOpen(true)} />
 
       <main className="cars-page">
-        {/* Page header */}
+        {/* Page hero */}
         <section className="cars-page__hero">
           <div className="container">
-            <div className="section-eyebrow">Begagnade bilar</div>
-            <h1 className="cars-page__title">
-              Bilar till <span className="title-accent">salu</span>
-            </h1>
-            <p className="cars-page__subtitle">
-              Alla våra bilar är genomgångna och besiktigade av oss på Brynäs Bilservice.
-              Ring oss på <a href="tel:+46705533395" className="text-gold">070-553 33 95</a> för provkörning.
-            </p>
-            <div className="cars-page__location">
-              <MapPinIcon />
-              <span>Utmarksvägen 21B, 802 91 Gävle — Tis–Fre 08–16</span>
+            <div className="cars-page__hero-content">
+              <div className="section-eyebrow">
+                <span className="eyebrow-line" aria-hidden="true" />
+                <span>Begagnade bilar i Brynäs</span>
+              </div>
+              <h1 className="cars-page__title">
+                Bilar till <span className="title-accent">salu</span>
+              </h1>
+              <p className="cars-page__lead">
+                Alla våra bilar är noggrant genomgångna, kontrollerade och servade av våra egna mekaniker på Brynäs Bilservice. Vi säkerställer att bilen är trygg och trafiksäker innan den säljs.
+              </p>
+
+              <div className="cars-page__hero-actions">
+                <a href="tel:+46705533395" className="cars-page__btn cars-page__btn--primary">
+                  <PhoneIcon className="cars-page__btn-icon" />
+                  <span>Ring: 070-553 33 95</span>
+                  <span className="cars-page__btn-arrow" aria-hidden="true">
+                    <ArrowRightIcon />
+                  </span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(true)}
+                  className="cars-page__btn cars-page__btn--outline"
+                >
+                  Boka tid för visning
+                </button>
+              </div>
+
+              <div className="cars-page__meta-bar">
+                <div className="cars-page__meta-item">
+                  <MapPinIcon />
+                  <a
+                    href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Utmarksvägen 21B, 802 91 Gävle
+                  </a>
+                </div>
+                <div className="cars-page__meta-item">
+                  <ClockIcon />
+                  <span>Mån–Fre 08:00–17:00 (Lör förfrågan)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trust Badges */}
+        <section className="cars-page__trust-section">
+          <div className="container">
+            <div className="cars-page__trust-grid">
+              <div className="cars-page__trust-item">
+                <div className="cars-page__trust-icon">
+                  <ShieldHeartIcon />
+                </div>
+                <div>
+                  <h3 className="cars-page__trust-title">Verkstadsinspekterade</h3>
+                  <p className="cars-page__trust-desc">Genomgångna och testade av våra egna mekaniker före försäljning.</p>
+                </div>
+              </div>
+              <div className="cars-page__trust-item">
+                <div className="cars-page__trust-icon">
+                  <CheckIcon />
+                </div>
+                <div>
+                  <h3 className="cars-page__trust-title">Färdiga för leverans</h3>
+                  <p className="cars-page__trust-desc">Besiktigade, provkörda och redo att rulla ut direkt.</p>
+                </div>
+              </div>
+              <div className="cars-page__trust-item">
+                <div className="cars-page__trust-icon">
+                  <PhoneIcon />
+                </div>
+                <div>
+                  <h3 className="cars-page__trust-title">Personlig kontakt</h3>
+                  <p className="cars-page__trust-desc">Tydlig rådgivning och personlig provkörning utan mellanhänder.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -160,13 +234,26 @@ export default function BilarTillSalu() {
         {/* Car listings */}
         <section className="cars-page__listings">
           <div className="container">
+            <div className="cars-page__listings-header">
+              <div className="section-eyebrow">
+                <span className="eyebrow-line" aria-hidden="true" />
+                <span>Aktuellt lager</span>
+              </div>
+              <h2 className="cars-page__listings-title">Tillgängliga bilar just nu</h2>
+            </div>
+
             {available.length === 0 ? (
               <div className="cars-page__empty">
-                <p>Inga bilar till salu just nu.</p>
-                <p>Hör av dig så berättar vi vad som är på gång.</p>
-                <a href="tel:+46705533395" className="btn btn--primary mt-4">
-                  <PhoneIcon className="w-4 h-4" />
-                  Ring oss
+                <div className="cars-page__empty-icon" aria-hidden="true">
+                  <ShieldHeartIcon />
+                </div>
+                <h3 className="cars-page__empty-title">Inga bilar i lager just nu</h3>
+                <p className="cars-page__empty-desc">
+                  Vi får löpande in nya noggrant kontrollerade bilar. Hör gärna av dig med dina önskemål så berättar vi vad som är på gång in.
+                </p>
+                <a href="tel:+46705533395" className="cars-page__btn cars-page__btn--primary">
+                  <PhoneIcon className="cars-page__btn-icon" />
+                  <span>Ring oss på 070-553 33 95</span>
                 </a>
               </div>
             ) : (
@@ -177,12 +264,49 @@ export default function BilarTillSalu() {
 
             {sold.length > 0 && (
               <div className="cars-page__sold">
-                <h3 className="cars-page__sold-title">Nyligen sålda</h3>
+                <div className="section-eyebrow">
+                  <span className="eyebrow-line" aria-hidden="true" />
+                  <span>Arkiv</span>
+                </div>
+                <h3 className="cars-page__sold-title">Nyligen sålda bilar</h3>
                 <div className="cars-grid cars-grid--sold">
                   {sold.map(car => <CarCard key={car.id} car={car} />)}
                 </div>
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Closing card */}
+        <section className="cars-page__closing">
+          <div className="container">
+            <div className="cars-page__closing-card">
+              <div className="cars-page__closing-content">
+                <div className="section-eyebrow justify-center">
+                  <span className="eyebrow-line" aria-hidden="true" />
+                  <span>Frågor om våra bilar?</span>
+                  <span className="eyebrow-line" aria-hidden="true" />
+                </div>
+                <h2 className="cars-page__closing-title">Vill du provköra eller sälja din bil?</h2>
+                <p className="cars-page__closing-desc">
+                  Du är varmt välkommen att ringa oss eller svänga förbi verkstaden på Utmarksvägen i Brynäs för att titta på bilen eller diskutera bilaffärer.
+                </p>
+                <div className="cars-page__hero-actions justify-center">
+                  <a href="tel:+46705533395" className="cars-page__btn cars-page__btn--primary">
+                    <PhoneIcon className="cars-page__btn-icon" />
+                    <span>Ring 070-553 33 95</span>
+                  </a>
+                  <a
+                    href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cars-page__btn cars-page__btn--outline"
+                  >
+                    Hitta till oss
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>

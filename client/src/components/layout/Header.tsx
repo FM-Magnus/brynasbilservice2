@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import newLogo from '../../assets/images/LOGOTYP_NY.svg'
 
 type HeaderProps = {
@@ -7,6 +8,7 @@ type HeaderProps = {
 }
 
 const navLinks = [
+  { href: '/', label: 'Start' },
   { href: '/om-oss', label: 'Om oss' },
   { href: '/tjanster', label: 'Tjänster' },
   { href: '/bilar-till-salu', label: 'Bilar till salu' },
@@ -27,6 +29,8 @@ export function Header({ onBookingClick, variant = 'default' }: HeaderProps) {
   const [sticky, setSticky] = useState(false)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const mobileNavRef = useRef<HTMLElement>(null)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => setSticky(window.scrollY > 60)
@@ -66,19 +70,65 @@ export function Header({ onBookingClick, variant = 'default' }: HeaderProps) {
     window.requestAnimationFrame(() => onBookingClick())
   }
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If external or mailto/tel, let default browser behavior handle it
+    if (href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:')) {
+      return
+    }
+
+    e.preventDefault()
+    closeMenu(false)
+
+    if (href === '/') {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        navigate('/')
+        window.scrollTo(0, 0)
+      }
+    } else {
+      navigate(href)
+      window.scrollTo(0, 0)
+    }
+  }
+
+  const isLinkActive = (href: string) => {
+    if (href === '/') {
+      return location.pathname === '/'
+    }
+    return location.pathname === href || location.pathname.startsWith(href + '/')
+  }
+
   return (
     <header className={`site-header site-header--${variant}${sticky ? ' scrolled' : ''}`} id="site-header">
       <div className="container">
         <div className="header-inner">
-          <a href="/" className="logo" aria-label="Brynäs Bilservice">
+          <a
+            href="/"
+            className="logo"
+            aria-label="Brynäs Bilservice - Till startsidan"
+            onClick={(e) => handleNavClick(e, '/')}
+          >
             <img src={newLogo} alt="Brynäs Bilservice" width="220" height="73" className="logo__img" loading="eager" />
           </a>
 
           <nav className="main-nav" aria-label="Huvudnavigation">
             <ul className="nav__links">
-              {navLinks.map((l, i) => (
-                <li key={`${l.href}-${i}`}><a href={l.href}>{l.label}</a></li>
-              ))}
+              {navLinks.map((l, i) => {
+                const active = isLinkActive(l.href)
+                return (
+                  <li key={`${l.href}-${i}`}>
+                    <a
+                      href={l.href}
+                      className={active ? 'active' : ''}
+                      aria-current={active ? 'page' : undefined}
+                      onClick={(e) => handleNavClick(e, l.href)}
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </nav>
 
@@ -111,9 +161,21 @@ export function Header({ onBookingClick, variant = 'default' }: HeaderProps) {
         hidden={!menuOpen}
       >
         <ul>
-          {navLinks.map((l, i) => (
-            <li key={`${l.href}-${i}`}><a href={l.href} onClick={() => closeMenu()}>{l.label}</a></li>
-          ))}
+          {navLinks.map((l, i) => {
+            const active = isLinkActive(l.href)
+            return (
+              <li key={`${l.href}-${i}`}>
+                <a
+                  href={l.href}
+                  className={active ? 'active' : ''}
+                  aria-current={active ? 'page' : undefined}
+                  onClick={(e) => handleNavClick(e, l.href)}
+                >
+                  {l.label}
+                </a>
+              </li>
+            )
+          })}
         </ul>
         <div className="mobile-cta">
           <a href="tel:0705533395" className="btn btn--ghost mb-3 w-full justify-center">

@@ -19,7 +19,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - Hero marquee removed as part of the approved Phase 1A redesign
 - GoogleReviews component in hero — yellow accent stars and breakdown bars (`#FBBC04`), subtle drop shadows (`text-shadow` / `filter: drop-shadow`), comfortable card dimensions/padding for multi-line reviews without overflow, placeholder data (real Brynäs reviews in `_magnus/REVIEWS/`)
 - **Contact intro section** (`ContactIntro.tsx`) — Responsive two-column contact and inquiry section positioned directly below Hero and above About, adhering to mockup `media_1789061551925.png`. Refactored layout to align right edge of teal form card flush with hero container (`0px` offset across 1920px down to 390px), broadened form card (844px at 1440px / 837px at 1920px), balanced gap (2–3rem), scaled left-column typography (`HÖR AV DIG TILL OSS` clamp 2.75rem–4.15rem, 58px icon badges), and reduced vertical top clearance (44px from hero frame).
-- **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
+- **Bilar till salu subpage** (`BilarTillSalu.tsx` at `/bilar-till-salu`) — Redesigned in full alignment with the approved redesign visual system: warm-white page surround (`#f8f7f3`), dark ink hero/cards (`#101618`), teal accent typography (`var(--redesign-accent)`), trust badges ("Verkstadsinspekterade", "Färdiga för leverans", "Personlig kontakt"), 3-photo interactive gallery with active thumbnail indicator and 16:10 aspect ratio, spec tags, dual booking/call CTAs, clean empty state, sold vehicle section, and dark closing CTA card. Verified 0px horizontal overflow across 1440px, 768px, and 390px.
 - **Workshop process section ("Så fungerar det")** (`EV.tsx`) — Repurposed former dark EV feature card into a compact 3-step workshop process card ("Från första kontakt till färdig bil") positioned directly below ContactIntro and directly above About. Removed all EV and high-voltage claims across About, ContactIntro, ServiceList, and CSS. Replaced EV items in ServiceList with authentic "Bärgning & biltransport", establishing a balanced 18-service grid.
 - **Slice 1 middle homepage sections** — Services, ServiceList, WhyUs redesigned with warm-white page surround, Archivo display typography, teal accents, and responsive layouts across desktop, tablet, and mobile. Dead booking links resolved via `onBookingClick` callback. Preserves all 6 service offers, all 18 detailed service items, and all 4 reassurance points.
 - "SE VÅRA BILAR" link on Bilar till salu service card and ServiceList item routes correctly to `/bilar-till-salu`
@@ -46,7 +46,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ### Section and nav order
 Page scroll: Hero → ContactIntro → Process ("Så fungerar det") → About → Services (compact preview) → Contact (combined closing section) → Footer
-Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
+Nav links: Start → Om oss → Tjänster → Bilar till salu → Kontakt
 
 ### Recently changed (this session)
 - Phase 1A was visually approved by Magnus: the redesigned header, hero and Google-review presentation are implemented; `background_hero.jpg` is connected and the marquee is removed.
@@ -116,6 +116,29 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ## Session log
 
 ### 2026-09-11 (latest) — Antigravity (Gemini 3.8 Flash)
+- Redesigned "Bilar till salu" subpage (`BilarTillSalu.tsx` at `/bilar-till-salu`) to align with the website's approved design system:
+  - Replaced legacy pure black (`#080808`), gold accents (`#F0B800`), and outdated borders with approved redesign tokens: warm-white surround (`#f8f7f3`), deep dark ink cards (`#101618`), teal accents (`#2496a0`), Archivo 800 headings, and Manrope typography.
+  - Upgraded Hero section matching `/tjanster`, `/om-oss`, and `/kontakt`: eyebrow `Begagnade bilar i Brynäs`, Archivo 800 title with teal `.title-accent` ("salu"), lead copy, dual CTAs (`tel:0705533395` and modal opener `Boka tid för visning`), and verified metadata bar (`Utmarksvägen 21B` + `Mån–Fre 08:00–17:00 (Lör förfrågan)`).
+  - Added 3-card trust banner on warm-white surround: "Verkstadsinspekterade" (`ShieldHeartIcon`), "Färdiga för leverans" (`ClockIcon`), and "Personlig kontakt" (`CheckIcon`).
+  - Redesigned vehicle card(s): 16:10 aspect ratio gallery with active turquoise indicator, rounded corners (`clamp(20px, 2.5vw, 28px)`), spec badge tags (`141 147 km`, `Manuell`, `Bensin`, `Mörkgrå`, `Nybesiktigad`), prominent teal price pill (`39 900 kr`), and primary CTA opening booking modal.
+  - Modernized empty state and sold vehicle archive section.
+  - Added closing dark CTA card matching the design of `/kontakt` and `/om-oss` with direct call link, booking modal trigger, and Google Maps directions link.
+  - Verified 0px horizontal overflow and touch target compliance across 1440px desktop, 768px tablet, and 390px mobile viewports.
+  - Automated tests verified thumbnail switching, modal opening, and zero overflow. Build (`npm --prefix client run build`) completed cleanly.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Added `START` navigation item and logo home-linking to Header navigation:
+  - Navigation order established: 1. Start, 2. Om oss, 3. Tjänster, 4. Bilar till salu, 5. Kontakt.
+  - Added `START` item to both desktop navigation (`.nav__links`) and mobile navigation (`#mobile-nav`).
+  - Added home navigation with scroll-to-top (`window.scrollTo(0, 0)` or smooth scroll if already on `/`) to both the `START` nav item and the Brynäs Bilservice logo.
+  - Implemented dynamic active navigation states:
+    - On homepage (`/`), `START` is marked active with `aria-current="page"`, `.active` class, subtle teal background (`rgba(36, 150, 160, 0.12)` desktop, `rgba(36, 150, 160, 0.28)` with teal left indicator mobile).
+    - On subpages (`/om-oss`, `/tjanster`, `/bilar-till-salu`, `/kontakt`), the corresponding navigation item receives `.active` and `aria-current="page"`.
+  - Tuned nav link padding in `client/src/css/index.css` (`clamp(0.72rem, 1.25vw, 1.15rem)` desktop, responsive clamp at 1024px) ensuring zero clipping or horizontal overflow.
+  - Automated tests verified 6 test suites via Headless Chrome CDP: Start active on `/`, active states on all 4 subpages, logo link returning home to top from all 4 subpages, `START` nav link returning home to top, mobile nav opening/navigating/closing, and zero horizontal overflow across 1440, 1024, 768, and 390 px.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, and captured screenshots (`header-nav-1440.png`, `header-mobile-nav-390.png`, `header-768.png`). No git commit or push performed.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
 - Created dedicated Swedish "Kontakt" subpage (`ContactPage.tsx` at `/kontakt`) connecting desktop and mobile header navigation items without modifying homepage contact sections.
 - Structured into cohesive sections matching the site's established design system:
   1. *Hero*: Archivo 800 title `Hör av dig till Brynäs Bilservice`, concise verified intro copy establishing workshop location on Utmarksvägen in Brynäs, Gävle, primary teal CTA `Boka tid` opening `BookingFormModal`, and secondary `Ring: 070-553 33 95` link.
