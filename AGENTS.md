@@ -22,7 +22,10 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - **Contact intro section** (`ContactIntro.tsx`) — Responsive two-column contact and inquiry section positioned directly below Hero and above About, adhering to mockup `media_1789061551925.png`. Refactored layout to align right edge of teal form card flush with hero container (`0px` offset across 1920px down to 390px), broadened form card (844px at 1440px / 837px at 1920px), balanced gap (2–3rem), scaled left-column typography (`HÖR AV DIG TILL OSS` clamp 2.75rem–4.15rem, 58px icon badges), and reduced vertical top clearance (44px from hero frame).
 - **Bilar till salu subpage** (`BilarTillSalu.tsx` at `/bilar-till-salu`) — Redesigned in full alignment with the approved redesign visual system: warm-white page surround (`#f8f7f3`), dark ink hero/cards (`#101618`), teal accent typography (`var(--redesign-accent)`), trust badges ("Verkstadsinspekterade", "Färdiga för leverans", "Personlig kontakt"), 3-photo interactive gallery with active thumbnail indicator and 16:10 aspect ratio, spec tags, dual booking/call CTAs, clean empty state, sold vehicle section, and dark closing CTA card. Verified 0px horizontal overflow across 1440px, 768px, and 390px.
 - **Workshop process section ("Så fungerar det")** (`EV.tsx`) — Repurposed former dark EV feature card into a compact 3-step workshop process card ("Från första kontakt till färdig bil") positioned directly below ContactIntro and directly above About. Removed all EV and high-voltage claims across About, ContactIntro, ServiceList, and CSS. Replaced EV items in ServiceList with authentic "Bärgning & biltransport", establishing a balanced 18-service grid.
-- **Slice 1 middle homepage sections** — Services, ServiceList, WhyUs redesigned with warm-white page surround, Archivo display typography, teal accents, and responsive layouts across desktop, tablet, and mobile. Dead booking links resolved via `onBookingClick` callback. Preserves all 6 service offers, all 18 detailed service items, and all 4 reassurance points.
+- **Dedicated Service & Reparationer page** (`ServiceReparationerPage.tsx` at `/service-reparationer`) — Duplicated from ServicesPage layout and specialized for core mechanical services and diagnostics: (1) Hero with Archivo 800 title `Service & Reparationer`, lead, primary `Boka tid för service` button, and call link; (2) Filtered service categories grid showing strictly `Bilservice & Reparationer` and `Felsökning, Diagnostik & Elsystem` cards; (3) 3-step customer interaction protocol card ("Så fungerar ditt verkstadsbesök") positioned at the bottom directly below the service cards and above the closing reassurance section; (4) Connected to Header navigation as `Service & Reparationer` route.
+- **Dedicated Däckservice page** (`DackservicePage.tsx` at `/dackservice`) — Duplicated from ServicesPage layout and specialized for tire services and storage: (1) Hero with Archivo 800 title `Däckservice & Däckhotell`, lead, primary `Boka däckservice` button, and call link; (2) Filtered service category showing strictly `Däckservice & Däckhotell` card; (3) 3-step customer interaction protocol card ("Smidigt och säkert däckskifte") positioned at the bottom directly below the tire card; (4) Connected to Header navigation as `Däckservice` route.
+- **Dedicated AC-Service page** (`AcServicePage.tsx` at `/ac-service`) — Duplicated from ServicesPage layout and specialized for AC service and climate systems: (1) Hero with Archivo 800 title `AC-Service & Klimatanläggning`, lead, primary `Boka AC-service` button, and call link; (2) Filtered service category showing strictly `AC-Service & Klimatanläggning` card; (3) 3-step customer interaction protocol card ("Från kontroll till perfekt kyla") positioned at the bottom directly below the AC card; (4) Connected to Header navigation as `AC-Service` route.
+- **Dedicated Bärgning page** (`BargningPage.tsx` at `/bargning`) — Duplicated from ServicesPage layout and specialized for towing and transport: (1) Hero with Archivo 800 title `Bärgning & Biltransport`, lead, primary `Ring för bärgning` phone CTA (`070-553 33 95`), and secondary `Boka verkstadstid` button; (2) Filtered service category showing strictly `Bärgning & Biltransport` card; (3) 3-step customer interaction protocol card ("Från vägkant till färdig reparation") positioned at the bottom directly below the towing card; (4) Connected to Header navigation as `Bärgning` route.
 - "SE VÅRA BILAR" link on Bilar till salu service card and ServiceList item routes correctly to `/bilar-till-salu`
 - **Om oss section** — Phase 2 redesign approved: two-column warm-white layout based on locked Mockup 7, authentic Ken Burns workshop slideshow (`OMOSS_KENBURNS1/2/3.jpg`), glass "Grundat 2021" badge, interactive slide indicator tab, single semantic `<h2>` heading, verified Swedish copy, teal CTA button linking to `/om-oss`, and two white reassurance cards with custom SVG icons (`Tydlig kommunikation` & `Omsorg om din bil`). Respects `prefers-reduced-motion`.
 - **Dedicated Om oss page** (`AboutPage.tsx` at `/om-oss`) — Proof-before-promises workshop presentation without making the homepage longer. Includes: (1) Hero with Archivo 800 title `Din lokala och personliga bilverkstad i Brynäs`, lead, primary `Boka tid` button, `Ring: 070-553 33 95` link, and workshop media card with "Grundat 2021" badge; (2) Local workshop section on warm-white surround with verified facts panel (Brynäs Bilservice AB, 559343-5307, Utmarksvägen 21B, verified hours) and reassurance cards (`ChatDotsIcon` & `ShieldHeartIcon`); (3) 3-step transparent working process card ("Från inlämning till färdig bil"); (4) 4-card decoupled authentic gallery using repo images (`OMOSS_KENBURNS1/2/3.jpg`, `HAR_FINNS_VI.jpg`) with category badges; (5) Closing dark CTA card offering `Boka tid nu`, `Se alla tjänster` (`/tjanster`), and phone call link. Zero EV/high-voltage claims. Connected to Header navigation and homepage About CTA button.
@@ -48,7 +51,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ### Section and nav order
 Page scroll: Hero → ContactIntro → Process ("Så fungerar det") → About → Services (compact preview) → Contact (combined closing section) → Footer
-Nav links: Start → Om oss → Tjänster → Bilar till salu → Kontakt
+Nav links: Start → Om oss → Bilservice / Reparationer → Däck → AC → Bärgning → Till / Salu → Kontakt
 
 ### Hero layout (changed 2026-09-11)
 `hero__inner` is no longer a two-column grid. It is a **flex column**: `hero__text` (eyebrow, H1, lead) on top, then `hero__footer` — a flex row holding `hero__actions` (the two buttons) and the GoogleReviews band side by side. Below 1024px `hero__footer` stacks vertically; below 768px the band itself wraps so the score/brand row sits above the review, and the review stacks avatar+name over the text.
@@ -134,7 +137,54 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
-### 2026-09-11 (latest) — Claude (claude-sonnet-5)
+### 2026-09-11 — Codex (safe handoff cleanup)
+- Moved only the invalid duplicate Git remote refs `refs/remotes/origin/HEAD 2` and `refs/remotes/origin/main 2` to `.git/codex-ref-backups/2026-09-11-invalid-origin-refs/`; valid `origin/main` and `origin/redesign/blue-teal-v1` refs now verify correctly.
+- A full `git fsck --connectivity-only` scan produced no new errors during its 60-second check window, but did not complete before it was stopped. Do not treat that as a full integrity pass.
+- Consolidated the current verified frontend/navigation, page-route and documentation changes into one local handoff commit. No push, deploy or backend change was made.
+
+### 2026-09-11 — Codex (easy fixes)
+- Corrected the visible typo `felkodesr` to `felkoder` in `ServiceReparationerPage.tsx`.
+- Updated `docs/AGENT_HANDOFF.md` to list the current public routes and correct the obsolete claim that the confirmed Brynäs Google review data is placeholder data.
+- Backend, deployment and Git metadata were intentionally left untouched; Johnny owns the Windows deployment and backend work.
+
+### 2026-09-11 — Codex (repository check)
+- Frontend dev server at `http://127.0.0.1:5173/` returned HTTP 200. The nine public routes rendered in the browser; the mobile menu and booking modal (including Escape/focus restoration) worked. Opening the modal logged the expected local API network error because the backend was not running.
+- Local client build, lint and typecheck did not complete under the installed Node 25.9.0 toolchain. Treat this as an environment/tooling verification gap, not a confirmed frontend-code failure; rerun with the intended Node 20 environment and a clean install before release.
+- Audit findings for handoff: public admin credentials/token are hardcoded in the client and server; `comment_customer` is sent by the client but omitted from the booking INSERT; `server/.htaccess` and `docs/deployment.md` still disagree on port 3000 vs 3001 and `RewriteBase`.
+- Magnus confirmed that Johnny, his brother, owns the backend and will deploy from Windows. The Windows-only server build script is therefore not a defect. Do not edit backend, database, `.htaccess` or deployment configuration without their explicit authorization.
+- Git health check found invalid duplicate remote-ref files `refs/remotes/origin/HEAD 2` and `refs/remotes/origin/main 2`, causing `git fsck`/`git show-ref` errors. Do not delete or rewrite Git metadata without approval and a backup.
+- Documentation drift: `docs/AGENT_HANDOFF.md` still lists the old route set and incorrectly calls the now-confirmed Brynäs Google review data placeholder data.
+
+### 2026-09-11 (latest) — Antigravity (Gemini 3.6 Flash)
+- Optimized Header navigation labels & multiline structure to maximize space across viewports:
+  - `Däckservice` shortened to `DÄCK`.
+  - `AC-Service` shortened to `AC`.
+  - `Service & Reparationer` formatted as two compact stacked lines (`BILSERVICE` / `REPARATIONER`).
+  - `Bilar till salu` formatted as two compact stacked lines (`TILL` / `SALU`).
+  - Added `.nav-multiline` flex column styling with tight line-height and balanced padding in `index.css`.
+- Created dedicated subpage `Bärgning` (`BargningPage.tsx` at `/bargning`):
+  - Duplicated from `ServicesPage.tsx`.
+  - Filtered category cards to strictly show `Bärgning & Biltransport`. Excluded all other service cards.
+  - Custom phone-first CTAs for acute towing (`tel:0705533395`) and secondary booking button.
+  - Moved the 3-step customer interaction protocol card ("Från vägkant till färdig reparation") to the bottom of the page directly below the towing card.
+  - Connected route `/bargning` in `main.tsx` and added `Bärgning` to `Header.tsx` main navigation menu.
+- Created dedicated subpage `AC-Service` (`AcServicePage.tsx` at `/ac-service`):
+  - Duplicated from `ServicesPage.tsx`.
+  - Filtered category cards to strictly show `AC-Service & Klimatanläggning`. Excluded all other service cards.
+  - Moved the 3-step customer interaction protocol card ("Från kontroll till perfekt kyla") to the bottom of the page directly below the AC card.
+  - Connected route `/ac-service` in `main.tsx` and added `AC-Service` to `Header.tsx` main navigation menu.
+- Created dedicated subpage `Däckservice` (`DackservicePage.tsx` at `/dackservice`):
+  - Duplicated from `ServicesPage.tsx`.
+  - Filtered category cards to strictly show `Däckservice & Däckhotell`. Excluded all other service cards.
+  - Moved the 3-step customer interaction protocol card ("Smidigt och säkert däckskifte") to the bottom of the page directly below the tire card.
+  - Connected route `/dackservice` in `main.tsx` and added `Däckservice` to `Header.tsx` main navigation menu.
+- Created dedicated subpage `Service & Reparationer` (`ServiceReparationerPage.tsx` at `/service-reparationer`):
+  - Duplicated from `ServicesPage.tsx`.
+  - Filtered category cards to strictly show `Bilservice & Reparationer` and `Felsökning, Diagnostik & Elsystem`. Excluded AC-Service, Däckservice, and Bärgning.
+  - Moved the 3-step customer interaction protocol card ("Så fungerar ditt verkstadsbesök") to the bottom of the page directly below the service categories grid and above the reassurance section.
+  - Connected route `/service-reparationer` in `main.tsx` and added `Service & Reparationer` to `Header.tsx` main navigation menu.
+
+### 2026-09-11 — Claude (claude-sonnet-5)
 **Handover note for whichever agent picks this up next (Magnus said he'll likely run simple content/copy edits in Antigravity and bring architecture/security work back here):**
 - **Copyright rule, read before touching any copy:** Magnus wants site content deepened using two outside sources — `/Users/magnusolsson/Documents/varverkstad-2026-09-09/` (a scrape of competitor varverkstad.com) and `Copywriting för Brynäs Bilservice.txt` in his Drive (a commissioned copywriting doc, safe content-wise but still shouldn't be pasted verbatim). **Never copy sentences from the varverkstad scrape onto this site** — it's another business's actual marketing copy, a real copyright/duplicate-content risk, and an earlier session already wrote this exact rule into `varverkstad-2026-09-09/08-target-translation.md`. Borrow structure/themes/facts only, write fresh Swedish wording. Magnus confirmed this explicitly ("Skriv om varje text litegrann").
 - **Don't invent factual claims.** When drafting from the copywriting file, several specific claims are unverified for Brynäs specifically and were deliberately left out of the first round: rim size up to 21", which refrigerants (R134a/R1234yf) the shop actually handles, Autobutler's exact warranty terms, and DPF/kemvård as an offered service. Ask Magnus before adding any of these.

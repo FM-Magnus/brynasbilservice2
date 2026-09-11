@@ -7,11 +7,20 @@ type HeaderProps = {
   variant?: 'hero' | 'default';
 }
 
-const navLinks = [
+const navLinks: { href: string; label: React.ReactNode }[] = [
   { href: '/', label: 'Start' },
   { href: '/om-oss', label: 'Om oss' },
-  { href: '/tjanster', label: 'Tjänster' },
-  { href: '/bilar-till-salu', label: 'Bilar till salu' },
+  {
+    href: '/service-reparationer',
+    label: <span className="nav-multiline"><span>Bilservice</span><span>Reparationer</span></span>
+  },
+  { href: '/dackservice', label: 'Däck' },
+  { href: '/ac-service', label: 'AC' },
+  { href: '/bargning', label: 'Bärgning' },
+  {
+    href: '/bilar-till-salu',
+    label: <span className="nav-multiline"><span>Till</span><span>salu</span></span>
+  },
   { href: '/kontakt', label: 'Kontakt' },
 ]
 

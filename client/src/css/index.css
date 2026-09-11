@@ -206,18 +206,28 @@ ul { list-style: none; }
   gap: 0;
 }
 .nav__links a {
-  display: block;
-  font-family: var(--redesign-font-body);
-  font-weight: 600;
-  font-size: 0.78rem;
-  line-height: 1;
-  letter-spacing: 0.08em;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--redesign-font-display);
+  font-weight: 800;
+  font-size: 0.8rem;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--redesign-ink);
   transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
   position: relative;
-  padding: 1.15rem clamp(0.72rem, 1.25vw, 1.15rem);
+  padding: 0.6rem clamp(0.5rem, 0.9vw, 0.95rem);
   border-radius: var(--redesign-radius-pill);
+}
+.nav-multiline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
 }
 .nav__links a:hover {
   color: var(--redesign-accent-dark);
@@ -2757,7 +2767,7 @@ ul { list-style: none; }
   .site-header > .container { padding-inline: 1.5rem; }
   .site-header--hero { top: 20px; }
   .site-header .logo__img { height: 58px; }
-  .nav__links a { padding-inline: clamp(0.5rem, 1vw, 0.65rem); font-size: 0.75rem; }
+  .nav__links a { padding: 0.5rem clamp(0.4rem, 0.7vw, 0.65rem); font-size: 0.74rem; }
   .site-header .header-booking-button { min-width: 154px; }
   .hero { padding: 20px; }
   .hero__frame {

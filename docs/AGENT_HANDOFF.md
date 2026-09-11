@@ -106,14 +106,14 @@ Phase 3 files:
 ## Architecture and preservation rules
 
 - The frontend lives in `client/`; use `cd client && npm run build`. Do not use or edit the root Vite/React scaffolding.
-- `client/src/main.tsx` provides routing and `LanguageProvider`. Routes are `/`, `/bilar-till-salu`, and `/admin`; production uses the `/brynasbilservice` basename, which remains unverified.
+- `client/src/main.tsx` provides routing and `LanguageProvider`. Public routes are `/`, `/om-oss`, `/tjanster`, `/service-reparationer`, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu`, and `/kontakt`; `/admin` is protected. Production uses the `/brynasbilservice` basename, which remains unverified.
 - `client/src/App.tsx` owns booking-modal state and renders: Header → Hero → About → Services → ServiceList → WhyUs → EV → CTA → Contact → Footer. Preserve that content and order unless a later approved phase says otherwise.
 - Reuse existing Brynäs content, images, telephone/email/address, service data, booking callbacks and real vehicle data. Do not replace business facts with mockup text or invent routes, maps, FAQ answers, form recipients or dummy flows.
 - Do not change `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, `server/.env`, deployment files, or root project configs. Johnny owns backend/server decisions.
 
 ## Known limitations and unverified items
 
-- Google review data is placeholder data, not verified Brynäs reviews.
+- Google review data is real Brynäs Bilservice data confirmed by Magnus (4,3 / 50 recensioner and the linked Google Maps profile), but it is hardcoded and can become stale over time.
 - Local booking API availability and real booking submission remain unverified. `comment_customer` is not saved by the server; do not change payloads/endpoints without backend approval.
 - Backend/database behaviour, production deployment, production basename navigation, external business facts and opening hours remain unverified.
 - Deployment automation is intentionally absent from canonical history. `.htaccess` and deployment documentation disagree; do not resolve this without Magnus and Johnny.
