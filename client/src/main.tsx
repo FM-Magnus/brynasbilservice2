@@ -9,6 +9,7 @@ import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
 import BilarTillSalu from './pages/BilarTillSalu.tsx'
 import ServicesPage from './pages/ServicesPage.tsx'
 import AboutPage from './pages/AboutPage.tsx'
+import ContactPage from './pages/ContactPage.tsx'
 
 const basename = process.env.NODE_ENV === 'development' ? '/' : '/brynasbilservice'
 
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<App />} />
           <Route path="/om-oss" element={<AboutPage />} />
           <Route path="/tjanster" element={<ServicesPage />} />
+          <Route path="/kontakt" element={<ContactPage />} />
           <Route path="/bilar-till-salu" element={<BilarTillSalu />} />
           <Route path="/admin" element={
             <ProtectedRoute>
