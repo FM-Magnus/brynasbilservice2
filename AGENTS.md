@@ -6,7 +6,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-11 by Antigravity)
+## Current state (last updated: 2026-09-11 by Claude (claude-opus-5))
 
 ### What is working
 - Full frontend renders: Hero, ContactIntro, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
@@ -17,7 +17,8 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - i18n context (Swedish/English) — LanguageProvider wraps the whole app in main.tsx; public section copy is currently hardcoded Swedish
 - ThemeSwitcher + localStorage are used in admin; public sections use dark CSS tokens and have no visible theme switch
 - Hero marquee removed as part of the approved Phase 1A redesign
-- GoogleReviews component in hero — yellow accent stars and breakdown bars (`#FBBC04`), subtle drop shadows (`text-shadow` / `filter: drop-shadow`), comfortable card dimensions/padding for multi-line reviews without overflow, placeholder data (real Brynäs reviews in `_magnus/REVIEWS/`)
+- **GoogleReviews band in hero** (`GoogleReviews.tsx`) — rebuilt as a horizontal band sitting in `hero__footer` beside the Boka tid / Ring oss nu buttons, not as a right-hand column card. Reads left to right: score block (4,3 centered over its star row, `50 recensioner` under), then `Google` with `Omdömen på Google Maps` under it, then the rotating review (avatar + name + stars, full text to the right). Star-distribution bars removed entirely. No card chrome — reviews render directly over the hero photo with `filter: drop-shadow` and reinforced `text-shadow`. The **whole panel is one `<a>`** to `https://maps.app.goo.gl/rXR1nz2RwaUQcvuW9` with a concise `aria-label` and gold focus ring; there are no nested interactive elements. `Omdömen på Google Maps` and `50 recensioner` are bottom-aligned to share an exact horizontal line and use identical font-size/line-height at every breakpoint.
+- Review data is **real Brynäs Bilservice data**, confirmed by Magnus: the 4,3 rating, the 50-review count and the Google Maps link are all correct. Reviews naming "Shomaher"/"Maher" refer to the owner, **Maher** — not another workshop.
 - **Contact intro section** (`ContactIntro.tsx`) — Responsive two-column contact and inquiry section positioned directly below Hero and above About, adhering to mockup `media_1789061551925.png`. Refactored layout to align right edge of teal form card flush with hero container (`0px` offset across 1920px down to 390px), broadened form card (844px at 1440px / 837px at 1920px), balanced gap (2–3rem), scaled left-column typography (`HÖR AV DIG TILL OSS` clamp 2.75rem–4.15rem, 58px icon badges), and reduced vertical top clearance (44px from hero frame).
 - **Bilar till salu subpage** (`BilarTillSalu.tsx` at `/bilar-till-salu`) — Redesigned in full alignment with the approved redesign visual system: warm-white page surround (`#f8f7f3`), dark ink hero/cards (`#101618`), teal accent typography (`var(--redesign-accent)`), trust badges ("Verkstadsinspekterade", "Färdiga för leverans", "Personlig kontakt"), 3-photo interactive gallery with active thumbnail indicator and 16:10 aspect ratio, spec tags, dual booking/call CTAs, clean empty state, sold vehicle section, and dark closing CTA card. Verified 0px horizontal overflow across 1440px, 768px, and 390px.
 - **Workshop process section ("Så fungerar det")** (`EV.tsx`) — Repurposed former dark EV feature card into a compact 3-step workshop process card ("Från första kontakt till färdig bil") positioned directly below ContactIntro and directly above About. Removed all EV and high-voltage claims across About, ContactIntro, ServiceList, and CSS. Replaced EV items in ServiceList with authentic "Bärgning & biltransport", establishing a balanced 18-service grid.
@@ -31,12 +32,13 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 ### What is broken / incomplete
 1. **GitHub Actions deployment is intentionally absent from canonical history** — the legacy misplaced workflow was preserved on `legacy/pre-live-site-2026-09-09`. Do not restore or modify deployment automation without Magnus and Johnny agreeing on the `.htaccess` and server configuration.
 2. **`.htaccess` discrepancy** — `server/.htaccess` says port 3000 + has `RewriteBase`. `docs/deployment.md` says port 3001 + explicitly forbids `RewriteBase`. One will fail at deploy. Johnny owns the resolution.
-3. **GoogleReviews has fake data** — hardcoded from a different business. Needs real Brynäs Bilservice reviews. Screenshots of real reviews are in `_magnus/REVIEWS/` (22 images).
+3. **GoogleReviews data is real but hardcoded and frozen** — *the old "fake data from a different business" claim was wrong and is retracted.* Magnus confirmed the owner is **Maher**, that the reviews are Brynäs Bilservice's own, and that 4,3 / 50 recensioner matches the live Google profile. The remaining problem is that the array in `GoogleReviews.tsx` is static: Google's rating and count move over time and the site will not. Screenshots of the real reviews are in `_magnus/REVIEWS/` (22 images).
 4. **comment_customer not saved** — BookingForm sends it in POST body but `server/index.js` `insertBooking()` does not include it in the INSERT query.
 5. **admin comment read-only** — `comment_admin` field is shown in admin modal but cannot be edited or saved.
 6. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
 7. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
 8. **Booking modal backend limitation** — local API availability and real booking submission remain unverified. Phase 1B made no backend, payload or endpoint changes.
+9. **Review band heights are hand-tuned to the current longest review** — `.google-reviews__list` `min-height` is 118px (desktop), 132px (≤768px), 170px (≤480px), each measured against Inge's review. Magnus is shortening/curating the long review texts himself; once that lands, re-measure the tallest remaining item and lower these three values or the band will carry dead space. Do not reintroduce `-webkit-line-clamp` — Magnus explicitly asked for the full text to be readable.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -48,18 +50,30 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 Page scroll: Hero → ContactIntro → Process ("Så fungerar det") → About → Services (compact preview) → Contact (combined closing section) → Footer
 Nav links: Start → Om oss → Tjänster → Bilar till salu → Kontakt
 
+### Hero layout (changed 2026-09-11)
+`hero__inner` is no longer a two-column grid. It is a **flex column**: `hero__text` (eyebrow, H1, lead) on top, then `hero__footer` — a flex row holding `hero__actions` (the two buttons) and the GoogleReviews band side by side. Below 1024px `hero__footer` stacks vertically; below 768px the band itself wraps so the score/brand row sits above the review, and the review stacks avatar+name over the text.
+
+### Research documents (external, not in repo)
+Two evidence-based strategy documents live in Magnus's Google Drive under `> RESEARCH OUTPUTS/BBilservice/`:
+- `Brynas-Bilservice-webbkravspecifikation (2).md` — a full research-backed requirements spec (IA, trust model, pricing law, GDPR, Core Web Vitals, structured data, 30-day launch plan). Written against an **Astro + Tailwind** target; this project is React + Vite, so its technical chapters do not transfer directly, but its information architecture and trust chapters do.
+- `Brynäs Bilservice_ Digital Konkurrensanalys och Strategi för Bil.md` — local competitor analysis for Gävle.
+
+**Treat their business-specific facts about Brynäs with suspicion.** The competitor analysis names the owner as "Sakar Fouad Kareem Al-Barazanchi"; Magnus confirmed the owner is **Maher**. It also assumes opening hours Tis–fre 08:00–16:00 with Mondays closed, which contradicts the Mån–Fre 08:00–17:00 used across the site and confirmed earlier by the owner. Verify against Magnus before acting on any fact from these files.
+
+### Open design thread (paused mid-review)
+Magnus asked for a structural review of the site against the research documents, delivered **one suggestion at a time**. Progress so far:
+- The current architecture is company-presenting (Start / Om oss / Tjänster / Bilar till salu / Kontakt); the spec's is customer-problem-solving (symptom-based `/problem/*` entry points). That gap is the headline finding and is **not yet addressed**.
+- Two structural observations recorded but not acted on: the identical 3-step "Så fungerar det" block is repeated on four pages without ever deepening into its own page, and opening hours are hardcoded in six places (`Footer.tsx:35`, `Contact.tsx:29`, `BilarTillSalu.tsx:192`, `AboutPage.tsx:241`, `ContactPage.tsx:210`, `ContactPage.tsx:284`) instead of one source.
+- Förslag 1 (replace the hero review panel with cold-start proof) was **withdrawn** after Magnus confirmed the review data is genuine. Förslag 2 has not been presented yet.
+
 ### Recently changed (this session)
-- Phase 1A was visually approved by Magnus: the redesigned header, hero and Google-review presentation are implemented; `background_hero.jpg` is connected and the marquee is removed.
-- Phase 1B was visually and functionally approved by Magnus: the booking-modal mobile layout and accessibility are improved with dialog semantics, focus trap, Escape handling, focus restoration and scroll lock.
-- Phase 1B verification passed at 1440, 768 and 390 px. Backend/API availability and real booking submission remain unverified; no backend, payload or endpoint changes were made.
-- Backend/API availability, authentic Google reviews and deployed production behavior remain unverified.
-- Redesign Phase 0 completed using all **seven** mockups, as explicitly clarified by Magnus; the handover's four-image limit is outdated.
-- Added `docs/redesign-phase-0/README.md` with component/content mapping, existing issues, Phase 1 file scope, decision points and acceptance criteria; saved desktop/tablet/mobile baselines in its `captures/` directory.
-- Magnus approved removing the marquee in the redesign; his supplied `background_hero.jpg` is in `client/src/assets/images/` and now wired into the hero.
-- The Phase 1A build wrote ignored output under `client/dist/`; no screenshots or ignored files are part of the Phase 1A change set.
-- `redesign/blue-teal-v1` is the intended redesign branch. It started at `1f8ab37b`, matching the locally stored `main` and `origin/main` refs. Having no upstream is intentional for the local baseline and is not a blocker; no push was performed.
-- External business facts, backend behavior, production-basename behavior and real Google review data remain unverified.
-- Correct local frontend is `http://127.0.0.1:5173/`. An older checkout separately listens on IPv6 localhost port 5173; avoid ambiguous `localhost` for this baseline.
+- Hero review panel fully reworked and the hero restructured to a column + footer band (see above). Uncommitted.
+- `server/node_modules` was corrupted (`mime-db` installed without its `db.json`), crashing `npm run dev` on startup. Fixed by reinstalling server dependencies; the regenerated `server/package-lock.json` is the only committed change this session (`492085a8`).
+- Local dev ran on **port 5174** — Vite auto-selected it because 5173 was already occupied by another process.
+- Backend starts but `/api/*` returns 500 without the MySQL SSH tunnel; that is expected locally.
+- Earlier sessions: Phase 1A/1B approved by Magnus (header, hero, booking-modal accessibility); Phase 0 completed using all **seven** mockups; marquee removed; `background_hero.jpg` wired into the hero; `docs/redesign-phase-0/README.md` added with baseline captures.
+- `redesign/blue-teal-v1` is the intended redesign branch, started at `1f8ab37b`. Having no upstream is intentional for the local baseline; no push has been performed.
+- Backend/API availability, production-basename behavior and deployed production behavior remain unverified.
 
 ### Files agents should NOT touch
 - `server/index.js` — owned by Johnny (Magnus's brother), backend developer
@@ -115,7 +129,22 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
-### 2026-09-11 (latest) — Antigravity (Gemini 3.8 Flash)
+### 2026-09-11 (latest) — Claude (claude-opus-5)
+- **Unblocked local dev.** `server/npm run dev` crashed instantly with `Cannot find module './db.json'` from `mime-db`. Root cause was a corrupted `node_modules`, not a Node version problem — the package was installed without its data file. Reinstalled server dependencies; committed the regenerated `server/package-lock.json` as `492085a8` (the only commit this session). Vite ran on **5174**, not 5173, because 5173 was already taken.
+- **Read both research documents** in Magnus's Google Drive (`> RESEARCH OUTPUTS/BBilservice/`) and mapped the current site architecture against them. Began a one-suggestion-at-a-time structural review; see "Open design thread" in Current state for exactly where it paused.
+- **Retracted a wrong finding.** Förslag 1 claimed the hero's Google reviews were another workshop's, because several mention "Shomaher"/"Maher" and the competitor analysis reported no verified Google profile. Magnus corrected this: the owner is **Maher** and the data is genuine. He later confirmed the 4,3 rating and the Maps link are correct too. The old "GoogleReviews has fake data" known issue is now corrected in this file. Consequence worth carrying forward: the research docs contain at least one verified error about this business (they name the owner "Sakar"), so their Brynäs-specific facts need checking with Magnus, including the Tis–fre 08–16 opening hours they assume.
+- **Rebuilt the hero review panel** through several rounds of Magnus's direction:
+  - Removed the yellow star-distribution bars and the `distribution` array.
+  - Enlarged the Google wordmark; renamed the subtitle from "Sammanfattning av recensioner" to **"Omdömen på Google Maps"** (Magnus first asked for "Reviews Google Maps", then asked for a recommendation and took this).
+  - Made the **entire panel a single `<a>`** to `https://maps.app.goo.gl/rXR1nz2RwaUQcvuW9` — score, wordmark and rotating review all link — with a concise `aria-label` so screen readers get a short name instead of the whole review, plus `rel="noopener noreferrer"` and a gold focus ring. No nested interactive elements.
+  - Stripped the review card entirely (background, border, blur, radius). Reviews now sit directly on the hero photo with `filter: drop-shadow` and stronger `text-shadow`.
+  - Moved the score to the left of the wordmark, centered 4,3 over its star row, and matched `Omdömen på Google Maps` to `50 recensioner` in font-size and line-height with bottom alignment so the two sit on an exact shared line (verified 0.0px delta at all breakpoints). Fixed a leftover `margin-bottom: 0.6rem` in the 480px block that was throwing mobile off by exactly 9.6px.
+  - **Restructured the hero itself**: `hero__inner` went from a 2-column grid to a flex column, with a new `hero__footer` row holding the buttons and the review band side by side, per Magnus's annotated screenshot.
+  - Removed line clamping on Magnus's request so the full review text is readable, and tuned `.google-reviews__list` `min-height` per breakpoint by measuring the tallest review.
+- **Proposed how to shorten the long reviews** rather than editing them unilaterally: curate the rotation down to the already-short reviews (recommended, no text touched), or use verbatim excerpts with an ellipsis. Advised against paraphrasing, per the spec's rule that omdömen must not be rewritten so meaning changes. Also flagged that the two longest reviews name "Shomaher", which reads as a different workshop on a site called Brynäs Bilservice. **Magnus is making these text changes himself** — the band `min-height` values will need re-measuring afterwards.
+- All hero/review work is **uncommitted**. Verified at 1280/1600 desktop, 768 tablet and 375 mobile: no horizontal overflow, no text overflowing its container.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
 - Redesigned "Bilar till salu" subpage (`BilarTillSalu.tsx` at `/bilar-till-salu`) to align with the website's approved design system:
   - Replaced legacy pure black (`#080808`), gold accents (`#F0B800`), and outdated borders with approved redesign tokens: warm-white surround (`#f8f7f3`), deep dark ink cards (`#101618`), teal accents (`#2496a0`), Archivo 800 headings, and Manrope typography.
   - Upgraded Hero section matching `/tjanster`, `/om-oss`, and `/kontakt`: eyebrow `Begagnade bilar i Brynäs`, Archivo 800 title with teal `.title-accent` ("salu"), lead copy, dual CTAs (`tel:0705533395` and modal opener `Boka tid för visning`), and verified metadata bar (`Utmarksvägen 21B` + `Mån–Fre 08:00–17:00 (Lör förfrågan)`).
