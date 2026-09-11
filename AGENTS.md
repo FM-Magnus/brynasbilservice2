@@ -6,10 +6,11 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-10 by Antigravity)
+## Current state (last updated: 2026-09-11 by Antigravity)
 
 ### What is working
-- Full frontend renders: Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
+- Full frontend renders: Hero, ContactIntro, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
+- Two-tier typography system: **Archivo 800** for display headings, **Manrope** (400-500 body, 600-700 controls/navigation/badges) via centralized tokens, strictly avoiding scattered component edits.
 - Phase 1A header and hero redesign — real SVG logo (scaled +20–30%), floating navigation/booking controls, keyboard-usable mobile menu, unchanged hero copy and connected `background_hero.jpg`
 - Booking form modal (DatePicker + TimePicker) — Phase 1B improved mobile layout and accessibility
 - Admin panel at `/admin` — booking management, service CRUD, soft-delete, search/filter/sort
@@ -17,6 +18,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - ThemeSwitcher + localStorage are used in admin; public sections use dark CSS tokens and have no visible theme switch
 - Hero marquee removed as part of the approved Phase 1A redesign
 - GoogleReviews component in hero — yellow accent stars and breakdown bars (`#FBBC04`), subtle drop shadows (`text-shadow` / `filter: drop-shadow`), comfortable card dimensions/padding for multi-line reviews without overflow, placeholder data (real Brynäs reviews in `_magnus/REVIEWS/`)
+- **Contact intro section** (`ContactIntro.tsx`) — Responsive two-column contact and inquiry section positioned directly below Hero and above About, adhering to mockup `media_1789061551925.png`. Refactored layout to align right edge of teal form card flush with hero container (`0px` offset across 1920px down to 390px), broadened form card (844px at 1440px / 837px at 1920px), balanced gap (2–3rem), scaled left-column typography (`HÖR AV DIG TILL OSS` clamp 2.75rem–4.15rem, 58px icon badges), and reduced vertical top clearance (44px from hero frame).
 - **Bilar till salu subpage** at `/bilar-till-salu` — real Peugeot 307 CC listing, 3-photo gallery with thumbnail strip, sold section, empty state
 - **Slice 1 middle homepage sections** — Services, ServiceList, WhyUs, and EV redesigned with warm-white page surround, Barlow display typography, teal accents, and responsive layouts across desktop, tablet, and mobile. Dead booking links resolved via `onBookingClick` callback. Preserves all 6 service offers, all 19 detailed service items, all 4 reassurance points, and all 14 EV brands.
 - "SE VÅRA BILAR" link on Bilar till salu service card and ServiceList item routes correctly to `/bilar-till-salu`
@@ -32,7 +34,6 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 6. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth; schema.sql is stale documentation.
 7. **Orphan root project configs** — `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html` at repo root reference React 19 / Vite 8 / Tailwind 4 (the project actually uses 18/4/3 in `client/`). They're misleading scaffolding and could be deleted, but doing so requires checking if any tooling targets them.
 8. **Booking modal backend limitation** — local API availability and real booking submission remain unverified. Phase 1B made no backend, payload or endpoint changes.
-9. **Typography variables are undefined outside redesigned sections** — legacy CSS references `--font-heading` and `--font-body`, while the redesigned sections use scoped Barlow tokens.
 
 ### Cars for sale (BilarTillSalu.tsx)
 - Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026
@@ -41,7 +42,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - To mark sold: add `sold: true` to the car object
 
 ### Section and nav order
-Page scroll: Hero → About → Services → ServiceList → WhyUs → EV → CTABanner → Contact
+Page scroll: Hero → ContactIntro → About → Services → ServiceList → WhyUs → EV → CTABanner → Contact
 Nav links: Om oss → Tjänster → Bilar till salu → Kontakt
 
 ### Recently changed (this session)
@@ -110,6 +111,19 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Refactored site typography to a two-tier **Archivo / Manrope** system via centralized theme tokens without editing any component files.
+- Loaded Google Fonts in `client/index.html`: `Archivo:wght@800` and `Manrope:wght@400;500;600;700`.
+- Configured Tailwind in `client/tailwind.config.js`: `heading: ["'Archivo'", 'sans-serif']` and `body: ["'Manrope'", 'sans-serif']`.
+- Updated CSS variables and element rules in `client/src/css/index.css`: Archivo 800 (ExtraBold, letter-spacing -0.02em, line-height 1.05–1.15) for all display headings; Manrope 400 (line-height 1.5–1.65) for body copy; Manrope 600–700 (letter-spacing 0.04em–0.08em) for buttons, navigation, chips, badges, and labels. Prohibited weight >= 700 on paragraphs. Prohibited faux-bold and uppercase body copy.
+- Verified computed styles and visual rendering across 1440px desktop, 768px tablet, and 390px mobile via headless Chrome CDP inspection and screen captures. Build and typecheck clean.
+
+### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
+- Created and mounted `ContactIntro.tsx` directly below Hero and above About on the landing page, matching user mockup (`media_1789061551925.png`).
+- Refactored layout, dimensions, and typography: broadened teal form card (844px at 1440px / 837px at 1920px), aligned right edge flush with hero container (`rightOffset: 0px` across 1920px down to 390px via CDP inspection), maintained balanced column gap (2–3rem), scaled up left-column typography (`HÖR AV DIG TILL OSS` clamp 2.75rem–4.15rem, 58px icon badges, 1.28rem values), and reduced vertical gap between Hero and Contact down to 44px.
+- Migrated all heading, display, and body typography from Barlow/Exo 2 to `Sora` (`Sora:wght@300;400;500;600;700;800`), matching Vår Verkstad / mockups across `client/index.html`, `client/src/css/index.css`, and `client/tailwind.config.js`.
+- Verified production build (`npm --prefix client run build`), `tsc` typecheck, and visual rendering across 1920px, 1440px, 1024px, 768px, and 390px.
 
 ### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
 - Redesigned and aligned CTA Banner (`CTABanner.tsx`) and Contact section (`Contact.tsx`) matching EV-card aesthetic: dark gradient full-width CTA banner and 3 deep-blue cards ("Hitta oss", "Öppettider", "Ring oss") on the light page background.

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Header } from './components/layout/Header'
 import { Hero } from './components/sections/Hero'
+import { ContactIntro } from './components/sections/ContactIntro'
 import { Services } from './components/sections/Services'
 import { ServiceList } from './components/sections/ServiceList'
 import { About } from './components/sections/About'
@@ -39,6 +40,7 @@ export default function App() {
     <>
       <Header onBookingClick={openModal} variant="hero" />
       <Hero onBookingClick={openModal} />
+      <ContactIntro />
       <About />
       <Services onBookingClick={openModal} />
       <ServiceList />

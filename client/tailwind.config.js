@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["'Exo 2'", 'sans-serif'],
-        body: ['Barlow', 'sans-serif'],
+        heading: ["'Archivo'", 'sans-serif'],
+        body: ["'Manrope'", 'sans-serif'],
       },
       colors: {
         brynas: {
