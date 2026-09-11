@@ -6,7 +6,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-11 by Claude (claude-opus-5))
+## Current state (last updated: 2026-09-11 by Claude (claude-sonnet-5))
 
 ### What is working
 - Full frontend renders: Hero, ContactIntro, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
@@ -66,9 +66,14 @@ Magnus asked for a structural review of the site against the research documents,
 - Two structural observations recorded but not acted on: the identical 3-step "Så fungerar det" block is repeated on four pages without ever deepening into its own page, and opening hours are hardcoded in six places (`Footer.tsx:35`, `Contact.tsx:29`, `BilarTillSalu.tsx:192`, `AboutPage.tsx:241`, `ContactPage.tsx:210`, `ContactPage.tsx:284`) instead of one source.
 - Förslag 1 (replace the hero review panel with cold-start proof) was **withdrawn** after Magnus confirmed the review data is genuine. Förslag 2 has not been presented yet.
 
+### Copywriting sourcing rule (established this session)
+Magnus wants the site's content deepened by drawing on two outside sources — a competitor reference pack (`/Users/magnusolsson/Documents/varverkstad-2026-09-09/`, a scrape of varverkstad.com) and a commissioned copywriting file (`> RESEARCH OUTPUTS/BBilservice/Copywriting för Brynäs Bilservice.txt` in his Drive). **Do not paste sentences from either source verbatim, including the commissioned file.** Borrow themes, structure and facts, then write original Swedish wording. This matters most for the varverkstad pack — reusing an actual competitor's marketing copy is a copyright and duplicate-content risk, and `varverkstad-2026-09-09/08-target-translation.md` already documents this as a hard rule from an earlier session ("Do not copy their copy, Swedish text strings"). Magnus confirmed this approach ("Skriv om varje text litegrann") after it was raised.
+
 ### Recently changed (this session)
-- Hero review panel fully reworked and the hero restructured to a column + footer band (see above). Uncommitted.
-- `server/node_modules` was corrupted (`mime-db` installed without its `db.json`), crashing `npm run dev` on startup. Fixed by reinstalling server dependencies; the regenerated `server/package-lock.json` is the only committed change this session (`492085a8`).
+- Hero review panel fully reworked and the hero restructured to a column + footer band (see above). Committed as `d6b7f18e`.
+- Rewrote the `description` field for all 5 categories on `ServicesPage.tsx` (Bilservice & Reparationer, Felsökning/Diagnostik, AC-Service, Däckservice, Bärgning & Biltransport) — longer, theme-richer text written from scratch, not copied from the copywriting file. Verified no card overflow at desktop and 375px. Committed together with this AGENTS.md update as `d570c433`.
+- Deliberately left out of the new service copy: exact rim size (21"), specific refrigerant types handled (R134a/R1234yf), Autobutler's 3-year warranty terms, and DPF/kemvård as an offered service — these are specific factual claims from the copywriting file that are unverified for Brynäs's actual equipment and partnerships. Ask Magnus before adding any of them.
+- `server/node_modules` was corrupted (`mime-db` installed without its `db.json`), crashing `npm run dev` on startup. Fixed by reinstalling server dependencies; the regenerated `server/package-lock.json` is committed as `492085a8`.
 - Local dev ran on **port 5174** — Vite auto-selected it because 5173 was already occupied by another process.
 - Backend starts but `/api/*` returns 500 without the MySQL SSH tunnel; that is expected locally.
 - Earlier sessions: Phase 1A/1B approved by Magnus (header, hero, booking-modal accessibility); Phase 0 completed using all **seven** mockups; marquee removed; `background_hero.jpg` wired into the hero; `docs/redesign-phase-0/README.md` added with baseline captures.
@@ -129,7 +134,15 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
-### 2026-09-11 (latest) — Claude (claude-opus-5)
+### 2026-09-11 (latest) — Claude (claude-sonnet-5)
+**Handover note for whichever agent picks this up next (Magnus said he'll likely run simple content/copy edits in Antigravity and bring architecture/security work back here):**
+- **Copyright rule, read before touching any copy:** Magnus wants site content deepened using two outside sources — `/Users/magnusolsson/Documents/varverkstad-2026-09-09/` (a scrape of competitor varverkstad.com) and `Copywriting för Brynäs Bilservice.txt` in his Drive (a commissioned copywriting doc, safe content-wise but still shouldn't be pasted verbatim). **Never copy sentences from the varverkstad scrape onto this site** — it's another business's actual marketing copy, a real copyright/duplicate-content risk, and an earlier session already wrote this exact rule into `varverkstad-2026-09-09/08-target-translation.md`. Borrow structure/themes/facts only, write fresh Swedish wording. Magnus confirmed this explicitly ("Skriv om varje text litegrann").
+- **Don't invent factual claims.** When drafting from the copywriting file, several specific claims are unverified for Brynäs specifically and were deliberately left out of the first round: rim size up to 21", which refrigerants (R134a/R1234yf) the shop actually handles, Autobutler's exact warranty terms, and DPF/kemvård as an offered service. Ask Magnus before adding any of these.
+- **Paused structural review, not abandoned:** Magnus asked for a one-suggestion-at-a-time review of the site's information architecture against two research documents (`webbkravspecifikation` and `Digital Konkurrensanalys`, both in his Drive under `BBilservice/`). Only one finding has been delivered (the site is company-presenting, the spec wants problem-solving `/problem/*` pages) and it was not acted on — treat that as still open, not resolved. Separately, a proposed fix to the hero review panel was floated and then withdrawn once Magnus confirmed the review data was genuine, so don't reintroduce that idea without re-reading the "Open design thread" section above.
+- **One live loose end:** `.google-reviews__list` `min-height` values are hand-tuned to the current review texts. If Magnus shortens the long reviews (he said he'd do this himself), re-measure the tallest remaining item and lower the three per-breakpoint values — see known issue #9 above.
+- Everything from this session is committed (`d6b7f18e`, `d570c433`, plus `492085a8` from earlier in the session). Nothing is sitting uncommitted.
+
+### 2026-09-11 — Claude (claude-opus-5)
 - **Unblocked local dev.** `server/npm run dev` crashed instantly with `Cannot find module './db.json'` from `mime-db`. Root cause was a corrupted `node_modules`, not a Node version problem — the package was installed without its data file. Reinstalled server dependencies; committed the regenerated `server/package-lock.json` as `492085a8` (the only commit this session). Vite ran on **5174**, not 5173, because 5173 was already taken.
 - **Read both research documents** in Magnus's Google Drive (`> RESEARCH OUTPUTS/BBilservice/`) and mapped the current site architecture against them. Began a one-suggestion-at-a-time structural review; see "Open design thread" in Current state for exactly where it paused.
 - **Retracted a wrong finding.** Förslag 1 claimed the hero's Google reviews were another workshop's, because several mention "Shomaher"/"Maher" and the competitor analysis reported no verified Google profile. Magnus corrected this: the owner is **Maher** and the data is genuine. He later confirmed the 4,3 rating and the Maps link are correct too. The old "GoogleReviews has fake data" known issue is now corrected in this file. Consequence worth carrying forward: the research docs contain at least one verified error about this business (they name the owner "Sakar"), so their Brynäs-specific facts need checking with Magnus, including the Tis–fre 08–16 opening hours they assume.
@@ -142,7 +155,7 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
   - **Restructured the hero itself**: `hero__inner` went from a 2-column grid to a flex column, with a new `hero__footer` row holding the buttons and the review band side by side, per Magnus's annotated screenshot.
   - Removed line clamping on Magnus's request so the full review text is readable, and tuned `.google-reviews__list` `min-height` per breakpoint by measuring the tallest review.
 - **Proposed how to shorten the long reviews** rather than editing them unilaterally: curate the rotation down to the already-short reviews (recommended, no text touched), or use verbatim excerpts with an ellipsis. Advised against paraphrasing, per the spec's rule that omdömen must not be rewritten so meaning changes. Also flagged that the two longest reviews name "Shomaher", which reads as a different workshop on a site called Brynäs Bilservice. **Magnus is making these text changes himself** — the band `min-height` values will need re-measuring afterwards.
-- All hero/review work is **uncommitted**. Verified at 1280/1600 desktop, 768 tablet and 375 mobile: no horizontal overflow, no text overflowing its container.
+- Hero/review work verified at 1280/1600 desktop, 768 tablet and 375 mobile: no horizontal overflow, no text overflowing its container. (Committed later in the session as `d6b7f18e` — see the entry above.)
 
 ### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
 - Redesigned "Bilar till salu" subpage (`BilarTillSalu.tsx` at `/bilar-till-salu`) to align with the website's approved design system:
