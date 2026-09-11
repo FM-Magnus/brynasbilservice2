@@ -70,7 +70,7 @@ export function About() {
             </p>
 
             <div className="about__action">
-              <a href="#alla-tjanster" className="about__cta-btn">
+              <a href="/om-oss" className="about__cta-btn">
                 <span>Läs mer om oss</span>
                 <ArrowRightIcon className="about__cta-icon" />
               </a>

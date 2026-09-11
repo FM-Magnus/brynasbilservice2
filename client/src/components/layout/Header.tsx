@@ -7,7 +7,7 @@ type HeaderProps = {
 }
 
 const navLinks = [
-  { href: '/#om-oss', label: 'Om oss' },
+  { href: '/om-oss', label: 'Om oss' },
   { href: '/tjanster', label: 'Tjänster' },
   { href: '/bilar-till-salu', label: 'Bilar till salu' },
   { href: '/#kontakt', label: 'Kontakt' },
