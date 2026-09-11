@@ -28,6 +28,9 @@ export function Hero({ onBookingClick }: HeroProps) {
                 <p className="hero__subtitle">
                   Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation — för alla bilmärken, till konkurrenskraftiga priser.
                 </p>
+              </div>
+
+              <div className="hero__footer">
                 <div className="hero__actions">
                   <Button onClick={onBookingClick} variant="primary">Boka tid</Button>
                   <Button href="tel:+46705533395" variant="outline">
@@ -35,9 +38,9 @@ export function Hero({ onBookingClick }: HeroProps) {
                     Ring oss nu
                   </Button>
                 </div>
-              </div>
 
-              <GoogleReviews />
+                <GoogleReviews />
+              </div>
             </div>
           </div>
         </div>

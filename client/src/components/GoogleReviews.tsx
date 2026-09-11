@@ -20,14 +20,6 @@ const reviews = [
   { name: 'Göran Bertils', rating: 4, text: 'Positiv: Kvalitet, Värde' },
 ];
 
-const distribution = [
-  { stars: 5, count: 42, pct: 84 },
-  { stars: 4, count: 4, pct: 8 },
-  { stars: 3, count: 0, pct: 0 },
-  { stars: 2, count: 0, pct: 0 },
-  { stars: 1, count: 4, pct: 8 },
-];
-
 function StarIcon({ filled, half, size = 20 }: { filled?: boolean; half?: boolean; size?: number }) {
   return (
     <svg
@@ -121,31 +113,22 @@ export function GoogleReviews() {
   }, [prefersReducedMotion, showReviews]);
 
   return (
-    <div className={`google-reviews ${showSummary ? 'visible' : ''}`} role="region" aria-label="Google-recensioner">
-      <div className="google-reviews__header">
-        <div className="google-reviews__logo">Google</div>
-        <div className="google-reviews__title">Sammanfattning av recensioner</div>
-      </div>
-
+    <a
+      className={`google-reviews ${showSummary ? 'visible' : ''}`}
+      href="https://maps.app.goo.gl/rXR1nz2RwaUQcvuW9"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Brynäs Bilservice har betyget 4,3 av 5 baserat på 50 omdömen. Läs omdömena på Google Maps (öppnas i ny flik)."
+    >
       <div className="google-reviews__summary">
-        <div className="google-reviews__bars">
-          {distribution.map((d) => (
-            <div key={d.stars} className="google-reviews__bar-row">
-              <span className="google-reviews__bar-label">{d.stars}</span>
-              <div className="google-reviews__bar-track" role="img" aria-label={`${d.stars} stjärnor: ${d.count} recensioner`}>
-                <div
-                  className="google-reviews__bar-fill"
-                  style={{ width: `${d.pct}%`, transitionDelay: `${(5 - d.stars) * 120}ms` }}
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
         <div className="google-reviews__score">
           <div className="google-reviews__score-number">4,3</div>
           <Stars rating={4.3} showHalf />
           <div className="google-reviews__score-count">50 recensioner</div>
+        </div>
+        <div className="google-reviews__brand">
+          <div className="google-reviews__logo">Google</div>
+          <div className="google-reviews__title">Omdömen på Google Maps</div>
         </div>
       </div>
 
@@ -169,6 +152,6 @@ export function GoogleReviews() {
           </div>
         ))}
       </div>
-    </div>
+    </a>
   );
 }
