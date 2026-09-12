@@ -8,7 +8,7 @@ import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 import './BookingForm.css'; // Import custom styles for modal
 
-export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; initialComment?: string }> = ({ isOpen, onClose, initialComment = '' }) => {
   const [services, setServices] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
@@ -37,6 +37,10 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void }
         .catch(error => console.error('Error fetching services:', error));
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen && initialComment) setCustomerComment((current) => current || initialComment);
+  }, [initialComment, isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;

@@ -388,7 +388,7 @@ export function BookingManagement() {
                           e.stopPropagation();
                           openModal(booking);
                         }}
-                        className="text-yellow-500 hover:text-yellow-700 ml-4"
+                        className="text-[var(--redesign-accent)] hover:text-[var(--redesign-accent-dark)] ml-4"
                       >
                         <PencilIcon className="h-5 w-5" />
                       </button>
@@ -481,7 +481,7 @@ export function BookingManagement() {
 
                           <div className="mb-4 pr-2">
                             <div className="uppercase text-gray-500">{t('email')}</div>
-                            <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedBooking.customer_email ? <a href={`mailto:${selectedBooking.customer_email}`} className="text-brynas-gold hover:text-brynas-gold-light underline">{selectedBooking.customer_email}</a> : t('notAvailable')}</div>
+                            <div className="p-2 rounded-md dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800">{selectedBooking.customer_email ? <a href={`mailto:${selectedBooking.customer_email}`} className="text-[var(--redesign-accent)] hover:text-[var(--redesign-accent-dark)] underline">{selectedBooking.customer_email}</a> : t('notAvailable')}</div>
                           </div>
 
 
@@ -562,7 +562,7 @@ export function BookingManagement() {
                 <div className="mt-5 sm:mt-6">
                   <button
                     type="button"
-                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 dark:bg-brynas-gold dark:text-brynas-black text-base font-medium text-white hover:bg-indigo-700 dark:hover:bg-brynas-gold-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 dark:bg-[var(--redesign-accent)] text-base font-medium text-white hover:bg-indigo-700 dark:hover:bg-[var(--redesign-accent-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={closeModal}
                   >
                     {t('close')}

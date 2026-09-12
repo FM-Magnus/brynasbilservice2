@@ -33,7 +33,7 @@ function CalendarIcon() {
   )
 }
 
-export function Header({ onBookingClick, variant = 'default' }: HeaderProps) {
+export function Header({ onBookingClick, variant = 'hero' }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [sticky, setSticky] = useState(false)
   const menuButtonRef = useRef<HTMLButtonElement>(null)

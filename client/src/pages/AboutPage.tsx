@@ -86,7 +86,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <Header onBookingClick={openModal} variant="default" />
+      <Header onBookingClick={openModal} />
 
       <main className="about-page" id="main-content">
         {/* Hero section */}
@@ -127,7 +127,6 @@ export default function AboutPage() {
                   </a>
                 </div>
               </div>
-
               <div className="about-page__hero-visual">
                 <div className="about-page__hero-card">
                   <img

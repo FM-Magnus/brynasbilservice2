@@ -1,342 +1,50 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
-import { SnowflakeIcon } from '../components/icons/SnowflakeIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
-import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
+import imgAc from '../assets/images/servicekort_AC.jpg'
 
-import imgAC from '../assets/images/servicekort_AC.jpg'
+type PricingCardProps = { title: string; price: string; items: string[]; note?: string; onBook: () => void }
+const symptoms = [
+  ['Dålig kyla eller imma på rutorna?', 'AC-service'],
+  ['Unken lukt ur fläktutblåsen?', 'AC-rengöring och kontroll av kupéfilter'],
+  ['Missljud när AC:n slås på?', 'Felsökning'],
+] as const
+const faqs = [
+  ['Vad händer om systemet läcker?', 'En identifierad läcka behöver undersökas och repareras innan köldmedium fylls på. Vi lämnar alltid ett prisförslag innan ytterligare arbete utförs.'],
+  ['Hur vet jag vilken gas min bil har?', 'Köldmediet står normalt på en märkning i motorrummet. R1234yf är vanligt i nyare bilar.'],
+  ['Hur lång tid tar servicen?', 'En AC-service tar normalt cirka 45–60 minuter. Du kan vanligtvis vänta på plats.'],
+] as const
 
-interface ServiceCategory {
-  id: string
-  title: string
-  subtitle: string
-  description: string
-  image: string
-  imageAlt: string
-  icon: JSX.Element
-  actionType: 'booking' | 'call'
-  items: string[]
-  troubleshooting: string[]
+function PricingCard({ title, price, items, note, onBook }: PricingCardProps) {
+  return <article className="ac-page__price-card"><h3>{title}</h3><p className="ac-page__price">{price}</p><ul>{items.map((item) => <li key={item}><CheckIcon />{item}</li>)}</ul>{note && <p className="ac-page__note">{note}</p>}<button type="button" onClick={onBook} className="ac-page__button ac-page__button--primary">Boka tid</button></article>
 }
 
-const serviceCategories: ServiceCategory[] = [
-  {
-    id: 'ac-klimatanlaggning',
-    title: 'AC-Service & Klimatanläggning',
-    subtitle: 'Optimal kupékomfort och fungerande avfuktning året runt',
-    description: 'AC:n är inte bara till för sommaren — den drar även ut fukt ur kupén och håller rutorna fria från imma under kalla årstider. Vi provtrycker systemet, letar upp läckage innan vi fyller på köldmedium och kan även rengöra ventilationen om luften börjar kännas unken.',
-    image: imgAC,
-    imageAlt: 'Tekniker utför service på bilens AC-system',
-    icon: <SnowflakeIcon />,
-    actionType: 'booking',
-    items: [
-      'AC-service & påfyllning av köldmedium',
-      'Täthetskontroll & provtryckning',
-      'Felsökning av AC-kompressor och kondensor',
-      'Kupéfilterbyte & rengöring'
-    ],
-    troubleshooting: [
-      'AC:n blåser dålig eller ljummen kyla',
-      'Imma på rutorna som inte försvinner vid fläktkörning',
-      'Dålig lukt eller unken luft ur ventilationsutblåsen',
-      'Missljud från motorrummet när AC:n slås på'
-    ]
-  }
-]
-
-const processSteps = [
-  {
-    num: '01',
-    title: 'Beskriv symptom & boka tid',
-    desc: 'Lämna in bilen om kylan uteblir, det luktar unket eller rutorna immar igen.'
-  },
-  {
-    num: '02',
-    title: 'Provtryckning & täthetskontroll',
-    desc: 'Vi kontrollerar läckage och fyller på köldmedium enligt systemets specifikation.'
-  },
-  {
-    num: '03',
-    title: 'Fräsch kupéluft & effektiv kyla',
-    desc: 'Bilen lämnas tillbaka med testad klimatanläggning och behaglig temperatur.'
-  }
-]
+function FaqAccordion() {
+  const [open, setOpen] = useState<number | null>(0)
+  const baseId = useId()
+  return <div className="ac-page__faq-list">{faqs.map(([question, answer], index) => { const id = `${baseId}-${index}`; const expanded = open === index; return <article className="ac-page__faq-item" key={question}><h3><button type="button" aria-expanded={expanded} aria-controls={id} onClick={() => setOpen(expanded ? null : index)}>{question}<span aria-hidden="true">{expanded ? '−' : '+'}</span></button></h3>{expanded && <div id={id} role="region" aria-label={question}><p>{answer}</p></div>}</article> })}</div>
+}
 
 export default function AcServicePage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [registration, setRegistration] = useState('')
+  const [recommendation, setRecommendation] = useState('')
+  const bookingNote = [registration.trim() && `Registreringsnummer: ${registration.trim().toUpperCase()}`, recommendation && `Önskad hjälp: ${recommendation}`].filter(Boolean).join('\n')
+  const openBooking = () => setIsModalOpen(true)
+  const goToBooking = () => document.getElementById('boka')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  useEffect(() => { window.scrollTo(0, 0) }, [])
 
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
-  return (
-    <>
-      <Header onBookingClick={openModal} />
-
-      <main className="services-page">
-        {/* Hero Section */}
-        <section className="services-page__hero" aria-labelledby="services-hero-title">
-          <div className="container">
-            <div className="services-page__hero-content">
-              <div className="section-eyebrow">
-                <span className="eyebrow-line" aria-hidden="true" />
-                Vår verkstad i Brynäs, Gävle
-              </div>
-              <h1 className="services-page__title" id="services-hero-title">
-                AC-Service & <span className="title-accent">Klimatanläggning</span>
-              </h1>
-              <p className="services-page__lead">
-                Vi erbjuder komplett AC-service, påfyllning av köldmedium, läcksökning och rengöring i Gävle — för skön kyla på sommaren och imfria rutor hela vintern.
-              </p>
-              <div className="services-page__hero-actions">
-                <button
-                  type="button"
-                  onClick={openModal}
-                  className="services-page__btn services-page__btn--primary"
-                >
-                  Boka AC-service
-                </button>
-                <a
-                  href="tel:0705533395"
-                  className="services-page__btn services-page__btn--outline"
-                >
-                  <PhoneIcon className="services-page__btn-icon" />
-                  <span>Ring oss: 070-553 33 95</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Categories Section (AC card only) */}
-        <section className="services-page__categories" aria-labelledby="services-categories-title">
-          <div className="container">
-            <header className="section-header">
-              <div className="section-eyebrow">
-                <span className="eyebrow-line" aria-hidden="true" />
-                Kupékomfort & Avfuktning
-              </div>
-              <h2 className="section-title" id="services-categories-title">
-                Klimat & <span className="title-accent">AC-Tjänster</span>
-              </h2>
-              <p className="section-desc">
-                Här hittar du detaljerad information om vad som ingår i vår AC-service, täthetskontroll och rengöring av kupéluft.
-              </p>
-            </header>
-
-            <div className="services-page__category-list">
-              {serviceCategories.map((cat, index) => (
-                <article
-                  className="services-category-card"
-                  id={cat.id}
-                  key={cat.id}
-                  aria-labelledby={`${cat.id}-title`}
-                >
-                  <div className="services-category-card__media">
-                    <img
-                      src={cat.image}
-                      alt={cat.imageAlt}
-                      className="services-category-card__img"
-                      loading="lazy"
-                    />
-                    <div className="services-category-card__badge" aria-hidden="true">
-                      {cat.icon}
-                    </div>
-                    <span className="services-category-card__badge-num" aria-hidden="true">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-
-                  <div className="services-category-card__content">
-                    <div className="services-category-card__header">
-                      <h3 className="services-category-card__title" id={`${cat.id}-title`}>
-                        {cat.title}
-                      </h3>
-                      <p className="services-category-card__subtitle">
-                        {cat.subtitle}
-                      </p>
-                      <p className="services-category-card__desc">
-                        {cat.description}
-                      </p>
-                    </div>
-
-                    <div className="services-category-card__details">
-                      {/* What we do */}
-                      <div className="services-category-card__col">
-                        <h4 className="services-category-card__subheading">
-                          Det här ingår & utförs:
-                        </h4>
-                        <ul className="services-category-card__items">
-                          {cat.items.map(item => (
-                            <li key={item}>
-                              <CheckIcon className="services-category-card__check" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Common symptoms */}
-                      <div className="services-category-card__col">
-                        <h4 className="services-category-card__subheading">
-                          Vanliga tecken på att du behöver hjälp:
-                        </h4>
-                        <ul className="services-category-card__symptoms">
-                          {cat.troubleshooting.map(symptom => (
-                            <li key={symptom}>
-                              <span className="services-category-card__bullet" aria-hidden="true">•</span>
-                              <span>{symptom}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* Action Bar */}
-                    <div className="services-category-card__actions">
-                      <button
-                        type="button"
-                        onClick={openModal}
-                        className="services-category-card__cta"
-                        aria-label={`Boka tid för ${cat.title}`}
-                      >
-                        <span>Boka tid</span>
-                        <span className="services-category-card__arrow-badge" aria-hidden="true">
-                          <ArrowRightIcon className="services-category-card__arrow" />
-                        </span>
-                      </button>
-
-                      <a
-                        href="tel:0705533395"
-                        className="services-category-card__call-link"
-                      >
-                        Frågor? Ring 070-553 33 95
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Process Card ("Så fungerar det") - MOVED TO BOTTOM */}
-        <section className="services-page__process-section" aria-labelledby="services-process-title">
-          <div className="container">
-            <div className="services-page__process-card">
-              <div className="services-page__process-inner">
-                <div className="services-page__process-text">
-                  <div className="section-eyebrow section-eyebrow--dark">
-                    <span className="eyebrow-line" aria-hidden="true" />
-                    Så fungerar ditt AC-besök
-                  </div>
-                  <h2 className="services-page__process-heading" id="services-process-title">
-                    Från kontroll <br />
-                    <span className="title-accent">till perfekt kyla</span>
-                  </h2>
-                  <p className="services-page__process-desc">
-                    Vi provtrycker systemet först för att säkerställa att det inte finns läckage innan påfyllning sker.
-                  </p>
-                  <div className="services-page__process-action">
-                    <a href="tel:0705533395" className="services-page__process-cta">
-                      <PhoneIcon className="services-page__process-icon" />
-                      <span>Ring oss: 070-553 33 95</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div className="services-page__process-steps">
-                  <div className="services-page__steps-list">
-                    {processSteps.map(step => (
-                      <div className="services-page__step" key={step.num}>
-                        <div className="services-page__step-num" aria-hidden="true">
-                          {step.num}
-                        </div>
-                        <div className="services-page__step-content">
-                          <h3 className="services-page__step-title">{step.title}</h3>
-                          <p className="services-page__step-desc">{step.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Vehicles note section */}
-        <section className="services-page__cars-note" aria-labelledby="cars-note-title">
-          <div className="container">
-            <div className="services-page__cars-box">
-              <div className="services-page__cars-text">
-                <div className="section-eyebrow section-eyebrow--dark">
-                  <span className="eyebrow-line" aria-hidden="true" />
-                  Kvalitetskontrollerade fordon
-                </div>
-                <h3 className="services-page__cars-heading" id="cars-note-title">
-                  Letar du efter en begagnad bil?
-                </h3>
-                <p className="services-page__cars-desc">
-                  Vi säljer även noggrant genomgångna och besiktigade begagnade bilar i Gävle. Varje bil kontrolleras av våra mekaniker innan försäljning.
-                </p>
-              </div>
-              <div className="services-page__cars-action">
-                <a href="/bilar-till-salu" className="services-page__cars-btn">
-                  <span>Se bilar till salu</span>
-                  <ArrowRightIcon className="services-page__cars-arrow" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Reassurance section */}
-        <section className="services-page__reassurance" aria-labelledby="reassurance-title">
-          <div className="container">
-            <div className="services-page__reassurance-card">
-              <div className="services-page__reassurance-header">
-                <div className="services-page__reassurance-icon" aria-hidden="true">
-                  <ShieldHeartIcon />
-                </div>
-                <div>
-                  <h3 className="services-page__reassurance-title" id="reassurance-title">
-                    Fräsch luft och garanterad täthet
-                  </h3>
-                  <p className="services-page__reassurance-desc">
-                    Vi provtrycker och läcksöker alltid ditt AC-system noggrant. Inga överraskningar eller onödig påfyllning om systemet läcker.
-                  </p>
-                </div>
-              </div>
-              <div className="services-page__reassurance-actions">
-                <button
-                  type="button"
-                  onClick={openModal}
-                  className="services-page__btn services-page__btn--primary"
-                >
-                  Boka tid nu
-                </button>
-                <a
-                  href="tel:0705533395"
-                  className="services-page__btn services-page__btn--outline"
-                >
-                  Ring: 070-553 33 95
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <Footer />
-    </>
-  )
+  return <><Header onBookingClick={openBooking} /><main className="ac-page">
+    <section className="ac-page__hero" aria-labelledby="ac-hero-title"><div className="container ac-page__container"><div className="ac-page__hero-copy"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />AC &amp; klimatanläggning</div><h1 id="ac-hero-title">AC-service &amp; <span>Klimatrengöring</span> i Gävle</h1><p>En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer.</p><ul className="ac-page__badges"><li>Bibehållen nybilsgaranti</li><li>Certifierad kylkompetens</li><li>Fasta priser</li></ul><label htmlFor="ac-registration">Registreringsnummer <span>valfritt</span></label><div className="ac-page__registration"><input id="ac-registration" value={registration} onChange={(event) => setRegistration(event.target.value)} placeholder="ABC123" autoCapitalize="characters" /><button type="button" onClick={goToBooking} className="ac-page__button ac-page__button--primary">Boka tid</button></div><a className="ac-page__phone" href="tel:0705533395"><PhoneIcon />Ring oss: 070-553 33 95</a></div><img src={imgAc} alt="AC-service på Brynäs Bilservice" /></div></section>
+    <section className="ac-page__section ac-page__symptoms" aria-labelledby="ac-symptoms-title"><div className="container ac-page__container"><div className="ac-page__section-heading"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Hitta rätt hjälp</div><h2 id="ac-symptoms-title">Känner du igen något av detta?</h2></div><div className="ac-page__symptom-grid">{symptoms.map(([question, advice]) => <button type="button" className={recommendation === advice ? 'is-selected' : ''} key={question} onClick={() => setRecommendation(advice)} aria-pressed={recommendation === advice}><strong>{question}</strong><span>{recommendation === advice ? `Rekommendation: ${advice}` : 'Välj för rekommendation'}</span></button>)}</div>{recommendation && <p className="ac-page__recommendation" role="status">Vi föreslår: <strong>{recommendation}</strong>. Det följer med till bokningsformulärets kommentar.</p>}</div></section>
+    <section className="ac-page__section" aria-labelledby="ac-prices-title"><div className="container ac-page__container"><div className="ac-page__section-heading"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Tydliga priser</div><h2 id="ac-prices-title">Service för renare och svalare kupé</h2><p>Samtliga priser är inklusive moms.</p></div><div className="ac-page__price-grid"><PricingCard title="AC-service" price="1 495 kr" items={['Tömning', 'Vakuumsugning för fuktborttagning', 'Läckagekontroll/vakuumtest', 'Påfyllning av R134a-köldmedium', 'Kompressorolja, PAG', 'Prestandatest med utblåstemperatur']} onBook={openBooking} /><PricingCard title="AC-rengöring" price="800 kr arbetskostnad" items={['Antibakteriell rengöring av luftkanaler/förångare', 'Arbete för byte av kupéfilter']} note="OBS! Materialkostnad för kupéfilter tillkommer och varierar per bilmodell." onBook={openBooking} /><PricingCard title="OBD-diagnostik & felsökning" price="500 kr" items={['Avläsning av felkoder', 'Kontroll av relevanta tryckgivare vid elfel eller utebliven funktion']} onBook={openBooking} /></div><p className="ac-page__refrigerant-note">Priset 1 495 kr gäller bilar med köldmedium R134a. För nyare bilar med R1234yf, vanligt efter cirka 2017, kontakta oss för prisuppgift.</p></div></section>
+    <section className="ac-page__section ac-page__process" aria-labelledby="ac-process-title"><div className="container ac-page__container"><div className="ac-page__section-heading"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Så går det till</div><h2 id="ac-process-title">Från kontroll till komfort</h2></div><ol>{['Provtryckning och visuell inspektion', 'Vakuumsugning och täthetstest', 'Fyllning enligt fordonsspecifikation', 'Prestandamätning i kupéutblås'].map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, '0')}</span>{step}</li>)}</ol></div></section>
+    <section className="ac-page__section ac-page__trust" aria-labelledby="ac-trust-title"><div className="container ac-page__container"><div className="ac-page__trust-card"><ShieldHeartIcon /><div><h2 id="ac-trust-title">Omsorg om systemet och bilen</h2><p>Vi hanterar AC-system och köldmedier professionellt och går igenom vad vi hittar innan mer arbete påbörjas. Precis som vid övrig service följer vi tillverkarens föreskrifter så att nybilsgarantin kan behållas.</p></div></div></div></section>
+    <section className="ac-page__section" aria-labelledby="ac-faq-title"><div className="container ac-page__container"><div className="ac-page__section-heading"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Vanliga frågor</div><h2 id="ac-faq-title">Bra att veta om AC-service</h2></div><FaqAccordion /></div></section>
+    <section id="boka" className="ac-page__booking" aria-labelledby="ac-booking-title"><div className="container ac-page__container"><div><h2 id="ac-booking-title">Boka AC-service</h2><p>{bookingNote ? 'Ditt registreringsnummer och önskemål följer med till kommentarsfältet i bokningen.' : 'Välj datum, tid och tjänst i vårt befintliga bokningsformulär.'}</p></div><button type="button" onClick={openBooking} className="ac-page__button ac-page__button--primary">Öppna bokning</button></div></section>
+  </main><BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment={bookingNote} /><Footer /></>
 }

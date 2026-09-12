@@ -7,9 +7,6 @@
   --color-dark: #111111;
   --color-dark-2: #181818;
   --color-dark-3: #222222;
-  --color-gold: #F0B800;
-  --color-gold-light: #FFD000;
-  --color-gold-dark: #C09400;
   --color-red: #CC1417;
   --color-red-dark: #A00F12;
   --color-red-light: #E8191C;
@@ -125,15 +122,15 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 .btn--primary {
-  background: var(--color-gold);
-  color: var(--color-black);
-  border-color: var(--color-gold);
+  background: var(--redesign-accent);
+  color: var(--color-white);
+  border-color: var(--redesign-accent);
 }
 .btn--primary:hover {
-  background: var(--color-gold-light);
-  border-color: var(--color-gold-light);
+  background: var(--redesign-accent-dark);
+  border-color: var(--redesign-accent-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(240,184,0,0.5);
+  box-shadow: 0 8px 24px rgba(36,150,160,0.5);
 }
 .btn--outline {
   background: transparent;
@@ -141,18 +138,18 @@ ul { list-style: none; }
   border-color: rgba(255,255,255,0.4);
 }
 .btn--outline:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
+  border-color: var(--redesign-accent);
+  color: var(--redesign-accent);
   transform: translateY(-2px);
 }
 .btn--ghost {
   background: transparent;
-  color: var(--color-gold);
-  border-color: var(--color-gold);
+  color: var(--redesign-accent);
+  border-color: var(--redesign-accent);
 }
 .btn--ghost:hover {
-  background: var(--color-gold);
-  color: var(--color-black);
+  background: var(--redesign-accent);
+  color: var(--color-white);
   transform: translateY(-2px);
 }
 
@@ -308,6 +305,17 @@ ul { list-style: none; }
   padding-top: 92px;
 }
 
+/* Subpage heroes keep the landing page's floating navigation, with enough
+   top space for their own titles to clear it. */
+.site-header--hero + .services-page .services-page__hero,
+.site-header--hero + .tyres-page .tyres-page__hero,
+.site-header--hero + .ac-page .ac-page__hero,
+.site-header--hero + .about-page .about-page__hero,
+.site-header--hero + .contact-page .contact-page__hero,
+.site-header--hero + .cars-page .cars-page__hero {
+  padding-top: clamp(9.5rem, 12vw, 11.5rem);
+}
+
 /* Hamburger */
 .nav-toggle {
   display: none;
@@ -400,19 +408,19 @@ ul { list-style: none; }
 /* Hero */
 .hero {
   position: relative;
-  padding: 30px;
-  background: var(--redesign-page);
+  padding: 0;
+  background: #111718;
   font-family: var(--redesign-font-body);
 }
 .hero__frame {
   position: relative;
   width: 100%;
-  max-width: var(--redesign-hero-max);
+  max-width: none;
   height: clamp(640px, calc(100svh - 60px), 760px);
   min-height: 640px;
-  margin-inline: auto;
+  margin-inline: 0;
   overflow: hidden;
-  border-radius: var(--redesign-radius-card);
+  border-radius: 0;
   background: #111718;
   box-shadow: 0 18px 55px rgba(20, 34, 36, 0.12);
 }
@@ -555,7 +563,7 @@ ul { list-style: none; }
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--redesign-accent);
   opacity: 0.85;
   padding-right: 2rem;
   vertical-align: middle;
@@ -593,7 +601,7 @@ ul { list-style: none; }
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--redesign-accent);
   margin-bottom: var(--space-4);
 }
 .section-eyebrow::before,
@@ -602,7 +610,7 @@ ul { list-style: none; }
   display: block;
   width: 24px;
   height: 1px;
-  background: linear-gradient(90deg, var(--color-red), var(--color-gold));
+  background: var(--redesign-accent);
 }
 .section-title {
   font-family: var(--font-heading);
@@ -613,7 +621,7 @@ ul { list-style: none; }
   letter-spacing: -0.02em;
   margin-bottom: var(--space-4);
 }
-.title-accent { color: var(--color-gold); }
+.title-accent { color: var(--redesign-accent); }
 .section-desc {
   font-family: var(--font-body);
   font-weight: 400;
@@ -2467,7 +2475,7 @@ ul { list-style: none; }
   cursor: pointer;
 }
 .google-reviews:focus-visible {
-  outline: 2px solid var(--color-gold, #F0B800);
+  outline: 2px solid var(--hero-review-star);
   outline-offset: 6px;
   border-radius: 10px;
 }
@@ -2815,6 +2823,12 @@ ul { list-style: none; }
   .site-header--default + .services-page,
   .site-header--default + .about-page,
   .site-header--default + .contact-page { padding-top: 76px; }
+  .site-header--hero + .services-page .services-page__hero,
+  .site-header--hero + .tyres-page .tyres-page__hero,
+  .site-header--hero + .ac-page .ac-page__hero,
+  .site-header--hero + .about-page .about-page__hero,
+  .site-header--hero + .contact-page .contact-page__hero,
+  .site-header--hero + .cars-page .cars-page__hero { padding-top: 8.5rem; }
   .header-inner { min-height: 64px; }
   .site-header--hero.scrolled .header-inner {
     min-height: 62px;
@@ -2930,7 +2944,7 @@ ul { list-style: none; }
     font-size: 0.6rem;
     gap: var(--space-2);
     margin-bottom: var(--space-3);
-    color: var(--color-gold-light);
+    color: var(--redesign-accent);
   }
   .section-eyebrow::before {
     width: 32px;
@@ -4511,6 +4525,98 @@ ul { list-style: none; }
   .services-page__step-num { width: 34px; height: 34px; font-size: 0.95rem; }
   .services-category-card { border-radius: 20px; }
   .services-category-card__content { padding: 1.25rem; }
+}
+
+/* AC service page */
+.ac-page { background: var(--redesign-page); color: var(--redesign-ink); min-height: 100vh; }
+.ac-page__container { max-width: var(--redesign-hero-max); padding-inline: clamp(1.25rem, 4vw, 3.5rem); }
+.ac-page h1, .ac-page h2, .ac-page h3 { font-family: var(--font-heading); font-weight: 800; letter-spacing: -.02em; }
+.ac-page__hero { background: #101618; color: #fff; padding-block: clamp(3rem, 6vw, 5.5rem); }.ac-page__hero .ac-page__container { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }.ac-page__hero h1 { font-size: clamp(2.35rem, 5vw, 4rem); line-height: 1.04; margin: .5rem 0 1rem; }.ac-page__hero h1 span { color: var(--redesign-accent); }.ac-page__hero-copy > p { color: rgba(255,255,255,.76); line-height: 1.7; margin: 0; }.ac-page__hero > .container > img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--redesign-radius-card); }
+.ac-page__badges { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1.4rem 0; padding: 0; }.ac-page__badges li { border: 1px solid rgba(36,150,160,.5); color: #fff; background: rgba(36,150,160,.12); border-radius: var(--redesign-radius-pill); font-size: .78rem; font-weight: 700; padding: .42rem .7rem; }.ac-page__hero label { display: block; font-size: .88rem; font-weight: 700; margin-bottom: .45rem; }.ac-page__hero label span { color: rgba(255,255,255,.65); font-weight: 500; }.ac-page__registration { display: flex; gap: .75rem; }.ac-page__registration input { min-width: 0; flex: 1; border: 1px solid rgba(255,255,255,.35); background: #fff; color: var(--redesign-ink); border-radius: var(--redesign-radius-pill); font: inherit; font-weight: 700; letter-spacing: .08em; padding: .75rem 1rem; text-transform: uppercase; }.ac-page__phone { display: inline-flex; align-items: center; gap: .55rem; color: #fff; font-weight: 700; margin-top: 1rem; text-decoration: none; }.ac-page__phone svg { width: 18px; color: var(--redesign-accent); }
+.ac-page__button { min-height: 48px; border-radius: var(--redesign-radius-pill); padding: .75rem 1.2rem; border: 1px solid var(--redesign-accent); cursor: pointer; font: 700 .84rem var(--font-body); letter-spacing: .04em; text-transform: uppercase; }.ac-page__button--primary { background: var(--redesign-accent); color: #fff; }.ac-page__button:hover { background: var(--redesign-accent-dark); border-color: var(--redesign-accent-dark); }.ac-page__button:focus-visible, .ac-page__symptom-grid button:focus-visible, .ac-page__faq-item button:focus-visible { outline: 3px solid var(--redesign-accent); outline-offset: 3px; }
+.ac-page__section { padding-block: clamp(3rem, 6vw, 5.5rem); }.ac-page__section-heading { max-width: 760px; margin-bottom: clamp(1.6rem, 3vw, 2.5rem); }.ac-page__section-heading h2 { font-size: clamp(1.85rem, 3.5vw, 3rem); margin: .4rem 0 .75rem; line-height: 1.1; }.ac-page__section-heading p { color: #556266; margin: 0; }.ac-page__symptoms { background: rgba(36,150,160,.06); }.ac-page__symptom-grid, .ac-page__price-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }.ac-page__symptom-grid button { text-align: left; padding: 1.25rem; min-height: 150px; background: var(--redesign-surface); color: var(--redesign-ink); border: 1px solid rgba(16,22,24,.12); border-radius: 20px; cursor: pointer; }.ac-page__symptom-grid button.is-selected { border-color: var(--redesign-accent); box-shadow: 0 0 0 2px rgba(36,150,160,.15); }.ac-page__symptom-grid strong, .ac-page__symptom-grid span { display: block; }.ac-page__symptom-grid strong { font-family: var(--font-heading); font-size: 1.1rem; line-height: 1.25; }.ac-page__symptom-grid span { margin-top: .9rem; color: var(--redesign-accent-dark); font-size: .9rem; font-weight: 600; }.ac-page__recommendation { margin: 1.25rem 0 0; }
+.ac-page__price-card { display: flex; flex-direction: column; background: #101618; color: #fff; border-radius: 24px; padding: 1.4rem; }.ac-page__price-card h3 { font-size: 1.35rem; margin: 0; }.ac-page__price { color: var(--redesign-accent); font: 800 clamp(1.5rem, 2vw, 1.85rem) var(--font-heading); margin: .75rem 0; }.ac-page__price-card ul { margin: 0; padding: 0; flex: 1; }.ac-page__price-card li { display: flex; gap: .55rem; font-size: .9rem; line-height: 1.45; margin: .55rem 0; color: rgba(255,255,255,.8); }.ac-page__price-card li svg { width: 18px; flex: 0 0 auto; color: var(--redesign-accent); }.ac-page__note, .ac-page__refrigerant-note { font-size: .85rem; line-height: 1.55; }.ac-page__note { color: rgba(255,255,255,.75); }.ac-page__price-card .ac-page__button { margin-top: 1.25rem; width: 100%; }.ac-page__refrigerant-note { border-left: 3px solid var(--redesign-accent); padding-left: 1rem; color: #556266; max-width: 900px; margin: 1.5rem 0 0; }
+.ac-page__process { background: #101618; color: #fff; }.ac-page__process ol { padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }.ac-page__process li { display: grid; gap: .8rem; color: rgba(255,255,255,.82); font-weight: 700; }.ac-page__process li span { color: var(--redesign-accent); font: 800 1.4rem var(--font-heading); }.ac-page__trust-card { display: flex; gap: 1.25rem; background: var(--redesign-surface); border: 1px solid rgba(16,22,24,.1); border-radius: var(--redesign-radius-card); padding: clamp(1.5rem, 4vw, 2.5rem); }.ac-page__trust-card > svg { color: var(--redesign-accent); flex: 0 0 auto; width: 42px; }.ac-page__trust-card h2 { margin: 0 0 .5rem; font-size: clamp(1.5rem, 3vw, 2rem); }.ac-page__trust-card p { color: #556266; margin: 0; line-height: 1.65; }
+.ac-page__faq-list { max-width: 900px; }.ac-page__faq-item { border-top: 1px solid rgba(16,22,24,.14); }.ac-page__faq-item:last-child { border-bottom: 1px solid rgba(16,22,24,.14); }.ac-page__faq-item h3 { margin: 0; }.ac-page__faq-item button { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 1rem; background: none; border: 0; padding: 1.15rem 0; color: var(--redesign-ink); cursor: pointer; text-align: left; font: 800 1.05rem var(--font-heading); }.ac-page__faq-item button span { color: var(--redesign-accent); font-size: 1.7rem; }.ac-page__faq-item div { padding: 0 0 1.15rem; }.ac-page__faq-item p { color: #556266; line-height: 1.65; margin: 0; }.ac-page__booking { background: #101618; color: #fff; padding-block: clamp(2rem, 5vw, 3.5rem); }.ac-page__booking .ac-page__container { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }.ac-page__booking h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 0 0 .5rem; }.ac-page__booking p { color: rgba(255,255,255,.75); margin: 0; }
+@media (max-width: 800px) { .ac-page__hero .ac-page__container { grid-template-columns: 1fr 1fr; }.ac-page__hero-copy { grid-column: 1 / -1; }.ac-page__price-grid, .ac-page__symptom-grid { grid-template-columns: 1fr 1fr; }.ac-page__process ol { grid-template-columns: 1fr 1fr; } } @media (max-width: 520px) { .ac-page__hero .ac-page__container, .ac-page__price-grid, .ac-page__symptom-grid, .ac-page__process ol { grid-template-columns: 1fr; }.ac-page__registration, .ac-page__booking .ac-page__container { align-items: stretch; flex-direction: column; }.ac-page__registration .ac-page__button, .ac-page__booking .ac-page__button { width: 100%; }.ac-page__trust-card { align-items: flex-start; flex-direction: column; } }
+
+/* ═══════════════════════════════════════════════════════
+   TYRES SERVICE PAGE
+═══════════════════════════════════════════════════════ */
+.tyres-page { min-height: 100vh; background: var(--redesign-page); color: var(--redesign-ink); font-family: var(--redesign-font-body); }
+.tyres-page__container { max-width: var(--redesign-hero-max); padding-inline: clamp(1.25rem, 4vw, 3.5rem); }
+.tyres-page h1, .tyres-page h2, .tyres-page h3 { font-family: var(--font-heading); font-weight: 800; letter-spacing: -0.02em; }
+.tyres-page .title-accent { color: var(--redesign-accent); }
+.tyres-page__hero { background: #0e1416; color: #fff; padding-block: clamp(3.5rem, 6vw, 5.5rem); position: relative; overflow: hidden; }
+.tyres-page__hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 82% 20%, rgba(36,150,160,.22), transparent 32%), radial-gradient(circle at 5% 90%, rgba(36,150,160,.12), transparent 38%); }
+.tyres-page__hero .tyres-page__container { position: relative; z-index: 1; max-width: 980px; }
+.tyres-page__hero h1 { font-size: clamp(2.4rem, 5.6vw, 4.1rem); line-height: 1.05; margin: .55rem 0 1.2rem; }
+.tyres-page__hero p { max-width: 790px; margin: 0; color: rgba(255,255,255,.78); font-size: clamp(1.02rem, 1.2vw, 1.15rem); line-height: 1.7; }
+.tyres-page__actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+.tyres-page__button, .tyres-page__card-cta { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: .65rem; border-radius: var(--redesign-radius-pill); padding: .75rem 1.35rem; font-family: var(--font-body); font-size: .87rem; font-weight: 700; letter-spacing: .035em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: transform var(--dur-normal) var(--ease), background var(--dur-normal) var(--ease), border-color var(--dur-normal) var(--ease); }
+.tyres-page__button--primary, .tyres-page__card-cta { background: var(--redesign-accent); border: 1px solid var(--redesign-accent); color: #fff; box-shadow: 0 6px 18px rgba(36,150,160,.28); }
+.tyres-page__button--outline { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.25); color: #fff; }
+.tyres-page__button svg, .tyres-page__card-cta svg { width: 17px; height: 17px; flex: 0 0 auto; }
+.tyres-page__button:hover, .tyres-page__card-cta:hover { transform: translateY(-2px); background: var(--redesign-accent-dark); border-color: var(--redesign-accent-dark); }
+.tyres-page__button:focus-visible, .tyres-page__card-cta:focus-visible { outline: 3px solid var(--redesign-accent); outline-offset: 3px; }
+.tyres-page__check, .tyres-page__services, .tyres-page__legacy, .tyres-page__advice, .tyres-page__closing { padding-block: clamp(2.7rem, 5vw, 5rem); }
+.tyres-page__check { padding-bottom: 1rem; }
+.tyres-page__check-card { background: #101618; color: #fff; border-radius: var(--redesign-radius-card); padding: clamp(1.5rem, 4vw, 3rem); display: grid; grid-template-columns: 1.15fr .85fr; gap: 2rem clamp(2rem, 5vw, 5rem); position: relative; overflow: hidden; }
+.tyres-page__check-card::before { content: ''; position: absolute; width: 320px; height: 320px; right: -120px; bottom: -170px; border-radius: 50%; background: rgba(36,150,160,.15); filter: blur(10px); }
+.tyres-page__check-card > * { position: relative; z-index: 1; }
+.tyres-page__check-card h2, .tyres-page__section-header h2, .tyres-page__legacy-card h2, .tyres-page__advice h2, .tyres-page__closing h2 { font-size: clamp(1.75rem, 3.5vw, 2.7rem); line-height: 1.08; margin: .5rem 0 1rem; }
+.tyres-page__check-card p { margin: 0; color: rgba(255,255,255,.75); line-height: 1.65; }
+.tyres-page__checklist { padding: 0; margin: 0; list-style: none; display: grid; align-content: center; gap: .9rem; }
+.tyres-page__checklist li, .tyres-page__legacy-card li { display: flex; align-items: flex-start; gap: .75rem; line-height: 1.45; font-weight: 600; }
+.tyres-page__checklist svg, .tyres-page__legacy-card svg { flex: 0 0 auto; width: 20px; height: 20px; color: var(--redesign-accent); margin-top: .1rem; }
+.tyres-page__check-footer { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 1.25rem; border-top: 1px solid rgba(255,255,255,.12); padding-top: 1.25rem; }
+.tyres-page__check-footer p { font-size: .9rem; max-width: 520px; }
+.tyres-page__section-header { max-width: 740px; margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.tyres-page__section-header p { color: #556266; line-height: 1.65; margin: 0 0 .8rem; }
+.tyres-page__section-header strong { color: var(--redesign-accent-dark); font-size: .9rem; }
+.tyres-page__service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.1rem, 2vw, 1.5rem); }
+.tyres-page__service-card { min-width: 0; display: flex; flex-direction: column; background: #101618; color: #fff; border: 1px solid rgba(255,255,255,.08); border-radius: clamp(18px, 2vw, 24px); overflow: hidden; box-shadow: 0 12px 30px rgba(16,22,24,.12); }
+.tyres-page__service-image { height: 150px; position: relative; overflow: hidden; background: #111; }
+.tyres-page__service-image img { width: 100%; height: 100%; object-fit: cover; opacity: .72; filter: saturate(.7); }
+.tyres-page__service-image span { position: absolute; right: .8rem; bottom: .8rem; padding: .3rem .55rem; color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; background: rgba(14,20,22,.76); font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.tyres-page__service-content { display: flex; flex: 1; flex-direction: column; padding: 1.3rem; }
+.tyres-page__service-content h3 { font-size: 1.42rem; line-height: 1.15; margin: 0 0 .7rem; }
+.tyres-page__service-content > p { margin: 0; color: rgba(255,255,255,.75); font-size: .91rem; line-height: 1.6; }
+.tyres-page__prices { min-height: 92px; margin-top: 1.15rem; padding: .9rem 0; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); display: flex; flex-direction: column; justify-content: center; gap: .55rem; }
+.tyres-page__price-row { display: flex; justify-content: space-between; align-items: baseline; gap: .8rem; }
+.tyres-page__price-label { color: rgba(255,255,255,.7); font-size: .82rem; }
+.tyres-page__price-value { display: inline-flex; align-items: baseline; flex-wrap: wrap; justify-content: flex-end; gap: .35rem; text-align: right; }
+.tyres-page__price-value > span, .tyres-page__price-value small { color: rgba(255,255,255,.7); font-size: .78rem; font-weight: 600; }
+.tyres-page__price-value strong { color: var(--redesign-accent); font-size: 1.3rem; line-height: 1; }
+.tyres-page__contact-price { color: var(--redesign-accent); font-size: 1.05rem; font-weight: 700; margin: 0; }
+.tyres-page__card-cta { width: 100%; margin-top: 1.15rem; justify-content: space-between; }
+.tyres-page__legacy { padding-top: 0; }
+.tyres-page__legacy-card { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); background: var(--redesign-surface); border-radius: var(--redesign-radius-card); overflow: hidden; border: 1px solid rgba(16,22,24,.1); }
+.tyres-page__legacy-card > img { width: 100%; height: 100%; min-height: 300px; object-fit: cover; }
+.tyres-page__legacy-card > div { padding: clamp(1.5rem, 4vw, 3rem); }
+.tyres-page__legacy-card p, .tyres-page__advice p { color: #556266; line-height: 1.65; }
+.tyres-page__legacy-card ul { padding: 0; margin: 1.25rem 0 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .75rem 1.5rem; }
+.tyres-page__advice { background: rgba(36,150,160,.06); }
+.tyres-page__advice-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 8vw, 8rem); }
+.tyres-page__advice p { margin: 0 0 1rem; }
+.tyres-page__closing { padding-top: 0; }
+.tyres-page__closing-card { background: #101618; color: #fff; border-radius: var(--redesign-radius-card); padding: clamp(1.5rem, 4vw, 3rem); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.3rem 2rem; }
+.tyres-page__closing-card p { color: rgba(255,255,255,.72); line-height: 1.6; margin: 0; }
+.tyres-page__closing-icon { width: 52px; height: 52px; display: grid; place-items: center; color: var(--redesign-accent); border: 1px solid rgba(36,150,160,.35); border-radius: 15px; background: rgba(36,150,160,.1); }
+.tyres-page__closing-icon svg { width: 28px; height: 28px; }
+.tyres-page__closing-card .tyres-page__actions { margin: 0; }
+@media (max-width: 900px) { .tyres-page__service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tyres-page__check-card, .tyres-page__advice-grid { grid-template-columns: 1fr; } .tyres-page__closing-card { grid-template-columns: auto 1fr; } .tyres-page__closing-card .tyres-page__actions { grid-column: 1 / -1; } }
+@media (max-width: 600px) { .tyres-page__container { padding-inline: 1rem; } .tyres-page__actions, .tyres-page__check-footer { align-items: stretch; flex-direction: column; } .tyres-page__button { width: 100%; } .tyres-page__service-grid { grid-template-columns: 1fr; } .tyres-page__service-image { height: 180px; } .tyres-page__legacy-card { grid-template-columns: 1fr; } .tyres-page__legacy-card > img { min-height: 210px; height: 210px; } .tyres-page__legacy-card ul { grid-template-columns: 1fr; } .tyres-page__closing-card { grid-template-columns: 1fr; } .tyres-page__closing-card .tyres-page__actions { grid-column: auto; } }
+@media (prefers-reduced-motion: reduce) { .tyres-page__button, .tyres-page__card-cta { transition: none; } .tyres-page__button:hover, .tyres-page__card-cta:hover { transform: none; } }
+
+/* The compact eyebrow labels and their decorative rules are intentionally removed site-wide. */
+.section-eyebrow,
+.hero__eyebrow,
+.contact-intro__eyebrow,
+.about__eyebrow,
+.about-page__facts-eyebrow,
+.contact-page__card-eyebrow {
+  display: none !important;
 }
 
 /* ==========================================================================

@@ -1,343 +1,48 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
-import { TireIcon } from '../components/icons/TireIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
-
 import imgTyres from '../assets/images/servicekort_tyres.jpg'
 
-interface ServiceCategory {
-  id: string
-  title: string
-  subtitle: string
-  description: string
-  image: string
-  imageAlt: string
-  icon: JSX.Element
-  actionType: 'booking' | 'call'
-  items: string[]
-  troubleshooting: string[]
+type PriceEntry = { label?: string; prefix?: string; amount?: string; unit?: string; contactText?: string }
+type ServiceCardProps = { title: string; description: string; priceData: PriceEntry[]; imagePlaceholder: string; onBookingClick: () => void }
+
+const tyreServices: Omit<ServiceCardProps, 'onBookingClick'>[] = [
+  { title: 'Hjulskifte', description: 'Dags att byta till sommar- eller vinterdäck? Vi ser till att bytet går snabbt, smidigt och säkert. Vi kontrollerar mönsterdjup, slitage och lufttryck samt ser över synliga bromskomponenter. Efterdragning av hjulbultarna efter cirka 10 mil ingår kostnadsfritt.', priceData: [{ label: 'Personbil', amount: '350 kr' }, { label: 'SUV & lätt lastbil', amount: '500 kr' }], imagePlaceholder: imgTyres },
+  { title: 'Däckförvaring', description: 'Slipp tunga hjul och frigör plats hemma. Vi grovtvättar och kontrollerar hjulen vid inlämning, förvarar dem skyddade från UV-ljus och temperatursvängningar och kontaktar dig via SMS inför nästa säsongsskifte. Om däcken börjar bli slitna hör vi av oss i god tid.', priceData: [{ label: 'Personbil', amount: '890 kr' }, { label: 'SUV & lätt lastbil', amount: '990 kr' }], imagePlaceholder: imgTyres },
+  { title: 'Omläggning av däck', description: 'När nya däck ska monteras på fälgarna utför vi omläggningen med precision, monterar nya ventiler och balanserar hjulen så att allt sitter rätt från första kilometern.', priceData: [{ prefix: 'Från', amount: '180 kr', unit: 'per däck' }], imagePlaceholder: imgTyres },
+  { title: 'Hjulinställning', description: 'Rätt hjulinställning bidrar till jämnare däckslitage, stabilare vägegenskaper och lägre rullmotstånd. Vi utför fackmässig fyrhjulsinställning med modern utrustning.', priceData: [{ prefix: 'Från', amount: '1 495 kr' }], imagePlaceholder: imgTyres },
+  { title: 'Däckbalansering', description: 'Vibrationer i ratten vid vissa hastigheter är ofta ett tecken på obalans. Vi mäter hjulen med precisionsutrustning och kompenserar obalansen med rätt vikter. Det ger lugnare körning och minskar onödigt slitage på däck, styrning, fjädring och chassikomponenter.', priceData: [{ contactText: 'Kontakta oss för pris' }], imagePlaceholder: imgTyres },
+  { title: 'Punkteringslagning', description: 'Har du fått punktering? Vi inspekterar skadan och bedömer om däcket kan repareras säkert. När en fackmässig lagning är möjlig hjälper vi dig tillbaka på vägen utan onödigt dröjsmål.', priceData: [{ contactText: 'Kontakta oss för pris' }], imagePlaceholder: imgTyres },
+]
+
+function ServiceCard({ title, description, priceData, imagePlaceholder, onBookingClick }: ServiceCardProps) {
+  const isContactPrice = priceData.some((price) => price.contactText)
+  return <article className="tyres-page__service-card" aria-labelledby={`service-${title}`}>
+    <div className="tyres-page__service-image"><img src={imagePlaceholder} alt="Platshållarbild för däckservice" loading="lazy" /><span>Bild kommer</span></div>
+    <div className="tyres-page__service-content"><h3 id={`service-${title}`}>{title}</h3><p>{description}</p>
+      <div className="tyres-page__prices" aria-label={`Pris för ${title}`}>{priceData.map((price) => price.contactText ? <p className="tyres-page__contact-price" key={price.contactText}>{price.contactText}</p> : <div className="tyres-page__price-row" key={`${price.label}-${price.amount}`}>
+        {price.label && <span className="tyres-page__price-label">{price.label}</span>}<span className="tyres-page__price-value">{price.prefix && <span>{price.prefix}</span>}<strong>{price.amount}</strong>{price.unit && <small>{price.unit}</small>}</span>
+      </div>)}</div>
+      <button type="button" className="tyres-page__card-cta" onClick={onBookingClick}>{isContactPrice ? 'Kontakta oss' : 'Boka tid'}<ArrowRightIcon aria-hidden="true" /></button>
+    </div>
+  </article>
 }
-
-const serviceCategories: ServiceCategory[] = [
-  {
-    id: 'dack-hjulinstallning',
-    title: 'Däckservice & Däckhotell',
-    subtitle: 'Däckbyte, montering, hjulinställning och bekväm säsongsförvaring',
-    description: 'Fel hjulvinklar sliter ner nya däck i förtid och gör att bilen drar mer bränsle än den behöver — en snabb kontroll är ofta en billig försäkring mot en dyr omgång däck. Utöver skifte och balansering erbjuder vi däckhotell: vi tvättar, kontrollerar mönsterdjupet och förvarar hjulen mörkt och svalt till nästa säsong.',
-    image: imgTyres,
-    imageAlt: 'Montering och balansering av däck i däckverkstad',
-    icon: <TireIcon />,
-    actionType: 'booking',
-    items: [
-      'Däckbyte & montering',
-      'Balansering av hjul',
-      'Hjulinställning & framvagnsjustering',
-      'Däckhotell — förvaring & tvätt',
-      'Däcktryckskontroll & TPMS'
-    ],
-    troubleshooting: [
-      'Skakningar eller vibrationer i ratten vid motorvägsfart',
-      'Bilen drar åt ena sidan vid rak körning',
-      'Däcken slits snett eller ojämnt på inner-/ytterkant',
-      'Dags för säsongsskifte mellan sommar- och vinterdäck'
-    ]
-  }
-]
-
-const processSteps = [
-  {
-    num: '01',
-    title: 'Berätta om bilen',
-    desc: 'Beskriv ditt behov av däckbyte, hjulinställning eller däckhotell.'
-  },
-  {
-    num: '02',
-    title: 'Vi undersöker och utför arbetet',
-    desc: 'Vi skiftar, balanserar eller justerar hjulvinklarna med precision.'
-  },
-  {
-    num: '03',
-    title: 'Klart för vägen',
-    desc: 'Bilen lämnas tillbaka redo för säker och bekväm körning.'
-  }
-]
 
 export default function DackservicePage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-
   const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
-  return (
-    <>
-      <Header onBookingClick={openModal} />
-
-      <main className="services-page">
-        {/* Hero Section */}
-        <section className="services-page__hero" aria-labelledby="services-hero-title">
-          <div className="container">
-            <div className="services-page__hero-content">
-              <div className="section-eyebrow">
-                <span className="eyebrow-line" aria-hidden="true" />
-                Vår verkstad i Brynäs, Gävle
-              </div>
-              <h1 className="services-page__title" id="services-hero-title">
-                Däckservice & <span className="title-accent">Däckhotell</span>
-              </h1>
-              <p className="services-page__lead">
-                Vi erbjuder komplett däckservice i Gävle — allt från säsongsskifte, montering och balansering till hjulinställning och bekväm säsongsförvaring i vårt däckhotell.
-              </p>
-              <div className="services-page__hero-actions">
-                <button
-                  type="button"
-                  onClick={openModal}
-                  className="services-page__btn services-page__btn--primary"
-                >
-                  Boka däckservice
-                </button>
-                <a
-                  href="tel:0705533395"
-                  className="services-page__btn services-page__btn--outline"
-                >
-                  <PhoneIcon className="services-page__btn-icon" />
-                  <span>Ring oss: 070-553 33 95</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Categories Section (Däck cards only) */}
-        <section className="services-page__categories" aria-labelledby="services-categories-title">
-          <div className="container">
-            <header className="section-header">
-              <div className="section-eyebrow">
-                <span className="eyebrow-line" aria-hidden="true" />
-                Säkerhet & Väggrepp
-              </div>
-              <h2 className="section-title" id="services-categories-title">
-                Däck & <span className="title-accent">Hjulinställning</span>
-              </h2>
-              <p className="section-desc">
-                Här hittar du information om våra däcktjänster, balansering, hjulinställning och säsongsförvaring.
-              </p>
-            </header>
-
-            <div className="services-page__category-list">
-              {serviceCategories.map((cat, index) => (
-                <article
-                  className="services-category-card"
-                  id={cat.id}
-                  key={cat.id}
-                  aria-labelledby={`${cat.id}-title`}
-                >
-                  <div className="services-category-card__media">
-                    <img
-                      src={cat.image}
-                      alt={cat.imageAlt}
-                      className="services-category-card__img"
-                      loading="lazy"
-                    />
-                    <div className="services-category-card__badge" aria-hidden="true">
-                      {cat.icon}
-                    </div>
-                    <span className="services-category-card__badge-num" aria-hidden="true">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-
-                  <div className="services-category-card__content">
-                    <div className="services-category-card__header">
-                      <h3 className="services-category-card__title" id={`${cat.id}-title`}>
-                        {cat.title}
-                      </h3>
-                      <p className="services-category-card__subtitle">
-                        {cat.subtitle}
-                      </p>
-                      <p className="services-category-card__desc">
-                        {cat.description}
-                      </p>
-                    </div>
-
-                    <div className="services-category-card__details">
-                      {/* What we do */}
-                      <div className="services-category-card__col">
-                        <h4 className="services-category-card__subheading">
-                          Det här ingår & utförs:
-                        </h4>
-                        <ul className="services-category-card__items">
-                          {cat.items.map(item => (
-                            <li key={item}>
-                              <CheckIcon className="services-category-card__check" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Common symptoms */}
-                      <div className="services-category-card__col">
-                        <h4 className="services-category-card__subheading">
-                          Vanliga tecken på att du behöver hjälp:
-                        </h4>
-                        <ul className="services-category-card__symptoms">
-                          {cat.troubleshooting.map(symptom => (
-                            <li key={symptom}>
-                              <span className="services-category-card__bullet" aria-hidden="true">•</span>
-                              <span>{symptom}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* Action Bar */}
-                    <div className="services-category-card__actions">
-                      <button
-                        type="button"
-                        onClick={openModal}
-                        className="services-category-card__cta"
-                        aria-label={`Boka tid för ${cat.title}`}
-                      >
-                        <span>Boka tid</span>
-                        <span className="services-category-card__arrow-badge" aria-hidden="true">
-                          <ArrowRightIcon className="services-category-card__arrow" />
-                        </span>
-                      </button>
-
-                      <a
-                        href="tel:0705533395"
-                        className="services-category-card__call-link"
-                      >
-                        Frågor? Ring 070-553 33 95
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Process Card ("Så fungerar det") - AT THE BOTTOM */}
-        <section className="services-page__process-section" aria-labelledby="services-process-title">
-          <div className="container">
-            <div className="services-page__process-card">
-              <div className="services-page__process-inner">
-                <div className="services-page__process-text">
-                  <div className="section-eyebrow section-eyebrow--dark">
-                    <span className="eyebrow-line" aria-hidden="true" />
-                    Så fungerar ditt däckbesök
-                  </div>
-                  <h2 className="services-page__process-heading" id="services-process-title">
-                    Smidigt och säkert <br />
-                    <span className="title-accent">däckskifte</span>
-                  </h2>
-                  <p className="services-page__process-desc">
-                    Vi byter dina däck snabbt, kontrollerar lufttryck och mönsterdjup, samt ser till att dina hjul är perfekt balanserade.
-                  </p>
-                  <div className="services-page__process-action">
-                    <a href="tel:0705533395" className="services-page__process-cta">
-                      <PhoneIcon className="services-page__process-icon" />
-                      <span>Ring oss: 070-553 33 95</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div className="services-page__process-steps">
-                  <div className="services-page__steps-list">
-                    {processSteps.map(step => (
-                      <div className="services-page__step" key={step.num}>
-                        <div className="services-page__step-num" aria-hidden="true">
-                          {step.num}
-                        </div>
-                        <div className="services-page__step-content">
-                          <h3 className="services-page__step-title">{step.title}</h3>
-                          <p className="services-page__step-desc">{step.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Vehicles note section */}
-        <section className="services-page__cars-note" aria-labelledby="cars-note-title">
-          <div className="container">
-            <div className="services-page__cars-box">
-              <div className="services-page__cars-text">
-                <div className="section-eyebrow section-eyebrow--dark">
-                  <span className="eyebrow-line" aria-hidden="true" />
-                  Kvalitetskontrollerade fordon
-                </div>
-                <h3 className="services-page__cars-heading" id="cars-note-title">
-                  Letar du efter en begagnad bil?
-                </h3>
-                <p className="services-page__cars-desc">
-                  Vi säljer även noggrant genomgångna och besiktigade begagnade bilar i Gävle. Varje bil kontrolleras av våra mekaniker innan försäljning.
-                </p>
-              </div>
-              <div className="services-page__cars-action">
-                <a href="/bilar-till-salu" className="services-page__cars-btn">
-                  <span>Se bilar till salu</span>
-                  <ArrowRightIcon className="services-page__cars-arrow" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Reassurance section */}
-        <section className="services-page__reassurance" aria-labelledby="reassurance-title">
-          <div className="container">
-            <div className="services-page__reassurance-card">
-              <div className="services-page__reassurance-header">
-                <div className="services-page__reassurance-icon" aria-hidden="true">
-                  <ShieldHeartIcon />
-                </div>
-                <div>
-                  <h3 className="services-page__reassurance-title" id="reassurance-title">
-                    Rätt mönsterdjup och säkra vägegenskaper
-                  </h3>
-                  <p className="services-page__reassurance-desc">
-                    Vi ser till att dina däck mäter korrekta värden, är korrekt balanserade och att hjulvinklarna inte sliter ut däcken i förtid.
-                  </p>
-                </div>
-              </div>
-              <div className="services-page__reassurance-actions">
-                <button
-                  type="button"
-                  onClick={openModal}
-                  className="services-page__btn services-page__btn--primary"
-                >
-                  Boka tid nu
-                </button>
-                <a
-                  href="tel:0705533395"
-                  className="services-page__btn services-page__btn--outline"
-                >
-                  Ring: 070-553 33 95
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <Footer />
-    </>
-  )
+  useEffect(() => { window.scrollTo(0, 0) }, [])
+  return <><Header onBookingClick={openModal} /><main className="tyres-page">
+    <section className="tyres-page__hero" aria-labelledby="tyres-hero-title"><div className="container tyres-page__container"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Däckverkstad i Brynäs, Gävle</div><h1 id="tyres-hero-title">Däckservice &amp; <span className="title-accent">Hjulskifte</span> i Gävle</h1><p>Vi hjälper dig med hjulskifte, montering, balansering, hjulinställning, punkteringslagning och däckhotell — med omtanke om säkerhet, körkomfort och dina hjul.</p><div className="tyres-page__actions"><button type="button" className="tyres-page__button tyres-page__button--primary" onClick={openModal}>Boka tid</button><a className="tyres-page__button tyres-page__button--outline" href="tel:0705533395"><PhoneIcon />Ring oss: 070-553 33 95</a></div></div></section>
+    <section className="tyres-page__check" aria-labelledby="tyres-check-title"><div className="container tyres-page__container"><div className="tyres-page__check-card"><div><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Tryggare körning</div><h2 id="tyres-check-title">Däckkollen – <span className="title-accent">kostnadsfri säkerhetskontroll</span></h2><p>Din och din bils säkerhet är vår högsta prioritet. Med välskötta däck får du bättre väggrepp, jämnare slitage och en säkrare, mer bränsleeffektiv resa. Därför erbjuder vi Däckkollen – en kostnadsfri översyn av hjulen och viktiga säkerhetsdelar.</p></div><ul className="tyres-page__checklist">{['Hjulbultarnas åtdragning', 'Lufttryck', 'Mönsterdjup', 'Sprickor, skador och ojämnt slitage', 'Översiktlig kontroll av stötdämpare och bromsar'].map((item) => <li key={item}><CheckIcon />{item}</li>)}</ul><div className="tyres-page__check-footer"><p>Nya aluminiumfälgar bör efterdras efter cirka 10 mil.</p><button type="button" className="tyres-page__button tyres-page__button--primary" onClick={openModal}>Boka kostnadsfri Däckkoll</button></div></div></div></section>
+    <section className="tyres-page__services" aria-labelledby="tyres-services-title"><div className="container tyres-page__container"><header className="tyres-page__section-header"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Våra däcktjänster</div><h2 id="tyres-services-title">Allt för dina <span className="title-accent">hjul</span></h2><p>Från säsongsskifte till kontroll och reparation — välj den hjälp som passar din bil.</p><strong>Samtliga priser är inklusive moms.</strong></header><div className="tyres-page__service-grid">{tyreServices.map((service) => <ServiceCard {...service} key={service.title} onBookingClick={openModal} />)}</div></div></section>
+    <section className="tyres-page__legacy" aria-labelledby="tyres-legacy-title"><div className="container tyres-page__container"><article className="tyres-page__legacy-card"><img src={imgTyres} alt="Montering och balansering av däck i däckverkstad" loading="lazy" /><div><div className="section-eyebrow section-eyebrow--dark"><span className="eyebrow-line" aria-hidden="true" />Befintlig däckservice</div><h2 id="tyres-legacy-title">Mer om vår däckservice</h2><p>Utöver skifte och balansering hjälper vi till med hjulinställning och säsongsförvaring. Vi ser över mönsterdjup, lufttryck och synliga bromskomponenter så att du får en bra överblick över hjulens skick.</p><ul>{['Däckbyte & montering', 'Balansering av hjul', 'Hjulinställning', 'Däckhotell — förvaring & tvätt', 'Däcktryckskontroll'].map((item) => <li key={item}><CheckIcon />{item}</li>)}</ul></div></article></div></section>
+    <section className="tyres-page__advice" aria-labelledby="tyres-advice-title"><div className="container tyres-page__container"><div className="tyres-page__advice-grid"><div><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Råd till bilägaren</div><h2 id="tyres-advice-title">Så håller du koll på <span className="title-accent">däcken</span></h2></div><div><p>Kontrollera lufttrycket när däcken är kalla och jämför med bilens instruktionsbok. Som riktmärke är en kontroll varje månad en bra vana, och en extra kontroll inför längre resor eller säsongsskifte är klok.</p><p>Se över mönsterdjupet och leta efter sprickor, utbuktningar, främmande föremål och ojämnt slitage. Är du osäker på däckens ålder eller en skada, låt en fackperson bedöma den.</p><p>Rätt lufttryck och jämnt slitage hjälper väggrepp, bromsning, körkomfort, däcklivslängd och bränsleförbrukning.</p></div></div></div></section>
+    <section className="tyres-page__closing" aria-labelledby="tyres-closing-title"><div className="container tyres-page__container"><div className="tyres-page__closing-card"><div className="tyres-page__closing-icon" aria-hidden="true"><ShieldHeartIcon /></div><div><h2 id="tyres-closing-title">Låt oss gå igenom dina hjul</h2><p>Vi hjälper dig att upptäcka skador, felaktigt lufttryck och slitage i tid.</p></div><div className="tyres-page__actions"><button type="button" className="tyres-page__button tyres-page__button--primary" onClick={openModal}>Boka kostnadsfri Däckkoll</button><a className="tyres-page__button tyres-page__button--outline" href="tel:0705533395">Ring: 070-553 33 95</a></div></div></div></section>
+  </main><BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /><Footer /></>
 }

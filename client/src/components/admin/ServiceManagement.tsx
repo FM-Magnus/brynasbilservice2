@@ -185,7 +185,7 @@ export function ServiceManagement() {
           </div>
           <button
             onClick={handleAddNew}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-brynas-gold dark:text-brynas-black dark:hover:bg-brynas-gold-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-[var(--redesign-accent)] dark:hover:bg-[var(--redesign-accent-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             {t('addNewService')}
           </button>
@@ -311,7 +311,7 @@ export function ServiceManagement() {
             <button
               type="button"
               onClick={handleSave}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-brynas-gold dark:text-brynas-black dark:hover:bg-brynas-gold-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-[var(--redesign-accent)] dark:hover:bg-[var(--redesign-accent-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               {t('save')}
             </button>
@@ -369,7 +369,7 @@ export function ServiceManagement() {
                             e.stopPropagation();
                             handleEdit(service);
                           }}
-                          className="text-indigo-600 hover:text-indigo-900 dark:text-brynas-gold dark:hover:text-brynas-gold-light mr-4"
+                          className="text-indigo-600 hover:text-indigo-900 dark:text-[var(--redesign-accent)] dark:hover:text-[var(--redesign-accent-dark)] mr-4"
                           title={t('editService')}
                         >
                           <PencilIcon className="h-5 w-5" />
@@ -469,7 +469,7 @@ export function ServiceManagement() {
                 <div className="mt-5 sm:mt-6">
                   <button
                     type="button"
-                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 dark:bg-brynas-gold dark:text-brynas-black text-base font-medium text-white hover:bg-indigo-700 dark:hover:bg-brynas-gold-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 dark:bg-[var(--redesign-accent)] text-base font-medium text-white hover:bg-indigo-700 dark:hover:bg-[var(--redesign-accent-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                     onClick={closeModal}
                   >
                     {t('close')}

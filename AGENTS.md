@@ -137,6 +137,12 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
+### 2026-09-11 — Codex (Däckservice page)
+- Rebuilt `/dackservice` as a dedicated pricing and safety page while retaining a compact version of the prior däckservice card below the new content.
+- Added the customer-supplied cost-free Däckkollen, six data-driven service cards with exact VAT-inclusive prices/contact-price treatment, tyre-care advice, and booking CTAs that reuse the existing modal.
+- Reused `servicekort_tyres.jpg` as a labelled local image placeholder throughout; no external images, routes, backend, booking-flow, Header or Footer changes.
+- Verified the production build and `git diff --check`; local browser accessibility-tree inspection confirmed one H1, all six services/prices, phone links, booking triggers and no car-sales section on this route. Responsive visual screenshots and real booking submission remain unverified.
+
 ### 2026-09-11 — Codex (safe handoff cleanup)
 - Moved only the invalid duplicate Git remote refs `refs/remotes/origin/HEAD 2` and `refs/remotes/origin/main 2` to `.git/codex-ref-backups/2026-09-11-invalid-origin-refs/`; valid `origin/main` and `origin/redesign/blue-teal-v1` refs now verify correctly.
 - A full `git fsck --connectivity-only` scan produced no new errors during its 60-second check window, but did not complete before it was stopped. Do not treat that as a full integrity pass.

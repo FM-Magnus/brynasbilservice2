@@ -74,7 +74,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <Header onBookingClick={openModal} variant="default" />
+      <Header onBookingClick={openModal} />
 
       <main className="contact-page" id="main-content">
         {/* Hero Section */}
