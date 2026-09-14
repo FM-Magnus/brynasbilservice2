@@ -103,6 +103,23 @@ Phase 3 files:
 - `client/src/components/sections/EV.tsx`
 - `client/src/css/index.css`
 
+### Phase 4 — Biltjänster customer guides & specialized service subpages
+
+- Implemented full customer guides following the unified design standard (H1, intro, benefits, warning signs, checklist card, shared process, `BiltjansterFaq`, closing booking CTA) for:
+  - `/kamrem` (`KamremPage.tsx`)
+  - `/bilbatteri` (`BilbatteriPage.tsx`)
+  - `/stodampare-fjadrar` (`StodampareFjadrarPage.tsx`)
+  - `/hjullagerbyte` (`HjullagerbytePage.tsx`)
+  - `/avgassystem` (`AvgassystemPage.tsx`)
+  - `/drivaxel-drivknutar` (`DrivaxelDrivknutarPage.tsx`)
+  - `/styrning-kulleder` (`StyrningKullederPage.tsx`)
+  - `/bromssystem` (`BromssystemPage.tsx`)
+  - `/koppling` (`KopplingPage.tsx`)
+- Specialized Däckservice page (`DackservicePage.tsx` at `/dackservice`): updated with dedicated statutory winter-tire dates card (1 dec–31 mar, 1 okt–15 apr, 16 apr–30 sep, 3PMSF), enriched maintenance advice prose (1.6/3mm, 3–5mm/4mm, 4-digit DOT code 6–10 years), Däckkollen card removed per request, 6 service cards & pricing intact.
+- Specialized AC-Service page (`AcServicePage.tsx` at `/ac-service`): updated with 3 enriched symptom cards (1–2 line technical causes while preserving interactive routing logic), hero compressor damage note ("why not to wait"), pricing frequency guidance (annual check vs biannual full service with `DRAFT GUIDANCE` caveat), 3 pricing cards & R134a/R1234yf note with `FACT TO CONFIRM` caveat intact.
+- Created [`docs/CODEX_HANDOVER.md`](CODEX_HANDOVER.md) for Codex handover and continuation.
+- Verified 0px horizontal overflow across all subpages at 1440px and 390px.
+
 ## Architecture and preservation rules
 
 - The frontend lives in `client/`; use `cd client && npm run build`. Do not use or edit the root Vite/React scaffolding.
