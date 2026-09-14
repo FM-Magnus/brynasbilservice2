@@ -6,7 +6,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-14 by Codex)
+## Current state (last updated: 2026-09-14 by Antigravity)
 
 ### What is working
 - Magnus confirmed on 2026-09-14 that the website is still a work in progress and **no page copy is final-approved**. Earlier approvals in this file concern specific design or functionality, not final page text.
@@ -26,7 +26,8 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - **Bilservice guide** (`ServiceReparationerPage.tsx` at `/service-reparationer#bilservice`) — Long-form Bilservice content destination with a replaceable visual placeholder, service-level guide, relevant internal links, booking/call CTAs, process, pricing CTA, and the existing vehicle/reassurance closing blocks. The repair and diagnostics cards no longer live here.
 - **Biltjänster default page** (`BiltjansterPage.tsx` at `/biltjanster`) — The default destination for the Biltjänster menu. It currently holds the moved `Reparationer & Felsökning` heading and its two existing large cards (`Reparationer & mekaniskt underhåll` and `Felsökning, Diagnostik & Elsystem`), retaining their local images, booking-modal actions and call links. Future service destinations belong below this entry in the menu.
 - **Oljebyte guide** (`OljebytePage.tsx` at `/oljebyte`) — Expanded draft covering oil-change basics, viscosity/standards, oil types, ageing, intervals, common misconceptions, service checklist, benefits and the shared expandable FAQ. The existing booking modal, telephone CTA and replaceable hero placeholder remain. Magnus chose to retain the technical wording as draft; none of this copy is final-approved or technically fact-checked.
-- **Future Biltjänster shells** (`KamremPage.tsx`, `BilbatteriPage.tsx`) — Empty, individually routed destinations at `/kamrem` and `/bilbatteri`. They reuse the existing hero, booking/call pattern and replaceable image placeholder; no supplied draft copy has been inserted or fact-checked.
+- **Kamrem guide** (`KamremPage.tsx` at `/kamrem`) — Expanded draft guide covering timing belt vs chain, benefits, warning signs, service scope checklist, draft guidance, safety note, shared workshop process, FAQ and booking CTA. The intervals, timing and component claims are draft source material and have not been fact-checked with the workshop.
+- **Future Biltjänster shell** (`BilbatteriPage.tsx`) — Empty, individually routed destination at `/bilbatteri`. It reuses the existing hero, booking/call pattern and replaceable image placeholder; no supplied draft copy has been inserted or fact-checked.
 - **Additional Biltjänster shells** (`StodampareFjadrarPage.tsx`, `HjullagerbytePage.tsx`, `AvgassystemPage.tsx`, `DrivaxelDrivknutarPage.tsx`, `StyrningKullederPage.tsx`) — Empty, individually routed destinations at `/stodampare-fjadrar`, `/hjullagerbyte`, `/avgassystem`, `/drivaxel-drivknutar` and `/styrning-kulleder`. They use the same reusable shell; supplied draft copy remains outside the application.
 - **Bromssystem guide** (`BromssystemPage.tsx` at `/bromssystem`) — Expanded draft guide with brake-system overview, benefits, warning signs, service scope, guidance cards, shared workshop process, FAQ and booking CTA. The intervals, thickness, timing and component claims are draft source material and have not been fact-checked with the workshop.
 - **Koppling guide** (`KopplingPage.tsx` at `/koppling`) — Expanded draft guide with clutch overview, benefits, warning signs, service scope, draft guidance, shared workshop process, FAQ and booking CTA. The intervals, timing and component claims are draft source material and have not been fact-checked with the workshop; no claim is made about DSG or automated clutch-transmission work.
@@ -143,6 +144,12 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-14 — Antigravity (Kamrem draft guide)
+- Replaced the Kamrem shell with the supplied draft content, distributed into an accessible, responsive customer guide with timing belt vs chain overview, benefits, warning signs, service scope checklist, draft guidance, interference engine safety note, shared 5-step process, accessible FAQ and existing booking/call actions.
+- Added scoped CSS for `.kamrem-page` in `client/src/css/index.css` following the `.clutch-page` and `.brake-page` patterns, including explicit sizing and alignment for `.kamrem-page__service-check`.
+- Hardened `client/src/components/icons/CheckIcon.tsx` with default SVG dimensions (18x18) and `SVGProps` extension to prevent any unstyled SVG overflow.
+- Updated `docs/PROJECT_STATUS.md` and `AGENTS.md`. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
 
 ### 2026-09-14 — Codex (Antigravity migration handoff)
 - Added `docs/ANTIGRAVITY_HANDOFF.md` with the current branch/commit state, Biltjänster information architecture, reusable page pattern, content and uncertainty rules, protected paths, verification checklist and a copyable next-page task brief for Antigravity 2 / Flash 3.8. No application code or backend/deployment files were changed.

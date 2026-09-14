@@ -4080,6 +4080,7 @@ ul { list-style: none; }
 .services-page__guide {
   padding-block: clamp(3.5rem, 7vw, 6.5rem);
 }
+.services-page > section > .container,
 .services-page__guide > .container,
 .services-page__pricing > .container {
   max-width: var(--redesign-hero-max);
@@ -5361,6 +5362,111 @@ ul { list-style: none; }
   .clutch-page__guidance-grid,
   .clutch-page__benefit-grid,
   .clutch-page__service-card ul { grid-template-columns: 1fr; }
+}
+
+/* Kamrem service page */
+.kamrem-page__intro,
+.kamrem-page__symptoms,
+.kamrem-page__guidance { padding-block: clamp(3rem, 5.5vw, 5rem); }
+.kamrem-page__symptoms { background: rgba(36, 150, 160, 0.045); }
+.kamrem-page__parts-grid,
+.kamrem-page__guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.kamrem-page__symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.kamrem-page__part-card,
+.kamrem-page__symptom-card,
+.kamrem-page__guidance-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.kamrem-page__part-card h3,
+.kamrem-page__symptom-card h3,
+.kamrem-page__guidance-card h3 {
+  margin: 0 0 0.65rem;
+  color: var(--redesign-ink);
+  font: 800 clamp(1.03rem, 1.5vw, 1.2rem) / 1.25 var(--font-heading);
+  letter-spacing: -0.015em;
+}
+.kamrem-page__part-card h3,
+.kamrem-page__guidance-card h3 { color: var(--redesign-accent-dark); }
+.kamrem-page__part-card p,
+.kamrem-page__symptom-card p,
+.kamrem-page__guidance-card p {
+  margin: 0;
+  color: #556266;
+  font: 400 0.94rem / 1.62 var(--font-body);
+}
+.kamrem-page__section-gap { margin-top: clamp(3rem, 5vw, 4.5rem); }
+.kamrem-page__benefit-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.kamrem-page__benefit-grid .services-page__benefit-card { min-height: 168px; }
+.kamrem-page__service { padding-block: clamp(2rem, 4vw, 3.5rem); }
+.kamrem-page__service-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--redesign-radius-card);
+  color: #fff;
+  background: #101618;
+}
+.kamrem-page__service-card h2 {
+  margin: 0 0 0.85rem;
+  color: #fff;
+  font: 800 clamp(1.8rem, 3.4vw, 2.7rem) / 1.08 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.kamrem-page__service-card > div > p { margin: 0; color: rgba(255, 255, 255, 0.74); font: 400 1rem / 1.65 var(--font-body); }
+.kamrem-page__service-card ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem 1.25rem; margin: 0; padding: 0; }
+.kamrem-page__service-card li { display: flex; gap: 0.55rem; align-items: flex-start; color: rgba(255, 255, 255, 0.84); font: 400 0.92rem / 1.5 var(--font-body); }
+.kamrem-page__service-check,
+.kamrem-page__service-card li svg {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  max-width: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  flex: 0 0 18px;
+  margin-top: 0.1rem;
+  color: var(--redesign-accent);
+}
+.kamrem-page__safety-note {
+  max-width: 980px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--redesign-accent);
+  color: #556266;
+  background: rgba(36, 150, 160, 0.06);
+  font: 400 0.95rem / 1.6 var(--font-body);
+}
+.kamrem-page__safety-note strong { color: var(--redesign-ink); font-weight: 800; }
+.kamrem-page__booking { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+
+@media (max-width: 1024px) {
+  .kamrem-page__parts-grid,
+  .kamrem-page__guidance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kamrem-page__benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kamrem-page__service-card { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .kamrem-page__parts-grid,
+  .kamrem-page__symptom-grid,
+  .kamrem-page__guidance-grid,
+  .kamrem-page__benefit-grid,
+  .kamrem-page__service-card ul { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 1024px) {
