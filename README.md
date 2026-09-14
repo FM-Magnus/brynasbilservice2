@@ -11,7 +11,7 @@ Website and booking system for Brynäs Bilservice — a local car repair shop in
 | Frontend | React 18, TypeScript, Tailwind CSS 3, Vite 4 |
 | Backend | Node.js 16 (server), Express 4, JavaScript |
 | Database | MySQL / MariaDB |
-| Deployment | GitHub Actions → SSH + tar → VPS |
+| Deployment | Production workflow unresolved; see [project status](docs/PROJECT_STATUS.md) |
 | Process manager | PM2 (via fnm) |
 | Hosting | VPS at `194.14.207.224` behind Cloudflare |
 
@@ -30,8 +30,7 @@ brynasbilservice/
 │   │   │   └── ui/      # Reusable UI (Button, SectionHeader)
 │   │   ├── context/     # React context (LanguageContext)
 │   │   ├── css/         # Stylesheets
-│   │   ├── pages/
-│   │   │   └── admin/   # Dashboard page
+│   │   ├── pages/       # Public subpages and admin dashboard
 │   │   ├── translations/# sv.ts, en.ts
 │   │   ├── App.tsx
 │   │   └── main.tsx     # Router setup
@@ -43,13 +42,12 @@ brynasbilservice/
 │   └── package.json
 ├── docs/                # Documentation
 │   ├── admin-panel.md
+│   ├── AGENT_HANDOFF.md
+│   ├── PROJECT_STATUS.md
 │   ├── deployment.md
 │   └── ssh-setup.md
-├── .htaccess            # Apache rewrite rules (deployed to server)
-├── .github/
-│   ├── copilot-instructions.md
-│   └── workflows/
-│       └── deploy.yml
+├── AGENTS.md            # Current state and chronological session log
+├── CLAUDE.md            # Agent-specific working notes
 └── README.md
 ```
 
@@ -59,7 +57,7 @@ brynasbilservice/
 
 - Node.js 20+ (for local development)
 - npm
-- SSH key `~/.ssh/fenrirm` for server/database access
+- SSH access only when working with the remote database or server
 
 ### Local Development
 
@@ -78,8 +76,7 @@ npm install
 npm run dev            # runs on localhost:5173
 ```
 
-The frontend dev server at `http://localhost:5173/brynasbilservice/` proxies API
-calls to `http://localhost:3000` via the axios config.
+The development frontend runs at `http://localhost:5173/` by default; Vite may select another port if 5173 is occupied. The client API configuration addresses the local Express server at `http://localhost:3000`.
 
 ### Build
 
@@ -96,35 +93,27 @@ cd client && npm run build    # outputs to client/dist/
 | Database | `fenrirm_brynasbilservice` |
 | Username | `fenrirm_brynasbilservice` |
 
-Schema is defined in [`server/database/schema.sql`](server/database/schema.sql).
+The checked-in [`server/database/schema.sql`](server/database/schema.sql) is not a verified representation of the live database; Johnny owns reconciliation.
 Tables: **customers**, **bookings**, **services**.
 
 ## Deployment
 
-Automated via GitHub Actions on push to `main`. See [docs/deployment.md](docs/deployment.md)
-for the full architecture, directory layout, and manual operations.
-
-Key points:
-
-- Client is built with Node 20 on GitHub Actions, deployed to `$DEPLOY_PATH/public/`
-- Server runs with Node 16 on the VPS (CentOS 7, glibc too old for Node 18+)
-- Express listens on port **3001** (not 3000 — that port is occupied)
-- Apache `.htaccess` proxies `/api/` to Express and serves the SPA fallback
-- `.env` is preserved across deploys via backup/restore
+There is no active repository-root GitHub Actions deployment workflow. The older [deployment notes](docs/deployment.md) describe an intended setup and conflict with `server/.htaccess` on port and rewrite behaviour. Magnus and Johnny must verify the production configuration before deployment work. A push alone does not deploy this branch.
 
 ## Documentation
 
 - [Admin Panel](docs/admin-panel.md) — features, auth flow, API endpoints
-- [Deployment](docs/deployment.md) — architecture, GitHub Actions, server ops
+- [Project status](docs/PROJECT_STATUS.md) — current routes, content, images, responsibilities and open decisions
+- [Agent handoff](docs/AGENT_HANDOFF.md) — approved redesign baseline and preservation rules
+- [Session log](AGENTS.md) — recent work and known gaps
+- [Deployment](docs/deployment.md) — historical/intended architecture; verify before use
 - [SSH Setup](docs/ssh-setup.md) — key generation and server access
 
 ## Working with AI assistants
 
-Magnus develops the frontend with help from AI coding assistants (Claude Code, Codex, Kimi,
-etc.). Johnny works on the backend by hand. To keep both ways of working from stepping on
-each other, the repo has three documentation files at the root.
+Magnus develops the frontend with help from AI coding assistants. Johnny owns the backend and deployment. The [project status](docs/PROJECT_STATUS.md) describes the current division of work.
 
-### The three documentation files — at a glance
+### Documentation files — at a glance
 
 | File | Who it's for | What's in it |
 |---|---|---|
@@ -132,6 +121,8 @@ each other, the repo has three documentation files at the root.
 | [`instructions.md`](instructions.md) | Magnus (and any human dev) | Practical day-to-day reference: how to run locally, change content, build, deploy. No AI-specific stuff. |
 | [`CLAUDE.md`](CLAUDE.md) | AI assistants | Rules, ownership boundaries, architecture, the design system, API contract, known traps. AI tools read this once at session start. |
 | [`AGENTS.md`](AGENTS.md) | AI assistants (all of them) | Living state of the project + chronological session log. Each AI session reads it first and updates it last. |
+| [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) | AI assistants | Approved redesign baseline and preservation rules. |
+| [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) | Everyone | Current page, copy, image and responsibility dashboard. |
 
 ### What this means in practice
 

@@ -9,7 +9,8 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 ## Current state (last updated: 2026-09-14 by Codex)
 
 ### What is working
-- Full frontend renders: Hero, ContactIntro, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
+- Magnus confirmed on 2026-09-14 that the website is still a work in progress and **no page copy is final-approved**. Earlier approvals in this file concern specific design or functionality, not final page text.
+- Current landing page renders: Header, Hero, ContactIntro, EV (workshop process), About, Services (preview), Contact, Footer, plus the booking modal. `ServiceList`, `WhyUs`, and `CTABanner` remain in the source tree but are not mounted by `App.tsx`.
 - Two-tier typography system: **Archivo 800** for display headings, **Manrope** (400-500 body, 600-700 controls/navigation/badges) via centralized tokens, strictly avoiding scattered component edits.
 - Phase 1A header and hero redesign — real SVG logo (scaled +20–30%), floating navigation/booking controls, keyboard-usable mobile menu, unchanged hero copy and connected `background_hero.jpg`
 - Booking form modal (DatePicker + TimePicker) — Phase 1B improved mobile layout and accessibility
@@ -137,6 +138,10 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-14 — Codex (documentation dashboard and stale-reference cleanup)
+- Added `docs/PROJECT_STATUS.md` with source-checked routes, page copy/image presence, responsibilities, known gaps and the documentation workflow. Magnus confirmed that all page copy remains work in progress and none is final-approved.
+- Corrected current-stack, navigation, marquee, review and deployment claims in `README.md`, `CLAUDE.md` and `instructions.md`; historical session entries and application code were not changed.
 
 ### 2026-09-14 — Codex (Bilservice and Biltjänster information architecture)
 - Added the long-form Bilservice guide at `/service-reparationer#bilservice`, using the existing teal design system, booking modal and telephone links. It uses a CSS/markup placeholder rather than a fake image asset for the future Bilservice hero image.

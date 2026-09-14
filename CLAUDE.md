@@ -13,12 +13,12 @@ Two developers:
 - **Live URL:** https://labb.fenrirmedia.se/brynasbilservice/
 - **Host:** VPS at `194.14.207.224` behind Cloudflare → nginx → Apache → Express
 - **OS:** CentOS 7 (glibc 2.17 — **cannot run Node 18+**, locked to Node 16)
-- **Build runtime:** Node 20 on GitHub Actions Ubuntu runner
+- **Build runtime in the historical deployment plan:** Node 20 on a GitHub Actions Ubuntu runner; no active root workflow currently executes it
 - **Production port:** Express runs on **3001** (port 3000 is taken by another tenant)
 - **Local dev port:** Express runs on **3000**
 - **Process manager:** PM2 via fnm
-- **Apache `.htaccess`:** proxies `/api/*` to Express, falls back to `public/index.html` for SPA routes
-- **Auto-deploy:** GitHub Actions on push to `main` (currently broken — workflow file is in wrong location, see `AGENTS.md`)
+- **Checked-in `server/.htaccess`:** contains an API proxy and SPA fallback, but its port/rewrite rules conflict with `docs/deployment.md`; live behaviour is unverified
+- **Auto-deploy:** No active repository-root workflow; see [current project status](docs/PROJECT_STATUS.md). Deployment needs Magnus and Johnny's review.
 - **Database access for local dev:** SSH tunnel required —
   `ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224`
 
@@ -43,18 +43,17 @@ src/
   main.tsx              — React root, BrowserRouter, LanguageProvider, routes
   css/index.css         — all CSS (custom properties, component styles, responsive)
   components/
-    sections/           — Hero, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact
+    sections/           — active landing-page sections are selected in App.tsx
     layout/             — Header, Footer
-    ui/                 — Button, ButtonLink, SectionHeader, Marquee
+    ui/                 — reusable UI components
     icons/              — SVG icon components
     admin/              — BookingManagement, ServiceManagement, ProtectedRoute
     BookingForm.tsx     — booking modal (react-datepicker + react-time-picker)
-    GoogleReviews.tsx   — hardcoded review data, needs updating with real Brynäs reviews
+    GoogleReviews.tsx   — real Brynäs reviews and rating, hardcoded and potentially stale
     ThemeSwitcher.tsx
-  pages/admin/          — Dashboard, Login
+  pages/                — public subpages and admin UI
   context/              — LanguageContext (sv/en i18n)
   translations/         — en.ts, sv.ts
-  data/                 — marquee-items.txt (one item per line, loaded raw by Hero.tsx)
   assets/images/        — all image assets
 ```
 
@@ -68,10 +67,7 @@ dist/             — server build output
 ```
 
 ### Routes
-- `/` — public site (App.tsx)
-- `/bilar-till-salu` — used cars subpage (BilarTillSalu.tsx)
-- `/admin` — admin dashboard (ProtectedRoute → Dashboard)
-- `/api/*` — Express API endpoints
+`client/src/main.tsx` defines the public routes `/`, `/om-oss`, `/tjanster`, `/biltjanster`, `/service-reparationer`, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu`, and `/kontakt`. `/admin` is protected; `/api/*` belongs to Express. The Header's Biltjänster dropdown lists `Våra tjänster` (`/biltjanster`) before `Bilservice` (`/service-reparationer#bilservice`). See [project status](docs/PROJECT_STATUS.md) for the current role of each page.
 
 ### API contract (server/index.js)
 All routes return JSON. No request validation, no error middleware — keep payloads tight.
@@ -113,47 +109,36 @@ cd client && npm run dev   # vite, port 5173
 ```
 
 Open `http://localhost:5173` in browser.
-The Vite dev server proxies `/api` to `localhost:3000` automatically via axiosConfig.
+The Axios configuration points directly to `http://localhost:3000` in development; it does not use a Vite `/api` proxy.
 
 ## Deploy
 **Intended flow** (when GitHub Actions is fixed): push to `main` → workflow builds the client and tars it to `$DEPLOY_PATH/public/` over SSH → `.env` is preserved across deploys → PM2 restarts the server. See `docs/deployment.md` for the full pipeline and required GitHub Secrets.
 
-**Manual flow** (current, since auto-deploy is broken):
-```bash
-cd client && npm run build
-# Copy client/dist/* to server/public/
-```
-Server serves the built client from `server/public/` as static files.
+The local frontend build is `npm --prefix client run build`. Do not treat a successful build or Git push as a verified deployment. Johnny owns production steps.
 
 ## Repo traps to avoid
 - **Don't touch root `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html`** — they reference React 19 / Vite 8 / Tailwind 4, none of which is what the project actually uses. They're orphan scaffolding from an earlier attempt and confuse new agents. The real frontend project lives in `client/`.
-- **`server/.htaccess` and `docs/deployment.md` disagree** about port and `RewriteBase`. The docs are correct (port 3001, no `RewriteBase`); `server/.htaccess` is stale. Johnny owns the resolution.
-- **`.github/workflows/deploy.yml` is in the wrong place** (lives at `client/.github/workflows/`, GitHub looks at repo root). Auto-deploy is silently broken until this is moved.
-- **No git remote is configured** as of this writing — `git remote -v` is empty. The repo is local-only until pushed to GitHub.
+- **`server/.htaccess` and `docs/deployment.md` disagree** about port and `RewriteBase`. Neither proves the live setup; Johnny owns the resolution.
+- **Deployment workflow is not active at repo root.** A legacy file exists under `client/.github/workflows/`. Do not move or run it as a repair without a joint deployment decision.
+- **Git remote exists.** `origin` points to `FM-Magnus/brynasbilservice2`; verify the current branch and remote before any authorized Git operation.
 
 ## Design system
 All CSS custom properties are in `client/src/css/index.css` under `:root`.
 
-Key tokens:
-- `--color-gold: #F0B800` — primary accent
-- `--color-red: #CC1417` — secondary accent
-- `--color-black: #080808` — background
-- `--font-heading` — Exo 2
-- `--font-body` — Barlow
+Current public-design tokens include `--redesign-accent` (teal), `--redesign-page` (warm white), `--redesign-ink`, `--font-heading` (Archivo) and `--font-body` (Manrope). Legacy red/black variables remain in the stylesheet; they are not the direction for new public UI. Yellow is limited to the landing-page Google field.
 
 Animations: `.fade-up` class + IntersectionObserver in App.tsx triggers `.visible` on scroll.
 
 ## Page section order (App.tsx)
-Hero → About → Services → ServiceList → WhyUs → EV → CTABanner → Contact
+Header → Hero → ContactIntro → EV (workshop process) → About → Services (preview) → Contact → Footer
 
-Nav link order (Header.tsx): Om oss → Tjänster → Bilar till salu → Kontakt
+Nav link order (Header.tsx): Start → Om oss → Biltjänster → Däck → AC → Bärgning → Till salu → Kontakt
 
 ## Known issues / open TODOs
-1. **GoogleReviews.tsx** — contains hardcoded placeholder data, not real Brynäs reviews
+1. **GoogleReviews.tsx** — real Brynäs review data is hardcoded and will become stale unless maintained
 2. **schema.sql out of sync** — missing columns: `customer_name`, `comment_customer`, `comment_admin`; missing `'erased'` from status ENUM; `service` column is VARCHAR but stores INT ID
 3. **comment_customer not saved** — BookingForm sends it, but server's insertBooking() doesn't include it in the INSERT
 4. **Admin comment read-only** — admin modal shows comment_admin but provides no way to save it
-5. **SSH key in project folder** — `client/fenrirm` and `client/fenrirm.pub` should not be here
 
 ## Agent handoff rules
 - **Read `AGENTS.md` first** — it has the current state of the project and recent session history

@@ -8,7 +8,7 @@
 
 ## Running the project locally
 
-You need **two terminals open at the same time**.
+The public frontend can run on its own. Start the backend separately when testing API-backed booking or admin work; database access is needed for those flows.
 
 ### Terminal 1 — Backend server
 ```bash
@@ -16,14 +16,14 @@ cd server
 npm run dev
 ```
 Starts Express on `http://localhost:3000`
-Requires MySQL running locally with credentials from `server/.env`
+Requires a database connection using credentials from `server/.env`; the documented SSH tunnel is one local-development option.
 
 ### Terminal 2 — Frontend
 ```bash
 cd client
 npm run dev
 ```
-Starts Vite on `http://localhost:5173` — open this in your browser.
+Starts Vite at `http://localhost:5173/` by default; it may choose another port if 5173 is busy.
 
 > **Note:** If MySQL isn't running locally, the API calls will fail but the UI will still load and render.
 
@@ -35,14 +35,7 @@ Starts Vite on `http://localhost:5173` — open this in your browser.
 cd client
 npm run build
 ```
-This outputs to `client/dist/`. Copy everything from `client/dist/` into `server/public/` — the Express server serves those files statically.
-
-```bash
-# Quick deploy copy (run from project root)
-cp -r client/dist/* server/public/
-```
-
-Then restart the server on the host.
+This produces a local `client/dist/` build. Production deployment is a separate Johnny-owned task. The former automatic workflow is not active, and the checked-in deployment notes conflict with `server/.htaccess`; see [project status](docs/PROJECT_STATUS.md) before planning a release.
 
 ---
 
@@ -56,10 +49,9 @@ brynasbilservice/
 │       ├── main.tsx      ← App entry point, routing, language context
 │       ├── css/index.css ← All CSS — custom properties, components, responsive
 │       ├── components/   ← All UI components
-│       ├── pages/        ← Admin dashboard and login
+│       ├── pages/        ← Public subpages and admin UI
 │       ├── context/      ← Language context (Swedish/English)
 │       ├── translations/ ← sv.ts and en.ts
-│       ├── data/         ← marquee-items.txt (edit to change marquee text)
 │       └── assets/       ← Images and other static assets
 ├── server/               ← Backend (Node.js + Express + MySQL)
 │   ├── index.js          ← API routes and server config
@@ -84,37 +76,25 @@ brynasbilservice/
 | Colors, fonts, spacing | `client/src/css/index.css` (`:root` variables) |
 | Hero section | `client/src/components/sections/Hero.tsx` |
 | About section | `client/src/components/sections/About.tsx` |
-| Service cards (with images) | `client/src/components/sections/Services.tsx` |
-| Full service list | `client/src/components/sections/ServiceList.tsx` |
+| Landing-page service preview | `client/src/components/sections/Services.tsx` |
+| Full service catalogue | `client/src/pages/ServicesPage.tsx` (`/tjanster`) |
+| Biltjänster default and Bilservice guide | `client/src/pages/BiltjansterPage.tsx`, `client/src/pages/ServiceReparationerPage.tsx` |
 | Booking form (modal) | `client/src/components/BookingForm.tsx` |
 | Google reviews widget | `client/src/components/GoogleReviews.tsx` |
-| Scrolling marquee | `client/src/components/ui/Marquee.tsx` |
-| Marquee text content | `client/src/data/marquee-items.txt` |
 | Images | `client/src/assets/images/` |
 | Admin panel | `client/src/components/admin/` + `client/src/pages/admin/` |
 
 ---
 
-## Changing the marquee text
-
-Edit `client/src/data/marquee-items.txt` — one item per line.
-The Hero section reads this file and passes lines to the Marquee component.
-
----
-
 ## Changing opening hours
 
-Edit `client/src/components/sections/Contact.tsx` — the hours table is defined there.
-Also update the info bar text in `client/src/components/layout/Header.tsx`.
+Opening hours currently appear in `Contact.tsx`, `Footer.tsx` and several subpages. Confirm new hours with Magnus/Johnny, then search `client/src/` for every occurrence and update the affected frontend views together. The Header has no opening-hours info bar.
 
 ---
 
 ## Adding a new service card
 
-Edit `client/src/components/sections/Services.tsx`.
-Each card is an entry in the `services` array with: `img`, `alt`, `w`, `h`, `icon`, `title`, `desc`, `linkText`, `linkHref`.
-
-Add the card image to `client/src/assets/images/`.
+First choose the correct destination: the landing-page preview is in `Services.tsx`, the existing full catalogue is in `ServicesPage.tsx`, and the Biltjänster default cards are in `BiltjansterPage.tsx`. Add any approved image to `client/src/assets/images/` and preserve the page's booking and telephone behaviour. The current route/content plan is in [project status](docs/PROJECT_STATUS.md).
 
 ---
 
@@ -152,7 +132,7 @@ Admin routes require header: `Authorization: Bearer admin-secret-token`
 
 ## Known issues to fix
 
-1. **GoogleReviews widget** shows placeholder data — needs real Brynäs Bilservice reviews
+1. **GoogleReviews widget** contains confirmed Brynäs review data, but its rating, count and selected reviews are hardcoded and can become stale
 2. **Customer comment** is collected in the booking form but not saved to the database
 3. **Database schema** (`server/database/schema.sql`) is out of sync with the actual running database
 4. **Admin auth** is not production-ready — hardcoded credentials and token
