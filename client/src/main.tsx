@@ -10,6 +10,16 @@ import BilarTillSalu from './pages/BilarTillSalu.tsx'
 import ServicesPage from './pages/ServicesPage.tsx'
 import ServiceReparationerPage from './pages/ServiceReparationerPage.tsx'
 import BiltjansterPage from './pages/BiltjansterPage.tsx'
+import OljebytePage from './pages/OljebytePage.tsx'
+import KamremPage from './pages/KamremPage.tsx'
+import KopplingPage from './pages/KopplingPage.tsx'
+import BromssystemPage from './pages/BromssystemPage.tsx'
+import BilbatteriPage from './pages/BilbatteriPage.tsx'
+import StodampareFjadrarPage from './pages/StodampareFjadrarPage.tsx'
+import HjullagerbytePage from './pages/HjullagerbytePage.tsx'
+import AvgassystemPage from './pages/AvgassystemPage.tsx'
+import DrivaxelDrivknutarPage from './pages/DrivaxelDrivknutarPage.tsx'
+import StyrningKullederPage from './pages/StyrningKullederPage.tsx'
 import DackservicePage from './pages/DackservicePage.tsx'
 import AcServicePage from './pages/AcServicePage.tsx'
 import BargningPage from './pages/BargningPage.tsx'
@@ -33,6 +43,16 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/tjanster" element={<ServicesPage />} />
           <Route path="/service-reparationer" element={<ServiceReparationerPage />} />
           <Route path="/biltjanster" element={<BiltjansterPage />} />
+          <Route path="/oljebyte" element={<OljebytePage />} />
+          <Route path="/kamrem" element={<KamremPage />} />
+          <Route path="/koppling" element={<KopplingPage />} />
+          <Route path="/bromssystem" element={<BromssystemPage />} />
+          <Route path="/bilbatteri" element={<BilbatteriPage />} />
+          <Route path="/stodampare-fjadrar" element={<StodampareFjadrarPage />} />
+          <Route path="/hjullagerbyte" element={<HjullagerbytePage />} />
+          <Route path="/avgassystem" element={<AvgassystemPage />} />
+          <Route path="/drivaxel-drivknutar" element={<DrivaxelDrivknutarPage />} />
+          <Route path="/styrning-kulleder" element={<StyrningKullederPage />} />
           <Route path="/dackservice" element={<DackservicePage />} />
           <Route path="/ac-service" element={<AcServicePage />} />
           <Route path="/bargning" element={<BargningPage />} />

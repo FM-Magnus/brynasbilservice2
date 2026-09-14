@@ -25,6 +25,11 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - **Workshop process section ("Så fungerar det")** (`EV.tsx`) — Repurposed former dark EV feature card into a compact 3-step workshop process card ("Från första kontakt till färdig bil") positioned directly below ContactIntro and directly above About. Removed all EV and high-voltage claims across About, ContactIntro, ServiceList, and CSS. Replaced EV items in ServiceList with authentic "Bärgning & biltransport", establishing a balanced 18-service grid.
 - **Bilservice guide** (`ServiceReparationerPage.tsx` at `/service-reparationer#bilservice`) — Long-form Bilservice content destination with a replaceable visual placeholder, service-level guide, relevant internal links, booking/call CTAs, process, pricing CTA, and the existing vehicle/reassurance closing blocks. The repair and diagnostics cards no longer live here.
 - **Biltjänster default page** (`BiltjansterPage.tsx` at `/biltjanster`) — The default destination for the Biltjänster menu. It currently holds the moved `Reparationer & Felsökning` heading and its two existing large cards (`Reparationer & mekaniskt underhåll` and `Felsökning, Diagnostik & Elsystem`), retaining their local images, booking-modal actions and call links. Future service destinations belong below this entry in the menu.
+- **Oljebyte guide** (`OljebytePage.tsx` at `/oljebyte`) — Expanded draft covering oil-change basics, viscosity/standards, oil types, ageing, intervals, common misconceptions, service checklist, benefits and the shared expandable FAQ. The existing booking modal, telephone CTA and replaceable hero placeholder remain. Magnus chose to retain the technical wording as draft; none of this copy is final-approved or technically fact-checked.
+- **Future Biltjänster shells** (`KamremPage.tsx`, `BilbatteriPage.tsx`) — Empty, individually routed destinations at `/kamrem` and `/bilbatteri`. They reuse the existing hero, booking/call pattern and replaceable image placeholder; no supplied draft copy has been inserted or fact-checked.
+- **Additional Biltjänster shells** (`StodampareFjadrarPage.tsx`, `HjullagerbytePage.tsx`, `AvgassystemPage.tsx`, `DrivaxelDrivknutarPage.tsx`, `StyrningKullederPage.tsx`) — Empty, individually routed destinations at `/stodampare-fjadrar`, `/hjullagerbyte`, `/avgassystem`, `/drivaxel-drivknutar` and `/styrning-kulleder`. They use the same reusable shell; supplied draft copy remains outside the application.
+- **Bromssystem guide** (`BromssystemPage.tsx` at `/bromssystem`) — Expanded draft guide with brake-system overview, benefits, warning signs, service scope, guidance cards, shared workshop process, FAQ and booking CTA. The intervals, thickness, timing and component claims are draft source material and have not been fact-checked with the workshop.
+- **Koppling guide** (`KopplingPage.tsx` at `/koppling`) — Expanded draft guide with clutch overview, benefits, warning signs, service scope, draft guidance, shared workshop process, FAQ and booking CTA. The intervals, timing and component claims are draft source material and have not been fact-checked with the workshop; no claim is made about DSG or automated clutch-transmission work.
 - **Dedicated Däckservice page** (`DackservicePage.tsx` at `/dackservice`) — Duplicated from ServicesPage layout and specialized for tire services and storage: (1) Hero with Archivo 800 title `Däckservice & Däckhotell`, lead, primary `Boka däckservice` button, and call link; (2) Filtered service category showing strictly `Däckservice & Däckhotell` card; (3) 3-step customer interaction protocol card ("Smidigt och säkert däckskifte") positioned at the bottom directly below the tire card; (4) Connected to Header navigation as `Däckservice` route.
 - **Dedicated AC-Service page** (`AcServicePage.tsx` at `/ac-service`) — Duplicated from ServicesPage layout and specialized for AC service and climate systems: (1) Hero with Archivo 800 title `AC-Service & Klimatanläggning`, lead, primary `Boka AC-service` button, and call link; (2) Filtered service category showing strictly `AC-Service & Klimatanläggning` card; (3) 3-step customer interaction protocol card ("Från kontroll till perfekt kyla") positioned at the bottom directly below the AC card; (4) Connected to Header navigation as `AC-Service` route.
 - **Dedicated Bärgning page** (`BargningPage.tsx` at `/bargning`) — Duplicated from ServicesPage layout and specialized for towing and transport: (1) Hero with Archivo 800 title `Bärgning & Biltransport`, lead, primary `Ring för bärgning` phone CTA (`070-553 33 95`), and secondary `Boka verkstadstid` button; (2) Filtered service category showing strictly `Bärgning & Biltransport` card; (3) 3-step customer interaction protocol card ("Från vägkant till färdig reparation") positioned at the bottom directly below the towing card; (4) Connected to Header navigation as `Bärgning` route.
@@ -53,7 +58,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ### Section and nav order
 Page scroll: Hero → ContactIntro → Process ("Så fungerar det") → About → Services (compact preview) → Contact (combined closing section) → Footer
-Nav links: Start → Om oss → Biltjänster (Våra tjänster, Bilservice) → Däck → AC → Bärgning → Till / Salu → Kontakt
+Nav links: Start → Om oss → Biltjänster (Våra tjänster, Bilservice, Oljebyte) → Däck → AC → Bärgning → Till / Salu → Kontakt
 
 ### Hero layout (changed 2026-09-11)
 `hero__inner` is no longer a two-column grid. It is a **flex column**: `hero__text` (eyebrow, H1, lead) on top, then `hero__footer` — a flex row holding `hero__actions` (the two buttons) and the GoogleReviews band side by side. Below 1024px `hero__footer` stacks vertically; below 768px the band itself wraps so the score/brand row sits above the review, and the review stacks avatar+name over the text.
@@ -138,6 +143,39 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-14 — Codex (Koppling draft guide)
+- Replaced the Koppling shell with the supplied draft content, distributed into a Bilservice-inspired customer guide with clutch overview, warning signs, scope, draft guidance, shared process, accessible FAQ and existing booking/call actions. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication; DSG and automated transmission work were not claimed.
+
+### 2026-09-14 — Codex (Bromssystem draft guide)
+- Replaced the Bromssystem shell with the supplied draft content, distributed into a Bilservice-inspired customer guide with system parts, warning signs, scope, draft guidance, shared process, accessible FAQ and existing booking/call actions. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
+
+### 2026-09-14 — Codex (additional Biltjänster page shells)
+- Added empty Stötdämpare och fjädrar, Hjullagerbyte, Avgassystem, Drivaxel och drivknutar and Styrning och kulleder destinations using the Swedish URL-safe routes approved in this session. They appear after Bilbatteri in the desktop dropdown. No supplied draft copy, factual claims or images were added.
+
+### 2026-09-14 — Codex (future Biltjänster page shells)
+- Added empty, dedicated Kamrem, Koppling, Bromssystem and Bilbatteri destinations after Magnus confirmed `/kamrem`, `/koppling`, `/bromssystem` and `/bilbatteri`. The desktop Biltjänster dropdown now lists them after Oljebyte; mobile continues linking Biltjänster to `/biltjanster`. No supplied draft copy, business claims or images were added.
+
+### 2026-09-14 — Codex (Oljebyte compact light sections)
+- Kept the existing “Vad ingår i ett oljebyte hos oss?” and “Fördelar med regelbundna oljebyten” sections near the top of `/oljebyte`, reduced card/section spacing, and changed the benefits block to a compact warm-white layout. No copy, routes, or functionality changed.
+
+### 2026-09-14 — Codex (expanded Oljebyte draft)
+- Distributed Magnus's expanded Oljebyte source text across the existing page: viscosity, oil standards/types, oil ageing, service intervals, misconceptions, checklist and shared FAQ. Preserved the booking modal, telephone CTA and image placeholder.
+- Magnus explicitly chose to keep the technical wording as draft rather than tone down uncertain claims. The copy is not final-approved or technically fact-checked; review the service/technical claims with Magnus and the workshop before publication. Updated `docs/PROJECT_STATUS.md` accordingly.
+
+### 2026-09-14 — Codex (Oljebyte content order)
+- Moved the oil-ageing and interval guidance directly below the introductory “Vad är ett oljebyte?” section and expanded that introduction with the complete definition and service explanation. Preserved all copy and interactions.
+
+### 2026-09-14 — Codex (Oljebyte information hierarchy)
+- Reordered the page so the customer-focused service content, FAQ and booking CTA come before the technical deep-dive. Added the `Mer info` grouping for the viscosity, standards, oil types, ageing, interval and misconception sections; the oil-type section now uses the warm-white page background with individual cards.
+
+### 2026-09-14 — Codex (shared Biltjänster FAQ)
+- Added the reusable `BiltjansterFaq` component and refactored Oljebyte to use it. The component provides keyboard-accessible expandable answers, supports multiple open items, and keeps all FAQ copy supplied by the page.
+- No new FAQ copy was added to other pages; AC's existing FAQ remains outside this scoped change.
+
+### 2026-09-14 — Codex (Oljebyte page)
+- Added the draft Oljebyte destination at `/oljebyte`, using the existing booking modal, telephone link, shared teal design system, a replaceable CSS/markup hero-image placeholder, checklist cards and an accessible FAQ.
+- Added Oljebyte as the third desktop Biltjänster entry after Våra tjänster and Bilservice. Mobile Biltjänster continues linking only to `/biltjanster`. Updated `docs/PROJECT_STATUS.md`; all Oljebyte copy remains draft and unapproved.
 
 ### 2026-09-14 — Codex (documentation dashboard and stale-reference cleanup)
 - Added `docs/PROJECT_STATUS.md` with source-checked routes, page copy/image presence, responsibilities, known gaps and the documentation workflow. Magnus confirmed that all page copy remains work in progress and none is final-approved.

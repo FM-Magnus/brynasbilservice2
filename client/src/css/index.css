@@ -4838,6 +4838,557 @@ ul { list-style: none; }
   .services-category-card__content { padding: 1.25rem; }
 }
 
+/* ═══════════════════════════════════════════════════════
+   OIL CHANGE PAGE
+═══════════════════════════════════════════════════════ */
+
+.oil-page__hero .services-page__hero-content { max-width: 720px; }
+.oil-page__image-placeholder {
+  min-height: clamp(280px, 30vw, 380px);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(36, 150, 160, 0.28), transparent 38%),
+    radial-gradient(circle at 75% 80%, rgba(36, 150, 160, 0.12), transparent 42%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+}
+.oil-page__container {
+  max-width: var(--redesign-hero-max);
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+}
+.oil-page__intro {
+  padding-block: clamp(3rem, 5.5vw, 5rem);
+}
+.oil-page__intro > .oil-page__container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.75fr);
+  align-items: start;
+  gap: clamp(1.5rem, 5vw, 5rem);
+}
+.oil-page__intro-copy h2,
+.oil-page__importance h2,
+.oil-page__section-heading h2 {
+  margin: 0 0 0.9rem;
+  color: var(--redesign-ink);
+  font: 800 clamp(1.9rem, 3.6vw, 3rem) / 1.1 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.oil-page__intro-copy > p,
+.oil-page__importance p,
+.oil-page__section-heading > p {
+  margin: 0;
+  color: #556266;
+  font: 400 clamp(0.98rem, 1.2vw, 1.08rem) / 1.7 var(--font-body);
+}
+.oil-page__importance {
+  position: relative;
+  padding: clamp(1.5rem, 3vw, 2.2rem);
+  border: 1px solid rgba(36, 150, 160, 0.25);
+  border-radius: var(--redesign-radius-card);
+  background: rgba(36, 150, 160, 0.06);
+  box-shadow: 0 12px 30px rgba(20, 34, 36, 0.05);
+}
+.oil-page__importance::before {
+  position: absolute;
+  top: 1.55rem;
+  bottom: 1.55rem;
+  left: 0;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: var(--redesign-accent);
+  content: '';
+}
+.oil-page__importance h2 { font-size: clamp(1.35rem, 2vw, 1.7rem); }
+.oil-page__importance p + p { margin-top: 1rem; }
+.oil-page__included {
+  padding-block: clamp(2.25rem, 4vw, 3.5rem);
+  background: rgba(36, 150, 160, 0.045);
+}
+.oil-page__section-heading { max-width: 770px; margin-bottom: clamp(1.25rem, 2.5vw, 2rem); }
+.oil-page__included-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+.oil-page__included-card {
+  position: relative;
+  min-height: 150px;
+  padding: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.oil-page__included-card > span {
+  display: block;
+  color: rgba(36, 150, 160, 0.65);
+  font: 800 0.83rem var(--font-heading);
+  letter-spacing: 0.06em;
+}
+.oil-page__included-card > svg {
+  width: 22px;
+  height: 22px;
+  margin: 0.8rem 0 0.55rem;
+  color: var(--redesign-accent);
+}
+.oil-page__included-card p {
+  margin: 0;
+  color: var(--redesign-ink);
+  font: 700 0.92rem / 1.45 var(--font-body);
+}
+.oil-page__benefits {
+  position: relative;
+  padding-block: clamp(2.25rem, 4vw, 3.5rem);
+  color: var(--redesign-ink);
+  background: rgba(36, 150, 160, 0.045);
+}
+.oil-page__benefits::before {
+  position: absolute;
+  top: -180px;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(36, 150, 160, 0.17), transparent 68%);
+  content: '';
+  display: none;
+}
+.oil-page__benefits .oil-page__container { position: relative; }
+.oil-page__section-heading--light h2 { color: #fff; }
+.oil-page__section-heading--light .title-accent { color: var(--redesign-accent); }
+.oil-page__benefits .oil-page__section-heading--light h2 { color: var(--redesign-ink); }
+.oil-page__benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.oil-page__benefit-card {
+  min-height: 112px;
+  padding: 1rem;
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.oil-page__benefit-card svg {
+  width: 22px;
+  height: 22px;
+  color: var(--redesign-accent);
+}
+.oil-page__benefit-card p {
+  margin: 0.7rem 0 0;
+  color: var(--redesign-ink);
+  font: 700 0.95rem / 1.4 var(--font-body);
+}
+.oil-page__guide,
+.oil-page__usage,
+.oil-page__misconceptions {
+  padding-block: clamp(3rem, 5.5vw, 5rem);
+}
+.oil-page { display: flex; flex-direction: column; }
+.oil-page__hero { order: 1; }
+.oil-page__intro { order: 2; }
+.oil-page__included { order: 3; }
+.oil-page__benefits { order: 4; }
+.oil-page > .biltjanster-faq { order: 5; }
+.oil-page__booking { order: 6; }
+.oil-page__more-info { order: 7; }
+.oil-page__usage { order: 8; }
+.oil-page__guide { order: 9; }
+.oil-page__types { order: 10; }
+.oil-page__misconceptions { order: 11; }
+.oil-page__more-info-heading { max-width: 760px; padding-top: clamp(3.5rem, 7vw, 6rem); }
+.oil-page__more-info-heading h2 { margin: 0 0 .75rem; color: var(--redesign-ink); font: 800 clamp(2rem, 3.6vw, 3rem) / 1.1 var(--font-heading); letter-spacing: -.02em; }
+.oil-page__more-info-heading p { margin: 0; color: #556266; font: 400 clamp(.98rem, 1.2vw, 1.08rem) / 1.7 var(--font-body); }
+.oil-page__guide-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+}
+.oil-page__detail-grid,
+.oil-page__ageing-grid,
+.oil-page__misconception-grid,
+.oil-page__type-grid {
+  display: grid;
+  gap: 1rem;
+}
+.oil-page__detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.oil-page__detail-card,
+.oil-page__ageing-card,
+.oil-page__misconception-card {
+  min-width: 0;
+  padding: clamp(1.3rem, 2.5vw, 1.8rem);
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.oil-page__detail-card h3,
+.oil-page__ageing-card h3,
+.oil-page__misconception-card h3,
+.oil-page__type-card h3,
+.oil-page__standards-list h3 {
+  margin: 0 0 0.65rem;
+  font: 800 clamp(1.05rem, 1.6vw, 1.2rem) / 1.3 var(--font-heading);
+  overflow-wrap: anywhere;
+}
+.oil-page__detail-card p,
+.oil-page__ageing-card p,
+.oil-page__misconception-card p,
+.oil-page__type-card p,
+.oil-page__standards p,
+.oil-page__guide-note,
+.oil-page__usage-summary,
+.oil-page__interval p,
+.oil-page__type-conclusion {
+  margin: 0;
+  font: 400 0.98rem / 1.7 var(--font-body);
+}
+.oil-page__detail-card p,
+.oil-page__ageing-card p,
+.oil-page__misconception-card p,
+.oil-page__guide-note,
+.oil-page__usage-summary { color: #556266; }
+.oil-page__guide-note,
+.oil-page__usage-summary { margin-top: 1.4rem; max-width: 770px; }
+.oil-page__standards {
+  min-width: 0;
+  padding: clamp(1.5rem, 3vw, 2.3rem);
+  border-radius: var(--redesign-radius-card);
+  color: #fff;
+  background: var(--redesign-ink);
+}
+.oil-page__standards h2,
+.oil-page__interval h2 {
+  margin: 0 0 1rem;
+  font: 800 clamp(1.55rem, 2.7vw, 2.15rem) / 1.15 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.oil-page__standards p,
+.oil-page__interval p { color: rgba(255, 255, 255, 0.8); }
+.oil-page__standards-list { display: grid; gap: 0.9rem; margin-block: 1.5rem; }
+.oil-page__standards-list article {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.oil-page__standards-list h3 { color: var(--redesign-accent); }
+.oil-page__types {
+  padding-block: clamp(3rem, 5.5vw, 5rem);
+  color: var(--redesign-ink);
+  background: var(--redesign-page);
+}
+.oil-page__types .oil-page__section-heading--light h2 { color: var(--redesign-ink); }
+.oil-page__types .oil-page__section-heading--light .title-accent { color: var(--redesign-accent); }
+.oil-page__type-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.oil-page__type-card {
+  min-width: 0;
+  padding: clamp(1.3rem, 2.5vw, 1.8rem);
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.oil-page__type-card h3 { color: var(--redesign-accent); }
+.oil-page__type-card p,
+.oil-page__type-conclusion { color: #556266; }
+.oil-page__type-conclusion { max-width: 900px; margin-top: 1.7rem; }
+.oil-page__ageing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.oil-page__interval {
+  max-width: 1000px;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  border-radius: var(--redesign-radius-card);
+  color: #fff;
+  background: var(--redesign-ink);
+}
+.oil-page__interval p + p { margin-top: 1rem; }
+.oil-page__misconception-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.oil-page__misconception-card:last-child { grid-column: 1 / -1; }
+.biltjanster-faq {
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+  background: var(--redesign-page);
+}
+.biltjanster-faq__container {
+  max-width: var(--redesign-hero-max);
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+}
+.biltjanster-faq__heading { max-width: 760px; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+.biltjanster-faq__heading h2 {
+  margin: 0 0 0.75rem;
+  color: var(--redesign-ink);
+  font: 800 clamp(1.9rem, 3.6vw, 3rem) / 1.1 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.biltjanster-faq__heading p {
+  margin: 0;
+  color: #556266;
+  font: 400 clamp(0.98rem, 1.2vw, 1.08rem) / 1.7 var(--font-body);
+}
+.biltjanster-faq__list {
+  display: grid;
+  max-width: 900px;
+  gap: 0.75rem;
+}
+.biltjanster-faq__item {
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 18px;
+  background: var(--redesign-surface);
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.biltjanster-faq__item.is-open {
+  border-color: rgba(36, 150, 160, 0.38);
+  box-shadow: 0 10px 28px rgba(20, 34, 36, 0.06);
+}
+.biltjanster-faq__item h3 { margin: 0; }
+.biltjanster-faq__item button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.2rem 1.35rem;
+  border: 0;
+  color: var(--redesign-ink);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font: 800 clamp(1rem, 1.5vw, 1.12rem) / 1.35 var(--font-heading);
+}
+.biltjanster-faq__item button:focus-visible {
+  outline: 3px solid var(--redesign-accent);
+  outline-offset: 4px;
+}
+.biltjanster-faq__symbol {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(36, 150, 160, 0.25);
+  border-radius: 50%;
+  background: rgba(36, 150, 160, 0.08);
+  color: var(--redesign-accent-dark);
+  font: 400 1.55rem / 1 var(--font-body);
+}
+.biltjanster-faq__item > div { padding: 0 1.35rem 1.35rem; }
+.biltjanster-faq__item p {
+  max-width: 800px;
+  margin: 0;
+  color: #556266;
+  font: 400 1rem / 1.7 var(--font-body);
+}
+.oil-page__booking { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+
+/* Brake service page */
+.brake-page__intro,
+.brake-page__symptoms,
+.brake-page__guidance { padding-block: clamp(3rem, 5.5vw, 5rem); }
+.brake-page__symptoms { background: rgba(36, 150, 160, 0.045); }
+.brake-page__parts-grid,
+.brake-page__symptom-grid,
+.brake-page__guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.brake-page__part-card,
+.brake-page__symptom-card,
+.brake-page__guidance-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.brake-page__part-card h3,
+.brake-page__symptom-card h3,
+.brake-page__guidance-card h3 {
+  margin: 0 0 0.65rem;
+  color: var(--redesign-ink);
+  font: 800 clamp(1.03rem, 1.5vw, 1.2rem) / 1.25 var(--font-heading);
+  letter-spacing: -0.015em;
+}
+.brake-page__part-card h3,
+.brake-page__guidance-card h3 { color: var(--redesign-accent-dark); }
+.brake-page__part-card p,
+.brake-page__symptom-card p,
+.brake-page__guidance-card p {
+  margin: 0;
+  color: #556266;
+  font: 400 0.94rem / 1.62 var(--font-body);
+}
+.brake-page__section-gap { margin-top: clamp(3rem, 5vw, 4.5rem); }
+.brake-page__benefit-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.brake-page__benefit-grid .services-page__benefit-card { min-height: 168px; }
+.brake-page__service { padding-block: clamp(2rem, 4vw, 3.5rem); }
+.brake-page__service-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--redesign-radius-card);
+  color: #fff;
+  background: #101618;
+}
+.brake-page__service-card h2 {
+  margin: 0 0 0.85rem;
+  color: #fff;
+  font: 800 clamp(1.8rem, 3.4vw, 2.7rem) / 1.08 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.brake-page__service-card > div > p { margin: 0; color: rgba(255, 255, 255, 0.74); font: 400 1rem / 1.65 var(--font-body); }
+.brake-page__service-card ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem 1.25rem; margin: 0; padding: 0; }
+.brake-page__service-card li { display: flex; gap: 0.55rem; align-items: flex-start; color: rgba(255, 255, 255, 0.84); font: 400 0.92rem / 1.5 var(--font-body); }
+.brake-page__service-card li svg { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 0.1rem; color: var(--redesign-accent); }
+.brake-page__safety-note {
+  max-width: 980px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--redesign-accent);
+  color: #556266;
+  background: rgba(36, 150, 160, 0.06);
+  font: 400 0.95rem / 1.6 var(--font-body);
+}
+.brake-page__safety-note strong { color: var(--redesign-ink); font-weight: 800; }
+.brake-page__booking { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+
+@media (max-width: 1024px) {
+  .brake-page__parts-grid,
+  .brake-page__symptom-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .brake-page__guidance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .brake-page__benefit-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .brake-page__service-card { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .brake-page__parts-grid,
+  .brake-page__symptom-grid,
+  .brake-page__guidance-grid,
+  .brake-page__benefit-grid,
+  .brake-page__service-card ul { grid-template-columns: 1fr; }
+}
+
+/* Clutch service page */
+.clutch-page__intro,
+.clutch-page__symptoms,
+.clutch-page__guidance { padding-block: clamp(3rem, 5.5vw, 5rem); }
+.clutch-page__symptoms { background: rgba(36, 150, 160, 0.045); }
+.clutch-page__parts-grid,
+.clutch-page__symptom-grid,
+.clutch-page__guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.clutch-page__part-card,
+.clutch-page__symptom-card,
+.clutch-page__guidance-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.clutch-page__part-card h3,
+.clutch-page__symptom-card h3,
+.clutch-page__guidance-card h3 {
+  margin: 0 0 0.65rem;
+  color: var(--redesign-ink);
+  font: 800 clamp(1.03rem, 1.5vw, 1.2rem) / 1.25 var(--font-heading);
+  letter-spacing: -0.015em;
+}
+.clutch-page__part-card h3,
+.clutch-page__guidance-card h3 { color: var(--redesign-accent-dark); }
+.clutch-page__part-card p,
+.clutch-page__symptom-card p,
+.clutch-page__guidance-card p {
+  margin: 0;
+  color: #556266;
+  font: 400 0.94rem / 1.62 var(--font-body);
+}
+.clutch-page__section-gap { margin-top: clamp(3rem, 5vw, 4.5rem); }
+.clutch-page__benefit-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.clutch-page__benefit-grid .services-page__benefit-card { min-height: 168px; }
+.clutch-page__symptom-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.clutch-page__service { padding-block: clamp(2rem, 4vw, 3.5rem); }
+.clutch-page__service-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--redesign-radius-card);
+  color: #fff;
+  background: #101618;
+}
+.clutch-page__service-card h2 {
+  margin: 0 0 0.85rem;
+  color: #fff;
+  font: 800 clamp(1.8rem, 3.4vw, 2.7rem) / 1.08 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.clutch-page__service-card > div > p { margin: 0; color: rgba(255, 255, 255, 0.74); font: 400 1rem / 1.65 var(--font-body); }
+.clutch-page__service-card ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem 1.25rem; margin: 0; padding: 0; }
+.clutch-page__service-card li { display: flex; gap: 0.55rem; align-items: flex-start; color: rgba(255, 255, 255, 0.84); font: 400 0.92rem / 1.5 var(--font-body); }
+.clutch-page__service-card li svg { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 0.1rem; color: var(--redesign-accent); }
+.clutch-page__safety-note {
+  max-width: 980px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--redesign-accent);
+  color: #556266;
+  background: rgba(36, 150, 160, 0.06);
+  font: 400 0.95rem / 1.6 var(--font-body);
+}
+.clutch-page__safety-note strong { color: var(--redesign-ink); font-weight: 800; }
+.clutch-page__booking { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+
+@media (max-width: 1024px) {
+  .clutch-page__symptom-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clutch-page__benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clutch-page__service-card { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .clutch-page__parts-grid,
+  .clutch-page__symptom-grid,
+  .clutch-page__guidance-grid,
+  .clutch-page__benefit-grid,
+  .clutch-page__service-card ul { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1024px) {
+  .oil-page__guide-layout { grid-template-columns: 1fr; }
+  .oil-page__included-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .oil-page__included-card:last-child { grid-column: span 2; }
+  .oil-page__benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .oil-page__intro > .oil-page__container { grid-template-columns: 1fr; }
+  .oil-page__ageing-grid { grid-template-columns: 1fr; }
+  .oil-page__image-placeholder { min-height: 220px; }
+}
+
+@media (max-width: 520px) {
+  .oil-page__detail-grid,
+  .oil-page__type-grid,
+  .oil-page__misconception-grid { grid-template-columns: 1fr; }
+  .oil-page__misconception-card:last-child { grid-column: auto; }
+  .oil-page__included-grid,
+  .oil-page__benefit-grid { grid-template-columns: 1fr; }
+  .oil-page__included-card:last-child { grid-column: auto; }
+  .oil-page__included-card { min-height: 0; }
+  .biltjanster-faq__item button { padding: 1rem; }
+  .biltjanster-faq__item > div { padding: 0 1rem 1rem; }
+}
+
 /* AC service page */
 .ac-page { background: var(--redesign-page); color: var(--redesign-ink); min-height: 100vh; }
 .ac-page__container { max-width: var(--redesign-hero-max); padding-inline: clamp(1.25rem, 4vw, 3.5rem); }

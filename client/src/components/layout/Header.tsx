@@ -33,6 +33,46 @@ const navLinks: NavLink[] = [
         href: '/service-reparationer#bilservice',
         label: 'Bilservice',
       },
+      {
+        href: '/oljebyte',
+        label: 'Oljebyte',
+      },
+      {
+        href: '/kamrem',
+        label: 'Kamrem',
+      },
+      {
+        href: '/koppling',
+        label: 'Koppling',
+      },
+      {
+        href: '/bromssystem',
+        label: 'Bromssystem',
+      },
+      {
+        href: '/bilbatteri',
+        label: 'Bilbatteri',
+      },
+      {
+        href: '/stodampare-fjadrar',
+        label: 'Stötdämpare och fjädrar',
+      },
+      {
+        href: '/hjullagerbyte',
+        label: 'Hjullagerbyte',
+      },
+      {
+        href: '/avgassystem',
+        label: 'Avgassystem',
+      },
+      {
+        href: '/drivaxel-drivknutar',
+        label: 'Drivaxel och drivknutar',
+      },
+      {
+        href: '/styrning-kulleder',
+        label: 'Styrning och kulleder',
+      },
     ],
   },
   { href: '/dackservice', label: 'Däck' },
