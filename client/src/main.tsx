@@ -9,6 +9,7 @@ import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
 import BilarTillSalu from './pages/BilarTillSalu.tsx'
 import ServicesPage from './pages/ServicesPage.tsx'
 import ServiceReparationerPage from './pages/ServiceReparationerPage.tsx'
+import BiltjansterPage from './pages/BiltjansterPage.tsx'
 import DackservicePage from './pages/DackservicePage.tsx'
 import AcServicePage from './pages/AcServicePage.tsx'
 import BargningPage from './pages/BargningPage.tsx'
@@ -31,6 +32,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/om-oss" element={<AboutPage />} />
           <Route path="/tjanster" element={<ServicesPage />} />
           <Route path="/service-reparationer" element={<ServiceReparationerPage />} />
+          <Route path="/biltjanster" element={<BiltjansterPage />} />
           <Route path="/dackservice" element={<DackservicePage />} />
           <Route path="/ac-service" element={<AcServicePage />} />
           <Route path="/bargning" element={<BargningPage />} />

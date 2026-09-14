@@ -106,7 +106,8 @@ Phase 3 files:
 ## Architecture and preservation rules
 
 - The frontend lives in `client/`; use `cd client && npm run build`. Do not use or edit the root Vite/React scaffolding.
-- `client/src/main.tsx` provides routing and `LanguageProvider`. Public routes are `/`, `/om-oss`, `/tjanster`, `/service-reparationer`, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu`, and `/kontakt`; `/admin` is protected. Production uses the `/brynasbilservice` basename, which remains unverified.
+- `client/src/main.tsx` provides routing and `LanguageProvider`. Public routes are `/`, `/om-oss`, `/tjanster`, `/biltjanster`, `/service-reparationer`, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu`, and `/kontakt`; `/admin` is protected. Production uses the `/brynasbilservice` basename, which remains unverified.
+- `Biltjänster` is the shared header dropdown. Its default route is `/biltjanster` (`Våra tjänster`), followed by `/service-reparationer#bilservice` (`Bilservice`). The first route owns the two large repair/diagnostics cards; Bilservice owns the long-form service guide and its closing vehicle/reassurance blocks. Keep future Biltjänster entries simple and append them beneath these two.
 - `client/src/App.tsx` owns booking-modal state and renders: Header → Hero → About → Services → ServiceList → WhyUs → EV → CTA → Contact → Footer. Preserve that content and order unless a later approved phase says otherwise.
 - Reuse existing Brynäs content, images, telephone/email/address, service data, booking callbacks and real vehicle data. Do not replace business facts with mockup text or invent routes, maps, FAQ answers, form recipients or dummy flows.
 - Do not change `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, `server/.env`, deployment files, or root project configs. Johnny owns backend/server decisions.

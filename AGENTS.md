@@ -6,7 +6,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-11 by Claude (claude-sonnet-5))
+## Current state (last updated: 2026-09-14 by Codex)
 
 ### What is working
 - Full frontend renders: Hero, ContactIntro, About, Services, ServiceList, WhyUs, EV, CTABanner, Contact, Footer
@@ -22,7 +22,8 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - **Contact intro section** (`ContactIntro.tsx`) — Responsive two-column contact and inquiry section positioned directly below Hero and above About, adhering to mockup `media_1789061551925.png`. Refactored layout to align right edge of teal form card flush with hero container (`0px` offset across 1920px down to 390px), broadened form card (844px at 1440px / 837px at 1920px), balanced gap (2–3rem), scaled left-column typography (`HÖR AV DIG TILL OSS` clamp 2.75rem–4.15rem, 58px icon badges), and reduced vertical top clearance (44px from hero frame).
 - **Bilar till salu subpage** (`BilarTillSalu.tsx` at `/bilar-till-salu`) — Redesigned in full alignment with the approved redesign visual system: warm-white page surround (`#f8f7f3`), dark ink hero/cards (`#101618`), teal accent typography (`var(--redesign-accent)`), trust badges ("Verkstadsinspekterade", "Färdiga för leverans", "Personlig kontakt"), 3-photo interactive gallery with active thumbnail indicator and 16:10 aspect ratio, spec tags, dual booking/call CTAs, clean empty state, sold vehicle section, and dark closing CTA card. Verified 0px horizontal overflow across 1440px, 768px, and 390px.
 - **Workshop process section ("Så fungerar det")** (`EV.tsx`) — Repurposed former dark EV feature card into a compact 3-step workshop process card ("Från första kontakt till färdig bil") positioned directly below ContactIntro and directly above About. Removed all EV and high-voltage claims across About, ContactIntro, ServiceList, and CSS. Replaced EV items in ServiceList with authentic "Bärgning & biltransport", establishing a balanced 18-service grid.
-- **Dedicated Service & Reparationer page** (`ServiceReparationerPage.tsx` at `/service-reparationer`) — Duplicated from ServicesPage layout and specialized for core mechanical services and diagnostics: (1) Hero with Archivo 800 title `Service & Reparationer`, lead, primary `Boka tid för service` button, and call link; (2) Filtered service categories grid showing strictly `Bilservice & Reparationer` and `Felsökning, Diagnostik & Elsystem` cards; (3) 3-step customer interaction protocol card ("Så fungerar ditt verkstadsbesök") positioned at the bottom directly below the service cards and above the closing reassurance section; (4) Connected to Header navigation as `Service & Reparationer` route.
+- **Bilservice guide** (`ServiceReparationerPage.tsx` at `/service-reparationer#bilservice`) — Long-form Bilservice content destination with a replaceable visual placeholder, service-level guide, relevant internal links, booking/call CTAs, process, pricing CTA, and the existing vehicle/reassurance closing blocks. The repair and diagnostics cards no longer live here.
+- **Biltjänster default page** (`BiltjansterPage.tsx` at `/biltjanster`) — The default destination for the Biltjänster menu. It currently holds the moved `Reparationer & Felsökning` heading and its two existing large cards (`Reparationer & mekaniskt underhåll` and `Felsökning, Diagnostik & Elsystem`), retaining their local images, booking-modal actions and call links. Future service destinations belong below this entry in the menu.
 - **Dedicated Däckservice page** (`DackservicePage.tsx` at `/dackservice`) — Duplicated from ServicesPage layout and specialized for tire services and storage: (1) Hero with Archivo 800 title `Däckservice & Däckhotell`, lead, primary `Boka däckservice` button, and call link; (2) Filtered service category showing strictly `Däckservice & Däckhotell` card; (3) 3-step customer interaction protocol card ("Smidigt och säkert däckskifte") positioned at the bottom directly below the tire card; (4) Connected to Header navigation as `Däckservice` route.
 - **Dedicated AC-Service page** (`AcServicePage.tsx` at `/ac-service`) — Duplicated from ServicesPage layout and specialized for AC service and climate systems: (1) Hero with Archivo 800 title `AC-Service & Klimatanläggning`, lead, primary `Boka AC-service` button, and call link; (2) Filtered service category showing strictly `AC-Service & Klimatanläggning` card; (3) 3-step customer interaction protocol card ("Från kontroll till perfekt kyla") positioned at the bottom directly below the AC card; (4) Connected to Header navigation as `AC-Service` route.
 - **Dedicated Bärgning page** (`BargningPage.tsx` at `/bargning`) — Duplicated from ServicesPage layout and specialized for towing and transport: (1) Hero with Archivo 800 title `Bärgning & Biltransport`, lead, primary `Ring för bärgning` phone CTA (`070-553 33 95`), and secondary `Boka verkstadstid` button; (2) Filtered service category showing strictly `Bärgning & Biltransport` card; (3) 3-step customer interaction protocol card ("Från vägkant till färdig reparation") positioned at the bottom directly below the towing card; (4) Connected to Header navigation as `Bärgning` route.
@@ -51,7 +52,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ### Section and nav order
 Page scroll: Hero → ContactIntro → Process ("Så fungerar det") → About → Services (compact preview) → Contact (combined closing section) → Footer
-Nav links: Start → Om oss → Bilservice / Reparationer → Däck → AC → Bärgning → Till / Salu → Kontakt
+Nav links: Start → Om oss → Biltjänster (Våra tjänster, Bilservice) → Däck → AC → Bärgning → Till / Salu → Kontakt
 
 ### Hero layout (changed 2026-09-11)
 `hero__inner` is no longer a two-column grid. It is a **flex column**: `hero__text` (eyebrow, H1, lead) on top, then `hero__footer` — a flex row holding `hero__actions` (the two buttons) and the GoogleReviews band side by side. Below 1024px `hero__footer` stacks vertically; below 768px the band itself wraps so the score/brand row sits above the review, and the review stacks avatar+name over the text.
@@ -136,6 +137,12 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-14 — Codex (Bilservice and Biltjänster information architecture)
+- Added the long-form Bilservice guide at `/service-reparationer#bilservice`, using the existing teal design system, booking modal and telephone links. It uses a CSS/markup placeholder rather than a fake image asset for the future Bilservice hero image.
+- Replaced the oversized/overlapping service dropdown with the shared `Biltjänster` control: desktop offers exactly `Våra tjänster` then `Bilservice`; mobile routes the single Biltjänster link to `/biltjanster`. The desktop menu retains Escape, click-outside, link-selection and keyboard behaviour.
+- Moved—not copied—the existing repair and diagnostics heading plus its two large image cards from the Bilservice route into a new `/biltjanster` page. The Bilservice diagnostics link now targets `/biltjanster#felsokning-diagnostik`; the smaller vehicle-sales and reassurance blocks remain on Bilservice.
+- Verified `git diff --check` and `npm --prefix client run build`; the Vite >500 kB chunk message remains a warning. Exact 1440/768/390 browser viewport controls were unavailable in the local browser session.
 
 ### 2026-09-11 — Codex (Däckservice page)
 - Rebuilt `/dackservice` as a dedicated pricing and safety page while retaining a compact version of the prior däckservice card below the new content.
