@@ -140,7 +140,7 @@ Phase 3 files:
 ## Startup checklist
 
 1. Read this file, `AGENTS.md`, and `docs/redesign-phase-0/README.md`.
-2. Confirm `redesign/blue-teal-v1`, the expected HEAD, a clean working tree and no upstream; do not fetch or push.
+2. Confirm `redesign/blue-teal-v1`, clean working tree, synced with `origin/redesign/blue-teal-v1` at commit `05b9f34f`. Never push without Magnus's explicit prior approval.
 3. Inspect the About implementation and locked mockup 7 before editing. Attach the seven mockups and Vår Verkstad pack if working in a cloud environment.
 4. Make only the approved About-section changes; preserve business data and functionality.
 5. Verify at 1440, 768 and 390 CSS pixels, then run the diff and build checks.

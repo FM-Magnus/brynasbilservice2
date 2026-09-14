@@ -16,7 +16,7 @@ This is a work-in-progress website. Magnus has not final-approved any public pag
 git status --short --branch
 ```
 
-Observed handoff state: branch `redesign/blue-teal-v1`, latest commit `39417357 feat: expand Biltjanster service guides`, tracking `origin/redesign/blue-teal-v1`, three commits ahead at handoff time. Do not push unless Magnus explicitly asks for it.
+Observed handoff state: branch `redesign/blue-teal-v1`, latest commit `05b9f34f feat(services): update dackservice and ac-service pages, add codex handover`, tracking `origin/redesign/blue-teal-v1`, pushed and in 100% sync. Never push without Magnus's explicit prior approval.
 
 ## Product and technical context
 
@@ -49,14 +49,21 @@ Mobile Biltjänster links to `/biltjanster`; do not create a second nested mobil
 
 ## Page status and reusable pattern
 
-Completed long-form guides:
+Completed long-form guides (all 9 service pages are fully implemented and verified):
 
 - `/service-reparationer#bilservice` — Bilservice guide.
 - `/oljebyte` — Oljebyte guide with technical material under `Mer info`.
-- `/bromssystem` — expanded Bromssystem guide.
+- `/kamrem` — expanded Kamrem guide with belt vs chain, warning signs, checklist, shared FAQ.
 - `/koppling` — expanded Koppling guide.
-
-The remaining service destinations are shells awaiting their own supplied copy. The next likely pages are `/kamrem`, `/bilbatteri`, `/stodampare-fjadrar`, `/hjullagerbyte`, `/avgassystem`, `/drivaxel-drivknutar` and `/styrning-kulleder`.
+- `/bromssystem` — expanded Bromssystem guide.
+- `/bilbatteri` — expanded Bilbatteri guide with battery types, warning signs, checklist, shared FAQ.
+- `/stodampare-fjadrar` — expanded Stötdämpare och fjädrar guide with bounce test, checklist, shared FAQ.
+- `/hjullagerbyte` — expanded Hjullagerbyte guide with nav units, ABS sensors, checklist, shared FAQ.
+- `/avgassystem` — expanded Avgassystem guide with exhaust system, lambda sensors, catalytic converter, checklist, shared FAQ.
+- `/drivaxel-drivknutar` — expanded Drivaxel och drivknutar guide with CV joints, boots, checklist, shared FAQ.
+- `/styrning-kulleder` — expanded Styrning och kulleder guide with ball joints, tie rods, EPS/hydraulic power steering, checklist, shared FAQ.
+- `/dackservice` — specialized tire page with statutory dates card, enriched prose, 6 service cards & pricing.
+- `/ac-service` — specialized AC page with enriched symptoms, hero warning, pricing frequency line, 3 pricing cards.
 
 For a supplied service page, follow the established structure:
 
