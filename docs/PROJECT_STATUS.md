@@ -2,6 +2,8 @@
 
 Updated 2026-09-14. The website is a work in progress; Magnus confirmed that **no page copy is final-approved yet**. Routes, page content and image use below were checked against `client/src/`; production behaviour was not checked. See [AGENTS.md](../AGENTS.md) for the session log and [AGENT_HANDOFF.md](AGENT_HANDOFF.md) for design history and preservation rules.
 
+For the Antigravity 2 / Flash 3.8 migration, use the task-specific [Antigravity handoff](ANTIGRAVITY_HANDOFF.md) alongside the repository instructions.
+
 ## Purpose and stack
 
 The repository contains Brynäs Bilservice's public website, booking and admin frontend, and an Express API. Magnus directs the product and frontend; Johnny owns the server, database and deployment decisions.

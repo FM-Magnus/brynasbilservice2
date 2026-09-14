@@ -144,6 +144,9 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
+### 2026-09-14 — Codex (Antigravity migration handoff)
+- Added `docs/ANTIGRAVITY_HANDOFF.md` with the current branch/commit state, Biltjänster information architecture, reusable page pattern, content and uncertainty rules, protected paths, verification checklist and a copyable next-page task brief for Antigravity 2 / Flash 3.8. No application code or backend/deployment files were changed.
+
 ### 2026-09-14 — Codex (Koppling draft guide)
 - Replaced the Koppling shell with the supplied draft content, distributed into a Bilservice-inspired customer guide with clutch overview, warning signs, scope, draft guidance, shared process, accessible FAQ and existing booking/call actions. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication; DSG and automated transmission work were not claimed.
 
