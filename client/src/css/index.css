@@ -5469,6 +5469,356 @@ ul { list-style: none; }
   .kamrem-page__service-card ul { grid-template-columns: 1fr; }
 }
 
+/* Battery service page */
+.battery-page__intro,
+.battery-page__symptoms,
+.battery-page__guidance { padding-block: clamp(3rem, 5.5vw, 5rem); }
+.battery-page__symptoms { background: rgba(36, 150, 160, 0.045); }
+.battery-page__parts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.battery-page__symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.battery-page__guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.battery-page__part-card,
+.battery-page__symptom-card,
+.battery-page__guidance-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.battery-page__part-card h3,
+.battery-page__symptom-card h3,
+.battery-page__guidance-card h3 {
+  margin: 0 0 0.65rem;
+  color: var(--redesign-ink);
+  font: 800 clamp(1.03rem, 1.5vw, 1.2rem) / 1.25 var(--font-heading);
+  letter-spacing: -0.015em;
+}
+.battery-page__part-card h3,
+.battery-page__guidance-card h3 { color: var(--redesign-accent-dark); }
+.battery-page__part-card p,
+.battery-page__symptom-card p,
+.battery-page__guidance-card p {
+  margin: 0;
+  color: #556266;
+  font: 400 0.94rem / 1.62 var(--font-body);
+}
+.battery-page__section-gap { margin-top: clamp(3rem, 5vw, 4.5rem); }
+.battery-page__benefit-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.battery-page__benefit-grid .services-page__benefit-card { min-height: 168px; }
+.battery-page__service { padding-block: clamp(2rem, 4vw, 3.5rem); }
+.battery-page__service-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--redesign-radius-card);
+  color: #fff;
+  background: #101618;
+}
+.battery-page__service-card h2 {
+  margin: 0 0 0.85rem;
+  color: #fff;
+  font: 800 clamp(1.8rem, 3.4vw, 2.7rem) / 1.08 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.battery-page__service-card > div > p { margin: 0; color: rgba(255, 255, 255, 0.74); font: 400 1rem / 1.65 var(--font-body); }
+.battery-page__service-card ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem 1.25rem; margin: 0; padding: 0; }
+.battery-page__service-card li { display: flex; gap: 0.55rem; align-items: flex-start; color: rgba(255, 255, 255, 0.84); font: 400 0.92rem / 1.5 var(--font-body); }
+.battery-page__service-check,
+.battery-page__service-card li svg {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  max-width: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  flex: 0 0 18px;
+  margin-top: 0.1rem;
+  color: var(--redesign-accent);
+}
+.battery-page__advice-note {
+  max-width: 980px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--redesign-accent);
+  color: #556266;
+  background: rgba(36, 150, 160, 0.06);
+  font: 400 0.95rem / 1.6 var(--font-body);
+}
+.battery-page__advice-note strong { color: var(--redesign-ink); font-weight: 800; }
+.battery-page__booking { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+
+@media (max-width: 1024px) {
+  .battery-page__parts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .battery-page__symptom-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .battery-page__guidance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .battery-page__benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .battery-page__service-card { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .battery-page__parts-grid,
+  .battery-page__symptom-grid,
+  .battery-page__guidance-grid,
+  .battery-page__benefit-grid,
+  .battery-page__service-card ul { grid-template-columns: 1fr; }
+}
+
+/* Suspension & springs service page */
+.suspension-page__intro,
+.suspension-page__symptoms,
+.suspension-page__guidance { padding-block: clamp(3rem, 5.5vw, 5rem); }
+.suspension-page__symptoms { background: rgba(36, 150, 160, 0.045); }
+.suspension-page__parts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.suspension-page__symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.suspension-page__guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.suspension-page__part-card,
+.suspension-page__symptom-card,
+.suspension-page__guidance-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.suspension-page__part-card h3,
+.suspension-page__symptom-card h3,
+.suspension-page__guidance-card h3 {
+  margin: 0 0 0.65rem;
+  color: var(--redesign-ink);
+  font: 800 clamp(1.03rem, 1.5vw, 1.2rem) / 1.25 var(--font-heading);
+  letter-spacing: -0.015em;
+}
+.suspension-page__part-card h3,
+.suspension-page__guidance-card h3 { color: var(--redesign-accent-dark); }
+.suspension-page__part-card p,
+.suspension-page__symptom-card p,
+.suspension-page__guidance-card p {
+  margin: 0;
+  color: #556266;
+  font: 400 0.94rem / 1.62 var(--font-body);
+}
+.suspension-page__section-gap { margin-top: clamp(3rem, 5vw, 4.5rem); }
+.suspension-page__benefit-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.suspension-page__benefit-grid .services-page__benefit-card { min-height: 168px; }
+.suspension-page__test-tip {
+  max-width: 980px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--redesign-accent);
+  color: #556266;
+  background: rgba(36, 150, 160, 0.06);
+  font: 400 0.95rem / 1.6 var(--font-body);
+}
+.suspension-page__test-tip strong { color: var(--redesign-ink); font-weight: 800; }
+.suspension-page__service { padding-block: clamp(2rem, 4vw, 3.5rem); }
+.suspension-page__service-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--redesign-radius-card);
+  color: #fff;
+  background: #101618;
+}
+.suspension-page__service-card h2 {
+  margin: 0 0 0.85rem;
+  color: #fff;
+  font: 800 clamp(1.8rem, 3.4vw, 2.7rem) / 1.08 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.suspension-page__service-card > div > p { margin: 0; color: rgba(255, 255, 255, 0.74); font: 400 1rem / 1.65 var(--font-body); }
+.suspension-page__service-card ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem 1.25rem; margin: 0; padding: 0; }
+.suspension-page__service-card li { display: flex; gap: 0.55rem; align-items: flex-start; color: rgba(255, 255, 255, 0.84); font: 400 0.92rem / 1.5 var(--font-body); }
+.suspension-page__service-check,
+.suspension-page__service-card li svg {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  max-width: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  flex: 0 0 18px;
+  margin-top: 0.1rem;
+  color: var(--redesign-accent);
+}
+.suspension-page__safety-note {
+  max-width: 980px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--redesign-accent);
+  color: #556266;
+  background: rgba(36, 150, 160, 0.06);
+  font: 400 0.95rem / 1.6 var(--font-body);
+}
+.suspension-page__safety-note strong { color: var(--redesign-ink); font-weight: 800; }
+.suspension-page__booking { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+
+@media (max-width: 1024px) {
+  .suspension-page__parts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .suspension-page__symptom-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .suspension-page__guidance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .suspension-page__benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .suspension-page__service-card { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .suspension-page__parts-grid,
+  .suspension-page__symptom-grid,
+  .suspension-page__guidance-grid,
+  .suspension-page__benefit-grid,
+  .suspension-page__service-card ul { grid-template-columns: 1fr; }
+}
+
+/* Wheel bearing service page */
+.wheel-bearing-page__intro,
+.wheel-bearing-page__symptoms,
+.wheel-bearing-page__guidance { padding-block: clamp(3rem, 5.5vw, 5rem); }
+.wheel-bearing-page__symptoms { background: rgba(36, 150, 160, 0.045); }
+.wheel-bearing-page__parts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.wheel-bearing-page__symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.wheel-bearing-page__guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.wheel-bearing-page__part-card,
+.wheel-bearing-page__symptom-card,
+.wheel-bearing-page__guidance-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(16, 22, 24, 0.1);
+  border-radius: 24px;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.wheel-bearing-page__part-card h3,
+.wheel-bearing-page__symptom-card h3,
+.wheel-bearing-page__guidance-card h3 {
+  margin: 0 0 0.65rem;
+  color: var(--redesign-ink);
+  font: 800 clamp(1.03rem, 1.5vw, 1.2rem) / 1.25 var(--font-heading);
+  letter-spacing: -0.015em;
+}
+.wheel-bearing-page__part-card h3,
+.wheel-bearing-page__guidance-card h3 { color: var(--redesign-accent-dark); }
+.wheel-bearing-page__part-card p,
+.wheel-bearing-page__symptom-card p,
+.wheel-bearing-page__guidance-card p {
+  margin: 0;
+  color: #556266;
+  font: 400 0.94rem / 1.62 var(--font-body);
+}
+.wheel-bearing-page__section-gap { margin-top: clamp(3rem, 5vw, 4.5rem); }
+.wheel-bearing-page__benefit-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.wheel-bearing-page__benefit-grid .services-page__benefit-card { min-height: 168px; }
+.wheel-bearing-page__test-tip {
+  max-width: 980px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--redesign-accent);
+  color: #556266;
+  background: rgba(36, 150, 160, 0.06);
+  font: 400 0.95rem / 1.6 var(--font-body);
+}
+.wheel-bearing-page__test-tip strong { color: var(--redesign-ink); font-weight: 800; }
+.wheel-bearing-page__service { padding-block: clamp(2rem, 4vw, 3.5rem); }
+.wheel-bearing-page__service-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--redesign-radius-card);
+  color: #fff;
+  background: #101618;
+}
+.wheel-bearing-page__service-card h2 {
+  margin: 0 0 0.85rem;
+  color: #fff;
+  font: 800 clamp(1.8rem, 3.4vw, 2.7rem) / 1.08 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+.wheel-bearing-page__service-card > div > p { margin: 0; color: rgba(255, 255, 255, 0.74); font: 400 1rem / 1.65 var(--font-body); }
+.wheel-bearing-page__service-card ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem 1.25rem; margin: 0; padding: 0; }
+.wheel-bearing-page__service-card li { display: flex; gap: 0.55rem; align-items: flex-start; color: rgba(255, 255, 255, 0.84); font: 400 0.92rem / 1.5 var(--font-body); }
+.wheel-bearing-page__service-check,
+.wheel-bearing-page__service-card li svg {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  max-width: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  flex: 0 0 18px;
+  margin-top: 0.1rem;
+  color: var(--redesign-accent);
+}
+.wheel-bearing-page__safety-note {
+  max-width: 980px;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--redesign-accent);
+  color: #556266;
+  background: rgba(36, 150, 160, 0.06);
+  font: 400 0.95rem / 1.6 var(--font-body);
+}
+.wheel-bearing-page__safety-note strong { color: var(--redesign-ink); font-weight: 800; }
+.wheel-bearing-page__booking { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+
+@media (max-width: 1024px) {
+  .wheel-bearing-page__parts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wheel-bearing-page__symptom-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wheel-bearing-page__guidance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wheel-bearing-page__benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wheel-bearing-page__service-card { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .wheel-bearing-page__parts-grid,
+  .wheel-bearing-page__symptom-grid,
+  .wheel-bearing-page__guidance-grid,
+  .wheel-bearing-page__benefit-grid,
+  .wheel-bearing-page__service-card ul { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 1024px) {
   .oil-page__guide-layout { grid-template-columns: 1fr; }
   .oil-page__included-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
