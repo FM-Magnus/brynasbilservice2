@@ -6670,6 +6670,55 @@ ul { list-style: none; }
   margin: 0;
 }
 
+/* Local aside: Maher portrait & facts card */
+.about-page__local-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.about-page__maher-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--redesign-radius-card);
+  overflow: hidden;
+  border: 1px solid rgba(16, 22, 24, 0.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  background: #141c1f;
+}
+.about-page__maher-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.about-page__maher-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(16, 22, 24, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--redesign-radius-pill);
+  padding: 0.45rem 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.about-page__maher-divider {
+  color: var(--redesign-accent);
+}
+.about-page__maher-role {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
 /* Facts card */
 .about-page__facts-card {
   background:
@@ -7031,6 +7080,12 @@ ul { list-style: none; }
   .about-page__cta-card {
     border-radius: 24px;
     padding: 2rem 1.25rem;
+  }
+  .about-page__maher-badge {
+    bottom: 0.75rem;
+    left: 0.75rem;
+    font-size: 0.78rem;
+    padding: 0.35rem 0.75rem;
   }
 }
 

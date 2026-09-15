@@ -20,7 +20,7 @@ Every route in this table exists in `client/src/main.tsx`. Text is present in th
 | Menu area | Route | Current purpose / progress | Copy | Image | Next content task |
 | --- | --- | --- | --- | --- | --- |
 | Start | `/` | Implemented landing page with hero, contact, process, about and service preview | WIP; not approved | Local hero/workshop JPGs | Confirm final copy and hero export |
-| Om oss | `/om-oss` | Implemented workshop, facts, process and gallery page | WIP; not approved | Local workshop JPGs | Confirm copy and photo selection |
+| Om oss | `/om-oss` | Implemented workshop, facts, process and gallery page; added Maher Basher / Shomaher intro, consumer law proof, staff & gallery TODO comments, and Maher portrait card | WIP; not approved | Maher portrait WebP/JPG + local workshop JPGs | Confirm copy, staff details, and expanded gallery photo selection |
 | Biltjänster → Våra tjänster | `/biltjanster` | Default Biltjänster hub, headed “Våra biltjänster”, with linked summary cards for the eleven current service guides | WIP; not approved | CSS-only hero and card placeholders | Replace placeholders with selected service imagery; continue adding service entries only after a route/copy decision |
 | Felsökning | `/felsokning` | Standalone diagnostic-service entry with source-grounded symptoms and a future-image placeholder | WIP; not approved | Marked hero image placeholder | Provide and approve fuller Felsökning copy and a hero image |
 | Biltjänster → Bilservice | `/service-reparationer#bilservice` | Long-form Bilservice guide with service levels, process and pricing CTA | WIP; not approved | Marked hero image placeholder | Provide and approve a Bilservice hero image |

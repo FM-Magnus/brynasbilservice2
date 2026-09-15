@@ -11,6 +11,8 @@ import imgWorkshop1 from '../assets/images/OMOSS_KENBURNS1.jpg'
 import imgWorkshop2 from '../assets/images/OMOSS_KENBURNS2.jpg'
 import imgLounge from '../assets/images/OMOSS_KENBURNS3.jpg'
 import imgExterior from '../assets/images/HAR_FINNS_VI.jpg'
+import imgMaherWebp from '../assets/images/maher_portrait.webp'
+import imgMaherJpg from '../assets/images/maher_portrait.jpg'
 
 interface GalleryItem {
   id: string
@@ -154,10 +156,21 @@ export default function AboutPage() {
                   En fristående verkstad med hjärtat i Gävle
                 </h2>
                 <p className="about-page__text-lead">
+                  Brynäs Bilservice drivs av Maher Basher, som vuxit upp med bilar och motorer som en livslång passion, gick fordonsprogrammet på gymnasiet och arbetade sedan som mekaniker innan han startade eget. Han drev tidigare en verkstad som gick under smeknamnet Shomaher — ett skämtsamt spel på hans eget namn och F1-föraren Schumacher — och namnet lever kvar än idag. Som Shomaher är han något av en lokalkändis bland mekaniker och bilentusiaster i Gävle, vilket syns tydligt bland recensionerna på Google Maps. Hos oss är det alltid Maher eller någon i teamet du pratar med, aldrig en anonym kundtjänst.
+                </p>
+
+                {/* TODO CONTENT: HÄR BORDE DET FINNAS EN SEKTION OM PERSONALEN.
+                Ska presentera övriga medarbetare (namn, roll, ungefär hur länge de jobbat med bilar) med samma personliga ton som Maher-stycket ovan.
+                Väntar på uppgifter från kund. */}
+
+                <p className="about-page__text-lead">
                   Vi är en oberoende bilverkstad, vilket innebär att vi inte är styrda av någon enskild biltillverkares kedja. Det gör att vi kan ge ärliga och anpassade rekommendationer utifrån vad som är bäst och mest ekonomiskt för just din bil.
                 </p>
                 <p className="about-page__text-body">
                   Vi använder reservdelar av originalkvalitet med full garanti och följer tillverkarnas officiella serviceprotokoll. Därför gäller din nybilsgaranti och stämpel i serviceboken precis som hos märkesverkstaden.
+                </p>
+                <p className="about-page__text-body">
+                  Vi tror mer på bevis än på löften. Skulle vi hitta ett slitet bromsbelägg eller en läckande stötdämpare vid en rutinservice, kontaktar vi dig alltid med ett specificerat pris innan vi rör bilen vidare — och håller oss till svensk konsumenttjänstlag, som säger att en ungefärlig prisuppgift normalt inte får överskridas med mer än 15 procent. Du bestämmer, inte vi.
                 </p>
 
                 <div className="about-page__reassurance-list">
@@ -187,65 +200,84 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="about-page__facts-card">
-                <div className="about-page__facts-header">
-                  <div className="about-page__facts-eyebrow">Information</div>
-                  <h3 className="about-page__facts-title">Företagsfakta & kontakt</h3>
+              <div className="about-page__local-aside">
+                <div className="about-page__maher-card">
+                  <picture>
+                    <source srcSet={imgMaherWebp} type="image/webp" />
+                    <img
+                      src={imgMaherJpg}
+                      alt="Maher Basher i verkstaden hos Brynäs Bilservice"
+                      className="about-page__maher-img"
+                      loading="lazy"
+                    />
+                  </picture>
+                  <div className="about-page__maher-badge">
+                    <span className="about-page__maher-name">Maher Basher</span>
+                    <span className="about-page__maher-divider" aria-hidden="true">·</span>
+                    <span className="about-page__maher-role">Grundare &amp; mekaniker</span>
+                  </div>
                 </div>
 
-                <div className="about-page__facts-body">
-                  <div className="about-page__fact-row">
-                    <span className="about-page__fact-label">Juridiskt namn:</span>
-                    <span className="about-page__fact-val">Brynäs Bilservice AB</span>
-                  </div>
-                  <div className="about-page__fact-row">
-                    <span className="about-page__fact-label">Organisationsnr:</span>
-                    <span className="about-page__fact-val font-mono">559343-5307</span>
-                  </div>
-                  <div className="about-page__fact-row">
-                    <span className="about-page__fact-label">Verksamhetsstart:</span>
-                    <span className="about-page__fact-val">Grundat 2021</span>
-                  </div>
-                  <div className="about-page__fact-row">
-                    <span className="about-page__fact-label">Verkstad:</span>
-                    <a
-                      href="https://maps.google.com/?q=Utmarksvägen+21B,+802+91+Gävle"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="about-page__fact-link"
-                    >
-                      Utmarksvägen 21B, 802 91 Gävle
-                    </a>
-                  </div>
-                  <div className="about-page__fact-row">
-                    <span className="about-page__fact-label">Telefon:</span>
-                    <a href="tel:0705533395" className="about-page__fact-link">
-                      070-553 33 95
-                    </a>
-                  </div>
-                  <div className="about-page__fact-row">
-                    <span className="about-page__fact-label">E-post:</span>
-                    <a href="mailto:info@brynasbilservice.se" className="about-page__fact-link">
-                      info@brynasbilservice.se
-                    </a>
+                <div className="about-page__facts-card">
+                  <div className="about-page__facts-header">
+                    <div className="about-page__facts-eyebrow">Information</div>
+                    <h3 className="about-page__facts-title">Företagsfakta & kontakt</h3>
                   </div>
 
-                  <div className="about-page__facts-divider" aria-hidden="true" />
+                  <div className="about-page__facts-body">
+                    <div className="about-page__fact-row">
+                      <span className="about-page__fact-label">Juridiskt namn:</span>
+                      <span className="about-page__fact-val">Brynäs Bilservice AB</span>
+                    </div>
+                    <div className="about-page__fact-row">
+                      <span className="about-page__fact-label">Organisationsnr:</span>
+                      <span className="about-page__fact-val font-mono">559343-5307</span>
+                    </div>
+                    <div className="about-page__fact-row">
+                      <span className="about-page__fact-label">Verksamhetsstart:</span>
+                      <span className="about-page__fact-val">Grundat 2021</span>
+                    </div>
+                    <div className="about-page__fact-row">
+                      <span className="about-page__fact-label">Verkstad:</span>
+                      <a
+                        href="https://maps.google.com/?q=Utmarksvägen+21B,+802+91+Gävle"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="about-page__fact-link"
+                      >
+                        Utmarksvägen 21B, 802 91 Gävle
+                      </a>
+                    </div>
+                    <div className="about-page__fact-row">
+                      <span className="about-page__fact-label">Telefon:</span>
+                      <a href="tel:0705533395" className="about-page__fact-link">
+                        070-553 33 95
+                      </a>
+                    </div>
+                    <div className="about-page__fact-row">
+                      <span className="about-page__fact-label">E-post:</span>
+                      <a href="mailto:info@brynasbilservice.se" className="about-page__fact-link">
+                        info@brynasbilservice.se
+                      </a>
+                    </div>
 
-                  <div className="about-page__hours-block">
-                    <span className="about-page__hours-title">Öppettider:</span>
-                    <div className="about-page__hours-list">
-                      <div className="about-page__hours-row">
-                        <span>Måndag – Fredag:</span>
-                        <span className="font-semibold text-white">08:00 – 17:00</span>
-                      </div>
-                      <div className="about-page__hours-row">
-                        <span>Lördag:</span>
-                        <span className="font-medium text-teal-300">Förfrågan</span>
-                      </div>
-                      <div className="about-page__hours-row">
-                        <span>Söndag:</span>
-                        <span className="text-gray-400">Stängt</span>
+                    <div className="about-page__facts-divider" aria-hidden="true" />
+
+                    <div className="about-page__hours-block">
+                      <span className="about-page__hours-title">Öppettider:</span>
+                      <div className="about-page__hours-list">
+                        <div className="about-page__hours-row">
+                          <span>Måndag – Fredag:</span>
+                          <span className="font-semibold text-white">08:00 – 17:00</span>
+                        </div>
+                        <div className="about-page__hours-row">
+                          <span>Lördag:</span>
+                          <span className="font-medium text-teal-300">Förfrågan</span>
+                        </div>
+                        <div className="about-page__hours-row">
+                          <span>Söndag:</span>
+                          <span className="text-gray-400">Stängt</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -319,6 +351,12 @@ export default function AboutPage() {
                   </div>
                 </article>
               ))}
+              {/* TODO CONTENT: HÄR BORDE GALLERIET UTÖKAS MED FLER KATEGORIER.
+              Kunden har fler bilder tagna med systemkamera. Föreslagna nya kategorier:
+              1. Teamet i arbete (kopplar till "Maher eller någon i teamet"-stycket ovan)
+              2. Faktiska jobb innan/efter (kopplar till "bevis före löften"-stycket ovan)
+              3. Utrustning i närbild
+              Väntar på bildmaterial och godkännande av vilka bilder som får publiceras. */}
             </div>
           </div>
         </section>
