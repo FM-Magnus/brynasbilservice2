@@ -1,45 +1,15 @@
-import { useState } from 'react'
-import omoss1 from '../../assets/images/OMOSS_KENBURNS1.jpg'
-import omoss2 from '../../assets/images/OMOSS_KENBURNS2.jpg'
-import omoss3 from '../../assets/images/OMOSS_KENBURNS3.jpg'
-import { KenBurnsSlideshow } from '../ui/KenBurnsSlideshow'
+import { GalleryTeaserCard } from '../ui/GalleryTeaserCard'
 import { ArrowRightIcon } from '../icons/ArrowRightIcon'
 import { ChatDotsIcon } from '../icons/ChatDotsIcon'
 import { ShieldHeartIcon } from '../icons/ShieldHeartIcon'
 
 export function About() {
-  const [activeSlide, setActiveSlide] = useState(0)
-
   return (
     <section className="about" id="om-oss">
       <div className="container">
         <div className="about__inner">
           <div className="about__media">
-            <div className="about__media-card">
-              <KenBurnsSlideshow
-                images={[omoss1, omoss2, omoss3]}
-                alts={[
-                  'Brynäs Bilservice verkstad med bilar och utrustning',
-                  'Däckverkstad med däck och hjulutrustning',
-                  'Kundmottagning och väntrum hos Brynäs Bilservice',
-                ]}
-                className="about__slideshow"
-                onIndexChange={setActiveSlide}
-              />
-              <div className="about__badge">Grundat 2021</div>
-
-              <div className="about__slide-tab" aria-label="Bildvisare" role="tablist">
-                {[0, 1, 2].map(idx => (
-                  <span
-                    key={idx}
-                    className={`about__slide-dot${idx === activeSlide ? ' about__slide-dot--active' : ''}`}
-                    aria-label={`Bild ${idx + 1}`}
-                    role="tab"
-                    aria-selected={idx === activeSlide}
-                  />
-                ))}
-              </div>
-            </div>
+            <GalleryTeaserCard />
           </div>
 
           <div className="about__content">

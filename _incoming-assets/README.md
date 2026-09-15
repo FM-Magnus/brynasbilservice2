@@ -61,3 +61,9 @@ valda användningen i den riktiga frontendens bildmapp.
 - `vinter_och_slapskor/`: väglag, släpkärra eller säsongsmiljö.
 
 Välj hellre lugna, tydliga och säkra situationer än dramatiska olycksbilder.
+
+## Befordrade produktionsbilder (Promoted to Production)
+
+Följande material från inkorgen har optimerats och satts i produktion i frontendens repository:
+- **Maher-porträtt**: Från `incoming/maher_portrait_fullsize.jpg` → `client/src/assets/images/maher_portrait.webp` (+ `.jpg`). Används i presentationen på `/om-oss`.
+- **Verkstads-thumbnails för `GalleryTeaserCard`**: Från `03_verkstad_och_team/verkstadsoversikter/` (billyftar och däckställ, däckmaskiner, arbetsbänk samt fordon på lyft) → `client/src/assets/images/gallery/` (`gallery_thumb_workshop_*.webp` + `.jpg`). Används i `GalleryTeaserCard.tsx` på startsidan och kan återanvändas på andra undersidor.

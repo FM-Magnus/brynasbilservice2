@@ -19,7 +19,7 @@ Every route in this table exists in `client/src/main.tsx`. Text is present in th
 
 | Menu area | Route | Current purpose / progress | Copy | Image | Next content task |
 | --- | --- | --- | --- | --- | --- |
-| Start | `/` | Implemented landing page with hero, contact, process, about and service preview | WIP; not approved | Local hero/workshop JPGs | Confirm final copy and hero export |
+| Start | `/` | Implemented landing page with hero, contact, process, about (featuring reusable `GalleryTeaserCard` with corner cutout to `/galleri`) and service preview | WIP; not approved | Local hero JPG + workshop WebP thumbnails in `gallery/` | Confirm final copy and hero export |
 | Om oss | `/om-oss` | Implemented workshop, facts, process, Maher portrait card, and CTA teaser button linking to `/galleri` | WIP; not approved | Maher portrait WebP/JPG + local workshop JPGs | Confirm copy, staff details, and expanded gallery photo selection |
 | Galleri | `/galleri` | Dedicated workshop gallery subpage with full 4-card photo grid, dark hero, closing CTA card, booking modal and phone CTAs | WIP; not approved | Local workshop JPGs | Confirm final photo selection and categories |
 | Biltjänster → Våra tjänster | `/biltjanster` | Default Biltjänster hub, headed “Våra biltjänster”, with linked summary cards for the eleven current service guides | WIP; not approved | CSS-only hero and card placeholders | Replace placeholders with selected service imagery; continue adding service entries only after a route/copy decision |
@@ -50,7 +50,7 @@ Pages may retain clearly labelled placeholders while final photography is prepar
 
 As of 2026-09-15 the intake holds unassigned candidates for workshop overviews, biltransport/bärgning, customer interaction, Bilservice, Däck, AC, Drivaxel/drivknutar and blue-toned backgrounds. Ten workshop image pairs and six transport image pairs already have matching JPG thumbnails. These are a reviewed local asset pool, not approval to use them automatically; Magnus must select a page and placement before an agent creates a production export.
 
-Only after an image is selected should it be exported and added to `client/src/assets/images/`. Use a descriptive pair such as `page-purpose.webp` and `page-purpose.jpg`: WebP is the intended primary format and JPG the compatibility fallback. Current components mainly import JPG directly, so supplying pairs does not by itself activate fallback delivery. Match the actual placement and crop when each asset is integrated; this dashboard sets no universal pixel dimensions. Keep business claims and prices subject to Magnus's approval.
+Only after an image is selected should it be exported and added to `client/src/assets/images/`. Use a descriptive pair such as `page-purpose.webp` and `page-purpose.jpg`: WebP is the intended primary format and JPG the compatibility fallback. Dedicated subdirectories are used for grouped assets (e.g. `client/src/assets/images/gallery/` for `GalleryTeaserCard` thumbnails). Current components mainly import JPG directly unless updated to WebP. Match the actual placement and crop when each asset is integrated; this dashboard sets no universal pixel dimensions. Keep business claims and prices subject to Magnus's approval.
 
 ## People and agent roles
 

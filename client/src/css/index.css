@@ -1650,6 +1650,152 @@ ul { list-style: none; }
   border-radius: 4px;
 }
 
+/* ==========================================================================
+   Reusable Workshop Gallery Teaser Card (.gallery-teaser-card)
+   ========================================================================== */
+
+.gallery-teaser-card {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  border-radius: var(--redesign-radius-card);
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(20, 34, 36, 0.12);
+  transition: transform var(--dur-normal) var(--ease), box-shadow var(--dur-normal) var(--ease);
+  cursor: pointer;
+}
+.gallery-teaser-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(20, 34, 36, 0.2);
+}
+.gallery-teaser-card:focus-visible {
+  outline: 3px solid var(--redesign-accent);
+  outline-offset: 4px;
+}
+.gallery-teaser-card__media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.gallery-teaser-card__slideshow {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.92) contrast(1.04);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gallery-teaser-card:hover .gallery-teaser-card__slideshow {
+  transform: scale(1.03);
+}
+.gallery-teaser-card__badge {
+  position: absolute;
+  top: clamp(1rem, 2.5vw, 1.5rem);
+  left: clamp(1rem, 2.5vw, 1.5rem);
+  z-index: 3;
+  background: rgba(14, 21, 23, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--redesign-radius-pill);
+  padding: 0.45rem 1.15rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+.gallery-teaser-card__cutout {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  background: var(--redesign-page);
+  padding: 9px 16px 8px 16px;
+  border-top-left-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: -4px -4px 14px rgba(20, 34, 36, 0.05);
+  transition: background var(--dur-fast) var(--ease);
+}
+.gallery-teaser-card__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.gallery-teaser-card__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(36, 150, 160, 0.28);
+  transition: all var(--dur-normal) var(--ease);
+}
+.gallery-teaser-card__dot--active {
+  background: var(--redesign-accent);
+  width: 16px;
+  border-radius: 3px;
+}
+.gallery-teaser-card__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--redesign-ink);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease);
+}
+.gallery-teaser-card:hover .gallery-teaser-card__label {
+  color: var(--redesign-accent);
+}
+.gallery-teaser-card__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(36, 150, 160, 0.12);
+  color: var(--redesign-accent);
+  transition: transform var(--dur-normal) var(--ease), background var(--dur-normal) var(--ease), color var(--dur-normal) var(--ease);
+  flex-shrink: 0;
+}
+.gallery-teaser-card:hover .gallery-teaser-card__arrow {
+  transform: translateX(3px);
+  background: var(--redesign-accent);
+  color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  .gallery-teaser-card__cutout {
+    padding: 7px 12px 6px 12px;
+    gap: 7px;
+  }
+  .gallery-teaser-card__label {
+    font-size: 0.75rem;
+  }
+  .gallery-teaser-card__arrow {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-teaser-card,
+  .gallery-teaser-card__slideshow,
+  .gallery-teaser-card__arrow,
+  .gallery-teaser-card__dot {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
 /* Content Column */
 .about__content {
   position: relative;
