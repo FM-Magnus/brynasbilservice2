@@ -10,6 +10,7 @@ import BilarTillSalu from './pages/BilarTillSalu.tsx'
 import ServicesPage from './pages/ServicesPage.tsx'
 import ServiceReparationerPage from './pages/ServiceReparationerPage.tsx'
 import BiltjansterPage from './pages/BiltjansterPage.tsx'
+import FelsokningPage from './pages/FelsokningPage.tsx'
 import OljebytePage from './pages/OljebytePage.tsx'
 import KamremPage from './pages/KamremPage.tsx'
 import KopplingPage from './pages/KopplingPage.tsx'
@@ -43,6 +44,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/tjanster" element={<ServicesPage />} />
           <Route path="/service-reparationer" element={<ServiceReparationerPage />} />
           <Route path="/biltjanster" element={<BiltjansterPage />} />
+          <Route path="/felsokning" element={<FelsokningPage />} />
           <Route path="/oljebyte" element={<OljebytePage />} />
           <Route path="/kamrem" element={<KamremPage />} />
           <Route path="/koppling" element={<KopplingPage />} />

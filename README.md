@@ -46,6 +46,7 @@ brynasbilservice/
 │   ├── PROJECT_STATUS.md
 │   ├── deployment.md
 │   └── ssh-setup.md
+├── _incoming-assets/     # Git-ignored local image/graphics inbox; see its README
 ├── AGENTS.md            # Current state and chronological session log
 ├── CLAUDE.md            # Agent-specific working notes
 └── README.md
@@ -104,6 +105,7 @@ There is no active repository-root GitHub Actions deployment workflow. The older
 
 - [Admin Panel](docs/admin-panel.md) — features, auth flow, API endpoints
 - [Project status](docs/PROJECT_STATUS.md) — current routes, content, images, responsibilities and open decisions
+- [Image inbox](_incoming-assets/README.md) — local staging, naming and selection flow for raw photography and layout graphics
 - [Agent handoff](docs/AGENT_HANDOFF.md) — approved redesign baseline and preservation rules
 - [Session log](AGENTS.md) — recent work and known gaps
 - [Deployment](docs/deployment.md) — historical/intended architecture; verify before use
@@ -123,6 +125,7 @@ Magnus develops the frontend with help from AI coding assistants. Johnny owns th
 | [`AGENTS.md`](AGENTS.md) | AI assistants (all of them) | Living state of the project + chronological session log. Each AI session reads it first and updates it last. |
 | [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) | AI assistants | Approved redesign baseline and preservation rules. |
 | [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) | Everyone | Current page, copy, image and responsibility dashboard. |
+| [`_incoming-assets/README.md`](_incoming-assets/README.md) | Magnus and frontend agents | Temporary, Git-ignored image/graphics intake and selection workflow. |
 
 ### What this means in practice
 

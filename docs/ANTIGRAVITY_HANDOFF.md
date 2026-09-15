@@ -1,6 +1,6 @@
 # Antigravity handoff — Brynäs Bilservice Biltjänster
 
-Updated 2026-09-14 for migration to Antigravity 2 / Flash 3.8.
+Updated 2026-09-15 for migration to Antigravity 2 / Flash 3.8.
 
 This is a work-in-progress website. Magnus has not final-approved any public page copy yet. Treat all supplied copy, intervals, prices, service claims and image choices as draft until Magnus explicitly approves them.
 
@@ -16,7 +16,7 @@ This is a work-in-progress website. Magnus has not final-approved any public pag
 git status --short --branch
 ```
 
-Observed handoff state: branch `redesign/blue-teal-v1`, latest commit `05b9f34f feat(services): update dackservice and ac-service pages, add codex handover`, tracking `origin/redesign/blue-teal-v1`, pushed and in 100% sync. Never push without Magnus's explicit prior approval.
+Historical handoff baseline: branch `redesign/blue-teal-v1`, commit `05b9f34f feat(services): update dackservice and ac-service pages, add codex handover`. This is no longer a clean-worktree guarantee: current work includes further local frontend, documentation and image-inbox changes. Run `git status --short --branch` before acting. Never push without Magnus's explicit prior approval.
 
 ## Product and technical context
 
@@ -26,7 +26,7 @@ Observed handoff state: branch `redesign/blue-teal-v1`, latest commit `05b9f34f 
 - Visual system: warm-white page surround, dark ink used only for contained cards, teal accent token (`var(--redesign-accent)`), rounded cards, generous spacing. Do not introduce yellow, gold, amber or red accents; yellow is allowed only in the landing-page Google field.
 - Existing interactions: use `BookingFormModal` with local `isModalOpen` state; phone links use `tel:0705533395`.
 - Shared FAQ: `client/src/components/ui/BiltjansterFaq.tsx`. Use it for every new Biltjänster page.
-- Image policy: use existing local images or a clearly labelled CSS/markup placeholder. Do not download, generate or invent photographic assets.
+- Image policy: use existing local images or a clearly labelled CSS/markup placeholder. Raw photography, blue-tone backgrounds and layout graphics first go in `_incoming-assets/`; read its README before selecting anything. Do not download, generate or invent photographic assets.
 
 ## Current information architecture
 
@@ -47,9 +47,11 @@ Desktop Biltjänster dropdown order:
 
 Mobile Biltjänster links to `/biltjanster`; do not create a second nested mobile accordion.
 
+The standalone main-navigation entry `Felsökning` routes to `/felsokning` immediately after Biltjänster. It is a draft service entry with a CSS-only future-image placeholder.
+
 ## Page status and reusable pattern
 
-Completed long-form guides (all 9 service pages are fully implemented and verified):
+Completed long-form guides (the current route map in `docs/PROJECT_STATUS.md` is authoritative):
 
 - `/service-reparationer#bilservice` — Bilservice guide.
 - `/oljebyte` — Oljebyte guide with technical material under `Mer info`.
@@ -122,7 +124,7 @@ Do not commit or push automatically. If Magnus requests a commit, inspect the ex
 
 ## Documentation rhythm
 
-At the end of each implementation session, append a factual dated entry to `AGENTS.md` and update the relevant row in `docs/PROJECT_STATUS.md`. Do not rewrite README, CLAUDE or instructions for ordinary page copy/image work; touch them only when project structure or working instructions change.
+At the end of each implementation session, append a factual dated entry to `AGENTS.md` and update the relevant row in `docs/PROJECT_STATUS.md`. Do not rewrite README, CLAUDE or instructions for ordinary page copy/image work; touch them only when project structure or working instructions change. The image intake folder is now part of that working structure, so consult `_incoming-assets/README.md` when handling images.
 
 ## Suggested Antigravity task brief
 

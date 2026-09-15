@@ -10,6 +10,16 @@
 
 Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/README.md) before editing. This document records the approved redesign state; it does not authorize work beyond the next stated phase.
 
+## Current continuation note — 2026-09-15
+
+The historical Git details above are not current state. Always inspect the current worktree and branch before acting. Since this baseline was written:
+
+- `/biltjanster` is the Biltjänster hub headed **“Våra biltjänster”**, with linked summary cards for the current service guides and clearly labelled CSS image placeholders.
+- `/felsokning` is a separate main-navigation destination immediately after Biltjänster, using the established service-page pattern and a future-image placeholder.
+- Raw photos, blue-tone backgrounds and non-photographic layout graphics now enter through `_incoming-assets/`. Its README defines the subject-based folders; selected web exports only belong in `client/src/assets/images/`.
+
+For the authoritative current route map and copy/image status, use [`PROJECT_STATUS.md`](PROJECT_STATUS.md).
+
 ## Authority and references
 
 Apply sources in this order when they conflict:
@@ -123,8 +133,8 @@ Phase 3 files:
 ## Architecture and preservation rules
 
 - The frontend lives in `client/`; use `cd client && npm run build`. Do not use or edit the root Vite/React scaffolding.
-- `client/src/main.tsx` provides routing and `LanguageProvider`. Public routes are `/`, `/om-oss`, `/tjanster`, `/biltjanster`, `/service-reparationer`, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu`, and `/kontakt`; `/admin` is protected. Production uses the `/brynasbilservice` basename, which remains unverified.
-- `Biltjänster` is the shared header dropdown. Its default route is `/biltjanster` (`Våra tjänster`), followed by `/service-reparationer#bilservice` (`Bilservice`). The first route owns the two large repair/diagnostics cards; Bilservice owns the long-form service guide and its closing vehicle/reassurance blocks. Keep future Biltjänster entries simple and append them beneath these two.
+- `client/src/main.tsx` provides routing and `LanguageProvider`. The route list includes `/`, `/om-oss`, `/tjanster`, `/biltjanster`, `/service-reparationer`, `/felsokning`, the individual Biltjänster service guides, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu`, and `/kontakt`; `/admin` is protected. Production uses the `/brynasbilservice` basename, which remains unverified.
+- `Biltjänster` is the shared header dropdown. Its default route is `/biltjanster` (`Våra tjänster`), followed by `/service-reparationer#bilservice` (`Bilservice`) and the current service-guide destinations. The default route is now a linked service-guide hub; Bilservice owns the long-form service guide and its closing vehicle/reassurance blocks. The standalone `Felsökning` link follows Biltjänster in the main navigation. Keep future Biltjänster entries simple and add them only after an explicit route/content decision.
 - `client/src/App.tsx` owns booking-modal state and renders: Header → Hero → About → Services → ServiceList → WhyUs → EV → CTA → Contact → Footer. Preserve that content and order unless a later approved phase says otherwise.
 - Reuse existing Brynäs content, images, telephone/email/address, service data, booking callbacks and real vehicle data. Do not replace business facts with mockup text or invent routes, maps, FAQ answers, form recipients or dummy flows.
 - Do not change `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, `server/.env`, deployment files, or root project configs. Johnny owns backend/server decisions.

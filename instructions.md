@@ -81,7 +81,8 @@ brynasbilservice/
 | Biltjänster default and Bilservice guide | `client/src/pages/BiltjansterPage.tsx`, `client/src/pages/ServiceReparationerPage.tsx` |
 | Booking form (modal) | `client/src/components/BookingForm.tsx` |
 | Google reviews widget | `client/src/components/GoogleReviews.tsx` |
-| Images | `client/src/assets/images/` |
+| Final web images | `client/src/assets/images/` |
+| New/raw image and layout-graphic candidates | `_incoming-assets/` — see `_incoming-assets/README.md` |
 | Admin panel | `client/src/components/admin/` + `client/src/pages/admin/` |
 
 ---
@@ -94,7 +95,7 @@ Opening hours currently appear in `Contact.tsx`, `Footer.tsx` and several subpag
 
 ## Adding a new service card
 
-First choose the correct destination: the landing-page preview is in `Services.tsx`, the existing full catalogue is in `ServicesPage.tsx`, and the Biltjänster default cards are in `BiltjansterPage.tsx`. Add any approved image to `client/src/assets/images/` and preserve the page's booking and telephone behaviour. The current route/content plan is in [project status](docs/PROJECT_STATUS.md).
+First choose the correct destination: the landing-page preview is in `Services.tsx`, the existing full catalogue is in `ServicesPage.tsx`, and the Biltjänster default cards are in `BiltjansterPage.tsx`. Put raw photos, graphics and candidates in `_incoming-assets/` first; that folder is intentionally ignored by Git. Only selected, web-exported images belong in `client/src/assets/images/`. Preserve the page's booking and telephone behaviour. The current route/content plan is in [project status](docs/PROJECT_STATUS.md).
 
 ---
 

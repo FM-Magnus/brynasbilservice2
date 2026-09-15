@@ -4,7 +4,7 @@ import newLogo from '../../assets/images/LOGOTYP_NY.svg'
 
 type HeaderProps = {
   onBookingClick: () => void;
-  variant?: 'hero' | 'default';
+  variant?: 'hero' | 'default' | 'light';
 }
 
 type NavChild = {
@@ -75,6 +75,7 @@ const navLinks: NavLink[] = [
       },
     ],
   },
+  { href: '/felsokning', label: 'Felsökning' },
   { href: '/dackservice', label: 'Däck' },
   { href: '/ac-service', label: 'AC' },
   { href: '/bargning', label: 'Bärgning' },

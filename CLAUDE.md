@@ -54,7 +54,7 @@ src/
   pages/                — public subpages and admin UI
   context/              — LanguageContext (sv/en i18n)
   translations/         — en.ts, sv.ts
-  assets/images/        — all image assets
+  assets/images/        — final image assets imported by the application
 ```
 
 ### Server (`server/`)
@@ -67,7 +67,11 @@ dist/             — server build output
 ```
 
 ### Routes
-`client/src/main.tsx` defines the public routes `/`, `/om-oss`, `/tjanster`, `/biltjanster`, `/service-reparationer`, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu`, and `/kontakt`. `/admin` is protected; `/api/*` belongs to Express. The Header's Biltjänster dropdown lists `Våra tjänster` (`/biltjanster`) before `Bilservice` (`/service-reparationer#bilservice`). See [project status](docs/PROJECT_STATUS.md) for the current role of each page.
+`client/src/main.tsx` defines the public routes, including `/biltjanster`, `/service-reparationer`, `/felsokning`, the Biltjänster guide routes, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu` and `/kontakt`. `/admin` is protected; `/api/*` belongs to Express. The Header's Biltjänster dropdown starts with `Våra tjänster` (`/biltjanster`) then `Bilservice` (`/service-reparationer#bilservice`); the standalone `Felsökning` link follows Biltjänster in the main navigation. See [project status](docs/PROJECT_STATUS.md) for the current route map.
+
+### Image intake
+
+`_incoming-assets/` is a temporary, Git-ignored local intake for raw photography, background candidates and layout graphics. Read `_incoming-assets/README.md` before sorting or selecting assets. Do not import unselected raw files from there into the application: only chosen, web-exported files belong in `client/src/assets/images/`.
 
 ### API contract (server/index.js)
 All routes return JSON. No request validation, no error middleware — keep payloads tight.
@@ -132,7 +136,7 @@ Animations: `.fade-up` class + IntersectionObserver in App.tsx triggers `.visibl
 ## Page section order (App.tsx)
 Header → Hero → ContactIntro → EV (workshop process) → About → Services (preview) → Contact → Footer
 
-Nav link order (Header.tsx): Start → Om oss → Biltjänster → Däck → AC → Bärgning → Till salu → Kontakt
+Nav link order (Header.tsx): Start → Om oss → Biltjänster → Felsökning → Däck → AC → Bärgning → Till salu → Kontakt
 
 ## Known issues / open TODOs
 1. **GoogleReviews.tsx** — real Brynäs review data is hardcoded and will become stale unless maintained

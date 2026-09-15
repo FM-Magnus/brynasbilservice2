@@ -1,74 +1,96 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
-import { MonitorIcon } from '../components/icons/MonitorIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
-import imgRepair from '../assets/images/servicekort_repair.jpg'
-import imgDiagnosis from '../assets/images/servicecard_diagnosis.jpg'
 
-interface ServiceCategory {
+interface ServiceGuide {
   id: string
   title: string
-  subtitle: string
-  description: string
-  image: string
-  imageAlt: string
-  icon: JSX.Element
-  items: string[]
-  troubleshooting: string[]
+  summary: string
+  href: string
+  imageLabel: string
 }
 
-const serviceCategories: ServiceCategory[] = [
+const serviceGuides: ServiceGuide[] = [
   {
-    id: 'reparationer',
-    title: 'Reparationer & mekaniskt underhåll',
-    subtitle: 'Underhåll och mekaniska reparationer enligt biltillverkarens föreskrifter',
-    description: 'Vi servar och reparerar alla bilmärken enligt tillverkarens föreskrifter — vilket innebär att din nybilsgaranti gäller precis som vanligt, oavsett var bilen är köpt. Innan vi rör en skruv får du ett tydligt prisbesked, och upptäcker vi något oväntat under arbetets gång kontaktar vi dig innan vi går vidare.',
-    image: imgRepair,
-    imageAlt: 'Mekaniker utför reparation i motorrummet på bilverkstad',
-    icon: <WrenchIcon />,
-    items: [
-      'Bilservice & oljebyte',
-      'Bromsbyte & bromskontroll',
-      'Kamremsbyten',
-      'Kopplingsbyten',
-      'Motorservice & motorbyten',
-      'Växellådsreparationer',
-      'Avgassystem & ljuddämpare',
-      'Batteribyte & kontroll',
-      'Dragkroksmontage',
-      'Besiktning & förkontroll',
-    ],
-    troubleshooting: [
-      'Bilen drar snett, skakar eller känns instabil',
-      'Missljud från motor, koppling eller avgassystem',
-      'Försämrad bromsverkan eller gnisslande bromsar',
-      'Serviceindikatorn lyser i instrumentpanelen',
-    ],
+    id: 'bilservice',
+    title: 'Bilservice',
+    summary: 'Regelbunden service samlar rutinkontroller som hjälper till att bevara bilens funktion, säkerhet och livslängd.',
+    href: '/service-reparationer#bilservice',
+    imageLabel: 'Bilservice i verkstaden',
   },
   {
-    id: 'felsokning-diagnostik',
-    title: 'Felsökning, Diagnostik & Elsystem',
-    subtitle: 'Avancerad datoriserad felsökning för modern fordonselektronik',
-    description: 'En varningslampa säger sällan hela sanningen. Vi börjar alltid med att läsa av bilens felkoder, men en kod visar bara vilket system som larmar — inte exakt vilken del som är trasig. Därför går vi vidare med riktad felsökning till ett i förväg bestämt pris, så att sökandet aldrig blir en öppen räkning.',
-    image: imgDiagnosis,
-    imageAlt: 'Datoriserad diagnostikutrustning ansluten till bilens elektronik',
-    icon: <MonitorIcon />,
-    items: [
-      'Felsökning & felkodsläsning',
-      'Elektronik & givardiagnostik',
-      'Elarbete & elsystem',
-      'Batteri- och laddningssystem',
-    ],
-    troubleshooting: [
-      'Motorlampan (Check Engine) eller varningslampor tänds',
-      'Bilen är svårstartad eller dör under körning',
-      'Ojämn motorgång eller reducerad motoreffekt',
-      'Elektriska funktioner eller instrument slutat fungera',
-    ],
+    id: 'oljebyte',
+    title: 'Oljebyte',
+    summary: 'Ny motorolja och ett nytt filter hjälper motorns rörliga delar att smörjas och skyddas mot onödigt slitage.',
+    href: '/oljebyte',
+    imageLabel: 'Oljebyte i verkstaden',
+  },
+  {
+    id: 'kamrem',
+    title: 'Kamrem',
+    summary: 'Kamremmen håller motorns rörliga delar i rätt takt och byts enligt rätt intervall för din bil.',
+    href: '/kamrem',
+    imageLabel: 'Kamremsarbete i verkstaden',
+  },
+  {
+    id: 'koppling',
+    title: 'Koppling',
+    summary: 'Kopplingen överför kraften mellan motor och växellåda och är en slitdel som kan behöva bytas.',
+    href: '/koppling',
+    imageLabel: 'Kopplingsarbete i verkstaden',
+  },
+  {
+    id: 'bromssystem',
+    title: 'Bromssystem',
+    summary: 'Bromsarna är avgörande för säkerheten, och tidiga tecken kan hjälpa dig att få rätt åtgärd i tid.',
+    href: '/bromssystem',
+    imageLabel: 'Bromsarbete i verkstaden',
+  },
+  {
+    id: 'bilbatteri',
+    title: 'Bilbatteri',
+    summary: 'Bilbatteriet ger startkraft och försörjer elsystemet – rätt batterityp behöver testas och anpassas till bilen.',
+    href: '/bilbatteri',
+    imageLabel: 'Batterikontroll i verkstaden',
+  },
+  {
+    id: 'stodampare-fjadrar',
+    title: 'Stötdämpare & fjädrar',
+    summary: 'Stötdämpare och fjädrar hjälper hjulen att hålla kontakt med vägen för stabil och kontrollerad körning.',
+    href: '/stodampare-fjadrar',
+    imageLabel: 'Arbete med stötdämpare och fjädrar',
+  },
+  {
+    id: 'hjullagerbyte',
+    title: 'Hjullagerbyte',
+    summary: 'Ett hjullager ska ge mjuk och friktionsfri gång; brummande ljud eller vibrationer kan vara tecken på slitage.',
+    href: '/hjullagerbyte',
+    imageLabel: 'Hjullagerbyte i verkstaden',
+  },
+  {
+    id: 'avgassystem',
+    title: 'Avgassystem',
+    summary: 'Avgassystemet dämpar motorljud och samverkar med bilens avgasrening och sensorer.',
+    href: '/avgassystem',
+    imageLabel: 'Avgassystem i verkstaden',
+  },
+  {
+    id: 'drivaxel-drivknutar',
+    title: 'Drivaxel & drivknutar',
+    summary: 'Drivaxlar och drivknutar för motorkraften till hjulen och behöver fungera utan glapp, läckage eller vibrationer.',
+    href: '/drivaxel-drivknutar',
+    imageLabel: 'Drivaxelarbete i verkstaden',
+  },
+  {
+    id: 'styrning-kulleder',
+    title: 'Styrning & kulleder',
+    summary: 'Styrning och kulleder hjälper bilen att svara stabilt på ratten och hålla rätt väghållning.',
+    href: '/styrning-kulleder',
+    imageLabel: 'Styrningsarbete i verkstaden',
   },
 ]
 
@@ -78,98 +100,94 @@ export default function BiltjansterPage() {
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
 
-  useEffect(() => {
-    if (!window.location.hash) window.scrollTo(0, 0)
-  }, [])
-
   return (
     <>
       <Header onBookingClick={openModal} />
 
       <main className="services-page biltjanster-page">
-        <section className="services-page__categories" aria-labelledby="services-categories-title">
+        <section className="services-page__hero" aria-labelledby="services-hero-title">
           <div className="container">
-            <header className="section-header">
-              <h1 className="section-title" id="services-categories-title">
-                Reparationer & <span className="title-accent">Felsökning</span>
-              </h1>
-              <p className="section-desc">
-                Här hittar du fördjupad information om mekaniska reparationer, vanliga symptom och riktad felsökning.
-              </p>
-            </header>
+            <div className="services-page__hero-layout">
+              <div className="services-page__hero-content">
+                <h1 className="services-page__title" id="services-hero-title">
+                  Våra <span className="title-accent">biltjänster</span>
+                </h1>
+                <p className="services-page__lead">
+                  Här hittar du fördjupad information om mekaniska reparationer, vanliga symptom och riktad felsökning.
+                </p>
+                <div className="services-page__hero-actions">
+                  <button
+                    type="button"
+                    onClick={openModal}
+                    className="services-page__btn services-page__btn--primary"
+                  >
+                    Boka tid
+                  </button>
+                  <a href="tel:0705533395" className="services-page__btn services-page__btn--outline">
+                    <PhoneIcon className="services-page__btn-icon" />
+                    <span>Ring 070-553 33 95</span>
+                  </a>
+                </div>
+              </div>
 
-            <div className="services-page__category-list">
-              {serviceCategories.map((category, index) => (
+              <div
+                className="services-page__image-placeholder"
+                role="img"
+                aria-label="Platshållare för framtida bild till Biltjänster"
+              >
+                <WrenchIcon aria-hidden="true" />
+                <span>Våra tjänster</span>
+                <small>Bild kommer</small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="services-page__categories" aria-label="Serviceguider">
+          <div className="container">
+            <div className="services-page__category-list biltjanster-page__guide-list">
+              {serviceGuides.map((guide, index) => (
                 <article
-                  className="services-category-card"
-                  id={category.id}
-                  key={category.id}
-                  aria-labelledby={`${category.id}-title`}
+                  className="services-category-card biltjanster-page__guide-card"
+                  id={guide.id}
+                  key={guide.id}
+                  aria-labelledby={`${guide.id}-title`}
                 >
-                  <div className="services-category-card__media">
-                    <img
-                      src={category.image}
-                      alt={category.imageAlt}
-                      className="services-category-card__img"
-                      loading="lazy"
-                    />
+                  <div
+                    className="services-category-card__media biltjanster-page__guide-media"
+                    role="img"
+                    aria-label={`Platshållare för framtida bild: ${guide.imageLabel}`}
+                  >
                     <div className="services-category-card__badge" aria-hidden="true">
-                      {category.icon}
+                      <WrenchIcon />
                     </div>
                     <span className="services-category-card__badge-num" aria-hidden="true">
                       {String(index + 1).padStart(2, '0')}
                     </span>
+                    <div className="biltjanster-page__guide-placeholder" aria-hidden="true">
+                      <span>{guide.imageLabel}</span>
+                      <small>Bild kommer</small>
+                    </div>
                   </div>
 
                   <div className="services-category-card__content">
                     <div className="services-category-card__header">
-                      <h2 className="services-category-card__title" id={`${category.id}-title`}>
-                        {category.title}
+                      <h2 className="services-category-card__title" id={`${guide.id}-title`}>
+                        {guide.title}
                       </h2>
-                      <p className="services-category-card__subtitle">{category.subtitle}</p>
-                      <p className="services-category-card__desc">{category.description}</p>
-                    </div>
-
-                    <div className="services-category-card__details">
-                      <div className="services-category-card__col">
-                        <h3 className="services-category-card__subheading">Det här ingår & utförs:</h3>
-                        <ul className="services-category-card__items">
-                          {category.items.map(item => (
-                            <li key={item}>
-                              <CheckIcon className="services-category-card__check" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="services-category-card__col">
-                        <h3 className="services-category-card__subheading">Vanliga tecken på att du behöver hjälp:</h3>
-                        <ul className="services-category-card__symptoms">
-                          {category.troubleshooting.map(symptom => (
-                            <li key={symptom}>
-                              <span className="services-category-card__bullet" aria-hidden="true">•</span>
-                              <span>{symptom}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <p className="services-category-card__desc">{guide.summary}</p>
                     </div>
 
                     <div className="services-category-card__actions">
-                      <button
-                        type="button"
-                        onClick={openModal}
+                      <a
+                        href={guide.href}
                         className="services-category-card__cta"
-                        aria-label={`Boka tid för ${category.title}`}
+                        aria-label={`Läs mer om ${guide.title}`}
                       >
-                        <span>Boka tid</span>
+                        <span>Läs mer</span>
                         <span className="services-category-card__arrow-badge" aria-hidden="true">
                           <ArrowRightIcon className="services-category-card__arrow" />
                         </span>
-                      </button>
-                      <a href="tel:0705533395" className="services-category-card__call-link">
-                        Frågor? Ring 070-553 33 95
                       </a>
                     </div>
                   </div>

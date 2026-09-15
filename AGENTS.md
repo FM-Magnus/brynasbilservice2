@@ -6,7 +6,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-14 by Antigravity)
+## Current state (last updated: 2026-09-15 by Codex)
 
 ### What is working
 - Magnus confirmed on 2026-09-14 that the website is still a work in progress and **no page copy is final-approved**. Earlier approvals in this file concern specific design or functionality, not final page text.
@@ -24,7 +24,9 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - **Bilar till salu subpage** (`BilarTillSalu.tsx` at `/bilar-till-salu`) — Redesigned in full alignment with the approved redesign visual system: warm-white page surround (`#f8f7f3`), dark ink hero/cards (`#101618`), teal accent typography (`var(--redesign-accent)`), trust badges ("Verkstadsinspekterade", "Färdiga för leverans", "Personlig kontakt"), 3-photo interactive gallery with active thumbnail indicator and 16:10 aspect ratio, spec tags, dual booking/call CTAs, clean empty state, sold vehicle section, and dark closing CTA card. Verified 0px horizontal overflow across 1440px, 768px, and 390px.
 - **Workshop process section ("Så fungerar det")** (`EV.tsx`) — Repurposed former dark EV feature card into a compact 3-step workshop process card ("Från första kontakt till färdig bil") positioned directly below ContactIntro and directly above About. Removed all EV and high-voltage claims across About, ContactIntro, ServiceList, and CSS. Replaced EV items in ServiceList with authentic "Bärgning & biltransport", establishing a balanced 18-service grid.
 - **Bilservice guide** (`ServiceReparationerPage.tsx` at `/service-reparationer#bilservice`) — Long-form Bilservice content destination with a replaceable visual placeholder, service-level guide, relevant internal links, booking/call CTAs, process, pricing CTA, and the existing vehicle/reassurance closing blocks. The repair and diagnostics cards no longer live here.
-- **Biltjänster default page** (`BiltjansterPage.tsx` at `/biltjanster`) — The default destination for the Biltjänster menu. It currently holds the moved `Reparationer & Felsökning` heading and its two existing large cards (`Reparationer & mekaniskt underhåll` and `Felsökning, Diagnostik & Elsystem`), retaining their local images, booking-modal actions and call links. Future service destinations belong below this entry in the menu.
+- **Biltjänster default page** (`BiltjansterPage.tsx` at `/biltjanster`) — The default destination for the Biltjänster menu, headed “Våra biltjänster”. It now presents linked draft-summary cards for the eleven current service guides, each with a CSS-only future-image placeholder. It retains the booking-modal and telephone actions; guide pages remain the owners of their detailed content.
+- **Felsökning page** (`FelsokningPage.tsx` at `/felsokning`) — Separate main-navigation entry immediately after Biltjänster. It reuses the established service-page layout with existing diagnostic wording, booking/call actions and a CSS-only future-image placeholder; it deliberately makes no new pricing, capability or photographic claims.
+- **Image and layout-graphics intake** (`_incoming-assets/`) — Temporary local, Git-ignored inbox for raw photography, blue-tone hero/card backgrounds and non-photographic layout graphics. Read `_incoming-assets/README.md`; only selected, web-exported assets belong in `client/src/assets/images/`.
 - **Oljebyte guide** (`OljebytePage.tsx` at `/oljebyte`) — Expanded draft covering oil-change basics, viscosity/standards, oil types, ageing, intervals, common misconceptions, service checklist, benefits and the shared expandable FAQ. The existing booking modal, telephone CTA and replaceable hero placeholder remain. Magnus chose to retain the technical wording as draft; none of this copy is final-approved or technically fact-checked.
 - **Kamrem guide** (`KamremPage.tsx` at `/kamrem`) — Expanded draft guide covering timing belt vs chain, benefits, warning signs, service scope checklist, draft guidance, safety note, shared workshop process, FAQ and booking CTA. The intervals, timing and component claims are draft source material and have not been fact-checked with the workshop.
 - **Bilbatteri guide** (`BilbatteriPage.tsx` at `/bilbatteri`) — Expanded draft guide covering battery types (standard, EFB, AGM), benefits, warning signs, service scope checklist, draft guidance, underhållsråd note, shared workshop process, FAQ and booking CTA. The intervals and technical claims are draft source material and have not been fact-checked with the workshop.
@@ -63,7 +65,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ### Section and nav order
 Page scroll: Hero → ContactIntro → Process ("Så fungerar det") → About → Services (compact preview) → Contact (combined closing section) → Footer
-Nav links: Start → Om oss → Biltjänster (Våra tjänster, Bilservice, Oljebyte) → Däck → AC → Bärgning → Till / Salu → Kontakt
+Nav links: Start → Om oss → Biltjänster (Våra tjänster, Bilservice and the current service guides) → Felsökning → Däck → AC → Bärgning → Till / Salu → Kontakt
 
 ### Hero layout (changed 2026-09-11)
 `hero__inner` is no longer a two-column grid. It is a **flex column**: `hero__text` (eyebrow, H1, lead) on top, then `hero__footer` — a flex row holding `hero__actions` (the two buttons) and the GoogleReviews band side by side. Below 1024px `hero__footer` stacks vertically; below 768px the band itself wraps so the score/brand row sits above the review, and the review stacks avatar+name over the text.
@@ -156,6 +158,16 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-15 — Codex (image and layout-graphics intake)
+- Added `_incoming-assets/` as the Git-ignored local staging area for raw photography, blue-tone hero/card backgrounds and layout graphics. Its README specifies subject-based folders, including customer interaction, workshop/team, each service, bärgning split into recovery/transport/winter, vehicle listings and layout graphics. Images must be selected and web-exported before entering `client/src/assets/images/`; no runtime asset was added or changed.
+
+### 2026-09-15 — Codex (Felsökning entry page)
+- Added the standalone `/felsokning` route and its desktop/mobile main-navigation entry after Biltjänster. The new page uses the existing AC-service layout language without AC content, imagery, prices or registration input; it contains only existing diagnostic wording, a CSS-only hero placeholder and the established booking/call actions.
+
+### 2026-09-15 — Codex (Biltjänster standard hero)
+- Replaced the temporary contained `/biltjanster` hero with the shared full-width service-page hero used by the other Biltjänster destinations. The H1 is now “Våra biltjänster”; its existing lead, booking modal CTA, phone link and replaceable image placeholder remain intact.
+- Replaced the two detailed repair/diagnostics cards with a linked collection of the eleven existing service guides. Each card uses a concise source-grounded draft summary and a CSS-only future-image placeholder; no individual guide page, route or shared navigation was changed.
 
 ### 2026-09-14 — Antigravity (Styrning och kulleder draft guide)
 - Replaced the Styrning och kulleder placeholder shell with the supplied draft content, completing the Biltjänster service guide pass. Structured into an accessible, responsive customer guide with steering components (spindelleder, styrleder, hydraulisk servo, EPS), benefits, 6 warning signs, bilens dragning callout tip, service checklist in dark card, guidance cards, safety note, shared 5-step process, accessible FAQ and existing booking/call actions.

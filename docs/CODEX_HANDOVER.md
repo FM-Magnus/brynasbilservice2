@@ -1,6 +1,6 @@
 # Codex Handoff — Brynäs Bilservice
 
-Updated **2026-09-14** by Antigravity.
+Updated **2026-09-15** by Codex. This is a continuation guide, not a substitute for inspecting the live worktree.
 This document prepares Codex (or any incoming AI assistant) to seamlessly continue frontend development on Brynäs Bilservice.
 
 ---
@@ -9,7 +9,7 @@ This document prepares Codex (or any incoming AI assistant) to seamlessly contin
 
 - **Repository path:** `/Users/magnusolsson/Documents/REPOS/brynasbilservice_repo`
 - **Active working branch:** `redesign/blue-teal-v1`
-- **Branch status:** Fully synced with `origin/redesign/blue-teal-v1` at commit `05b9f34f`. Working tree is 100% clean.
+- **Branch status:** The last known pushed baseline is `05b9f34f`. On 2026-09-15, the local branch was ahead by one commit with intentional, uncommitted frontend, documentation and image-inbox work. Run `git status --short --branch` before any action; do not assume this handoff remains current.
 - **Push rule:** **STRICT RULE: Never run `git push` without Magnus's explicit prior approval.**
 - **Frontend location:** `client/` (React 18, Vite 4, TypeScript, Tailwind CSS 3).
   - Build command: `npm --prefix client run build`
@@ -28,7 +28,7 @@ This document prepares Codex (or any incoming AI assistant) to seamlessly contin
   - Body & UI controls: `var(--font-body)` (**Manrope 400–500** body, **600–700** badges/controls/buttons).
 - **Color tokens:**
   - Page background: warm-white `#f8f7f3` (`var(--redesign-page)`).
-  - Contained dark cards: `#101618` (`var(--redesign-card)` or direct hex) — dark styling is strictly contained within cards, never full-viewport black on public pages.
+  - Contained dark cards: `#101618` (`var(--redesign-card)` or direct hex). For ordinary content, dark styling stays contained; the established shared service-page hero is the intentional exception.
   - Teal accent: `var(--redesign-accent)` (`#2496a0`) and dark accent `var(--redesign-accent-dark)` (`#1b727a`).
   - Strict color prohibition: No gold, amber, or red accents (gold/yellow is only allowed on the Google Maps review badge).
 - **Key UI components:**
@@ -48,7 +48,8 @@ All public routes are registered in `client/src/main.tsx` and dropdown navigatio
 | --- | --- | --- | --- |
 | `/` | `App.tsx` | Active | Landing page: Header → Hero (with GoogleReviews band) → ContactIntro → EV (Workshop process "Så fungerar det") → About → Services (preview) → Contact (combined closing card) → Footer |
 | `/om-oss` | `AboutPage.tsx` | Implemented | Local workshop facts, 4-photo gallery, reassurance cards, 3-step process, closing CTA |
-| `/biltjanster` | `BiltjansterPage.tsx` | Active Hub | Default Biltjänster destination with repair & diagnostics cards |
+| `/biltjanster` | `BiltjansterPage.tsx` | Active hub | “Våra biltjänster”: linked draft-summary cards for the eleven current service guides, with CSS-only image placeholders |
+| `/felsokning` | `FelsokningPage.tsx` | Implemented draft | Standalone diagnostic-service entry after Biltjänster in the main navigation; existing diagnostic wording and CSS-only hero placeholder |
 | `/service-reparationer#bilservice` | `ServiceReparationerPage.tsx` | Implemented | Long-form Bilservice guide, service levels, process, pricing CTA |
 | `/oljebyte` | `OljebytePage.tsx` | Implemented | Oil change basics, oil standards, intervals, checklist, shared FAQ |
 | `/kamrem` | `KamremPage.tsx` | Implemented | Timing belt vs chain, warning signs, checklist, shared process & FAQ |
@@ -71,8 +72,8 @@ All public routes are registered in `client/src/main.tsx` and dropdown navigatio
 
 ## 4. Key Work Completed in This Session
 
-1. **Full Implementation of 8 Biltjänster Customer Guides:**
-   - Implemented `/kamrem`, `/bilbatteri`, `/stodampare-fjadrar`, `/hjullagerbyte`, `/avgassystem`, `/drivaxel-drivknutar`, and `/styrning-kulleder`.
+1. **Current Biltjänster guide pattern:**
+   - The guide destinations are implemented across the route map above. `/biltjanster` is now headed “Våra biltjänster” and presents linked draft-summary cards for the current service guides, all with CSS-only future-image placeholders.
    - Each page follows the approved structure:
      1. Hero with Archivo 800 heading, draft lead, `Boka tid` button, `Ring oss` link, and replaceable image placeholder.
      2. "Vad är..." explanatory section with key mechanical context.
@@ -123,6 +124,7 @@ When Codex receives a new task from Magnus:
 3. **Copywriting & Draft Rules:**
    - **No page copy is final-approved.** Treat all text as draft.
    - **Never copy external text verbatim** from reference folders or competitors. Rephrase and synthesize original Swedish text ("Skriv om varje text litegrann").
+   - **Image workflow:** Put raw photography, blue-tone background candidates and non-photographic layout graphics in `_incoming-assets/` first. Read `_incoming-assets/README.md`; image contents there are deliberately ignored by Git. Add only selected, web-exported images to `client/src/assets/images/`.
 4. **Verification Checklist:**
    - Run `npm --prefix client run build` to ensure 0 TypeScript or build errors.
    - Check layout on desktop (1440px) and mobile (390px) to guarantee **0 px horizontal overflow**.

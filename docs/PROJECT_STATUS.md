@@ -1,6 +1,6 @@
 # Brynäs Bilservice — current project status
 
-Updated 2026-09-14. The website is a work in progress; Magnus confirmed that **no page copy is final-approved yet**. Routes, page content and image use below were checked against `client/src/`; production behaviour was not checked. See [AGENTS.md](../AGENTS.md) for the session log and [AGENT_HANDOFF.md](AGENT_HANDOFF.md) for design history and preservation rules.
+Updated 2026-09-15. The website is a work in progress; Magnus confirmed that **no page copy is final-approved yet**. Routes, page content and image use below were checked against `client/src/`; production behaviour was not checked. See [AGENTS.md](../AGENTS.md) for the session log and [AGENT_HANDOFF.md](AGENT_HANDOFF.md) for design history and preservation rules.
 
 For the Antigravity 2 / Flash 3.8 migration, use the task-specific [Antigravity handoff](ANTIGRAVITY_HANDOFF.md) alongside the repository instructions.
 
@@ -11,7 +11,7 @@ The repository contains Brynäs Bilservice's public website, booking and admin f
 - Active frontend: `client/` — React 18, TypeScript, Vite 4, Tailwind CSS 3, React Router, Archivo/Manrope and shared teal CSS tokens. Build with `npm --prefix client run build`.
 - Backend: `server/` — JavaScript, Express 4 and MySQL through `mysql2`. Production is documented as Node 16 on the VPS; its current behaviour was not checked for this dashboard.
 - The root React/Vite configuration is orphaned scaffolding. Run and build the frontend from `client/`, not the repository root.
-- Git status: branch `redesign/blue-teal-v1`. Pushed and synced with `origin/redesign/blue-teal-v1` at commit `05b9f34f`. Worktree is 100% clean. Never push without Magnus's explicit prior approval.
+- Git status: branch `redesign/blue-teal-v1`. The last known pushed baseline is commit `05b9f34f`; on 2026-09-15 the local branch was ahead by one commit and had intentional, uncommitted frontend/documentation work. Always run `git status --short --branch` before relying on this summary. Never push without Magnus's explicit prior approval.
 
 ## Public pages and content work
 
@@ -21,7 +21,8 @@ Every route in this table exists in `client/src/main.tsx`. Text is present in th
 | --- | --- | --- | --- | --- | --- |
 | Start | `/` | Implemented landing page with hero, contact, process, about and service preview | WIP; not approved | Local hero/workshop JPGs | Confirm final copy and hero export |
 | Om oss | `/om-oss` | Implemented workshop, facts, process and gallery page | WIP; not approved | Local workshop JPGs | Confirm copy and photo selection |
-| Biltjänster → Våra tjänster | `/biltjanster` | Current default page with moved repair and diagnostics cards | WIP; not approved | Two local service JPGs | Develop this page and decide future service entries |
+| Biltjänster → Våra tjänster | `/biltjanster` | Default Biltjänster hub, headed “Våra biltjänster”, with linked summary cards for the eleven current service guides | WIP; not approved | CSS-only hero and card placeholders | Replace placeholders with selected service imagery; continue adding service entries only after a route/copy decision |
+| Felsökning | `/felsokning` | Standalone diagnostic-service entry with source-grounded symptoms and a future-image placeholder | WIP; not approved | Marked hero image placeholder | Provide and approve fuller Felsökning copy and a hero image |
 | Biltjänster → Bilservice | `/service-reparationer#bilservice` | Long-form Bilservice guide with service levels, process and pricing CTA | WIP; not approved | Marked hero image placeholder | Provide and approve a Bilservice hero image |
 | Biltjänster → Oljebyte | `/oljebyte` | Expanded draft guide with customer-focused service content first; technical deep-dive sections grouped at the bottom under “Mer info” | WIP; not approved or technically fact-checked | Marked hero image placeholder | Fact-check the technical and service-specific claims with Magnus/workshop; provide and approve a hero image |
 | Biltjänster → Kamrem | `/kamrem` | Expanded customer guide covering system parts, benefits, warning signs, service scope, draft guidance, safety note, shared process and FAQ | WIP; draft intervals and technical guidance are not fact-checked | Marked hero image placeholder | Fact-check draft intervals, component claims and timing with the workshop; provide a hero image |
@@ -40,11 +41,13 @@ Every route in this table exists in `client/src/main.tsx`. Text is present in th
 | Till salu | `/bilar-till-salu` | Implemented vehicle listing and gallery | WIP; not approved | Three local vehicle JPGs | Confirm listing details and image selection before publication |
 | Kontakt | `/kontakt` | Implemented contact details, hours and enquiry form | WIP; not approved | No page photo in component | Confirm copy and form handling with the relevant owner |
 
-The desktop Biltjänster dropdown currently orders **Våra tjänster → `/biltjanster`**, **Bilservice → `/service-reparationer#bilservice`**, **Oljebyte → `/oljebyte`**, **Kamrem → `/kamrem`**, **Koppling → `/koppling`**, **Bromssystem → `/bromssystem`**, **Bilbatteri → `/bilbatteri`**, **Stötdämpare och fjädrar → `/stodampare-fjadrar`**, **Hjullagerbyte → `/hjullagerbyte`**, **Avgassystem → `/avgassystem`**, **Drivaxel och drivknutar → `/drivaxel-drivknutar`**, then **Styrning och kulleder → `/styrning-kulleder`**. Mobile Biltjänster links to `/biltjanster`. The old `/tjanster` route remains reachable from page CTAs; its future role has not been decided.
+The desktop Biltjänster dropdown currently orders **Våra tjänster → `/biltjanster`**, **Bilservice → `/service-reparationer#bilservice`**, **Oljebyte → `/oljebyte`**, **Kamrem → `/kamrem`**, **Koppling → `/koppling`**, **Bromssystem → `/bromssystem`**, **Bilbatteri → `/bilbatteri`**, **Stötdämpare och fjädrar → `/stodampare-fjadrar`**, **Hjullagerbyte → `/hjullagerbyte`**, **Avgassystem → `/avgassystem`**, **Drivaxel och drivknutar → `/drivaxel-drivknutar`**, then **Styrning och kulleder → `/styrning-kulleder`**. The separate main navigation also includes **Felsökning → `/felsokning`** after Biltjänster. Mobile Biltjänster links to `/biltjanster`. The old `/tjanster` route remains reachable from page CTAs; its future role has not been decided.
 
 ## Copy and image handoff
 
-Pages may retain clearly labelled placeholders while final photography is prepared. For future exports, use a descriptive pair such as `page-purpose.webp` and `page-purpose.jpg`: WebP is the intended primary format and JPG the compatibility fallback. Current components mainly import JPG directly, so supplying pairs does not by itself activate fallback delivery. Match the actual placement and crop when each asset is integrated; this dashboard sets no universal pixel dimensions. Keep business claims and prices subject to Magnus's approval.
+Pages may retain clearly labelled placeholders while final photography is prepared. New raw photography, graphics and image candidates first belong in [`_incoming-assets/`](../_incoming-assets/), whose [`README`](../_incoming-assets/README.md) defines the subject-based folders, naming and selection process. The inbox deliberately ignores image contents in Git; it is not a runtime asset directory.
+
+Only after an image is selected should it be exported and added to `client/src/assets/images/`. Use a descriptive pair such as `page-purpose.webp` and `page-purpose.jpg`: WebP is the intended primary format and JPG the compatibility fallback. Current components mainly import JPG directly, so supplying pairs does not by itself activate fallback delivery. Match the actual placement and crop when each asset is integrated; this dashboard sets no universal pixel dimensions. Keep business claims and prices subject to Magnus's approval.
 
 ## People and agent roles
 
