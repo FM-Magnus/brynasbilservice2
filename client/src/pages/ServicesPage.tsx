@@ -12,11 +12,11 @@ import { TruckIcon } from '../components/icons/TruckIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 
-import imgRepair from '../assets/images/servicekort_repair.jpg'
-import imgDiagnosis from '../assets/images/servicecard_diagnosis.jpg'
-import imgAC from '../assets/images/servicekort_AC.jpg'
-import imgTyres from '../assets/images/servicekort_tyres.jpg'
-import imgTow from '../assets/images/servicekort_tow.jpg'
+import imgRepair from '../assets/images/services/repair/mechanic-brake-repair.jpg'
+import imgDiagnosis from '../assets/images/services/diagnostics/vehicle-diagnostics-laptop.jpg'
+import imgAC from '../assets/images/services/ac/ac-manometers-on-engine.jpg'
+import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
+import imgTow from '../assets/images/services/towing/tow-truck-night.jpg'
 
 interface ServiceCategory {
   id: string

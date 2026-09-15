@@ -6,7 +6,7 @@ import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
-import imgTyres from '../assets/images/servicekort_tyres.jpg'
+import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
 
 type PriceEntry = { label?: string; prefix?: string; amount?: string; unit?: string; contactText?: string }
 type ServiceCardProps = { title: string; description: string; priceData: PriceEntry[]; imagePlaceholder: string; onBookingClick: () => void }

@@ -5,7 +5,7 @@ import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
-import imgAc from '../assets/images/servicekort_AC.jpg'
+import imgAc from '../assets/images/services/ac/ac-manometers-on-engine.jpg'
 
 type PricingCardProps = { title: string; price: string; items: string[]; note?: string; onBook: () => void }
 const symptoms = [

@@ -8,7 +8,7 @@ import { TruckIcon } from '../components/icons/TruckIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 
-import imgTow from '../assets/images/servicekort_tow.jpg'
+import imgTow from '../assets/images/services/towing/tow-truck-night.jpg'
 
 interface ServiceCategory {
   id: string

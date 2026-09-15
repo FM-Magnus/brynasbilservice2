@@ -1,7 +1,16 @@
 import { useState } from 'react'
-import peugeot307_1 from '../assets/images/peugeot-307-cc-1.jpg'
-import peugeot307_2 from '../assets/images/peugeot-307-cc-2.jpg'
-import peugeot307_3 from '../assets/images/peugeot-307-cc-3.jpg'
+import peugeotRearJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter.jpg'
+import peugeotRearWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter.webp'
+import peugeotRearThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter-thumb.jpg'
+import peugeotRearThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter-thumb.webp'
+import peugeotWheelJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup.jpg'
+import peugeotWheelWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup.webp'
+import peugeotWheelThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup-thumb.jpg'
+import peugeotWheelThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup-thumb.webp'
+import peugeotSideJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.jpg'
+import peugeotSideWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
+import peugeotSideThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile-thumb.jpg'
+import peugeotSideThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile-thumb.webp'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
@@ -23,8 +32,15 @@ interface Car {
   price: number
   description: string
   color: string
-  images?: string[]   // first image is the main one
+  images?: CarImage[]   // first image is the main one
   sold?: boolean
+}
+
+interface CarImage {
+  jpg: string
+  webp: string
+  thumbnailJpg: string
+  thumbnailWebp: string
 }
 
 // ── Edit this list when stock changes ──────────────────────────────────────
@@ -47,7 +63,11 @@ const cars: Car[] = [
       'Snygg och välskött cabriolet med elektriskt hopfällbart hardtop. Nybesiktigad maj 2026 och godkänd till juli 2027. ' +
       'Dragkrok. Aluminiumfälgar. Inga anmärkningar i senaste besiktning. ' +
       'Perfekt sommarbil — ring oss för att boka en provkörning.',
-    images: [peugeot307_3, peugeot307_1, peugeot307_2],
+    images: [
+      { jpg: peugeotSideJpg, webp: peugeotSideWebp, thumbnailJpg: peugeotSideThumbJpg, thumbnailWebp: peugeotSideThumbWebp },
+      { jpg: peugeotRearJpg, webp: peugeotRearWebp, thumbnailJpg: peugeotRearThumbJpg, thumbnailWebp: peugeotRearThumbWebp },
+      { jpg: peugeotWheelJpg, webp: peugeotWheelWebp, thumbnailJpg: peugeotWheelThumbJpg, thumbnailWebp: peugeotWheelThumbWebp },
+    ],
   },
 ]
 // ──────────────────────────────────────────────────────────────────────────
@@ -69,12 +89,15 @@ function CarCard({ car }: { car: Car }) {
     <article className={`car-card${car.sold ? ' car-card--sold' : ''}`}>
       <div className="car-card__image-wrap">
         {mainImg ? (
-          <img
-            src={mainImg}
-            alt={`${car.make} ${car.model}`}
-            className="car-card__image"
-            loading="lazy"
-          />
+          <picture>
+            <source srcSet={mainImg.webp} type="image/webp" />
+            <img
+              src={mainImg.jpg}
+              alt={`${car.make} ${car.model}`}
+              className="car-card__image"
+              loading="lazy"
+            />
+          </picture>
         ) : (
           <div className="car-card__image-placeholder">
             <svg viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -93,7 +116,7 @@ function CarCard({ car }: { car: Car }) {
       {/* Thumbnail strip — only shown when there are multiple images */}
       {images.length > 1 && (
         <div className="car-card__thumbs">
-          {images.map((src, i) => (
+          {images.map((image, i) => (
             <button
               key={i}
               type="button"
@@ -101,7 +124,10 @@ function CarCard({ car }: { car: Car }) {
               onClick={() => setActiveImg(i)}
               aria-label={`Visa bild ${i + 1}`}
             >
-              <img src={src} alt="" loading="lazy" />
+              <picture>
+                <source srcSet={image.thumbnailWebp} type="image/webp" />
+                <img src={image.thumbnailJpg} alt="" loading="lazy" />
+              </picture>
             </button>
           ))}
         </div>

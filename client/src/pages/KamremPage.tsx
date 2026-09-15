@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import { BookingFormModal } from '../components/BookingForm'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { Footer } from '../components/layout/Footer'
 import { Header } from '../components/layout/Header'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
+import timingBeltJpg from '../assets/images/services/timing-belt/timing-belt-in-hand.jpg'
+import timingBeltWebp from '../assets/images/services/timing-belt/timing-belt-in-hand.webp'
 
 const parts = [
   ['Kamrem & spännrullar', 'Driver kamaxeln och ser till att motorns ventiler öppnas och stängs i exakt synk med kolvarnas rörelse.'],
@@ -67,20 +68,27 @@ export default function KamremPage() {
     <>
       <Header onBookingClick={() => setIsModalOpen(true)} />
       <main className="services-page kamrem-page">
-        <section className="services-page__hero" aria-labelledby="kamrem-page-title">
+        <section className="services-page__hero kamrem-page__hero" aria-labelledby="kamrem-page-title">
           <div className="container"><div className="services-page__hero-layout">
             <div className="services-page__hero-content">
+              <p className="kamrem-page__eyebrow">Motor · precision · trygghet</p>
               <h1 className="services-page__title" id="kamrem-page-title">Kamrem <span className="title-accent">när motorns tajming är avgörande</span></h1>
               <p className="services-page__lead">Kamremmen synkroniserar motorns vevaxel och kamaxel så att kolvar och ventiler rör sig i exakt rätt takt. Det är en av bilens mest kritiska delar där ett missat byte kan leda till totalt motorhaveri.</p>
               <div className="services-page__hero-actions"><button type="button" onClick={() => setIsModalOpen(true)} className="services-page__btn services-page__btn--primary">Boka tid</button><a href="tel:0705533395" className="services-page__btn services-page__btn--outline"><PhoneIcon className="services-page__btn-icon" /><span>Ring 070-553 33 95</span></a></div>
             </div>
-            <div className="services-page__image-placeholder" role="img" aria-label="Platshållare för framtida bild av kamremsarbete i verkstaden"><WrenchIcon aria-hidden="true" /><span>Kamremsarbete i verkstaden</span><small>Bild kommer</small></div>
+            <div className="kamrem-page__hero-visual">
+              <picture>
+                <source srcSet={timingBeltWebp} type="image/webp" />
+                <img src={timingBeltJpg} alt="Kamrem som hålls upp vid ett motorarbete" />
+              </picture>
+              <div className="kamrem-page__visual-caption"><span>Kamrem</span><small>Motorarbete med omsorg</small></div>
+            </div>
           </div></div>
         </section>
 
         <section className="services-page__guide kamrem-page__intro" aria-labelledby="kamrem-intro-title"><div className="container">
           <div className="services-page__guide-intro"><h2 id="kamrem-intro-title">Vad är en kamrem?</h2><p>Värt att veta innan man läser vidare: inte alla bilar har kamrem. Vissa motorer har istället kamkedja i metall som normalt håller bilens livslängd utan schemalagt byte. Eftersom samma bilmodell kan ha kamrem på en motorvariant och kamkedja på en annan räcker inte modellnamnet ensamt för att veta vad som gäller din bil.</p></div>
-          <div className="kamrem-page__parts-grid">{parts.map(([title, text]) => <article className="kamrem-page__part-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="kamrem-page__parts-grid">{parts.map(([title, text], index) => <article className="kamrem-page__part-card" key={title}><span className="kamrem-page__part-number" aria-hidden="true">0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
           <div className="services-page__guide-intro kamrem-page__section-gap"><h2>Varför är det viktigt att byta i tid?</h2></div>
           <div className="services-page__benefit-grid kamrem-page__benefit-grid">{benefits.map(([title, text]) => <article className="services-page__benefit-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
         </div></section>

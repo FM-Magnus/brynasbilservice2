@@ -5,14 +5,19 @@ import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 
-import imgWorkshop1 from '../assets/images/OMOSS_KENBURNS1.jpg'
-import imgWorkshop2 from '../assets/images/OMOSS_KENBURNS2.jpg'
-import imgLounge from '../assets/images/OMOSS_KENBURNS3.jpg'
-import imgExterior from '../assets/images/HAR_FINNS_VI.jpg'
+import imgWorkshop1Webp from '../assets/images/gallery/workshop-mechanical-bay.webp'
+import imgWorkshop1Jpg from '../assets/images/gallery/workshop-mechanical-bay.jpg'
+import imgWorkshop2Webp from '../assets/images/gallery/workshop-tire-storage.webp'
+import imgWorkshop2Jpg from '../assets/images/gallery/workshop-tire-storage.jpg'
+import imgLoungeWebp from '../assets/images/gallery/workshop-customer-reception.webp'
+import imgLoungeJpg from '../assets/images/gallery/workshop-customer-reception.jpg'
+import imgExteriorWebp from '../assets/images/gallery/workshop-exterior.webp'
+import imgExteriorJpg from '../assets/images/gallery/workshop-exterior.jpg'
 
 interface GalleryItem {
   id: string
-  image: string
+  imageWebp: string
+  imageJpg: string
   alt: string
   category: string
   title: string
@@ -22,7 +27,8 @@ interface GalleryItem {
 const galleryItems: GalleryItem[] = [
   {
     id: 'verkstad',
-    image: imgWorkshop1,
+    imageWebp: imgWorkshop1Webp,
+    imageJpg: imgWorkshop1Jpg,
     alt: 'Brynäs Bilservice verkstadslokal med lyftar och verktyg',
     category: 'Verkstadslokaler',
     title: 'Lyftplatser och mekaniska reparationer',
@@ -30,7 +36,8 @@ const galleryItems: GalleryItem[] = [
   },
   {
     id: 'dack',
-    image: imgWorkshop2,
+    imageWebp: imgWorkshop2Webp,
+    imageJpg: imgWorkshop2Jpg,
     alt: 'Däckverkstad med maskiner för däckskifte och hjulbalansering',
     category: 'Däck & hjulservice',
     title: 'Modern däck- och balanseringsutrustning',
@@ -38,7 +45,8 @@ const galleryItems: GalleryItem[] = [
   },
   {
     id: 'reception',
-    image: imgLounge,
+    imageWebp: imgLoungeWebp,
+    imageJpg: imgLoungeJpg,
     alt: 'Kundmottagning och väntyta hos Brynäs Bilservice',
     category: 'Kundmottagning',
     title: 'Trevlig väntyta och personligt mottagande',
@@ -46,7 +54,8 @@ const galleryItems: GalleryItem[] = [
   },
   {
     id: 'exterior',
-    image: imgExterior,
+    imageWebp: imgExteriorWebp,
+    imageJpg: imgExteriorJpg,
     alt: 'Brynäs Bilservice exteriör och entré på Utmarksvägen 21B',
     category: 'Exteriör & infart',
     title: 'Utmarksvägen 21B på Brynäs i Gävle',
@@ -106,11 +115,14 @@ export default function GalleryPage() {
               </div>
               <div className="about-page__hero-visual">
                 <div className="about-page__hero-card">
-                  <img
-                    src={imgWorkshop1}
-                    alt="Brynäs Bilservice verkstad med bilar och utrustning"
-                    className="about-page__hero-img"
-                  />
+                  <picture>
+                    <source srcSet={imgWorkshop1Webp} type="image/webp" />
+                    <img
+                      src={imgWorkshop1Jpg}
+                      alt="Brynäs Bilservice verkstad med bilar och utrustning"
+                      className="about-page__hero-img"
+                    />
+                  </picture>
                   <div className="about-page__hero-badge">Grundat 2021</div>
                 </div>
               </div>
@@ -138,12 +150,15 @@ export default function GalleryPage() {
               {galleryItems.map((item) => (
                 <article key={item.id} className="about-page__gallery-card">
                   <div className="about-page__gallery-media">
-                    <img
-                      src={item.image}
-                      alt={item.alt}
-                      className="about-page__gallery-img"
-                      loading="lazy"
-                    />
+                    <picture>
+                      <source srcSet={item.imageWebp} type="image/webp" />
+                      <img
+                        src={item.imageJpg}
+                        alt={item.alt}
+                        className="about-page__gallery-img"
+                        loading="lazy"
+                      />
+                    </picture>
                     <div className="about-page__gallery-badge">{item.category}</div>
                   </div>
                   <div className="about-page__gallery-body">

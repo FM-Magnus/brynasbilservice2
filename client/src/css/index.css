@@ -513,7 +513,10 @@ ul { list-style: none; }
   position: absolute;
   inset: 0;
   background-color: #111718;
-  background-image: url('../assets/images/background_hero.jpg');
+  background-image: image-set(
+    url('../assets/images/home/hero/home-workshop-hero.webp') type('image/webp') 1x,
+    url('../assets/images/home/hero/home-workshop-hero.jpg') type('image/jpeg') 1x
+  );
   background-size: cover;
   background-position: 50% 52%;
   z-index: 0;
@@ -5562,10 +5565,114 @@ ul { list-style: none; }
 }
 
 /* Kamrem service page */
+.kamrem-page__hero {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(36, 150, 160, 0.34), transparent 25rem),
+    radial-gradient(circle at 57% 105%, rgba(18, 102, 112, 0.26), transparent 29rem),
+    #0b1113;
+}
+.kamrem-page__hero::before {
+  opacity: 0.48;
+  background:
+    linear-gradient(90deg, rgba(36, 150, 160, 0.13) 1px, transparent 1px),
+    linear-gradient(rgba(36, 150, 160, 0.13) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(90deg, #000 0%, transparent 72%);
+}
+.kamrem-page__hero .services-page__hero-layout { grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr); }
+.kamrem-page__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1rem;
+  color: #91d7d9;
+  font: 700 0.72rem / 1.2 var(--font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.kamrem-page__eyebrow::before {
+  width: 2.5rem;
+  height: 1px;
+  content: '';
+  background: currentColor;
+}
+.kamrem-page__hero .services-page__title { max-width: 700px; font-size: clamp(2.75rem, 5.2vw, 4.6rem); }
+.kamrem-page__hero-visual {
+  position: relative;
+  min-width: 0;
+  width: min(100%, 485px);
+  justify-self: end;
+  aspect-ratio: 1 / 1.04;
+  isolation: isolate;
+}
+.kamrem-page__hero-visual::before {
+  position: absolute;
+  z-index: -1;
+  inset: 8% -6% -5% 5%;
+  border: 1px solid rgba(145, 215, 217, 0.42);
+  border-radius: 48% 52% 43% 57% / 52% 43% 57% 48%;
+  content: '';
+  transform: rotate(-9deg);
+}
+.kamrem-page__hero-visual::after {
+  position: absolute;
+  z-index: 2;
+  top: 9%;
+  right: -1%;
+  width: clamp(3.75rem, 8vw, 5.5rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: 50%;
+  content: '';
+  pointer-events: none;
+}
+.kamrem-page__hero-visual picture,
+.kamrem-page__hero-visual img { display: block; width: 100%; height: 100%; }
+.kamrem-page__hero-visual picture {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 46% 54% 49% 51% / 54% 43% 57% 46%;
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.36);
+  transform: rotate(3deg);
+}
+.kamrem-page__hero-visual img { object-fit: cover; object-position: center; filter: saturate(0.86) contrast(1.06); }
+.kamrem-page__visual-caption {
+  position: absolute;
+  z-index: 3;
+  left: -4%;
+  bottom: 8%;
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.23);
+  border-radius: 14px;
+  color: #fff;
+  background: rgba(11, 17, 19, 0.8);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+}
+.kamrem-page__visual-caption span { font: 800 1rem / 1 var(--font-heading); letter-spacing: -0.02em; }
+.kamrem-page__visual-caption small { color: rgba(255, 255, 255, 0.7); font: 600 0.67rem / 1.25 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; }
 .kamrem-page__intro,
 .kamrem-page__symptoms,
 .kamrem-page__guidance { padding-block: clamp(3rem, 5.5vw, 5rem); }
-.kamrem-page__symptoms { background: rgba(36, 150, 160, 0.045); }
+.kamrem-page__intro { position: relative; }
+.kamrem-page__symptoms {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(110deg, rgba(36, 150, 160, 0.1), rgba(36, 150, 160, 0.025));
+}
+.kamrem-page__symptoms::before {
+  position: absolute;
+  top: -8rem;
+  right: -7rem;
+  width: 22rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(36, 150, 160, 0.14);
+  border-radius: 50%;
+  content: '';
+}
 .kamrem-page__parts-grid,
 .kamrem-page__guidance-grid {
   display: grid;
@@ -5580,6 +5687,7 @@ ul { list-style: none; }
 .kamrem-page__part-card,
 .kamrem-page__symptom-card,
 .kamrem-page__guidance-card {
+  position: relative;
   min-width: 0;
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
   border: 1px solid rgba(16, 22, 24, 0.1);
@@ -5587,6 +5695,25 @@ ul { list-style: none; }
   background: var(--redesign-surface);
   box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
 }
+.kamrem-page__part-card {
+  min-height: 220px;
+  padding-top: clamp(4.25rem, 6vw, 5.5rem);
+  overflow: hidden;
+  border-color: rgba(36, 150, 160, 0.2);
+  background: linear-gradient(145deg, #fff, #f2f8f7);
+}
+.kamrem-page__part-card:nth-child(2) { background: var(--redesign-ink); border-color: var(--redesign-ink); }
+.kamrem-page__part-card:nth-child(2) h3 { color: #91d7d9; }
+.kamrem-page__part-card:nth-child(2) p { color: rgba(255, 255, 255, 0.74); }
+.kamrem-page__part-number {
+  position: absolute;
+  top: 1.25rem;
+  left: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--redesign-accent);
+  font: 800 clamp(2rem, 3.5vw, 2.9rem) / 1 var(--font-heading);
+  letter-spacing: -0.05em;
+}
+.kamrem-page__part-card:nth-child(2) .kamrem-page__part-number { color: rgba(145, 215, 217, 0.35); }
 .kamrem-page__part-card h3,
 .kamrem-page__symptom-card h3,
 .kamrem-page__guidance-card h3 {
@@ -5609,6 +5736,8 @@ ul { list-style: none; }
 .kamrem-page__benefit-grid .services-page__benefit-card { min-height: 168px; }
 .kamrem-page__service { padding-block: clamp(2rem, 4vw, 3.5rem); }
 .kamrem-page__service-card {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(1.75rem, 5vw, 5rem);
@@ -5618,6 +5747,18 @@ ul { list-style: none; }
   color: #fff;
   background: #101618;
 }
+.kamrem-page__service-card::after {
+  position: absolute;
+  right: -13rem;
+  bottom: -15rem;
+  width: 29rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(145, 215, 217, 0.16);
+  border-radius: 50%;
+  content: '';
+  pointer-events: none;
+}
+.kamrem-page__service-card > * { position: relative; z-index: 1; }
 .kamrem-page__service-card h2 {
   margin: 0 0 0.85rem;
   color: #fff;
@@ -5652,6 +5793,8 @@ ul { list-style: none; }
 .kamrem-page__booking { padding-bottom: clamp(3.5rem, 7vw, 6rem); }
 
 @media (max-width: 1024px) {
+  .kamrem-page__hero .services-page__hero-layout { grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr); }
+  .kamrem-page__hero-visual { width: min(100%, 390px); }
   .kamrem-page__parts-grid,
   .kamrem-page__guidance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kamrem-page__benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -5659,6 +5802,11 @@ ul { list-style: none; }
 }
 
 @media (max-width: 640px) {
+  .kamrem-page__hero .services-page__hero-layout { grid-template-columns: 1fr; }
+  .kamrem-page__hero-visual { width: min(88vw, 390px); justify-self: center; margin-top: 0.35rem; }
+  .kamrem-page__hero-visual::before { inset: 7% -3% -3% 3%; }
+  .kamrem-page__visual-caption { left: -2%; bottom: 5%; }
+  .kamrem-page__hero .services-page__title { font-size: clamp(2.65rem, 13vw, 3.55rem); }
   .kamrem-page__parts-grid,
   .kamrem-page__symptom-grid,
   .kamrem-page__guidance-grid,

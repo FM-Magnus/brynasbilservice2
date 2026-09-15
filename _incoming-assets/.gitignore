@@ -2,5 +2,6 @@
 *
 !.gitignore
 !README.md
+!ASSET_INVENTORY.md
 !*/
 !.gitkeep

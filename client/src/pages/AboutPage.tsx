@@ -7,9 +7,10 @@ import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 
-import imgWorkshop1 from '../assets/images/OMOSS_KENBURNS1.jpg'
-import imgMaherWebp from '../assets/images/maher_portrait.webp'
-import imgMaherJpg from '../assets/images/maher_portrait.jpg'
+import imgWorkshop1Webp from '../assets/images/gallery/workshop-mechanical-bay.webp'
+import imgWorkshop1Jpg from '../assets/images/gallery/workshop-mechanical-bay.jpg'
+import imgMaherWebp from '../assets/images/people/maher-basher-portrait.webp'
+import imgMaherJpg from '../assets/images/people/maher-basher-portrait.jpg'
 
 const steps = [
   {
@@ -84,11 +85,14 @@ export default function AboutPage() {
               </div>
               <div className="about-page__hero-visual">
                 <div className="about-page__hero-card">
-                  <img
-                    src={imgWorkshop1}
-                    alt="Brynäs Bilservice verkstad med bilar och utrustning"
-                    className="about-page__hero-img"
-                  />
+                  <picture>
+                    <source srcSet={imgWorkshop1Webp} type="image/webp" />
+                    <img
+                      src={imgWorkshop1Jpg}
+                      alt="Brynäs Bilservice verkstad med bilar och utrustning"
+                      className="about-page__hero-img"
+                    />
+                  </picture>
                   <div className="about-page__hero-badge">Grundat 2021</div>
                 </div>
               </div>

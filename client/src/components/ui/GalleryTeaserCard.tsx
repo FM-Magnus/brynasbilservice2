@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { KenBurnsSlideshow } from './KenBurnsSlideshow'
 import { ArrowRightIcon } from '../icons/ArrowRightIcon'
 
-import thumbLifts from '../../assets/images/gallery/gallery_thumb_workshop_lifts.webp'
-import thumbTiremachine from '../../assets/images/gallery/gallery_thumb_workshop_tiremachine.webp'
-import thumbBenches from '../../assets/images/gallery/gallery_thumb_workshop_benches.webp'
-import thumbCarLift from '../../assets/images/gallery/gallery_thumb_workshop_car_lift.webp'
+import thumbLifts from '../../assets/images/gallery/workshop-lifts-thumb.webp'
+import thumbTiremachine from '../../assets/images/gallery/workshop-tire-machine-thumb.webp'
+import thumbBenches from '../../assets/images/gallery/workshop-workbench-thumb.webp'
+import thumbCarLift from '../../assets/images/gallery/workshop-car-lift-thumb.webp'
 
 const defaultSlides = [
   {

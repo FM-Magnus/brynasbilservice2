@@ -8,7 +8,7 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 
 - **Repository path:** `/Users/magnusolsson/Documents/REPOS/brynasbilservice_repo`
 - **Active working branch:** `redesign/blue-teal-v1`
-- **Branch status:** The last known pushed baseline is `05b9f34f`. The local branch is currently 6 commits ahead of origin (`fe9863b6`, `6d589d16`, `e0f4dbf1`, `6af5dc8b`, `97cb0817`, `eb6ccb1c`).
+- **Branch status:** The last known pushed baseline is `05b9f34f`. The image-library cleanup and Kamrem visual work are local changes on this branch; always verify the live ahead count before acting.
 - **Push rule:** **STRICT RULE: Never run `git push` without Magnus's explicit prior approval.**
 - **Frontend location:** `client/` (React 18, Vite 4, TypeScript, Tailwind CSS 3).
   - Build command: `npm --prefix client run build` (verified: 0 errors).
@@ -28,7 +28,7 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 - Added introduction copy for the owner, **Maher Basher** (often referred to as Maher or Shomaher in customer reviews).
 - Added consumer law reassurance paragraph (följer konsumenttjänstlagen: arbetet påbörjas inte förrän fast pris/kostnadsförslag godkänts och priset får inte överskridas med mer än 15 %).
 - Integrated an authentic, optimized 1:1 portrait card beside the Maher copy and above the facts box:
-  - `client/src/assets/images/maher_portrait.webp` (127 kB) with `.jpg` fallback (157 kB).
+  - `client/src/assets/images/people/maher-basher-portrait.webp` (127 kB) with JPG fallback (157 kB).
 - Left clean JSX TODO comments for future staff presentation and gallery expansion.
 
 ### 2. Dedicated Workshop Gallery Subpage (`GalleryPage.tsx` at `/galleri`)
@@ -58,10 +58,10 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 - Committed as `eb6ccb1c`.
 - Established dedicated production asset directory: `client/src/assets/images/gallery/`.
 - Converted and saved 4 active workshop thumbnails (< 70 kB WebP with JPG fallback):
-  - `gallery_thumb_workshop_lifts.webp` (46 kB) + `.jpg`
-  - `gallery_thumb_workshop_tiremachine.webp` (67 kB) + `.jpg`
-  - `gallery_thumb_workshop_benches.webp` (53 kB) + `.jpg`
-  - `gallery_thumb_workshop_car_lift.webp` (47 kB) + `.jpg`
+  - `workshop-lifts-thumb.webp` (46 kB) + `.jpg`
+  - `workshop-tire-machine-thumb.webp` (67 kB) + `.jpg`
+  - `workshop-workbench-thumb.webp` (53 kB) + `.jpg`
+  - `workshop-car-lift-thumb.webp` (47 kB) + `.jpg`
 - `GalleryTeaserCard.tsx` imports strictly from `../../assets/images/gallery/`.
 - **Zero dependencies or import references** to the temporary, Git-ignored `_incoming-assets/` folder in production code.
 
@@ -98,7 +98,7 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 | `/felsokning` | `FelsokningPage.tsx` | Diagnostics | Standalone diagnostic service entry with symptom checklist & placeholder |
 | `/service-reparationer#bilservice` | `ServiceReparationerPage.tsx` | Bilservice guide | Long-form Bilservice content, service levels, process, pricing CTA |
 | `/oljebyte` | `OljebytePage.tsx` | Oil change guide | Oil standards, intervals, service checklist, expandable FAQ |
-| `/kamrem` | `KamremPage.tsx` | Timing belt guide | Belt vs chain, warning signs, checklist, shared process & FAQ |
+| `/kamrem` | `KamremPage.tsx` | Timing belt guide | Image-led precision hero, belt vs chain, numbered system cards, warning signs, checklist, shared process & FAQ |
 | `/koppling` | `KopplingPage.tsx` | Clutch guide | Clutch components, symptoms, checklist, shared FAQ |
 | `/bromssystem` | `BromssystemPage.tsx` | Brake guide | Brake overview, warning signs, checklist, shared FAQ |
 | `/bilbatteri` | `BilbatteriPage.tsx` | Battery guide | Battery types (standard/EFB/AGM), advice, shared FAQ |
@@ -121,13 +121,13 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 1. **Intake (`_incoming-assets/`)**:
    - Temporary local inbox for raw photography and assets. Git-ignored by design.
    - New files belong in `_incoming-assets/incoming/` and are sorted into subject folders (`03_verkstad_och_team/`, etc.).
-   - Read `_incoming-assets/README.md`.
+   - Read `_incoming-assets/README.md` and `_incoming-assets/ASSET_INVENTORY.md`.
 2. **Promotion to Production (`client/src/assets/images/`)**:
    - Only when an image is explicitly chosen for a page/component is it exported into `client/src/assets/images/` (or dedicated subfolders like `gallery/`).
-   - Standard format: WebP primary (quality 82, compressed) with JPG compatibility fallback.
+   - Standard format: WebP primary (quality 82, compressed) with JPG compatibility fallback when the consuming component supports both.
    - Thumbnails for cards: ~640px wide, < 70 kB.
    - Hero/large images: ~1920px wide, compressed.
-   - Current promoted assets documented in `_incoming-assets/README.md`.
+   - Current promoted assets documented in `_incoming-assets/README.md`. The `/kamrem` page uses `services/timing-belt/timing-belt-in-hand.webp` with JPG fallback; its source remains in the Kamrem subject folder.
 
 ---
 

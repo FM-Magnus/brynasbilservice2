@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import newLogo from '../../assets/images/LOGOTYP_NY.svg'
+import newLogo from '../../assets/images/brand/brynas-bilservice-logo.svg'
 
 type HeaderProps = {
   onBookingClick: () => void;

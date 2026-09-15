@@ -1,4 +1,4 @@
-import newLogo from '../../assets/images/LOGOTYP_NY.svg'
+import newLogo from '../../assets/images/brand/brynas-bilservice-logo.svg'
 import { FacebookIcon } from '../icons/FacebookIcon'
 
 export function Footer() {
