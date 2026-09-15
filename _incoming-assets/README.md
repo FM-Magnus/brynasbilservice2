@@ -5,6 +5,18 @@ bilder som ska bedömas här. Bildfilerna ignoreras av Git med avsikt; först n�
 en bild är vald och exporterad för webben ska den få en permanent plats i
 `client/src/assets/images/`.
 
+## Börja här
+
+Lägg nytt, osorterat material direkt i `incoming/`. Du behöver inte döpa om,
+beskära eller välja kategori först. När materialet ska användas granskar agenten
+filerna, parar ihop format och thumbnails, byter till sökbara namn och flyttar
+dem till rätt ämnesmapp.
+
+En agent får aldrig rensa `incoming/` bara för att den har påbörjat en granskning.
+Filer flyttas först när motiv och ämnesmapp är tydliga. Råfilerna blir kvar i
+bildbanken tills Magnus har valt bild och placering; först därefter skapas en
+avsiktlig webbexport för `client/src/assets/images/`.
+
 ## Sorteringsprincip
 
 Sortera efter **vad bilden visar**, inte den första sidan där den råkar kunna
@@ -14,6 +26,7 @@ enskild sidmapp.
 
 | Mapp | För vad |
 | --- | --- |
+| `incoming/` | Enda avlämningsmappen för nytt, osorterat material. Lägg aldrig färdiga webbutgåvor här. |
 | `00_layoutgrafik/` | Icke-fotografiska grafiska tillgångar för layouten: ikoner, mönster/texturer, dekorativa former och återanvändbara UI-detaljer. |
 | `01_blue_tone_bakgrunder/` | Återanvändbara blå-/tealtonade bakgrunder. `heros` är breda och har lugn yta för text; `kort_och_sektioner` är för mindre, beskurna ytor. |
 | `02_kundinteraktion/` | Riktig mänsklig kontakt: bokning/inlämning, rådgivning och återlämning. Används för att skapa förtroende snarare än som teknisk servicebild. |

@@ -14,6 +14,7 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
 
 The historical Git details above are not current state. Always inspect the current worktree and branch before acting. Since this baseline was written:
 
+- The newest local commit is `6d589d16` and `redesign/blue-teal-v1` was two commits ahead of origin on 2026-09-15. Context and image-intake changes may be intentionally uncommitted during a handover; preserve them and run `git status --short --branch` before doing anything else.
 - `/biltjanster` is the Biltjänster hub headed **“Våra biltjänster”**, with linked summary cards for the current service guides and clearly labelled CSS image placeholders.
 - `/felsokning` is a separate main-navigation destination immediately after Biltjänster, using the established service-page pattern and a future-image placeholder.
 - Raw photos, blue-tone backgrounds and non-photographic layout graphics now enter through `_incoming-assets/`. Its README defines the subject-based folders; selected web exports only belong in `client/src/assets/images/`.
@@ -150,7 +151,7 @@ Phase 3 files:
 ## Startup checklist
 
 1. Read this file, `AGENTS.md`, and `docs/redesign-phase-0/README.md`.
-2. Confirm `redesign/blue-teal-v1`, clean working tree, synced with `origin/redesign/blue-teal-v1` at commit `05b9f34f`. Never push without Magnus's explicit prior approval.
+2. Confirm the current branch is `redesign/blue-teal-v1` and record—not alter—the actual worktree state. Do not assume it is clean or synced; never push without Magnus's explicit prior approval.
 3. Inspect the About implementation and locked mockup 7 before editing. Attach the seven mockups and Vår Verkstad pack if working in a cloud environment.
 4. Make only the approved About-section changes; preserve business data and functionality.
 5. Verify at 1440, 768 and 390 CSS pixels, then run the diff and build checks.

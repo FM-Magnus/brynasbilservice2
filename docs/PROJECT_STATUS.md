@@ -11,7 +11,7 @@ The repository contains Brynäs Bilservice's public website, booking and admin f
 - Active frontend: `client/` — React 18, TypeScript, Vite 4, Tailwind CSS 3, React Router, Archivo/Manrope and shared teal CSS tokens. Build with `npm --prefix client run build`.
 - Backend: `server/` — JavaScript, Express 4 and MySQL through `mysql2`. Production is documented as Node 16 on the VPS; its current behaviour was not checked for this dashboard.
 - The root React/Vite configuration is orphaned scaffolding. Run and build the frontend from `client/`, not the repository root.
-- Git status: branch `redesign/blue-teal-v1`. The last known pushed baseline is commit `05b9f34f`; on 2026-09-15 the local branch was ahead by one commit and had intentional, uncommitted frontend/documentation work. Always run `git status --short --branch` before relying on this summary. Never push without Magnus's explicit prior approval.
+- Git status: branch `redesign/blue-teal-v1`. The last known pushed baseline is `05b9f34f`; newest local commit is `6d589d16` and the branch was two commits ahead of origin on 2026-09-15. Image-intake context updates may remain deliberately uncommitted while a handover is prepared. Always run `git status --short --branch` before relying on this summary. Never push without Magnus's explicit prior approval.
 
 ## Public pages and content work
 
@@ -46,6 +46,8 @@ The desktop Biltjänster dropdown currently orders **Våra tjänster → `/biltj
 ## Copy and image handoff
 
 Pages may retain clearly labelled placeholders while final photography is prepared. New raw photography, graphics and image candidates first belong in [`_incoming-assets/`](../_incoming-assets/), whose [`README`](../_incoming-assets/README.md) defines the subject-based folders, naming and selection process. The inbox deliberately ignores image contents in Git; it is not a runtime asset directory.
+
+As of 2026-09-15 the intake holds unassigned candidates for workshop overviews, biltransport/bärgning, customer interaction, Bilservice, Däck, AC, Drivaxel/drivknutar and blue-toned backgrounds. Ten workshop image pairs and six transport image pairs already have matching JPG thumbnails. These are a reviewed local asset pool, not approval to use them automatically; Magnus must select a page and placement before an agent creates a production export.
 
 Only after an image is selected should it be exported and added to `client/src/assets/images/`. Use a descriptive pair such as `page-purpose.webp` and `page-purpose.jpg`: WebP is the intended primary format and JPG the compatibility fallback. Current components mainly import JPG directly, so supplying pairs does not by itself activate fallback delivery. Match the actual placement and crop when each asset is integrated; this dashboard sets no universal pixel dimensions. Keep business claims and prices subject to Magnus's approval.
 

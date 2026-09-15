@@ -16,7 +16,14 @@ This is a work-in-progress website. Magnus has not final-approved any public pag
 git status --short --branch
 ```
 
-Historical handoff baseline: branch `redesign/blue-teal-v1`, commit `05b9f34f feat(services): update dackservice and ac-service pages, add codex handover`. This is no longer a clean-worktree guarantee: current work includes further local frontend, documentation and image-inbox changes. Run `git status --short --branch` before acting. Never push without Magnus's explicit prior approval.
+## Current handover state — 2026-09-15
+
+- Local branch: `redesign/blue-teal-v1`, currently **ahead of `origin/redesign/blue-teal-v1` by two commits**. The newest local commit is `6d589d16 feat: add diagnostics page and image intake workflow`; it has not been pushed.
+- The image intake instructions and `incoming/` folder are intentionally uncommitted while this handover is being prepared. Source-image contents in `_incoming-assets/` are ignored by Git by design.
+- Do not assume a clean worktree from this document. Preserve every existing change, run `git status --short --branch` first, and do not commit or push unless Magnus explicitly asks.
+- Read `_incoming-assets/README.md` before working with images. Do not add raw source files directly to `client/src/assets/images/`.
+
+Historical handoff baseline: `05b9f34f feat(services): update dackservice and ac-service pages, add codex handover`. It is only a pushed-history reference, not a description of the current worktree.
 
 ## Product and technical context
 
@@ -27,6 +34,18 @@ Historical handoff baseline: branch `redesign/blue-teal-v1`, commit `05b9f34f fe
 - Existing interactions: use `BookingFormModal` with local `isModalOpen` state; phone links use `tel:0705533395`.
 - Shared FAQ: `client/src/components/ui/BiltjansterFaq.tsx`. Use it for every new Biltjänster page.
 - Image policy: use existing local images or a clearly labelled CSS/markup placeholder. Raw photography, blue-tone backgrounds and layout graphics first go in `_incoming-assets/`; read its README before selecting anything. Do not download, generate or invent photographic assets.
+
+## Prepared image inventory
+
+All assets below are candidates only: none has been wired into the application or approved for a specific placement.
+
+- `03_verkstad_och_team/verkstadsoversikter/`: ten newly supplied workshop-overview image pairs, each with a compact JPG thumbnail.
+- `05_bargning_och_transport/02_biltransport/`: six transport image pairs with thumbnails, plus three newly supplied transport-photo candidates.
+- `02_kundinteraktion/`: three customer-interaction candidates: workshop advice, mechanic/customer by a car, and a handover/handshake.
+- `04_tjanster/`: candidate images for Bilservice, Däck, AC and Drivaxel/drivknutar.
+- `01_blue_tone_bakgrunder/heros/`: one blue-toned tools-on-workbench background candidate.
+
+Before integrating a candidate, ask Magnus which page and placement it should serve, inspect the source crop, export an intentional WebP/JPG pair, and only then add the selected runtime asset to `client/src/assets/images/`. Do not use the intake folder as a production import path.
 
 ## Current information architecture
 
@@ -133,5 +152,5 @@ Build the next Biltjänster page at <route> using the existing Bilservice, Oljeb
 
 Use the supplied Swedish text as draft copy only. Preserve its meaning, add no unconfirmed claims, use the shared BiltjansterFaq, keep the warm-white page background with contained dark cards, reuse the booking modal and tel:0705533395, and leave a clearly labelled hero image placeholder.
 
-Read AGENTS.md, docs/AGENT_HANDOFF.md and docs/PROJECT_STATUS.md first. If anything is uncertain, ask Magnus before editing that item. Inspect, edit only the allowed paths, browser-check 1440/768/390, run git diff --check and npm --prefix client run build, update the documentation, and report exact evidence. Do not commit, push or touch backend/deployment files.
+Read AGENTS.md, docs/AGENT_HANDOFF.md, docs/PROJECT_STATUS.md, this handoff and `_incoming-assets/README.md` first. If anything is uncertain, ask Magnus before editing that item. Inspect, edit only the allowed paths, browser-check 1440/768/390, run git diff --check and npm --prefix client run build, update the documentation, and report exact evidence. Do not commit, push or touch backend/deployment files.
 ```

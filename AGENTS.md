@@ -26,7 +26,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - **Bilservice guide** (`ServiceReparationerPage.tsx` at `/service-reparationer#bilservice`) — Long-form Bilservice content destination with a replaceable visual placeholder, service-level guide, relevant internal links, booking/call CTAs, process, pricing CTA, and the existing vehicle/reassurance closing blocks. The repair and diagnostics cards no longer live here.
 - **Biltjänster default page** (`BiltjansterPage.tsx` at `/biltjanster`) — The default destination for the Biltjänster menu, headed “Våra biltjänster”. It now presents linked draft-summary cards for the eleven current service guides, each with a CSS-only future-image placeholder. It retains the booking-modal and telephone actions; guide pages remain the owners of their detailed content.
 - **Felsökning page** (`FelsokningPage.tsx` at `/felsokning`) — Separate main-navigation entry immediately after Biltjänster. It reuses the established service-page layout with existing diagnostic wording, booking/call actions and a CSS-only future-image placeholder; it deliberately makes no new pricing, capability or photographic claims.
-- **Image and layout-graphics intake** (`_incoming-assets/`) — Temporary local, Git-ignored inbox for raw photography, blue-tone hero/card backgrounds and non-photographic layout graphics. Read `_incoming-assets/README.md`; only selected, web-exported assets belong in `client/src/assets/images/`.
+- **Image and layout-graphics intake** (`_incoming-assets/`) — Temporary local, Git-ignored inbox for raw photography, blue-tone hero/card backgrounds and non-photographic layout graphics. New unsorted material goes in `_incoming-assets/incoming/`; reviewed assets are sorted by subject. The current candidate pool includes workshop, biltransport/bärgning, customer interaction, Bilservice, Däck, AC, Drivaxel and blue-tone background imagery. Read `_incoming-assets/README.md`; only selected, web-exported assets belong in `client/src/assets/images/`.
 - **Oljebyte guide** (`OljebytePage.tsx` at `/oljebyte`) — Expanded draft covering oil-change basics, viscosity/standards, oil types, ageing, intervals, common misconceptions, service checklist, benefits and the shared expandable FAQ. The existing booking modal, telephone CTA and replaceable hero placeholder remain. Magnus chose to retain the technical wording as draft; none of this copy is final-approved or technically fact-checked.
 - **Kamrem guide** (`KamremPage.tsx` at `/kamrem`) — Expanded draft guide covering timing belt vs chain, benefits, warning signs, service scope checklist, draft guidance, safety note, shared workshop process, FAQ and booking CTA. The intervals, timing and component claims are draft source material and have not been fact-checked with the workshop.
 - **Bilbatteri guide** (`BilbatteriPage.tsx` at `/bilbatteri`) — Expanded draft guide covering battery types (standard, EFB, AGM), benefits, warning signs, service scope checklist, draft guidance, underhållsråd note, shared workshop process, FAQ and booking CTA. The intervals and technical claims are draft source material and have not been fact-checked with the workshop.
@@ -101,8 +101,8 @@ Magnus wants the site's content deepened by drawing on two outside sources — a
 - Hero review panel fully reworked and the hero restructured to a column + footer band (see above). Committed as `d6b7f18e`.
 - Rewrote the `description` field for all 5 categories on `ServicesPage.tsx` (Bilservice & Reparationer, Felsökning/Diagnostik, AC-Service, Däckservice, Bärgning & Biltransport). Committed as `d570c433`.
 - Backend starts but `/api/*` returns 500 without the MySQL SSH tunnel; that is expected locally.
-- Working branch: `redesign/blue-teal-v1`. Pushed to `origin/redesign/blue-teal-v1` (commit `05b9f34f`) on 2026-09-14 with Magnus's explicit approval. Working tree is 100% clean and in sync with origin.
-- Remote parity verified: `git push origin redesign/blue-teal-v1` completed successfully.
+- Historical pushed baseline: `05b9f34f` on `origin/redesign/blue-teal-v1` (pushed with Magnus's approval on 2026-09-14). The current local branch has subsequent commits `fe9863b6` and `6d589d16` and was two commits ahead of origin on 2026-09-15; image-intake context updates may be intentionally uncommitted during handover. Always inspect live Git state before acting.
+- Historical remote parity was verified through `05b9f34f`; it does not authorize or prove the state of later local commits.
 - Production safety: pushed strictly to `origin/redesign/blue-teal-v1` on Magnus's repository (`FM-Magnus/brynasbilservice2`), with no modification to `main`, no modification to `johnny-archive`, and no production server deployment.
 
 ### Files agents should NOT touch
@@ -158,6 +158,9 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-15 — Codex (Antigravity continuation preparation)
+- Updated the project handovers and status dashboard for an Antigravity continuation. Recorded the actual local baseline (`6d589d16`, two commits ahead of origin at handover time), the no-push rule, the incoming-image workflow and the reviewed candidate image inventory. No runtime code, image import, build configuration, backend or deployment file was changed; do not assume the worktree is clean—inspect it before every task.
 
 ### 2026-09-15 — Codex (image and layout-graphics intake)
 - Added `_incoming-assets/` as the Git-ignored local staging area for raw photography, blue-tone hero/card backgrounds and layout graphics. Its README specifies subject-based folders, including customer interaction, workshop/team, each service, bärgning split into recovery/transport/winter, vehicle listings and layout graphics. Images must be selected and web-exported before entering `client/src/assets/images/`; no runtime asset was added or changed.

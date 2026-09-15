@@ -9,7 +9,7 @@ This document prepares Codex (or any incoming AI assistant) to seamlessly contin
 
 - **Repository path:** `/Users/magnusolsson/Documents/REPOS/brynasbilservice_repo`
 - **Active working branch:** `redesign/blue-teal-v1`
-- **Branch status:** The last known pushed baseline is `05b9f34f`. On 2026-09-15, the local branch was ahead by one commit with intentional, uncommitted frontend, documentation and image-inbox work. Run `git status --short --branch` before any action; do not assume this handoff remains current.
+- **Branch status:** The last known pushed baseline is `05b9f34f`. The latest local commit is `6d589d16`; the branch was two commits ahead of origin on 2026-09-15. Image-intake context updates may intentionally remain uncommitted during a handover. Run `git status --short --branch` before any action; do not assume this handoff remains current.
 - **Push rule:** **STRICT RULE: Never run `git push` without Magnus's explicit prior approval.**
 - **Frontend location:** `client/` (React 18, Vite 4, TypeScript, Tailwind CSS 3).
   - Build command: `npm --prefix client run build`
@@ -100,10 +100,10 @@ All public routes are registered in `client/src/main.tsx` and dropdown navigatio
    - Preserved all 3 prices, card titles, 4-step process, and R134a/R1234yf note with `FACT TO CONFIRM` code comment.
    - Verified 0px horizontal overflow on desktop (1440px) and mobile (390px).
 
-4. **Remote Parity & Git State:**
-   - All commits (`15956373` through `05b9f34f`) pushed to `origin/redesign/blue-teal-v1` with Magnus's approval.
-   - Working tree is clean.
-   - Full build (`npm --prefix client run build`) passes in ~1.8s with 0 errors.
+4. **Historical remote parity (not current worktree state):**
+   - All commits through `05b9f34f` were pushed to `origin/redesign/blue-teal-v1` with Magnus's approval.
+   - Subsequent local commits include `fe9863b6` and `6d589d16`; do not push them without a separate explicit request and verification.
+   - The prior full build passed, but run it again after any implementation change.
 
 ---
 
