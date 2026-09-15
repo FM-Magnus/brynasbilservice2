@@ -150,7 +150,7 @@ export default function ServiceReparationerPage() {
               <p>Ett regelbundet serviceprogram är avgörande för flera skäl.</p>
             </div>
 
-            <div className="services-page__benefit-grid">
+            <div className="services-page__benefit-grid services-page__benefit-grid--accent">
               {serviceBenefits.map((benefit) => (
                 <article className="services-page__benefit-card" key={benefit.title}>
                   <h3>{benefit.title}</h3>

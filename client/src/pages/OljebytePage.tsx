@@ -291,6 +291,22 @@ export default function OljebytePage() {
           </div>
         </section>
 
+        <section className="oil-page__benefits" aria-labelledby="oljebyte-benefits-title">
+          <div className="container oil-page__container">
+            <header className="oil-page__section-heading oil-page__section-heading--light">
+              <h2 id="oljebyte-benefits-title">Fördelar med regelbundna <span className="title-accent">oljebyten</span></h2>
+            </header>
+            <div className="oil-page__benefit-grid oil-page__benefit-grid--accent">
+              {benefits.map((benefit) => (
+                <article className="oil-page__benefit-card" key={benefit}>
+                  <CheckIcon />
+                  <p>{benefit}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="oil-page__included" aria-labelledby="oljebyte-included-title">
           <div className="container oil-page__container">
             <header className="oil-page__section-heading">
@@ -303,22 +319,6 @@ export default function OljebytePage() {
                   <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <CheckIcon />
                   <p>{item}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="oil-page__benefits" aria-labelledby="oljebyte-benefits-title">
-          <div className="container oil-page__container">
-            <header className="oil-page__section-heading oil-page__section-heading--light">
-              <h2 id="oljebyte-benefits-title">Fördelar med regelbundna <span className="title-accent">oljebyten</span></h2>
-            </header>
-            <div className="oil-page__benefit-grid">
-              {benefits.map((benefit) => (
-                <article className="oil-page__benefit-card" key={benefit}>
-                  <CheckIcon />
-                  <p>{benefit}</p>
                 </article>
               ))}
             </div>

@@ -86,7 +86,7 @@ export default function ContactPage() {
                 Kontakta oss
               </div>
               <h1 className="contact-page__hero-title" id="contact-hero-title">
-                Hör av dig till Brynäs Bilservice
+                <span className="title-accent">Hör av dig</span> till Brynäs Bilservice
               </h1>
               <p className="contact-page__hero-lead">
                 Har du frågor om din bil, behöver rådgivning eller vill skicka en förfrågan? Vår verkstad ligger på Utmarksvägen i Brynäs, Gävle och vi hjälper dig gärna med snabba och raka besked.

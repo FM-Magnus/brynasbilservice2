@@ -133,6 +133,10 @@ Current public-design tokens include `--redesign-accent` (teal), `--redesign-pag
 
 Animations: `.fade-up` class + IntersectionObserver in App.tsx triggers `.visible` on scroll.
 
+**Hero rule (site-wide, established 2026-09-15):** every page hero heading uses `text-transform: uppercase` with a teal-accented portion (`<span className="title-accent">`, colored via `var(--redesign-accent)`). Every hero container shares `min-height: clamp(640px, calc(100svh - 60px), 760px)` with `display:flex; align-items:center` — the same sizing as the landing page's `.hero__frame`. Apply this to any new page hero.
+
+**Card motifs (established 2026-09-15):** two reusable card treatments break up all-white card grids — a **teal accent card** (`background: linear-gradient(145deg, #0b848e 0%, #066973 100%)`, white text) for "featured" content, and a **dark card** (`var(--redesign-ink)` background, white text, `#91d7d9` highlights) for "technical/serious" content. Reuse these (see AGENTS.md Current state for exact usages) before inventing a new card style.
+
 ## Page section order (App.tsx)
 Header → Hero → ContactIntro → EV (workshop process) → About → Services (preview) → Contact → Footer
 

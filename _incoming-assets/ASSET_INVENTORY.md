@@ -29,7 +29,7 @@ documentation evidence so a thumbnail can never be mistaken for a main image.
 | Gallery cards | `gallery/workshop/workshop-*-card.webp` | Six 1280px animated landing-page overview exports | `GalleryTeaserCard.tsx` |
 | Gallery thumbnails | `gallery/workshop/workshop-*-thumb.{webp,jpg}` | Matching 640px thumbnails only | `GalleryPage.tsx`, `GalleryTeaserCard.tsx` |
 | People | `people/maher-basher-portrait.{webp,jpg}` and `-thumb` pair | Owner portrait and its thumbnail | `AboutPage.tsx` |
-| Services | `services/{ac,diagnostics,repair,timing-belt,tires,towing}/` | Selected page-specific imagery | Services and service-guide pages |
+| Services | `services/{ac,battery,diagnostics,repair,timing-belt,tires,towing}/` | Selected page-specific imagery. `battery/` (added 2026-09-15) holds the 3 Bilbatteri photos (hero, intro, service section); `diagnostics/` gained 2 more (Felsökning intro/service) plus a `.webp` export of the existing hero JPG | Services and service-guide pages |
 | Vehicles | `vehicles/peugeot-307-cc/` | 1920px photo pairs plus 640px picker thumbnails | `BilarTillSalu.tsx` |
 | Public | `client/public/favicon.{ico,png}` | Browser favicon | `client/index.html` |
 

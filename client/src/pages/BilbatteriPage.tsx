@@ -6,6 +6,12 @@ import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { Footer } from '../components/layout/Footer'
 import { Header } from '../components/layout/Header'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
+import heroJpg from '../assets/images/services/battery/battery-terminal-bolt-tightening.jpg'
+import heroWebp from '../assets/images/services/battery/battery-terminal-bolt-tightening.webp'
+import introJpg from '../assets/images/services/battery/battery-multimeter-test-workshop.jpg'
+import introWebp from '../assets/images/services/battery/battery-multimeter-test-workshop.webp'
+import serviceJpg from '../assets/images/services/battery/battery-terminal-voltage-closeup.jpg'
+import serviceWebp from '../assets/images/services/battery/battery-terminal-voltage-closeup.webp'
 
 const parts = [
   ['Konventionellt blysyrabatteri', 'Vanligast på äldre bilar utan start-stopp-teknik.'],
@@ -40,10 +46,10 @@ const serviceItems = [
 ]
 
 const guidance = [
-  ['Batteriers livslängd', 'Bilbatterier håller normalt 3–6 år beroende på typ (konventionella 3–4 år, EFB 4–6 år, AGM 5–7 år). Riktvärden kan variera med körmönster.'],
-  ['Kyla halverar kapaciteten', 'Vid minusgrader kan batteriets effektiva startkraft minska med upp till 50 % samtidigt som motorn kräver mer kraft att dra igång.'],
-  ['Kortkörning sliter', 'Körsträckor under 15 minuter hinner sällan återställa den ström som gick åt vid startögonblicket.'],
-  ['Djupurladdning ger permanenta skador', 'Ett helt urladdat batteri kan drabbas av sulfatering som gör att det aldrig återfår sin ursprungliga kapacitet.'],
+  { title: 'Batteriers livslängd', value: '3–6 år', text: 'Bilbatterier håller normalt 3–6 år beroende på typ (konventionella 3–4 år, EFB 4–6 år, AGM 5–7 år). Riktvärden kan variera med körmönster.' },
+  { title: 'Kyla halverar kapaciteten', value: '−50%', text: 'Vid minusgrader kan batteriets effektiva startkraft minska med upp till 50 % samtidigt som motorn kräver mer kraft att dra igång.' },
+  { title: 'Kortkörning sliter', value: '<15 min', text: 'Körsträckor under 15 minuter hinner sällan återställa den ström som gick åt vid startögonblicket.' },
+  { title: 'Djupurladdning ger permanenta skador', value: 'Permanent', text: 'Ett helt urladdat batteri kan drabbas av sulfatering som gör att det aldrig återfår sin ursprungliga kapacitet.' },
 ]
 
 const processSteps = [
@@ -71,29 +77,40 @@ export default function BilbatteriPage() {
     <>
       <Header onBookingClick={() => setIsModalOpen(true)} />
       <main className="services-page battery-page">
-        <section className="services-page__hero" aria-labelledby="battery-page-title">
-          <div className="container"><div className="services-page__hero-layout">
+        <section className="services-page__hero battery-page__hero" aria-labelledby="battery-page-title">
+          <div className="battery-page__hero-media" aria-hidden="true">
+            <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="" /></picture>
+            <div className="battery-page__hero-scrim" />
+          </div>
+          <div className="container"><div className="battery-page__hero-inner">
             <div className="services-page__hero-content">
+              <div className="battery-page__eyebrow"><BoltIcon aria-hidden="true" /><span>Elsystem &amp; startkraft</span></div>
               <h1 className="services-page__title" id="battery-page-title">Bilbatteri <span className="title-accent">när du behöver säker startkraft</span></h1>
               <p className="services-page__lead">Bilbatteriet driver startmotorn och håller igång bilens elsystem — från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil.</p>
               <div className="services-page__hero-actions"><button type="button" onClick={() => setIsModalOpen(true)} className="services-page__btn services-page__btn--primary">Boka tid</button><a href="tel:0705533395" className="services-page__btn services-page__btn--outline"><PhoneIcon className="services-page__btn-icon" /><span>Ring 070-553 33 95</span></a></div>
             </div>
-            <div className="services-page__image-placeholder" role="img" aria-label="Platshållare för framtida bild av batteriservice i verkstaden"><BoltIcon aria-hidden="true" /><span>Batteriservice i verkstaden</span><small>Bild kommer</small></div>
+            <aside className="battery-page__hero-callout"><span className="battery-page__hero-callout-value">3–6 år</span><span className="battery-page__hero-callout-label">Normal livslängd på ett bilbatteri</span><p>Kyla, kortkörning och ålder är de vanligaste orsakerna till att batteriet ger upp — ofta helt utan förvarning.</p></aside>
           </div></div>
         </section>
 
         <section className="services-page__guide battery-page__intro" aria-labelledby="battery-intro-title"><div className="container">
-          <div className="services-page__guide-intro"><h2 id="battery-intro-title">Vad gör bilbatteriet?</h2><p>Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ — till exempel ett standardbatteri i en bil som kräver AGM — ger kortare livslängd och sämre funktion.</p></div>
+          <div className="battery-page__intro-layout">
+            <div className="services-page__guide-intro"><h2 id="battery-intro-title">Vad gör bilbatteriet?</h2><p>Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ — till exempel ett standardbatteri i en bil som kräver AGM — ger kortare livslängd och sämre funktion.</p></div>
+            <div className="battery-page__intro-media"><picture><source srcSet={introWebp} type="image/webp" /><img src={introJpg} alt="Mekaniker testar batteriets spänning med en multimeter i verkstaden" loading="lazy" /></picture></div>
+          </div>
           <div className="battery-page__parts-grid">{parts.map(([title, text]) => <article className="battery-page__part-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
           <div className="services-page__guide-intro battery-page__section-gap"><h2>Varför är det viktigt att byta i tid?</h2></div>
-          <div className="services-page__benefit-grid battery-page__benefit-grid">{benefits.map(([title, text]) => <article className="services-page__benefit-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="battery-page__benefit-list">{benefits.map(([title, text]) => <article className="battery-page__benefit-row" key={title}><span className="battery-page__benefit-icon"><BoltIcon aria-hidden="true" /></span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
         </div></section>
 
-        <section className="battery-page__symptoms" aria-labelledby="battery-symptoms-title"><div className="container"><div className="services-page__guide-intro"><h2 id="battery-symptoms-title">Varningstecken på svagt eller dåligt batteri</h2><p>Batteriet ger ofta subtila ledtrådar innan det lägger av helt. Känner du igen något av följande symptom är det klokt att låta oss testa batteriets hälsa innan kylan slår till.</p></div><div className="battery-page__symptom-grid">{symptoms.map(([title, text]) => <article className="battery-page__symptom-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+        <section className="battery-page__symptoms" aria-labelledby="battery-symptoms-title"><div className="container"><div className="services-page__guide-intro"><h2 id="battery-symptoms-title">Varningstecken på svagt eller dåligt batteri</h2><p>Batteriet ger ofta subtila ledtrådar innan det lägger av helt. Känner du igen något av följande symptom är det klokt att låta oss testa batteriets hälsa innan kylan slår till.</p></div><div className="battery-page__symptom-list">{symptoms.map(([title, text], index) => <article className="battery-page__symptom-row" key={title}><span className="battery-page__symptom-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></div></section>
 
-        <section className="battery-page__service" aria-labelledby="battery-service-title"><div className="container"><div className="battery-page__service-card"><div><h2 id="battery-service-title">Det här kan vi hjälpa dig med</h2><p>Vi testar bilens laddsystem och monterar ett kvalitetsbatteri med exakt rätt specifikation och teknik för just din bil.</p></div><ul>{serviceItems.map(item => <li key={item}><CheckIcon className="battery-page__service-check" aria-hidden="true" /><span>{item}</span></li>)}</ul></div></div></section>
+        <section className="battery-page__service" aria-labelledby="battery-service-title"><div className="container"><div className="battery-page__service-card">
+          <div className="battery-page__service-media"><picture><source srcSet={serviceWebp} type="image/webp" /><img src={serviceJpg} alt="Mekaniker mäter batterispänningen med en multimeter, 12,6 volt" /></picture></div>
+          <div className="battery-page__service-content"><div><h2 id="battery-service-title">Det här kan vi hjälpa dig med</h2><p>Vi testar bilens laddsystem och monterar ett kvalitetsbatteri med exakt rätt specifikation och teknik för just din bil.</p></div><ul>{serviceItems.map(item => <li key={item}><CheckIcon className="battery-page__service-check" aria-hidden="true" /><span>{item}</span></li>)}</ul></div>
+        </div></div></section>
 
-        <section className="battery-page__guidance" aria-labelledby="battery-guidance-title"><div className="container"><div className="services-page__guide-intro"><h2 id="battery-guidance-title">Mer info om batterier och underhåll</h2><p>Här är branschmässiga riktlinjer och fakta kring batterityper, temperaturpåverkan och körmönster. Vi kontrollerar alltid vad som passar din bil bäst.</p></div><div className="battery-page__guidance-grid">{guidance.map(([title, text]) => <article className="battery-page__guidance-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div><aside className="battery-page__advice-note"><strong>Underhållsråd:</strong> Kör du mestadels korta sträckor rekommenderar vi att ansluta en modern underhållsladdare några gånger under vinterhalvåret för att maximera batteriets livslängd.</aside></div></section>
+        <section className="battery-page__guidance" aria-labelledby="battery-guidance-title"><div className="container"><div className="services-page__guide-intro"><h2 id="battery-guidance-title">Mer info om batterier och underhåll</h2><p>Här är branschmässiga riktlinjer och fakta kring batterityper, temperaturpåverkan och körmönster. Vi kontrollerar alltid vad som passar din bil bäst.</p></div><div className="battery-page__guidance-stats">{guidance.map(({ title, value, text }) => <article className="battery-page__stat-card" key={title}><span className="battery-page__stat-value">{value}</span><h3>{title}</h3><p>{text}</p></article>)}</div><aside className="battery-page__advice-note"><strong>Underhållsråd:</strong> Kör du mestadels korta sträckor rekommenderar vi att ansluta en modern underhållsladdare några gånger under vinterhalvåret för att maximera batteriets livslängd.</aside></div></section>
 
         <section className="services-page__process-section battery-page__process" aria-labelledby="battery-process-title"><div className="container"><div className="services-page__process-card"><div className="services-page__process-inner"><div className="services-page__process-text"><h2 className="services-page__process-heading" id="battery-process-title">Så går det till <br /><span className="title-accent">hos oss</span></h2><p className="services-page__process-desc">Att byta batteri hos oss går snabbt och smidigt, med noggrann diagnostik så att du vet att hela laddsystemet mår bra.</p><div className="services-page__process-action"><a href="tel:0705533395" className="services-page__process-cta"><PhoneIcon className="services-page__process-icon" /><span>Ring oss: 070-553 33 95</span></a></div></div><div className="services-page__process-steps"><div className="services-page__steps-list">{processSteps.map(([number, title, text]) => <div className="services-page__step" key={number}><div className="services-page__step-num" aria-hidden="true">{number}</div><div className="services-page__step-content"><h3 className="services-page__step-title">{title}</h3><p className="services-page__step-desc">{text}</p></div></div>)}</div></div></div></div></div></section>
 

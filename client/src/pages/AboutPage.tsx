@@ -55,7 +55,7 @@ export default function AboutPage() {
                   Om Brynäs Bilservice
                 </div>
                 <h1 className="about-page__hero-title" id="about-hero-title">
-                  Din lokala och personliga bilverkstad i Brynäs
+                  Din lokala och <span className="title-accent">personliga bilverkstad</span> i Brynäs
                 </h1>
                 <p className="about-page__hero-lead">
                   Sedan starten 2021 har vi drivit en oberoende bilverkstad på Utmarksvägen i Gävle med ett enkelt mål: att ge bilägare personlig service, fackmannamässigt utfört arbete och raka besked utan krångel.
