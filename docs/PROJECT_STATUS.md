@@ -13,7 +13,7 @@ The repository contains Brynäs Bilservice's public website, booking and admin f
 - Active frontend: `client/` — React 18, TypeScript, Vite 4, Tailwind CSS 3, React Router, Archivo/Manrope and shared teal CSS tokens. Build with `npm --prefix client run build`.
 - Backend: `server/` — JavaScript, Express 4 and MySQL through `mysql2`. Production is documented as Node 16 on the VPS; its current behaviour was not checked for this dashboard.
 - The root React/Vite configuration is orphaned scaffolding. Run and build the frontend from `client/`, not the repository root.
-- Git status: branch `redesign/blue-teal-v1`. The last known pushed baseline is `05b9f34f`; local (not yet pushed) work since then includes the image-library cleanup, Kamrem visual update, and the 2026-09-15 Claude session committed as `afda8cee` (Bilbatteri/Felsökning/AC/Däckservice rework + site-wide hero rule). Always run `git status --short --branch` before relying on this summary. Never push without Magnus's explicit prior approval.
+- Git status: branch `redesign/blue-teal-v1`, pushed and in sync with `origin/redesign/blue-teal-v1` as of `1dd9fb0a` (2026-09-16), which includes the image-library cleanup, Kamrem visual update, and the 2026-09-15 Claude session (`afda8cee`: Bilbatteri/Felsökning/AC/Däckservice rework + site-wide hero rule). Always run `git status --short --branch` before relying on this summary — it can drift the moment new local work starts. Never push without Magnus's explicit prior approval.
 
 ## Public pages and content work
 
