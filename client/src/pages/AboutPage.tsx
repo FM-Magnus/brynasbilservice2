@@ -8,55 +8,8 @@ import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 
 import imgWorkshop1 from '../assets/images/OMOSS_KENBURNS1.jpg'
-import imgWorkshop2 from '../assets/images/OMOSS_KENBURNS2.jpg'
-import imgLounge from '../assets/images/OMOSS_KENBURNS3.jpg'
-import imgExterior from '../assets/images/HAR_FINNS_VI.jpg'
 import imgMaherWebp from '../assets/images/maher_portrait.webp'
 import imgMaherJpg from '../assets/images/maher_portrait.jpg'
-
-interface GalleryItem {
-  id: string
-  image: string
-  alt: string
-  category: string
-  title: string
-  description: string
-}
-
-const galleryItems: GalleryItem[] = [
-  {
-    id: 'verkstad',
-    image: imgWorkshop1,
-    alt: 'Brynäs Bilservice verkstadslokal med lyftar och verktyg',
-    category: 'Verkstadslokaler',
-    title: 'Lyftplatser och mekaniska reparationer',
-    description: 'Välutrustad verkstadsyta för service, bromsar, kamremsbyten och större mekaniska arbeten.'
-  },
-  {
-    id: 'dack',
-    image: imgWorkshop2,
-    alt: 'Däckverkstad med maskiner för däckskifte och hjulbalansering',
-    category: 'Däck & hjulservice',
-    title: 'Modern däck- och balanseringsutrustning',
-    description: 'Maskiner för däckskifte, krängning, balansering och däckhotellshantering.'
-  },
-  {
-    id: 'reception',
-    image: imgLounge,
-    alt: 'Kundmottagning och väntyta hos Brynäs Bilservice',
-    category: 'Kundmottagning',
-    title: 'Trevlig väntyta och personligt mottagande',
-    description: 'Vår kundmottagning där du lämnar och hämtar nycklarna och kan sitta ner en stund.'
-  },
-  {
-    id: 'exterior',
-    image: imgExterior,
-    alt: 'Brynäs Bilservice exteriör och entré på Utmarksvägen 21B',
-    category: 'Exteriör & infart',
-    title: 'Utmarksvägen 21B på Brynäs i Gävle',
-    description: 'Lättillgänglig infart och goda parkeringsmöjligheter precis intill verkstaden.'
-  }
-]
 
 const steps = [
   {
@@ -317,46 +270,16 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Workshop gallery section */}
-        <section className="about-page__gallery" aria-labelledby="gallery-title">
+        {/* Workshop gallery teaser CTA */}
+        <section className="about-page__gallery-cta" aria-label="Bildgalleri">
           <div className="container">
-            <div className="about-page__gallery-intro">
-              <div className="section-eyebrow section-eyebrow--dark">
-                <span className="eyebrow-line" aria-hidden="true" />
-                Bilder från verkstaden
-              </div>
-              <h2 className="about-page__section-title" id="gallery-title">
-                Ta en titt bakom kulisserna
-              </h2>
-              <p className="about-page__gallery-lead">
-                Autentiska bilder från vår verkstad, däckavdelning och kundmottagning på Utmarksvägen i Brynäs.
-              </p>
-            </div>
-
-            <div className="about-page__gallery-grid">
-              {galleryItems.map((item) => (
-                <article key={item.id} className="about-page__gallery-card">
-                  <div className="about-page__gallery-media">
-                    <img
-                      src={item.image}
-                      alt={item.alt}
-                      className="about-page__gallery-img"
-                      loading="lazy"
-                    />
-                    <div className="about-page__gallery-badge">{item.category}</div>
-                  </div>
-                  <div className="about-page__gallery-body">
-                    <h3 className="about-page__gallery-title">{item.title}</h3>
-                    <p className="about-page__gallery-desc">{item.description}</p>
-                  </div>
-                </article>
-              ))}
-              {/* TODO CONTENT: HÄR BORDE GALLERIET UTÖKAS MED FLER KATEGORIER.
-              Kunden har fler bilder tagna med systemkamera. Föreslagna nya kategorier:
-              1. Teamet i arbete (kopplar till "Maher eller någon i teamet"-stycket ovan)
-              2. Faktiska jobb innan/efter (kopplar till "bevis före löften"-stycket ovan)
-              3. Utrustning i närbild
-              Väntar på bildmaterial och godkännande av vilka bilder som får publiceras. */}
+            <div className="about-page__gallery-cta-inner">
+              <a href="/galleri" className="about-page__gallery-cta-btn">
+                <span>Ta en titt bakom garageportarna – välkommen in i vårt bildgalleri</span>
+                <span className="about-page__btn-arrow" aria-hidden="true">
+                  <ArrowRightIcon className="w-4 h-4" />
+                </span>
+              </a>
             </div>
           </div>
         </section>

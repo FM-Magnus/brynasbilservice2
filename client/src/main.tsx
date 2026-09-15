@@ -26,6 +26,7 @@ import AcServicePage from './pages/AcServicePage.tsx'
 import BargningPage from './pages/BargningPage.tsx'
 import AboutPage from './pages/AboutPage.tsx'
 import ContactPage from './pages/ContactPage.tsx'
+import GalleryPage from './pages/GalleryPage.tsx'
 
 const basename = import.meta.env.DEV ? '/' : '/brynasbilservice'
 
@@ -41,6 +42,7 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/om-oss" element={<AboutPage />} />
+          <Route path="/galleri" element={<GalleryPage />} />
           <Route path="/tjanster" element={<ServicesPage />} />
           <Route path="/service-reparationer" element={<ServiceReparationerPage />} />
           <Route path="/biltjanster" element={<BiltjansterPage />} />

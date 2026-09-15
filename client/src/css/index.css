@@ -6891,6 +6891,55 @@ ul { list-style: none; }
   margin: 0;
 }
 
+/* Workshop gallery teaser CTA (AboutPage) */
+.about-page__gallery-cta {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+.about-page__gallery-cta-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about-page__gallery-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 58px;
+  padding: 1.05rem 2.25rem;
+  background: var(--redesign-accent);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--redesign-radius-pill);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.4;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(36, 150, 160, 0.28);
+  transition: all var(--dur-normal) var(--ease);
+  max-width: 100%;
+}
+.about-page__gallery-cta-btn:hover {
+  background: var(--redesign-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(36, 150, 160, 0.42);
+}
+.about-page__gallery-cta-btn:focus-visible {
+  outline: 3px solid var(--redesign-accent);
+  outline-offset: 3px;
+}
+.about-page__gallery-cta-btn span:first-child {
+  flex: 1 1 auto;
+}
+.about-page__gallery-cta-btn .about-page__btn-arrow {
+  flex-shrink: 0;
+}
+.about-page__gallery-cta-btn:hover .about-page__btn-arrow {
+  transform: translateX(3px);
+}
+
 /* Workshop gallery section */
 .about-page__gallery {
   padding-block: clamp(3.5rem, 6vw, 5.5rem);
@@ -7064,6 +7113,11 @@ ul { list-style: none; }
   .about-page__fact-link {
     text-align: left;
   }
+  .about-page__gallery-cta-btn {
+    padding: 0.95rem 1.6rem;
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -7087,11 +7141,21 @@ ul { list-style: none; }
     font-size: 0.78rem;
     padding: 0.35rem 0.75rem;
   }
+  .about-page__gallery-cta {
+    padding-block: 2rem;
+  }
+  .about-page__gallery-cta-btn {
+    padding: 0.85rem 1.15rem;
+    font-size: 0.88rem;
+    gap: 10px;
+    width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .about-page__btn,
   .about-page__btn-arrow,
+  .about-page__gallery-cta-btn,
   .about-page__step-card,
   .about-page__gallery-card,
   .about-page__gallery-img {
