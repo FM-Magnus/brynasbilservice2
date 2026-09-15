@@ -32,10 +32,9 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 - Left clean JSX TODO comments for future staff presentation and gallery expansion.
 
 ### 2. Dedicated Workshop Gallery Subpage (`GalleryPage.tsx` at `/galleri`)
-- Committed as `97cb0817`.
 - Built dedicated gallery page at `client/src/pages/GalleryPage.tsx` registered as `/galleri` in `client/src/main.tsx`.
-- Features dark hero (`Bilder & Verkstadsmiljö`, `Bilder från Brynäs Bilservice`), dual `Boka tid` / `Ring` CTAs, full 4-card workshop photo grid with tags and descriptions, closing dark CTA card, and `BookingFormModal`.
-- Retains expansion TODO comment for future photo categories (teamet i arbete, före/efter, närbilder på utrustning).
+- Features dark hero (`Bilder & Verkstadsmiljö`, `Bilder från Brynäs Bilservice`), dual `Boka tid` / `Ring` CTAs, an image-first viewer with a full-size selected asset, horizontal thumbnail carousel, previous/next controls, mouse-wheel/trackpad scrolling, track dragging and Arrow-key navigation, plus the closing dark CTA card and `BookingFormModal`.
+- The viewer deliberately excludes customer reception, portrait, handover and every people-containing image. It uses eleven visually reviewed no-people workshop views, each with a 1920px WebP/JPG main pair and a matching 640px thumbnail pair; see `_incoming-assets/ASSET_INVENTORY.md` for the exact mapping.
 
 ### 3. Gallery Teaser CTA Button on `/om-oss`
 - Committed as `97cb0817`.
@@ -54,15 +53,12 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
   3. Organic bottom-right corner cutout (`background: var(--redesign-page); border-top-left-radius: 20px;`) displaying active slide dots, uppercase `"TILL GALLERIET"` text, and circular arrow badge with slide hover animation (`translateX(3px)`).
 - Integrated into `client/src/components/sections/About.tsx` replacing inline slideshow markup.
 
-### 5. Best-Practice Asset Organization
+### 5. Complete image-library organization
 - Committed as `eb6ccb1c`.
-- Established dedicated production asset directory: `client/src/assets/images/gallery/`.
-- Converted and saved 4 active workshop thumbnails (< 70 kB WebP with JPG fallback):
-  - `workshop-lifts-thumb.webp` (46 kB) + `.jpg`
-  - `workshop-tire-machine-thumb.webp` (67 kB) + `.jpg`
-  - `workshop-workbench-thumb.webp` (53 kB) + `.jpg`
-  - `workshop-car-lift-thumb.webp` (47 kB) + `.jpg`
-- `GalleryTeaserCard.tsx` imports strictly from `../../assets/images/gallery/`.
+- Production assets are grouped by purpose, while source, legacy and documentation images stay visibly separate. The authoritative map is `_incoming-assets/ASSET_INVENTORY.md`.
+- The eleven production gallery images are in `client/src/assets/images/gallery/workshop/`: every basename has a 1920px WebP/JPG main pair and a 640px `-thumb` WebP/JPG pair.
+- `GalleryTeaserCard.tsx` imports six dedicated 1280px overview `-card.webp` exports strictly from `../../assets/images/gallery/workshop/`; tire-machine/workbench detail views are intentionally excluded. The 640px `-thumb` files are reserved for the compact carousel, while the large viewer and the `/om-oss` hero import only 1920px main files.
+- Historical image exports are grouped under `client/src/assets/images/archive/` by actual subject, including `gallery-legacy/` and `brand/`; no production code imports this tree.
 - **Zero dependencies or import references** to the temporary, Git-ignored `_incoming-assets/` folder in production code.
 
 ---
@@ -93,7 +89,7 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 | --- | --- | --- | --- |
 | `/` | `App.tsx` | Landing page | Header → Hero (with GoogleReviews band) → ContactIntro → Process ("Så fungerar det") → About (with `GalleryTeaserCard`) → Services preview → Contact → Footer |
 | `/om-oss` | `AboutPage.tsx` | About page | Hero → Local workshop section with Maher copy & portrait card → 3-step process → Gallery CTA button (*"Ta en titt bakom garageportarna..."*) → Closing CTA |
-| `/galleri` | `GalleryPage.tsx` | Dedicated Gallery | Dark hero → 4-card workshop photo grid with tags/descriptions → Closing dark CTA card → Booking modal |
+| `/galleri` | `GalleryPage.tsx` | Dedicated Gallery | Dark hero → full-size image viewer with accessible thumbnail carousel → Closing dark CTA card → Booking modal |
 | `/biltjanster` | `BiltjansterPage.tsx` | Biltjänster hub | "Våra biltjänster": linked draft summary cards for 11 service guides with CSS placeholders |
 | `/felsokning` | `FelsokningPage.tsx` | Diagnostics | Standalone diagnostic service entry with symptom checklist & placeholder |
 | `/service-reparationer#bilservice` | `ServiceReparationerPage.tsx` | Bilservice guide | Long-form Bilservice content, service levels, process, pricing CTA |
@@ -135,8 +131,8 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 
 When continuing from here, the following tasks are top priority:
 
-1. **Gallery expansion (when customer materials arrive)**:
-   - Expand `GalleryPage.tsx` with additional photo categories (teamet i arbete, före/efter-jobb, verktyg i närbild) as outlined in the TODO comment in `GalleryPage.tsx`.
+1. **Gallery curation (when new material arrives)**:
+   - Keep the full viewer limited to no-people images and create a 1920px WebP/JPG main pair plus matching 640px thumbnail pair before adding a new item. Never use a teaser thumbnail as a full viewer source.
 2. **Hero GoogleReviews band height tuning**:
    - If Magnus shortens/curates the long review texts, re-measure `.google-reviews__list` `min-height` and lower the desktop/tablet/mobile height constraints to eliminate dead whitespace.
 3. **Problem-solving symptom routes (`/problem/*`)**:

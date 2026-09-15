@@ -7,8 +7,8 @@ import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 
-import imgWorkshop1Webp from '../assets/images/gallery/workshop-mechanical-bay.webp'
-import imgWorkshop1Jpg from '../assets/images/gallery/workshop-mechanical-bay.jpg'
+import imgWorkshop1Webp from '../assets/images/gallery/workshop/workshop-car-open-hood.webp'
+import imgWorkshop1Jpg from '../assets/images/gallery/workshop/workshop-car-open-hood.jpg'
 import imgMaherWebp from '../assets/images/people/maher-basher-portrait.webp'
 import imgMaherJpg from '../assets/images/people/maher-basher-portrait.jpg'
 

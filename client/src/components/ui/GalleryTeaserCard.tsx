@@ -2,27 +2,39 @@ import { useState } from 'react'
 import { KenBurnsSlideshow } from './KenBurnsSlideshow'
 import { ArrowRightIcon } from '../icons/ArrowRightIcon'
 
-import thumbLifts from '../../assets/images/gallery/workshop-lifts-thumb.webp'
-import thumbTiremachine from '../../assets/images/gallery/workshop-tire-machine-thumb.webp'
-import thumbBenches from '../../assets/images/gallery/workshop-workbench-thumb.webp'
-import thumbCarLift from '../../assets/images/gallery/workshop-car-lift-thumb.webp'
+import cardLifts from '../../assets/images/gallery/workshop/workshop-lifts-and-tire-racks-card.webp'
+import cardCarLift from '../../assets/images/gallery/workshop/workshop-car-on-lift-card.webp'
+import cardOpenHood from '../../assets/images/gallery/workshop/workshop-car-open-hood-card.webp'
+import cardEmptyLifts from '../../assets/images/gallery/workshop/workshop-empty-lifts-card.webp'
+import cardOverheadBay from '../../assets/images/gallery/workshop/workshop-overhead-car-bay-card.webp'
+import cardServiceAisle from '../../assets/images/gallery/workshop/workshop-service-aisle-card.webp'
 
 const defaultSlides = [
+  // These 1280px card exports stay sharp in the large square, animated landing-page frame.
+  // `-thumb` files are intentionally reserved for the compact /galleri carousel.
   {
-    image: thumbLifts,
-    alt: 'Brynäs Bilservice verkstad med billyftar och däckställ',
+    image: cardOpenHood,
+    alt: 'Bil med öppen motorhuv på verkstadsgolvet hos Brynäs Bilservice',
   },
   {
-    image: thumbTiremachine,
-    alt: 'Däckmaskiner och balanseringsutrustning i verkstaden',
+    image: cardEmptyLifts,
+    alt: 'Öppen verkstadsyta med lyftplatser och däckförvaring',
   },
   {
-    image: thumbBenches,
-    alt: 'Arbetsbänk med verktygstavlor och reparationsutrustning',
+    image: cardOverheadBay,
+    alt: 'Överblick över verkstadens bilplats och däckställ',
   },
   {
-    image: thumbCarLift,
-    alt: 'Bil upplyft på serviceplats i verkstaden',
+    image: cardServiceAisle,
+    alt: 'Servicegång genom verkstaden med arbetsutrustning och däckställ',
+  },
+  {
+    image: cardCarLift,
+    alt: 'Bil vid lyftplatsen i Brynäs Bilservice verkstad',
+  },
+  {
+    image: cardLifts,
+    alt: 'Verkstadsöversikt med billyftar och däckställ',
   },
 ]
 
