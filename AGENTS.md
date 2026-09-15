@@ -6,7 +6,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-15 by Codex)
+## Current state (last updated: 2026-09-15 by Antigravity)
 
 ### What is working
 - Magnus confirmed on 2026-09-14 that the website is still a work in progress and **no page copy is final-approved**. Earlier approvals in this file concern specific design or functionality, not final page text.
@@ -99,11 +99,12 @@ Magnus wants the site's content deepened by drawing on two outside sources — a
   - `AvgassystemPage.tsx` (`/avgassystem`) — Exhaust system, lambda sensors, catalytic converter, silencers, warning signs, checklist, safety note, shared process & FAQ.
   - `DrivaxelDrivknutarPage.tsx` (`/drivaxel-drivknutar`) — Driveshafts, CV joints, rubber boots, warning signs, checklist, safety note, shared process & FAQ.
   - `StyrningKullederPage.tsx` (`/styrning-kulleder`) — Ball joints, tie rods, power steering (EPS/hydraulic), warning signs, checklist, safety note, shared process & FAQ.
-- Created `docs/CODEX_HANDOVER.md` for seamless continuation by Codex.
-- Hero review panel fully reworked and the hero restructured to a column + footer band (see above). Committed as `d6b7f18e`.
-- Rewrote the `description` field for all 5 categories on `ServicesPage.tsx` (Bilservice & Reparationer, Felsökning/Diagnostik, AC-Service, Däckservice, Bärgning & Biltransport). Committed as `d570c433`.
+- Created and updated `docs/CODEX_HANDOVER.md` for seamless continuation by Codex.
+- Maher intro copy, consumer law proof ("15 procent"), and 1:1 portrait card added to `/om-oss`. Committed as `6af5dc8b`.
+- Dedicated gallery page (`GalleryPage.tsx` at `/galleri`) created and connected; old gallery block on `/om-oss` replaced with stylish teal pill CTA button. Committed as `97cb0817`.
+- Standalone reusable `GalleryTeaserCard` component created with Ken Burns slideshow of workshop thumbnails (< 70 kB WebP/JPG), "Grundat 2021" badge, and "TILL GALLERIET" corner cutout; thumbnails organized in `client/src/assets/images/gallery/`. Committed as `eb6ccb1c`.
 - Backend starts but `/api/*` returns 500 without the MySQL SSH tunnel; that is expected locally.
-- Historical pushed baseline: `05b9f34f` on `origin/redesign/blue-teal-v1` (pushed with Magnus's approval on 2026-09-14). The current local branch has subsequent commits `fe9863b6` and `6d589d16` and was two commits ahead of origin on 2026-09-15; image-intake context updates may be intentionally uncommitted during handover. Always inspect live Git state before acting.
+- Historical pushed baseline: `05b9f34f` on `origin/redesign/blue-teal-v1` (pushed with Magnus's approval on 2026-09-14). The current local branch has subsequent commits and is currently 6 commits ahead of origin on 2026-09-15 (`fe9863b6`, `6d589d16`, `e0f4dbf1`, `6af5dc8b`, `97cb0817`, `eb6ccb1c`). Always inspect live Git state before acting. Strict rule: NEVER push without Magnus's prior approval.
 - Historical remote parity was verified through `05b9f34f`; it does not authorize or prove the state of later local commits.
 - Production safety: pushed strictly to `origin/redesign/blue-teal-v1` on Magnus's repository (`FM-Magnus/brynasbilservice2`), with no modification to `main`, no modification to `johnny-archive`, and no production server deployment.
 

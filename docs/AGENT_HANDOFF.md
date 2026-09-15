@@ -14,10 +14,14 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
 
 The historical Git details above are not current state. Always inspect the current worktree and branch before acting. Since this baseline was written:
 
-- The newest local commit is `6d589d16` and `redesign/blue-teal-v1` was two commits ahead of origin on 2026-09-15. Context and image-intake changes may be intentionally uncommitted during a handover; preserve them and run `git status --short --branch` before doing anything else.
+- The newest local commit is `eb6ccb1c` on `redesign/blue-teal-v1` (ahead of origin by 6 commits).
+- `/galleri` is a dedicated workshop gallery subpage (`GalleryPage.tsx`) featuring real workshop photos, dark hero, closing CTA, and booking modal.
+- `/om-oss` has been enriched with Maher Basher intro copy, consumer law proof ("15 procent"), authentic portrait card, and a stylish pill CTA button linking to `/galleri`.
+- Startsidan features the reusable `GalleryTeaserCard` component with Ken Burns slideshow, "Grundat 2021" badge, and bottom-right cutout badge "TILL GALLERIET".
+- Workshop thumbnails are organized in dedicated production asset directory `client/src/assets/images/gallery/` (< 70 kB WebP with JPG fallback).
 - `/biltjanster` is the Biltjänster hub headed **“Våra biltjänster”**, with linked summary cards for the current service guides and clearly labelled CSS image placeholders.
 - `/felsokning` is a separate main-navigation destination immediately after Biltjänster, using the established service-page pattern and a future-image placeholder.
-- Raw photos, blue-tone backgrounds and non-photographic layout graphics now enter through `_incoming-assets/`. Its README defines the subject-based folders; selected web exports only belong in `client/src/assets/images/`.
+- Raw photos, blue-tone backgrounds and non-photographic layout graphics enter through `_incoming-assets/`. Its README defines the subject-based folders; selected web exports belong strictly in `client/src/assets/images/` and its subdirectories.
 
 For the authoritative current route map and copy/image status, use [`PROJECT_STATUS.md`](PROJECT_STATUS.md).
 
