@@ -1,9 +1,16 @@
-# Agent Handoff Log — Brynäs Bilservice
+# Agent startup contract — Brynäs Bilservice
 
-This file is maintained by AI agents (Claude, Codex, Kimi, etc.) and updated at the end of every working session.
-**If you are an AI agent starting a session: read this file first.**
-For the approved redesign baseline and continuation rules, also read [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md).
-**Before any color, token, spacing or breakpoint change**, read [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) first — it has the token tables, the hardcoded-hex frequency list, and the current breakpoint set, so you don't have to re-derive them by grepping the 8,700-line `client/src/css/index.css` from scratch.
+**Read this file first. Do not append session logs here.** Write dated work notes to [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md).
+Read [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) for redesign continuity. Before any CSS work, read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) and [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md).
+
+## CSS SAFETY — HIGHEST PRIORITY
+
+1. **NEVER edit `client/src/css/index.css`.** Do not add, delete, move, rename, reformat or “clean up” rules there.
+2. Existing pages may keep using `index.css` unchanged. Dead-looking rules stay in place.
+3. New or redesigned pages use an owned CSS island with a unique class prefix.
+4. Shared CSS is allowed only for a page family explicitly listed in `docs/CSS_OWNERSHIP.md`.
+5. If the requested work appears to require `index.css`, stop before editing and report `BLOCKED`.
+6. The pre-commit hook enforces this freeze. Never bypass it without Magnus's explicit approval.
 
 ---
 
@@ -12,7 +19,6 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 - **`/service-reparationer` (Bilservice) is a THIRD, separate visual identity — do not confuse it with `ServiceGuideTemplate.css`.** Rebuilt from scratch against a Magnus-supplied final mockup (clean automotive advertising / ownership confidence, warm off-white canvas, dark petrol hero, amber used only as a tiny accent). Styled entirely by its own colocated `client/src/pages/ServiceReparationerPage.css` (class prefix `.bilservice__`) — zero dependency on `index.css`'s `.services-page__*` system *and* zero dependency on `ServiceGuideTemplate.css`. All 6 image slots (hero, service book/key, and the 4 value cards) are intentional labelled placeholders (`data-image-slot`) sized to the final photo's geometry — no photos supplied yet. All existing approved Swedish copy preserved verbatim (benefits, 3 service tiers, process steps, "Mer än bara service" links, reassurance card). See session log for the full section-by-section rundown.
 - **`/koppling`, `/avgassystem`, `/oljebyte` and `/bromssystem` are NOT part of the shared `index.css` system — do not treat them like the other guide pages.** All four were fully rebuilt from scratch (see session log below) on the shared `client/src/styles/ServiceGuideTemplate.css` (class prefix `.service-guide__*`). Zero dependency on any page-specific rule in `index.css` — only global tokens (colors, fonts, radii) are shared. **This is Magnus's template for the remaining bland guide pages** (Stötdämpare och fjädrar, Hjullagerbyte, Styrning och kulleder). Avgassystem proved it's reusable for a similarly-sized page; Oljebyte proved it scales to a much *larger* one (new `.service-guide__topic-block` pattern for content-heavy pages); Bromssystem proved a single new modifier class (`.service-guide__symptom-row--urgent`, amber) can carry a mockup's dual-accent-color treatment without forking the template. When rebuilding another page on this template, import the same file — never fork its classes into a colocated file, and never let `index.css` changes leak into it. `index.css` is now at 7531 lines (was 8123 at session start).
 - **Biltjänster layout & imagery pass (complete)** — per [`docs/BILTJANSTER_LAYOUT_PLAN.md`](docs/BILTJANSTER_LAYOUT_PLAN.md), agreed with Magnus. All 11 pages under the Biltjänster dropdown had a distinct layout treatment applied (no two used the same card/grid pattern); no body copy was deleted anywhere. Bilservice, Oljebyte and Drivaxel och drivknutar also got a real hero photo (see below). Stötdämpare och fjädrar, Hjullagerbyte and Styrning och kulleder each got a CSS-only variation (staggered/shadowed card stacks, lettered rows, grouped sub-system cards) since no matching photos exist for them in `_incoming-assets/`. **Koppling, Avgassystem, Oljebyte and Bromssystem have since been superseded by the full ServiceGuideTemplate rebuilds above — that earlier CSS-only pass no longer applies to any of them.** On the `/biltjanster` hub, 3 of the 11 cards (Kamrem, Bilbatteri, Bromssystem) also got a topic-fitting icon badge (clock/bolt/shield) instead of the generic wrench used on the other 8.
-
 - **Däckservice service-card photos (`/dackservice`)** — The 6-card service grid ("Allt för dina hjul") previously reused one generic desaturated placeholder image with a "Bild kommer" badge on every card. Replaced with 6 distinct real workshop photos, one per service, found loose (unsorted) in `_incoming-assets/` root and matched by content: Hjulskifte, Däckförvaring, Omläggning av däck, Hjulinställning, Däckbalansering, Punkteringslagning. Exported as `client/src/assets/images/services/tires/tire-{wheel-change,storage-rack,refitting,wheel-alignment,wheel-balancing,puncture-repair}.{webp,jpg}` (900px wide, 37–105 KB each, matched to the card's actual 150–180px render height). Removed the placeholder badge and the desaturation/opacity filter from `.tyres-page__service-image` in `index.css` (net line count decreased). Originals untouched in `_incoming-assets/`, not yet re-sorted into a subfolder — still sitting loose at root.
 - **Oljebyte / Drivaxel och drivknutar hero photos** — Both replaced their generic `.services-page__image-placeholder` ("Bild kommer") box with a real photo: Oljebyte gets `oil-drain-under-car` (mechanic draining old oil under a lifted car), Drivaxel och drivknutar gets `cv-joint-workbench` (a CV joint on a workbench). Each is a colocated `<PageName>.css` file (`OljebytePage.css`, `DrivaxelDrivknutarPage.css`) defining a `.<page>__hero-image` class; the shared `.services-page__image-placeholder` base rule is untouched since other guide pages still use it. `wrench-and-bolt-workbench.{jpg,webp}` (previously Bilservice's hero, before its full rebuild — see Current state above) is still used as a card image on `/biltjanster`. **Data-quality note:** two source files in `_incoming-assets/` root have swapped/wrong content for their filename — `bilservice__servicebok-och-bilnyckel__landskap__v01.jpeg` actually contains the CV-joint photo (used for Drivaxel), and `drivaxel__drivknut-pa-arbetsbank__landskap__v01.jpeg` actually contains the wrench/bolt photo. Always visually verify a source image before trusting its filename in this bank.
 
@@ -179,7 +185,9 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ---
 
-## Session log
+## Legacy recent session log — frozen
+
+Do not append here. New entries belong in [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md); older history remains in [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md).
 
 ### 2026-09-16 — Claude (Bilservice rebuilt from scratch — third page identity)
 - Magnus supplied a final mockup + a very detailed implementation brief for `/service-reparationer` (Bilservice): "clean automotive advertising / ownership confidence" — a third visual identity, explicitly distinct from both `index.css`'s `.services-page__*` system and the teal-technical `ServiceGuideTemplate.css` used by Koppling/Avgassystem/Oljebyte/Bromssystem. Priority was visual fidelity to the mockup's macro geometry (section heights, column ratios, colour proportions, card hierarchy) over creative reinterpretation.
@@ -325,19 +333,11 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 - Replaced the temporary contained `/biltjanster` hero with the shared full-width service-page hero used by the other Biltjänster destinations. The H1 is now “Våra biltjänster”; its existing lead, booking modal CTA, phone link and replaceable image placeholder remain intact.
 - Replaced the two detailed repair/diagnostics cards with a linked collection of the eleven existing service guides. Each card uses a concise source-grounded draft summary and a CSS-only future-image placeholder; no individual guide page, route or shared navigation was changed.
 
-**Entries older than 2026-09-15 have been moved to [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md)** (2026-09-14 back to 2026-05-05) to keep this file a manageable first read. Check the archive for anything older than what's below.
+**Entries older than 2026-09-15 are in [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md).** This embedded log is retained only as historical evidence and must not grow.
 
----
+## Documentation updates
 
-## How to update this file
-
-At the end of your session, update **two sections**:
-
-1. **Current state** — rewrite it to reflect reality now. Remove things that are fixed. Add new broken things.
-2. **Session log** — append a new entry at the top of the log with: date, agent name/model, bullet list of what was done.
-
-Keep entries factual and short. Future agents need to understand what changed, not why.
-
-**Keep this file's session log short.** If it grows past ~15-20 entries, move the oldest ones to the top of [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md) (same newest-first order) and update the cutoff note above the log. This file is the mandatory first read for every agent session — every unarchived entry is a token cost every single session, whether or not it's still relevant.
-
-**This file, and `client/src/css/index.css`, must never bloat again.** A git pre-commit hook (`.githooks/pre-commit`, active via `core.hooksPath`, auto-configured by `client/package.json`'s `postinstall`) blocks any commit that grows `index.css` past its last-committed size, or grows this file past 450 lines without archiving first. If this `AGENTS.md` is ever copied into a new project as a template, copy `.githooks/pre-commit` and the `postinstall` wiring in `client/package.json` along with it — the rule is enforced by that hook, not by this sentence alone.
+- Replace stale Current state text concisely; do not append parallel versions.
+- Add new dated work notes to `docs/SESSION_LOG_CURRENT.md`, newest first.
+- `AGENTS.md` may not grow. The pre-commit hook also rejects every staged change to `client/src/css/index.css`.
+- Never bypass the hook without Magnus's explicit approval.

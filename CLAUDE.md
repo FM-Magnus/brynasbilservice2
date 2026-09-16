@@ -23,8 +23,8 @@ Two developers:
   `ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224`
 
 ## Division of responsibility
-**Magnus owns (safe to edit freely):**
-- `client/src/` — all components, sections, CSS, assets
+**Magnus owns (edit only within the current task's explicit write scope):**
+- `client/src/` — frontend components, sections, CSS islands and assets; `client/src/css/index.css` is frozen even though it is frontend-owned
 - `client/package.json`
 - `client/tailwind.config.js`, `client/vite.config.ts`
 
@@ -41,7 +41,8 @@ Two developers:
 src/
   App.tsx               — page layout, section order, IntersectionObserver for .fade-up
   main.tsx              — React root, BrowserRouter, LanguageProvider, routes
-  css/index.css         — all CSS (custom properties, component styles, responsive)
+  css/index.css         — frozen legacy CSS + global custom properties; never edit
+  styles/               — explicitly shared CSS islands such as ServiceGuideTemplate.css
   components/
     sections/           — active landing-page sections are selected in App.tsx
     layout/             — Header, Footer
@@ -129,6 +130,8 @@ The local frontend build is `npm --prefix client run build`. Do not treat a succ
 ## Design system
 All CSS custom properties are in `client/src/css/index.css` under `:root`.
 
+**CSS hard freeze:** never modify `client/src/css/index.css`, including cleanup or deletion. Read `docs/CSS_OWNERSHIP.md` before any CSS task and edit only the route's listed CSS island. Existing legacy dependencies stay untouched; new designs use isolated stylesheets.
+
 Current public-design tokens include `--redesign-accent` (teal), `--redesign-page` (warm white), `--redesign-ink`, `--font-heading` (Archivo) and `--font-body` (Manrope). Legacy red/black variables remain in the stylesheet; they are not the direction for new public UI. Yellow is limited to the landing-page Google field.
 
 Animations: `.fade-up` class + IntersectionObserver in App.tsx triggers `.visible` on scroll.
@@ -149,10 +152,10 @@ Nav link order (Header.tsx): Start → Om oss → Biltjänster → Felsökning �
 4. **Admin comment read-only** — admin modal shows comment_admin but provides no way to save it
 
 ## Agent handoff rules
-- **Read `AGENTS.md` first** — it has the current state of the project and recent session history
+- **Read `AGENTS.md` first** — it is the bounded startup contract; read `docs/CSS_OWNERSHIP.md` before CSS work
 - Read recent logs in `_magnus/` before making design changes
 - Check existing component structure before adding new files
 - Never rewrite large files unnecessarily — prefer targeted edits
 - Preserve unfinished or in-progress work unless clearly broken
 - Do not touch server files unless explicitly asked
-- **Update `AGENTS.md` at the end of every session** — rewrite the "current state" section and append a new entry to the session log
+- **Log work in `docs/SESSION_LOG_CURRENT.md`** — do not append session entries to `AGENTS.md`

@@ -55,11 +55,12 @@ Use a warm-white page surround, dark photographic cards, rounded corners, strong
 
 ## Completed work
 
-Phases 0 through 4 (baseline capture → header/hero/reviews → booking modal → About section → Services/ServiceList/WhyUs/EV → the full Biltjänster guide set) are done and approved. The session-by-session record of exactly what changed and which files were touched now lives in `AGENTS.md`'s "Session log" (recent) and [`docs/SESSION_LOG_ARCHIVE.md`](SESSION_LOG_ARCHIVE.md) (2026-09-11 and earlier) — check those instead of duplicating that history here. `docs/redesign-phase-0/README.md` still holds the original Phase 0 mockup-to-component mapping if you need the very first baseline reasoning.
+Phases 0 through 4 (baseline capture → header/hero/reviews → booking modal → About section → Services/ServiceList/WhyUs/EV → the full Biltjänster guide set) are done and approved. Session-by-session records live in [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) and [`SESSION_LOG_ARCHIVE.md`](SESSION_LOG_ARCHIVE.md); `AGENTS.md` is now a bounded startup contract and its embedded legacy log is frozen. `docs/redesign-phase-0/README.md` still holds the original Phase 0 mockup-to-component mapping.
 
 ## Architecture and preservation rules
 
 - The frontend lives in `client/`; use `cd client && npm run build`. Do not use or edit the root Vite/React scaffolding.
+- `client/src/css/index.css` is a frozen legacy dependency layer. Never modify or clean it; use the route owner in [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) for every CSS task.
 - `client/src/main.tsx` provides routing and `LanguageProvider`. The route list includes `/`, `/om-oss`, `/tjanster`, `/biltjanster`, `/service-reparationer`, `/felsokning`, the individual Biltjänster service guides, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu`, and `/kontakt`; `/admin` is protected. Production uses the `/brynasbilservice` basename, which remains unverified.
 - `Biltjänster` is the shared header dropdown. Its default route is `/biltjanster` (`Våra tjänster`), followed by `/service-reparationer#bilservice` (`Bilservice`) and the current service-guide destinations. The default route is now a linked service-guide hub; Bilservice owns the long-form service guide and its closing vehicle/reassurance blocks. The standalone `Felsökning` link follows Biltjänster in the main navigation. Keep future Biltjänster entries simple and add them only after an explicit route/content decision.
 - `client/src/App.tsx` owns booking-modal state and renders: Header → Hero → About → Services → ServiceList → WhyUs → EV → CTA → Contact → Footer. Preserve that content and order unless a later approved phase says otherwise.

@@ -4,14 +4,14 @@ Updated 2026-09-16. Migration to Antigravity 2 / Flash 3.8.
 
 ## READ THIS FIRST — the two files that must never bloat again
 
-`client/src/css/index.css` was 8,742 lines because every past session (across every AI tool used on this project) added new pages' CSS directly into it. It was cut to 8,132 lines on 2026-09-16 by removing confirmed-dead code. **It must not grow again.**
+`client/src/css/index.css` became a multi-thousand-line dependency layer because many sessions added page CSS directly into it. It is now **completely frozen**: do not add, delete, move, rename, reformat or clean any rule. Existing pages may keep using it unchanged.
 
 - **Every new page or component gets its own CSS file**, colocated next to its `.tsx` (e.g. `client/src/pages/NewPage.tsx` + `client/src/pages/NewPage.css`), imported directly in that component (`import './NewPage.css'`). Do not add new rules to `client/src/css/index.css`.
 - Design tokens (`var(--redesign-accent)`, `var(--space-4)`, etc.) are defined once in `index.css` and load globally — they work from any file, so this costs nothing.
 - Working precedent already in the codebase: `client/src/components/BookingForm.css`, imported directly in `BookingForm.tsx`.
-- Full detail: [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization).
+- Full detail and route ownership: [`docs/CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) and [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization).
 
-**This is enforced, not just requested.** A git pre-commit hook (`.githooks/pre-commit`) blocks any commit that grows `client/src/css/index.css` past its last-committed line count, and blocks any commit that grows `AGENTS.md` past 450 lines without archiving old entries first. If a commit is refused with a message about this, **do not bypass it** — move the new page's CSS to its own file instead. It activates automatically via `client/package.json`'s `postinstall` script the first time `npm install` runs in `client/`.
+**This is enforced, not just requested.** The pre-commit hook blocks every staged change to `client/src/css/index.css` and any growth of `AGENTS.md`. If it refuses a commit, **do not bypass it** without Magnus's explicit approval. Put page CSS in its owned island and session notes in `docs/SESSION_LOG_CURRENT.md`. The hook activates via `client/package.json`'s `postinstall` script.
 
 This is a work-in-progress website. Magnus has not final-approved any public page copy yet. Treat all supplied copy, intervals, prices, service claims and image choices as draft until Magnus explicitly approves them.
 
@@ -29,8 +29,8 @@ git status --short --branch
 
 ## Current handover state — 2026-09-16
 
-- Local branch: `redesign/blue-teal-v1`, currently **ahead of `origin/redesign/blue-teal-v1` by 22 commits**, none pushed. Newest local commit: `cedd0aaf docs: close out Biltjänster layout & imagery pass log`.
-- Claude just finished a full layout & imagery pass across all 11 pages under the Biltjänster dropdown (plan: [`docs/BILTJANSTER_LAYOUT_PLAN.md`](BILTJANSTER_LAYOUT_PLAN.md); results: `AGENTS.md` Current state + session log, and `docs/PROJECT_STATUS.md`'s per-page table). Every page now has a distinct card/grid treatment; 5 of the 11 guide pages also got a real hero photo copied from `_incoming-assets/`. No body copy was deleted anywhere.
+- Local branch: `redesign/blue-teal-v1`, with unpublished local commits. Always verify the live ahead count and newest commit with Git rather than relying on this handoff snapshot.
+- Claude finished a full layout & imagery pass across all 11 pages under the Biltjänster dropdown (plan: [`docs/BILTJANSTER_LAYOUT_PLAN.md`](BILTJANSTER_LAYOUT_PLAN.md); results: `AGENTS.md` Current state, `docs/SESSION_LOG_CURRENT.md`, and `docs/PROJECT_STATUS.md`'s per-page table). Every page received a distinct card/grid treatment; several guides also received real photos selected from `_incoming-assets/`. No body copy was deleted.
 - Do not assume a clean worktree from this document. Preserve every existing change, run `git status --short --branch` first, and do not commit or push unless Magnus explicitly asks.
 - Read `_incoming-assets/README.md` before working with images. Do not add raw source files directly to `client/src/assets/images/`. **Verify a candidate image's actual content before trusting its filename** — two files in the root were found this session with swapped/wrong content vs. their name (see `AGENTS.md`).
 
@@ -71,11 +71,11 @@ The standalone main-navigation entry `Felsökning` routes to `/felsokning` immed
 
 ## Page status and reusable pattern
 
-All 11 pages under the Biltjänster dropdown are built and, as of the 2026-09-16 layout pass, each has its **own distinct card/grid treatment** rather than one repeated template — see `docs/PROJECT_STATUS.md`'s table for the current state of each page, and `AGENTS.md`'s Current state / session log for exactly what changed on each. Reference `BilbatteriPage.tsx` and `KamremPage.tsx` for the richest existing layouts (real photos, hero-media/intro-media/service-media pattern); the other pages layer distinct CSS-only variation (dark spec cards, connected timelines, checkerboard accents, staggered stacks, etc.) on top of the same underlying `services-page__*` shared classes.
+All 11 pages under the Biltjänster dropdown are built and, as of the 2026-09-16 layout pass, each has its **own distinct card/grid treatment** rather than one repeated template — see `docs/PROJECT_STATUS.md` for current page state, `AGENTS.md` for stable constraints, and `docs/SESSION_LOG_CURRENT.md` for new work notes. Reference `BilbatteriPage.tsx` and `KamremPage.tsx` for rich image-led layouts; several other routes now use the isolated `ServiceGuideTemplate.css` family, so check `docs/CSS_OWNERSHIP.md` before assuming a page still belongs to the legacy `services-page__*` system.
 
-If asked to touch one of these pages again: read that page's `.tsx` and its colocated `.css` first, don't flatten its distinct treatment back to the generic template, and don't delete existing body copy — rearrange or restyle it instead.
+If asked to touch one of these pages again: read its `.tsx`, then use `docs/CSS_OWNERSHIP.md` to identify the only CSS file you may edit. Do not assume every page has a colocated file. Do not flatten a distinct treatment or delete body copy.
 
-**Do not add new CSS to `index.css`** (see [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization)). Every page in this section now has its own colocated `<PageName>.css` — extend that file instead. Design tokens (`var(--redesign-accent)` etc.) work the same regardless of which file you're in. Keep dark styling contained; never make the entire viewport dark.
+**Never modify `index.css`** (see [`docs/CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md)). Use only the owned colocated or shared island listed for the route. Design tokens (`var(--redesign-accent)` etc.) remain available without editing their legacy definitions. Keep dark styling contained; never make the entire viewport dark.
 
 ## Content and uncertainty rules
 
@@ -90,9 +90,9 @@ If asked to touch one of these pages again: read that page's `.tsx` and its colo
 Normal page work should stay inside:
 
 - `client/src/pages/<page>.tsx`
-- `client/src/pages/<page>.css` — new pages/components get their own colocated CSS file; do not add to `client/src/css/index.css` (see [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization))
+- the exact CSS island listed for the route in [`docs/CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md); never edit `client/src/css/index.css`
 - `docs/PROJECT_STATUS.md` when page status changes
-- `AGENTS.md` for a concise factual session note
+- `docs/SESSION_LOG_CURRENT.md` for a concise factual session note
 
 Do not modify `server/`, `.env` files, database schema, `.htaccess`, deployment configuration, root scaffolding, dependencies, lockfiles, Git remotes or branches unless Magnus gives explicit new authority.
 
@@ -120,7 +120,7 @@ Do not commit or push automatically. If Magnus requests a commit, inspect the ex
 
 ## Documentation rhythm
 
-At the end of each implementation session, append a factual dated entry to `AGENTS.md` and update the relevant row in `docs/PROJECT_STATUS.md`. Do not rewrite README, CLAUDE or instructions for ordinary page copy/image work; touch them only when project structure or working instructions change. The image intake folder is now part of that working structure, so consult `_incoming-assets/README.md` when handling images.
+At the end of each implementation session, prepend a factual dated entry to `docs/SESSION_LOG_CURRENT.md` and update the relevant row in `docs/PROJECT_STATUS.md`. Do not append to `AGENTS.md`. Do not rewrite README, CLAUDE or instructions for ordinary page copy/image work; touch them only when project structure or working instructions change. Consult `_incoming-assets/README.md` when handling images.
 
 ## Suggested Antigravity task brief
 

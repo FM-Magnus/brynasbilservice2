@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# Blocks bloat in the two files that caused real pain in this project:
-# client/src/css/index.css (grew to 8,742 lines, one page's CSS at a time)
-# and AGENTS.md (grew to 599 lines, one un-archived session log entry at a
-# time). See docs/DESIGN_SYSTEM.md#css-file-organization and AGENTS.md's
-# "How to update this file" section for the full story.
+# Enforces the two files that caused real pain in this project:
+# client/src/css/index.css is a frozen legacy dependency layer, and AGENTS.md
+# is a bounded startup contract rather than a session log. See
+# docs/CSS_OWNERSHIP.md and docs/DESIGN_SYSTEM.md#css-file-organization.
 
 STAGED=$(git diff --cached --name-only)
 BLOCKED=0
@@ -30,36 +29,29 @@ check_no_growth () {
   fi
 }
 
-check_max_lines () {
+check_frozen () {
   local file="$1"
-  local max="$2"
-  local reason="$3"
+  local reason="$2"
   echo "$STAGED" | grep -qx "$file" || return 0
 
-  local new_lines
-  new_lines=$(git show :"$file" | wc -l | tr -d ' ')
-
-  if [ "$new_lines" -gt "$max" ]; then
-    echo ""
-    echo "BLOCKED: $file is $new_lines lines, over the $max-line cap."
-    echo ""
-    echo "$reason"
-    echo ""
-    echo "If this growth is genuinely intentional, confirm with Magnus, then commit with --no-verify."
-    echo ""
-    BLOCKED=1
-  fi
+  echo ""
+  echo "BLOCKED: $file is frozen and has staged changes."
+  echo ""
+  echo "$reason"
+  echo ""
+  echo "If this change is genuinely intentional, confirm with Magnus, then commit with --no-verify."
+  echo ""
+  BLOCKED=1
 }
 
-check_no_growth "client/src/css/index.css" \
-  "This file is not supposed to grow anymore (docs/DESIGN_SYSTEM.md#css-file-organization).
-New pages/components get their own colocated CSS file, imported directly in the
-component — design tokens (var(--redesign-accent) etc.) still work from anywhere."
+check_frozen "client/src/css/index.css" \
+  "Do not add, delete, move, rename, reformat or clean rules in this file.
+Existing legacy pages may keep using it unchanged. New or redesigned pages use
+an explicitly owned CSS island; see docs/CSS_OWNERSHIP.md."
 
-check_max_lines "AGENTS.md" 450 \
-  "AGENTS.md is the mandatory first read for every agent session — every unarchived
-line is a cost paid every single session. Move older session-log entries to
-docs/SESSION_LOG_ARCHIVE.md (see AGENTS.md's own \"How to update this file\" section)
-before adding new ones."
+check_no_growth "AGENTS.md" \
+  "AGENTS.md is the mandatory startup contract and must not grow. Replace stale
+current-state text with equally concise text when needed. Write dated session
+entries to docs/SESSION_LOG_CURRENT.md, not AGENTS.md."
 
 exit $BLOCKED

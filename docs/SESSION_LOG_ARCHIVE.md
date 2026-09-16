@@ -1,8 +1,8 @@
 # Session Log Archive — Brynäs Bilservice
 
-Entries older than the rolling window kept in `AGENTS.md`'s "Session log" section live here instead, so `AGENTS.md` stays a manageable size for every agent to read at the start of a session. This file is historical record only — nothing here should be treated as more current than what's in `AGENTS.md`'s "Current state" section.
+Older session entries live here so the mandatory `AGENTS.md` startup contract stays bounded. New entries go to [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md). This file is historical record only — nothing here should be treated as more current than `AGENTS.md`'s Current state.
 
-When trimming `AGENTS.md` again, move its oldest entries to the top of this file (newest-first, same as before) and update the cutoff note in `AGENTS.md`.
+When rotating `SESSION_LOG_CURRENT.md`, move its oldest entries to the top of this file in newest-first order. Do not append session entries to `AGENTS.md`.
 
 ---
 

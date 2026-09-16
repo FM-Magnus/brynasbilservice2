@@ -1,6 +1,6 @@
 # Brynäs Bilservice — current project status
 
-Updated 2026-09-16 (Claude session: Biltjänster layout & imagery pass — see [`docs/BILTJANSTER_LAYOUT_PLAN.md`](BILTJANSTER_LAYOUT_PLAN.md)). The website is a work in progress; Magnus confirmed that **no page copy is final-approved yet**. Routes, page content and image use below were checked against `client/src/`; production behaviour was not checked. See [AGENTS.md](../AGENTS.md) for the session log and [AGENT_HANDOFF.md](AGENT_HANDOFF.md) for design history and preservation rules.
+Updated 2026-09-16 (Claude session: Biltjänster layout & imagery pass — see [`docs/BILTJANSTER_LAYOUT_PLAN.md`](BILTJANSTER_LAYOUT_PLAN.md)). The website is a work in progress; Magnus confirmed that **no page copy is final-approved yet**. Routes, page content and image use below were checked against `client/src/`; production behaviour was not checked. See [the current session log](SESSION_LOG_CURRENT.md) for new work notes, [AGENTS.md](../AGENTS.md) for startup constraints and [AGENT_HANDOFF.md](AGENT_HANDOFF.md) for design history.
 
 **Design system note:** every page hero now shares one rule — uppercase heading text with a teal-accented portion (`.title-accent`), and the same `min-height: clamp(640px, calc(100svh - 60px), 760px)` as the landing page hero. Apply this to any new hero. A reusable "teal accent card" / "dark card" pair of grid-card styles (see `AGENTS.md` Current state) is also now used across several pages to break up all-white card grids — reuse these before inventing a new card treatment.
 

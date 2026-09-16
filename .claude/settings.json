@@ -5,8 +5,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '{\"systemMessage\": \"AGENTS.md reminder: update /Users/magnusolsson/Documents/REPOS/brynasbilservice_repo/AGENTS.md — rewrite the current state section and append a new entry to the session log before finishing.\"}'",
-            "statusMessage": "Checking AGENTS.md reminder..."
+            "command": "echo '{\"systemMessage\": \"Session reminder: keep AGENTS.md bounded; replace stale current-state wording only when necessary and never append a session entry there. Write the dated work note to /Users/magnusolsson/Documents/REPOS/brynasbilservice_repo/docs/SESSION_LOG_CURRENT.md before finishing. For CSS work, never modify client/src/css/index.css.\"}'",
+            "statusMessage": "Checking bounded handoff reminder..."
           }
         ]
       }

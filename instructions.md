@@ -47,7 +47,8 @@ brynasbilservice/
 │   └── src/
 │       ├── App.tsx       ← Section order and layout
 │       ├── main.tsx      ← App entry point, routing, language context
-│       ├── css/index.css ← All CSS — custom properties, components, responsive
+│       ├── css/index.css ← Frozen legacy CSS + global tokens; never edit
+│       ├── styles/       ← Explicitly shared CSS islands
 │       ├── components/   ← All UI components
 │       ├── pages/        ← Public subpages and admin UI
 │       ├── context/      ← Language context (Swedish/English)
@@ -81,6 +82,8 @@ brynasbilservice/
 | Biltjänster default and Bilservice guide | `client/src/pages/BiltjansterPage.tsx`, `client/src/pages/ServiceReparationerPage.tsx` |
 | Booking form (modal) | `client/src/components/BookingForm.tsx` |
 | Google reviews widget | `client/src/components/GoogleReviews.tsx` |
+
+`client/src/css/index.css` is a frozen dependency layer. Reading and consuming its existing tokens is allowed; editing, deleting, reformatting or cleaning it is not. New/redesigned pages use the exact CSS island listed in [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md).
 | Final web images | `client/src/assets/images/` |
 | New/raw image and layout-graphic candidates | `_incoming-assets/` — see `_incoming-assets/README.md` |
 | Admin panel | `client/src/components/admin/` + `client/src/pages/admin/` |

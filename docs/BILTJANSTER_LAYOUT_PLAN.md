@@ -102,10 +102,9 @@ container around it, restyle it, but the words stay.
 - After each page (or small logical group): `npm --prefix client run build`,
   check in the browser preview (desktop + mobile, console errors, network
   requests for new images), then `git commit` with a descriptive message.
-- Update `AGENTS.md` — "Current state" and a short session-log entry — after each
-  commit or small batch, per the file's own "How to update this file" section.
-  Archive older session-log entries into `docs/SESSION_LOG_ARCHIVE.md` first if
-  approaching the 450-line cap.
+- Keep `AGENTS.md` bounded: replace stale Current state wording only when needed,
+  and write dated session entries to `docs/SESSION_LOG_CURRENT.md`. Never append
+  a session entry to `AGENTS.md`.
 - Work through the full list continuously without stopping for routine
   layout/image decisions. Flag unverified/draft technical claims with the
   existing `FACT TO CONFIRM` / `DRAFT GUIDANCE` code-comment convention. Only

@@ -198,15 +198,19 @@ This matches the landing page's `.hero__frame`. Apply to any new page hero — s
 
 ## CSS file organization
 
-**New rule, established 2026-09-16 — do not add more CSS to `client/src/css/index.css`.**
+**Hard freeze, confirmed by Magnus 2026-09-16: never edit `client/src/css/index.css`.**
 
-That file is 8,742 lines because ~15+ past sessions each followed the same instruction — "add scoped CSS for `.your-page` in `index.css`" — for every new page. Nobody was ever tasked with fixing that, so it compounded. The fix isn't a risky big-bang split of the existing file; it's just stopping the growth going forward:
+The file is a fragile legacy dependency layer routed across many pages. A broad cleanup could destabilize unrelated routes, so migration happens by making the file gradually irrelevant—not by modifying or splitting it:
 
-- **Any new page or component gets its own CSS file**, colocated next to its `.tsx` file (e.g. `client/src/pages/NewPage.tsx` + `client/src/pages/NewPage.css`), imported directly in that component (`import './NewPage.css'`).
-- This already has a working precedent: `client/src/components/BookingForm.css` is imported directly in `BookingForm.tsx`, not appended to `index.css`.
-- `:root` tokens (`--redesign-accent`, `--space-4`, etc.) are defined once in `index.css`, which loads globally via `main.tsx`. A component's own CSS file can use `var(--redesign-accent)` etc. freely — tokens aren't tied to which file you're in.
-- `index.css` itself is **not being split retroactively** right now — that's a separate, riskier decision (moving ~8,700 existing lines without breaking a selector, on a site that isn't visually finalized yet). Leave existing page styles where they are unless a specific page is being substantially rebuilt anyway.
-- **Concrete precedent (2026-09-16): `/koppling`.** Fully rebuilt from scratch on `client/src/styles/ServiceGuideTemplate.css` (class prefix `.service-guide__*`), a shared file with **zero dependency on any page-specific `index.css` rule** — only global tokens. The old page's `.clutch-page__*` rules were deleted outright, not migrated. This file is meant to be reused by future page rebuilds, not copied — import it directly rather than duplicating its classes into another colocated file.
+- Do not add, delete, move, rename, reformat or “clean up” any rule in `index.css`, even when a rule appears dead after a page rebuild.
+- Existing legacy pages may continue using the file unchanged.
+- Any new or redesigned page/component gets an owned CSS island, imported directly by its `.tsx` file and using a unique class prefix.
+- A shared CSS island is allowed only for an explicitly named page family. Reuse that file directly; never copy it into another file.
+- Global `:root` tokens still load from `index.css` through `main.tsx` and remain available to every CSS island. Consuming a token does not authorize editing its definition.
+- If a task appears to require changing `index.css`, stop before editing and report `BLOCKED` to Magnus.
+- Historical log entries describing earlier deletions from `index.css` are evidence of past work, not permission to repeat it. This freeze supersedes them.
+
+The route-to-stylesheet map and exact write rules live in [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md). The pre-commit hook rejects every staged change to `index.css`.
 
 ## JS code splitting
 

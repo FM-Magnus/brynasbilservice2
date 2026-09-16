@@ -23,9 +23,9 @@ This document is the authoritative continuation guide for Claude Code (or any in
 
 ## 2. Hard CSS & Architectural Rules
 
-1. **NEVER touch or add CSS to `client/src/css/index.css`:**
-   - Pre-commit git hooks block direct additions to `index.css`.
-   - All page-specific styles MUST live in colocated CSS files in `client/src/pages/` (e.g. `AboutPage.css`, `AcServicePage.css`, `DackservicePage.css`, `BargningPage.css`) and be imported directly into the corresponding `.tsx` file.
+1. **NEVER modify `client/src/css/index.css`:**
+   - The pre-commit hook blocks every staged change, including additions, deletions, rewrites and cleanup attempts.
+   - Existing pages may keep consuming it unchanged. New/redesigned pages use the exact owned island listed in `docs/CSS_OWNERSHIP.md`; do not assume every route has a colocated file.
 2. **Typography System:**
    - Headings: **Archivo 800** (uppercase with `.title-accent` in `var(--redesign-accent)`).
    - Body & UI Controls: **Manrope** (400–500 body, 600–700 buttons/badges).
@@ -90,6 +90,6 @@ This document is the authoritative continuation guide for Claude Code (or any in
 Before making any changes or responding to the user:
 1. `git status` — Ensure working directory is clean.
 2. `npm --prefix client run build` — Verify TypeScript and asset pipeline build cleanly.
-3. Check `AGENTS.md` and `docs/PROJECT_STATUS.md` for historical decisions and copy caveats (all copy is draft/unapproved).
-4. Respect `.githooks/pre-commit` — Do not write CSS to `client/src/css/index.css`.
+3. Check `AGENTS.md`, `docs/CSS_OWNERSHIP.md` and `docs/PROJECT_STATUS.md` for constraints and copy caveats.
+4. Respect `.githooks/pre-commit`: never change `client/src/css/index.css`, and log new work in `docs/SESSION_LOG_CURRENT.md` rather than growing `AGENTS.md`.
 5. Never run `git push` without explicit user permission.
