@@ -7,6 +7,8 @@ import { CheckIcon } from '../components/icons/CheckIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import heroJpg from '../assets/images/services/oil/oil-drain-under-car.jpg'
 import heroWebp from '../assets/images/services/oil/oil-drain-under-car.webp'
+import funnelJpg from '../assets/images/services/oil/oil-poured-into-funnel.jpg'
+import funnelWebp from '../assets/images/services/oil/oil-poured-into-funnel.webp'
 import './OljebytePage.css'
 
 const includedItems = [
@@ -205,6 +207,45 @@ export default function OljebytePage() {
           </div>
         </section>
 
+        <section className="oil-page__included" aria-labelledby="oljebyte-included-title">
+          <div className="container oil-page__container">
+            <header className="oil-page__section-heading">
+              <h2 id="oljebyte-included-title">Vad ingår i ett oljebyte hos oss?</h2>
+              <p>Ett oljebyte hos Brynäs Bilservice omfattar:</p>
+            </header>
+            <div className="oil-page__included-grid">
+              {includedItems.map((item, index) => (
+                <article className="oil-page__included-card" key={item}>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <CheckIcon />
+                  <p>{item}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="oil-page__benefits" aria-labelledby="oljebyte-benefits-title">
+          <div className="container oil-page__container oil-page__benefits-layout">
+            <div className="oil-page__benefits-media">
+              <picture><source srcSet={funnelWebp} type="image/webp" /><img src={funnelJpg} alt="Ny motorolja hälls i en tratt i motorrummet" loading="lazy" /></picture>
+            </div>
+            <div className="oil-page__benefits-content">
+              <header className="oil-page__section-heading oil-page__section-heading--light">
+                <h2 id="oljebyte-benefits-title">Fördelar med regelbundna <span className="title-accent">oljebyten</span></h2>
+              </header>
+              <div className="oil-page__benefit-grid oil-page__benefit-grid--accent">
+                {benefits.map((benefit) => (
+                  <article className="oil-page__benefit-card" key={benefit}>
+                    <CheckIcon />
+                    <p>{benefit}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="oil-page__more-info" aria-labelledby="oljebyte-more-info-title">
           <div className="container oil-page__container">
             <header className="oil-page__more-info-heading">
@@ -288,40 +329,6 @@ export default function OljebytePage() {
               ))}
             </div>
             <p className="oil-page__type-conclusion">Den praktiska slutsatsen: beteckningen "fullsyntetisk" på flaskan garanterar inte att två oljor är likvärdiga. Additivpaketet – rengörande, korrosionsskyddande och viskositetsstabiliserande tillsatser – väger minst lika tungt som basoljan, och det är just kombinationen av basolja och additivpaket som gör att pris och prestanda kan skilja sig kraftigt mellan oljor som ser identiska ut på pappret.</p>
-          </div>
-        </section>
-
-        <section className="oil-page__benefits" aria-labelledby="oljebyte-benefits-title">
-          <div className="container oil-page__container">
-            <header className="oil-page__section-heading oil-page__section-heading--light">
-              <h2 id="oljebyte-benefits-title">Fördelar med regelbundna <span className="title-accent">oljebyten</span></h2>
-            </header>
-            <div className="oil-page__benefit-grid oil-page__benefit-grid--accent">
-              {benefits.map((benefit) => (
-                <article className="oil-page__benefit-card" key={benefit}>
-                  <CheckIcon />
-                  <p>{benefit}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="oil-page__included" aria-labelledby="oljebyte-included-title">
-          <div className="container oil-page__container">
-            <header className="oil-page__section-heading">
-              <h2 id="oljebyte-included-title">Vad ingår i ett oljebyte hos oss?</h2>
-              <p>Ett oljebyte hos Brynäs Bilservice omfattar:</p>
-            </header>
-            <div className="oil-page__included-grid">
-              {includedItems.map((item, index) => (
-                <article className="oil-page__included-card" key={item}>
-                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                  <CheckIcon />
-                  <p>{item}</p>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 
