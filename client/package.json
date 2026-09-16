@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",

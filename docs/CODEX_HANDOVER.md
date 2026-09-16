@@ -1,4 +1,6 @@
-# Codex Handoff — Brynäs Bilservice
+# Codex Handoff — Brynäs Bilservice (historical, 2026-09-15)
+
+**Superseded — kept for historical record only.** `AGENTS.md`'s "Current state" and session log, and `docs/PROJECT_STATUS.md`'s route table, are the current source of truth. This file is a point-in-time session recap from 2026-09-15 by Antigravity; its content is now duplicated (and kept up to date) in those two files. Don't treat it as a required read.
 
 Updated **2026-09-15** by Antigravity. This is a continuation guide and source of truth for Codex (or any incoming AI assistant) to seamlessly continue development on Brynäs Bilservice.
 

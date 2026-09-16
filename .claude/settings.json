@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '{\"systemMessage\": \"AGENTS.md reminder: update /Users/magnusolsson/brynasbilservice/AGENTS.md — rewrite the current state section and append a new entry to the session log before finishing.\"}'",
+            "command": "echo '{\"systemMessage\": \"AGENTS.md reminder: update /Users/magnusolsson/Documents/REPOS/brynasbilservice_repo/AGENTS.md — rewrite the current state section and append a new entry to the session log before finishing.\"}'",
             "statusMessage": "Checking AGENTS.md reminder..."
           }
         ]

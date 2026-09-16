@@ -1,6 +1,17 @@
 # Antigravity handoff — Brynäs Bilservice Biltjänster
 
-Updated 2026-09-15 for migration to Antigravity 2 / Flash 3.8.
+Updated 2026-09-16. Migration to Antigravity 2 / Flash 3.8.
+
+## READ THIS FIRST — the two files that must never bloat again
+
+`client/src/css/index.css` was 8,742 lines because every past session (across every AI tool used on this project) added new pages' CSS directly into it. It was cut to 8,132 lines on 2026-09-16 by removing confirmed-dead code. **It must not grow again.**
+
+- **Every new page or component gets its own CSS file**, colocated next to its `.tsx` (e.g. `client/src/pages/NewPage.tsx` + `client/src/pages/NewPage.css`), imported directly in that component (`import './NewPage.css'`). Do not add new rules to `client/src/css/index.css`.
+- Design tokens (`var(--redesign-accent)`, `var(--space-4)`, etc.) are defined once in `index.css` and load globally — they work from any file, so this costs nothing.
+- Working precedent already in the codebase: `client/src/components/BookingForm.css`, imported directly in `BookingForm.tsx`.
+- Full detail: [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization).
+
+**This is enforced, not just requested.** A git pre-commit hook (`.githooks/pre-commit`) blocks any commit that grows `client/src/css/index.css` past its last-committed line count, and blocks any commit that grows `AGENTS.md` past 450 lines without archiving old entries first. If a commit is refused with a message about this, **do not bypass it** — move the new page's CSS to its own file instead. It activates automatically via `client/package.json`'s `postinstall` script the first time `npm install` runs in `client/`.
 
 This is a work-in-progress website. Magnus has not final-approved any public page copy yet. Treat all supplied copy, intervals, prices, service claims and image choices as draft until Magnus explicitly approves them.
 
@@ -98,7 +109,7 @@ For a supplied service page, follow the established structure:
 8. `BiltjansterFaq` with the page’s supplied questions and answers.
 9. Contained pricing/booking CTA.
 
-Use existing CSS patterns from `BromssystemPage.tsx` and `index.css`, but scope new selectors to the page (for example `.clutch-page__…`). Keep dark styling contained; never make the entire viewport dark.
+Use existing CSS patterns from `BromssystemPage.tsx` for visual reference, but **do not add new CSS to `index.css`** (see [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization) — that file is 8,742 lines because every past page added its styles there). Instead create a colocated file for the new page (e.g. `NewPage.css` next to `NewPage.tsx`) and import it directly in the component, scoping selectors to the page as before (for example `.clutch-page__…`). Design tokens (`var(--redesign-accent)` etc.) work the same regardless of which file you're in. Keep dark styling contained; never make the entire viewport dark.
 
 ## Content and uncertainty rules
 
@@ -113,7 +124,7 @@ Use existing CSS patterns from `BromssystemPage.tsx` and `index.css`, but scope 
 Normal page work should stay inside:
 
 - `client/src/pages/<page>.tsx`
-- `client/src/css/index.css`
+- `client/src/pages/<page>.css` — new pages/components get their own colocated CSS file; do not add to `client/src/css/index.css` (see [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization))
 - `docs/PROJECT_STATUS.md` when page status changes
 - `AGENTS.md` for a concise factual session note
 

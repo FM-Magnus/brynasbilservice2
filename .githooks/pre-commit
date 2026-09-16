@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Blocks bloat in the two files that caused real pain in this project:
+# client/src/css/index.css (grew to 8,742 lines, one page's CSS at a time)
+# and AGENTS.md (grew to 599 lines, one un-archived session log entry at a
+# time). See docs/DESIGN_SYSTEM.md#css-file-organization and AGENTS.md's
+# "How to update this file" section for the full story.
+
+STAGED=$(git diff --cached --name-only)
+BLOCKED=0
+
+check_no_growth () {
+  local file="$1"
+  local reason="$2"
+  echo "$STAGED" | grep -qx "$file" || return 0
+  git cat-file -e HEAD:"$file" 2>/dev/null || return 0
+
+  local old_lines new_lines
+  old_lines=$(git cat-file -p HEAD:"$file" | wc -l | tr -d ' ')
+  new_lines=$(git show :"$file" | wc -l | tr -d ' ')
+
+  if [ "$new_lines" -gt "$old_lines" ]; then
+    echo ""
+    echo "BLOCKED: $file would grow from $old_lines to $new_lines lines."
+    echo ""
+    echo "$reason"
+    echo ""
+    echo "If this growth is genuinely intentional, confirm with Magnus, then commit with --no-verify."
+    echo ""
+    BLOCKED=1
+  fi
+}
+
+check_max_lines () {
+  local file="$1"
+  local max="$2"
+  local reason="$3"
+  echo "$STAGED" | grep -qx "$file" || return 0
+
+  local new_lines
+  new_lines=$(git show :"$file" | wc -l | tr -d ' ')
+
+  if [ "$new_lines" -gt "$max" ]; then
+    echo ""
+    echo "BLOCKED: $file is $new_lines lines, over the $max-line cap."
+    echo ""
+    echo "$reason"
+    echo ""
+    echo "If this growth is genuinely intentional, confirm with Magnus, then commit with --no-verify."
+    echo ""
+    BLOCKED=1
+  fi
+}
+
+check_no_growth "client/src/css/index.css" \
+  "This file is not supposed to grow anymore (docs/DESIGN_SYSTEM.md#css-file-organization).
+New pages/components get their own colocated CSS file, imported directly in the
+component — design tokens (var(--redesign-accent) etc.) still work from anywhere."
+
+check_max_lines "AGENTS.md" 450 \
+  "AGENTS.md is the mandatory first read for every agent session — every unarchived
+line is a cost paid every single session. Move older session-log entries to
+docs/SESSION_LOG_ARCHIVE.md (see AGENTS.md's own \"How to update this file\" section)
+before adding new ones."
+
+exit $BLOCKED

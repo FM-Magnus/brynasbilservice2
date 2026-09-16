@@ -1,0 +1,288 @@
+# Session Log Archive — Brynäs Bilservice
+
+Entries older than the rolling window kept in `AGENTS.md`'s "Session log" section live here instead, so `AGENTS.md` stays a manageable size for every agent to read at the start of a session. This file is historical record only — nothing here should be treated as more current than what's in `AGENTS.md`'s "Current state" section.
+
+When trimming `AGENTS.md` again, move its oldest entries to the top of this file (newest-first, same as before) and update the cutoff note in `AGENTS.md`.
+
+---
+
+### 2026-09-11 — Codex (Däckservice page)
+- Rebuilt `/dackservice` as a dedicated pricing and safety page while retaining a compact version of the prior däckservice card below the new content.
+- Added the customer-supplied cost-free Däckkollen, six data-driven service cards with exact VAT-inclusive prices/contact-price treatment, tyre-care advice, and booking CTAs that reuse the existing modal.
+- Reused `servicekort_tyres.jpg` as a labelled local image placeholder throughout; no external images, routes, backend, booking-flow, Header or Footer changes.
+- Verified the production build and `git diff --check`; local browser accessibility-tree inspection confirmed one H1, all six services/prices, phone links, booking triggers and no car-sales section on this route. Responsive visual screenshots and real booking submission remain unverified.
+
+### 2026-09-11 — Codex (safe handoff cleanup)
+- Moved only the invalid duplicate Git remote refs `refs/remotes/origin/HEAD 2` and `refs/remotes/origin/main 2` to `.git/codex-ref-backups/2026-09-11-invalid-origin-refs/`; valid `origin/main` and `origin/redesign/blue-teal-v1` refs now verify correctly.
+- A full `git fsck --connectivity-only` scan produced no new errors during its 60-second check window, but did not complete before it was stopped. Do not treat that as a full integrity pass.
+- Consolidated the current verified frontend/navigation, page-route and documentation changes into one local handoff commit. No push, deploy or backend change was made.
+
+### 2026-09-11 — Codex (easy fixes)
+- Corrected the visible typo `felkodesr` to `felkoder` in `ServiceReparationerPage.tsx`.
+- Updated `docs/AGENT_HANDOFF.md` to list the current public routes and correct the obsolete claim that the confirmed Brynäs Google review data is placeholder data.
+- Backend, deployment and Git metadata were intentionally left untouched; Johnny owns the Windows deployment and backend work.
+
+### 2026-09-11 — Codex (repository check)
+- Frontend dev server at `http://127.0.0.1:5173/` returned HTTP 200. The nine public routes rendered in the browser; the mobile menu and booking modal (including Escape/focus restoration) worked. Opening the modal logged the expected local API network error because the backend was not running.
+- Local client build, lint and typecheck did not complete under the installed Node 25.9.0 toolchain. Treat this as an environment/tooling verification gap, not a confirmed frontend-code failure; rerun with the intended Node 20 environment and a clean install before release.
+- Audit findings for handoff: public admin credentials/token are hardcoded in the client and server; `comment_customer` is sent by the client but omitted from the booking INSERT; `server/.htaccess` and `docs/deployment.md` still disagree on port 3000 vs 3001 and `RewriteBase`.
+- Magnus confirmed that Johnny, his brother, owns the backend and will deploy from Windows. The Windows-only server build script is therefore not a defect. Do not edit backend, database, `.htaccess` or deployment configuration without their explicit authorization.
+- Git health check found invalid duplicate remote-ref files `refs/remotes/origin/HEAD 2` and `refs/remotes/origin/main 2`, causing `git fsck`/`git show-ref` errors. Do not delete or rewrite Git metadata without approval and a backup.
+- Documentation drift: `docs/AGENT_HANDOFF.md` still lists the old route set and incorrectly calls the now-confirmed Brynäs Google review data placeholder data.
+
+### 2026-09-11 (latest) — Antigravity (Gemini 3.6 Flash)
+- Optimized Header navigation labels & multiline structure to maximize space across viewports:
+  - `Däckservice` shortened to `DÄCK`.
+  - `AC-Service` shortened to `AC`.
+  - `Service & Reparationer` formatted as two compact stacked lines (`BILSERVICE` / `REPARATIONER`).
+  - `Bilar till salu` formatted as two compact stacked lines (`TILL` / `SALU`).
+  - Added `.nav-multiline` flex column styling with tight line-height and balanced padding in `index.css`.
+- Created dedicated subpage `Bärgning` (`BargningPage.tsx` at `/bargning`):
+  - Duplicated from `ServicesPage.tsx`.
+  - Filtered category cards to strictly show `Bärgning & Biltransport`. Excluded all other service cards.
+  - Custom phone-first CTAs for acute towing (`tel:0705533395`) and secondary booking button.
+  - Moved the 3-step customer interaction protocol card ("Från vägkant till färdig reparation") to the bottom of the page directly below the towing card.
+  - Connected route `/bargning` in `main.tsx` and added `Bärgning` to `Header.tsx` main navigation menu.
+- Created dedicated subpage `AC-Service` (`AcServicePage.tsx` at `/ac-service`):
+  - Duplicated from `ServicesPage.tsx`.
+  - Filtered category cards to strictly show `AC-Service & Klimatanläggning`. Excluded all other service cards.
+  - Moved the 3-step customer interaction protocol card ("Från kontroll till perfekt kyla") to the bottom of the page directly below the AC card.
+  - Connected route `/ac-service` in `main.tsx` and added `AC-Service` to `Header.tsx` main navigation menu.
+- Created dedicated subpage `Däckservice` (`DackservicePage.tsx` at `/dackservice`):
+  - Duplicated from `ServicesPage.tsx`.
+  - Filtered category cards to strictly show `Däckservice & Däckhotell`. Excluded all other service cards.
+  - Moved the 3-step customer interaction protocol card ("Smidigt och säkert däckskifte") to the bottom of the page directly below the tire card.
+  - Connected route `/dackservice` in `main.tsx` and added `Däckservice` to `Header.tsx` main navigation menu.
+- Created dedicated subpage `Service & Reparationer` (`ServiceReparationerPage.tsx` at `/service-reparationer`):
+  - Duplicated from `ServicesPage.tsx`.
+  - Filtered category cards to strictly show `Bilservice & Reparationer` and `Felsökning, Diagnostik & Elsystem`. Excluded AC-Service, Däckservice, and Bärgning.
+  - Moved the 3-step customer interaction protocol card ("Så fungerar ditt verkstadsbesök") to the bottom of the page directly below the service categories grid and above the reassurance section.
+  - Connected route `/service-reparationer` in `main.tsx` and added `Service & Reparationer` to `Header.tsx` main navigation menu.
+
+### 2026-09-11 — Claude (claude-sonnet-5)
+**Handover note for whichever agent picks this up next (Magnus said he'll likely run simple content/copy edits in Antigravity and bring architecture/security work back here):**
+- **Copyright rule, read before touching any copy:** Magnus wants site content deepened using two outside sources — `/Users/magnusolsson/Documents/varverkstad-2026-09-09/` (a scrape of competitor varverkstad.com) and `Copywriting för Brynäs Bilservice.txt` in his Drive (a commissioned copywriting doc, safe content-wise but still shouldn't be pasted verbatim). **Never copy sentences from the varverkstad scrape onto this site** — it's another business's actual marketing copy, a real copyright/duplicate-content risk, and an earlier session already wrote this exact rule into `varverkstad-2026-09-09/08-target-translation.md`. Borrow structure/themes/facts only, write fresh Swedish wording. Magnus confirmed this explicitly ("Skriv om varje text litegrann").
+- **Don't invent factual claims.** When drafting from the copywriting file, several specific claims are unverified for Brynäs specifically and were deliberately left out of the first round: rim size up to 21", which refrigerants (R134a/R1234yf) the shop actually handles, Autobutler's exact warranty terms, and DPF/kemvård as an offered service. Ask Magnus before adding any of these.
+- **Paused structural review, not abandoned:** Magnus asked for a one-suggestion-at-a-time review of the site's information architecture against two research documents (`webbkravspecifikation` and `Digital Konkurrensanalys`, both in his Drive under `BBilservice/`). Only one finding has been delivered (the site is company-presenting, the spec wants problem-solving `/problem/*` pages) and it was not acted on — treat that as still open, not resolved. Separately, a proposed fix to the hero review panel was floated and then withdrawn once Magnus confirmed the review data was genuine, so don't reintroduce that idea without re-reading the "Open design thread" section above.
+- **One live loose end:** `.google-reviews__list` `min-height` values are hand-tuned to the current review texts. If Magnus shortens the long reviews (he said he'd do this himself), re-measure the tallest remaining item and lower the three per-breakpoint values — see known issue #9 above.
+- Everything from this session is committed (`d6b7f18e`, `d570c433`, plus `492085a8` from earlier in the session). Nothing is sitting uncommitted.
+
+### 2026-09-11 — Claude (claude-opus-5)
+- **Unblocked local dev.** `server/npm run dev` crashed instantly with `Cannot find module './db.json'` from `mime-db`. Root cause was a corrupted `node_modules`, not a Node version problem — the package was installed without its data file. Reinstalled server dependencies; committed the regenerated `server/package-lock.json` as `492085a8` (the only commit this session). Vite ran on **5174**, not 5173, because 5173 was already taken.
+- **Read both research documents** in Magnus's Google Drive (`> RESEARCH OUTPUTS/BBilservice/`) and mapped the current site architecture against them. Began a one-suggestion-at-a-time structural review; see "Open design thread" in Current state for exactly where it paused.
+- **Retracted a wrong finding.** Förslag 1 claimed the hero's Google reviews were another workshop's, because several mention "Shomaher"/"Maher" and the competitor analysis reported no verified Google profile. Magnus corrected this: the owner is **Maher** and the data is genuine. He later confirmed the 4,3 rating and the Maps link are correct too. The old "GoogleReviews has fake data" known issue is now corrected in this file. Consequence worth carrying forward: the research docs contain at least one verified error about this business (they name the owner "Sakar"), so their Brynäs-specific facts need checking with Magnus, including the Tis–fre 08–16 opening hours they assume.
+- **Rebuilt the hero review panel** through several rounds of Magnus's direction:
+  - Removed the yellow star-distribution bars and the `distribution` array.
+  - Enlarged the Google wordmark; renamed the subtitle from "Sammanfattning av recensioner" to **"Omdömen på Google Maps"** (Magnus first asked for "Reviews Google Maps", then asked for a recommendation and took this).
+  - Made the **entire panel a single `<a>`** to `https://maps.app.goo.gl/rXR1nz2RwaUQcvuW9` — score, wordmark and rotating review all link — with a concise `aria-label` so screen readers get a short name instead of the whole review, plus `rel="noopener noreferrer"` and a gold focus ring. No nested interactive elements.
+  - Stripped the review card entirely (background, border, blur, radius). Reviews now sit directly on the hero photo with `filter: drop-shadow` and stronger `text-shadow`.
+  - Moved the score to the left of the wordmark, centered 4,3 over its star row, and matched `Omdömen på Google Maps` to `50 recensioner` in font-size and line-height with bottom alignment so the two sit on an exact shared line (verified 0.0px delta at all breakpoints). Fixed a leftover `margin-bottom: 0.6rem` in the 480px block that was throwing mobile off by exactly 9.6px.
+  - **Restructured the hero itself**: `hero__inner` went from a 2-column grid to a flex column, with a new `hero__footer` row holding the buttons and the review band side by side, per Magnus's annotated screenshot.
+  - Removed line clamping on Magnus's request so the full review text is readable, and tuned `.google-reviews__list` `min-height` per breakpoint by measuring the tallest review.
+- **Proposed how to shorten the long reviews** rather than editing them unilaterally: curate the rotation down to the already-short reviews (recommended, no text touched), or use verbatim excerpts with an ellipsis. Advised against paraphrasing, per the spec's rule that omdömen must not be rewritten so meaning changes. Also flagged that the two longest reviews name "Shomaher", which reads as a different workshop on a site called Brynäs Bilservice. **Magnus is making these text changes himself** — the band `min-height` values will need re-measuring afterwards.
+- Hero/review work verified at 1280/1600 desktop, 768 tablet and 375 mobile: no horizontal overflow, no text overflowing its container. (Committed later in the session as `d6b7f18e` — see the entry above.)
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Redesigned "Bilar till salu" subpage (`BilarTillSalu.tsx` at `/bilar-till-salu`) to align with the website's approved design system:
+  - Replaced legacy pure black (`#080808`), gold accents (`#F0B800`), and outdated borders with approved redesign tokens: warm-white surround (`#f8f7f3`), deep dark ink cards (`#101618`), teal accents (`#2496a0`), Archivo 800 headings, and Manrope typography.
+  - Upgraded Hero section matching `/tjanster`, `/om-oss`, and `/kontakt`: eyebrow `Begagnade bilar i Brynäs`, Archivo 800 title with teal `.title-accent` ("salu"), lead copy, dual CTAs (`tel:0705533395` and modal opener `Boka tid för visning`), and verified metadata bar (`Utmarksvägen 21B` + `Mån–Fre 08:00–17:00 (Lör förfrågan)`).
+  - Added 3-card trust banner on warm-white surround: "Verkstadsinspekterade" (`ShieldHeartIcon`), "Färdiga för leverans" (`ClockIcon`), and "Personlig kontakt" (`CheckIcon`).
+  - Redesigned vehicle card(s): 16:10 aspect ratio gallery with active turquoise indicator, rounded corners (`clamp(20px, 2.5vw, 28px)`), spec badge tags (`141 147 km`, `Manuell`, `Bensin`, `Mörkgrå`, `Nybesiktigad`), prominent teal price pill (`39 900 kr`), and primary CTA opening booking modal.
+  - Modernized empty state and sold vehicle archive section.
+  - Added closing dark CTA card matching the design of `/kontakt` and `/om-oss` with direct call link, booking modal trigger, and Google Maps directions link.
+  - Verified 0px horizontal overflow and touch target compliance across 1440px desktop, 768px tablet, and 390px mobile viewports.
+  - Automated tests verified thumbnail switching, modal opening, and zero overflow. Build (`npm --prefix client run build`) completed cleanly.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Added `START` navigation item and logo home-linking to Header navigation:
+  - Navigation order established: 1. Start, 2. Om oss, 3. Tjänster, 4. Bilar till salu, 5. Kontakt.
+  - Added `START` item to both desktop navigation (`.nav__links`) and mobile navigation (`#mobile-nav`).
+  - Added home navigation with scroll-to-top (`window.scrollTo(0, 0)` or smooth scroll if already on `/`) to both the `START` nav item and the Brynäs Bilservice logo.
+  - Implemented dynamic active navigation states:
+    - On homepage (`/`), `START` is marked active with `aria-current="page"`, `.active` class, subtle teal background (`rgba(36, 150, 160, 0.12)` desktop, `rgba(36, 150, 160, 0.28)` with teal left indicator mobile).
+    - On subpages (`/om-oss`, `/tjanster`, `/bilar-till-salu`, `/kontakt`), the corresponding navigation item receives `.active` and `aria-current="page"`.
+  - Tuned nav link padding in `client/src/css/index.css` (`clamp(0.72rem, 1.25vw, 1.15rem)` desktop, responsive clamp at 1024px) ensuring zero clipping or horizontal overflow.
+  - Automated tests verified 6 test suites via Headless Chrome CDP: Start active on `/`, active states on all 4 subpages, logo link returning home to top from all 4 subpages, `START` nav link returning home to top, mobile nav opening/navigating/closing, and zero horizontal overflow across 1440, 1024, 768, and 390 px.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, and captured screenshots (`header-nav-1440.png`, `header-mobile-nav-390.png`, `header-768.png`). No git commit or push performed.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Created dedicated Swedish "Kontakt" subpage (`ContactPage.tsx` at `/kontakt`) connecting desktop and mobile header navigation items without modifying homepage contact sections.
+- Structured into cohesive sections matching the site's established design system:
+  1. *Hero*: Archivo 800 title `Hör av dig till Brynäs Bilservice`, concise verified intro copy establishing workshop location on Utmarksvägen in Brynäs, Gävle, primary teal CTA `Boka tid` opening `BookingFormModal`, and secondary `Ring: 070-553 33 95` link.
+  2. *Two-column layout (Desktop)*:
+     - Left column: Dark contact card (`#101618`) featuring verified telephone (`070-553 33 95`), email (`info@brynasbilservice.se`), address (`Utmarksvägen 21B, 802 91 Gävle`), directions link to Google Maps, Facebook link, and verified opening hours (Mån–Fre 08:00–17:00, Lör Förfrågan, Sön Stängt). Reassurance card with 3 transparent steps ("Från förfrågan till bekräftad tid").
+     - Right column: Clean contact form card with prominent callout stating that form submission sends a request and is not an automated booking. Includes `namn`, `epost`, `telefon`, `arende` dropdown (verified services only, zero EV/hybrid options), and `meddelande`. Provides instant feedback and reset option.
+  3. *Closing CTA*: Dark card offering `Boka tid nu` (modal), `Ring: 070-553 33 95`, and `Vägbeskrivning` (Google Maps).
+- Connected Header navigation: `{ href: '/kontakt', label: 'Kontakt' }` in `client/src/components/layout/Header.tsx` for desktop and mobile menus.
+- Added route `/kontakt` in `client/src/main.tsx`.
+- Zero EV or high-voltage claims anywhere on the page.
+- Scoped responsive styles in `client/src/css/index.css` with zero horizontal overflow across 1440px desktop, 768px tablet, and 390px mobile. Tap targets meet or exceed 52px. Full `prefers-reduced-motion` support.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, direct navigation, reload, modal opening/closing, form submission state, and captured screenshots (`contact-page-1440.png`, `contact-page-768.png`, `contact-page-390.png`). No git commit or push performed.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Created dedicated Swedish "Om oss" subpage (`AboutPage.tsx` at `/om-oss`) using the "proof before promises" direction, expanding workshop credibility without lengthening the homepage.
+- Structured into five cohesive sections matching the site's established design system:
+  1. *Hero*: Archivo 800 title `Din lokala och personliga bilverkstad i Brynäs`, authentic intro copy, primary teal CTA `Boka tid` opening `BookingFormModal`, secondary `Ring: 070-553 33 95` link, and workshop media card (`OMOSS_KENBURNS1.jpg`) with "Grundat 2021" glass badge.
+  2. *Lokal verkstad*: Two-column layout on warm-white background (`#f8f7f3`). Left: independent workshop presentation with reassurance cards (`ChatDotsIcon` & `ShieldHeartIcon`). Right: Dark ink facts card (`#101618`) with verified business details (Brynäs Bilservice AB, org.nr 559343-5307, Utmarksvägen 21B with Google Maps link, phone, email, and verified opening hours Mån–Fre 08:00–17:00, Lör Förfrågan, Sön Stängt).
+  3. *Så arbetar vi*: 3-step transparent working process card ("Från inlämning till färdig bil" with 01. Du berättar om bilen, 02. Vi undersöker och återkopplar, 03. Du godkänner innan vi börjar).
+  4. *Verkstaden i bilder*: 4-card decoupled authentic gallery using repo images only (`OMOSS_KENBURNS1.jpg`, `OMOSS_KENBURNS2.jpg`, `OMOSS_KENBURNS3.jpg`, `HAR_FINNS_VI.jpg`), with category badges (Verkstadslokaler, Däck & hjulservice, Kundmottagning, Exteriör & infart) and descriptive titles/copy. Zero stock/AI photos; protects customer privacy.
+  5. *Closing CTA*: Unified dark card offering `Boka tid nu`, `Se alla tjänster` (`/tjanster`), and phone call link (`tel:0705533395`).
+- Connected Header navigation ("Om oss" -> `/om-oss` across desktop and mobile menus) and homepage About CTA button ("Läs mer om oss" -> `/om-oss`).
+- Added route `/om-oss` in `client/src/main.tsx`.
+- Zero EV or high-voltage claims anywhere on the page.
+- Added scoped responsive styles in `client/src/css/index.css` with zero horizontal overflow across 1440px desktop, 768px tablet, and 390px mobile. Tap targets meet or exceed 52px. Full `prefers-reduced-motion` support.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, direct navigation, reload, modal opening/closing, and captured screenshots (`about-page-1440.png`, `about-page-768.png`, `about-page-390.png`). No git commit or push performed.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Replaced two separate repeating homepage sections ("Redo att boka service?" `CTABanner.tsx` and "Kontakt & öppettider" 3-card `Contact.tsx`) with a single substantial, compact closing contact section (`Contact.tsx`) directly above the footer.
+- Designed one unified dark ink card (`#101618`, `border: 1px solid rgba(255, 255, 255, 0.08)`, `border-radius: var(--redesign-radius-card)`, subtle radial teal corner glows):
+  - Left column: Eyebrow `Kontakt & Öppettider`, Archivo 800 title `Behöver din bil hjälp?`, Swedish lead sentence, Primary CTA `Boka tid` with arrow disc triggering `BookingFormModal`, Secondary CTA `Ring: 070-553 33 95` (`tel:+46705533395`).
+  - Right column: Inset dark panel (`rgba(255, 255, 255, 0.03)`) grouping verified address (`Utmarksvägen 21B, 802 91 Gävle`) with Google Maps link, verified phone (`070-553 33 95`), verified email (`info@brynasbilservice.se`), and compact 3-row opening hours (`Måndag – Fredag 08:00 – 17:00`, `Lördag Förfrågan`, `Söndag Stängt`).
+- Corrected opening hours across `Contact.tsx`, `Footer.tsx`, and `CTABanner.tsx` per owner confirmation: all weekdays open 08:00–17:00 (not closed on Monday), Saturday on inquiry ("Förfrågan"), Sunday closed ("Stängt").
+- Removed `CTABanner` from `App.tsx` and passed `onBookingClick={openModal}` to `<Contact />`. Preserved `CTABanner.tsx` on disk.
+- Retained `#kontakt` anchor id so all nav and footer links scroll seamlessly to the combined closing contact section.
+- Scoped responsive layout across desktop (1440px), tablet (768px), and mobile (390px) with minimum 50px tap target button heights and zero horizontal overflow. Respects `prefers-reduced-motion`.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, modal opening behavior, and captured screenshots (`contact-combined-1440.png`, `contact-combined-768.png`, `contact-combined-390.png`). No git commit or push performed.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Replaced homepage's six large photographic service cards (`Services.tsx`) and full 18-item list (`ServiceList.tsx`) with a single compact four-item service preview section (`Services.tsx`).
+- Connected primary CTA button `SE ALLA TJÄNSTER` to the dedicated verified services page (`/tjanster`) with arrow disc badge; retained non-competing secondary booking CTA `Boka tid för service` triggering `BookingFormModal`.
+- Structured 4 verified workshop categories in a responsive 2x2 grid: "Bilservice och reparationer", "Felsökning och diagnostik", "Däckservice och däckhotell", and "AC-service", each with authentic icons, titles, and concise descriptions. Zero EV/high-voltage claims.
+- Dramatically streamlined homepage vertical length:
+  - 1440px desktop: 6,523 px → 5,230 px (-1,293 px / -19.8%).
+  - 768px tablet: 8,849 px → 7,226 px (-1,623 px / -18.3%).
+  - 390px mobile: 10,593 px → 7,341 px (-3,252 px / -30.7%).
+- Maintained dedicated services page (`/tjanster`) completely intact with all 5 comprehensive categories.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, browser back navigation, and zero horizontal overflow across 1440, 768, and 390 px.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Styled the large category cards on the dedicated `/tjanster` page to match the old card design:
+  - Deep dark blue / ink background (`#101618`) with subtle border (`1px solid rgba(255, 255, 255, 0.08)`) and radial turquoise corner glow (`radial-gradient`).
+  - Crisp white display headings (`#ffffff`, Archivo 800) and white subheadings ("Det här ingår & utförs", "Vanliga tecken på att du behöver hjälp").
+  - Teal/light-blue subtitle and accent checkmarks/bullets (`var(--redesign-accent)`).
+  - High-contrast readable white body text (`rgba(255, 255, 255, 0.84)`).
+  - Light-blue / teal CTA button (`var(--redesign-accent)`) with bold uppercase white text and circular arrow badge disc (`rgba(255, 255, 255, 0.2)`).
+  - Numbered pill badge (`01`, `02`, etc.) in the top-right corner of each card media image.
+  - Card hover state with lift, glowing box shadow, and image zoom.
+  - Sits on the warm-white page background (`#f8f7f3`) without changing card dimensions, grid layout, or content.
+- Verified across desktop (1440px), tablet (768px), and mobile (390px) viewports with zero horizontal overflow. Clean build and passes `git diff --check`.
+
+### 2026-09-11 (later) — Antigravity (Gemini 3.8 Flash)
+- Repurposed existing dark EV feature card into a compact "Så fungerar det" process section (`EV.tsx`) and moved it directly below `ContactIntro` and directly above `About`.
+- Removed every public claim of EV or high-voltage competence from the landing page:
+  - `EV.tsx`: completely replaced EV content, brand badges, and partners text with the 3-step workshop process ("Från första kontakt till färdig bil").
+  - `About.tsx`: removed sentence claiming specialist competence on next-generation electric vehicles.
+  - `ContactIntro.tsx`: replaced `Elbil & hybrid` dropdown option with genuine `Bärgning & transport`.
+  - `ServiceList.tsx`: removed `Elbilsservice — alla märken` and `Högvoltssystem & diagnostik`; added authentic `Bärgning & biltransport`, resulting in a balanced 18-service grid.
+  - `index.css`: removed EV-specific classes and styles, added compact process panel and step styles.
+- Maintained exact visual design language: dark rounded container (`#101618`), turquoise radial corner highlight, turquoise pill button with phone link (`tel:0705533395`), inset dark panel with subtle border, restrained turquoise step badges (`01`, `02`, `03`), white Archivo 800 titles, and Manrope 400 descriptions.
+- Responsive layout verified without horizontal overflow across desktop (1440px), tablet (768px, stacked intro over steps), and mobile (390px, full-width button).
+- Confirmed zero regressions on `/bilar-till-salu` and booking/contact interactions. Clean build and zero TypeScript errors.
+
+### 2026-09-11 — Antigravity (Gemini 3.8 Flash)
+- Refactored site typography to a two-tier **Archivo / Manrope** system via centralized theme tokens without editing any component files.
+- Loaded Google Fonts in `client/index.html`: `Archivo:wght@800` and `Manrope:wght@400;500;600;700`.
+- Configured Tailwind in `client/tailwind.config.js`: `heading: ["'Archivo'", 'sans-serif']` and `body: ["'Manrope'", 'sans-serif']`.
+- Updated CSS variables and element rules in `client/src/css/index.css`: Archivo 800 (ExtraBold, letter-spacing -0.02em, line-height 1.05–1.15) for all display headings; Manrope 400 (line-height 1.5–1.65) for body copy; Manrope 600–700 (letter-spacing 0.04em–0.08em) for buttons, navigation, chips, badges, and labels. Prohibited weight >= 700 on paragraphs. Prohibited faux-bold and uppercase body copy.
+- Verified computed styles and visual rendering across 1440px desktop, 768px tablet, and 390px mobile via headless Chrome CDP inspection and screen captures. Build and typecheck clean.
+
+### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
+- Created and mounted `ContactIntro.tsx` directly below Hero and above About on the landing page, matching user mockup (`media_1789061551925.png`).
+- Refactored layout, dimensions, and typography: broadened teal form card (844px at 1440px / 837px at 1920px), aligned right edge flush with hero container (`rightOffset: 0px` across 1920px down to 390px via CDP inspection), maintained balanced column gap (2–3rem), scaled up left-column typography (`HÖR AV DIG TILL OSS` clamp 2.75rem–4.15rem, 58px icon badges, 1.28rem values), and reduced vertical gap between Hero and Contact down to 44px.
+- Migrated all heading, display, and body typography from Barlow/Exo 2 to `Sora` (`Sora:wght@300;400;500;600;700;800`), matching Vår Verkstad / mockups across `client/index.html`, `client/src/css/index.css`, and `client/tailwind.config.js`.
+- Verified production build (`npm --prefix client run build`), `tsc` typecheck, and visual rendering across 1920px, 1440px, 1024px, 768px, and 390px.
+
+### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
+- Redesigned and aligned CTA Banner (`CTABanner.tsx`) and Contact section (`Contact.tsx`) matching EV-card aesthetic: dark gradient full-width CTA banner and 3 deep-blue cards ("Hitta oss", "Öppettider", "Ring oss") on the light page background.
+- Refactored hero Google Reviews overlay: updated stars and active breakdown bars to vibrant yellow accent (`#FBBC04`), scaled typography, expanded container dimensions and internal padding (`p-6` / `min-height: 195px`), preventing multi-line overflow (e.g. 4-line review).
+- Added subtle, crisp drop shadows (`text-shadow` / `filter: drop-shadow`) to Google Reviews overlay text and stars, lifting elements cleanly over dark dashboard background without harsh halos.
+- Scaled up the site header logo by +20–30% across desktop (`68px`), scrolled (`54px`), 1024px (`58px`), 768px (`50px`), and 480px/390px (`44px`), preserving aspect ratio and navbar alignment without container overflow.
+- Performed comparative analysis vs. Vår Verkstad (`varverkstad.com`), identifying strategic roadmap opportunities (4-step "Så här fungerar det" process, reg-nr input, quick quote request, real Google reviews).
+- Verified production build (`npm --prefix client run build`) and clean git diff check.
+
+### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
+- Magnus visually approved the Slice 1 redesign of Services, ServiceList, WhyUs, and EV sections.
+- Redesigned `Services.tsx`: 6-card responsive grid matching Mockup 6 aesthetic, wired `onBookingClick` from `App.tsx` to cards 1-4 ("Boka tid") resolving dead anchor issue (#8), retained `#kontakt` and `/bilar-till-salu` targets.
+- Redesigned `ServiceList.tsx`: full 19-service offering in clean white cards with teal checkmarks (`CheckIcon`), EV lightning badges (`BoltIcon`), and link to `/bilar-till-salu`.
+- Redesigned `WhyUs.tsx`: 4 reassurance cards matching Mockup 6 bottom row with soft teal icon containers and verified Swedish copy.
+- Redesigned `EV.tsx`: high-tech dark card (`#101618`) on warm-white page surround, retaining all 14 brands, verified EV copy, Däckleader/Autobutler text, and direct phone CTA (`tel:0705533395`).
+- Cleaned legacy gold and red CSS rules and obsolete mobile overrides in `client/src/css/index.css`; added scoped responsive layout across desktop (1440px), tablet (768px), and mobile (390px) with zero horizontal overflow; supported `prefers-reduced-motion` for `.fade-up`.
+- Verified clean build (`cd client && npm run build`), `git diff --check`, and `/bilar-till-salu` subpage without regression.
+
+### 2026-09-10 — Antigravity (Gemini 3.8 Flash)
+- Magnus visually approved the Phase 2 About section redesign.
+- Redesigned `About.tsx` matching locked Mockup 7: warm-white page background (`#f8f7f3`), dark rounded card for Ken Burns workshop slideshow, glass "Grundat 2021" badge, bottom-right slide indicator tab, single semantic `<h2>` without nested headings, verified Swedish business copy, uppercase teal pill CTA button linking smoothly to `#alla-tjanster`, and two white reassurance cards with custom SVG icons (`ChatDotsIcon.tsx` and `ShieldHeartIcon.tsx`).
+- Enhanced `KenBurnsSlideshow.tsx` with `onIndexChange` callback and `prefers-reduced-motion` detection.
+- Replaced legacy gold/black About CSS with scoped redesign tokens and responsive layout across desktop (1440px), tablet (768px), and mobile (390px).
+- Fixed the legacy nested `<h2>` semantics bug in About.
+- Production build verified with `cd client && npm run build` and `git diff --check`.
+
+### 2026-09-10 — Codex
+
+- Magnus visually and functionally approved Phase 1B. Improved booking-modal mobile layout and accessibility with dialog semantics, focus trap, Escape handling, focus restoration and scroll lock.
+- Backend/API availability and real booking submission remain unverified. No backend, payload or endpoint changes were made.
+
+### 2026-09-10 — Codex
+- Magnus visually approved Phase 1A. Implemented the redesigned header, hero and Google-review presentation; connected `background_hero.jpg`; removed the marquee.
+- Verified the approved visual result at 1440, 768 and 390 px, including the vehicle-sale header and mobile-menu behavior.
+- Booking-modal clipping and modal accessibility remain deferred to Phase 1B. Backend/API availability, authentic Google reviews and deployed production behavior remain unverified.
+
+### 2026-09-10 — Codex
+- Completed redesign Phase 0 using all seven supplied design references and the local Vår Verkstad reference pack; added the report and nine baseline screenshots under `docs/redesign-phase-0/`.
+- Verified clean starting worktree, origin and HEAD; existing redesign branch matches local main at `1f8ab37b`. Frontend build passes with the existing large-chunk warning.
+- Verified 1440/768/390 viewport baselines, mobile menu, modal opening/closing, car thumbnail switching and navigation from the car page. Recorded the unavailable services API and mobile modal clipping; no booking submitted.
+- Documented missing font variables, dead service anchors, motion/accessibility gaps and outdated theme/i18n claims. Magnus decided to remove the marquee in the redesign and supplied `background_hero.jpg`; moved it unchanged from repo root to `client/src/assets/images/` on his explicit instruction, without wiring it into the page.
+- Phase 0 changed documentation and approved artifacts only: the build wrote ignored `client/dist/` output and screenshot capture created nine files. No application source, backend or deployment code changed. External business facts, backend behavior, production-basename behavior and real Google review data remain unverified.
+- `redesign/blue-teal-v1` is the intended redesign branch. Its lack of upstream is intentional and not a blocker. No push was performed.
+
+### 2026-09-09 — Codex
+- Verified that the locally running frontend (including the Google Reviews hero) is the intended live-site version; `client/` was restored from its tracked local snapshot after a temporary working-tree deletion.
+- Recovered Git continuity for `https://github.com/FM-Magnus/brynasbilservice2`: the previous unrelated GitHub `main` is preserved at `legacy/pre-live-site-2026-09-09`; the current local project history and verified frontend build are now canonical `main` (commit `1e5c5d4f`). A matching `recovery/live-site-2026-09-09` branch remains as an additional safety point.
+- This checkout's `origin` now tracks `FM-Magnus/brynasbilservice2`; the former `FM-Johnny/brynasbilservice` remote is retained locally as `johnny-archive` for reference only.
+- Removed 11 already-deleted unused `_magnus/` reference assets in the canonical recovery commit. The real frontend build (`client/npm run build`) passes. The root Vite scaffold is still not the application build target.
+- Added `docs/git-history-recovery.md` as the plain-language explanation of the recovery, safety branches, everyday Git workflow, and deployment boundary.
+
+### 2026-05-08 — Claude (claude-opus-4-7)
+- Built reusable `KenBurnsSlideshow` component (`client/src/components/ui/KenBurnsSlideshow.tsx`) — crossfading slideshow with continuous Ken Burns pan/zoom on each image, three pan variants rotating, respects `prefers-reduced-motion`
+- Replaced static About image with slideshow cycling `OMOSS_KENBURNS1/2/3.jpg` (7s visible per image, 1.5s crossfade)
+- Removed accent image and `sakar_works.jpg` entirely from the codebase
+- Removed obsolete `.about__img-main` and `.about__img-accent` CSS rules; added `.kenburns*` rules + 3 keyframe animations
+- Mobile slideshow height adjusted to 280px (was 240px on the static image — Ken Burns needs slightly more room for the pan)
+- **Name correction:** Magnus's brother (backend dev) is named **Johnny**, not Sakar. Fixed across `CLAUDE.md`, `AGENTS.md`, `README.md`, `instructions.md`. The asset filename `sakar_works.jpg` was deleted as part of the Ken Burns work so no leftover reference remains.
+- Rewrote the "Working with AI assistants" section in `README.md` to address both Magnus and Johnny — Johnny now has explicit guidance that the AI tools won't touch his backend files, and that he's welcome to add his own entries to the AGENTS.md session log
+- Two extra untracked images (`BARGNING_TRANSPORT.jpg`, `HAR_FINNS_VI.jpg`) ended up committed alongside the Ken Burns work because of `git add -A` — they're now in the repo waiting to be used in some future feature
+
+### 2026-05-07 (later) — Claude (claude-opus-4-7)
+- Full repo audit comparing CLAUDE.md / AGENTS.md / instructions.md against actual code
+- Discovered: GitHub Actions deploy file in wrong location (silent broken deploy), no git remote, .htaccess port/RewriteBase mismatch, schema.sql heavily out of sync with live DB, orphan root project configs (React 19/Vite 8) confusing newer agents
+- Removed orphan files at repo root: `Hero_Bakground_warmer.jpg`, `LOGOTYP_NY.svg`, `New_old_logo.png`, `logo1-c66a10e4@0.5x.png`
+- Removed `client/src/service_card_carsale.jpg` (stray, not imported)
+- Removed `client/src/backup/` (only contained unused `Button.d.ts`)
+- Added Production environment section + full API contract section to AGENTS.md
+- Added Production environment + API contract + Database reality + Repo traps sections to CLAUDE.md
+- Added 3 new entries to "What is broken" (deploy, no remote, .htaccess mismatch)
+- Build verified clean after cleanup
+- Proposed but **declined by Magnus**: moving `deploy.yml` to repo root (B), reconciling `.htaccess` (C), removing orphan root configs (D). All three remain as known issues — they involve Johnny's domain or risk breaking production. Future agents: do not act on these without Magnus explicitly asking.
+- Added "Working with AI assistants" section to README.md so the AI workflow (three docs, Stop hook, AGENTS.md as shared log) is discoverable from the project entry point
+
+### 2026-05-07 — Claude (claude-sonnet-4-6)
+- Built Bilar till salu subpage (`client/src/pages/BilarTillSalu.tsx`) — Car interface, CarCard component, gallery with thumbnail strip, sold section, empty state, full CSS
+- Added `/bilar-till-salu` route to `main.tsx`
+- Header nav: all section links changed to `/#section` format so they work from subpages; logo fixed to `/`
+- Replaced 3 fake placeholder cars with real Peugeot 307 CC 2.0 (2006, mörkgrå, 141 147 km, 39 900 kr)
+- Added 3 Peugeot photos (`peugeot-307-cc-1/2/3.jpg`), renamed from macOS screenshot names, wired into gallery
+- Fixed dead link on "Bilar till salu" service card (`#kontakt` → `/bilar-till-salu`)
+- Replaced all 6 service card images with new per-service photos (repair, diagnosis, AC, tyres, tow, carbuy)
+- Car interface changed from `image?: string` to `images?: string[]` to support multi-photo gallery
+- Fixed mobile padding bug on car card body: `--space-5` doesn't exist in design system, changed to `--space-6`
+- All builds verified clean throughout
+
+### 2026-05-05 — Claude (claude-sonnet-4-6)
+- Full codebase review and analysis
+- Identified 3 missing npm packages blocking the build; installed them
+- Identified broken/incomplete features (see current state above)
+- Compared current codebase to LaCie backup ("brynasbilservice INNAN STÄDNING I CODE")
+- Reinstated files deleted by Kimi Code cleanup: GoogleReviews.tsx, Marquee.tsx, SnowflakeIcon.tsx, TruckIcon.tsx, marquee-items.txt, LOGOTYP_NY.svg, HERO_BG_V4/V6/V7.jpg, Hero_Background_V3.jpg, Hero_Bakground_warmer.jpg, new_old_logo.png
+- Restored Hero.tsx, Services.tsx, Header.tsx, Footer.tsx, css/index.css, App.tsx to pre-cleanup versions
+- Fixed nav: deduplicated Bilar till salu link (was `#kontakt`, now `#alla-tjanster`)
+- Created CLAUDE.md, instructions.md, AGENTS.md
