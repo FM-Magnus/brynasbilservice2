@@ -10,15 +10,15 @@
 
 Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/README.md) before editing. This document records the approved redesign state; it does not authorize work beyond the next stated phase.
 
-## Current continuation note — 2026-09-15
+## Current continuation note — 2026-09-16
 
 The historical Git details above are not current state. Always inspect the current worktree and branch before acting. Since this baseline was written:
 
-- The newest local commit is `eb6ccb1c` on `redesign/blue-teal-v1` (ahead of origin by 6 commits).
+- The newest local commit is `78cd10d3` on `redesign/blue-teal-v1` (ahead of origin by 1 commit).
+- Dedicated hero background WebP/JPG pairs implemented across **Om oss** (`/om-oss`), **AC-service** (`/ac-service`), **Bärgning** (`/bargning`), and **Däckservice** (`/dackservice`), each styled via colocated scoped CSS files (`AboutPage.css`, `AcServicePage.css`, `BargningPage.css`, `DackservicePage.css`) using `image-set()` and the standard overlay gradient (`opacity: 0.85`).
 - `/galleri` is a dedicated workshop gallery subpage (`GalleryPage.tsx`) featuring real workshop photos, dark hero, closing CTA, and booking modal.
-- `/om-oss` has been enriched with Maher Basher intro copy, consumer law proof ("15 procent"), authentic portrait card, and a stylish pill CTA button linking to `/galleri`.
+- `/om-oss` features Maher Basher intro copy, consumer law proof ("15 procent"), authentic portrait card, and a stylish pill CTA button linking to `/galleri`.
 - Startsidan features the reusable `GalleryTeaserCard` component with Ken Burns slideshow, "Grundat 2021" badge, and bottom-right cutout badge "TILL GALLERIET".
-- Workshop thumbnails are organized in dedicated production asset directory `client/src/assets/images/gallery/` (< 70 kB WebP with JPG fallback).
 - `/biltjanster` is the Biltjänster hub headed **“Våra biltjänster”**, with linked summary cards for the current service guides and clearly labelled CSS image placeholders.
 - `/felsokning` is a separate main-navigation destination immediately after Biltjänster, using the established service-page pattern and a future-image placeholder.
 - Raw photos, blue-tone backgrounds and non-photographic layout graphics enter through `_incoming-assets/`. Its README defines the subject-based folders; selected web exports belong strictly in `client/src/assets/images/` and its subdirectories.
