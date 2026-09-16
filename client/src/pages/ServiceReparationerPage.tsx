@@ -1,3 +1,11 @@
+// Rebuilt from scratch 2026-09-16 as the THIRD Brynäs page identity: clean
+// automotive advertising / ownership confidence, distinct from both index.css
+// and the teal-technical ServiceGuideTemplate.css used by Koppling/Bromsar.
+// Styled entirely by ./ServiceReparationerPage.css (class prefix .bilservice__)
+// — this page has NO dependency on any .services-page__* rule in index.css.
+// Real photography is not supplied yet; every image position below is an
+// intentional, clearly-labelled placeholder (data-image-slot) sized to the
+// final photo's geometry so it can be dropped in later with no layout change.
 import { useState, useEffect } from 'react'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
@@ -8,316 +16,227 @@ import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { BoltIcon } from '../components/icons/BoltIcon'
 import { DollarIcon } from '../components/icons/DollarIcon'
-import heroJpg from '../assets/images/services/general/wrench-and-bolt-workbench.jpg'
-import heroWebp from '../assets/images/services/general/wrench-and-bolt-workbench.webp'
-import './ServiceReparationerPage.css'
+import { WrenchIcon } from '../components/icons/WrenchIcon'
+import { GaugeIcon } from '../components/icons/GaugeIcon'
+import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
+import { InfoIcon } from '../components/icons/InfoIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
+import './ServiceReparationerPage.css'
 
-const processSteps = [
-  {
-    num: '01',
-    title: 'Bokning och inlämning',
-    desc: 'Du bokar en tid med oss och lämnar in bilen när det passar.'
-  },
-  {
-    num: '02',
-    title: 'Initial kontroll',
-    desc: 'Vi gör en första bedömning av bilens skick och servicebehov.'
-  },
-  {
-    num: '03',
-    title: 'Service enligt checklista',
-    desc: 'Mekanikern följer checklistan för den servicenivå som är aktuell.'
-  },
-  {
-    num: '04',
-    title: 'Godkännande vid extraarbete',
-    desc: 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.'
-  },
-  {
-    num: '05',
-    title: 'Slutkontroll och rapport',
-    desc: 'När bilen är klar får du en genomgång och råd inför nästa service.'
-  }
-]
+const trustRow = [
+  { icon: ShieldIcon, title: 'Personlig service', text: 'Du och din bil i fokus.' },
+  { icon: WrenchIcon, title: 'Erfarna mekaniker', text: 'Mångårig erfarenhet.' },
+  { icon: ClockIcon, title: 'Tryggt och enkelt', text: 'Från bokning till färdig bil.' },
+] as const
 
 const serviceBenefits = [
-  {
-    title: 'Säkerhet',
-    description: 'Fel på bromsar, däck eller elektriska system kan leda till farliga situationer på vägen.',
-    icon: ShieldIcon
-  },
-  {
-    title: 'Livslängd',
-    description: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.',
-    icon: ClockIcon
-  },
-  {
-    title: 'Prestation',
-    description: 'En välunderhållen bil ger bättre bränsleekonomi och prestanda.',
-    icon: BoltIcon
-  },
-  {
-    title: 'Återförsäljningsvärde',
-    description: 'En bil med en fullständig servicehistorik är ofta mer attraktiv för potentiella köpare.',
-    icon: DollarIcon
-  }
-]
+  { title: 'Säkerhet', description: 'Fel på bromsar, däck eller elektriska system kan leda till farliga situationer på vägen.', icon: ShieldIcon },
+  { title: 'Livslängd', description: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.', icon: ClockIcon },
+  { title: 'Prestation', description: 'En välunderhållen bil ger bättre bränsleekonomi och prestanda.', icon: BoltIcon },
+  { title: 'Återförsäljningsvärde', description: 'En bil med en fullständig servicehistorik är ofta mer attraktiv för potentiella köpare.', icon: DollarIcon },
+] as const
 
 const serviceLevels = [
   {
     title: 'Bas- eller mindre service',
     description: 'Detta är det mest grundläggande underhållsprogrammet, vanligtvis rekommenderat varje 12:e månad eller varje 10 000 km.',
-    items: [
-      'Oljebyte',
-      'Byte av oljefilter',
-      'Kontroll av däck och däcktryck',
-      'Kontroll av vätskenivåer (spolarvätska, kylvätska, bromsvätska)'
-    ]
+    items: ['Oljebyte', 'Byte av oljefilter', 'Kontroll av däck och däcktryck', 'Kontroll av vätskenivåer (spolarvätska, kylvätska, bromsvätska)'],
   },
   {
     title: 'Mellanservice',
     description: 'Mellanservice är mer omfattande och inkluderar allt i en bas- eller mindre service, plus:',
-    items: [
-      'Byte av luftfilter',
-      'Byte av bränslefilter',
-      'Granskning av bromssystem',
-      'Kontroll av drivremmar och övriga remmar',
-      'Kontroll av belysning och signaler',
-      'Inspektion av avgassystemet'
-    ]
+    items: ['Byte av luftfilter', 'Byte av bränslefilter', 'Granskning av bromssystem', 'Kontroll av drivremmar och övriga remmar', 'Kontroll av belysning och signaler', 'Inspektion av avgassystemet'],
   },
   {
     title: 'Stor service',
     description: 'En stor service är den mest omfattande och inkluderar följande, utöver de tidigare nämnda punkterna:',
-    items: [
-      'Byte av tändstift',
-      'Kontroll och justering av tändsystem',
-      'Inspektion av fjädring och stötdämpare',
-      'Kontroll av växellåda och koppling',
-      'Kontroll av bilens elektroniska system, inklusive diagnostiska tester'
-    ]
-  }
-]
+    items: ['Byte av tändstift', 'Kontroll och justering av tändsystem', 'Inspektion av fjädring och stötdämpare', 'Kontroll av växellåda och koppling', 'Kontroll av bilens elektroniska system, inklusive diagnostiska tester'],
+  },
+] as const
+
+const processSteps = [
+  { num: '01', icon: PhoneIcon, title: 'Bokning och inlämning', desc: 'Du bokar en tid med oss och lämnar in bilen när det passar.' },
+  { num: '02', icon: GaugeIcon, title: 'Initial kontroll', desc: 'Vi gör en första bedömning av bilens skick och servicebehov.' },
+  { num: '03', icon: CheckIcon, title: 'Service enligt checklista', desc: 'Mekanikern följer checklistan för den servicenivå som är aktuell.' },
+  { num: '04', icon: ThumbsUpIcon, title: 'Godkännande vid extraarbete', desc: 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.' },
+  { num: '05', icon: InfoIcon, title: 'Slutkontroll och rapport', desc: 'När bilen är klar får du en genomgång och råd inför nästa service.' },
+] as const
+
+function ImageSlot({ id, label, tone = 'light', className = '' }: { id: string; label: string; tone?: 'light' | 'dark'; className?: string }) {
+  return (
+    <div
+      className={`bilservice__image-slot${tone === 'dark' ? ' bilservice__image-slot--dark' : ''}${className ? ` ${className}` : ''}`}
+      data-image-slot={id}
+      role="img"
+      aria-label={`Platshållare för bild: ${label}`}
+    >
+      <span>{label}</span>
+    </div>
+  )
+}
 
 export default function ServiceReparationerPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <>
       <Header onBookingClick={openModal} />
-
-      <main className="services-page bilservice-guide">
-        {/* Hero Section */}
-        <section className="services-page__hero" id="bilservice" aria-labelledby="services-hero-title">
-          <div className="container">
-            <div className="services-page__hero-layout">
-              <div className="services-page__hero-content">
-                <h1 className="services-page__title" id="services-hero-title">
-                  Bilservice – allt du behöver <span className="title-accent">veta innan du bokar</span>
-                </h1>
-                <p className="services-page__lead">
-                  Bilservice är en serie rutinmässiga underhållsåtgärder som syftar till att förbättra bilens livslängd, funktion och säkerhet. Det handlar inte bara om att byta olja och kontrollera däcktryck; en fullständig service kan inkludera allt från bromsinspektioner till kontroll av elektroniska system.
-                </p>
-                <div className="services-page__hero-actions">
-                  <button
-                    type="button"
-                    onClick={openModal}
-                    className="services-page__btn services-page__btn--primary"
-                  >
-                    Boka tid
-                  </button>
-                  <a
-                    href="tel:0705533395"
-                    className="services-page__btn services-page__btn--outline"
-                  >
-                    <PhoneIcon className="services-page__btn-icon" />
-                    <span>Ring 070-553 33 95</span>
-                  </a>
-                </div>
+      <main className="bilservice">
+        {/* Hero */}
+        <section className="bilservice__hero" id="bilservice" aria-labelledby="bilservice-hero-title">
+          <ImageSlot id="bilservice-hero-car" label="Bild — Bilservice hero, färdig bil" tone="dark" className="bilservice__hero-media" />
+          <div className="bilservice__hero-inner">
+            <div className="bilservice__hero-content">
+              <div className="bilservice__eyebrow">Din bilverkstad i Brynäs, Gävle</div>
+              <h1 className="bilservice__hero-title" id="bilservice-hero-title">
+                Din bil<br /><span className="title-accent">förtjänar</span><br />det bästa
+              </h1>
+              <p className="bilservice__hero-lead">
+                Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation — för alla bilmärken, till konkurrenskraftiga priser.
+              </p>
+              <div className="bilservice__actions">
+                <button type="button" onClick={openModal} className="bilservice__btn bilservice__btn--primary">Boka tid</button>
+                <a href="tel:0705533395" className="bilservice__btn bilservice__btn--outline"><PhoneIcon aria-hidden="true" /><span>Ring oss nu</span></a>
               </div>
-              <div className="bilservice-guide__hero-image">
-                <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Skiftnyckel och bult i närbild på en arbetsbänk i verkstaden" loading="lazy" /></picture>
+              <div className="bilservice__hero-trust">
+                {trustRow.map(({ icon: Icon, title, text }) => (
+                  <div className="bilservice__hero-trust-item" key={title}>
+                    <Icon aria-hidden="true" />
+                    <div><h3>{title}</h3><p>{text}</p></div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="services-page__pricing bilservice-guide__quick-pricing" aria-labelledby="services-pricing-title">
-          <div className="container">
-            <div className="services-page__pricing-card">
-              <div>
-                <h2 id="services-pricing-title">Vad kostar en bilservice?</h2>
-                <p>Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
-              </div>
-              <div className="services-page__pricing-actions">
-                <button type="button" onClick={openModal} className="services-page__btn services-page__btn--primary">Boka tid för bilservice</button>
-                <a href="tel:0705533395" className="services-page__btn services-page__btn--outline">Ring 070-553 33 95</a>
+        {/* Vad kostar en bilservice? */}
+        <section className="bilservice__section" aria-labelledby="bilservice-price-title">
+          <div className="bilservice__container bilservice__split">
+            <div>
+              <h2 className="bilservice__price-heading" id="bilservice-price-title">Vad kostar en <span className="title-accent">bilservice</span>?</h2>
+              <p className="bilservice__price-text">Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
+              <div className="bilservice__actions">
+                <button type="button" onClick={openModal} className="bilservice__btn bilservice__btn--primary">Boka tid för bilservice</button>
+                <a href="tel:0705533395" className="bilservice__btn bilservice__btn--outline">Ring 070-553 33 95</a>
               </div>
             </div>
+            <ImageSlot id="bilservice-servicebook-keys" label="Bild — Servicebok och bilnyckel" className="bilservice__split-media--right bilservice__image-slot--ar-16-9 bilservice__image-slot--radius-lg" />
           </div>
         </section>
 
-        <section className="services-page__guide" aria-labelledby="service-guide-title">
-          <div className="container">
-            <div className="services-page__guide-intro">
-              <h2 id="service-guide-title">Varför är bilservice viktigt?</h2>
+        {/* Varför är bilservice viktigt? */}
+        <section className="bilservice__section bilservice__section--tight" aria-labelledby="bilservice-why-title">
+          <div className="bilservice__container">
+            <div className="bilservice__intro">
+              <h2 id="bilservice-why-title">Varför är bilservice viktigt?</h2>
               <p>Ett regelbundet serviceprogram är avgörande för flera skäl.</p>
             </div>
-
-            <div className="services-page__benefit-grid services-page__benefit-grid--accent">
+            <div className="bilservice__value-grid">
               {serviceBenefits.map((benefit) => (
-                <article className="services-page__benefit-card bilservice-guide__benefit-card" key={benefit.title}>
-                  <benefit.icon className="bilservice-guide__benefit-icon" aria-hidden="true" />
-                  <h3>{benefit.title}</h3>
-                  <p>{benefit.description}</p>
+                <article className="bilservice__value-card" key={benefit.title}>
+                  <ImageSlot id={`bilservice-value-${benefit.title.toLowerCase()}`} label={`Bild — ${benefit.title}`} className="bilservice__image-slot--ar-4-3" />
+                  <div className="bilservice__value-body">
+                    <span className="bilservice__value-icon"><benefit.icon aria-hidden="true" /></span>
+                    <h3>{benefit.title}</h3>
+                    <p>{benefit.description}</p>
+                  </div>
                 </article>
               ))}
             </div>
+          </div>
+        </section>
 
-            <div className="services-page__guide-intro services-page__guide-intro--levels">
-              <h2>Vilken service behöver din bil?</h2>
+        {/* Vilken service behöver din bil? */}
+        <section className="bilservice__section bilservice__section--tight" aria-labelledby="bilservice-levels-title">
+          <div className="bilservice__container">
+            <div className="bilservice__intro">
+              <h2 id="bilservice-levels-title">Vilken service behöver din bil?</h2>
               <p>Exakt vad som ingår styrs av tillverkarens rekommenderade intervall för just din bilmodell, men de flesta verkstäder – oss inkluderade – delar in service i tre nivåer.</p>
             </div>
-
-            <div className="services-page__level-grid bilservice-guide__level-grid">
+            <div className="bilservice__levels-grid">
               {serviceLevels.map((level, index) => (
-                <article className="services-page__level-card bilservice-guide__level-card" key={level.title}>
-                  <span className="services-page__level-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <article className={`bilservice__level-card bilservice__level-card--0${index + 1}`} key={level.title}>
+                  <span className="bilservice__level-badge" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <h3>{level.title}</h3>
                   <p>{level.description}</p>
+                  <div className="bilservice__level-divider" aria-hidden="true" />
                   <ul>
-                    {level.items.map((item) => (
-                      <li key={item}>
-                        <CheckIcon aria-hidden="true" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
+                    {level.items.map((item) => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
                   </ul>
                 </article>
               ))}
             </div>
+          </div>
+        </section>
 
-            <div className="services-page__more-card">
+        {/* Mer än bara service */}
+        <section className="bilservice__section--aqua" aria-labelledby="bilservice-more-title">
+          <div className="bilservice__container" style={{ paddingBlock: 'clamp(3rem, 5vw, 4rem)' }}>
+            <div className="bilservice__bridge">
+              <h2 id="bilservice-more-title">Mer än bara service</h2>
+              <p>
+                Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – <a href="/ac-service">AC-service</a>, <a href="/biltjanster#felsokning-diagnostik">diagnostik när en varningslampa lyser</a>, och <a href="/dackservice">däckhotell</a> om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med <a href="/bilar-till-salu">försäljning av begagnade bilar</a> och <a href="/bargning">transport av fordon</a>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Så går det till hos oss */}
+        <section className="bilservice__section bilservice__section--dark" aria-labelledby="bilservice-process-title">
+          <div className="bilservice__container bilservice__process">
+            <div className="bilservice__process-text">
+              <h2 className="bilservice__process-heading" id="bilservice-process-title">Så går det till<br /><span className="title-accent">hos oss</span></h2>
+              <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
+              <a href="tel:0705533395" className="bilservice__btn bilservice__btn--primary"><PhoneIcon aria-hidden="true" /><span>Ring oss: 070-553 33 95</span></a>
+            </div>
+            <div className="bilservice__process-steps">
+              {processSteps.map((step) => (
+                <div className="bilservice__process-step" key={step.num}>
+                  <span className="bilservice__process-icon"><step.icon aria-hidden="true" /></span>
+                  <span className="bilservice__process-num" aria-hidden="true">{step.num}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Letar du efter en begagnad bil? */}
+        <section className="bilservice__section--tight" aria-labelledby="bilservice-cars-title">
+          <div className="bilservice__container" style={{ paddingBlock: 'clamp(2rem, 3.5vw, 3rem)' }}>
+            <div className="bilservice__promo">
               <div>
-                <h2>Mer än bara service</h2>
-                <p>
-                  Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – <a href="/ac-service">AC-service</a>, <a href="/biltjanster#felsokning-diagnostik">diagnostik när en varningslampa lyser</a>, och <a href="/dackservice">däckhotell</a> om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med <a href="/bilar-till-salu">försäljning av begagnade bilar</a> och <a href="/bargning">transport av fordon</a>.
-                </p>
+                <div className="bilservice__promo-eyebrow">Kvalitetskontrollerade fordon</div>
+                <h3 id="bilservice-cars-title">Letar du efter en begagnad bil?</h3>
               </div>
+              <a href="/bilar-till-salu" className="bilservice__promo-link"><span>Se bilar till salu</span><ArrowRightIcon aria-hidden="true" /></a>
             </div>
           </div>
         </section>
 
-        <section className="services-page__process-section" aria-labelledby="services-process-title">
-          <div className="container">
-            <div className="services-page__process-card">
-              <div className="services-page__process-inner">
-                <div className="services-page__process-text">
-                  <h2 className="services-page__process-heading" id="services-process-title">
-                    Så går det till <br />
-                    <span className="title-accent">hos oss</span>
-                  </h2>
-                  <p className="services-page__process-desc">
-                    Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.
-                  </p>
-                  <div className="services-page__process-action">
-                    <a href="tel:0705533395" className="services-page__process-cta">
-                      <PhoneIcon className="services-page__process-icon" />
-                      <span>Ring oss: 070-553 33 95</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div className="services-page__process-steps">
-                  <div className="services-page__steps-list">
-                    {processSteps.map(step => (
-                      <div className="services-page__step" key={step.num}>
-                        <div className="services-page__step-num" aria-hidden="true">{step.num}</div>
-                        <div className="services-page__step-content">
-                          <h3 className="services-page__step-title">{step.title}</h3>
-                          <p className="services-page__step-desc">{step.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+        {/* Alltid tydliga besked och ärliga priser */}
+        <section className="bilservice__section--tight" aria-labelledby="bilservice-trust-title">
+          <div className="bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(4.5rem, 7vw, 6.5rem)' }}>
+            <div className="bilservice__trust-card">
+              <span className="bilservice__trust-icon"><ShieldHeartIcon aria-hidden="true" /></span>
+              <div className="bilservice__trust-text">
+                <h3 id="bilservice-trust-title">Alltid tydliga besked och ärliga priser</h3>
+                <p>Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Vehicles note section */}
-        <section className="services-page__cars-note" aria-labelledby="cars-note-title">
-          <div className="container">
-            <div className="services-page__cars-box">
-              <div className="services-page__cars-text">
-                <div className="section-eyebrow section-eyebrow--dark">
-                  <span className="eyebrow-line" aria-hidden="true" />
-                  Kvalitetskontrollerade fordon
-                </div>
-                <h3 className="services-page__cars-heading" id="cars-note-title">
-                  Letar du efter en begagnad bil?
-                </h3>
-                <p className="services-page__cars-desc">
-                  Vi säljer även noggrant genomgångna och besiktigade begagnade bilar i Gävle. Varje bil kontrolleras av våra mekaniker innan försäljning.
-                </p>
-              </div>
-              <div className="services-page__cars-action">
-                <a href="/bilar-till-salu" className="services-page__cars-btn">
-                  <span>Se bilar till salu</span>
-                  <ArrowRightIcon className="services-page__cars-arrow" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Reassurance section */}
-        <section className="services-page__reassurance" aria-labelledby="reassurance-title">
-          <div className="container">
-            <div className="services-page__reassurance-card">
-              <div className="services-page__reassurance-header">
-                <div className="services-page__reassurance-icon" aria-hidden="true">
-                  <ShieldHeartIcon />
-                </div>
-                <div>
-                  <h3 className="services-page__reassurance-title" id="reassurance-title">
-                    Alltid tydliga besked och ärliga priser
-                  </h3>
-                  <p className="services-page__reassurance-desc">
-                    Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.
-                  </p>
-                </div>
-              </div>
-              <div className="services-page__reassurance-actions">
-                <button
-                  type="button"
-                  onClick={openModal}
-                  className="services-page__btn services-page__btn--primary"
-                >
-                  Boka tid nu
-                </button>
-                <a
-                  href="tel:0705533395"
-                  className="services-page__btn services-page__btn--outline"
-                >
-                  Ring: 070-553 33 95
-                </a>
+              <div className="bilservice__actions">
+                <button type="button" onClick={openModal} className="bilservice__btn bilservice__btn--primary">Boka tid nu</button>
+                <a href="tel:0705533395" className="bilservice__btn bilservice__btn--outline">Ring: 070-553 33 95</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-
       <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
       <Footer />
     </>
