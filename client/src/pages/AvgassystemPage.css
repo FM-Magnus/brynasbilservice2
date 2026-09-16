@@ -1,0 +1,46 @@
+/* Parts as a connected timeline (one continuous line through all 4 dots)
+   instead of a plain grid — reads as "gases flow through these stages". */
+.exhaust-page__parts-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  position: relative;
+}
+.exhaust-page__parts-timeline::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: calc(12.5% - 1px);
+  right: calc(12.5% - 1px);
+  height: 2px;
+  background: rgba(36, 150, 160, 0.3);
+  z-index: 0;
+}
+.exhaust-page__part-card--timeline { position: relative; padding-top: 2rem; }
+.exhaust-page__part-dot {
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--redesign-accent);
+  border: 3px solid var(--redesign-page, #f8f7f3);
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  .exhaust-page__parts-timeline { grid-template-columns: 1fr; }
+  .exhaust-page__parts-timeline::before { display: none; }
+}
+
+/* Small "OBS" flag on the catalytic-converter-theft guidance card */
+.exhaust-page__guidance-flag {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--redesign-radius-pill);
+  background: var(--redesign-ink);
+  color: #fff;
+  font: 800 0.7rem var(--font-body);
+  letter-spacing: 0.06em;
+}
