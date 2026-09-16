@@ -9,6 +9,7 @@ import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 
 import imgTow from '../assets/images/services/towing/tow-truck-night.jpg'
+import './BargningPage.css'
 
 interface ServiceCategory {
   id: string
@@ -82,7 +83,7 @@ export default function BargningPage() {
 
       <main className="services-page">
         {/* Hero Section */}
-        <section className="services-page__hero" aria-labelledby="services-hero-title">
+        <section className="services-page__hero bargning-hero" aria-labelledby="services-hero-title">
           <div className="container">
             <div className="services-page__hero-content">
               <div className="section-eyebrow">

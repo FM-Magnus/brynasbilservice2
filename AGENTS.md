@@ -7,10 +7,12 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-15 by Claude)
+## Current state (last updated: 2026-09-16 by Codex)
 
-### What is working
-- Magnus confirmed on 2026-09-14 that the website is still a work in progress and **no page copy is final-approved**. Earlier approvals in this file concern specific design or functionality, not final page text.
+- **Däckservice page hero background update (`/dackservice`)** — Imported and optimized replacement asset `HERO-BG_DACK.webp` (2146 × 733 px) from `_incoming-assets/incoming/` to `client/src/assets/images/services/tires/tires-hero-bg.{webp,jpg}` (48.7 KB WebP, 96.7 KB JPG fallback). Scoped in colocated `DackservicePage.css` with `image-set()` and overlay gradient (`.tyres-page__hero::before` with linear-gradient 90deg dark-to-translucent, opacity 0.85). Original archived to `_incoming-assets/01_blue_tone_bakgrunder/heros/` and `_incoming-assets/incoming/` kept clean.
+- **AC-service page hero background update (`/ac-service`)** — Imported and optimized replacement asset `HERO-BG_AC.webp` (2172 × 724 px) from `_incoming-assets/incoming/` to `client/src/assets/images/services/ac/ac-hero-bg.{webp,jpg}` (55.7 KB WebP, 108.3 KB JPG fallback). Scoped in colocated `AcServicePage.css` with `image-set()` and overlay gradient (`.ac-page__hero::before` with linear-gradient 90deg dark-to-translucent, opacity 0.85). Removed old inline image markup from `AcServicePage.tsx`. Original archived to `_incoming-assets/01_blue_tone_bakgrunder/heros/` and `_incoming-assets/incoming/` kept clean.
+- **Om oss page hero background update (`/om-oss`)** — Imported and optimized replacement asset `BG HERO OM OSS.webp` (2172 × 724 px) from `_incoming-assets/incoming/` to `client/src/assets/images/about/about-hero-bg.{webp,jpg}` (55.0 KB WebP, 110.1 KB JPG fallback). Scoped in colocated `AboutPage.css` with `image-set()` and overlay gradient (`.about-page__hero::before` with linear-gradient 90deg dark-to-translucent, opacity 0.85). Original archived to `_incoming-assets/02_kundinteraktion/` and `_incoming-assets/incoming/` kept clean.
+- **Bärgning hero background update (`/bargning`)** — Dedicated blue-teal background `towing-hero-bg.{webp,jpg}` styled in colocated `BargningPage.css` with clean contrast and natural lighting.
 - Current landing page renders: Header, Hero, ContactIntro, EV (workshop process), About, Services (preview), Contact, Footer, plus the booking modal. `ServiceList`, `WhyUs`, and `CTABanner` remain in the source tree but are not mounted by `App.tsx`.
 - Two-tier typography system: **Archivo 800** for display headings, **Manrope** (400-500 body, 600-700 controls/navigation/badges) via centralized tokens, strictly avoiding scattered component edits.
 - Phase 1A header and hero redesign — real SVG logo (scaled +20–30%), floating navigation/booking controls, keyboard-usable mobile menu, unchanged hero copy and connected `home/hero/home-workshop-hero.webp` with JPG fallback
@@ -171,6 +173,13 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-16 — Antigravity (Bärgning & Om oss hero background image setups)
+- **Om oss** (`/om-oss`): Added handshake/workshop hero background image (`client/src/assets/images/about/about-hero-bg.{webp,jpg}`) with dark teal gradient overlay.
+- Added colocated scoped CSS in `client/src/pages/AboutPage.css` imported in `AboutPage.tsx` without adding lines to `index.css`.
+- **Bärgning** (`/bargning`): Added high-quality towing hero background image (`client/src/assets/images/services/towing/towing-hero-bg.{webp,jpg}`) with dark teal gradient overlay.
+- Added colocated scoped CSS in `client/src/pages/BargningPage.css` imported in `BargningPage.tsx` without modifying or duplicating shared `services-page__*` classes in `index.css`.
+- Verified clean build (`npm --prefix client run build`), `git diff --check`, and responsive layout.
 
 ### 2026-09-15 — Claude (visual redesign pass: Bilbatteri, Felsökning, AC, Däckservice + site-wide hero rule)
 - **Bilbatteri** (`/bilbatteri`): replaced the icon placeholder with 3 real photos Magnus supplied (2 pasted via chat, 1 already in `_incoming-assets/incoming/`), exported to `client/src/assets/images/services/battery/`, originals sorted into `_incoming-assets/04_tjanster/07_bilbatteri_och_el/`. Restructured benefits (icon-row list), symptoms (numbered list), guidance (stat-strip). No copy changed.

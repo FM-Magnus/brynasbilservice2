@@ -7,10 +7,9 @@ import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 
-import imgWorkshop1Webp from '../assets/images/gallery/workshop/workshop-car-open-hood.webp'
-import imgWorkshop1Jpg from '../assets/images/gallery/workshop/workshop-car-open-hood.jpg'
 import imgMaherWebp from '../assets/images/people/maher-basher-portrait.webp'
 import imgMaherJpg from '../assets/images/people/maher-basher-portrait.jpg'
+import './AboutPage.css'
 
 const steps = [
   {
@@ -48,53 +47,38 @@ export default function AboutPage() {
         {/* Hero section */}
         <section className="about-page__hero" aria-labelledby="about-hero-title">
           <div className="container">
-            <div className="about-page__hero-grid">
-              <div className="about-page__hero-content">
-                <div className="section-eyebrow">
-                  <span className="eyebrow-line" aria-hidden="true" />
-                  Om Brynäs Bilservice
-                </div>
-                <h1 className="about-page__hero-title" id="about-hero-title">
-                  Din lokala och <span className="title-accent">personliga bilverkstad</span> i Brynäs
-                </h1>
-                <p className="about-page__hero-lead">
-                  Sedan starten 2021 har vi drivit en oberoende bilverkstad på Utmarksvägen i Gävle med ett enkelt mål: att ge bilägare personlig service, fackmannamässigt utfört arbete och raka besked utan krångel.
-                </p>
-                <p className="about-page__hero-sub">
-                  Hos oss pratar du direkt med mekanikern som arbetar med din bil. Vi servar och reparerar alla bilmärken enligt tillverkarens rekommendationer och lämnar alltid tydliga kostnadsförslag innan vi påbörjar något arbete.
-                </p>
-                <div className="about-page__hero-actions">
-                  <button
-                    type="button"
-                    onClick={openModal}
-                    className="about-page__btn about-page__btn--primary"
-                  >
-                    <span>Boka tid</span>
-                    <span className="about-page__btn-arrow" aria-hidden="true">
-                      <ArrowRightIcon className="w-4 h-4" />
-                    </span>
-                  </button>
-                  <a
-                    href="tel:0705533395"
-                    className="about-page__btn about-page__btn--outline"
-                  >
-                    <PhoneIcon className="w-4 h-4 text-teal-400" />
-                    <span>Ring: 070-553 33 95</span>
-                  </a>
-                </div>
+            <div className="about-page__hero-content">
+              <div className="section-eyebrow">
+                <span className="eyebrow-line" aria-hidden="true" />
+                Om Brynäs Bilservice
               </div>
-              <div className="about-page__hero-visual">
-                <div className="about-page__hero-card">
-                  <picture>
-                    <source srcSet={imgWorkshop1Webp} type="image/webp" />
-                    <img
-                      src={imgWorkshop1Jpg}
-                      alt="Brynäs Bilservice verkstad med bilar och utrustning"
-                      className="about-page__hero-img"
-                    />
-                  </picture>
-                  <div className="about-page__hero-badge">Grundat 2021</div>
-                </div>
+              <h1 className="about-page__hero-title" id="about-hero-title">
+                Din lokala och <span className="title-accent">personliga bilverkstad</span> i Brynäs
+              </h1>
+              <p className="about-page__hero-lead">
+                Sedan starten 2021 har vi drivit en oberoende bilverkstad på Utmarksvägen i Gävle med ett enkelt mål: att ge bilägare personlig service, fackmannamässigt utfört arbete och raka besked utan krångel.
+              </p>
+              <p className="about-page__hero-sub">
+                Hos oss pratar du direkt med mekanikern som arbetar med din bil. Vi servar och reparerar alla bilmärken enligt tillverkarens rekommendationer och lämnar alltid tydliga kostnadsförslag innan vi påbörjar något arbete.
+              </p>
+              <div className="about-page__hero-actions">
+                <button
+                  type="button"
+                  onClick={openModal}
+                  className="about-page__btn about-page__btn--primary"
+                >
+                  <span>Boka tid</span>
+                  <span className="about-page__btn-arrow" aria-hidden="true">
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </span>
+                </button>
+                <a
+                  href="tel:0705533395"
+                  className="about-page__btn about-page__btn--outline"
+                >
+                  <PhoneIcon className="w-4 h-4 text-teal-400" />
+                  <span>Ring: 070-553 33 95</span>
+                </a>
               </div>
             </div>
           </div>

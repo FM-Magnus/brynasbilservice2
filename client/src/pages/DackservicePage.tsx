@@ -10,8 +10,8 @@ import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { UsersIcon } from '../components/icons/UsersIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
-import { ClockIcon } from '../components/icons/ClockIcon'
 import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
+import './DackservicePage.css'
 
 type PriceEntry = { label?: string; prefix?: string; amount?: string; unit?: string; contactText?: string }
 type ServiceCardProps = { title: string; description: string; priceData: PriceEntry[]; imagePlaceholder: string; onBookingClick: () => void }
@@ -73,7 +73,7 @@ export default function DackservicePage() {
   const openModal = () => setIsModalOpen(true)
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return <><Header onBookingClick={openModal} /><main className="tyres-page">
-    <section className="tyres-page__hero" aria-labelledby="tyres-hero-title"><div className="container tyres-page__container"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Däckverkstad i Brynäs, Gävle</div><h1 id="tyres-hero-title">Däckservice &amp; <span className="title-accent">Hjulskifte</span> i Gävle</h1><p>Vi hjälper dig med hjulskifte, montering, balansering, hjulinställning, punkteringslagning och däckhotell — med omtanke om säkerhet, körkomfort och dina hjul.</p><div className="tyres-page__actions"><button type="button" className="tyres-page__button tyres-page__button--primary" onClick={openModal}>Boka tid</button><a className="tyres-page__button tyres-page__button--outline" href="tel:0705533395"><PhoneIcon />Ring oss: 070-553 33 95</a></div></div></section>
+    <section className="tyres-page__hero" aria-labelledby="tyres-hero-title"><div className="container tyres-page__container"><div className="tyres-page__hero-content"><div className="section-eyebrow"><span className="eyebrow-line" aria-hidden="true" />Däckverkstad i Brynäs, Gävle</div><h1 id="tyres-hero-title">Däckservice &amp; <span className="title-accent">Hjulskifte</span> i Gävle</h1><p>Vi hjälper dig med hjulskifte, montering, balansering, hjulinställning, punkteringslagning och däckhotell — med omtanke om säkerhet, körkomfort och dina hjul.</p><div className="tyres-page__actions"><button type="button" className="tyres-page__button tyres-page__button--primary" onClick={openModal}>Boka tid</button><a className="tyres-page__button tyres-page__button--outline" href="tel:0705533395"><PhoneIcon />Ring oss: 070-553 33 95</a></div></div></div></section>
 
     <section className="tyres-page__value" aria-labelledby="tyres-value-title"><div className="container tyres-page__container"><header className="tyres-page__section-header"><h2 id="tyres-value-title">Varför välja din lokala däckverkstad?</h2></header><div className="tyres-page__value-grid">{localValueProps.map(({ icon: Icon, title, text }) => <article className="tyres-page__value-card" key={title}><Icon aria-hidden="true" /><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
 

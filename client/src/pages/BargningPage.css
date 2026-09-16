@@ -1,0 +1,35 @@
+/* Scoped styles for BargningPage */
+
+.bargning-hero {
+  position: relative;
+  background-color: #0e1416;
+  background-image: image-set(
+    url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
+    url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
+  );
+  background-size: cover;
+  background-position: center right;
+  overflow: hidden;
+}
+
+/* Remove duplicate gradients since the hero image is already graded */
+.bargning-hero::before {
+  display: none;
+}
+
+.bargning-hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.bargning-hero .services-page__hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+@media (max-width: 768px) {
+  .bargning-hero {
+    background-position: 80% center;
+  }
+}

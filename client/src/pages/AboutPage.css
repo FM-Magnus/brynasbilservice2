@@ -1,0 +1,46 @@
+/* Scoped styles for AboutPage */
+
+.about-page__hero {
+  position: relative;
+  background-color: #0e1416;
+  background-image: image-set(
+    url('../assets/images/about/about-hero-bg.webp') type('image/webp') 1x,
+    url('../assets/images/about/about-hero-bg.jpg') type('image/jpeg') 1x
+  );
+  background-size: cover;
+  background-position: center right;
+  overflow: hidden;
+}
+
+.about-page__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 10, 11, 0.92) 0%,
+    rgba(5, 10, 11, 0.80) 35%,
+    rgba(5, 10, 11, 0.48) 65%,
+    rgba(5, 10, 11, 0.20) 100%
+  );
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-page__hero > .container {
+  position: relative;
+  z-index: 2;
+}
+
+.about-page__hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+@media (max-width: 768px) {
+  .about-page__hero {
+    background-position: 80% center;
+  }
+}
