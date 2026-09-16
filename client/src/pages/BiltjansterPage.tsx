@@ -5,6 +5,9 @@ import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
+import { ClockIcon } from '../components/icons/ClockIcon'
+import { BoltIcon } from '../components/icons/BoltIcon'
+import { ShieldIcon } from '../components/icons/ShieldIcon'
 import bilserviceThumbJpg from '../assets/images/services/general/wrench-and-bolt-workbench-thumb.jpg'
 import bilserviceThumbWebp from '../assets/images/services/general/wrench-and-bolt-workbench-thumb.webp'
 import oljebyteThumbJpg from '../assets/images/services/oil/oil-drain-under-car-thumb.jpg'
@@ -24,6 +27,7 @@ interface ServiceGuide {
   imageLabel: string
   imageJpg?: string
   imageWebp?: string
+  icon?: typeof WrenchIcon
 }
 
 const serviceGuides: ServiceGuide[] = [
@@ -53,6 +57,7 @@ const serviceGuides: ServiceGuide[] = [
     imageLabel: 'Kamremsarbete i verkstaden',
     imageJpg: kamremThumbJpg,
     imageWebp: kamremThumbWebp,
+    icon: ClockIcon,
   },
   {
     id: 'koppling',
@@ -67,6 +72,7 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Bromsarna är avgörande för säkerheten, och tidiga tecken kan hjälpa dig att få rätt åtgärd i tid.',
     href: '/bromssystem',
     imageLabel: 'Bromsarbete i verkstaden',
+    icon: ShieldIcon,
   },
   {
     id: 'bilbatteri',
@@ -76,6 +82,7 @@ const serviceGuides: ServiceGuide[] = [
     imageLabel: 'Batterikontroll i verkstaden',
     imageJpg: bilbatteriThumbJpg,
     imageWebp: bilbatteriThumbWebp,
+    icon: BoltIcon,
   },
   {
     id: 'stodampare-fjadrar',
@@ -168,7 +175,9 @@ export default function BiltjansterPage() {
         <section className="services-page__categories" aria-label="Serviceguider">
           <div className="container">
             <div className="services-page__category-list biltjanster-page__guide-list">
-              {serviceGuides.map((guide, index) => (
+              {serviceGuides.map((guide, index) => {
+                const GuideIcon = guide.icon ?? WrenchIcon
+                return (
                 <article
                   className="services-category-card biltjanster-page__guide-card"
                   id={guide.id}
@@ -181,7 +190,7 @@ export default function BiltjansterPage() {
                     aria-label={guide.imageJpg ? undefined : `Platshållare för framtida bild: ${guide.imageLabel}`}
                   >
                     <div className="services-category-card__badge" aria-hidden="true">
-                      <WrenchIcon />
+                      <GuideIcon />
                     </div>
                     <span className="services-category-card__badge-num" aria-hidden="true">
                       {String(index + 1).padStart(2, '0')}
@@ -221,7 +230,8 @@ export default function BiltjansterPage() {
                     </div>
                   </div>
                 </article>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>
