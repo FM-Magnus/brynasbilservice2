@@ -2,6 +2,14 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-16 — Antigravity (dead code cleanup across client/src)
+
+- Deleted orphan page `client/src/pages/BiltjanstPlaceholderPage.tsx` (unreferenced in routing or components).
+- Deleted unmounted legacy start-page section components in `client/src/components/sections/` (`About.tsx`, `Contact.tsx`, `ContactIntro.tsx`, `EV.tsx`, `Hero.tsx`, `Services.tsx`), now fully superseded by the isolated `LandingPage.tsx` island.
+- Deleted unused legacy UI components in `client/src/components/ui/` (`Button.tsx`, `ButtonLink.tsx`, `GalleryTeaserCard.tsx`, `KenBurnsSlideshow.tsx`, `Marquee.tsx`, `SectionHeader.tsx`).
+- Preserved active shared components (`BiltjansterFaq.tsx`, `BookingForm.tsx`, `GoogleReviews.tsx`, `ThemeSwitcher.tsx`, and all icons).
+- Verified with `npm --prefix client run build`: successful zero-error build. `index.css` untouched.
+
 ### 2026-09-16 — Codex (isolated landing-page rebuild and documentation reconciliation)
 
 - Replaced the legacy start-page composition in `client/src/App.tsx` with the route-local `client/src/pages/landing/LandingPage.tsx` and colocated `LandingPage.css`. The page is a dedicated `.landing-v2__*` CSS island; `client/src/css/index.css` was not changed.
