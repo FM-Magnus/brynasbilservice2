@@ -114,7 +114,7 @@ export default function ServiceReparationerPage() {
         </section>
 
         {/* Vad kostar en bilservice? */}
-        <section className="bilservice__section" aria-labelledby="bilservice-price-title">
+        <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="bilservice-price-title">
           <div className="bilservice__container bilservice__split">
             <div>
               <h2 className="bilservice__price-heading" id="bilservice-price-title">Vad kostar en <span className="title-accent">bilservice</span>?</h2>

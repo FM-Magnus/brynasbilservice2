@@ -31,7 +31,11 @@
 }
 
 .bilservice__section { padding-block: clamp(4.5rem, 7vw, 6.5rem); }
-.bilservice__section--tight { padding-block: clamp(3rem, 5vw, 4rem); }
+.bilservice__section--tight { padding-block: clamp(2.5rem, 4vw, 3rem); }
+/* Consecutive white-background sections should read as one continuous
+   canvas, not a series of chapter breaks — only the hero->content and
+   white->aqua/dark transitions keep the fuller padding above. */
+.bilservice__section--flow-bottom { padding-bottom: clamp(2.5rem, 4vw, 3rem); }
 .bilservice__section--dark { background: linear-gradient(150deg, var(--bilservice-petrol-950) 0%, var(--bilservice-petrol-900) 100%); color: #fff; }
 .bilservice__section--aqua { background: var(--bilservice-aqua-100); }
 
