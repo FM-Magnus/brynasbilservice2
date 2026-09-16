@@ -32,6 +32,16 @@ photo layout already hit, and **don't make them all look like each other** — v
 hero composition, media placement (left/right alternating, full-bleed vs boxed),
 and card treatments the way Kamrem/Bilbatteri/AC/Dackservice already differ.
 
+**This is a layout pass, not just an image-insertion pass.** Don't treat each page
+as "keep the existing template, slot a photo into the one placeholder box." Actually
+rearrange sections and elements — reorder blocks, break a single-column list into
+an asymmetric grid, pull a stat or warning sign out into its own callout, alternate
+which side the media sits on page to page — so the page feels genuinely reworked,
+not just illustrated. **Do not delete or shorten any existing body copy** while
+doing this — every warning sign, checklist item, FAQ answer, and paragraph currently
+on a page must still be present somewhere afterward; move it, restructure the
+container around it, restyle it, but the words stay.
+
 ## Order of work
 
 1. Bilbatteri and Kamrem are the reference bar (richest existing layouts) — don't
@@ -47,6 +57,12 @@ and card treatments the way Kamrem/Bilbatteri/AC/Dackservice already differ.
 
 - Only **copy** from `_incoming-assets/` into `client/src/assets/images/...`.
   Never move or delete originals there.
+- **Re-check `_incoming-assets/` fresh for every page**, not just once at the
+  start of the session — re-scan the root loose files and the relevant
+  `04_tjanster/<nn>_<topic>/` subfolder each time (they were emptied by a prior
+  sort, but root loose files are still being worked through and more material
+  may become relevant as you go). Don't rely on a single inventory pass done
+  hours/pages ago.
 - **Visually verify every candidate image before trusting its filename.** This
   session already found two root files with swapped/wrong content vs. their name
   (`bilservice__servicebok-och-bilnyckel...` is actually a CV-joint photo;
@@ -72,6 +88,11 @@ and card treatments the way Kamrem/Bilbatteri/AC/Dackservice already differ.
   span, hero container `min-height: clamp(640px, calc(100svh - 60px), 760px)`
   (or the page's existing equivalent).
 - Verify 0px horizontal overflow at ~1440px, ~768px, and ~390px for every page touched.
+- **Check flex/grid behavior continuously while working, not just once at the end**
+  — after every structural change (new flex row, new grid, reordered block),
+  reload and glance at it before moving to the next change. Catching a broken
+  `flex-direction` or a grid that collapses wrong right after you write it is
+  far cheaper than finding it in a final pass over the whole page.
 
 ## Process guardrails (non-negotiable, from CLAUDE.md)
 
