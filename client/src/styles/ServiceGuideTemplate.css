@@ -16,8 +16,8 @@
   padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
 
-.service-guide__section { padding-block: clamp(3rem, 6vw, 5rem); }
-.service-guide__section--tight { padding-block: clamp(1.5rem, 3vw, 2.5rem); }
+.service-guide__section { padding-block: clamp(2.5rem, 5vw, 3.75rem); }
+.service-guide__section--tight { padding-block: clamp(1.25rem, 2.5vw, 1.75rem); }
 
 .service-guide__eyebrow {
   display: inline-flex;
@@ -78,7 +78,7 @@
   /* Fixed top-padding floor, not vertical centering: this hero's content
      (eyebrow + multi-line heading + lead + trust row) can be tall, and
      flex-centering would let it overflow up into the fixed header. */
-  padding-block: clamp(5.5rem, 9vw, 7.5rem) clamp(3rem, 5vw, 4.5rem);
+  padding-block: clamp(9.5rem, 6vw + 6rem, 12rem) clamp(3rem, 5vw, 4.5rem);
   min-height: clamp(640px, calc(100svh - 60px), 760px);
 }
 .service-guide__hero-inner {
@@ -508,7 +508,7 @@
    ageing/misconceptions sections. Alternates surface tone between
    instances via --alt for rhythm, matching the light/white section
    alternation the rest of the template already uses. */
-.service-guide__topic-block { padding-block: clamp(3rem, 6vw, 5rem); }
+.service-guide__topic-block { padding-block: clamp(2.5rem, 5vw, 3.75rem); }
 .service-guide__topic-block--alt { background: var(--redesign-surface); }
 .service-guide__topic-header { margin-bottom: clamp(1.5rem, 3vw, 2rem); max-width: 68ch; }
 .service-guide__topic-header h2 { margin: 0 0 0.6rem; color: var(--redesign-ink); font: 800 clamp(1.5rem, 2.6vw, 2rem) / 1.2 var(--font-heading); }
