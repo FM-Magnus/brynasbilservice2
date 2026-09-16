@@ -16,7 +16,7 @@ import imgRepair from '../assets/images/services/repair/mechanic-brake-repair.jp
 import imgDiagnosis from '../assets/images/services/diagnostics/vehicle-diagnostics-laptop.jpg'
 import imgAC from '../assets/images/services/ac/ac-manometers-on-engine.jpg'
 import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
-import imgTow from '../assets/images/services/towing/tow-truck-night.jpg'
+import imgTow from '../assets/images/services/towing/tow-truck-at-workshop.jpg'
 
 interface ServiceCategory {
   id: string
@@ -133,7 +133,7 @@ const serviceCategories: ServiceCategory[] = [
     subtitle: 'Lokal bärgningshjälp och säker fordonstransport i Gävle med omnejd',
     description: 'Ett haveri kommer sällan lägligt. Oavsett om bilen har stannat på vägen, inte startar på uppfarten eller är för skadad för att köras säkert, hjälper vi dig med bärgning och transport direkt till verkstaden i Gävle — så att felsökningen kan komma igång så fort bilen är hos oss.',
     image: imgTow,
-    imageAlt: 'Bärgningsbil utför säker transport av bil till verkstaden',
+    imageAlt: 'Brynäs Bilservice bärgningsbil (Iveco flakbil) parkerad vid verkstaden, lastad med däck',
     icon: <TruckIcon />,
     actionType: 'call',
     items: [

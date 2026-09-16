@@ -8,7 +8,8 @@ import { TruckIcon } from '../components/icons/TruckIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 
-import imgTow from '../assets/images/services/towing/tow-truck-night.jpg'
+import imgTowJpg from '../assets/images/services/towing/tow-truck-at-workshop.jpg'
+import imgTowWebp from '../assets/images/services/towing/tow-truck-at-workshop.webp'
 import './BargningPage.css'
 
 interface ServiceCategory {
@@ -16,7 +17,8 @@ interface ServiceCategory {
   title: string
   subtitle: string
   description: string
-  image: string
+  imageJpg: string
+  imageWebp: string
   imageAlt: string
   icon: JSX.Element
   actionType: 'booking' | 'call'
@@ -30,8 +32,9 @@ const serviceCategories: ServiceCategory[] = [
     title: 'Bärgning & Biltransport',
     subtitle: 'Lokal bärgningshjälp och säker fordonstransport i Gävle med omnejd',
     description: 'Ett haveri kommer sällan lägligt. Oavsett om bilen har stannat på vägen, inte startar på uppfarten eller är för skadad för att köras säkert, hjälper vi dig med bärgning och transport direkt till verkstaden i Gävle — så att felsökningen kan komma igång så fort bilen är hos oss.',
-    image: imgTow,
-    imageAlt: 'Bärgningsbil utför säker transport av bil till verkstaden',
+    imageJpg: imgTowJpg,
+    imageWebp: imgTowWebp,
+    imageAlt: 'Brynäs Bilservice bärgningsbil (Iveco flakbil) parkerad vid verkstaden, lastad med däck',
     icon: <TruckIcon />,
     actionType: 'call',
     items: [
@@ -141,12 +144,15 @@ export default function BargningPage() {
                   aria-labelledby={`${cat.id}-title`}
                 >
                   <div className="services-category-card__media">
-                    <img
-                      src={cat.image}
-                      alt={cat.imageAlt}
-                      className="services-category-card__img"
-                      loading="lazy"
-                    />
+                    <picture>
+                      <source srcSet={cat.imageWebp} type="image/webp" />
+                      <img
+                        src={cat.imageJpg}
+                        alt={cat.imageAlt}
+                        className="services-category-card__img"
+                        loading="lazy"
+                      />
+                    </picture>
                     <div className="services-category-card__badge" aria-hidden="true">
                       {cat.icon}
                     </div>
