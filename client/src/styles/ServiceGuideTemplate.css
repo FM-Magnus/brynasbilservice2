@@ -476,3 +476,60 @@
   .service-guide__closing .service-guide__actions { width: 100%; }
   .service-guide__closing .service-guide__btn { flex: 1 1 auto; justify-content: center; }
 }
+
+/* ---------- Prose highlight card ----------
+   For a short block of flowing prose (no discrete list items) that still
+   needs to read as "worth pausing on" — a lighter-weight alternative to a
+   full dark panel. Introduced for Oljebyte's "Varför är oljebyte viktigt?". */
+.service-guide__intro-content > .service-guide__prose-card,
+.service-guide__intro-content > .service-guide__tip-strip { margin-top: 1.5rem; }
+.service-guide__prose-card {
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border-radius: var(--redesign-radius-card);
+  background: rgba(36, 150, 160, 0.06);
+  border-left: 3px solid var(--redesign-accent);
+}
+.service-guide__prose-card h3 { margin: 0 0 0.6rem; color: var(--redesign-ink); font: 800 1.05rem / 1.3 var(--font-heading); }
+.service-guide__prose-card p { margin: 0; color: #556266; font: 400 0.94rem / 1.65 var(--font-body); }
+.service-guide__prose-card p + p { margin-top: 0.85rem; }
+
+/* ---------- Topic block ----------
+   A repeatable "deep-dive" pattern for content-heavy pages: a heading +
+   intro, a card grid of N items (2/3/4 columns via modifier), optional
+   closing prose. Introduced for Oljebyte's viscosity/standards/oil-type/
+   ageing/misconceptions sections. Alternates surface tone between
+   instances via --alt for rhythm, matching the light/white section
+   alternation the rest of the template already uses. */
+.service-guide__topic-block { padding-block: clamp(3rem, 6vw, 5rem); }
+.service-guide__topic-block--alt { background: var(--redesign-surface); }
+.service-guide__topic-header { margin-bottom: clamp(1.5rem, 3vw, 2rem); max-width: 68ch; }
+.service-guide__topic-header h2 { margin: 0 0 0.6rem; color: var(--redesign-ink); font: 800 clamp(1.5rem, 2.6vw, 2rem) / 1.2 var(--font-heading); }
+.service-guide__topic-header p { margin: 0; color: #556266; font: 400 0.96rem / 1.65 var(--font-body); }
+.service-guide__topic-grid { display: grid; gap: 1rem; margin-bottom: 1.25rem; }
+.service-guide__topic-grid--cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.service-guide__topic-grid--cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.service-guide__topic-grid--cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.service-guide__topic-card {
+  padding: clamp(1.1rem, 2.2vw, 1.5rem);
+  border-radius: 20px;
+  background: var(--redesign-surface);
+  border: 1px solid rgba(16, 22, 24, 0.08);
+}
+.service-guide__topic-block--alt .service-guide__topic-card { background: var(--redesign-page); }
+.service-guide__topic-card h3 { margin: 0 0 0.5rem; color: var(--redesign-accent-dark); font: 800 0.95rem / 1.3 var(--font-heading); }
+.service-guide__topic-card p { margin: 0; color: #556266; font: 400 0.88rem / 1.55 var(--font-body); }
+.service-guide__topic-prose { max-width: 72ch; }
+.service-guide__topic-prose--spaced { margin-top: 2rem; }
+.service-guide__topic-prose h3 { margin: 0 0 0.6rem; color: var(--redesign-ink); font: 800 1.15rem / 1.3 var(--font-heading); }
+.service-guide__topic-prose p { margin: 0 0 0.9rem; color: #556266; font: 400 0.95rem / 1.65 var(--font-body); }
+.service-guide__topic-prose p:last-child { margin-bottom: 0; }
+.service-guide__topic-note { max-width: 72ch; margin-top: 1rem; color: var(--redesign-accent-dark); font: 700 0.9rem / 1.5 var(--font-body); }
+@media (max-width: 1024px) {
+  .service-guide__topic-grid--cols-3,
+  .service-guide__topic-grid--cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .service-guide__topic-grid--cols-2,
+  .service-guide__topic-grid--cols-3,
+  .service-guide__topic-grid--cols-4 { grid-template-columns: 1fr; }
+}
