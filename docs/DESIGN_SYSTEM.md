@@ -192,7 +192,7 @@ Every hero container:
 - `min-height: clamp(640px, calc(100svh - 60px), 760px)`
 - `display: flex; align-items: center`
 
-This matches the landing page's `.hero__frame`. Apply to any new page hero — see `CLAUDE.md` for the full rule text and the list of hero containers it currently applies to.
+This matches the shared page-hero baseline. The isolated start page owns its hero separately through `.landing-v2__*` in `pages/landing/LandingPage.css`; do not alter it through this generic rule. Apply this baseline to any new non-landing page hero — see `CLAUDE.md` for the full rule text and the list of hero containers it currently applies to.
 
 ---
 

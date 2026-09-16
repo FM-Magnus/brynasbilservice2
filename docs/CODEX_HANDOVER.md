@@ -89,7 +89,7 @@ Updated **2026-09-15** by Antigravity. This is a continuation guide and source o
 
 | Route | Component | Purpose / Status | Key Features |
 | --- | --- | --- | --- |
-| `/` | `App.tsx` | Landing page | Header → Hero (with GoogleReviews band) → ContactIntro → Process ("Så fungerar det") → About (with `GalleryTeaserCard`) → Services preview → Contact → Footer |
+| `/` | `pages/landing/LandingPage.tsx` | Isolated landing page | Floating header → sunset hero with cyclic Google-review link → contact/form → reassurance → visual four-service preview → five-step process → gallery/about → used-car CTA → closing contact → footer |
 | `/om-oss` | `AboutPage.tsx` | About page | Hero → Local workshop section with Maher copy & portrait card → 3-step process → Gallery CTA button (*"Ta en titt bakom garageportarna..."*) → Closing CTA |
 | `/galleri` | `GalleryPage.tsx` | Dedicated Gallery | Dark hero → full-size image viewer with accessible thumbnail carousel → Closing dark CTA card → Booking modal |
 | `/biltjanster` | `BiltjansterPage.tsx` | Biltjänster hub | "Våra biltjänster": linked draft summary cards for 11 service guides with CSS placeholders |

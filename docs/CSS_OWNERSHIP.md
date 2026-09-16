@@ -18,6 +18,7 @@ Migration means building an independent CSS island until the legacy file becomes
 
 | Route | TSX owner | CSS owner | Required prefix |
 | --- | --- | --- | --- |
+| `/` | `client/src/pages/landing/LandingPage.tsx` | `client/src/pages/landing/LandingPage.css` | `.landing-v2__*` |
 | `/service-reparationer` | `client/src/pages/ServiceReparationerPage.tsx` | `client/src/pages/ServiceReparationerPage.css` | `.bilservice__*` |
 | `/koppling` | `client/src/pages/KopplingPage.tsx` | `client/src/styles/ServiceGuideTemplate.css` | `.service-guide__*` |
 | `/avgassystem` | `client/src/pages/AvgassystemPage.tsx` | `client/src/styles/ServiceGuideTemplate.css` | `.service-guide__*` |
@@ -45,7 +46,7 @@ These pages import a colocated CSS file but may still consume frozen global/lega
 
 Routes without an owned page stylesheet may keep their current styling unchanged. If one is redesigned, create a new colocated CSS island with a unique route-specific prefix; do not modify the legacy file.
 
-This currently includes `/`, `/biltjanster`, `/felsokning`, `/kamrem`, `/bilbatteri`, `/tjanster`, `/bilar-till-salu`, `/galleri`, `/kontakt` and `/admin`.
+This currently includes `/biltjanster`, `/felsokning`, `/kamrem`, `/bilbatteri`, `/tjanster`, `/bilar-till-salu`, `/galleri`, `/kontakt` and `/admin`.
 
 ## Required task contract
 
