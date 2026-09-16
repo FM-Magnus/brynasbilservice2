@@ -5,6 +5,16 @@ import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
+import bilserviceThumbJpg from '../assets/images/services/general/wrench-and-bolt-workbench-thumb.jpg'
+import bilserviceThumbWebp from '../assets/images/services/general/wrench-and-bolt-workbench-thumb.webp'
+import oljebyteThumbJpg from '../assets/images/services/oil/oil-drain-under-car-thumb.jpg'
+import oljebyteThumbWebp from '../assets/images/services/oil/oil-drain-under-car-thumb.webp'
+import kamremThumbJpg from '../assets/images/services/timing-belt/timing-belt-in-hand-thumb-card.jpg'
+import kamremThumbWebp from '../assets/images/services/timing-belt/timing-belt-in-hand-thumb-card.webp'
+import bilbatteriThumbJpg from '../assets/images/services/battery/battery-terminal-bolt-tightening-thumb-card.jpg'
+import bilbatteriThumbWebp from '../assets/images/services/battery/battery-terminal-bolt-tightening-thumb-card.webp'
+import drivaxelThumbJpg from '../assets/images/services/driveshaft/cv-joint-workbench-thumb.jpg'
+import drivaxelThumbWebp from '../assets/images/services/driveshaft/cv-joint-workbench-thumb.webp'
 
 interface ServiceGuide {
   id: string
@@ -12,6 +22,8 @@ interface ServiceGuide {
   summary: string
   href: string
   imageLabel: string
+  imageJpg?: string
+  imageWebp?: string
 }
 
 const serviceGuides: ServiceGuide[] = [
@@ -21,6 +33,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Regelbunden service samlar rutinkontroller som hjälper till att bevara bilens funktion, säkerhet och livslängd.',
     href: '/service-reparationer#bilservice',
     imageLabel: 'Bilservice i verkstaden',
+    imageJpg: bilserviceThumbJpg,
+    imageWebp: bilserviceThumbWebp,
   },
   {
     id: 'oljebyte',
@@ -28,6 +42,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Ny motorolja och ett nytt filter hjälper motorns rörliga delar att smörjas och skyddas mot onödigt slitage.',
     href: '/oljebyte',
     imageLabel: 'Oljebyte i verkstaden',
+    imageJpg: oljebyteThumbJpg,
+    imageWebp: oljebyteThumbWebp,
   },
   {
     id: 'kamrem',
@@ -35,6 +51,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Kamremmen håller motorns rörliga delar i rätt takt och byts enligt rätt intervall för din bil.',
     href: '/kamrem',
     imageLabel: 'Kamremsarbete i verkstaden',
+    imageJpg: kamremThumbJpg,
+    imageWebp: kamremThumbWebp,
   },
   {
     id: 'koppling',
@@ -56,6 +74,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Bilbatteriet ger startkraft och försörjer elsystemet – rätt batterityp behöver testas och anpassas till bilen.',
     href: '/bilbatteri',
     imageLabel: 'Batterikontroll i verkstaden',
+    imageJpg: bilbatteriThumbJpg,
+    imageWebp: bilbatteriThumbWebp,
   },
   {
     id: 'stodampare-fjadrar',
@@ -84,6 +104,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Drivaxlar och drivknutar för motorkraften till hjulen och behöver fungera utan glapp, läckage eller vibrationer.',
     href: '/drivaxel-drivknutar',
     imageLabel: 'Drivaxelarbete i verkstaden',
+    imageJpg: drivaxelThumbJpg,
+    imageWebp: drivaxelThumbWebp,
   },
   {
     id: 'styrning-kulleder',
@@ -155,8 +177,8 @@ export default function BiltjansterPage() {
                 >
                   <div
                     className="services-category-card__media biltjanster-page__guide-media"
-                    role="img"
-                    aria-label={`Platshållare för framtida bild: ${guide.imageLabel}`}
+                    role={guide.imageJpg ? undefined : 'img'}
+                    aria-label={guide.imageJpg ? undefined : `Platshållare för framtida bild: ${guide.imageLabel}`}
                   >
                     <div className="services-category-card__badge" aria-hidden="true">
                       <WrenchIcon />
@@ -164,10 +186,17 @@ export default function BiltjansterPage() {
                     <span className="services-category-card__badge-num" aria-hidden="true">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <div className="biltjanster-page__guide-placeholder" aria-hidden="true">
-                      <span>{guide.imageLabel}</span>
-                      <small>Bild kommer</small>
-                    </div>
+                    {guide.imageJpg && guide.imageWebp ? (
+                      <picture>
+                        <source srcSet={guide.imageWebp} type="image/webp" />
+                        <img className="services-category-card__img" src={guide.imageJpg} alt={guide.imageLabel} loading="lazy" />
+                      </picture>
+                    ) : (
+                      <div className="biltjanster-page__guide-placeholder" aria-hidden="true">
+                        <span>{guide.imageLabel}</span>
+                        <small>Bild kommer</small>
+                      </div>
+                    )}
                   </div>
 
                   <div className="services-category-card__content">
