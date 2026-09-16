@@ -210,8 +210,8 @@ export default function ServiceReparationerPage() {
         </section>
 
         {/* Letar du efter en begagnad bil? */}
-        <section className="bilservice__section--tight" aria-labelledby="bilservice-cars-title">
-          <div className="bilservice__container" style={{ paddingBlock: 'clamp(2rem, 3.5vw, 3rem)' }}>
+        <section aria-labelledby="bilservice-cars-title">
+          <div className="bilservice__container" style={{ paddingBlock: 'clamp(1.25rem, 2vw, 1.75rem)' }}>
             <div className="bilservice__promo">
               <div>
                 <div className="bilservice__promo-eyebrow">Kvalitetskontrollerade fordon</div>
@@ -223,8 +223,8 @@ export default function ServiceReparationerPage() {
         </section>
 
         {/* Alltid tydliga besked och ärliga priser */}
-        <section className="bilservice__section--tight" aria-labelledby="bilservice-trust-title">
-          <div className="bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(4.5rem, 7vw, 6.5rem)' }}>
+        <section aria-labelledby="bilservice-trust-title">
+          <div className="bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem)' }}>
             <div className="bilservice__trust-card">
               <span className="bilservice__trust-icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bilservice__trust-text">
