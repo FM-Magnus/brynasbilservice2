@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import './KopplingPage.css'
 import { BookingFormModal } from '../components/BookingForm'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -78,12 +79,26 @@ export default function KopplingPage() {
 
         <section className="services-page__guide clutch-page__intro" aria-labelledby="clutch-intro-title"><div className="container">
           <div className="services-page__guide-intro"><h2 id="clutch-intro-title">Vad är en koppling?</h2><p>Varje gång du släpper upp kopplingspedalen sliter friktionsmaterialet på kopplingsskivan lite grann. Därför är ett framtida byte inte i sig ett fel, utan en del av bilens normala underhåll.</p></div>
-          <div className="clutch-page__parts-grid">{parts.map(([title, text]) => <article className="clutch-page__part-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="clutch-page__parts-spec">
+            {parts.map(([title, text], index) => (
+              <div className="clutch-page__spec-item" key={title}>
+                <span className="clutch-page__spec-letter" aria-hidden="true">{String.fromCharCode(65 + index)}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            ))}
+          </div>
           <div className="services-page__guide-intro clutch-page__section-gap"><h2>Varför är det viktigt att åtgärda i tid?</h2></div>
           <div className="services-page__benefit-grid clutch-page__benefit-grid">{benefits.map(([title, text]) => <article className="services-page__benefit-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
         </div></section>
 
-        <section className="clutch-page__symptoms" aria-labelledby="clutch-symptoms-title"><div className="container"><div className="services-page__guide-intro"><h2 id="clutch-symptoms-title">Tecken på att kopplingen behöver ses över</h2><p>Du behöver inte själv avgöra exakt vilken del som är problemet. De här signalerna är skäl att låta oss bedöma bilen.</p></div><div className="clutch-page__symptom-grid">{symptoms.map(([title, text]) => <article className="clutch-page__symptom-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+        <section className="clutch-page__symptoms" aria-labelledby="clutch-symptoms-title"><div className="container"><div className="services-page__guide-intro"><h2 id="clutch-symptoms-title">Tecken på att kopplingen behöver ses över</h2><p>Du behöver inte själv avgöra exakt vilken del som är problemet. De här signalerna är skäl att låta oss bedöma bilen.</p></div>
+          <article className="clutch-page__symptom-featured">
+            <h3>{symptoms[0][0]}</h3>
+            <p>{symptoms[0][1]}</p>
+          </article>
+          <div className="clutch-page__symptom-grid">{symptoms.slice(1).map(([title, text]) => <article className="clutch-page__symptom-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+        </div></section>
 
         <section className="clutch-page__service" aria-labelledby="clutch-service-title"><div className="container"><div className="clutch-page__service-card"><div><h2 id="clutch-service-title">Det här kan vi hjälpa dig med</h2><p>Vi börjar med att bedöma vad som faktiskt behöver göras och kontaktar dig innan vi går vidare med arbete utöver den första bedömningen.</p></div><ul>{serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}</ul></div></div></section>
 
