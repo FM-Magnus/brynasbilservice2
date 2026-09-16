@@ -179,6 +179,9 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
+### 2026-09-16 — Claude (handoff doc refresh for Antigravity)
+- Updated `docs/PROJECT_STATUS.md` (per-page image/next-task cells for all 11 Biltjänster rows, top git-status line) and `docs/ANTIGRAVITY_HANDOFF.md` (stale commit count, consumed image inventory, obsolete "build the next page" task brief) to match the finished Biltjänster layout pass. Net shorter than before. No code changed.
+
 ### 2026-09-16 — Claude (Biltjänster layout & imagery pass, part 3 — complete)
 - **Avgassystem**: 4-part grid → connected timeline (single line through 4 dots); catalytic-converter-theft guidance card gets a small "OBS" flag badge instead of a full color fill.
 - **Styrning och kulleder**: 4-part grid was actually two sub-systems (mechanical linkage vs. servo assist) flattened together — split into two labeled 2-card groups; safety-note aside gets a ShieldIcon.
