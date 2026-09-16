@@ -257,7 +257,7 @@
 }
 .service-guide__importance h2 { margin: 0 0 0.65rem; color: #fff; font: 800 clamp(1.4rem, 2.4vw, 1.85rem) / 1.2 var(--font-heading); }
 .service-guide__importance > div > p { margin: 0; color: rgba(255, 255, 255, 0.68); font: 400 0.92rem / 1.55 var(--font-body); }
-.service-guide__importance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.85rem; }
+.service-guide__importance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.85rem; }
 .service-guide__importance-card {
   padding: 1.1rem;
   border-radius: 18px;
@@ -307,6 +307,14 @@
   color: var(--redesign-accent-dark);
 }
 .service-guide__symptom-row--featured .service-guide__symptom-icon { background: rgba(255, 255, 255, 0.18); color: #fff; }
+.service-guide__symptom-row--urgent {
+  background: linear-gradient(145deg, #e2711d 0%, #c25a10 100%);
+  border-color: transparent;
+}
+.service-guide__symptom-row--urgent h3,
+.service-guide__symptom-row--urgent p { color: #fff; }
+.service-guide__symptom-row--urgent p { color: rgba(255, 255, 255, 0.9); }
+.service-guide__symptom-row--urgent .service-guide__symptom-icon { background: rgba(255, 255, 255, 0.2); color: #fff; }
 .service-guide__symptom-icon svg { width: 18px; height: 18px; }
 .service-guide__symptom-row h3 { margin: 0 0 0.25rem; color: var(--redesign-ink); font: 800 0.98rem / 1.25 var(--font-heading); }
 .service-guide__symptom-row p { margin: 0; color: #556266; font: 400 0.86rem / 1.5 var(--font-body); }
