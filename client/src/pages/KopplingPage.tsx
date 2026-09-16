@@ -24,6 +24,12 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
+import heroJpg from '../assets/images/services/clutch/clutch-under-vehicle-workshop.jpg'
+import heroWebp from '../assets/images/services/clutch/clutch-under-vehicle-workshop.webp'
+import componentsJpg from '../assets/images/services/clutch/clutch-components-on-bench.jpg'
+import componentsWebp from '../assets/images/services/clutch/clutch-components-on-bench.webp'
+import symptomsJpg from '../assets/images/services/clutch/mechanic-under-vehicle-diagnosis.jpg'
+import symptomsWebp from '../assets/images/services/clutch/mechanic-under-vehicle-diagnosis.webp'
 import '../styles/ServiceGuideTemplate.css'
 
 const trustBadges = [
@@ -82,16 +88,6 @@ const faqs = [
   { question: 'Hur lång tid tar ett kopplingsbyte?', answer: 'Normalt 4–10 timmars arbetstid beroende på bilmodell, eftersom växellådan behöver demonteras. Ring oss så får du en tidsuppskattning anpassad efter din bil.' },
 ]
 
-function MediaPlaceholder({ label, note, light }: { label: string; note: string; light?: boolean }) {
-  return (
-    <div className={`service-guide__placeholder${light ? ' service-guide__placeholder--light' : ''}`} role="img" aria-label={`Platshållare för framtida bild: ${label}`}>
-      <WrenchIcon aria-hidden="true" />
-      <span>{label}</span>
-      <small>{note}</small>
-    </div>
-  )
-}
-
 export default function KopplingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -130,7 +126,7 @@ export default function KopplingPage() {
               </div>
 
               <div className="service-guide__hero-media">
-                <MediaPlaceholder label="Hero: koppling under bil" note="Bild kommer" />
+                <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Mekaniker arbetar med kopplingen under en lyft bil i verkstaden" loading="lazy" /></picture>
                 <div className="service-guide__hero-badge">
                   <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
                   <div><h3>Kopplingsbyte i vår verkstad i Gävle</h3><p>Kvalitet, erfarenhet och rätt utrustning.</p></div>
@@ -144,7 +140,7 @@ export default function KopplingPage() {
         <section className="service-guide__section" aria-labelledby="koppling-intro-title">
           <div className="service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
-              <MediaPlaceholder label="Kopplingskomponenter" note="Bild kommer" light />
+              <picture><source srcSet={componentsWebp} type="image/webp" /><img src={componentsJpg} alt="Kopplingssats med lamell, tryckplatta och svänghjul på en arbetsbänk" loading="lazy" /></picture>
               <p className="service-guide__intro-caption">Samma kraft. En mjukare resa.</p>
             </div>
             <div className="service-guide__intro-content">
@@ -207,7 +203,7 @@ export default function KopplingPage() {
               </div>
             </div>
             <div className="service-guide__symptoms-media">
-              <MediaPlaceholder label="Mekaniker under bil" note="Bild kommer" light />
+              <picture><source srcSet={symptomsWebp} type="image/webp" /><img src={symptomsJpg} alt="Mekaniker från Brynäs Bilservice arbetar under en lyft bil" loading="lazy" /></picture>
               <p className="service-guide__symptoms-caption">Vi hittar problemet – innan det blir större.</p>
             </div>
           </div>
