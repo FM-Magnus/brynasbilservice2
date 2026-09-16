@@ -180,6 +180,9 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
+### 2026-09-16 — Claude (Koppling: real photos wired in)
+- Magnus supplied 3 photos via `_incoming-assets/incoming/` (hero, clutch components on a bench, portrait mechanic-under-vehicle). All three matched their filenames. Exported to `client/src/assets/images/services/clutch/`, replacing Koppling's placeholder slots; removed the now-unused `MediaPlaceholder` helper. Originals moved from `incoming/` into `04_tjanster/05_koppling/` (git-ignored, no repo change). Verified build + desktop/mobile.
+
 ### 2026-09-16 — Claude (Avgassystem rebuilt on ServiceGuideTemplate — 2nd proof)
 - Rebuilt `AvgassystemPage.tsx` on the same `ServiceGuideTemplate.css` built for Koppling, migrating all existing Swedish copy (parts, importance, symptoms, service items, guidance, process, FAQ, closing). Only short generic microcopy was added (trust badges, felsökning cross-link, photo captions), same spirit as Koppling's additions.
 - Confirmed the template is genuinely reusable, not Koppling-specific: Avgassystem's 4-item component/importance grids (vs. Koppling's 2) wrapped cleanly into the template's existing 2-column grids with zero CSS changes.
