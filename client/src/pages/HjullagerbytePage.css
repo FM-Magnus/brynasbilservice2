@@ -1,0 +1,42 @@
+/* Parts as full-width rows with a lettered badge, instead of 3 square cards —
+   only 3 items, and the descriptions are long enough to want the full line width. */
+.wheel-bearing-page__parts-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.wheel-bearing-page__part-row {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-left: 3px solid var(--redesign-accent);
+  border-radius: 0 var(--redesign-radius-card) var(--redesign-radius-card) 0;
+  background: var(--redesign-surface);
+  box-shadow: 0 8px 24px rgba(20, 34, 36, 0.04);
+}
+.wheel-bearing-page__part-letter {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--redesign-accent);
+  color: #fff;
+  font: 800 1rem var(--font-body);
+}
+.wheel-bearing-page__part-row h3 { margin: 0 0 0.4rem; color: var(--redesign-accent-dark); font: 800 1.1rem / 1.25 var(--font-heading); }
+.wheel-bearing-page__part-row p { margin: 0; color: #556266; font: 400 0.94rem / 1.6 var(--font-body); }
+@media (max-width: 640px) {
+  .wheel-bearing-page__part-row { flex-direction: column; gap: 0.75rem; }
+}
+
+/* Guidance grid: checkerboard-accent the two most load-bearing facts (diagonal in the 2x2 grid) */
+.wheel-bearing-page__guidance-card--accent {
+  background: linear-gradient(145deg, #0b848e 0%, #066973 100%);
+  border-color: transparent;
+}
+.wheel-bearing-page__guidance-card--accent h3,
+.wheel-bearing-page__guidance-card--accent p { color: #ffffff; }
