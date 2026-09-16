@@ -9,7 +9,7 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ## Current state (last updated: 2026-09-16 by Claude)
 
-- **`/koppling` and `/avgassystem` are NOT part of the shared `index.css` system — do not treat them like the other guide pages.** Both were fully rebuilt from scratch (see session log below) on the shared `client/src/styles/ServiceGuideTemplate.css` (class prefix `.service-guide__*`). Zero dependency on any page-specific rule in `index.css` — only global tokens (colors, fonts, radii) are shared. **This is Magnus's template for the remaining bland guide pages** (Bromssystem, Stötdämpare och fjädrar, Hjullagerbyte, Styrning och kulleder) — Avgassystem proved it's genuinely reusable, not a Koppling-only one-off: its 4-item grids (vs. Koppling's 2) just wrapped into the template's existing 2-column grids with no CSS change needed. When rebuilding another page on this template, import the same file — never fork its classes into a colocated file, and never let `index.css` changes leak into it.
+- **`/koppling`, `/avgassystem` and `/oljebyte` are NOT part of the shared `index.css` system — do not treat them like the other guide pages.** All three were fully rebuilt from scratch (see session log below) on the shared `client/src/styles/ServiceGuideTemplate.css` (class prefix `.service-guide__*`). Zero dependency on any page-specific rule in `index.css` — only global tokens (colors, fonts, radii) are shared. **This is Magnus's template for the remaining bland guide pages** (Bromssystem, Stötdämpare och fjädrar, Hjullagerbyte, Styrning och kulleder). Avgassystem proved it's reusable for a similarly-sized page; Oljebyte proved it scales to a much *larger* one — its deep-dive technical content (viscosity, ACEA/API standards, oil groups, ageing, misconceptions) didn't fit Koppling/Avgassystem's shape at all, so a new generic `.service-guide__topic-block` pattern (heading + 2/3/4-col card grid + optional prose) was added to the template for exactly this case — reuse it rather than re-inventing a content-heavy layout. When rebuilding another page on this template, import the same file — never fork its classes into a colocated file, and never let `index.css` changes leak into it. `index.css` is now at 7622 lines (was 8123 at session start).
 - **Biltjänster layout & imagery pass (complete)** — per [`docs/BILTJANSTER_LAYOUT_PLAN.md`](docs/BILTJANSTER_LAYOUT_PLAN.md), agreed with Magnus. All 11 pages under the Biltjänster dropdown had a distinct layout treatment applied (no two used the same card/grid pattern); no body copy was deleted anywhere. Bilservice, Oljebyte and Drivaxel och drivknutar also got a real hero photo (see below). Bromssystem, Stötdämpare och fjädrar, Hjullagerbyte, Avgassystem and Styrning och kulleder each got a CSS-only variation (numbered checklist rows, staggered/shadowed card stacks, lettered rows, a connected timeline with dots, grouped sub-system cards) since no matching photos exist for them in `_incoming-assets/`. **Koppling has since been superseded by the full rebuild above — that CSS-only pass no longer applies to it.** On the `/biltjanster` hub, 3 of the 11 cards (Kamrem, Bilbatteri, Bromssystem) also got a topic-fitting icon badge (clock/bolt/shield) instead of the generic wrench used on the other 8.
 
 - **Däckservice service-card photos (`/dackservice`)** — The 6-card service grid ("Allt för dina hjul") previously reused one generic desaturated placeholder image with a "Bild kommer" badge on every card. Replaced with 6 distinct real workshop photos, one per service, found loose (unsorted) in `_incoming-assets/` root and matched by content: Hjulskifte, Däckförvaring, Omläggning av däck, Hjulinställning, Däckbalansering, Punkteringslagning. Exported as `client/src/assets/images/services/tires/tire-{wheel-change,storage-rack,refitting,wheel-alignment,wheel-balancing,puncture-repair}.{webp,jpg}` (900px wide, 37–105 KB each, matched to the card's actual 150–180px render height). Removed the placeholder badge and the desaturation/opacity filter from `.tyres-page__service-image` in `index.css` (net line count decreased). Originals untouched in `_incoming-assets/`, not yet re-sorted into a subfolder — still sitting loose at root.
@@ -180,6 +180,15 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
+### 2026-09-16 — Claude (Oljebyte rebuilt on ServiceGuideTemplate — 3rd page, hardest yet)
+- Duplicated `KopplingPage.tsx` as the literal starting scaffold, then replaced content section by section. Used Koppling/Avgassystem for form/rhythm only, not content shape — Oljebyte has 8 content arrays (vs. 5-6 on the other two) plus multiple paragraphs of freeform technical prose with no equivalent in either reference page.
+- Reused sections as-is: hero, intro (paired with the existing funnel photo), 4-card importance panel (`benefits`), service-scope checklist (`includedItems`, same shape as Koppling's `serviceItems`).
+- Added a new reusable pattern to `ServiceGuideTemplate.css`: `.service-guide__topic-block` (heading + 2/3/4-column card grid + optional closing prose, alternating surface tone) and `.service-guide__prose-card` (short highlight block for flowing text with no list items). Used the topic-block 5 times: oil ageing, viscosity numbers, API/ACEA standards, oil base groups, misconceptions.
+- Intentionally skipped: the "featured symptom" pattern and safety-strip — no symptom list or safety notice exists in Oljebyte's original content, so neither was invented.
+- Reused the two real photos this page already had (hero, funnel) — no placeholders needed.
+- Deleted `OljebytePage.css` and all `.oil-page__*` rules from `index.css` (~270 contiguous lines plus a few stray media-query lines mixed into shared breakpoints, removed without touching the shared `.biltjanster-faq` rules in the same block).
+- Verified: all 8 content arrays present, build clean, desktop/tablet/mobile no overflow, FAQ accordion confirmed via accessibility tree. Committed, not pushed.
+
 ### 2026-09-16 — Claude (Koppling: real photos wired in)
 - Magnus supplied 3 photos via `_incoming-assets/incoming/` (hero, clutch components on a bench, portrait mechanic-under-vehicle). All three matched their filenames. Exported to `client/src/assets/images/services/clutch/`, replacing Koppling's placeholder slots; removed the now-unused `MediaPlaceholder` helper. Originals moved from `incoming/` into `04_tjanster/05_koppling/` (git-ignored, no repo change). Verified build + desktop/mobile.
 
@@ -295,89 +304,7 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 - Replaced the temporary contained `/biltjanster` hero with the shared full-width service-page hero used by the other Biltjänster destinations. The H1 is now “Våra biltjänster”; its existing lead, booking modal CTA, phone link and replaceable image placeholder remain intact.
 - Replaced the two detailed repair/diagnostics cards with a linked collection of the eleven existing service guides. Each card uses a concise source-grounded draft summary and a CSS-only future-image placeholder; no individual guide page, route or shared navigation was changed.
 
-### 2026-09-14 — Antigravity (Styrning och kulleder draft guide)
-- Replaced the Styrning och kulleder placeholder shell with the supplied draft content, completing the Biltjänster service guide pass. Structured into an accessible, responsive customer guide with steering components (spindelleder, styrleder, hydraulisk servo, EPS), benefits, 6 warning signs, bilens dragning callout tip, service checklist in dark card, guidance cards, safety note, shared 5-step process, accessible FAQ and existing booking/call actions.
-- Added scoped CSS for `.steering-page` in `client/src/css/index.css` with responsive grids (desktop, 1024px, 640px) and explicit sizing for `.steering-page__service-check`.
-- Verified clean build and zero horizontal overflow at 1440px and 390px. Updated `docs/PROJECT_STATUS.md` and `AGENTS.md`. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
-
-### 2026-09-14 — Antigravity (Drivaxel och drivknutar draft guide)
-- Replaced the Drivaxel och drivknutar placeholder shell with the supplied draft content, structured into an accessible, responsive customer guide with driveshaft parts (drivaxel, yttre CV-knut, inre knut, gummidamasker), benefits, 6 warning signs, sprucken damask callout tip, service checklist in dark card, guidance cards, safety note, shared 5-step process, accessible FAQ and existing booking/call actions.
-- Added scoped CSS for `.driveshaft-page` in `client/src/css/index.css` with responsive grids (desktop, 1024px, 640px) and explicit sizing for `.driveshaft-page__service-check`.
-- Verified clean build and zero horizontal overflow at 1440px and 390px. Updated `docs/PROJECT_STATUS.md` and `AGENTS.md`. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
-
-### 2026-09-14 — Antigravity (Avgassystem draft guide)
-- Replaced the Avgassystem placeholder shell with the supplied draft content, structured into an accessible, responsive customer guide with exhaust components (ljuddämpare, katalysator, lambdasonder, grenrör), benefits, 6 warning signs, motorlampa callout tip, service checklist in dark card, guidance cards, safety note on exhaust fumes in cabin, shared 5-step process, accessible FAQ and existing booking/call actions.
-- Added scoped CSS for `.exhaust-page` in `client/src/css/index.css` with responsive grids (desktop, 1024px, 640px) and explicit sizing for `.exhaust-page__service-check`.
-- Verified clean build and zero horizontal overflow at 1440px and 390px. Updated `docs/PROJECT_STATUS.md` and `AGENTS.md`. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
-
-### 2026-09-14 — Antigravity (Hjullagerbyte draft guide)
-- Replaced the Hjullagerbyte placeholder shell with the supplied draft content, structured into an accessible, responsive customer guide with bearing components (förseglat hjullager, navenhet, integrerad ABS-sensor), benefits, 6 warning signs, missljud callout tip, service checklist in dark card, guidance cards, safety note, shared 5-step process, accessible FAQ and existing booking/call actions.
-- Added scoped CSS for `.wheel-bearing-page` in `client/src/css/index.css` with responsive grids (desktop, 1024px, 640px) and explicit sizing for `.wheel-bearing-page__service-check`.
-- Verified clean build and zero horizontal overflow at 1440px and 390px. Updated `docs/PROJECT_STATUS.md` and `AGENTS.md`. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
-
-### 2026-09-14 — Antigravity (Stötdämpare och fjädrar draft guide)
-- Replaced the Stötdämpare och fjädrar placeholder shell with the supplied draft content, structured into an accessible, responsive customer guide with chassis parts (dämpare, fjädrar, fjäderben/topplager), benefits, warning signs, bounce test tip, service checklist in dark card, guidance cards, broken spring safety note, shared 5-step process, accessible FAQ and existing booking/call actions.
-- Added scoped CSS for `.suspension-page` in `client/src/css/index.css` with responsive grids (desktop, 1024px, 640px) and explicit sizing for `.suspension-page__service-check`.
-- Verified clean build and zero horizontal overflow at 1440px and 390px. Updated `docs/PROJECT_STATUS.md` and `AGENTS.md`. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
-
-### 2026-09-14 — Antigravity (Bilbatteri draft guide)
-- Replaced the Bilbatteri placeholder shell with the supplied draft content, structured into an accessible, responsive customer guide with battery types (standard, EFB, AGM), benefits, 7 warning signs, service checklist in dark card, draft guidance, underhållsråd note, shared 5-step process, accessible FAQ and existing booking/call actions.
-- Added scoped CSS for `.battery-page` in `client/src/css/index.css` with responsive grids (desktop, 1024px, 640px) and explicit sizing for `.battery-page__service-check`.
-- Updated `docs/PROJECT_STATUS.md` and `AGENTS.md`. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
-
-### 2026-09-14 — Antigravity (Kamrem draft guide)
-- Replaced the Kamrem shell with the supplied draft content, distributed into an accessible, responsive customer guide with timing belt vs chain overview, benefits, warning signs, service scope checklist, draft guidance, interference engine safety note, shared 5-step process, accessible FAQ and existing booking/call actions.
-- Added scoped CSS for `.kamrem-page` in `client/src/css/index.css` following the `.clutch-page` and `.brake-page` patterns, including explicit sizing and alignment for `.kamrem-page__service-check`.
-- Hardened `client/src/components/icons/CheckIcon.tsx` with default SVG dimensions (18x18) and `SVGProps` extension to prevent any unstyled SVG overflow.
-- Updated `docs/PROJECT_STATUS.md` and `AGENTS.md`. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
-
-### 2026-09-14 — Codex (Antigravity migration handoff)
-- Added `docs/ANTIGRAVITY_HANDOFF.md` with the current branch/commit state, Biltjänster information architecture, reusable page pattern, content and uncertainty rules, protected paths, verification checklist and a copyable next-page task brief for Antigravity 2 / Flash 3.8. No application code or backend/deployment files were changed.
-
-### 2026-09-14 — Codex (Koppling draft guide)
-- Replaced the Koppling shell with the supplied draft content, distributed into a Bilservice-inspired customer guide with clutch overview, warning signs, scope, draft guidance, shared process, accessible FAQ and existing booking/call actions. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication; DSG and automated transmission work were not claimed.
-
-### 2026-09-14 — Codex (Bromssystem draft guide)
-- Replaced the Bromssystem shell with the supplied draft content, distributed into a Bilservice-inspired customer guide with system parts, warning signs, scope, draft guidance, shared process, accessible FAQ and existing booking/call actions. No image asset, price, route, backend or deployment change was made. Technical service claims remain draft and require workshop fact-checking before publication.
-
-### 2026-09-14 — Codex (additional Biltjänster page shells)
-- Added empty Stötdämpare och fjädrar, Hjullagerbyte, Avgassystem, Drivaxel och drivknutar and Styrning och kulleder destinations using the Swedish URL-safe routes approved in this session. They appear after Bilbatteri in the desktop dropdown. No supplied draft copy, factual claims or images were added.
-
-### 2026-09-14 — Codex (future Biltjänster page shells)
-- Added empty, dedicated Kamrem, Koppling, Bromssystem and Bilbatteri destinations after Magnus confirmed `/kamrem`, `/koppling`, `/bromssystem` and `/bilbatteri`. The desktop Biltjänster dropdown now lists them after Oljebyte; mobile continues linking Biltjänster to `/biltjanster`. No supplied draft copy, business claims or images were added.
-
-### 2026-09-14 — Codex (Oljebyte compact light sections)
-- Kept the existing “Vad ingår i ett oljebyte hos oss?” and “Fördelar med regelbundna oljebyten” sections near the top of `/oljebyte`, reduced card/section spacing, and changed the benefits block to a compact warm-white layout. No copy, routes, or functionality changed.
-
-### 2026-09-14 — Codex (expanded Oljebyte draft)
-- Distributed Magnus's expanded Oljebyte source text across the existing page: viscosity, oil standards/types, oil ageing, service intervals, misconceptions, checklist and shared FAQ. Preserved the booking modal, telephone CTA and image placeholder.
-- Magnus explicitly chose to keep the technical wording as draft rather than tone down uncertain claims. The copy is not final-approved or technically fact-checked; review the service/technical claims with Magnus and the workshop before publication. Updated `docs/PROJECT_STATUS.md` accordingly.
-
-### 2026-09-14 — Codex (Oljebyte content order)
-- Moved the oil-ageing and interval guidance directly below the introductory “Vad är ett oljebyte?” section and expanded that introduction with the complete definition and service explanation. Preserved all copy and interactions.
-
-### 2026-09-14 — Codex (Oljebyte information hierarchy)
-- Reordered the page so the customer-focused service content, FAQ and booking CTA come before the technical deep-dive. Added the `Mer info` grouping for the viscosity, standards, oil types, ageing, interval and misconception sections; the oil-type section now uses the warm-white page background with individual cards.
-
-### 2026-09-14 — Codex (shared Biltjänster FAQ)
-- Added the reusable `BiltjansterFaq` component and refactored Oljebyte to use it. The component provides keyboard-accessible expandable answers, supports multiple open items, and keeps all FAQ copy supplied by the page.
-- No new FAQ copy was added to other pages; AC's existing FAQ remains outside this scoped change.
-
-### 2026-09-14 — Codex (Oljebyte page)
-- Added the draft Oljebyte destination at `/oljebyte`, using the existing booking modal, telephone link, shared teal design system, a replaceable CSS/markup hero-image placeholder, checklist cards and an accessible FAQ.
-- Added Oljebyte as the third desktop Biltjänster entry after Våra tjänster and Bilservice. Mobile Biltjänster continues linking only to `/biltjanster`. Updated `docs/PROJECT_STATUS.md`; all Oljebyte copy remains draft and unapproved.
-
-### 2026-09-14 — Codex (documentation dashboard and stale-reference cleanup)
-- Added `docs/PROJECT_STATUS.md` with source-checked routes, page copy/image presence, responsibilities, known gaps and the documentation workflow. Magnus confirmed that all page copy remains work in progress and none is final-approved.
-- Corrected current-stack, navigation, marquee, review and deployment claims in `README.md`, `CLAUDE.md` and `instructions.md`; historical session entries and application code were not changed.
-
-### 2026-09-14 — Codex (Bilservice and Biltjänster information architecture)
-- Added the long-form Bilservice guide at `/service-reparationer#bilservice`, using the existing teal design system, booking modal and telephone links. It uses a CSS/markup placeholder rather than a fake image asset for the future Bilservice hero image.
-- Replaced the oversized/overlapping service dropdown with the shared `Biltjänster` control: desktop offers exactly `Våra tjänster` then `Bilservice`; mobile routes the single Biltjänster link to `/biltjanster`. The desktop menu retains Escape, click-outside, link-selection and keyboard behaviour.
-- Moved—not copied—the existing repair and diagnostics heading plus its two large image cards from the Bilservice route into a new `/biltjanster` page. The Bilservice diagnostics link now targets `/biltjanster#felsokning-diagnostik`; the smaller vehicle-sales and reassurance blocks remain on Bilservice.
-- Verified `git diff --check` and `npm --prefix client run build`; the Vite >500 kB chunk message remains a warning. Exact 1440/768/390 browser viewport controls were unavailable in the local browser session.
-
-**Entries older than 2026-09-14 have been moved to [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md)** (2026-09-11 back to 2026-05-05) to keep this file a manageable first read. Check the archive for anything older than what's below.
+**Entries older than 2026-09-15 have been moved to [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md)** (2026-09-14 back to 2026-05-05) to keep this file a manageable first read. Check the archive for anything older than what's below.
 
 ---
 
