@@ -378,6 +378,16 @@
 .service-guide__info-icon svg { width: 22px; height: 22px; }
 .service-guide__info-card h3 { margin: 0 0 0.4rem; color: var(--redesign-ink); font: 800 1rem / 1.25 var(--font-heading); }
 .service-guide__info-card p { margin: 0; color: #556266; font: 400 0.88rem / 1.55 var(--font-body); }
+.service-guide__info-flag {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--redesign-radius-pill);
+  background: var(--redesign-ink);
+  color: #fff;
+  font: 800 0.65rem var(--font-body);
+  letter-spacing: 0.06em;
+}
 
 .service-guide__safety-strip {
   display: flex;
