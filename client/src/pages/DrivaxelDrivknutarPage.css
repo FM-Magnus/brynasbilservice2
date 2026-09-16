@@ -1,0 +1,15 @@
+.driveshaft-page__hero-image {
+  min-height: clamp(260px, 28vw, 360px);
+  border-radius: var(--redesign-radius-card);
+  overflow: hidden;
+}
+.driveshaft-page__hero-image picture,
+.driveshaft-page__hero-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .driveshaft-page__hero-image { min-height: 220px; }
+}

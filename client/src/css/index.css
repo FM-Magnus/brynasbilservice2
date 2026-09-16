@@ -4524,13 +4524,6 @@ ul { list-style: none; }
 ═══════════════════════════════════════════════════════ */
 
 .oil-page__hero .services-page__hero-content { max-width: 720px; }
-.oil-page__image-placeholder {
-  min-height: clamp(280px, 30vw, 380px);
-  background:
-    radial-gradient(circle at 30% 20%, rgba(36, 150, 160, 0.28), transparent 38%),
-    radial-gradient(circle at 75% 80%, rgba(36, 150, 160, 0.12), transparent 42%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
-}
 .oil-page__container {
   max-width: var(--redesign-hero-max);
   padding-inline: clamp(1.25rem, 4vw, 3.5rem);
@@ -6427,7 +6420,6 @@ ul { list-style: none; }
 @media (max-width: 768px) {
   .oil-page__intro > .oil-page__container { grid-template-columns: 1fr; }
   .oil-page__ageing-grid { grid-template-columns: 1fr; }
-  .oil-page__image-placeholder { min-height: 220px; }
 }
 
 @media (max-width: 520px) {

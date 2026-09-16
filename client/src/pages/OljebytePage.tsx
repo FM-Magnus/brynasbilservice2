@@ -5,7 +5,9 @@ import { BookingFormModal } from '../components/BookingForm'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { WrenchIcon } from '../components/icons/WrenchIcon'
+import heroJpg from '../assets/images/services/oil/oil-drain-under-car.jpg'
+import heroWebp from '../assets/images/services/oil/oil-drain-under-car.webp'
+import './OljebytePage.css'
 
 const includedItems = [
   'Dränering av den gamla oljan',
@@ -173,10 +175,8 @@ export default function OljebytePage() {
                 </div>
               </div>
 
-              <div className="services-page__image-placeholder oil-page__image-placeholder" role="img" aria-label="Platshållare för framtida bild från oljebyte i verkstaden">
-                <WrenchIcon />
-                <span>Oljebyte i verkstaden</span>
-                <small>Bild kommer</small>
+              <div className="oil-page__hero-image">
+                <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Mekaniker dränerar gammal motorolja från en bil på lyft" loading="lazy" /></picture>
               </div>
             </div>
           </div>

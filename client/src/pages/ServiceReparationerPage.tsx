@@ -4,7 +4,9 @@ import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
-import { WrenchIcon } from '../components/icons/WrenchIcon'
+import heroJpg from '../assets/images/services/general/wrench-and-bolt-workbench.jpg'
+import heroWebp from '../assets/images/services/general/wrench-and-bolt-workbench.webp'
+import './ServiceReparationerPage.css'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 
@@ -134,10 +136,8 @@ export default function ServiceReparationerPage() {
                   </a>
                 </div>
               </div>
-              <div className="services-page__image-placeholder" role="img" aria-label="Platshållare för framtida bild från bilservice i verkstaden">
-                <WrenchIcon aria-hidden="true" />
-                <span>Bilservice i verkstaden</span>
-                <small>Bild kommer</small>
+              <div className="bilservice-guide__hero-image">
+                <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Skiftnyckel och bult i närbild på en arbetsbänk i verkstaden" loading="lazy" /></picture>
               </div>
             </div>
           </div>

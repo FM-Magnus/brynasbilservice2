@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { BookingFormModal } from '../components/BookingForm'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { Footer } from '../components/layout/Footer'
 import { Header } from '../components/layout/Header'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
+import heroJpg from '../assets/images/services/driveshaft/cv-joint-workbench.jpg'
+import heroWebp from '../assets/images/services/driveshaft/cv-joint-workbench.webp'
+import './DrivaxelDrivknutarPage.css'
 
 const parts = [
   ['Drivaxel', 'Den solida axeln som överför motorns vridmoment från växellådan och differentialen ut till respektive drivhjul.'],
@@ -78,7 +80,7 @@ export default function DrivaxelDrivknutarPage() {
               <p className="services-page__lead">Drivaxeln överför motorkraften från växellådan till drivhjulen via rörliga drivknutar (CV-knutar). Vi inspekterar damasker, åtgärdar fettläckage och byter slitna knutar eller kompletta drivaxlar.</p>
               <div className="services-page__hero-actions"><button type="button" onClick={() => setIsModalOpen(true)} className="services-page__btn services-page__btn--primary">Boka tid</button><a href="tel:0705533395" className="services-page__btn services-page__btn--outline"><PhoneIcon className="services-page__btn-icon" /><span>Ring 070-553 33 95</span></a></div>
             </div>
-            <div className="services-page__image-placeholder" role="img" aria-label="Platshållare för framtida bild av drivaxlarbete i verkstaden"><WrenchIcon aria-hidden="true" /><span>Drivaxlarbete i verkstaden</span><small>Bild kommer</small></div>
+            <div className="driveshaft-page__hero-image"><picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Drivaxel med CV-knut på arbetsbänk i verkstaden" loading="lazy" /></picture></div>
           </div></div>
         </section>
 
