@@ -13,3 +13,28 @@
 @media (max-width: 768px) {
   .bilservice-guide__hero-image { min-height: 220px; }
 }
+
+/* Quick-answer pricing band directly under the hero, ahead of the guide content */
+.bilservice-guide__quick-pricing { padding-block: clamp(1.5rem, 3vw, 2.25rem); }
+.bilservice-guide__quick-pricing .services-page__pricing-card { padding: clamp(1.5rem, 3vw, 2rem); }
+
+/* Benefit cards get a small icon badge above the title */
+.bilservice-guide__benefit-card { display: flex; flex-direction: column; gap: 0.6rem; }
+.bilservice-guide__benefit-icon {
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+/* Service-level ladder: middle tier reads as the "recommended" default, growing left to right */
+.bilservice-guide__level-grid { align-items: stretch; }
+.bilservice-guide__level-card { transition: transform 0.25s var(--ease, ease); }
+.bilservice-guide__level-card:nth-child(2) {
+  border-color: var(--redesign-accent);
+  box-shadow: 0 16px 34px rgba(36, 150, 160, 0.22);
+}
+.bilservice-guide__level-card:nth-child(3) .services-page__level-number { color: var(--redesign-accent); }
+@media (min-width: 1024px) {
+  .bilservice-guide__level-card:nth-child(2) { transform: translateY(-0.6rem); }
+}

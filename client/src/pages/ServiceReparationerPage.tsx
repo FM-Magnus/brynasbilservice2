@@ -4,6 +4,10 @@ import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
+import { ShieldIcon } from '../components/icons/ShieldIcon'
+import { ClockIcon } from '../components/icons/ClockIcon'
+import { BoltIcon } from '../components/icons/BoltIcon'
+import { DollarIcon } from '../components/icons/DollarIcon'
 import heroJpg from '../assets/images/services/general/wrench-and-bolt-workbench.jpg'
 import heroWebp from '../assets/images/services/general/wrench-and-bolt-workbench.webp'
 import './ServiceReparationerPage.css'
@@ -41,19 +45,23 @@ const processSteps = [
 const serviceBenefits = [
   {
     title: 'Säkerhet',
-    description: 'Fel på bromsar, däck eller elektriska system kan leda till farliga situationer på vägen.'
+    description: 'Fel på bromsar, däck eller elektriska system kan leda till farliga situationer på vägen.',
+    icon: ShieldIcon
   },
   {
     title: 'Livslängd',
-    description: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.'
+    description: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.',
+    icon: ClockIcon
   },
   {
     title: 'Prestation',
-    description: 'En välunderhållen bil ger bättre bränsleekonomi och prestanda.'
+    description: 'En välunderhållen bil ger bättre bränsleekonomi och prestanda.',
+    icon: BoltIcon
   },
   {
     title: 'Återförsäljningsvärde',
-    description: 'En bil med en fullständig servicehistorik är ofta mer attraktiv för potentiella köpare.'
+    description: 'En bil med en fullständig servicehistorik är ofta mer attraktiv för potentiella köpare.',
+    icon: DollarIcon
   }
 ]
 
@@ -107,7 +115,7 @@ export default function ServiceReparationerPage() {
     <>
       <Header onBookingClick={openModal} />
 
-      <main className="services-page">
+      <main className="services-page bilservice-guide">
         {/* Hero Section */}
         <section className="services-page__hero" id="bilservice" aria-labelledby="services-hero-title">
           <div className="container">
@@ -143,6 +151,21 @@ export default function ServiceReparationerPage() {
           </div>
         </section>
 
+        <section className="services-page__pricing bilservice-guide__quick-pricing" aria-labelledby="services-pricing-title">
+          <div className="container">
+            <div className="services-page__pricing-card">
+              <div>
+                <h2 id="services-pricing-title">Vad kostar en bilservice?</h2>
+                <p>Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
+              </div>
+              <div className="services-page__pricing-actions">
+                <button type="button" onClick={openModal} className="services-page__btn services-page__btn--primary">Boka tid för bilservice</button>
+                <a href="tel:0705533395" className="services-page__btn services-page__btn--outline">Ring 070-553 33 95</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="services-page__guide" aria-labelledby="service-guide-title">
           <div className="container">
             <div className="services-page__guide-intro">
@@ -152,7 +175,8 @@ export default function ServiceReparationerPage() {
 
             <div className="services-page__benefit-grid services-page__benefit-grid--accent">
               {serviceBenefits.map((benefit) => (
-                <article className="services-page__benefit-card" key={benefit.title}>
+                <article className="services-page__benefit-card bilservice-guide__benefit-card" key={benefit.title}>
+                  <benefit.icon className="bilservice-guide__benefit-icon" aria-hidden="true" />
                   <h3>{benefit.title}</h3>
                   <p>{benefit.description}</p>
                 </article>
@@ -164,9 +188,9 @@ export default function ServiceReparationerPage() {
               <p>Exakt vad som ingår styrs av tillverkarens rekommenderade intervall för just din bilmodell, men de flesta verkstäder – oss inkluderade – delar in service i tre nivåer.</p>
             </div>
 
-            <div className="services-page__level-grid">
+            <div className="services-page__level-grid bilservice-guide__level-grid">
               {serviceLevels.map((level, index) => (
-                <article className="services-page__level-card" key={level.title}>
+                <article className="services-page__level-card bilservice-guide__level-card" key={level.title}>
                   <span className="services-page__level-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <h3>{level.title}</h3>
                   <p>{level.description}</p>
@@ -226,21 +250,6 @@ export default function ServiceReparationerPage() {
                     ))}
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="services-page__pricing" aria-labelledby="services-pricing-title">
-          <div className="container">
-            <div className="services-page__pricing-card">
-              <div>
-                <h2 id="services-pricing-title">Vad kostar en bilservice?</h2>
-                <p>Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
-              </div>
-              <div className="services-page__pricing-actions">
-                <button type="button" onClick={openModal} className="services-page__btn services-page__btn--primary">Boka tid för bilservice</button>
-                <a href="tel:0705533395" className="services-page__btn services-page__btn--outline">Ring 070-553 33 95</a>
               </div>
             </div>
           </div>
