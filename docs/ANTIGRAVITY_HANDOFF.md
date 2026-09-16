@@ -27,14 +27,12 @@ This is a work-in-progress website. Magnus has not final-approved any public pag
 git status --short --branch
 ```
 
-## Current handover state — 2026-09-15
+## Current handover state — 2026-09-16
 
-- Local branch: `redesign/blue-teal-v1`, currently **ahead of `origin/redesign/blue-teal-v1` by two commits**. The newest local commit is `6d589d16 feat: add diagnostics page and image intake workflow`; it has not been pushed.
-- The image intake instructions and `incoming/` folder are intentionally uncommitted while this handover is being prepared. Source-image contents in `_incoming-assets/` are ignored by Git by design.
+- Local branch: `redesign/blue-teal-v1`, currently **ahead of `origin/redesign/blue-teal-v1` by 22 commits**, none pushed. Newest local commit: `cedd0aaf docs: close out Biltjänster layout & imagery pass log`.
+- Claude just finished a full layout & imagery pass across all 11 pages under the Biltjänster dropdown (plan: [`docs/BILTJANSTER_LAYOUT_PLAN.md`](BILTJANSTER_LAYOUT_PLAN.md); results: `AGENTS.md` Current state + session log, and `docs/PROJECT_STATUS.md`'s per-page table). Every page now has a distinct card/grid treatment; 5 of the 11 guide pages also got a real hero photo copied from `_incoming-assets/`. No body copy was deleted anywhere.
 - Do not assume a clean worktree from this document. Preserve every existing change, run `git status --short --branch` first, and do not commit or push unless Magnus explicitly asks.
-- Read `_incoming-assets/README.md` before working with images. Do not add raw source files directly to `client/src/assets/images/`.
-
-Historical handoff baseline: `05b9f34f feat(services): update dackservice and ac-service pages, add codex handover`. It is only a pushed-history reference, not a description of the current worktree.
+- Read `_incoming-assets/README.md` before working with images. Do not add raw source files directly to `client/src/assets/images/`. **Verify a candidate image's actual content before trusting its filename** — two files in the root were found this session with swapped/wrong content vs. their name (see `AGENTS.md`).
 
 ## Product and technical context
 
@@ -46,17 +44,9 @@ Historical handoff baseline: `05b9f34f feat(services): update dackservice and ac
 - Shared FAQ: `client/src/components/ui/BiltjansterFaq.tsx`. Use it for every new Biltjänster page.
 - Image policy: use existing local images or a clearly labelled CSS/markup placeholder. Raw photography, blue-tone backgrounds and layout graphics first go in `_incoming-assets/`; read its README before selecting anything. Do not download, generate or invent photographic assets.
 
-## Prepared image inventory
+## Image inventory
 
-All assets below are candidates only: none has been wired into the application or approved for a specific placement.
-
-- `03_verkstad_och_team/verkstadsoversikter/`: ten newly supplied workshop-overview image pairs, each with a compact JPG thumbnail.
-- `05_bargning_och_transport/02_biltransport/`: six transport image pairs with thumbnails, plus three newly supplied transport-photo candidates.
-- `02_kundinteraktion/`: three customer-interaction candidates: workshop advice, mechanic/customer by a car, and a handover/handshake.
-- `04_tjanster/`: candidate images for Bilservice, Däck, AC and Drivaxel/drivknutar.
-- `01_blue_tone_bakgrunder/heros/`: one blue-toned tools-on-workbench background candidate.
-
-Before integrating a candidate, ask Magnus which page and placement it should serve, inspect the source crop, export an intentional WebP/JPG pair, and only then add the selected runtime asset to `client/src/assets/images/`. Do not use the intake folder as a production import path.
+Most named/categorized `_incoming-assets/` subfolders are now empty — their contents were already promoted to production over past sessions (see `_incoming-assets/README.md`'s "Befordrade produktionsbilder" section for the full mapping). What's left is mostly loose, unsorted files at the root of `_incoming-assets/`. Confirmed this session: **no matching photos exist** for Koppling, Bromssystem, Stötdämpare och fjädrar, Hjullagerbyte, Avgassystem or Styrning och kulleder — don't assume a photo can be found for these without re-checking. Always visually verify a candidate before trusting its filename (see above). Before integrating anything, ask Magnus which page/placement it should serve, export an intentional WebP/JPG pair, and only then add it to `client/src/assets/images/`. Never import directly from `_incoming-assets/`.
 
 ## Current information architecture
 
@@ -81,35 +71,11 @@ The standalone main-navigation entry `Felsökning` routes to `/felsokning` immed
 
 ## Page status and reusable pattern
 
-Completed long-form guides (the current route map in `docs/PROJECT_STATUS.md` is authoritative):
+All 11 pages under the Biltjänster dropdown are built and, as of the 2026-09-16 layout pass, each has its **own distinct card/grid treatment** rather than one repeated template — see `docs/PROJECT_STATUS.md`'s table for the current state of each page, and `AGENTS.md`'s Current state / session log for exactly what changed on each. Reference `BilbatteriPage.tsx` and `KamremPage.tsx` for the richest existing layouts (real photos, hero-media/intro-media/service-media pattern); the other pages layer distinct CSS-only variation (dark spec cards, connected timelines, checkerboard accents, staggered stacks, etc.) on top of the same underlying `services-page__*` shared classes.
 
-- `/service-reparationer#bilservice` — Bilservice guide.
-- `/oljebyte` — Oljebyte guide with technical material under `Mer info`.
-- `/kamrem` — expanded Kamrem guide with belt vs chain, warning signs, checklist, shared FAQ.
-- `/koppling` — expanded Koppling guide.
-- `/bromssystem` — expanded Bromssystem guide.
-- `/bilbatteri` — expanded Bilbatteri guide with battery types, warning signs, checklist, shared FAQ.
-- `/stodampare-fjadrar` — expanded Stötdämpare och fjädrar guide with bounce test, checklist, shared FAQ.
-- `/hjullagerbyte` — expanded Hjullagerbyte guide with nav units, ABS sensors, checklist, shared FAQ.
-- `/avgassystem` — expanded Avgassystem guide with exhaust system, lambda sensors, catalytic converter, checklist, shared FAQ.
-- `/drivaxel-drivknutar` — expanded Drivaxel och drivknutar guide with CV joints, boots, checklist, shared FAQ.
-- `/styrning-kulleder` — expanded Styrning och kulleder guide with ball joints, tie rods, EPS/hydraulic power steering, checklist, shared FAQ.
-- `/dackservice` — specialized tire page with statutory dates card, enriched prose, 6 service cards & pricing.
-- `/ac-service` — specialized AC page with enriched symptoms, hero warning, pricing frequency line, 3 pricing cards.
+If asked to touch one of these pages again: read that page's `.tsx` and its colocated `.css` first, don't flatten its distinct treatment back to the generic template, and don't delete existing body copy — rearrange or restyle it instead.
 
-For a supplied service page, follow the established structure:
-
-1. Hero with one H1, concise draft lead, booking button, phone link and replaceable image placeholder.
-2. “Vad är/What is …?” explanatory introduction.
-3. Customer benefits in readable cards.
-4. Warning signs or symptoms.
-5. “Det här kan vi hjälpa dig med” in one contained dark card.
-6. “Mer info” for technical or interval guidance; keep the page background warm white.
-7. Shared five-step “Så går det till hos oss” process.
-8. `BiltjansterFaq` with the page’s supplied questions and answers.
-9. Contained pricing/booking CTA.
-
-Use existing CSS patterns from `BromssystemPage.tsx` for visual reference, but **do not add new CSS to `index.css`** (see [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization) — that file is 8,742 lines because every past page added its styles there). Instead create a colocated file for the new page (e.g. `NewPage.css` next to `NewPage.tsx`) and import it directly in the component, scoping selectors to the page as before (for example `.clutch-page__…`). Design tokens (`var(--redesign-accent)` etc.) work the same regardless of which file you're in. Keep dark styling contained; never make the entire viewport dark.
+**Do not add new CSS to `index.css`** (see [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md#css-file-organization)). Every page in this section now has its own colocated `<PageName>.css` — extend that file instead. Design tokens (`var(--redesign-accent)` etc.) work the same regardless of which file you're in. Keep dark styling contained; never make the entire viewport dark.
 
 ## Content and uncertainty rules
 
@@ -158,10 +124,12 @@ At the end of each implementation session, append a factual dated entry to `AGEN
 
 ## Suggested Antigravity task brief
 
+All 11 Biltjänster pages are built and laid out; there is no "next page" to build. Likely next work, in rough priority order:
+
+1. Fact-check the draft technical claims flagged `WIP; not approved` across `docs/PROJECT_STATUS.md`'s Biltjänster rows with Magnus/the workshop.
+2. Revisit the 6 pages with no available photo (Koppling, Bromssystem, Stötdämpare och fjädrar, Hjullagerbyte, Avgassystem, Styrning och kulleder) if Magnus supplies new source material to `_incoming-assets/`.
+3. See `AGENTS.md`'s "What is broken / incomplete" section for open items outside Biltjänster.
+
 ```text
-Build the next Biltjänster page at <route> using the existing Bilservice, Oljebyte, Bromssystem and Koppling pages as design references.
-
-Use the supplied Swedish text as draft copy only. Preserve its meaning, add no unconfirmed claims, use the shared BiltjansterFaq, keep the warm-white page background with contained dark cards, reuse the booking modal and tel:0705533395, and leave a clearly labelled hero image placeholder.
-
-Read AGENTS.md, docs/AGENT_HANDOFF.md, docs/PROJECT_STATUS.md, this handoff and `_incoming-assets/README.md` first. If anything is uncertain, ask Magnus before editing that item. Inspect, edit only the allowed paths, browser-check 1440/768/390, run git diff --check and npm --prefix client run build, update the documentation, and report exact evidence. Do not commit, push or touch backend/deployment files.
+Read AGENTS.md, docs/AGENT_HANDOFF.md, docs/PROJECT_STATUS.md and this handoff first, plus `_incoming-assets/README.md` before touching any image. If anything is uncertain, ask Magnus before editing that item. Edit only the allowed paths, browser-check 1440/768/390, run git diff --check and npm --prefix client run build, update the documentation, and report exact evidence. Do not commit, push or touch backend/deployment files.
 ```
