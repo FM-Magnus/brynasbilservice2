@@ -7,7 +7,9 @@ For the approved redesign baseline and continuation rules, also read [`docs/AGEN
 
 ---
 
-## Current state (last updated: 2026-09-16 by Codex)
+## Current state (last updated: 2026-09-16 by Claude)
+
+- **Däckservice service-card photos (`/dackservice`)** — The 6-card service grid ("Allt för dina hjul") previously reused one generic desaturated placeholder image with a "Bild kommer" badge on every card. Replaced with 6 distinct real workshop photos, one per service, found loose (unsorted) in `_incoming-assets/` root and matched by content: Hjulskifte, Däckförvaring, Omläggning av däck, Hjulinställning, Däckbalansering, Punkteringslagning. Exported as `client/src/assets/images/services/tires/tire-{wheel-change,storage-rack,refitting,wheel-alignment,wheel-balancing,puncture-repair}.{webp,jpg}` (900px wide, 37–105 KB each, matched to the card's actual 150–180px render height). Removed the placeholder badge and the desaturation/opacity filter from `.tyres-page__service-image` in `index.css` (net line count decreased). Originals untouched in `_incoming-assets/`, not yet re-sorted into a subfolder — still sitting loose at root.
 
 - **Däckservice page hero background update (`/dackservice`)** — Imported and optimized replacement asset `HERO-BG_DACK.webp` (2146 × 733 px) from `_incoming-assets/incoming/` to `client/src/assets/images/services/tires/tires-hero-bg.{webp,jpg}` (48.7 KB WebP, 96.7 KB JPG fallback). Scoped in colocated `DackservicePage.css` with `image-set()` and overlay gradient (`.tyres-page__hero::before` with linear-gradient 90deg dark-to-translucent, opacity 0.85). Original archived to `_incoming-assets/01_blue_tone_bakgrunder/heros/` and `_incoming-assets/incoming/` kept clean.
 - **AC-service page hero background update (`/ac-service`)** — Imported and optimized replacement asset `HERO-BG_AC.webp` (2172 × 724 px) from `_incoming-assets/incoming/` to `client/src/assets/images/services/ac/ac-hero-bg.{webp,jpg}` (55.7 KB WebP, 108.3 KB JPG fallback). Scoped in colocated `AcServicePage.css` with `image-set()` and overlay gradient (`.ac-page__hero::before` with linear-gradient 90deg dark-to-translucent, opacity 0.85). Removed old inline image markup from `AcServicePage.tsx`. Original archived to `_incoming-assets/01_blue_tone_bakgrunder/heros/` and `_incoming-assets/incoming/` kept clean.
@@ -173,6 +175,14 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 ---
 
 ## Session log
+
+### 2026-09-16 — Claude (Däckservice service-card photos)
+- Found 6 well-named, unused images loose in `_incoming-assets/` root (`dack_hjulskifte.png`, `dack_forvaring.jpg`, `dack_omlaggning.png`, `dack_hjulinstallning.png`, `dack_balans.png`, `dack_reparation.png`) — each a real photo matching one of the 6 tire-service cards on `/dackservice`, which were all sharing one generic desaturated placeholder with a "Bild kommer" badge.
+- Copied (not moved — originals still in `_incoming-assets/`) and processed with ImageMagick/cwebp: resized to 900px width and compressed to JPG+WebP pairs (37–105 KB each) in `client/src/assets/images/services/tires/`, following the site's `<picture>`/WebP-with-JPG-fallback convention.
+- Updated `DackservicePage.tsx` to import and wire each image to its matching card, removed the "Bild kommer" placeholder badge, and removed the placeholder-only desaturation/opacity filter from `.tyres-page__service-image img` in `index.css` (edit reduced index.css's line count, so the anti-bloat pre-commit growth guard was unaffected).
+- Found and fixed an unrelated pre-existing bug while verifying in-browser: `ClockIcon` was referenced in `DackservicePage.tsx` but never imported, crashing the page in dev. Added the missing import.
+- Verified in-browser (desktop + mobile viewport, via the built-in browser preview): correct WebP/JPG negotiation, no console errors, no horizontal overflow. `npm --prefix client run build` passes clean.
+- Committed on `redesign/blue-teal-v1`. Not pushed — awaiting Magnus's approval per the no-push rule.
 
 ### 2026-09-16 — Antigravity (Bärgning & Om oss hero background image setups)
 - **Om oss** (`/om-oss`): Added handshake/workshop hero background image (`client/src/assets/images/about/about-hero-bg.{webp,jpg}`) with dark teal gradient overlay.

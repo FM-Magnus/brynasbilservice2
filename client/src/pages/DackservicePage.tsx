@@ -10,19 +10,32 @@ import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { UsersIcon } from '../components/icons/UsersIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
+import { ClockIcon } from '../components/icons/ClockIcon'
 import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
+import wheelChangeJpg from '../assets/images/services/tires/tire-wheel-change.jpg'
+import wheelChangeWebp from '../assets/images/services/tires/tire-wheel-change.webp'
+import storageRackJpg from '../assets/images/services/tires/tire-storage-rack.jpg'
+import storageRackWebp from '../assets/images/services/tires/tire-storage-rack.webp'
+import refittingJpg from '../assets/images/services/tires/tire-refitting.jpg'
+import refittingWebp from '../assets/images/services/tires/tire-refitting.webp'
+import alignmentJpg from '../assets/images/services/tires/tire-wheel-alignment.jpg'
+import alignmentWebp from '../assets/images/services/tires/tire-wheel-alignment.webp'
+import balancingJpg from '../assets/images/services/tires/tire-wheel-balancing.jpg'
+import balancingWebp from '../assets/images/services/tires/tire-wheel-balancing.webp'
+import punctureRepairJpg from '../assets/images/services/tires/tire-puncture-repair.jpg'
+import punctureRepairWebp from '../assets/images/services/tires/tire-puncture-repair.webp'
 import './DackservicePage.css'
 
 type PriceEntry = { label?: string; prefix?: string; amount?: string; unit?: string; contactText?: string }
-type ServiceCardProps = { title: string; description: string; priceData: PriceEntry[]; imagePlaceholder: string; onBookingClick: () => void }
+type ServiceCardProps = { title: string; description: string; priceData: PriceEntry[]; imageJpg: string; imageWebp: string; imageAlt: string; onBookingClick: () => void }
 
 const tyreServices: Omit<ServiceCardProps, 'onBookingClick'>[] = [
-  { title: 'Hjulskifte', description: 'Dags att byta till sommar- eller vinterdäck? Vi ser till att bytet går snabbt, smidigt och säkert. Vi kontrollerar mönsterdjup, slitage och lufttryck samt ser över synliga bromskomponenter. Efterdragning av hjulbultarna efter cirka 10 mil ingår kostnadsfritt.', priceData: [{ label: 'Personbil', amount: '350 kr' }, { label: 'SUV & lätt lastbil', amount: '500 kr' }], imagePlaceholder: imgTyres },
-  { title: 'Däckförvaring', description: 'Slipp tunga hjul och frigör plats hemma. Vi grovtvättar och kontrollerar hjulen vid inlämning, förvarar dem skyddade från UV-ljus och temperatursvängningar och kontaktar dig via SMS inför nästa säsongsskifte. Om däcken börjar bli slitna hör vi av oss i god tid.', priceData: [{ label: 'Personbil', amount: '890 kr' }, { label: 'SUV & lätt lastbil', amount: '990 kr' }], imagePlaceholder: imgTyres },
-  { title: 'Omläggning av däck', description: 'När nya däck ska monteras på fälgarna utför vi omläggningen med precision, monterar nya ventiler och balanserar hjulen så att allt sitter rätt från första kilometern.', priceData: [{ prefix: 'Från', amount: '180 kr', unit: 'per däck' }], imagePlaceholder: imgTyres },
-  { title: 'Hjulinställning', description: 'Rätt hjulinställning bidrar till jämnare däckslitage, stabilare vägegenskaper och lägre rullmotstånd. Vi utför fackmässig fyrhjulsinställning med modern utrustning.', priceData: [{ prefix: 'Från', amount: '1 495 kr' }], imagePlaceholder: imgTyres },
-  { title: 'Däckbalansering', description: 'Vibrationer i ratten vid vissa hastigheter är ofta ett tecken på obalans. Vi mäter hjulen med precisionsutrustning och kompenserar obalansen med rätt vikter. Det ger lugnare körning och minskar onödigt slitage på däck, styrning, fjädring och chassikomponenter.', priceData: [{ contactText: 'Kontakta oss för pris' }], imagePlaceholder: imgTyres },
-  { title: 'Punkteringslagning', description: 'Har du fått punktering? Vi inspekterar skadan och bedömer om däcket kan repareras säkert. När en fackmässig lagning är möjlig hjälper vi dig tillbaka på vägen utan onödigt dröjsmål.', priceData: [{ contactText: 'Kontakta oss för pris' }], imagePlaceholder: imgTyres },
+  { title: 'Hjulskifte', description: 'Dags att byta till sommar- eller vinterdäck? Vi ser till att bytet går snabbt, smidigt och säkert. Vi kontrollerar mönsterdjup, slitage och lufttryck samt ser över synliga bromskomponenter. Efterdragning av hjulbultarna efter cirka 10 mil ingår kostnadsfritt.', priceData: [{ label: 'Personbil', amount: '350 kr' }, { label: 'SUV & lätt lastbil', amount: '500 kr' }], imageJpg: wheelChangeJpg, imageWebp: wheelChangeWebp, imageAlt: 'Mekaniker lyfter av ett hjul från en bil på lyft vid hjulskifte' },
+  { title: 'Däckförvaring', description: 'Slipp tunga hjul och frigör plats hemma. Vi grovtvättar och kontrollerar hjulen vid inlämning, förvarar dem skyddade från UV-ljus och temperatursvängningar och kontaktar dig via SMS inför nästa säsongsskifte. Om däcken börjar bli slitna hör vi av oss i god tid.', priceData: [{ label: 'Personbil', amount: '890 kr' }, { label: 'SUV & lätt lastbil', amount: '990 kr' }], imageJpg: storageRackJpg, imageWebp: storageRackWebp, imageAlt: 'Märkta hjul i förvaringsställ i verkstadens däckhotell' },
+  { title: 'Omläggning av däck', description: 'När nya däck ska monteras på fälgarna utför vi omläggningen med precision, monterar nya ventiler och balanserar hjulen så att allt sitter rätt från första kilometern.', priceData: [{ prefix: 'Från', amount: '180 kr', unit: 'per däck' }], imageJpg: refittingJpg, imageWebp: refittingWebp, imageAlt: 'Mekaniker monterar ett nytt däck på fälg i däckmaskin' },
+  { title: 'Hjulinställning', description: 'Rätt hjulinställning bidrar till jämnare däckslitage, stabilare vägegenskaper och lägre rullmotstånd. Vi utför fackmässig fyrhjulsinställning med modern utrustning.', priceData: [{ prefix: 'Från', amount: '1 495 kr' }], imageJpg: alignmentJpg, imageWebp: alignmentWebp, imageAlt: 'Mekaniker utför fyrhjulsinställning med mätutrustning på en bil' },
+  { title: 'Däckbalansering', description: 'Vibrationer i ratten vid vissa hastigheter är ofta ett tecken på obalans. Vi mäter hjulen med precisionsutrustning och kompenserar obalansen med rätt vikter. Det ger lugnare körning och minskar onödigt slitage på däck, styrning, fjädring och chassikomponenter.', priceData: [{ contactText: 'Kontakta oss för pris' }], imageJpg: balancingJpg, imageWebp: balancingWebp, imageAlt: 'Hjul monterat i balanseringsmaskin som visar obalansvärden' },
+  { title: 'Punkteringslagning', description: 'Har du fått punktering? Vi inspekterar skadan och bedömer om däcket kan repareras säkert. När en fackmässig lagning är möjlig hjälper vi dig tillbaka på vägen utan onödigt dröjsmål.', priceData: [{ contactText: 'Kontakta oss för pris' }], imageJpg: punctureRepairJpg, imageWebp: punctureRepairWebp, imageAlt: 'Mekaniker lagar en punktering på ett däck med vulkaniseringslapp' },
 ]
 
 const localValueProps = [
@@ -55,10 +68,10 @@ const faqs = [
   ['Kan jag boka däckhotell utan att göra ett hjulskifte samtidigt?', 'Ja, du kan lämna in däcken för förvaring separat, men de flesta väljer att kombinera det med sitt hjulskifte för att slippa ett extra besök.'],
 ] as const
 
-function ServiceCard({ title, description, priceData, imagePlaceholder, onBookingClick }: ServiceCardProps) {
+function ServiceCard({ title, description, priceData, imageJpg, imageWebp, imageAlt, onBookingClick }: ServiceCardProps) {
   const isContactPrice = priceData.some((price) => price.contactText)
   return <article className="tyres-page__service-card" aria-labelledby={`service-${title}`}>
-    <div className="tyres-page__service-image"><img src={imagePlaceholder} alt="Platshållarbild för däckservice" loading="lazy" /><span>Bild kommer</span></div>
+    <div className="tyres-page__service-image"><picture><source srcSet={imageWebp} type="image/webp" /><img src={imageJpg} alt={imageAlt} loading="lazy" /></picture></div>
     <div className="tyres-page__service-content"><h3 id={`service-${title}`}>{title}</h3><p>{description}</p>
       <div className="tyres-page__prices" aria-label={`Pris för ${title}`}>{priceData.map((price) => price.contactText ? <p className="tyres-page__contact-price" key={price.contactText}>{price.contactText}</p> : <div className="tyres-page__price-row" key={`${price.label}-${price.amount}`}>
         {price.label && <span className="tyres-page__price-label">{price.label}</span>}<span className="tyres-page__price-value">{price.prefix && <span>{price.prefix}</span>}<strong>{price.amount}</strong>{price.unit && <small>{price.unit}</small>}</span>

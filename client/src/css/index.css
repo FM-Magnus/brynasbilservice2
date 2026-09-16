@@ -6556,8 +6556,7 @@ ul { list-style: none; }
 .tyres-page__service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.1rem, 2vw, 1.5rem); }
 .tyres-page__service-card { min-width: 0; display: flex; flex-direction: column; background: #101618; color: #fff; border: 1px solid rgba(255,255,255,.08); border-radius: clamp(18px, 2vw, 24px); overflow: hidden; box-shadow: 0 12px 30px rgba(16,22,24,.12); }
 .tyres-page__service-image { height: 150px; position: relative; overflow: hidden; background: #111; }
-.tyres-page__service-image img { width: 100%; height: 100%; object-fit: cover; opacity: .72; filter: saturate(.7); }
-.tyres-page__service-image span { position: absolute; right: .8rem; bottom: .8rem; padding: .3rem .55rem; color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; background: rgba(14,20,22,.76); font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.tyres-page__service-image img { width: 100%; height: 100%; object-fit: cover; }
 .tyres-page__service-content { display: flex; flex: 1; flex-direction: column; padding: 1.3rem; }
 .tyres-page__service-content h3 { font-size: 1.42rem; line-height: 1.15; margin: 0 0 .7rem; }
 .tyres-page__service-content > p { margin: 0; color: rgba(255,255,255,.75); font-size: .91rem; line-height: 1.6; }
