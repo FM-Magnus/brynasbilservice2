@@ -6,7 +6,7 @@
 // Real photography is not supplied yet; every image position below is an
 // intentional, clearly-labelled placeholder (data-image-slot) sized to the
 // final photo's geometry so it can be dropped in later with no layout change.
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
@@ -18,8 +18,7 @@ import { BoltIcon } from '../components/icons/BoltIcon'
 import { DollarIcon } from '../components/icons/DollarIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
-import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
-import { InfoIcon } from '../components/icons/InfoIcon'
+import { CarSaleIcon } from '../components/icons/CarSaleIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import './ServiceReparationerPage.css'
@@ -58,9 +57,9 @@ const serviceLevels = [
 const processSteps = [
   { num: '01', icon: PhoneIcon, title: 'Bokning och inlämning', desc: 'Du bokar en tid med oss och lämnar in bilen när det passar.' },
   { num: '02', icon: GaugeIcon, title: 'Initial kontroll', desc: 'Vi gör en första bedömning av bilens skick och servicebehov.' },
-  { num: '03', icon: CheckIcon, title: 'Service enligt checklista', desc: 'Mekanikern följer checklistan för den servicenivå som är aktuell.' },
-  { num: '04', icon: ThumbsUpIcon, title: 'Godkännande vid extraarbete', desc: 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.' },
-  { num: '05', icon: InfoIcon, title: 'Slutkontroll och rapport', desc: 'När bilen är klar får du en genomgång och råd inför nästa service.' },
+  { num: '03', icon: WrenchIcon, title: 'Service enligt checklista', desc: 'Mekanikern följer checklistan för den servicenivå som är aktuell.' },
+  { num: '04', icon: CarSaleIcon, title: 'Godkännande vid extraarbete', desc: 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.' },
+  { num: '05', icon: CheckIcon, title: 'Slutkontroll och rapport', desc: 'När bilen är klar får du en genomgång och råd inför nästa service.' },
 ] as const
 
 function ImageSlot({ id, label, tone = 'light', className = '' }: { id: string; label: string; tone?: 'light' | 'dark'; className?: string }) {
@@ -105,7 +104,7 @@ export default function ServiceReparationerPage() {
               <div className="bilservice__hero-trust">
                 {trustRow.map(({ icon: Icon, title, text }) => (
                   <div className="bilservice__hero-trust-item" key={title}>
-                    <Icon aria-hidden="true" />
+                    <span className="bilservice__hero-trust-badge"><Icon aria-hidden="true" /></span>
                     <div><h3>{title}</h3><p>{text}</p></div>
                   </div>
                 ))}
@@ -195,13 +194,16 @@ export default function ServiceReparationerPage() {
               <a href="tel:0705533395" className="bilservice__btn bilservice__btn--primary"><PhoneIcon aria-hidden="true" /><span>Ring oss: 070-553 33 95</span></a>
             </div>
             <div className="bilservice__process-steps">
-              {processSteps.map((step) => (
-                <div className="bilservice__process-step" key={step.num}>
-                  <span className="bilservice__process-icon"><step.icon aria-hidden="true" /></span>
-                  <span className="bilservice__process-num" aria-hidden="true">{step.num}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                </div>
+              {processSteps.map((step, index) => (
+                <Fragment key={step.num}>
+                  {index > 0 && <span className="bilservice__process-arrow" aria-hidden="true"><ArrowRightIcon /></span>}
+                  <div className="bilservice__process-step">
+                    <span className="bilservice__process-icon"><step.icon aria-hidden="true" /></span>
+                    <span className="bilservice__process-num" aria-hidden="true">{step.num}</span>
+                    <h3>{step.title}</h3>
+                    <p>{step.desc}</p>
+                  </div>
+                </Fragment>
               ))}
             </div>
           </div>
