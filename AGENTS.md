@@ -179,6 +179,15 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Session log
 
+### 2026-09-16 — Claude (Koppling rebuilt as a reusable service-guide template)
+- Magnus is redesigning Koppling from scratch (four approved mockups, GPT-drafted implementation brief) and wants the result to be a template for redesigning the other bland guide pages, not a one-off.
+- New shared file `client/src/styles/ServiceGuideTemplate.css` (class prefix `.service-guide__*`), imported by `KopplingPage.tsx`. Depends only on global tokens in `index.css`, not on any page-specific class. Future page redesigns using this look should import this same file rather than copy its rules.
+- Rebuilt `KopplingPage.tsx` entirely from the mockups: dark hero (eyebrow, 3-line heading, trust badges, photo + floating badge), intro with 2 numbered components + a felsökning cross-link callout, dark 4-card "why it matters" panel, 5-row symptom list (first row featured) + photo, dark service-scope checklist card, "Mer info" (2 cards + safety strip), dark 5-step process panel, existing shared FAQ component, closing CTA. All existing Swedish copy preserved; only short new hero/tip/caption microcopy the mockups specifically call for was added.
+- 3 photo slots (hero, component explainer, symptoms) are placeholders — Magnus is producing the actual photography separately and will supply it next.
+- Added 9 new small stroke icons (`LightbulbIcon`, `AlertTriangleIcon`, `ThumbsUpIcon`, `HourglassIcon`, `InfoIcon`, `GaugeIcon`, `SlidersIcon`, `WavesIcon`, `Volume2Icon`) matching the existing icon set's style — the old generic-wrench-only icon set didn't cover what the mockups needed.
+- Deleted the old `KopplingPage.css` and its superseded `.clutch-page__*` rules from `index.css` outright (not migrated — nothing in the old design carries over). `index.css`: 8123 → 8033 lines.
+- Verified build + desktop/tablet/mobile in-browser. One committed so far; not pushed.
+
 ### 2026-09-16 — Claude (handoff doc refresh for Antigravity)
 - Updated `docs/PROJECT_STATUS.md` (per-page image/next-task cells for all 11 Biltjänster rows, top git-status line) and `docs/ANTIGRAVITY_HANDOFF.md` (stale commit count, consumed image inventory, obsolete "build the next page" task brief) to match the finished Biltjänster layout pass. Net shorter than before. No code changed.
 
