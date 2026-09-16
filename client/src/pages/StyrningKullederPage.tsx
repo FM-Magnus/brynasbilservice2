@@ -3,9 +3,11 @@ import { BookingFormModal } from '../components/BookingForm'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
+import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { Footer } from '../components/layout/Footer'
 import { Header } from '../components/layout/Header'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
+import './StyrningKullederPage.css'
 
 const parts = [
   ['Kulleder / Spindelleder', 'Länkar samman hjulupphängningen och gör att hjulet kan röra sig kontrollerat upp och ner samtidigt som det vrids vid styrning.'],
@@ -84,7 +86,16 @@ export default function StyrningKullederPage() {
 
         <section className="services-page__guide steering-page__intro" aria-labelledby="steering-intro-title"><div className="container">
           <div className="services-page__guide-intro"><h2 id="steering-intro-title">Vad gör styrning och kulleder?</h2><p>Under styrning och kulleder samlar vi de komponenter som gör att bilen lyder rattrörelserna exakt och att hjulen rör sig kontrollerat med fjädringen. Kulleder och styrleder skyddas av gummidamasker — spricker en damask tränger fukt och smuts in, vilket snabbt nöter ner leden och skapar farligt glapp.</p></div>
-          <div className="steering-page__parts-grid">{parts.map(([title, text]) => <article className="steering-page__part-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="steering-page__parts-groups">
+            <div className="steering-page__parts-group">
+              <span className="steering-page__parts-group-label">Mekanisk länkning</span>
+              <div className="steering-page__parts-grid">{parts.slice(0, 2).map(([title, text]) => <article className="steering-page__part-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+            </div>
+            <div className="steering-page__parts-group">
+              <span className="steering-page__parts-group-label">Servostyrning</span>
+              <div className="steering-page__parts-grid">{parts.slice(2).map(([title, text]) => <article className="steering-page__part-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+            </div>
+          </div>
           <div className="services-page__guide-intro steering-page__section-gap"><h2>Varför är det viktigt att åtgärda i tid?</h2></div>
           <div className="services-page__benefit-grid steering-page__benefit-grid">{benefits.map(([title, text]) => <article className="services-page__benefit-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
         </div></section>
@@ -93,7 +104,7 @@ export default function StyrningKullederPage() {
 
         <section className="steering-page__service" aria-labelledby="steering-service-title"><div className="container"><div className="steering-page__service-card"><div><h2 id="steering-service-title">Det här kan vi hjälpa dig med</h2><p>Vi felsöker, reparerar och byter slitna styrkomponenter och servodetaljer med kvalitetsdelar anpassade för din bilmodell.</p></div><ul>{serviceItems.map(item => <li key={item}><CheckIcon className="steering-page__service-check" aria-hidden="true" /><span>{item}</span></li>)}</ul></div></div></section>
 
-        <section className="steering-page__guidance" aria-labelledby="steering-guidance-title"><div className="container"><div className="services-page__guide-intro"><h2 id="steering-guidance-title">Viktig information om styrning och kulleder</h2><p>Här är praktiska riktlinjer och fakta kring styrningens mekanik och säkerhet. Vi undersöker alltid framvagnens faktiska skick innan vi föreslår reservdelsbyten.</p></div><div className="steering-page__guidance-grid">{guidance.map(([title, text]) => <article className="steering-page__guidance-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div><aside className="steering-page__safety-note"><strong>Säkerhetsnotis:</strong> En glappande kulled eller styrled är en allvarlig säkerhetsrisk som inte ska ignoreras. Skulle leden brista under färd förlorar föraren styrkontrollen över hjulet med omedelbar olycksrisk som följd. Boka kontroll så snart du märker klapper eller glapp.</aside></div></section>
+        <section className="steering-page__guidance" aria-labelledby="steering-guidance-title"><div className="container"><div className="services-page__guide-intro"><h2 id="steering-guidance-title">Viktig information om styrning och kulleder</h2><p>Här är praktiska riktlinjer och fakta kring styrningens mekanik och säkerhet. Vi undersöker alltid framvagnens faktiska skick innan vi föreslår reservdelsbyten.</p></div><div className="steering-page__guidance-grid">{guidance.map(([title, text]) => <article className="steering-page__guidance-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div><aside className="steering-page__safety-note steering-page__safety-note--icon"><ShieldIcon className="steering-page__safety-icon" aria-hidden="true" /><span><strong>Säkerhetsnotis:</strong> En glappande kulled eller styrled är en allvarlig säkerhetsrisk som inte ska ignoreras. Skulle leden brista under färd förlorar föraren styrkontrollen över hjulet med omedelbar olycksrisk som följd. Boka kontroll så snart du märker klapper eller glapp.</span></aside></div></section>
 
         <section className="services-page__process-section steering-page__process" aria-labelledby="steering-process-title"><div className="container"><div className="services-page__process-card"><div className="services-page__process-inner"><div className="services-page__process-text"><h2 className="services-page__process-heading" id="steering-process-title">Så går det till <br /><span className="title-accent">hos oss</span></h2><p className="services-page__process-desc">Att byta styrleder och kulleder kräver fackmannamässig glappkontroll och efterföljande hjulinställning. Så här ser vår process ut.</p><div className="services-page__process-action"><a href="tel:0705533395" className="services-page__process-cta"><PhoneIcon className="services-page__process-icon" /><span>Ring oss: 070-553 33 95</span></a></div></div><div className="services-page__process-steps"><div className="services-page__steps-list">{processSteps.map(([number, title, text]) => <div className="services-page__step" key={number}><div className="services-page__step-num" aria-hidden="true">{number}</div><div className="services-page__step-content"><h3 className="services-page__step-title">{title}</h3><p className="services-page__step-desc">{text}</p></div></div>)}</div></div></div></div></div></section>
 
