@@ -1,3 +1,8 @@
+// Rebuilt from scratch 2026-09-16 as Magnus's template for the other bland
+// guide pages. Styled entirely by ../styles/ServiceGuideTemplate.css — this
+// page has NO dependency on any page-specific rule in client/src/css/index.css.
+// Reuse ServiceGuideTemplate.css for future rebuilds; do not fork its classes
+// into another colocated file, and do not add rules for this page to index.css.
 import { useEffect, useState } from 'react'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'

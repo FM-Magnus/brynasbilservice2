@@ -206,6 +206,7 @@ That file is 8,742 lines because ~15+ past sessions each followed the same instr
 - This already has a working precedent: `client/src/components/BookingForm.css` is imported directly in `BookingForm.tsx`, not appended to `index.css`.
 - `:root` tokens (`--redesign-accent`, `--space-4`, etc.) are defined once in `index.css`, which loads globally via `main.tsx`. A component's own CSS file can use `var(--redesign-accent)` etc. freely — tokens aren't tied to which file you're in.
 - `index.css` itself is **not being split retroactively** right now — that's a separate, riskier decision (moving ~8,700 existing lines without breaking a selector, on a site that isn't visually finalized yet). Leave existing page styles where they are unless a specific page is being substantially rebuilt anyway.
+- **Concrete precedent (2026-09-16): `/koppling`.** Fully rebuilt from scratch on `client/src/styles/ServiceGuideTemplate.css` (class prefix `.service-guide__*`), a shared file with **zero dependency on any page-specific `index.css` rule** — only global tokens. The old page's `.clutch-page__*` rules were deleted outright, not migrated. This file is meant to be reused by future page rebuilds, not copied — import it directly rather than duplicating its classes into another colocated file.
 
 ## JS code splitting
 
