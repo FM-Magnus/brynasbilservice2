@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import './BromssystemPage.css'
 import { BookingFormModal } from '../components/BookingForm'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -94,14 +95,14 @@ export default function BromssystemPage() {
         <section className="services-page__guide brake-page__intro" aria-labelledby="brake-intro-title">
           <div className="container">
             <div className="services-page__guide-intro"><h2 id="brake-intro-title">Vad ingår i bromssystemet?</h2><p>Bromssystemet består av flera delar som slits i olika takt. En kontroll handlar därför om mer än att bara titta på belägg och skivor.</p></div>
-            <div className="brake-page__parts-grid">{brakeParts.map(([title, text]) => <article className="brake-page__part-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+            <div className="brake-page__parts-list">{brakeParts.map(([title, text], index) => <div className="brake-page__part-row" key={title}><span className="brake-page__part-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{text}</p></div></div>)}</div>
             <div className="services-page__guide-intro brake-page__section-gap"><h2>Varför är bromsservice viktigt?</h2></div>
             <div className="services-page__benefit-grid brake-page__benefit-grid">{benefits.map(([title, text]) => <article className="services-page__benefit-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
           </div>
         </section>
 
         <section className="brake-page__symptoms" aria-labelledby="brake-symptoms-title">
-          <div className="container"><div className="services-page__guide-intro"><h2 id="brake-symptoms-title">Tecken på att bromsarna behöver ses över</h2><p>Du behöver inte själv avgöra exakt vad som är fel. De här signalerna är skäl att låta oss kontrollera systemet.</p></div><div className="brake-page__symptom-grid">{symptoms.map(([title, text]) => <article className="brake-page__symptom-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></div>
+          <div className="container"><div className="services-page__guide-intro"><h2 id="brake-symptoms-title">Tecken på att bromsarna behöver ses över</h2><p>Du behöver inte själv avgöra exakt vad som är fel. De här signalerna är skäl att låta oss kontrollera systemet.</p></div><div className="brake-page__symptom-grid">{symptoms.map(([title, text], index) => <article className={`brake-page__symptom-card${index === symptoms.length - 1 ? ' brake-page__symptom-card--wide' : ''}`} key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></div>
         </section>
 
         <section className="brake-page__service" aria-labelledby="brake-service-title"><div className="container"><div className="brake-page__service-card"><div><h2 id="brake-service-title">Det här kan vi hjälpa dig med</h2><p>Vi börjar med att bedöma vad som faktiskt behöver göras och går inte vidare med extra arbete utan ditt godkännande.</p></div><ul>{serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}</ul></div></div></section>
