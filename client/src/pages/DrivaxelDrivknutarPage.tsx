@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { BookingFormModal } from '../components/BookingForm'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
+import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { Footer } from '../components/layout/Footer'
 import { Header } from '../components/layout/Header'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
@@ -86,7 +87,18 @@ export default function DrivaxelDrivknutarPage() {
 
         <section className="services-page__guide driveshaft-page__intro" aria-labelledby="driveshaft-intro-title"><div className="container">
           <div className="services-page__guide-intro"><h2 id="driveshaft-intro-title">Vad gör drivaxeln och drivknutarna?</h2><p>Drivaxeln för kraften från växellådan ut till hjulen, och i varje ände sitter en drivknut som klarar av att vinklas när hjulen styrs eller fjädrar. Runt varje knut sitter en gummidamask som håller kvar smörjfettet och stänger ute smuts och väta — damasken är systemets svagaste länk, och upptäcks en spricka i tid räcker det oftast med att byta enbart den.</p></div>
-          <div className="driveshaft-page__parts-grid">{parts.map(([title, text]) => <article className="driveshaft-page__part-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="driveshaft-page__parts-flow" aria-label="Kraftflödet från växellåda till hjul">
+            {parts.map(([title, text], index) => (
+              <Fragment key={title}>
+                <article className="driveshaft-page__part-card driveshaft-page__part-card--flow">
+                  <span className="driveshaft-page__part-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+                {index < parts.length - 1 && <ArrowRightIcon className="driveshaft-page__parts-arrow" aria-hidden="true" />}
+              </Fragment>
+            ))}
+          </div>
           <div className="services-page__guide-intro driveshaft-page__section-gap"><h2>Varför är det viktigt att åtgärda i tid?</h2></div>
           <div className="services-page__benefit-grid driveshaft-page__benefit-grid">{benefits.map(([title, text]) => <article className="services-page__benefit-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div>
         </div></section>
@@ -95,7 +107,7 @@ export default function DrivaxelDrivknutarPage() {
 
         <section className="driveshaft-page__service" aria-labelledby="driveshaft-service-title"><div className="container"><div className="driveshaft-page__service-card"><div><h2 id="driveshaft-service-title">Det här kan vi hjälpa dig med</h2><p>Vi undersöker drivlinan och byter skadade damasker, yttre drivknutar eller kompletta drivaxlar med kvalitetskomponenter anpassade för din bil.</p></div><ul>{serviceItems.map(item => <li key={item}><CheckIcon className="driveshaft-page__service-check" aria-hidden="true" /><span>{item}</span></li>)}</ul></div></div></section>
 
-        <section className="driveshaft-page__guidance" aria-labelledby="driveshaft-guidance-title"><div className="container"><div className="services-page__guide-intro"><h2 id="driveshaft-guidance-title">Viktig information om drivaxlar</h2><p>Här är praktiska fakta och råd kring drivaxlar och knutar. Vi gör alltid en fackmannamässig bedömning av komponenternas skick innan vi föreslår åtgärd.</p></div><div className="driveshaft-page__guidance-grid">{guidance.map(([title, text]) => <article className="driveshaft-page__guidance-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div><aside className="driveshaft-page__safety-note"><strong>Säkerhetsnotis:</strong> En drivknut med hörbart glapp ska inte köras med längre än nödvändigt. Det självläker aldrig och risken för följdskador på växellådan ökar. Om knuten havererar helt tappar bilen omedelbart all drivning.</aside></div></section>
+        <section className="driveshaft-page__guidance" aria-labelledby="driveshaft-guidance-title"><div className="container"><div className="services-page__guide-intro"><h2 id="driveshaft-guidance-title">Viktig information om drivaxlar</h2><p>Här är praktiska fakta och råd kring drivaxlar och knutar. Vi gör alltid en fackmannamässig bedömning av komponenternas skick innan vi föreslår åtgärd.</p></div><div className="driveshaft-page__guidance-grid">{guidance.map(([title, text], index) => <article className={`driveshaft-page__guidance-card${index === guidance.length - 1 ? ' driveshaft-page__guidance-card--accent' : ''}`} key={title}><h3>{title}</h3><p>{text}</p></article>)}</div><aside className="driveshaft-page__safety-note"><strong>Säkerhetsnotis:</strong> En drivknut med hörbart glapp ska inte köras med längre än nödvändigt. Det självläker aldrig och risken för följdskador på växellådan ökar. Om knuten havererar helt tappar bilen omedelbart all drivning.</aside></div></section>
 
         <section className="services-page__process-section driveshaft-page__process" aria-labelledby="driveshaft-process-title"><div className="container"><div className="services-page__process-card"><div className="services-page__process-inner"><div className="services-page__process-text"><h2 className="services-page__process-heading" id="driveshaft-process-title">Så går det till <br /><span className="title-accent">hos oss</span></h2><p className="services-page__process-desc">Att byta damasker eller drivaxlar kräver noggrannhet, rätt fettmängd och föreskrivna åtdragningsmoment. Så här ser vår process ut.</p><div className="services-page__process-action"><a href="tel:0705533395" className="services-page__process-cta"><PhoneIcon className="services-page__process-icon" /><span>Ring oss: 070-553 33 95</span></a></div></div><div className="services-page__process-steps"><div className="services-page__steps-list">{processSteps.map(([number, title, text]) => <div className="services-page__step" key={number}><div className="services-page__step-num" aria-hidden="true">{number}</div><div className="services-page__step-content"><h3 className="services-page__step-title">{title}</h3><p className="services-page__step-desc">{text}</p></div></div>)}</div></div></div></div></div></section>
 
