@@ -10,9 +10,13 @@
 
 Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/README.md) before editing. This document records the approved redesign state; it does not authorize work beyond the next stated phase.
 
-## Current continuation note — 2026-09-16
+## Current continuation note — 2026-09-17
 
-The historical Git details above are not current state. Always inspect the current worktree and branch before acting. Since this baseline was written:
+**AUTHORITATIVE REBUILD ROADMAP**: Consult [`HITL_Temporary_roadmap.md`](../HITL_Temporary_roadmap.md) before starting work.
+- **What it is**: Magnus's authoritative human-in-the-loop rebuild roadmap.
+- **Why it is there**: Keeps all agents aligned across sessions on the 7 design styles and prevents drift or unauthorized edits to frozen code.
+- **Why it is temporary**: Exists only while migrating away from `index.css`. Once all pages are rebuilt on their independent templates and `index.css` is deleted, this roadmap will be archived.
+
 
 - The newest local commit is `78cd10d3` on `redesign/blue-teal-v1` (ahead of origin by 1 commit).
 - Dedicated hero background WebP/JPG pairs implemented across **Om oss** (`/om-oss`), **AC-service** (`/ac-service`), **Bärgning** (`/bargning`), and **Däckservice** (`/dackservice`), each styled via colocated scoped CSS files (`AboutPage.css`, `AcServicePage.css`, `BargningPage.css`, `DackservicePage.css`) using `image-set()` and the standard overlay gradient (`opacity: 0.85`).

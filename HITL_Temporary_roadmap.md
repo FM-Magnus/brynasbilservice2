@@ -1,9 +1,18 @@
 # Rebuilding Brynäs Bilservice — Human-in-the-Loop (HITL) Roadmap
 
 **Document Owner**: Magnus Olsson  
-**Purpose**: Your strategic command guide for directing AI coding agents (Antigravity, Codex, Claude) through the ground-up rebuild of Brynäs Bilservice and the complete eradication of `index.css`.  
+**Document Name**: `HITL_Temporary_roadmap.md`  
 **Active Working Branch**: `redesign/blue-teal-v1`  
 **Local Dev Server**: `http://localhost:5173/`
+
+---
+
+### Critical Agent Primer (For New Chats & Fresh Agent Contexts)
+
+If you are a new AI agent (Antigravity, Codex, Claude) or continuing in a fresh conversation context:
+1. **WHAT THIS DOCUMENT IS**: This is the authoritative, Human-in-the-Loop (HITL) strategic command roadmap for the ground-up rebuild of Brynäs Bilservice. It outlines the exact architecture, the 7 designated Page Archetypes, the step-by-step phased execution plan, review criteria for Magnus, and agent steering prompts.
+2. **WHY IT IS THERE**: To prevent cognitive drift across agent switches or new context windows. It ensures every agent builds strictly according to Magnus's 7 Page Design Archetypes using canonical design tokens (`--bb-*`), standalone public shells (`PublicHeader`, `PublicFooter`), and isolated CSS islands—preventing any agent from inventing rogue styles or touching legacy code.
+3. **WHY IT IS TEMPORARY**: This document exists *only* during the transition phase from the legacy monolithic stylesheet (`client/src/css/index.css`) to the new modular architecture. Once all routes are rebuilt on their designated archetypes and `index.css` is completely deleted from the project, this temporary roadmap will have fulfilled its purpose and will be archived into `docs/archive/`.
 
 ---
 
@@ -197,4 +206,4 @@ If you step away and come back, or if a model runs out of credits, here is how y
 
 4. **If an agent drifts or tries to edit legacy CSS**:
    Tell them:
-   > *"STOP. We are following the TEMPORARYROADMAP.md ground truth. Do not edit legacy index.css. Rebuild the page cleanly on its designated Style Archetype using --bb-* tokens."*
+   > *"STOP. We are following the HITL_Temporary_roadmap.md ground truth. Do not edit legacy index.css. Rebuild the page cleanly on its designated Style Archetype using --bb-* tokens."*
