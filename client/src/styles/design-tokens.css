@@ -1,0 +1,18 @@
+:root {
+  --bb-color-ink-950: #071416;
+  --bb-color-ink-900: #0d1f22;
+  --bb-color-ink-800: #14373b;
+  --bb-color-surface: #ffffff;
+  --bb-color-teal-700: #047784;
+  --bb-color-teal-600: #0a9dac;
+  --bb-color-teal-500: #0ab2c1;
+  --bb-color-teal-100: #def7f8;
+  --bb-color-focus: #9ce8ed;
+  --bb-font-display: 'Archivo', Arial, sans-serif;
+  --bb-font-body: 'Manrope', Arial, sans-serif;
+  --bb-layout-max: 1280px;
+  --bb-shadow-floating: 0 18px 44px rgba(0, 0, 0, 0.34);
+  --bb-radius-control: 999px;
+  --bb-radius-menu: 24px;
+  --bb-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}

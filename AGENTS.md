@@ -1,7 +1,7 @@
 # Agent startup contract — Brynäs Bilservice
 
 **Read this file first. Do not append session logs here.** Write dated work notes to [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md).
-Read [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) for redesign continuity. Before any CSS work, read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) and [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md).
+Read [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) for redesign continuity. Before any CSS work, read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) and [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md). Always use Playwright for real-browser UI evaluation and screenshots.
 
 ## CSS SAFETY — HIGHEST PRIORITY
 

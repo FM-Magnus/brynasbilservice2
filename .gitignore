@@ -29,6 +29,11 @@ client/fenrirm.pub
 *.log
 npm-debug.log*
 
+# Playwright generated browser evidence
+client/test-results/
+client/playwright-report/
+client/blob-report/
+
 # Claude local settings (personal overrides, not team-wide)
 .claude/settings.local.json
 .playwright-mcp/

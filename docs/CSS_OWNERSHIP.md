@@ -14,11 +14,20 @@ This is the operational CSS map for Brynäs Bilservice. It is intentionally expl
 
 Migration means building an independent CSS island until the legacy file becomes irrelevant. It does not mean extracting or deleting legacy rules.
 
+## Redesign public shell
+
+The redesign public shell is independent from the frozen legacy layer.
+
+- `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens for new public work. New public components must not consume `--redesign-*`, `--color-*` or any other custom property defined by `index.css`.
+- `client/src/data/publicNavigation.ts` is the canonical navigation source for the new public header.
+- `client/src/components/layout/PublicHeader.tsx` and `PublicHeader.css` own the new shared header. It must not import `Header.tsx`, use legacy selectors or Tailwind utilities, or rely on `index.css` layout/control rules.
+- The legacy `Header.tsx`, Footer and BookingForm remain untouched until separately migrated. A new page may receive booking behaviour through a callback, but the new header must not import the legacy booking component.
+
 ## Fully isolated page families
 
 | Route | TSX owner | CSS owner | Required prefix |
 | --- | --- | --- | --- |
-| `/` | `client/src/pages/landing/LandingPage.tsx` | `client/src/pages/landing/LandingPage.css` | `.landing-v2__*` |
+| `/` | `client/src/pages/landing/LandingPage.tsx` | `LandingPage.css` plus `components/layout/PublicHeader.css` | `.landing-v2__*`, `.public-header__*` |
 | `/service-reparationer` | `client/src/pages/ServiceReparationerPage.tsx` | `client/src/pages/ServiceReparationerPage.css` | `.bilservice__*` |
 | `/koppling` | `client/src/pages/KopplingPage.tsx` | `client/src/styles/ServiceGuideTemplate.css` | `.service-guide__*` |
 | `/avgassystem` | `client/src/pages/AvgassystemPage.tsx` | `client/src/styles/ServiceGuideTemplate.css` | `.service-guide__*` |
@@ -75,5 +84,5 @@ For a page or shared-island change:
 2. Confirm `client/src/css/index.css` has no diff.
 3. Run `git diff --check`.
 4. Run `npm --prefix client run build`.
-5. Browser-check 1440, 768 and 390 CSS pixels when UI changed; verify zero horizontal overflow and the affected interactions.
+5. Use Playwright for every real-browser UI evaluation. Check 1440, 768 and 390 CSS pixels when UI changed; capture screenshots, verify zero horizontal overflow and exercise the affected interactions.
 6. Write the dated work note to `docs/SESSION_LOG_CURRENT.md`, not `AGENTS.md`.
