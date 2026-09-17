@@ -32,11 +32,12 @@ Once all pages are rebuilt on their respective archetypes, `index.css` has zero 
 
 ```text
 ================================================================================
-LEVEL 0: CANONICAL GLOBAL LAYER (Single Source of Truth)
+LEVEL 0: CANONICAL GLOBAL LAYER & PUBLIC SHELL (Single Source of Truth)
   • client/src/styles/design-tokens.css (--bb-* tokens: colors, type, spacing, radii)
   • client/src/data/publicNavigation.ts  (Canonical menu registry)
   • PublicHeader.tsx / PublicHeader.css (Standalone sticky/portal header)
-  • PublicFooter.tsx / PublicFooter.css (Upcoming standalone global footer)
+  • PublicFooter.tsx / PublicFooter.css (Standalone global automotive footer)
+  • GalleryTeaserCard.tsx / GalleryTeaserCard.css (Standalone workshop slideshow card)
 ================================================================================
                                 │
         ┌───────────────────────┼───────────────────────┐
@@ -84,31 +85,23 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 1: Lock the Reference Standard (Landing Page) *(NOW)*
-- **Agent's Job**: Fine-tune the Landing page spacing, typography scales, hero alignment, and Google reviews readability.
-- **Your Job (HITL Decision)**:
-  - Open `http://localhost:5173/` in your browser.
-  - Check the hero bottom: Are the Google review rating, stars, and quote easily readable?
-  - Scroll down: Does the section rhythm (contact form, reassurance, process, used car teaser) feel natural and well-paced?
-  - Test on mobile (DevTools at 390px): Does everything stack cleanly with zero side-scrolling?
-- **Ready to proceed when**: You look at the landing page and say, *"Yes, this is the visual benchmark."*
+### Step 1: Lock the Reference Standard (Landing Page) `[COMPLETED & LOCKED]`
+- **Status**: Completed. Landing page spacing, typography hierarchy, hero contrast overlay, cyclic Google review badge (4.3 / 50 reviews), and responsive layout are locked as the visual benchmark.
+- **Verification**: Verified via Playwright across 1440px, 768px, and 390px with zero horizontal overflow.
 
 ---
 
-### Step 2: Extract Canonical Tokens & Build `PublicFooter`
-- **Why this order**: Before building new pages, we promote the proven `--landing-*` variables into universal `--bb-*` tokens in `design-tokens.css`, and create `PublicFooter`. This completes the "sandwich" (Header + Footer) so every new page drops right into a finished shell.
-- **Agent's Job**:
-  - Unify font scales, colors, and radii into `design-tokens.css`.
-  - Build `PublicFooter.tsx` and `PublicFooter.css` with clean `--bb-*` tokens, verified address, phone, email, and opening hours.
-  - Mount `PublicFooter` on Landing page.
-- **Your Job (HITL Decision)**:
-  - Review the new footer on `http://localhost:5173/`. Verify links, opening hours (Mån–Fre 08:00–17:00), and mobile layout.
-- **Steering Prompt**:
-  > *"Promote the landing typography and spacing scales into design-tokens.css as canonical --bb-* tokens, then create the standalone PublicFooter component and mount it on the landing page."*
+### Step 2: Extract Canonical Tokens & Build `PublicFooter` & `GalleryTeaserCard` `[COMPLETED & LOCKED]`
+- **Status**: Completed.
+  - Promoted universal `--bb-*` design tokens into `client/src/styles/design-tokens.css` (colors, Archivo 800 display, Manrope body, amber accent `#f09505`, spacing, `--bb-wrap-max: 1320px`).
+  - Built standalone `PublicFooter.tsx` and `PublicFooter.css` faithfully matching Magnus's approved automotive mockup: 4-column layout, centered brand logo/eyebrow/trust badges/handwritten signature, quick links, contact badges, verified opening hours, booking CTA, and dynamic legal sub-footer over atmospheric wheel background asset (`footer-wheel-bg.webp`).
+  - Extracted standalone `GalleryTeaserCard.tsx` and `GalleryTeaserCard.css` with single-source `defaultWorkshopSlides` array for site-wide Ken Burns workshop teasers.
+  - Mounted both on `LandingPage.tsx` and pruned redundant legacy CSS.
+- **Verification**: Verified via Playwright at 1440px, 768px, and 390px with zero horizontal overflow; 0 lines added to `index.css`.
 
 ---
 
-### Step 3: Complete Style 1 — Rebuild `Kontakt` & `Om oss` from Scratch
+### Step 3: Complete Style 1 — Rebuild `Kontakt` & `Om oss` from Scratch `[NEXT ACTIVE STEP]`
 - **Why this order**: These pages directly inherit the visual DNA of the Landing page. Because the contact form, info cards, Maher intro, and reassurance cards are already designed on the landing page, these two pages can be rebuilt rapidly with zero legacy bloat.
 - **Agent's Job**:
   - Rebuild `/kontakt` (`ContactPage.tsx` + dedicated CSS): High-trust contact form, direct phone CTA, Google Maps card, verified hours.

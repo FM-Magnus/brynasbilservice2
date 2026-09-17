@@ -1,34 +1,86 @@
 # Brynäs Bilservice — Design System
 
-This is the living reference for the site's visual tokens and patterns. It didn't exist before 2026-09-16; this first version documents **what the code actually implements today (IMPLEMENTED)**. It does not yet adopt or reject the "V2" reference sheets Magnus supplied (a proposed dark-UI/light-UI target palette). That decision is still open — see [Open decisions](#open-decisions) at the bottom.
+This is the living reference for the site's visual tokens and patterns.
+**AUTHORITATIVE CANONICAL TOKENS**: `client/src/styles/design-tokens.css` defines the `--bb-*` design tokens that govern the 7 Page Design Archetypes and the standalone Public Shell (`PublicHeader`, `PublicFooter`, and `GalleryTeaserCard`). Legacy tokens in `client/src/css/index.css` are frozen and retained solely for unmigrated legacy pages.
 
-## The three-state model
+## 1. Canonical Design Tokens (`--bb-*`) — Single Source of Truth
 
-Every token or pattern in this doc can be in one of three states:
+Located in [`client/src/styles/design-tokens.css`](../client/src/styles/design-tokens.css).
 
-- **IMPLEMENTED** — what `client/src/css/index.css` (or a component file) actually does right now. Source of truth: the code, not this doc.
-- **TARGET** — a value proposed by a design reference (e.g. the V2 sheets) that the team has agreed to move toward, but hasn't shipped yet.
-- **GAP** — a place where IMPLEMENTED and TARGET disagree, or where IMPLEMENTED itself is inconsistent (e.g. a color used as a hardcoded hex in 47 places with no token).
+### Color Palette
 
-A GAP is not automatically a bug to fix — it's a fact to record. Don't collapse it into "the target doesn't apply here" or "go fix the code now" without an explicit decision from Magnus.
+| Token | Value | Role / Usage |
+|---|---|---|
+| `--bb-color-ink-950` | `#071416` | Deepest canvas tone, footer background, dark hero base |
+| `--bb-color-ink-900` | `#0d1f22` | Dark card background, dark container surfaces |
+| `--bb-color-ink-800` | `#14373b` | Elevated dark surfaces, borders, icon card backdrops |
+| `--bb-color-ink-soft` | `#0c2327` | Soft ink secondary containers |
+| `--bb-color-surface` | `#ffffff` | Pure white card surfaces |
+| `--bb-color-page` | `#f8f7f3` | Warm-white canvas background for page surround |
+| `--bb-color-teal-800` | `#007a86` | Deep teal base, badge borders, hover accents |
+| `--bb-color-teal-700` | `#047784` | Dark teal buttons, active navigation state |
+| `--bb-color-teal-600` | `#0a9dac` | Primary brand teal, standard button fills, link hover |
+| `--bb-color-teal-500` | `#0ab2c1` | Vibrant cyan/teal accent, pill CTA highlights |
+| `--bb-color-teal-100` | `#def7f8` | Pale teal tint for tag pills, light badges |
+| `--bb-color-focus` | `#9ce8ed` | Accessible focus ring outline |
+| `--bb-color-amber-500`| `#f09505` | Canonical automotive amber: footer accents, signature, urgent alerts |
+| `--bb-color-amber-400`| `#fca311` | Light amber hover highlight |
+| `--bb-color-amber-600`| `#d48202` | Deep amber border / shadow |
+| `--bb-color-text` | `#122225` | Primary body text on light surfaces |
+| `--bb-color-text-muted`| `#5e6c70` | Secondary / supporting text on light surfaces |
 
-Right now this document has **no confirmed TARGET values** — only IMPLEMENTED, with known GAPs flagged inline.
+### Typography & Hierarchy
+
+| Token | Value | Role / Usage |
+|---|---|---|
+| `--bb-font-display` | `'Archivo', Arial, sans-serif` | Display headings (`h1`–`h4`), weight 800 |
+| `--bb-font-body` | `'Manrope', Arial, sans-serif` | Body text, navigation, controls, badges (weights 400–700) |
+| `--bb-font-size-body` | `1rem` (16px) | Standard readable body copy |
+| `--bb-font-size-support` | `0.92rem` (~14.7px) | Secondary descriptions, subheadings |
+| `--bb-font-size-label` | `0.78rem` (~12.5px) | Uppercase tags, category badges, microcopy |
+| `--bb-font-size-control` | `0.95rem` (~15.2px) | Navigation links, button labels, form inputs |
+| `--bb-line-height-body` | `1.6` | Optimal body readability line-height |
+| `--bb-line-height-support` | `1.55` | Supporting text line-height |
+
+### Layout, Radii & Shadows
+
+| Token | Value | Role / Usage |
+|---|---|---|
+| `--bb-wrap-max` | `1320px` | Outer maximum wrapper for public navigation & footer |
+| `--bb-layout-max` | `1280px` | Standard page content container maximum width |
+| `--bb-radius-sm` | `8px` | Small tags, subtle card corners |
+| `--bb-radius-card` | `20px` | Standard automotive card radius (cards, teaser panels) |
+| `--bb-radius-menu` | `24px` | Header dropdown menu & floating navigation panel radius |
+| `--bb-radius-control`| `999px` | Fully rounded pills (buttons, search bars, badges) |
+| `--bb-shadow-floating` | `0 18px 44px rgba(0,0,0,0.34)` | Floating header & elevated dark card shadow |
+| `--bb-transition-fast` | `150ms cubic-bezier(0.4, 0, 0.2, 1)` | Standard fast hover/focus transition |
 
 ---
 
-## Color
+## 2. Canonical Public Shell Components
 
-### Tokens (`:root` in `client/src/css/index.css:5-60`)
+The site is framed by three standalone, self-contained components:
 
-**Redesign palette** (current public-facing direction):
+1. **`PublicHeader`** ([`client/src/components/layout/PublicHeader.tsx`](../client/src/components/layout/PublicHeader.tsx) + [`PublicHeader.css`](../client/src/components/layout/PublicHeader.css)):
+   - Renders at document root via React Portal (`z-index: 100`) so it clears all hero and stacking contexts.
+   - Fixed floating layout with desktop navigation pill, Biltjänster dropdown (driven by [`publicNavigation.ts`](../client/src/data/publicNavigation.ts)), compact breakpoint switch at 1320px, and accessible mobile slide-down panel.
+2. **`PublicFooter`** ([`client/src/components/layout/PublicFooter.tsx`](../client/src/components/layout/PublicFooter.tsx) + [`PublicFooter.css`](../client/src/components/layout/PublicFooter.css)):
+   - 4-column automotive footer matching Magnus's approved mockup (`media_1789659344071.png`).
+   - Column 1: Centered brand logo (`66px`), white subheader `— DIN LOKALA BILVERKSTAD I BRYNÄS, GÄVLE`, 3 trust badges (*Tryggt och enkelt*, *Personlig service*, *Erfarna mekaniker*), centered amber script signature *"Vi håller din bil i rullning!"*.
+   - Column 2: 9 Snabba länkar with right-pointing interactive chevrons (`›`).
+   - Column 3: 4 dark-teal contact badge cards (Telefon, E-post, Besöksadress, Google Maps link).
+   - Column 4: Vertically centered amber clock with verified hours (Mån–Fre 08:00–17:00), cyan pill `BOKA TID →` button, and direct phone link `RING OSS: 070-553 33 95`.
+   - Sub-footer: Dynamic copyright, workshop tagline, Facebook + Instagram links, legal notice.
+   - Background: Atmospheric automotive wheel asset (`footer-wheel-bg.webp`, 116 KB) on deep `#061518` background.
+3. **`GalleryTeaserCard`** ([`client/src/components/ui/GalleryTeaserCard.tsx`](../client/src/components/ui/GalleryTeaserCard.tsx) + [`GalleryTeaserCard.css`](../client/src/components/ui/GalleryTeaserCard.css)):
+   - Standalone Ken Burns workshop slideshow card with single-source `defaultWorkshopSlides` array.
+   - Frosted "Grundat 2021" badge, active slide indicators, and bottom-right corner cutout badge linking to `/galleri`.
 
-| Token | Value | Used for |
-|---|---|---|
-| `--redesign-page` | `#f8f7f3` | warm-white page background |
-| `--redesign-surface` | `#ffffff` | card/surface background |
-| `--redesign-ink` | `#101618` | dark card background, primary dark text |
-| `--redesign-accent` | `#2496a0` | teal accent — links, primary buttons, highlights |
-| `--redesign-accent-dark` | `#1b747b` | hover/active state for accent (darker-on-hover, see [Interaction](#interaction-states)) |
+---
+
+## 3. Legacy Palettes & Migration Status (Reference Only)
+
+The legacy tokens below remain in `client/src/css/index.css` solely for unmigrated legacy routes. **DO NOT USE FOR NEW WORK.**
 
 **Legacy palette** (pre-redesign; still in the stylesheet, not the direction for new public UI per `CLAUDE.md`):
 
