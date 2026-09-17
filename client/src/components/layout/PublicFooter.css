@@ -51,19 +51,19 @@
 .bb-footer__logo-link {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.35rem;
   width: 100%;
 }
 
 .bb-footer__logo {
   display: block;
-  height: 48px;
+  height: 66px;
   width: auto;
 }
 
 .bb-footer__eyebrow {
   align-items: center;
-  color: var(--bb-color-amber-500, #f09505);
+  color: #ffffff;
   display: flex;
   font-size: 0.74rem;
   font-weight: 700;
@@ -74,7 +74,7 @@
 }
 
 .bb-footer__eyebrow-dash {
-  background: var(--bb-color-amber-500, #f09505);
+  background: #ffffff;
   border-radius: 2px;
   flex-shrink: 0;
   height: 2px;
@@ -156,7 +156,7 @@
   height: auto;
   margin-inline: auto;
   max-width: 100%;
-  width: 220px;
+  width: 195px;
 }
 
 /* Headings */
