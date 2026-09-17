@@ -166,18 +166,6 @@
 /* About and vehicles */
 .landing-v2__about-section { padding-bottom: clamp(3.2rem, 5vw, 5rem); }
 .landing-v2__about-grid { align-items: center; display: grid; gap: clamp(2rem, 4vw, 4.5rem); grid-template-columns: minmax(300px, .84fr) minmax(0, 1.02fr); }
-.landing-v2__gallery { background: #dce5e4; border-radius: 21px; display: block; min-height: 442px; overflow: hidden; position: relative; }
-.landing-v2__gallery::after { background: linear-gradient(180deg, transparent 66%, rgba(4, 19, 22, .3)); content: ''; inset: 0; pointer-events: none; position: absolute; }
-.landing-v2__gallery img { height: 100%; inset: 0; object-fit: cover; opacity: 0; position: absolute; transition: opacity 1.1s ease, transform 7s ease; width: 100%; }
-.landing-v2__gallery img.is-active { opacity: 1; transform: scale(1.04); }
-.landing-v2__gallery-badge { background: rgba(5, 20, 23, .86); border: 1px solid rgba(255, 255, 255, .22); border-radius: 999px; color: #fff; font-size: .55rem; font-weight: 800; left: 1rem; letter-spacing: .1em; padding: .45rem .65rem; position: absolute; text-transform: uppercase; top: 1rem; z-index: 1; }
-.landing-v2__gallery-cutout { align-items: center; background: var(--landing-page); border-radius: 16px 0 0 0; bottom: 0; color: var(--landing-text); display: flex; font-size: .61rem; font-weight: 800; gap: .48rem; letter-spacing: .07em; padding: .68rem .1rem .26rem 1rem; position: absolute; right: 0; text-transform: uppercase; z-index: 2; }
-.landing-v2__gallery-cutout::before { background: var(--landing-page); border-radius: 0 0 15px 0; content: ''; height: 17px; position: absolute; right: calc(100% - 1px); top: 0; width: 17px; }
-.landing-v2__gallery-dots { align-items: center; display: flex; gap: 4px; }
-.landing-v2__gallery-dots i { background: #b8c7c8; border-radius: 50%; height: 5px; width: 5px; }
-.landing-v2__gallery-dots i.is-active { background: var(--landing-teal); width: 16px; }
-.landing-v2__gallery-cutout b { align-items: center; background: #e6f6f7; border-radius: 50%; color: var(--landing-teal-deep); display: flex; height: 24px; justify-content: center; width: 24px; }
-.landing-v2__gallery-cutout svg { height: 13px; width: 13px; }
 .landing-v2__about-copy > p:not(.landing-v2__eyebrow) { color: var(--landing-muted); font-size: var(--landing-type-body); line-height: var(--landing-leading-body); margin: 1rem 0; max-width: 610px; }
 .landing-v2__about-copy .landing-v2__book { margin-top: .6rem; }
 .landing-v2__cars-section { border-radius: 20px; margin: 0 auto clamp(1.5rem, 2.5vw, 2.8rem); max-width: 1520px; min-height: 230px; }
@@ -287,7 +275,6 @@
   .landing-v2__process-content li h3 { font-size: .78rem; }
   .landing-v2__process-content li p { font-size: .7rem; }
   .landing-v2__about-grid { grid-template-columns: 1fr; }
-  .landing-v2__gallery { min-height: min(117vw, 430px); }
   .landing-v2__cars-section { border-radius: 0; min-height: 270px; }
   .landing-v2__cars-content { min-height: 270px; }
   .landing-v2__closing-card { border-radius: 18px; gap: 1.6rem; padding: 1.35rem; }

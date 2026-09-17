@@ -2,6 +2,13 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-17 — Antigravity (Extract standalone reusable GalleryTeaserCard component)
+
+- Extracted the Ken Burns workshop gallery teaser card from `LandingPage.tsx` / `LandingPage.css` into a standalone, reusable UI component: `client/src/components/ui/GalleryTeaserCard.tsx` and `GalleryTeaserCard.css`.
+- Single Source of Truth: Created `defaultWorkshopSlides` array within `GalleryTeaserCard.tsx` so workshop slide images and alts can be modified in ONE single place, propagating across startsidan, `/om-oss`, and future service pages.
+- Configured scoped `.bb-gallery-card` styles powered by `--bb-*` design tokens, Ken Burns transitions, accessible focus, and responsive mobile overrides. Added `--bb-color-page: #f8f7f3;` and `--bb-color-teal-800: #007a86;` to `design-tokens.css`.
+- Verified 0-error build (`npm --prefix client run build`), 0px horizontal overflow across all three viewports (1440px, 768px, 390px) with Playwright, and pixel-identical visual presentation.
+
 ### 2026-09-17 — Magnus & Antigravity (7-Style Master Blueprint & Anti-Drift Documentation Reconciliation)
 
 - Formalized the master architectural plan in `AGENTS.md` and `docs/CSS_OWNERSHIP.md`: total eradication of `index.css` via Canonical Tokens (`design-tokens.css` with `--bb-*`) and 7 page design archetypes (Style 1: Brand/Landing, Style 2: Bilservice/Editorial, Style 3: Tech Guides A, Style 4: Tech Guides B, Style 5: Bespoke Gallery, Style 6: Bespoke Car Sales, Style 7: Canonical Core).
