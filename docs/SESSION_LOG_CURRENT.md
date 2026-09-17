@@ -2,6 +2,38 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-17 — Antigravity (Landing Page: Eyebrow Preceding Lines & Amber Accent on Dark Cards)
+
+- Added the standard preceding 23px accent line (`::before`) to all section eyebrows (`.landing-v2__eyebrow`), matching the hero format across the entire landing page.
+- Styled `.landing-v2__eyebrow--dark` (Why section, Process section, Cars section) and its preceding line in the amber accent (`var(--landing-amber)` / `--bb-color-amber-500: #f09505`), while light section eyebrows (Services, About) use deep teal (`var(--landing-teal-deep)` / `--bb-color-teal-800: #007a86`).
+- `PublicFooter` strictly untouched.
+- Verified via Playwright across 1440px, 768px, and 390px with 0px horizontal overflow; confirmed build with 0 errors; 0 edits to `client/src/css/index.css`.
+
+### 2026-09-17 — Antigravity (Landing Page: Hero "Ring oss nu" Outline to Amber Accent)
+
+- Updated the outline of the secondary call button (`.landing-v2__call`) in the landing hero to the canonical amber accent token (`var(--landing-amber)` / `--bb-color-amber-500: #f09505`).
+- Styled the hover outline to brighter amber (`--bb-color-amber-400: #fca311`), creating a warm and distinct secondary action pairing with the primary cyan `BOKA TID` pill.
+- Verified via Playwright at 1440px, 768px, and 390px with 0px horizontal overflow; confirmed build with 0 errors; 0 edits to `client/src/css/index.css`.
+
+### 2026-09-17 — Antigravity (Landing Page: Hero Eyebrow Text and Amber Accent)
+
+- Updated hero eyebrow text in `LandingPage.tsx` from "Din bilverkstad i Brynäs, Gävle" to "Din lokala bilverkstad i Gävle" (`DIN LOKALA BILVERKSTAD I GÄVLE`).
+- Styled both the text and its preceding line indicator (`.landing-v2__hero-eyebrow` and `::before`) with the amber accent token (`var(--landing-amber)` / `--bb-color-amber-500: #f09505`).
+- Verified via Playwright at 1440px, 768px, and 390px with 0px horizontal overflow; confirmed build with 0 errors; 0 edits to `client/src/css/index.css`.
+
+### 2026-09-17 — Antigravity (Landing Page: Hero Trust Row Symbols to Amber Accent)
+
+- Updated the three trust icons at the bottom of the landing page hero (`.landing-v2__trust-row i` — check-shield, wrench, and clock) from teal to the canonical amber accent token (`var(--landing-amber)` / `--bb-color-amber-500: #f09505`).
+- Preserved the white headings and light-gray subtext, creating a warm, balanced accent that harmonizes with the Google review badge and the amber elements across the design.
+- Verified via Playwright at 1440px, 768px, and 390px with 0px horizontal overflow; confirmed build with 0 errors; 0 edits to `client/src/css/index.css`.
+
+### 2026-09-17 — Antigravity (Landing Page: Remove Duplicate Closing CTA Card Before PublicFooter)
+
+- Removed duplicate closing section ("BEHÖVER DIN BIL HJÄLP?") and panel (`.landing-v2__closing-section`) from `LandingPage.tsx`, eliminating redundant repetition of contact info, hours, and booking buttons immediately above `PublicFooter`.
+- Pruned obsolete `.landing-v2__closing-*` CSS rules from `LandingPage.css` and adjusted `.landing-v2__cars-section` bottom margin (`clamp(3.2rem, 5vw, 5rem)`, mobile `3.5rem`) for clean spacing before `PublicFooter`.
+- Verified with Playwright across all 3 viewports (1440px desktop, 768px tablet, 390px mobile): all passed with zero horizontal overflow; captured and visually confirmed screenshots.
+- Zero edits to `client/src/css/index.css`; client production build succeeded with 0 errors.
+
 ### 2026-09-17 — Antigravity (Canonical Public Shell Documentation Reconciliation)
 
 - Reconciled documentation across `HITL_Temporary_roadmap.md`, `AGENTS.md`, `docs/CSS_OWNERSHIP.md`, `docs/AGENT_HANDOFF.md`, and `docs/DESIGN_SYSTEM.md` to record the completion and role of the three standalone Public Shell elements:
