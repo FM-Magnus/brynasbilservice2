@@ -44,9 +44,15 @@
 }
 
 /* Column 1: Brand */
+.bb-footer__col--brand {
+  max-width: 380px;
+}
+
 .bb-footer__logo-link {
-  display: inline-block;
-  margin-bottom: 0.95rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.15rem;
+  width: 100%;
 }
 
 .bb-footer__logo {
@@ -57,7 +63,7 @@
 
 .bb-footer__eyebrow {
   align-items: center;
-  color: var(--bb-color-teal-500, #0ab2c1);
+  color: var(--bb-color-amber-500, #f09505);
   display: flex;
   font-size: 0.74rem;
   font-weight: 700;
@@ -137,17 +143,20 @@
 
 .bb-footer__signature-wrap {
   border-top: 1px solid rgba(10, 178, 193, 0.18);
+  display: flex;
+  justify-content: center;
   margin-top: 0.2rem;
-  max-width: 360px;
   padding-top: 1.05rem;
+  width: 100%;
 }
 
 .bb-footer__signature-img {
   display: block;
   filter: drop-shadow(0 2px 10px rgba(240, 149, 5, 0.22));
   height: auto;
+  margin-inline: auto;
   max-width: 100%;
-  width: 215px;
+  width: 220px;
 }
 
 /* Headings */
