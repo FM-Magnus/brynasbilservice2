@@ -23,6 +23,13 @@ test('landing page renders without horizontal overflow', async ({ page }, testIn
     })
   }
 
+  const aboutSection = page.locator('.landing-v2__about-section')
+  if (await aboutSection.isVisible()) {
+    await aboutSection.screenshot({
+      path: testInfo.outputPath('landing-about-gallery.png'),
+    })
+  }
+
   await page.screenshot({
     path: testInfo.outputPath('landing-full-page.png'),
     fullPage: true,
