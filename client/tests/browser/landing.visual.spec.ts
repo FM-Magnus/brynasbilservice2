@@ -6,6 +6,24 @@ test('landing page renders without horizontal overflow', async ({ page }, testIn
   await page.evaluate(() => document.fonts.ready)
 
   await page.screenshot({
+    path: testInfo.outputPath('landing-viewport-hero.png'),
+  })
+
+  const heroBottom = page.locator('.landing-v2__hero-bottom')
+  if (await heroBottom.isVisible()) {
+    await heroBottom.screenshot({
+      path: testInfo.outputPath('landing-reviews.png'),
+    })
+  }
+
+  const contactSection = page.locator('.landing-v2__contact-section')
+  if (await contactSection.isVisible()) {
+    await contactSection.screenshot({
+      path: testInfo.outputPath('landing-contact.png'),
+    })
+  }
+
+  await page.screenshot({
     path: testInfo.outputPath('landing-full-page.png'),
     fullPage: true,
   })
