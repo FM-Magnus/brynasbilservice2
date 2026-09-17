@@ -30,6 +30,13 @@ test('landing page renders without horizontal overflow', async ({ page }, testIn
     })
   }
 
+  const footerSection = page.locator('.bb-footer')
+  if (await footerSection.isVisible()) {
+    await footerSection.screenshot({
+      path: testInfo.outputPath('landing-footer.png'),
+    })
+  }
+
   await page.screenshot({
     path: testInfo.outputPath('landing-full-page.png'),
     fullPage: true,

@@ -2,6 +2,20 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-17 — Magnus & Antigravity (Canonical Design Tokens & PublicFooter Rebuild Against Approved Mockup)
+
+- Built canonical standalone `PublicFooter.tsx` and `PublicFooter.css` (`.bb-footer*`) based faithfully on Magnus's approved automotive mockup (`media_1789659344071.png` and `media_1789659349199.png`).
+- 4-Column Layout:
+  1. Brand: Contour logo, amber-dashed eyebrow, descriptive copy, 3 trust badges (*Tryggt och enkelt*, *Personlig service*, *Erfarna mekaniker*), and crisp amber script signature *"Vi håller din bil i rullning!"* with brush underline.
+  2. Snabba länkar: 9 navigation destinations with interactive chevrons.
+  3. Kontakt: 4 dark-teal rounded icon badge items (phone, email, visiting address, Google Maps link).
+  4. Öppettider & CTA: Centered circular clock badge with formatted hours table, cyan-pill `BOKA TID →` button, and amber direct phone link `RING OSS: 070-553 33 95`.
+  5. Sub-footer: Dynamic copyright year, workshop tagline, centered Facebook and Instagram buttons, and legal links.
+- Background: Atmospheric automotive wheel asset (`footer-wheel-bg.webp`) with warm rim lighting anchored on the right and smooth petrol gradient fade to deep `#061518`.
+- Promoted typography, line-height, amber accent, and container tokens into `client/src/styles/design-tokens.css`.
+- Mounted `PublicFooter` on `LandingPage.tsx` and pruned 50+ lines of redundant legacy `.landing-v2__footer*` CSS.
+- Real-browser verified via Playwright: 0px horizontal overflow across desktop (1440px), tablet (768px), and mobile (390px). Verified 0 edits to `client/src/css/index.css`.
+
 ### 2026-09-17 — Antigravity (Extract standalone reusable GalleryTeaserCard component)
 
 - Extracted the Ken Burns workshop gallery teaser card from `LandingPage.tsx` / `LandingPage.css` into a standalone, reusable UI component: `client/src/components/ui/GalleryTeaserCard.tsx` and `GalleryTeaserCard.css`.

@@ -29,7 +29,7 @@ The entire site is being rebuilt away from `index.css` into a canonical design t
 
 1. **Top: Canonical Design Layer & Shell**:
    - `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens (colors, Archivo display/Manrope body type scales, radii, spacing, shadows).
-   - `client/src/data/publicNavigation.ts` + `PublicHeader.tsx` / `PublicHeader.css` (free-standing navigation element) + upcoming `PublicFooter`.
+   - `client/src/data/publicNavigation.ts` + `PublicHeader.tsx` / `PublicHeader.css` (free-standing navigation element) + `PublicFooter.tsx` / `PublicFooter.css` (canonical standalone global footer).
    - `client/src/components/ui/GalleryTeaserCard.tsx` / `GalleryTeaserCard.css` (reusable standalone workshop teaser card).
 
 2. **Style 1: Brand & Conversion Hub (Parent: Startsidan `/`)**:
