@@ -39,23 +39,23 @@ Two developers:
 ### Client (`client/`)
 ```
 src/
-  App.tsx               — page layout, section order, IntersectionObserver for .fade-up
+  App.tsx               — root component mounting LandingPage
   main.tsx              — React root, BrowserRouter, LanguageProvider, routes
-  css/index.css         — frozen legacy CSS + global custom properties; never edit
-  styles/               — explicitly shared CSS islands such as ServiceGuideTemplate.css
+  css/index.css         — frozen legacy CSS; never edit (enforced by hook)
+  styles/               — design-tokens.css (--bb-* tokens), ServiceGuideTemplate.css
+  data/                 — publicNavigation.ts (canonical menu registry)
   components/
-    sections/           — active landing-page sections are selected in App.tsx
-    layout/             — Header, Footer
-    ui/                 — reusable UI components
+    layout/             — PublicHeader, PublicFooter, legacy Header/Footer
+    ui/                 — reusable UI components (BiltjansterFaq, etc.)
     icons/              — SVG icon components
     admin/              — BookingManagement, ServiceManagement, ProtectedRoute
     BookingForm.tsx     — booking modal (react-datepicker + react-time-picker)
-    GoogleReviews.tsx   — real Brynäs reviews and rating, hardcoded and potentially stale
-    ThemeSwitcher.tsx
-  pages/                — public subpages and admin UI
+    GoogleReviews.tsx   — reviews widget for service pages
+    ThemeSwitcher.tsx   — admin theme switcher
+  pages/                — landing/LandingPage, service guides, subpages, admin
   context/              — LanguageContext (sv/en i18n)
   translations/         — en.ts, sv.ts
-  assets/images/        — final image assets imported by the application
+  assets/images/        — final web-optimized image assets
 ```
 
 ### Server (`server/`)

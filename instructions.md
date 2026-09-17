@@ -72,33 +72,35 @@ brynasbilservice/
 
 | What | Where |
 |---|---|
-| Page section order | `client/src/App.tsx` |
-| Navigation links | `client/src/components/layout/Header.tsx` |
-| Colors, fonts, spacing | `client/src/css/index.css` (`:root` variables) |
-| Hero section | `client/src/components/sections/Hero.tsx` |
-| About section | `client/src/components/sections/About.tsx` |
-| Landing-page service preview | `client/src/components/sections/Services.tsx` |
-| Full service catalogue | `client/src/pages/ServicesPage.tsx` (`/tjanster`) |
-| Biltjänster default and Bilservice guide | `client/src/pages/BiltjansterPage.tsx`, `client/src/pages/ServiceReparationerPage.tsx` |
+| Master rebuild roadmap | `HITL_Temporary_roadmap.md` (7 Page Archetypes) |
+| Landing page & sections | `client/src/pages/landing/LandingPage.tsx` (`LandingPage.css`) |
+| Navigation registry | `client/src/data/publicNavigation.ts` |
+| Canonical header | `client/src/components/layout/PublicHeader.tsx` (`PublicHeader.css`) |
+| Design tokens | `client/src/styles/design-tokens.css` (canonical `--bb-*`) |
+| Bilservice guide (Style 2) | `client/src/pages/ServiceReparationerPage.tsx` |
+| Biltjänster hub | `client/src/pages/BiltjansterPage.tsx` |
+| Tech guides Group A (Style 3) | `client/src/styles/ServiceGuideTemplate.css` (`/koppling`, `/oljebyte`, `/avgassystem`, `/bromssystem`) |
 | Booking form (modal) | `client/src/components/BookingForm.tsx` |
-| Google reviews widget | `client/src/components/GoogleReviews.tsx` |
-
-`client/src/css/index.css` is a frozen dependency layer. Reading and consuming its existing tokens is allowed; editing, deleting, reformatting or cleaning it is not. New/redesigned pages use the exact CSS island listed in [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md).
 | Final web images | `client/src/assets/images/` |
-| New/raw image and layout-graphic candidates | `_incoming-assets/` — see `_incoming-assets/README.md` |
+| New/raw image candidates | `_incoming-assets/` — see `_incoming-assets/README.md` |
 | Admin panel | `client/src/components/admin/` + `client/src/pages/admin/` |
+
+`client/src/css/index.css` is a frozen legacy stylesheet. Reading existing rules is permitted; editing, deleting, reformatting or adding rules there is strictly prohibited by pre-commit hooks. New/redesigned pages use the exact CSS island listed in [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md).
 
 ---
 
 ## Changing opening hours
 
-Opening hours currently appear in `Contact.tsx`, `Footer.tsx` and several subpages. Confirm new hours with Magnus/Johnny, then search `client/src/` for every occurrence and update the affected frontend views together. The Header has no opening-hours info bar.
+Opening hours appear in `LandingPage.tsx`, `Footer.tsx` and subpages. The verified hours are:
+- Måndag – Fredag: 08:00 – 17:00
+- Lördag: Förfrågan
+- Söndag: Stängt
 
 ---
 
-## Adding a new service card
+## Adding a new service card or guide
 
-First choose the correct destination: the landing-page preview is in `Services.tsx`, the existing full catalogue is in `ServicesPage.tsx`, and the Biltjänster default cards are in `BiltjansterPage.tsx`. Put raw photos, graphics and candidates in `_incoming-assets/` first; that folder is intentionally ignored by Git. Only selected, web-exported images belong in `client/src/assets/images/`. Preserve the page's booking and telephone behaviour. The current route/content plan is in [project status](docs/PROJECT_STATUS.md).
+Follow `HITL_Temporary_roadmap.md`. Service guides belong to Style 2 (major services), Style 3 (Tech Guides A), or Style 4 (Tech Guides B). Put raw photos in `_incoming-assets/` first (which is Git-ignored). Only selected, web-exported images belong in `client/src/assets/images/`. Preserve the page's booking and telephone behaviour.
 
 ---
 

@@ -7,7 +7,8 @@ This file receives new dated session entries, newest first. It is not a mandator
 - Formalized the master architectural plan in `AGENTS.md` and `docs/CSS_OWNERSHIP.md`: total eradication of `index.css` via Canonical Tokens (`design-tokens.css` with `--bb-*`) and 7 page design archetypes (Style 1: Brand/Landing, Style 2: Bilservice/Editorial, Style 3: Tech Guides A, Style 4: Tech Guides B, Style 5: Bespoke Gallery, Style 6: Bespoke Car Sales, Style 7: Canonical Core).
 - Created `HITL_Temporary_roadmap.md` detailing the 7-style architecture diagram, execution phases (Phase 1 through 7), task checklists, and strict rebuild rules.
 - Codified strict anti-drift guardrails in `AGENTS.md`: no 4th design systems, `--bb-*` tokens only, standalone `PublicHeader` authority, zero incremental "fixing" of legacy pages in `index.css`, and mandatory Playwright checks. Added clear agent primer explaining what `HITL_Temporary_roadmap.md` is, why it's there, and why it's temporary across agent context switches.
-- Trimmed stale legacy references in `AGENTS.md` to safely keep the document within the pre-commit ceiling (334 lines vs 344 limit).
+- Trimmed stale legacy references in `AGENTS.md` to safely keep the document within the pre-commit ceiling (333 lines vs 344 limit).
+- Removed dead leftover `client/src/data/marquee-items.txt` and updated `instructions.md` and `CLAUDE.md` to eliminate references to deleted legacy section components (`Hero.tsx`, `About.tsx`, `Services.tsx`, `Contact.tsx`).
 
 ### 2026-09-17 — Antigravity (Landing hero Google review scale & readability enhancement)
 
