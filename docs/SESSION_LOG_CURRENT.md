@@ -2,6 +2,19 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-17 — Magnus & Antigravity (7-Style Master Blueprint & Anti-Drift Documentation Reconciliation)
+
+- Formalized the master architectural plan in `AGENTS.md` and `docs/CSS_OWNERSHIP.md`: total eradication of `index.css` via Canonical Tokens (`design-tokens.css` with `--bb-*`) and 7 page design archetypes (Style 1: Brand/Landing, Style 2: Bilservice/Editorial, Style 3: Tech Guides A, Style 4: Tech Guides B, Style 5: Bespoke Gallery, Style 6: Bespoke Car Sales, Style 7: Canonical Core).
+- Created `TEMPORARYROADMAP.md` and `docs/TEMPORARYROADMAP.md` detailing the 7-style architecture diagram, execution phases (Phase 1 through 7), task checklists, and strict rebuild rules.
+- Codified strict anti-drift guardrails in `AGENTS.md`: no 4th design systems, `--bb-*` tokens only, standalone `PublicHeader` authority, zero incremental "fixing" of legacy pages in `index.css`, and mandatory Playwright checks.
+- Trimmed stale legacy references in `AGENTS.md` to safely keep the document within the pre-commit ceiling (333 lines vs 344 limit).
+
+### 2026-09-17 — Antigravity (Landing hero Google review scale & readability enhancement)
+
+- Scaled up the Google review badge and quote in `LandingPage.css` and `LandingPage.tsx`: increased rating number, Google label, reviewer name, star icons (from 11px to 13px), and quote text (from ~8.8px to readable 0.84rem / ~13.5px).
+- Expanded `.landing-v2__reviews` max-width and adjusted hero-bottom grid distribution to comfortably give the review text room without awkward wrapping.
+- Added `--disable-gpu` to `playwright.config.ts` for smooth sandbox compatibility, captured real browser screenshots at 1440, 768, and 390 CSS pixels, and verified zero horizontal overflow across all viewports.
+
 ### 2026-09-17 — Magnus & Antigravity (Landing padding, distancing and architecture verification)
 
 - Refined spacing, section padding, and distancing on the landing page (`LandingPage.css`) within its isolated `--landing-*` scope.

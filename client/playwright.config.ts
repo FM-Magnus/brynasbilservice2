@@ -17,6 +17,9 @@ export default defineConfig({
     reducedMotion: 'reduce',
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
+    launchOptions: {
+      args: ['--no-sandbox', '--disable-gpu'],
+    },
   },
   projects: [
     {
