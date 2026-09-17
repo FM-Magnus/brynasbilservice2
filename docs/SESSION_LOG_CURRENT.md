@@ -2,6 +2,12 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-17 — Antigravity (streamline _incoming-assets to flat intake and establish implementation-only rule)
+
+- Flattened `_incoming-assets/`: safely moved the 7 image files from subfolders to the root of `_incoming-assets/`, deleted all empty subfolders and their 33 tracked `.gitkeep` files.
+- Codified strict asset rule in `_incoming-assets/README.md` and `AGENTS.md`: `_incoming-assets/` is a flat staging folder where Magnus places completed assets before runs. Assets remain there and are NEVER moved, copied, or "pre-sorted" into `client/src/assets/images/` speculatively or during cleanup. They are only moved/exported into the repo by an implementing coding prompt that is actively integrating them into a feature or page.
+- Simplified `_incoming-assets/.gitignore` to ignore all raw files except `.gitignore`, `README.md`, and `ASSET_INVENTORY.md`.
+
 ### 2026-09-16 — Antigravity (dead code cleanup across client/src)
 
 - Deleted orphan page `client/src/pages/BiltjanstPlaceholderPage.tsx` (unreferenced in routing or components).

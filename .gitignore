@@ -31,3 +31,4 @@ npm-debug.log*
 
 # Claude local settings (personal overrides, not team-wide)
 .claude/settings.local.json
+.playwright-mcp/

@@ -1,7 +1,5 @@
-# Temporary image inbox. Keep the folder, but never stage its image contents.
+# Temporary image intake. Keep the folder, but never stage its image contents.
 *
 !.gitignore
 !README.md
 !ASSET_INVENTORY.md
-!*/
-!.gitkeep
