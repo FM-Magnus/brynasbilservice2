@@ -61,7 +61,7 @@ The redesign public shell is independent from the frozen legacy layer.
 | --- | --- | --- | --- |
 | `/` | Unique | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` |
 | `/om-oss` | Unique | Step 3: Rebuild as unique page | Transitional (`AboutPage.css`) → Will mount `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
-| `/kontakt` | Unique | Step 3: Rebuild as unique page | Legacy dependent → Will mount `PublicHeader` + `PublicFooter` + `ContactFormCard` |
+| `/kontakt` | Unique | Complete | `ContactPage.css` (`.kontakt-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/service-reparationer` | Bilservice family (owner) | Complete / Needs PublicHeader | `ServiceReparationerPage.css` |
 | `/felsokning` | Bilservice family | Transitional -> Rebuild on family template | Legacy dependent |
 | `/dackservice` | Bilservice family | Transitional -> Rebuild on family template | Legacy transitional (`DackservicePage.css`) |
@@ -79,8 +79,14 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/bargning` | Unique | Step 6: Rebuild as unique page | Legacy transitional (`BargningPage.css`) |
 | `/galleri` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
 | `/bilar-till-salu` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
-| `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-page__*`), mounts `PublicHeader` + `PublicFooter` |
+| `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter` |
 | `/admin` | Admin | Internal utility | Admin local |
+
+## Class-prefix collision check (mandatory before naming a new page's CSS island)
+
+Every legacy page rebuilt so far (`ContactPage.tsx`, `AboutPage.tsx`, the guide pages before their template rebuilds, etc.) already has a same-named BEM block living in `index.css` — e.g. `.contact-page__*` had 107 rules in `index.css` before the `/kontakt` rebuild. `index.css` stays loaded globally for every route (`main.tsx` imports it unconditionally), so reusing a legacy page's own old class prefix for its "isolated" rebuild silently collides with those frozen rules instead of avoiding them — the page renders using an unpredictable mix of both stylesheets, not a clean island. Found live on the `/kontakt` rebuild (2026-09-18): the closing CTA rendered centered because `index.css:7440-7516`'s old `.contact-page__closing*` rules were still matching.
+
+**Before writing a new page's first class name**, run `grep -c "\.<old-prefix>__" client/src/css/index.css` for whatever prefix the page's *legacy* markup used. If it's non-zero, pick a visibly different prefix for the rebuild (e.g. `/kontakt` moved from `contact-page__*` to `kontakt-page__*`) — do not reuse the old name just because the route or component name matches.
 
 ## Required task contract
 
