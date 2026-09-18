@@ -460,6 +460,11 @@ a.bb-footer__contact-val:hover {
   width: 35px;
 }
 
+.bb-footer__social-btn svg {
+  height: 18px;
+  width: 18px;
+}
+
 .bb-footer__social-btn:hover {
   border-color: var(--bb-color-teal-500, #0ab2c1);
   color: var(--bb-color-teal-500, #0ab2c1);

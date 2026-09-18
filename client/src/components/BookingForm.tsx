@@ -119,7 +119,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
       customerEmail,
       customerPhone,
       serviceId: selectedService,
-      date: selectedDate ? selectedDate.toISOString().split('T')[0] : '',
+      date: selectedDate,
       time: selectedTime,
       comment_customer: customerComment,
     };

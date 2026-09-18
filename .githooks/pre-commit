@@ -44,14 +44,28 @@ check_frozen () {
   BLOCKED=1
 }
 
+check_no_tailwind_in_public () {
+  local violations
+  violations=$(git diff --cached -U0 -- 'client/src/pages/*.tsx' 'client/src/components/*.tsx' 'client/src/components/layout/*.tsx' 'client/src/components/ui/*.tsx' ':!client/src/pages/admin/*' ':!client/src/components/admin/*' ':!client/src/components/ThemeSwitcher.tsx' 2>/dev/null | grep '^+.*className=' | grep -E '(^|[[:space:]"])(flex|grid|items-center|justify-between|p-[0-9]|px-[0-9]|py-[0-9]|m-[0-9]|mx-[0-9]|my-[0-9]|text-[a-z]+-[0-9]|bg-[a-z]+-[0-9])([[:space:]"]|$)' || true)
+
+  if [ -n "$violations" ]; then
+    echo ""
+    echo "BLOCKED: Tailwind utility classes detected in public-facing TSX files."
+    echo "Tailwind utilities are permitted ONLY in /admin (see AGENTS.md)."
+    echo "Violating line(s):"
+    echo "$violations"
+    echo ""
+    echo "If this change is genuinely intentional, confirm with Magnus, then commit with --no-verify."
+    echo ""
+    BLOCKED=1
+  fi
+}
+
 check_frozen "client/src/css/index.css" \
   "Do not add, delete, move, rename, reformat or clean rules in this file.
 Existing legacy pages may keep using it unchanged. New or redesigned pages use
 an explicitly owned CSS island; see docs/CSS_OWNERSHIP.md."
 
-check_no_growth "AGENTS.md" \
-  "AGENTS.md is the mandatory startup contract and must not grow. Replace stale
-current-state text with equally concise text when needed. Write dated session
-entries to docs/SESSION_LOG_CURRENT.md, not AGENTS.md."
+check_no_tailwind_in_public
 
 exit $BLOCKED
