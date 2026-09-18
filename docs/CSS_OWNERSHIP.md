@@ -41,7 +41,7 @@ The redesign public shell is independent from the frozen legacy layer.
 
 2. **The 7 unique, standalone pages** — each owns its own bespoke design and its own colocated CSS island. No shared page template between them.
    - `Startsidan` (`/`) — `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`). Complete.
-   - `Om oss` (`/om-oss`) — `AboutPage.tsx` + `AboutPage.css` (`.about-page__*`).
+   - `Om oss` (`/om-oss`) — `AboutPage.tsx` + `AboutPage.css` (`.omoss-page__*`). Complete. Rebuilt from approved mockup with zero dependency on `index.css`.
    - `Kontakt` (`/kontakt`) — `ContactPage.tsx` + `ContactPage.css` (`.contact-page__*`).
    - `Bärgning` (`/bargning`) — `BargningPage.tsx` + `BargningPage.css` (`.bargning-page__*` — pick a prefix distinct from other pages when rebuilding).
    - `Bilar till salu` (`/bilar-till-salu`) — `BilarTillSalu.tsx` + dedicated CSS.

@@ -2,6 +2,63 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (Second Pass: Full-Page Canonical Alignment & Token Cleanup on /om-oss)
+
+- **Standardized standalone "Om oss" page (`AboutPage.tsx` / `AboutPage.css`) to Landing truth & canonical tokens**:
+  - **Mixed-Case Display Headings & Accents**: Standardized H1 to natural mixed-case `Din lokala och <span className="bb-accent">personliga</span> bilverkstad i Brynäs` via `.bb-h1` and `.bb-accent`. Removed `text-transform: uppercase` from `.omoss-page__hero-title`.
+  - **Shared Design Elements (`shared-elements.css`)**:
+    - Section containers wrapped in canonical `.bb-wrap`.
+    - Eyebrows converted to semantic `<p className="bb-eyebrow bb-eyebrow--dark omoss-page__hero-eyebrow">` in hero and process, and `<p className="bb-eyebrow">` in story and principles.
+    - Section titles and leads wired to `.bb-h2`, `.bb-lead`, and `.bb-lead--dark`.
+    - Secondary phone CTAs converted to canonical `.bb-btn.bb-btn--ember`.
+  - **Design Token Purity & Specificity**:
+    - Scoped strictly within `.omoss-page__*`.
+    - Cleaned up redundant local eyebrow and button rules in `AboutPage.css` in favor of canonical `.bb-*` classes.
+  - **Strict CSS Safety**: `client/src/css/index.css` remained 100% frozen (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run build`: Built cleanly with 0 errors in 1.87s.
+  - Playwright visual test (`client/tests/browser/about.visual.spec.ts`): All tests passed across 1440px desktop, 768px tablet, and 390px mobile with 0px horizontal overflow.
+
+### 2026-09-18 — Antigravity (Second Pass: Full-Page Canonical Alignment & Token Cleanup on /kontakt)
+
+- **Standardized standalone Contact page (`ContactPage.tsx` / `ContactPage.css`) to Landing truth & canonical tokens**:
+  - **CSS Island & Specificity**: Scoped completely within `.kontakt-page__*`. Verified `:where()` resets on element selectors to prevent specificity leaks against shared `.bb-*` components.
+  - **Design Token Purity**: Eliminated non-canonical / phantom token references in `ContactPage.css`:
+    - Replaced `var(--bb-font-sans)` with canonical `var(--bb-font-body)` (`'Manrope', Arial, sans-serif`).
+    - Replaced `var(--bb-color-border-subtle)` with clean RGBA borders (`rgba(7, 20, 22, 0.08)` on light cards, `rgba(255, 255, 255, 0.08)` on dark cards).
+    - Replaced undefined `var(--bb-color-teal-300)` / `var(--bb-color-teal-400)` with `var(--bb-color-teal-500)` and `var(--bb-color-focus)`.
+    - Standardized `.kontakt-page__success-icon` to canonical `var(--bb-color-teal-500)`.
+  - **Buttons & Shared Patterns**:
+    - Hero actions: `.bb-btn.bb-btn--teal` ("Boka tid") and `.bb-btn.bb-btn--ember` ("Ring 070-553 33 95").
+    - Form submit button: `.bb-btn.bb-btn--ember-solid` (canonical for light-surface actions).
+    - Closing CTA card: `.bb-btn.bb-btn--teal` and `.bb-btn.bb-btn--ember`.
+    - Eyebrow: `.bb-eyebrow.bb-eyebrow--dark` in hero and closing, `.bb-eyebrow` on light step card.
+    - H1 & Accents: `.bb-h1` with `.bb-accent` ("Hör av dig till Brynäs Bilservice").
+  - **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run build`: Passed cleanly with 0 errors in 1.88s.
+  - Playwright visual tests (`client/tests/browser/contact.visual.spec.ts`): Verified across 1440px desktop, 768px tablet, and 390px mobile viewports: $\Delta = 0\text{px}$ horizontal overflow across all checks. Booking modal trigger verified.
+
+
+### 2026-09-18 — Antigravity (Om oss `/om-oss` Rebuilt from scratch against approved mockup)
+
+- **Rebuilt Om oss page (`AboutPage.tsx` / `AboutPage.css`) from approved visual mockup**:
+  - **CSS Safety & Independence**: Built completely from scratch as an isolated CSS island prefixed with `.omoss-page__*`. Zero reliance or touches to legacy `index.css` (0 lines changed). Consumes canonical design tokens `--bb-*` from `client/src/styles/design-tokens.css` and shared patterns from `client/src/styles/shared-elements.css`.
+  - **Public Shell & Modal**: Wrapped in canonical `PublicHeader` and `PublicFooter`, wired all "Boka tid" CTAs to canonical `BookingFormModal`.
+  - **Section 1: Hero (`.omoss-page__hero`)**: Archivo 800 title `Din lokala och <span class="omoss-page__teal-highlight">personliga</span> bilverkstad i Brynäs`, amber pill eyebrow `Sedan 2021 i Gävle`, primary `.bb-btn--teal` CTA + outline phone button, high-res portrait cutout of Maher Basher, and amber Caveat cursive handwriting quote (`/ Maher`).
+  - **Section 2: Trust Strip (`.omoss-page__trust-strip`)**: 4 trust badge cards (Personlig service, Erfarna mekaniker, Tryggt och enkelt, Oberoende verkstad) floating directly below the hero.
+  - **Section 3: Workshop Story & Profile (`.omoss-page__story`)**:
+    - Left column: Photo card of Maher leaning on workshop bench (optimized from `_incoming-assets/team__maher-i-verkstaden__landskap__v01.png` to `client/src/assets/images/about/maher-workshop-bench.{webp,jpg}`) with overlay badge `Maher Basher | Grundare & mekaniker` + dark petrol card detailing company facts, contact details, opening hours, and Google Maps link.
+    - Right column: Eyebrow `— Om Brynäs Bilservice`, heading `En fristående verkstad med hjärtat i Gävle`, 2 copy paragraphs, and pull quote card with amber quote mark.
+  - **Section 4: Core Principles (`.omoss-page__principles`)**: Centered header with 4 principle cards on warm-white canvas (Tydlig kommunikation, Omsorg om din bil, Kostnadsförslag före arbete, Oberoende rådgivning).
+  - **Section 5: Step-by-Step Process (`.omoss-page__process`)**: Dark petrol band with subtle technical grid, 3 connected step cards with cyan numeric badges (`01`, `02`, `03`) and amber connector arrows.
+  - **Section 6: Workshop Gallery Preview (`.omoss-page__gallery-preview`)**: Header with eyebrow `— Bakom garageportarna`, intro text, `.bb-btn--teal` button linking to `/galleri`, and 4-photo responsive card grid.
+  - **Section 7: Closing CTA Banner (`.omoss-page__cta`)**: Dark petrol card with `Redo att boka service eller reparation?`, `Boka tid nu` button, `Se alla tjänster` link, and direct phone link.
+- **Verification**:
+  - `npm --prefix client run build`: Passed cleanly in 2.05s with 0 errors.
+  - Playwright visual tests (`client/tests/browser/about.visual.spec.ts`): Verified across 1440px (desktop), 768px (tablet), and 390px (mobile) viewports with strictly 0px horizontal overflow (`scrollWidth <= clientWidth`). Modal trigger verified.
+
+
 ### 2026-09-18 — Antigravity (Second Pass: Hero & Full-Page Canonical Alignment on /oljebyte)
 
 - **Standardized Oljebyte (`/oljebyte`) hero, topic blocks & sections to Landing truth**:

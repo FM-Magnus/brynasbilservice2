@@ -3,7 +3,7 @@
 .kontakt-page {
   background: var(--bb-color-page);
   color: var(--bb-color-ink-950);
-  font-family: var(--bb-font-sans);
+  font-family: var(--bb-font-body);
   line-height: var(--bb-line-height-body);
   overflow-x: clip;
 }
@@ -50,12 +50,12 @@
 }
 .kontakt-page__card--dark {
   background: var(--bb-color-ink-950);
-  border: 1px solid var(--bb-color-border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--bb-color-text-inverse);
 }
 .kontakt-page__card--light {
   background: var(--bb-color-surface);
-  border: 1px solid var(--bb-color-border-subtle);
+  border: 1px solid rgba(7, 20, 22, 0.08);
   box-shadow: var(--bb-shadow-card);
 }
 .kontakt-page__card-title {
@@ -110,17 +110,17 @@
   line-height: 1.4;
 }
 .kontakt-page__detail-link:hover {
-  color: var(--bb-color-teal-300);
+  color: var(--bb-color-teal-500);
 }
 .kontakt-page__map-link {
-  color: var(--bb-color-teal-400);
+  color: var(--bb-color-teal-500);
   display: inline-block;
   font-size: 0.82rem;
   font-weight: 700;
   margin-top: 0.25rem;
 }
 .kontakt-page__map-link:hover {
-  color: var(--bb-color-teal-300);
+  color: var(--bb-color-focus);
   text-decoration: underline;
 }
 
@@ -215,7 +215,7 @@
 /* Form card */
 .kontakt-page__form-card {
   background: var(--bb-color-surface);
-  border: 1px solid var(--bb-color-border-subtle);
+  border: 1px solid rgba(7, 20, 22, 0.08);
   border-radius: var(--bb-radius-card);
   box-shadow: var(--bb-shadow-card);
   padding: clamp(1.75rem, 3vw, 2.5rem);
@@ -231,8 +231,8 @@
 }
 
 .kontakt-page__notice {
-  background: rgba(13, 148, 136, 0.08);
-  border: 1px solid rgba(13, 148, 136, 0.2);
+  background: rgba(10, 178, 193, 0.08);
+  border: 1px solid rgba(10, 178, 193, 0.2);
   border-radius: var(--bb-radius-sm);
   display: flex;
   gap: 0.7rem;
@@ -278,11 +278,11 @@
 .kontakt-page__textarea,
 .kontakt-page__select {
   background: var(--bb-color-surface);
-  border: 1px solid var(--bb-color-border-subtle);
+  border: 1px solid rgba(7, 20, 22, 0.15);
   border-radius: var(--bb-radius-sm);
   box-sizing: border-box;
   color: var(--bb-color-ink-950);
-  font-family: var(--bb-font-sans);
+  font-family: var(--bb-font-body);
   font-size: 0.9rem;
   padding: 0.65rem 0.8rem;
   width: 100%;
@@ -320,8 +320,8 @@
 }
 
 .kontakt-page__form-success {
-  background: rgba(13, 148, 136, 0.08);
-  border: 1px solid rgba(13, 148, 136, 0.25);
+  background: rgba(10, 178, 193, 0.08);
+  border: 1px solid rgba(10, 178, 193, 0.25);
   border-radius: var(--bb-radius-card);
   display: grid;
   gap: 0.5rem;
@@ -329,7 +329,7 @@
 }
 .kontakt-page__success-icon {
   align-items: center;
-  background: var(--bb-color-teal-600);
+  background: var(--bb-color-teal-500);
   border-radius: 50%;
   color: #ffffff;
   display: flex;
@@ -383,7 +383,7 @@
 }
 .kontakt-page__find-card {
   background: linear-gradient(155deg, var(--bb-color-ink-900), var(--bb-color-ink-950));
-  border-left: 1px solid var(--bb-color-border-subtle);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--bb-color-text-inverse);
   display: flex;
   flex-direction: column;
@@ -422,7 +422,7 @@
 }
 .kontakt-page__find-link {
   align-items: center;
-  color: var(--bb-color-teal-300);
+  color: var(--bb-color-teal-500);
   display: inline-flex;
   font-size: 0.82rem;
   font-weight: 700;
@@ -431,7 +431,7 @@
   width: fit-content;
 }
 .kontakt-page__find-link:hover {
-  color: var(--bb-color-teal-100);
+  color: var(--bb-color-focus);
 }
 .kontakt-page__find-link-arrow {
   height: 13px;
@@ -490,7 +490,7 @@
 }
 .kontakt-page__closing-card {
   background: var(--bb-color-ink-950);
-  border: 1px solid var(--bb-color-border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--bb-radius-card);
   color: var(--bb-color-text-inverse);
   padding: clamp(2.25rem, 4vw, 3.5rem);
@@ -516,7 +516,7 @@
 @media (max-width: 1100px) {
   .kontakt-page__grid { grid-template-columns: 1fr; }
   .kontakt-page__find-grid { grid-template-columns: 1fr; }
-  .kontakt-page__find-card { border-left: 0; border-top: 1px solid var(--bb-color-border-subtle); }
+  .kontakt-page__find-card { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
   .kontakt-page__map-card, .kontakt-page__map-card iframe { min-height: 280px; }
 }
 
