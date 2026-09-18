@@ -10,9 +10,9 @@
 ### Critical Agent Primer (For New Chats & Fresh Agent Contexts)
 
 If you are a new AI agent (Antigravity, Codex, Claude) or continuing in a fresh conversation context:
-1. **WHAT THIS DOCUMENT IS**: This is the authoritative, Human-in-the-Loop (HITL) strategic command roadmap for the ground-up rebuild of Brynäs Bilservice. It outlines the exact architecture, the 7 designated Page Archetypes, the step-by-step phased execution plan, review criteria for Magnus, and agent steering prompts.
-2. **WHY IT IS THERE**: To prevent cognitive drift across agent switches or new context windows. It ensures every agent builds strictly according to Magnus's 7 Page Design Archetypes using canonical design tokens (`--bb-*`), standalone public shells (`PublicHeader`, `PublicFooter`), and isolated CSS islands—preventing any agent from inventing rogue styles or touching legacy code.
-3. **WHY IT IS TEMPORARY**: This document exists *only* during the transition phase from the legacy monolithic stylesheet (`client/src/css/index.css`) to the new modular architecture. Once all routes are rebuilt on their designated archetypes and `index.css` is completely deleted from the project, this temporary roadmap will have fulfilled its purpose and will be archived into `docs/archive/`.
+1. **WHAT THIS DOCUMENT IS**: This is the authoritative, Human-in-the-Loop (HITL) strategic command roadmap for the ground-up rebuild of Brynäs Bilservice. It outlines the exact architecture, the 7 fully unique standalone pages, the 2 shared service-page families, the step-by-step phased execution plan, review criteria for Magnus, and agent steering prompts.
+2. **WHY IT IS THERE**: To prevent cognitive drift across agent switches or new context windows. It ensures every agent builds strictly according to Magnus's page architecture using canonical design tokens (`--bb-*`), standalone public shells (`PublicHeader`, `PublicFooter`), and isolated CSS islands — preventing any agent from inventing rogue styles or touching legacy code.
+3. **WHY IT IS TEMPORARY**: This document exists *only* during the transition phase from the legacy monolithic stylesheet (`client/src/css/index.css`) to the new modular architecture. Once all routes are rebuilt on their designated archetype and `index.css` is completely deleted from the project, this temporary roadmap will have fulfilled its purpose and will be archived into `docs/archive/`.
 
 ---
 
@@ -21,14 +21,19 @@ If you are a new AI agent (Antigravity, Codex, Claude) or continuing in a fresh 
 ### The Problem
 The legacy site is trapped in a 7,500+ line bloated stylesheet (`client/src/css/index.css`). It mixes legacy layout hacks, Tailwind utility conflicts, hardcoded colors, and tangled page dependencies. Editing anything there risks breaking five other pages simultaneously.
 
-### The Solution: Rebuild from the Ground Up via 7 Page Archetypes
+### The Solution: Rebuild from the Ground Up as Unique Pages + Two Service Families
 Rather than trying to "clean up" the old CSS file, we leave `index.css` completely frozen behind a pre-commit hook. We are building a modern, modular site alongside it using **self-contained CSS islands**.
 
-Once all pages are rebuilt on their respective archetypes, `index.css` has zero active callers and is simply **deleted**.
+**Revised 2026-09-18**: The site does not fit a symmetrical "7 archetypes with parent/child styles" model. Content analysis of each page showed most of them are too divergent from one another to share a template honestly. The architecture is now:
+
+- **7 fully unique, standalone pages** — each gets its own bespoke design and its own CSS island. Nothing shared between them beyond the Level 0 Canonical Core.
+- **2 shared service-page families** — the only page groups where a genuinely reusable template makes sense, because the pages within each group are structurally the same kind of content (a service hub, or a technical repair guide).
+
+Once all pages are rebuilt on their designated identity, `index.css` has zero active callers and is simply **deleted**.
 
 ---
 
-## 2. The 7-Style Blueprint (Visual Intent & Role)
+## 2. The Architecture (Visual Intent & Role)
 
 ```text
 ================================================================================
@@ -42,42 +47,41 @@ LEVEL 0: CANONICAL GLOBAL LAYER & PUBLIC SHELL (Single Source of Truth)
   • ContactFormCard.tsx / ContactFormCard.css (Standalone contact module & form card)
 ================================================================================
                                 │
-        ┌───────────────────────┼───────────────────────┐
-        ▼                       ▼                       ▼
-┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-│ STYLE 1: Brand & │    │ STYLE 2: Major   │    │ STYLE 3: Tech    │
-│ Conversion Hub   │    │ Services Hub     │    │ Guides (Group A) │
-│ (Landing Parent) │    │ (Bilservice Par.)│    │ (Template A)     │
-├──────────────────┤    ├──────────────────┤    ├──────────────────┤
-│ • Startsidan     │    │ • Bilservice     │    │ • Koppling       │
-│ • Om oss (NEW)   │    │ • Felsökning     │    │ • Oljebyte       │
-│ • Kontakt (NEW)  │    │ • Däckservice    │    │ • Avgassystem    │
-│                  │    │ • AC-service     │    │ • Bromssystem    │
-└──────────────────┘    └──────────────────┘    └──────────────────┘
-        │                       │                       │
-        ▼                       ▼                       ▼
-┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-│ STYLE 4: Tech    │    │ STYLE 5: Unique  │    │ STYLE 6: Unique  │
-│ Guides (Group B) │    │ Workshop Gallery │    │ Vehicle Sales    │
-│ (Template B)     │    │ (Bespoke layout) │    │ (Bespoke layout) │
-├──────────────────┤    ├──────────────────┤    ├──────────────────┤
-│ • Kamrem         │    │ • Galleri (NEW)  │    │ • Bilar till     │
-│ • Bilbatteri     │    │                  │    │   salu           │
-│ • Stötdämpare    │    │                  │    │                  │
-│ • Hjullager      │    │                  │    │                  │
-│ • Styrning       │    │                  │    │                  │
-│ • Drivaxel       │    │                  │    │                  │
-└──────────────────┘    └──────────────────┘    └──────────────────┘
+        ┌───────────┬───────────┬───────────┬───────────┬───────────┬───────────┐
+        ▼           ▼           ▼           ▼           ▼           ▼           ▼
+   Startsidan    Om oss      Kontakt     Bärgning   Bilar till    Galleri   Biltjänster
+      (/)      (/om-oss)  (/kontakt)  (/bargning)   salu       (/galleri)  (/biltjanster)
+                                                  (/bilar-till-salu)
+   Each of the 7 pages above is FULLY UNIQUE — its own bespoke design, its
+   own colocated CSS island, own class prefix. No shared page template.
+                                │
+                ┌───────────────┴───────────────┐
+                ▼                                ▼
+   ┌─────────────────────────┐      ┌─────────────────────────────┐
+   │ "BILSERVICE" FAMILY     │      │ "GUIDE" FAMILY               │
+   │ (shared template)       │      │ (shared template)            │
+   ├─────────────────────────┤      ├─────────────────────────────┤
+   │ • Bilservice (parent)   │      │ • Koppling                   │
+   │ • Felsökning            │      │ • Avgassystem                │
+   │ • Däckservice           │      │ • Oljebyte                   │
+   │ • AC-service             │      │ • Bromssystem                 │
+   │                          │      │ • Kamrem                     │
+   │ CSS owner:               │      │ • Bilbatteri                 │
+   │ ServiceReparationerPage  │      │ • Stötdämpare & fjädrar      │
+   │ .css (.bilservice__*)    │      │ • Hjullagerbyte               │
+   │                          │      │ • Styrning & kulleder        │
+   │                          │      │ • Drivaxel & drivknutar      │
+   │                          │      │                               │
+   │                          │      │ CSS owner: ServiceGuide-     │
+   │                          │      │ Template.css (.service-guide__*) │
+   └─────────────────────────┘      └─────────────────────────────┘
 ```
 
-### What Each Style Actually Means:
+### What Each Group Actually Means:
 1. **Canonical Core**: The global glue. Colors, fonts (Archivo display + Manrope body), standard button radii, and the standalone Header/Footer shell that frames every page.
-2. **Style 1 (Brand & Conversion)**: Clean warm-white canvas (`#f8f7f3`), deep petrol dark sections, high-contrast teal accents, direct contact forms, customer reassurance cards.
-3. **Style 2 (Major Editorial Services)**: Automotive editorial tone. High-trust tier packages (Brons/Silver/Guld), deep technical breakdown, transparent pricing, reassuring owner-first messaging.
-4. **Style 3 (Tech Guides Group A)**: Precision technical symptom breakdowns, checklists, repair timelines, and urgent warning cues (amber/teal).
-5. **Style 4 (Tech Guides Group B)**: A fresh second layout template for sub-services (belt, battery, suspension, bearings) so the website never feels monotonous or copy-pasted.
-6. **Style 5 (Unique Gallery)**: Image-first workshop storytelling, authentic photography viewer, tactile carousel.
-7. **Style 6 (Unique Vehicle Sales)**: Automotive showroom UI, vehicle spec pills, photo carousel, inspection badges, and direct purchase inquiry flow.
+2. **The 7 unique pages**: Startsidan, Om oss, Kontakt, Bärgning, Bilar till salu, Galleri, and Biltjänster. Each has diverged enough in content and purpose (brand storytelling vs. conversion form vs. towing dispatch vs. vehicle inventory vs. photo showcase vs. service directory) that forcing a shared template would mean fighting the content instead of presenting it well. Each owns its own colocated `<PageName>.css` with a unique class prefix.
+3. **"Bilservice" family**: The major service-hub pages — automotive editorial tone, high-trust tier packages (Brons/Silver/Guld), deep technical breakdown, transparent pricing, reassuring owner-first messaging. Structurally the same kind of page (a service line's dedicated hub), so one shared identity is honest, not forced.
+4. **"Guide" family**: The technical repair-guide pages — precision symptom breakdowns, checklists, repair timelines, warning cues (amber/teal). All ten guides are the same kind of content (single-component deep-dive), so they share one template rather than getting split into two near-identical templates.
 
 ---
 
@@ -88,7 +92,7 @@ Use this section to know **what the agent is doing**, **what you need to review/
 ---
 
 ### Step 1: Lock the Reference Standard (Landing Page) `[COMPLETED & LOCKED]`
-- **Status**: Completed. Landing page spacing, typography hierarchy, hero contrast overlay, cyclic Google review badge (4.3 / 50 reviews), and responsive layout are locked as the visual benchmark.
+- **Status**: Completed. Landing page spacing, typography hierarchy, hero contrast overlay, cyclic Google review badge (4.3 / 50 reviews), and responsive layout are locked as the visual benchmark. Landing is itself one of the 7 unique pages — it does not have "children" that inherit its template.
 - **Verification**: Verified via Playwright across 1440px, 768px, and 390px with zero horizontal overflow.
 
 ---
@@ -96,79 +100,68 @@ Use this section to know **what the agent is doing**, **what you need to review/
 ### Step 2: Extract Canonical Tokens & Build Standalone Public Shell Elements `[COMPLETED & LOCKED]`
 - **Status**: Completed.
   - Promoted universal `--bb-*` design tokens into `client/src/styles/design-tokens.css` (colors, Archivo 800 display, Manrope body, amber accent `#f09505`, spacing, `--bb-wrap-max: 1320px`).
-  - Built standalone `PublicFooter.tsx` and `PublicFooter.css` faithfully matching Magnus's approved automotive mockup: 4-column layout, centered brand logo/eyebrow/trust badges/handwritten signature, quick links, contact badges, verified opening hours, booking CTA, and dynamic legal sub-footer over atmospheric wheel background asset (`footer-wheel-bg.webp`).
-  - Extracted standalone `GalleryTeaserCard.tsx` and `GalleryTeaserCard.css` with single-source `defaultWorkshopSlides` array for site-wide Ken Burns workshop teasers.
-  - Extracted standalone `GoogleReviewsCard.tsx` and `GoogleReviewsCard.css` with single-source `defaultGoogleReviews` array, cyclic review rotation (8s), `prefers-reduced-motion` check, and support for `hero-overlay` and `card` variants.
-  - Extracted standalone `ContactFormCard.tsx` and `ContactFormCard.css` with single-source `defaultContactSubjects`, direct contact badges, teal gradient form card, and `full-section` / `card-only` variants.
+  - Built standalone `PublicFooter.tsx` and `PublicFooter.css`, `PublicHeader.tsx` and `PublicHeader.css`.
+  - Extracted standalone `GalleryTeaserCard.tsx`, `GoogleReviewsCard.tsx`, and `ContactFormCard.tsx` as shared, reusable components — these stay shared regardless of which unique page or family uses them.
   - Mounted on `LandingPage.tsx` and pruned redundant legacy CSS.
 - **Verification**: Verified via Playwright at 1440px, 768px, and 390px with zero horizontal overflow; 0 lines added to `index.css`.
 
 ---
 
-### Step 3: Complete Style 1 — Rebuild `Kontakt` & `Om oss` from Scratch `[NEXT ACTIVE STEP]`
-- **Why this order**: These pages directly inherit the visual DNA of the Landing page. Because the contact form, info cards, Maher intro, and reassurance cards are already designed on the landing page, these two pages can be rebuilt rapidly with zero legacy bloat.
+### Step 3: Build Om oss & Kontakt as Unique Pages `[NEXT ACTIVE STEP]`
+- **Why this order**: These are the two most-trafficked pages after the landing page, and their content (personal brand story, direct contact/booking) is closest in tone to the landing page's proof already built — but each still needs its own dedicated visual identity and CSS island, not a shared "Style 1" template.
 - **Agent's Job**:
-  - Rebuild `/kontakt` (`ContactPage.tsx` + dedicated CSS): High-trust contact form, direct phone CTA, Google Maps card, verified hours.
-  - Rebuild `/om-oss` (`AboutPage.tsx` + dedicated CSS): Authentic Maher Basher portrait, company transparency, "15%-regeln" consumer proof, workshop history.
+  - Rebuild `/kontakt` (`ContactPage.tsx` + dedicated `ContactPage.css`, `.contact-page__*`): High-trust contact form (`<ContactFormCard />`), direct phone CTA, Google Maps card, verified hours.
+  - Rebuild `/om-oss` (`AboutPage.tsx` + dedicated `AboutPage.css`, `.about-page__*`): Authentic Maher Basher portrait, company transparency, "15%-regeln" consumer proof, workshop history, `<GalleryTeaserCard />`.
   - Both pages mount `<PublicHeader />` and `<PublicFooter />`.
 - **Your Job (HITL Decision)**:
-  - Test `/kontakt` and `/om-oss` in the browser. Confirm copy and layout feel like natural extensions of the homepage.
+  - Test `/kontakt` and `/om-oss` in the browser. Confirm each page's own identity reads well on its own merits.
 - **Steering Prompt**:
-  > *"Rebuild the Kontakt page (/kontakt) from scratch using Style 1 (inheriting the landing page's design language, form, and tokens). Wrap it in PublicHeader and PublicFooter."*
+  > *"Rebuild the Kontakt page (/kontakt) from scratch as its own unique page, using the canonical --bb-* tokens and public shell. Wrap it in PublicHeader and PublicFooter."*
 
 ---
 
-### Step 4: Lock & Roll Out Style 2 — Major Services Hub
-- **Why this order**: Bilservice (`/service-reparationer`) already has its standalone `.bilservice__*` CSS island. By mounting the new PublicHeader/Footer on Bilservice and aligning its tokens, it becomes the parent style guide for the other three major service hubs.
+### Step 4: Roll Out the "Bilservice" Family
+- **Why this order**: Bilservice (`/service-reparationer`) already has its standalone `.bilservice__*` CSS island. By mounting the new PublicHeader/Footer on Bilservice and aligning its tokens, it becomes the shared identity for the other three service-hub pages.
 - **Agent's Job**:
   - Mount `<PublicHeader variant="solid" />` and `<PublicFooter />` on `ServiceReparationerPage.tsx`.
-  - Rebuild **`Felsökning`** (`/felsokning`) on Style 2 with OBD diagnostics focus and symptom selector.
-  - Rebuild **`Däckservice`** (`/dackservice`) on Style 2 with tire hotel (däckhotell) focus, legal requirements, and shift booking.
-  - Rebuild **`AC-service`** (`/ac-service`) on Style 2 with climate diagnostics, R134a/R1234yf options, and cleaning.
+  - Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template with OBD diagnostics focus and symptom selector.
+  - Rebuild **`Däckservice`** (`/dackservice`) on the Bilservice family template with tire hotel (däckhotell) focus, legal requirements, and shift booking.
+  - Rebuild **`AC-service`** (`/ac-service`) on the Bilservice family template with climate diagnostics, R134a/R1234yf options, and cleaning.
 - **Your Job (HITL Decision)**:
   - Review the service tier cards, pricing tables, and process steps across these 4 pages. Verify that technical wording and pricing caveats are clear.
 - **Steering Prompt**:
-  > *"Mount PublicHeader and PublicFooter on Bilservice, then rebuild Felsökning using Bilservice's Style 2 editorial archetype."*
+  > *"Mount PublicHeader and PublicFooter on Bilservice, then rebuild Felsökning using Bilservice's shared family template."*
 
 ---
 
-### Step 5: Connect Style 3 — Technical Service Guides (Group A)
-- **Why this order**: `Koppling`, `Avgassystem`, `Oljebyte`, and `Bromssystem` are already rebuilt on `ServiceGuideTemplate.css`. They just need the global shell and token alignment.
+### Step 5: Roll Out the "Guide" Family (All 10 Technical Guides)
+- **Why this order**: `Koppling`, `Avgassystem`, `Oljebyte`, and `Bromssystem` are already rebuilt on `ServiceGuideTemplate.css`. The remaining six guides (`Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, `Drivaxel & drivknutar`) join the **same** template rather than getting a second, separate one — there is no longer a second guide template in this architecture.
 - **Agent's Job**:
-  - Mount `<PublicHeader />` and `<PublicFooter />` on the 4 pages.
+  - Mount `<PublicHeader />` and `<PublicFooter />` on all 10 guide pages.
   - Ensure `ServiceGuideTemplate.css` consumes `--bb-*` tokens cleanly.
+  - Migrate `Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, and `Drivaxel & drivknutar` onto `ServiceGuideTemplate.css`, following the pattern already proven on the first four.
 - **Your Job (HITL Decision)**:
-  - Check `/koppling`, `/oljebyte`, `/avgassystem`, and `/bromssystem`. Confirm the menu navigation and footer frame them seamlessly.
+  - Check all 10 guide routes. Confirm the menu navigation and footer frame them seamlessly, and that the template holds up across all ten without needing a fork.
 - **Steering Prompt**:
-  > *"Connect PublicHeader and PublicFooter to the four Style 3 service guides (Koppling, Oljebyte, Avgassystem, Bromssystem) and verify zero horizontal overflow."*
+  > *"Connect PublicHeader and PublicFooter to the Style-3 guide pages already on ServiceGuideTemplate.css, then migrate Kamrem and Bilbatteri onto the same template as the next two."*
 
 ---
 
-### Step 6: Create Style 4 — Technical Service Guides (Group B)
-- **Why this order**: The remaining 6 service guides (*Kamrem*, *Bilbatteri*, *Stötdämpare*, *Hjullager*, *Styrning*, *Drivaxel*) currently rely on legacy styling or transitional CSS. Building a second distinct template (`ServiceGuideTemplateB.css`) gives them a cohesive, fresh look while preventing the entire site from looking identical.
+### Step 6: Build the Remaining Unique Pages
+- **Why this order**: `Bärgning`, `Bilar till salu`, `Galleri`, and `Biltjänster` don't share a template with each other or with anything else; each has its own unique UI requirements.
 - **Agent's Job**:
-  - Design and build `ServiceGuideTemplateB.css`.
-  - Migrate all 6 remaining technical guides to this template.
+  - Rebuild **`Bärgning`** (`/bargning`) as its own unique page — towing/transport dispatch focus, direct-call CTA.
+  - Rebuild **`Bilar till salu`** (`/bilar-till-salu`) as its own unique page — vehicle spec badges, multi-photo viewer, and inquiry modal.
+  - Rebuild **`Galleri`** (`/galleri`) as its own unique page — image-first layout and workshop overview.
+  - Rebuild **`Biltjänster`** (`/biltjanster`) as its own unique page — the service-catalog overview/index that the header's "Våra tjänster" link and the footer both point to.
+  - Mount `<PublicHeader />` and `<PublicFooter />` on all four.
 - **Your Job (HITL Decision)**:
-  - Review the visual distinction between Style 3 and Style 4 guides. Confirm they feel like part of the same automotive family while offering visual variety.
-- **Steering Prompt**:
-  > *"Create the Style 4 technical guide template (ServiceGuideTemplateB.css) and migrate Kamrem and Bilbatteri to it as the first proofs."*
+  - Inspect vehicle photos, test the gallery viewer, verify inquiry call-to-actions, and confirm the Biltjänster overview links out to all 10 guides plus the 4 Bilservice-family pages correctly.
 
 ---
 
-### Step 7: Build the Two Unique Pages
-- **Why this order**: These pages don't share templates with other pages; they have unique UI requirements.
-- **Agent's Job**:
-  - Rebuild **`Galleri`** (`/galleri`) (Style 5) with an image-first layout and workshop overview.
-  - Rebuild **`Bilar till salu`** (`/bilar-till-salu`) (Style 6) with vehicle spec badges, multi-photo viewer, and inquiry modal.
-  - Mount `<PublicHeader />` and `<PublicFooter />` on both.
-- **Your Job (HITL Decision)**:
-  - Inspect vehicle photos, test the gallery viewer, and verify inquiry call-to-actions.
-
----
-
-### Step 8: The Moment of Liberation (Deleting `index.css`)
-- **The Milestone**: Every single active route is now living on its own clean CSS island or shared template, wrapped in `PublicHeader` and `PublicFooter`.
+### Step 7: The Moment of Liberation (Deleting `index.css`)
+- **The Milestone**: Every single active route is now living on its own clean CSS island or one of the two shared family templates, wrapped in `PublicHeader` and `PublicFooter`.
 - **Agent's Job**:
   - Search codebase for any lingering references to `index.css`.
   - Delete `client/src/css/index.css`.
@@ -201,6 +194,6 @@ If you step away and come back, or if a model runs out of credits, here is how y
    ```
    *Rule*: Must build with 0 errors.
 
-4. **If an agent drifts or tries to edit legacy CSS**:
+4. **If an agent drifts or tries to edit legacy CSS, or tries to force a shared template onto one of the 7 unique pages**:
    Tell them:
-   > *"STOP. We are following the HITL_Temporary_roadmap.md ground truth. Do not edit legacy index.css. Rebuild the page cleanly on its designated Style Archetype using --bb-* tokens."*
+   > *"STOP. We are following the HITL_Temporary_roadmap.md ground truth. Do not edit legacy index.css. Om oss, Kontakt, Bärgning, Bilar till salu, Galleri, and Biltjänster are each unique pages — do not force them into a shared template. Only the Bilservice family and the Guide family share a template. Rebuild cleanly using --bb-* tokens."*

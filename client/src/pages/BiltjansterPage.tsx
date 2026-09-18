@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Header } from '../components/layout/Header'
-import { Footer } from '../components/layout/Footer'
+import { PublicHeader } from '../components/layout/PublicHeader'
+import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -18,6 +18,7 @@ import bilbatteriThumbJpg from '../assets/images/services/battery/battery-termin
 import bilbatteriThumbWebp from '../assets/images/services/battery/battery-terminal-bolt-tightening-thumb-card.webp'
 import drivaxelThumbJpg from '../assets/images/services/driveshaft/cv-joint-workbench-thumb.jpg'
 import drivaxelThumbWebp from '../assets/images/services/driveshaft/cv-joint-workbench-thumb.webp'
+import './BiltjansterPage.css'
 
 interface ServiceGuide {
   id: string
@@ -131,114 +132,115 @@ export default function BiltjansterPage() {
 
   return (
     <>
-      <Header onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openModal} variant="solid" />
 
-      <main className="services-page biltjanster-page">
-        <section className="services-page__hero" aria-labelledby="services-hero-title">
-          <div className="container">
-            <div className="services-page__hero-layout">
-              <div className="services-page__hero-content">
-                <h1 className="services-page__title" id="services-hero-title">
-                  Våra <span className="title-accent">biltjänster</span>
-                </h1>
-                <p className="services-page__lead">
-                  Här hittar du fördjupad information om mekaniska reparationer, vanliga symptom och riktad felsökning.
-                </p>
-                <div className="services-page__hero-actions">
-                  <button
-                    type="button"
-                    onClick={openModal}
-                    className="services-page__btn services-page__btn--primary"
-                  >
-                    Boka tid
-                  </button>
-                  <a href="tel:0705533395" className="services-page__btn services-page__btn--outline">
-                    <PhoneIcon className="services-page__btn-icon" />
-                    <span>Ring 070-553 33 95</span>
-                  </a>
-                </div>
-              </div>
-
-              <div
-                className="services-page__image-placeholder"
-                role="img"
-                aria-label="Platshållare för framtida bild till Biltjänster"
-              >
-                <WrenchIcon aria-hidden="true" />
-                <span>Våra tjänster</span>
-                <small>Bild kommer</small>
-              </div>
+      <main className="biltjanster-page" id="main-content">
+        <section className="biltjanster-page__hero" aria-labelledby="biltjanster-hero-title">
+          <div className="biltjanster-page__wrap biltjanster-page__hero-inner">
+            <p className="biltjanster-page__eyebrow">Hela vårt tjänsteutbud</p>
+            <h1 className="biltjanster-page__title" id="biltjanster-hero-title">
+              Våra <span className="biltjanster-page__accent">biltjänster</span>
+            </h1>
+            <p className="biltjanster-page__lead">
+              Här hittar du fördjupad information om mekaniska reparationer, vanliga symptom och riktad felsökning – ett samlat ställe för hela vårt tjänsteutbud.
+            </p>
+            <div className="biltjanster-page__hero-actions">
+              <button type="button" onClick={openModal} className="biltjanster-page__btn biltjanster-page__btn--primary">
+                <span>Boka tid</span>
+              </button>
+              <a href="tel:0705533395" className="biltjanster-page__btn biltjanster-page__btn--outline">
+                <PhoneIcon className="biltjanster-page__btn-icon" />
+                <span>Ring 070-553 33 95</span>
+              </a>
             </div>
           </div>
         </section>
 
-        <section className="services-page__categories" aria-label="Serviceguider">
-          <div className="container">
-            <div className="services-page__category-list biltjanster-page__guide-list">
+        <section className="biltjanster-page__guides" aria-label="Serviceguider">
+          <div className="biltjanster-page__wrap">
+            <div className="biltjanster-page__guide-grid">
               {serviceGuides.map((guide, index) => {
                 const GuideIcon = guide.icon ?? WrenchIcon
                 return (
-                <article
-                  className="services-category-card biltjanster-page__guide-card"
-                  id={guide.id}
-                  key={guide.id}
-                  aria-labelledby={`${guide.id}-title`}
-                >
-                  <div
-                    className="services-category-card__media biltjanster-page__guide-media"
-                    role={guide.imageJpg ? undefined : 'img'}
-                    aria-label={guide.imageJpg ? undefined : `Platshållare för framtida bild: ${guide.imageLabel}`}
+                  <article
+                    className="biltjanster-page__guide-card"
+                    id={guide.id}
+                    key={guide.id}
+                    aria-labelledby={`${guide.id}-title`}
                   >
-                    <div className="services-category-card__badge" aria-hidden="true">
-                      <GuideIcon />
+                    <div
+                      className="biltjanster-page__guide-media"
+                      role={guide.imageJpg ? undefined : 'img'}
+                      aria-label={guide.imageJpg ? undefined : `Platshållare för framtida bild: ${guide.imageLabel}`}
+                    >
+                      <span className="biltjanster-page__guide-badge" aria-hidden="true">
+                        <GuideIcon />
+                      </span>
+                      <span className="biltjanster-page__guide-num" aria-hidden="true">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      {guide.imageJpg && guide.imageWebp ? (
+                        <picture>
+                          <source srcSet={guide.imageWebp} type="image/webp" />
+                          <img className="biltjanster-page__guide-img" src={guide.imageJpg} alt={guide.imageLabel} loading="lazy" />
+                        </picture>
+                      ) : (
+                        <div className="biltjanster-page__guide-placeholder" aria-hidden="true">
+                          <span>{guide.imageLabel}</span>
+                          <small>Bild kommer</small>
+                        </div>
+                      )}
                     </div>
-                    <span className="services-category-card__badge-num" aria-hidden="true">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    {guide.imageJpg && guide.imageWebp ? (
-                      <picture>
-                        <source srcSet={guide.imageWebp} type="image/webp" />
-                        <img className="services-category-card__img" src={guide.imageJpg} alt={guide.imageLabel} loading="lazy" />
-                      </picture>
-                    ) : (
-                      <div className="biltjanster-page__guide-placeholder" aria-hidden="true">
-                        <span>{guide.imageLabel}</span>
-                        <small>Bild kommer</small>
-                      </div>
-                    )}
-                  </div>
 
-                  <div className="services-category-card__content">
-                    <div className="services-category-card__header">
-                      <h2 className="services-category-card__title" id={`${guide.id}-title`}>
+                    <div className="biltjanster-page__guide-content">
+                      <h2 className="biltjanster-page__guide-title" id={`${guide.id}-title`}>
                         {guide.title}
                       </h2>
-                      <p className="services-category-card__desc">{guide.summary}</p>
-                    </div>
-
-                    <div className="services-category-card__actions">
+                      <p className="biltjanster-page__guide-desc">{guide.summary}</p>
                       <a
                         href={guide.href}
-                        className="services-category-card__cta"
+                        className="biltjanster-page__guide-cta"
                         aria-label={`Läs mer om ${guide.title}`}
                       >
                         <span>Läs mer</span>
-                        <span className="services-category-card__arrow-badge" aria-hidden="true">
-                          <ArrowRightIcon className="services-category-card__arrow" />
+                        <span className="biltjanster-page__guide-arrow" aria-hidden="true">
+                          <ArrowRightIcon />
                         </span>
                       </a>
                     </div>
-                  </div>
-                </article>
+                  </article>
                 )
               })}
+            </div>
+          </div>
+        </section>
+
+        <section className="biltjanster-page__cta" aria-labelledby="biltjanster-cta-title">
+          <div className="biltjanster-page__wrap biltjanster-page__cta-inner">
+            <div>
+              <p className="biltjanster-page__eyebrow biltjanster-page__eyebrow--dark">Redo att boka?</p>
+              <h2 className="biltjanster-page__cta-title" id="biltjanster-cta-title">
+                Hittar du inte det du söker?
+              </h2>
+              <p className="biltjanster-page__cta-desc">
+                Ring oss eller boka en tid direkt så hjälper vi dig att hitta rätt åtgärd för din bil.
+              </p>
+            </div>
+            <div className="biltjanster-page__cta-actions">
+              <button type="button" onClick={openModal} className="biltjanster-page__btn biltjanster-page__btn--primary">
+                <span>Boka tid</span>
+              </button>
+              <a href="tel:0705533395" className="biltjanster-page__btn biltjanster-page__btn--outline">
+                <PhoneIcon className="biltjanster-page__btn-icon" />
+                <span>Ring: 070-553 33 95</span>
+              </a>
             </div>
           </div>
         </section>
       </main>
 
       <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <Footer />
+      <PublicFooter onBookingClick={openModal} />
     </>
   )
 }

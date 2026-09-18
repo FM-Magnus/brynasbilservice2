@@ -27,9 +27,9 @@ The redesign public shell is independent from the frozen legacy layer.
 - `client/src/components/ui/ContactFormCard.tsx` and `ContactFormCard.css` own the standalone reusable contact module and form card (`.bb-contact-section*`, `.bb-contact-form*`) with single-source contact subjects (`defaultContactSubjects`) and multi-variant support (`full-section`, `card-only`).
 - The legacy `Header.tsx`, `Footer.tsx` and `BookingForm.tsx` remain untouched until separately retired. A new page receives booking behaviour through callbacks or modals, mounting `PublicHeader` and `PublicFooter` directly.
 
-## The 7-Style Rebuild Architecture (Master Blueprint)
+## The Rebuild Architecture (Master Blueprint)
 
-The entire site is being rebuilt away from `index.css` into a canonical design token layer at the top, 4 shared design templates, and 2 unique standalone pages (7 design types total):
+**Revised 2026-09-18**: The site is not a symmetrical set of 7 style archetypes. Most pages are too divergent in content and purpose to honestly share a template. The entire site is being rebuilt away from `index.css` into a canonical design token layer at the top, **7 fully unique standalone pages**, and **2 shared service-page families** (the only groups where the pages are genuinely the same kind of content):
 
 1. **Top: Canonical Design Layer & Shell**:
    - `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens (colors, Archivo display/Manrope body type scales, radii, spacing, shadows).
@@ -38,53 +38,48 @@ The entire site is being rebuilt away from `index.css` into a canonical design t
    - `client/src/components/ui/GoogleReviewsCard.tsx` / `GoogleReviewsCard.css` (reusable standalone Google reviews card/overlay).
    - `client/src/components/ui/ContactFormCard.tsx` / `ContactFormCard.css` (reusable standalone contact module and form card).
 
-2. **Style 1: Brand & Conversion Hub (Parent: Startsidan `/`)**:
-   - *Parent*: `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`).
-   - *Children to be built brand-new on this archetype*: `Om oss` (`/om-oss`) and `Kontakt` (`/kontakt`).
+2. **The 7 unique, standalone pages** — each owns its own bespoke design and its own colocated CSS island. No shared page template between them.
+   - `Startsidan` (`/`) — `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`). Complete.
+   - `Om oss` (`/om-oss`) — `AboutPage.tsx` + `AboutPage.css` (`.about-page__*`).
+   - `Kontakt` (`/kontakt`) — `ContactPage.tsx` + `ContactPage.css` (`.contact-page__*`).
+   - `Bärgning` (`/bargning`) — `BargningPage.tsx` + `BargningPage.css` (`.bargning-page__*` — pick a prefix distinct from other pages when rebuilding).
+   - `Bilar till salu` (`/bilar-till-salu`) — `BilarTillSalu.tsx` + dedicated CSS.
+   - `Galleri` (`/galleri`) — `GalleryPage.tsx` + dedicated CSS.
+   - `Biltjänster` (`/biltjanster`) — `BiltjansterPage.tsx` + dedicated CSS. The service-catalog overview/index page; links out to every page in both families below.
 
-3. **Style 2: Major Service & Editorial Hub (Parent: Bilservice `/service-reparationer`)**:
-   - *Parent*: `ServiceReparationerPage.tsx` + `ServiceReparationerPage.css` (`.bilservice__*`).
-   - *Children to be built on this archetype*: `Felsökning` (`/felsokning`), `Däckservice` (`/dackservice`), `AC-service` (`/ac-service`).
+3. **"Bilservice" family (shared template)** — major service-hub pages, all structurally the same kind of page:
+   - *Owner*: `ServiceReparationerPage.tsx` + `ServiceReparationerPage.css` (`.bilservice__*`).
+   - *Pages on this template*: `Bilservice` (`/service-reparationer`), `Felsökning` (`/felsokning`), `Däckservice` (`/dackservice`), `AC-service` (`/ac-service`).
 
-4. **Style 3: Technical Service Guides — Group A**:
-   - *Template*: `ServiceGuideTemplate.css` (`.service-guide__*`).
-   - *Current pages*: `Koppling` (`/koppling`), `Avgassystem` (`/avgassystem`), `Oljebyte` (`/oljebyte`), `Bromssystem` (`/bromssystem`).
-
-5. **Style 4: Technical Service Guides — Group B**:
-   - *Template*: New distinct guide template for the remaining technical service pages, providing visual variety while reusing shared components.
-   - *Pages*: `Kamrem` (`/kamrem`), `Bilbatteri` (`/bilbatteri`), `Stötdämpare & fjädrar` (`/stodampare-fjadrar`), `Hjullagerbyte` (`/hjullagerbyte`), `Styrning & kulleder` (`/styrning-kulleder`), `Drivaxel & drivknutar` (`/drivaxel-drivknutar`).
-
-6. **Style 5: Unique Workshop Gallery (`/galleri`)**:
-   - Bespoke image-first showcase and workshop storytelling design.
-
-7. **Style 6: Unique Vehicle Sales (`/bilar-till-salu`)**:
-   - Bespoke automotive inventory design with vehicle specs, gallery viewer, and inquiry flow.
+4. **"Guide" family (shared template)** — technical repair-guide pages, all structurally the same kind of page. There is only one guide template; the remaining six guides join the same one already proven on the first four, not a second template.
+   - *Owner*: `ServiceGuideTemplate.css` (`.service-guide__*`).
+   - *Pages on this template*: `Koppling` (`/koppling`), `Avgassystem` (`/avgassystem`), `Oljebyte` (`/oljebyte`), `Bromssystem` (`/bromssystem`), `Kamrem` (`/kamrem`), `Bilbatteri` (`/bilbatteri`), `Stötdämpare & fjädrar` (`/stodampare-fjadrar`), `Hjullagerbyte` (`/hjullagerbyte`), `Styrning & kulleder` (`/styrning-kulleder`), `Drivaxel & drivknutar` (`/drivaxel-drivknutar`).
 
 ## Active Status of Routes During Rebuilding
 
 | Route | Architecture Group | Status | CSS Owner |
 | --- | --- | --- | --- |
-| `/` | Style 1 (Parent) | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` |
-| `/om-oss` | Style 1 (Child) | Step 3: Rebuild to Style 1 | Transitional (`AboutPage.css`) → Will mount `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
-| `/kontakt` | Style 1 (Child) | Step 3: Rebuild to Style 1 | Legacy dependent → Will mount `PublicHeader` + `PublicFooter` + `ContactFormCard` |
-| `/service-reparationer` | Style 2 (Parent) | Complete / Needs PublicHeader | `ServiceReparationerPage.css` |
-| `/felsokning` | Style 2 (Child) | Transitional -> Rebuild to Style 2 | Legacy dependent |
-| `/dackservice` | Style 2 (Child) | Transitional -> Rebuild to Style 2 | Legacy transitional (`DackservicePage.css`) |
-| `/ac-service` | Style 2 (Child) | Transitional -> Rebuild to Style 2 | Legacy transitional (`AcServicePage.css`) |
-| `/koppling` | Style 3 | Complete / Needs PublicHeader | `ServiceGuideTemplate.css` |
-| `/avgassystem` | Style 3 | Complete / Needs PublicHeader | `ServiceGuideTemplate.css` |
-| `/oljebyte` | Style 3 | Complete / Needs PublicHeader | `ServiceGuideTemplate.css` |
-| `/bromssystem` | Style 3 | Complete / Needs PublicHeader | `ServiceGuideTemplate.css` |
-| `/kamrem` | Style 4 | Transitional -> Rebuild to Style 4 | Legacy dependent |
-| `/bilbatteri` | Style 4 | Transitional -> Rebuild to Style 4 | Legacy dependent |
-| `/stodampare-fjadrar` | Style 4 | Transitional -> Rebuild to Style 4 | Legacy transitional (`StodampareFjadrarPage.css`) |
-| `/hjullagerbyte` | Style 4 | Transitional -> Rebuild to Style 4 | Legacy transitional (`HjullagerbytePage.css`) |
-| `/styrning-kulleder` | Style 4 | Transitional -> Rebuild to Style 4 | Legacy transitional (`StyrningKullederPage.css`) |
-| `/drivaxel-drivknutar` | Style 4 | Transitional -> Rebuild to Style 4 | Legacy transitional (`DrivaxelDrivknutarPage.css`) |
-| `/bargning` | Transitional | Specialized service | Legacy transitional (`BargningPage.css`) |
-| `/galleri` | Style 5 (Unique) | Transitional -> Bespoke rebuild | Legacy dependent |
-| `/bilar-till-salu` | Style 6 (Unique) | Transitional -> Dedicated rebuild | Legacy dependent |
-| `/biltjanster` | Hub | Transitional directory | Legacy dependent |
+| `/` | Unique | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` |
+| `/om-oss` | Unique | Step 3: Rebuild as unique page | Transitional (`AboutPage.css`) → Will mount `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
+| `/kontakt` | Unique | Step 3: Rebuild as unique page | Legacy dependent → Will mount `PublicHeader` + `PublicFooter` + `ContactFormCard` |
+| `/service-reparationer` | Bilservice family (owner) | Complete / Needs PublicHeader | `ServiceReparationerPage.css` |
+| `/felsokning` | Bilservice family | Transitional -> Rebuild on family template | Legacy dependent |
+| `/dackservice` | Bilservice family | Transitional -> Rebuild on family template | Legacy transitional (`DackservicePage.css`) |
+| `/ac-service` | Bilservice family | Transitional -> Rebuild on family template | Legacy transitional (`AcServicePage.css`) |
+| `/koppling` | Guide family | Complete / Needs PublicHeader | `ServiceGuideTemplate.css` |
+| `/avgassystem` | Guide family | Complete / Needs PublicHeader | `ServiceGuideTemplate.css` |
+| `/oljebyte` | Guide family | Complete / Needs PublicHeader | `ServiceGuideTemplate.css` |
+| `/bromssystem` | Guide family | Complete / Needs PublicHeader | `ServiceGuideTemplate.css` |
+| `/kamrem` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy dependent |
+| `/bilbatteri` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy dependent |
+| `/stodampare-fjadrar` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`StodampareFjadrarPage.css`) |
+| `/hjullagerbyte` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`HjullagerbytePage.css`) |
+| `/styrning-kulleder` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`StyrningKullederPage.css`) |
+| `/drivaxel-drivknutar` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`DrivaxelDrivknutarPage.css`) |
+| `/bargning` | Unique | Step 6: Rebuild as unique page | Legacy transitional (`BargningPage.css`) |
+| `/galleri` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
+| `/bilar-till-salu` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
+| `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-page__*`), mounts `PublicHeader` + `PublicFooter` |
 | `/admin` | Admin | Internal utility | Admin local |
 
 ## Required task contract

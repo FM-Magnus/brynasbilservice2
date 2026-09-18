@@ -1,7 +1,7 @@
 # Brynäs Bilservice — Design System
 
 This is the living reference for the site's visual tokens and patterns.
-**AUTHORITATIVE CANONICAL TOKENS**: `client/src/styles/design-tokens.css` defines the `--bb-*` design tokens that govern the 7 Page Design Archetypes and the standalone Public Shell (`PublicHeader`, `PublicFooter`, `GalleryTeaserCard`, `GoogleReviewsCard`, and `ContactFormCard`). Legacy tokens in `client/src/css/index.css` are frozen and retained solely for unmigrated legacy pages.
+**AUTHORITATIVE CANONICAL TOKENS**: `client/src/styles/design-tokens.css` defines the `--bb-*` design tokens that govern the 7 fully unique standalone pages, the 2 shared service-page families (Bilservice family, Guide family), and the standalone Public Shell (`PublicHeader`, `PublicFooter`, `GalleryTeaserCard`, `GoogleReviewsCard`, and `ContactFormCard`) — see `docs/CSS_OWNERSHIP.md` for the current architecture. Legacy tokens in `client/src/css/index.css` are frozen and retained solely for unmigrated legacy pages.
 
 ## 1. Canonical Design Tokens (`--bb-*`) — Single Source of Truth
 
