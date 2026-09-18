@@ -1,17 +1,28 @@
 /*
-  Shared template for redesigned Biltjänster guide pages, introduced with the
-  Koppling rebuild. Import this file directly in any page using this layout
-  language; keep page-specific one-offs in that page's own colocated CSS file.
-  Depends only on the global design tokens in client/src/css/index.css
-  (colors, fonts, radii) — never add rules for this template back into
-  index.css itself.
+  Shared template for redesigned Biltjänster guide pages.
+  Import this file directly in any page using this layout language;
+  keep page-specific one-offs in that page's own colocated CSS file.
+  Depends ONLY on the canonical design tokens in client/src/styles/design-tokens.css
+  (--bb-*) and shared elements — zero dependency on index.css.
 */
 
-.service-guide { background: var(--redesign-page); overflow-x: hidden; }
+.service-guide {
+  background: var(--bb-color-page);
+  color: var(--bb-color-ink-950);
+  font-family: var(--bb-font-sans);
+  line-height: var(--bb-line-height-body);
+  overflow-x: hidden;
+}
+
+:where(.service-guide) *, :where(.service-guide) *::before, :where(.service-guide) *::after { box-sizing: border-box; }
+:where(.service-guide) :where(a) { color: inherit; text-decoration: none; }
+:where(.service-guide) :where(button, input, textarea, select) { font: inherit; }
+:where(.service-guide) :where(h1, h2, h3, h4, p) { margin: 0; }
+:where(.service-guide) :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
 
 .service-guide__container {
   width: 100%;
-  max-width: var(--redesign-hero-max);
+  max-width: var(--bb-wrap-max, 1320px);
   margin-inline: auto;
   padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
@@ -22,34 +33,42 @@
 .service-guide__eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.7rem;
   margin-bottom: 1rem;
-  color: var(--redesign-accent);
-  font: 800 0.78rem var(--font-body);
+  color: var(--bb-color-teal-500);
+  font-family: var(--bb-font-sans);
+  font-size: var(--bb-font-size-label, 0.78rem);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
 }
 .service-guide__eyebrow::before {
   content: '';
-  width: 22px;
+  width: 23px;
   height: 2px;
-  background: var(--redesign-accent);
+  background: var(--bb-color-amber-500);
 }
 
 .service-guide__title {
   margin: 0 0 1rem;
-  color: #ffffff;
-  text-transform: uppercase;
-  font: 800 clamp(2.25rem, 4.6vw, 3.6rem) / 1.05 var(--font-heading);
+  color: var(--bb-color-text-inverse, #ffffff);
+  font-family: var(--bb-font-display);
+  font-size: clamp(2.25rem, 4.6vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
   letter-spacing: -0.01em;
 }
-.service-guide__title .title-accent { color: var(--redesign-accent); }
+.service-guide__title .title-accent,
+.service-guide__title .bb-accent { color: var(--bb-color-teal-500); }
 
 .service-guide__lead {
   max-width: 46ch;
   margin: 0 0 1.75rem;
-  color: rgba(255, 255, 255, 0.78);
-  font: 400 1.05rem / 1.65 var(--font-body);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--bb-font-sans);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.65;
 }
 
 .service-guide__actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-bottom: 2rem; }
@@ -57,27 +76,41 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.9rem 1.6rem;
-  border-radius: var(--redesign-radius-pill);
-  font: 700 0.95rem var(--font-body);
+  padding: 0.75rem 1.3rem;
+  min-height: 52px;
+  border-radius: var(--bb-radius-control, 9999px);
+  font-family: var(--bb-font-sans);
+  font-size: var(--bb-font-size-control, 0.95rem);
+  font-weight: 700;
   text-decoration: none;
+  text-transform: uppercase;
   cursor: pointer;
-  border: 1px solid transparent;
-  transition: transform 0.2s var(--ease), background 0.2s var(--ease);
+  transition: transform var(--bb-transition-fast, 0.2s ease), background var(--bb-transition-fast, 0.2s ease), border-color var(--bb-transition-fast, 0.2s ease);
 }
 .service-guide__btn:hover { transform: translateY(-1px); }
-.service-guide__btn--primary { background: var(--redesign-accent); color: #ffffff; }
-.service-guide__btn--primary:hover { background: var(--redesign-accent-dark); }
-.service-guide__btn--outline { background: transparent; color: #ffffff; border-color: rgba(255, 255, 255, 0.28); }
-.service-guide__btn--outline:hover { border-color: rgba(255, 255, 255, 0.5); }
+.service-guide__btn--primary {
+  background: linear-gradient(to right, transparent, #048a99);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: var(--bb-shadow-button);
+  color: var(--bb-color-text-inverse, #ffffff);
+}
+.service-guide__btn--primary:hover {
+  background: linear-gradient(135deg, #12cbd8, #057784);
+}
+.service-guide__btn--outline {
+  background: linear-gradient(to right, transparent, rgba(240, 149, 5, 0.25));
+  border-color: var(--bb-color-amber-500);
+  color: var(--bb-color-text-inverse, #ffffff);
+}
+.service-guide__btn--outline:hover {
+  background: linear-gradient(to right, transparent, rgba(252, 163, 17, 0.45));
+  border-color: var(--bb-color-amber-400);
+}
 .service-guide__btn svg { width: 18px; height: 18px; }
 
 /* ---------- Hero ---------- */
 .service-guide__hero {
-  background: var(--redesign-ink);
-  /* Fixed top-padding floor, not vertical centering: this hero's content
-     (eyebrow + multi-line heading + lead + trust row) can be tall, and
-     flex-centering would let it overflow up into the fixed header. */
+  background: var(--bb-color-ink-950);
   padding-block: clamp(9.5rem, 6vw + 6rem, 12rem) clamp(3rem, 5vw, 4.5rem);
   min-height: clamp(640px, calc(100svh - 60px), 760px);
 }
@@ -94,16 +127,17 @@
   width: 22px;
   height: 22px;
   margin-top: 0.15rem;
-  color: var(--redesign-accent);
+  color: var(--bb-color-amber-500);
 }
-.service-guide__trust-item h3 { margin: 0 0 0.15rem; color: #fff; font: 700 0.92rem var(--font-body); }
-.service-guide__trust-item p { margin: 0; color: rgba(255, 255, 255, 0.62); font: 400 0.82rem / 1.4 var(--font-body); }
+.service-guide__trust-item h3 { margin: 0 0 0.15rem; color: #fff; font-family: var(--bb-font-sans); font-size: 0.92rem; font-weight: 700; }
+.service-guide__trust-item p { margin: 0; color: rgba(255, 255, 255, 0.62); font-family: var(--bb-font-sans); font-size: 0.82rem; line-height: 1.4; font-weight: 400; }
 
 .service-guide__hero-media {
   position: relative;
   min-height: clamp(320px, 34vw, 460px);
-  border-radius: var(--redesign-radius-card);
+  border-radius: var(--bb-radius-card);
   overflow: hidden;
+  box-shadow: var(--bb-shadow-elevated);
 }
 .service-guide__hero-media picture,
 .service-guide__hero-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -116,8 +150,8 @@
   gap: 0.75rem;
   max-width: 260px;
   padding: 0.9rem 1.1rem;
-  border-radius: 20px;
-  background: rgba(16, 22, 24, 0.86);
+  border-radius: var(--bb-radius-card);
+  background: rgba(12, 18, 20, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -129,13 +163,13 @@
   justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: 10px;
-  background: rgba(36, 150, 160, 0.25);
-  color: var(--redesign-accent);
+  border-radius: var(--bb-radius-sm);
+  background: rgba(240, 149, 5, 0.15);
+  color: var(--bb-color-amber-500);
 }
 .service-guide__hero-badge-icon svg { width: 18px; height: 18px; }
-.service-guide__hero-badge h3 { margin: 0; color: #fff; font: 700 0.85rem / 1.25 var(--font-body); }
-.service-guide__hero-badge p { margin: 0.15rem 0 0; color: rgba(255, 255, 255, 0.6); font: 400 0.75rem / 1.3 var(--font-body); }
+.service-guide__hero-badge h3 { margin: 0; color: #fff; font-family: var(--bb-font-sans); font-size: 0.85rem; font-weight: 700; line-height: 1.25; }
+.service-guide__hero-badge p { margin: 0.15rem 0 0; color: rgba(255, 255, 255, 0.6); font-family: var(--bb-font-sans); font-size: 0.75rem; font-weight: 400; line-height: 1.3; }
 
 /* ---------- Generic placeholder for images not yet supplied ---------- */
 .service-guide__placeholder {
@@ -150,15 +184,15 @@
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
   background:
-    radial-gradient(circle at 70% 20%, rgba(36, 150, 160, 0.22), transparent 42%),
+    radial-gradient(circle at 70% 20%, rgba(13, 148, 136, 0.15), transparent 42%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
-  border: 1px dashed rgba(36, 150, 160, 0.55);
+  border: 1px dashed rgba(13, 148, 136, 0.45);
 }
-.service-guide__placeholder svg { width: 32px; height: 32px; color: var(--redesign-accent); }
-.service-guide__placeholder span { font: 800 0.95rem var(--font-heading); }
-.service-guide__placeholder small { font: 600 0.7rem var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
-.service-guide__placeholder--light { color: #556266; border-color: rgba(36, 150, 160, 0.4); background: rgba(36, 150, 160, 0.05); }
-.service-guide__placeholder--light small { color: #8a9599; }
+.service-guide__placeholder svg { width: 32px; height: 32px; color: var(--bb-color-teal-500); }
+.service-guide__placeholder span { font-family: var(--bb-font-display); font-size: 0.95rem; font-weight: 800; }
+.service-guide__placeholder small { font-family: var(--bb-font-sans); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
+.service-guide__placeholder--light { color: var(--bb-color-text-muted); border-color: rgba(13, 148, 136, 0.3); background: rgba(13, 148, 136, 0.05); }
+.service-guide__placeholder--light small { color: var(--bb-color-text-muted); }
 
 /* ---------- "Vad är en koppling?" intro ---------- */
 .service-guide__intro-layout {
@@ -170,8 +204,9 @@
 .service-guide__intro-media {
   position: relative;
   min-height: clamp(280px, 26vw, 380px);
-  border-radius: var(--redesign-radius-card);
+  border-radius: var(--bb-radius-card);
   overflow: hidden;
+  box-shadow: var(--bb-shadow-card);
 }
 .service-guide__intro-media picture,
 .service-guide__intro-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -180,7 +215,11 @@
   left: 1.25rem;
   bottom: 1.1rem;
   color: #fff;
-  font: 500 italic 1.05rem/1.3 var(--font-heading);
+  font-family: var(--bb-font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.3;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 .service-guide__intro-media::after {
@@ -193,13 +232,19 @@
 
 .service-guide__intro-content h2 {
   margin: 0 0 0.75rem;
-  color: var(--redesign-ink);
-  font: 800 clamp(1.7rem, 3vw, 2.3rem) / 1.15 var(--font-heading);
+  color: var(--bb-color-ink-950);
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1.15;
 }
 .service-guide__intro-content > p {
   margin: 0 0 1.5rem;
-  color: #556266;
-  font: 400 1rem / 1.65 var(--font-body);
+  color: var(--bb-color-text-muted);
+  font-family: var(--bb-font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
 }
 
 .service-guide__component-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
@@ -212,21 +257,23 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(36, 150, 160, 0.12);
-  color: var(--redesign-accent-dark);
-  font: 800 0.85rem var(--font-body);
+  background: rgba(240, 149, 5, 0.15);
+  color: var(--bb-color-amber-600);
+  font-family: var(--bb-font-sans);
+  font-size: 0.85rem;
+  font-weight: 800;
 }
-.service-guide__component-item h3 { margin: 0 0 0.3rem; color: var(--redesign-ink); font: 800 0.98rem / 1.25 var(--font-heading); }
-.service-guide__component-item p { margin: 0; color: #556266; font: 400 0.88rem / 1.55 var(--font-body); }
+.service-guide__component-item h3 { margin: 0 0 0.3rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 0.98rem; font-weight: 800; line-height: 1.25; }
+.service-guide__component-item p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.88rem; font-weight: 400; line-height: 1.55; }
 
 .service-guide__tip-strip {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1.1rem 1.35rem;
-  border-radius: var(--redesign-radius-card);
-  border: 1px solid rgba(36, 150, 160, 0.25);
-  background: rgba(36, 150, 160, 0.06);
+  border-radius: var(--bb-radius-card);
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  background: rgba(13, 148, 136, 0.06);
 }
 .service-guide__tip-icon {
   flex: 0 0 auto;
@@ -236,27 +283,38 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(36, 150, 160, 0.14);
-  color: var(--redesign-accent-dark);
+  background: rgba(13, 148, 136, 0.14);
+  color: var(--bb-color-teal-700);
 }
 .service-guide__tip-icon svg { width: 20px; height: 20px; }
 .service-guide__tip-text { flex: 1 1 auto; min-width: 0; }
-.service-guide__tip-text strong { display: block; color: var(--redesign-ink); font: 700 0.95rem var(--font-body); }
-.service-guide__tip-text span { color: #556266; font: 400 0.85rem / 1.5 var(--font-body); }
-.service-guide__tip-strip .service-guide__btn--primary { flex: 0 0 auto; padding: 0.7rem 1.2rem; font-size: 0.85rem; }
+.service-guide__tip-text strong { display: block; color: var(--bb-color-ink-950); font-family: var(--bb-font-sans); font-size: 0.95rem; font-weight: 700; }
+.service-guide__tip-text span { color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.85rem; font-weight: 400; line-height: 1.5; }
+.service-guide__tip-strip .service-guide__btn--primary {
+  background: linear-gradient(135deg, var(--bb-color-teal-600), var(--bb-color-teal-700));
+  border-color: var(--bb-color-teal-500);
+  color: #fff;
+  flex: 0 0 auto;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.85rem;
+}
+.service-guide__tip-strip .service-guide__btn--primary:hover {
+  background: linear-gradient(135deg, var(--bb-color-teal-500), var(--bb-color-teal-800));
+}
 
 /* ---------- "Varför är det viktigt att åtgärda i tid?" dark panel ---------- */
 .service-guide__importance {
   padding: clamp(1.75rem, 3.5vw, 2.75rem);
-  border-radius: var(--redesign-radius-card);
-  background: var(--redesign-ink);
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-ink-950);
+  border: 1px solid var(--bb-color-border-subtle);
   display: grid;
   grid-template-columns: minmax(220px, 0.85fr) minmax(0, 2.4fr);
   gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: center;
 }
-.service-guide__importance h2 { margin: 0 0 0.65rem; color: #fff; font: 800 clamp(1.4rem, 2.4vw, 1.85rem) / 1.2 var(--font-heading); }
-.service-guide__importance > div > p { margin: 0; color: rgba(255, 255, 255, 0.68); font: 400 0.92rem / 1.55 var(--font-body); }
+.service-guide__importance h2 { margin: 0 0 0.65rem; color: #fff; font-family: var(--bb-font-display); font-size: clamp(1.4rem, 2.4vw, 1.85rem); font-weight: 800; line-height: 1.2; }
+.service-guide__importance > div > p { margin: 0; color: rgba(255, 255, 255, 0.68); font-family: var(--bb-font-sans); font-size: 0.92rem; font-weight: 400; line-height: 1.55; }
 .service-guide__importance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.85rem; }
 .service-guide__importance-card {
   padding: 1.1rem;
@@ -264,9 +322,9 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
-.service-guide__importance-card svg { width: 20px; height: 20px; margin-bottom: 0.6rem; color: var(--redesign-accent); }
-.service-guide__importance-card h3 { margin: 0 0 0.35rem; color: #fff; font: 700 0.9rem / 1.25 var(--font-body); }
-.service-guide__importance-card p { margin: 0; color: rgba(255, 255, 255, 0.6); font: 400 0.8rem / 1.5 var(--font-body); }
+.service-guide__importance-card svg { width: 20px; height: 20px; margin-bottom: 0.6rem; color: var(--bb-color-amber-500); }
+.service-guide__importance-card h3 { margin: 0 0 0.35rem; color: #fff; font-family: var(--bb-font-sans); font-size: 0.9rem; font-weight: 700; line-height: 1.25; }
+.service-guide__importance-card p { margin: 0; color: rgba(255, 255, 255, 0.6); font-family: var(--bb-font-sans); font-size: 0.8rem; font-weight: 400; line-height: 1.5; }
 
 /* ---------- Symptoms ---------- */
 .service-guide__symptoms-layout {
@@ -275,8 +333,8 @@
   gap: clamp(2rem, 4vw, 3rem);
   align-items: stretch;
 }
-.service-guide__symptoms-content h2 { margin: 0 0 0.6rem; color: var(--redesign-ink); font: 800 clamp(1.7rem, 3vw, 2.3rem) / 1.15 var(--font-heading); }
-.service-guide__symptoms-content > p { margin: 0 0 1.5rem; color: #556266; font: 400 0.98rem / 1.6 var(--font-body); max-width: 52ch; }
+.service-guide__symptoms-content h2 { margin: 0 0 0.6rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 800; line-height: 1.15; }
+.service-guide__symptoms-content > p { margin: 0 0 1.5rem; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.98rem; font-weight: 400; line-height: 1.6; max-width: 52ch; }
 
 .service-guide__symptom-list { display: flex; flex-direction: column; gap: 0.75rem; }
 .service-guide__symptom-row {
@@ -285,8 +343,9 @@
   align-items: flex-start;
   padding: 1.1rem 1.25rem;
   border-radius: 20px;
-  background: var(--redesign-surface);
-  border: 1px solid rgba(16, 22, 24, 0.08);
+  background: var(--bb-color-surface);
+  border: 1px solid var(--bb-color-border-subtle);
+  box-shadow: var(--bb-shadow-card);
 }
 .service-guide__symptom-row--featured {
   background: linear-gradient(145deg, #0b848e 0%, #066973 100%);
@@ -303,8 +362,8 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(36, 150, 160, 0.12);
-  color: var(--redesign-accent-dark);
+  background: rgba(240, 149, 5, 0.15);
+  color: var(--bb-color-amber-600);
 }
 .service-guide__symptom-row--featured .service-guide__symptom-icon { background: rgba(255, 255, 255, 0.18); color: #fff; }
 .service-guide__symptom-row--urgent {
@@ -316,14 +375,15 @@
 .service-guide__symptom-row--urgent p { color: rgba(255, 255, 255, 0.9); }
 .service-guide__symptom-row--urgent .service-guide__symptom-icon { background: rgba(255, 255, 255, 0.2); color: #fff; }
 .service-guide__symptom-icon svg { width: 18px; height: 18px; }
-.service-guide__symptom-row h3 { margin: 0 0 0.25rem; color: var(--redesign-ink); font: 800 0.98rem / 1.25 var(--font-heading); }
-.service-guide__symptom-row p { margin: 0; color: #556266; font: 400 0.86rem / 1.5 var(--font-body); }
+.service-guide__symptom-row h3 { margin: 0 0 0.25rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 0.98rem; font-weight: 800; line-height: 1.25; }
+.service-guide__symptom-row p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.86rem; font-weight: 400; line-height: 1.5; }
 
 .service-guide__symptoms-media {
   position: relative;
   min-height: 320px;
-  border-radius: var(--redesign-radius-card);
+  border-radius: var(--bb-radius-card);
   overflow: hidden;
+  box-shadow: var(--bb-shadow-card);
 }
 .service-guide__symptoms-media picture,
 .service-guide__symptoms-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -340,37 +400,43 @@
   bottom: 1.1rem;
   right: 1.25rem;
   color: #fff;
-  font: 500 italic clamp(1rem, 1.6vw, 1.2rem) / 1.3 var(--font-heading);
+  font-family: var(--bb-font-display);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.3;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* ---------- "Det här kan vi hjälpa dig med" service card ---------- */
 .service-guide__service-card {
   padding: clamp(1.75rem, 3.5vw, 2.75rem);
-  border-radius: var(--redesign-radius-card);
-  background: var(--redesign-ink);
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-ink-950);
+  border: 1px solid var(--bb-color-border-subtle);
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
   gap: clamp(1.75rem, 4vw, 3rem);
   align-items: center;
 }
-.service-guide__service-card h2 { margin: 0 0 0.65rem; color: #fff; font: 800 clamp(1.5rem, 2.6vw, 2rem) / 1.2 var(--font-heading); }
-.service-guide__service-card > div > p { margin: 0; color: rgba(255, 255, 255, 0.68); font: 400 0.95rem / 1.6 var(--font-body); }
+.service-guide__service-card h2 { margin: 0 0 0.65rem; color: #fff; font-family: var(--bb-font-display); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; line-height: 1.2; }
+.service-guide__service-card > div > p { margin: 0; color: rgba(255, 255, 255, 0.68); font-family: var(--bb-font-sans); font-size: 0.95rem; font-weight: 400; line-height: 1.6; }
 .service-guide__service-checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem 1.5rem; margin: 0; padding: 0; list-style: none; }
-.service-guide__service-checklist li { display: flex; gap: 0.6rem; align-items: flex-start; color: rgba(255, 255, 255, 0.85); font: 400 0.92rem / 1.5 var(--font-body); }
-.service-guide__service-checklist svg { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 0.15rem; color: var(--redesign-accent); }
+.service-guide__service-checklist li { display: flex; gap: 0.6rem; align-items: flex-start; color: rgba(255, 255, 255, 0.85); font-family: var(--bb-font-sans); font-size: 0.92rem; font-weight: 400; line-height: 1.5; }
+.service-guide__service-checklist svg { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 0.15rem; color: var(--bb-color-teal-500); }
 
 /* ---------- "Mer info" ---------- */
-.service-guide__info-heading h2 { margin: 0 0 0.5rem; color: var(--redesign-ink); font: 800 clamp(1.6rem, 2.8vw, 2.1rem) / 1.2 var(--font-heading); }
-.service-guide__info-heading p { margin: 0 0 1.75rem; color: #556266; font: 400 0.96rem / 1.6 var(--font-body); }
+.service-guide__info-heading h2 { margin: 0 0 0.5rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: clamp(1.6rem, 2.8vw, 2.1rem); font-weight: 800; line-height: 1.2; }
+.service-guide__info-heading p { margin: 0 0 1.75rem; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.96rem; font-weight: 400; line-height: 1.6; }
 .service-guide__info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem; }
 .service-guide__info-card {
   display: flex;
   gap: 1rem;
   padding: 1.5rem;
-  border-radius: var(--redesign-radius-card);
-  background: var(--redesign-surface);
-  border: 1px solid rgba(16, 22, 24, 0.08);
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-surface);
+  border: 1px solid var(--bb-color-border-subtle);
+  box-shadow: var(--bb-shadow-card);
 }
 .service-guide__info-icon {
   flex: 0 0 auto;
@@ -380,20 +446,22 @@
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: rgba(36, 150, 160, 0.1);
-  color: var(--redesign-accent-dark);
+  background: rgba(13, 148, 136, 0.1);
+  color: var(--bb-color-teal-700);
 }
 .service-guide__info-icon svg { width: 22px; height: 22px; }
-.service-guide__info-card h3 { margin: 0 0 0.4rem; color: var(--redesign-ink); font: 800 1rem / 1.25 var(--font-heading); }
-.service-guide__info-card p { margin: 0; color: #556266; font: 400 0.88rem / 1.55 var(--font-body); }
+.service-guide__info-card h3 { margin: 0 0 0.4rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 1rem; font-weight: 800; line-height: 1.25; }
+.service-guide__info-card p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.88rem; font-weight: 400; line-height: 1.55; }
 .service-guide__info-flag {
   display: inline-block;
   margin-bottom: 0.5rem;
   padding: 0.2rem 0.55rem;
-  border-radius: var(--redesign-radius-pill);
-  background: var(--redesign-ink);
+  border-radius: var(--bb-radius-control);
+  background: var(--bb-color-ink-950);
   color: #fff;
-  font: 800 0.65rem var(--font-body);
+  font-family: var(--bb-font-sans);
+  font-size: 0.65rem;
+  font-weight: 800;
   letter-spacing: 0.06em;
 }
 
@@ -403,18 +471,19 @@
   align-items: flex-start;
   padding: 1.1rem 1.35rem;
   border-radius: 18px;
-  background: rgba(36, 150, 160, 0.07);
-  border-left: 3px solid var(--redesign-accent);
+  background: rgba(13, 148, 136, 0.07);
+  border-left: 3px solid var(--bb-color-teal-500);
 }
-.service-guide__safety-strip svg { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 0.1rem; color: var(--redesign-accent-dark); }
-.service-guide__safety-strip p { margin: 0; color: #556266; font: 400 0.9rem / 1.6 var(--font-body); }
-.service-guide__safety-strip strong { color: var(--redesign-ink); font-weight: 800; }
+.service-guide__safety-strip svg { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 0.1rem; color: var(--bb-color-teal-700); }
+.service-guide__safety-strip p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.9rem; font-weight: 400; line-height: 1.6; }
+.service-guide__safety-strip strong { color: var(--bb-color-ink-950); font-weight: 800; }
 
 /* ---------- Process ---------- */
 .service-guide__process {
   padding: clamp(1.75rem, 3.5vw, 2.75rem);
-  border-radius: var(--redesign-radius-card);
-  background: var(--redesign-ink);
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-ink-950);
+  border: 1px solid var(--bb-color-border-subtle);
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
   gap: clamp(1.75rem, 4vw, 3rem);
@@ -423,11 +492,14 @@
 .service-guide__process-text h2 {
   margin: 0 0 0.85rem;
   color: #fff;
-  text-transform: uppercase;
-  font: 800 clamp(1.7rem, 3vw, 2.3rem) / 1.15 var(--font-heading);
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1.15;
 }
-.service-guide__process-text h2 .title-accent { color: var(--redesign-accent); }
-.service-guide__process-text > p { margin: 0 0 1.5rem; color: rgba(255, 255, 255, 0.68); font: 400 0.95rem / 1.6 var(--font-body); max-width: 40ch; }
+.service-guide__process-text h2 .title-accent,
+.service-guide__process-text h2 .bb-accent { color: var(--bb-color-teal-500); }
+.service-guide__process-text > p { margin: 0 0 1.5rem; color: rgba(255, 255, 255, 0.68); font-family: var(--bb-font-sans); font-size: 0.95rem; font-weight: 400; line-height: 1.6; max-width: 40ch; }
 .service-guide__process-steps { display: flex; flex-direction: column; gap: 1.1rem; }
 .service-guide__process-step { display: flex; gap: 1rem; align-items: flex-start; }
 .service-guide__process-num {
@@ -438,12 +510,14 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(36, 150, 160, 0.18);
-  color: var(--redesign-accent);
-  font: 800 0.82rem var(--font-body);
+  background: rgba(240, 149, 5, 0.15);
+  color: var(--bb-color-amber-500);
+  font-family: var(--bb-font-sans);
+  font-size: 0.82rem;
+  font-weight: 800;
 }
-.service-guide__process-step h3 { margin: 0 0 0.2rem; color: #fff; font: 700 0.95rem var(--font-body); }
-.service-guide__process-step p { margin: 0; color: rgba(255, 255, 255, 0.6); font: 400 0.85rem / 1.5 var(--font-body); }
+.service-guide__process-step h3 { margin: 0 0 0.2rem; color: #fff; font-family: var(--bb-font-sans); font-size: 0.95rem; font-weight: 700; }
+.service-guide__process-step p { margin: 0; color: rgba(255, 255, 255, 0.6); font-family: var(--bb-font-sans); font-size: 0.85rem; font-weight: 400; line-height: 1.5; }
 
 /* ---------- Closing CTA ---------- */
 .service-guide__closing {
@@ -453,11 +527,12 @@
   align-items: center;
   justify-content: space-between;
   padding: clamp(1.75rem, 3.5vw, 2.5rem);
-  border-radius: var(--redesign-radius-card);
-  background: var(--redesign-ink);
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-ink-950);
+  border: 1px solid var(--bb-color-border-subtle);
 }
-.service-guide__closing h2 { margin: 0 0 0.5rem; color: #fff; font: 800 clamp(1.4rem, 2.4vw, 1.85rem) / 1.2 var(--font-heading); }
-.service-guide__closing p { margin: 0; max-width: 46ch; color: rgba(255, 255, 255, 0.68); font: 400 0.92rem / 1.6 var(--font-body); }
+.service-guide__closing h2 { margin: 0 0 0.5rem; color: #fff; font-family: var(--bb-font-display); font-size: clamp(1.4rem, 2.4vw, 1.85rem); font-weight: 800; line-height: 1.2; }
+.service-guide__closing p { margin: 0; max-width: 46ch; color: rgba(255, 255, 255, 0.68); font-family: var(--bb-font-sans); font-size: 0.92rem; font-weight: 400; line-height: 1.6; }
 .service-guide__closing .service-guide__actions { margin-bottom: 0; flex-wrap: nowrap; }
 
 /* ---------- Responsive ---------- */
@@ -485,53 +560,45 @@
   .service-guide__closing .service-guide__btn { flex: 1 1 auto; justify-content: center; }
 }
 
-/* ---------- Prose highlight card ----------
-   For a short block of flowing prose (no discrete list items) that still
-   needs to read as "worth pausing on" — a lighter-weight alternative to a
-   full dark panel. Introduced for Oljebyte's "Varför är oljebyte viktigt?". */
+/* ---------- Prose highlight card ---------- */
 .service-guide__intro-content > .service-guide__prose-card,
 .service-guide__intro-content > .service-guide__tip-strip { margin-top: 1.5rem; }
 .service-guide__prose-card {
   padding: clamp(1.5rem, 3vw, 2rem);
-  border-radius: var(--redesign-radius-card);
-  background: rgba(36, 150, 160, 0.06);
-  border-left: 3px solid var(--redesign-accent);
+  border-radius: var(--bb-radius-card);
+  background: rgba(13, 148, 136, 0.06);
+  border-left: 3px solid var(--bb-color-teal-500);
 }
-.service-guide__prose-card h3 { margin: 0 0 0.6rem; color: var(--redesign-ink); font: 800 1.05rem / 1.3 var(--font-heading); }
-.service-guide__prose-card p { margin: 0; color: #556266; font: 400 0.94rem / 1.65 var(--font-body); }
+.service-guide__prose-card h3 { margin: 0 0 0.6rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
+.service-guide__prose-card p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.94rem; font-weight: 400; line-height: 1.65; }
 .service-guide__prose-card p + p { margin-top: 0.85rem; }
 
-/* ---------- Topic block ----------
-   A repeatable "deep-dive" pattern for content-heavy pages: a heading +
-   intro, a card grid of N items (2/3/4 columns via modifier), optional
-   closing prose. Introduced for Oljebyte's viscosity/standards/oil-type/
-   ageing/misconceptions sections. Alternates surface tone between
-   instances via --alt for rhythm, matching the light/white section
-   alternation the rest of the template already uses. */
+/* ---------- Topic block ---------- */
 .service-guide__topic-block { padding-block: clamp(2.5rem, 5vw, 3.75rem); }
-.service-guide__topic-block--alt { background: var(--redesign-surface); }
+.service-guide__topic-block--alt { background: var(--bb-color-surface); }
 .service-guide__topic-header { margin-bottom: clamp(1.5rem, 3vw, 2rem); max-width: 68ch; }
-.service-guide__topic-header h2 { margin: 0 0 0.6rem; color: var(--redesign-ink); font: 800 clamp(1.5rem, 2.6vw, 2rem) / 1.2 var(--font-heading); }
-.service-guide__topic-header p { margin: 0; color: #556266; font: 400 0.96rem / 1.65 var(--font-body); }
+.service-guide__topic-header h2 { margin: 0 0 0.6rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; line-height: 1.2; }
+.service-guide__topic-header p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.96rem; font-weight: 400; line-height: 1.65; }
 .service-guide__topic-grid { display: grid; gap: 1rem; margin-bottom: 1.25rem; }
 .service-guide__topic-grid--cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .service-guide__topic-grid--cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .service-guide__topic-grid--cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .service-guide__topic-card {
   padding: clamp(1.1rem, 2.2vw, 1.5rem);
-  border-radius: 20px;
-  background: var(--redesign-surface);
-  border: 1px solid rgba(16, 22, 24, 0.08);
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-surface);
+  border: 1px solid var(--bb-color-border-subtle);
+  box-shadow: var(--bb-shadow-card);
 }
-.service-guide__topic-block--alt .service-guide__topic-card { background: var(--redesign-page); }
-.service-guide__topic-card h3 { margin: 0 0 0.5rem; color: var(--redesign-accent-dark); font: 800 0.95rem / 1.3 var(--font-heading); }
-.service-guide__topic-card p { margin: 0; color: #556266; font: 400 0.88rem / 1.55 var(--font-body); }
+.service-guide__topic-block--alt .service-guide__topic-card { background: var(--bb-color-page); }
+.service-guide__topic-card h3 { margin: 0 0 0.5rem; color: var(--bb-color-teal-700); font-family: var(--bb-font-display); font-size: 0.95rem; font-weight: 800; line-height: 1.3; }
+.service-guide__topic-card p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.88rem; font-weight: 400; line-height: 1.55; }
 .service-guide__topic-prose { max-width: 72ch; }
 .service-guide__topic-prose--spaced { margin-top: 2rem; }
-.service-guide__topic-prose h3 { margin: 0 0 0.6rem; color: var(--redesign-ink); font: 800 1.15rem / 1.3 var(--font-heading); }
-.service-guide__topic-prose p { margin: 0 0 0.9rem; color: #556266; font: 400 0.95rem / 1.65 var(--font-body); }
+.service-guide__topic-prose h3 { margin: 0 0 0.6rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 1.15rem; font-weight: 800; line-height: 1.3; }
+.service-guide__topic-prose p { margin: 0 0 0.9rem; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.95rem; font-weight: 400; line-height: 1.65; }
 .service-guide__topic-prose p:last-child { margin-bottom: 0; }
-.service-guide__topic-note { max-width: 72ch; margin-top: 1rem; color: var(--redesign-accent-dark); font: 700 0.9rem / 1.5 var(--font-body); }
+.service-guide__topic-note { max-width: 72ch; margin-top: 1rem; color: var(--bb-color-teal-800); font-family: var(--bb-font-sans); font-size: 0.9rem; font-weight: 700; line-height: 1.5; }
 @media (max-width: 1024px) {
   .service-guide__topic-grid--cols-3,
   .service-guide__topic-grid--cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -540,4 +607,8 @@
   .service-guide__topic-grid--cols-2,
   .service-guide__topic-grid--cols-3,
   .service-guide__topic-grid--cols-4 { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-guide *, .service-guide *::before, .service-guide *::after { transition-duration: 0.01ms !important; }
 }

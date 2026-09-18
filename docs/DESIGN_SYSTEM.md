@@ -119,6 +119,18 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
 - **`.bb-card-arrow`** — the ember bottom-right "go to" arrow that sits inside a `.bb-card--photo`.
 - **`.bb-card--glass`** — translucent glass panel for a list/detail block on a dark photo band.
 - **`.bb-icon-badge`, `.bb-icon-bare`** — two real icon treatments now (a third, a pale full circle behind a process-step icon, was tried on Landing and explicitly removed 2026-09-18 — do not reintroduce it as a shared pattern). `.bb-icon-badge` is ember-tinted rounded-square (ember is the accent color for icons site-wide now, not teal); `.bb-icon-bare` is a bare glyph with a drop-shadow for legibility, for an icon floating directly on a busy/dark background with nothing behind it.
+- **`.bb-trust-row`** — 3-pillar hero trust pattern (*Personlig service*, *Erfarna mekaniker*, *Tryggt och enkelt*), containing `.bb-trust-row__item`, `.bb-icon-bare`, and `.bb-trust-row__text` (`<b>` + `<small>`). Stacks to 1 column on mobile (<=650px).
+- **`.bb-process-grid`** — 5-step workshop protocol process layout (`<ol className="bb-process-grid">`), number `01` above `.bb-icon-bare`, with glowing amber connector line (`li::after`) across steps. Wraps cleanly to 3 columns on tablet and 2 columns on mobile.
+- **`.bb-promo-card`** — dark cross-sell / promo banner card (`linear-gradient(135deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%)`), containing `.bb-promo-card__copy` (`.bb-eyebrow--dark` + `h3`) and `.bb-btn--teal`. Stacks on mobile (<=640px).
+- **`.bb-card--trust`** — light surface reassurance card (`background: var(--bb-color-surface, #fff)` with `var(--bb-shadow-card)`), containing `.bb-card--trust__icon`, `.bb-card--trust__text` (display `h3` + `.bb-lead`), and action buttons. Stacks on mobile (<=640px).
+- **`.bb-hero` system** — standardized full-bleed hero layout from Landing (`.bb-hero`, `.bb-hero__media`, `.bb-hero__shade`, `.bb-hero__content`, `.bb-hero__copy`, `.bb-hero__actions`, `.bb-hero__bottom`). Governed by tokens `--bb-hero-min-height` (`clamp(700px, 58vw, 850px)`), `--bb-hero-min-height-mobile` (`780px`), `--bb-hero-copy-max-width` (`540px`), and canonical dual-layer scrim overlay (`90deg` dark-to-translucent ink + `0deg` bottom-to-top vignette). Stacks to single column with adjusted padding on mobile (<=650px). **Scope**: applies strictly to new independent pages disconnected from `index.css` (Landing, Bilservice, and future rebuilt standalone pages).
+
+**Harmonization & Site-wide Decisions (2026-09-18, confirmed by Magnus)**:
+1. *Canvas*: Landing's `--bb-color-page: #f8f7f3` is the generic site-wide rule (replacing Bilservice's one-off `#f5f3ee`).
+2. *Dark Palette*: Canonical Ink (`--bb-color-ink-950: #071416`, `--bb-color-ink-900: #0d1f22`, etc.) site-wide (eliminating Bilservice's petrol drift `#07181c`, `#0a2429`).
+3. *Process Layout*: Landing's process step layout is the canonical standard (number above `.bb-icon-bare`, glowing horizontal amber connector line).
+4. *Hero System*: Landing's hero geometry, dual scrim overlay, typography, and bottom anchor layout are the canonical standard for all full-bleed heroes on independent pages.
+Both Landing (`/`) and Bilservice (`/service-reparationer`) now actively consume these shared patterns and tokens, with redundant local rules pruned.
 
 **Open, deliberately paused (2026-09-18)**: Magnus flagged that cards and possibly buttons read "too rounded." Not yet resolved — see "Radius tokens: what's safe to tune vs. already live" below before touching any radius token.
 

@@ -4,8 +4,10 @@
 // Reuse ServiceGuideTemplate.css for future rebuilds; do not fork its classes
 // into another colocated file, and do not add rules for this page to index.css.
 import { useEffect, useState } from 'react'
-import { Header } from '../components/layout/Header'
-import { Footer } from '../components/layout/Footer'
+import '../styles/design-tokens.css'
+import '../styles/shared-elements.css'
+import { PublicHeader } from '../components/layout/PublicHeader'
+import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -95,30 +97,30 @@ export default function KopplingPage() {
 
   return (
     <>
-      <Header onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openModal} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="koppling-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
-                <div className="service-guide__eyebrow">Kraftöverföring &amp; drivlina</div>
-                <h1 className="service-guide__title" id="koppling-title">
-                  KOPPLING <span className="title-accent">NÄR</span><br />
-                  KRAFTEN BEHÖVER<br />
-                  NÅ HJULEN
+                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Kraftöverföring &amp; drivlina</div>
+                <h1 className="bb-h1 service-guide__title" id="koppling-title">
+                  Koppling <span className="bb-accent">när</span><br />
+                  kraften behöver<br />
+                  nå hjulen
                 </h1>
-                <p className="service-guide__lead">
+                <p className="bb-lead bb-lead--dark service-guide__lead">
                   Kopplingen överför kraften mellan motorn och växellådan och gör att du kan växla utan att motorn stannar eller rycker till. Den är en slitdel, och att den till slut behöver bytas är en förväntad del av bilens underhåll.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="service-guide__btn service-guide__btn--primary">Boka tid</button>
-                  <a href="tel:0705533395" className="service-guide__btn service-guide__btn--outline"><PhoneIcon />Ring 070-553 33 95</a>
+                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
                     <div className="service-guide__trust-item" key={title}>
-                      <Icon className="service-guide__trust-icon" aria-hidden="true" />
+                      <Icon className="bb-icon-bare service-guide__trust-icon" aria-hidden="true" />
                       <div><h3>{title}</h3><p>{text}</p></div>
                     </div>
                   ))}
@@ -138,7 +140,7 @@ export default function KopplingPage() {
 
         {/* Vad är en koppling? */}
         <section className="service-guide__section" aria-labelledby="koppling-intro-title">
-          <div className="service-guide__container service-guide__intro-layout">
+          <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
               <picture><source srcSet={componentsWebp} type="image/webp" /><img src={componentsJpg} alt="Kopplingssats med lamell, tryckplatta och svänghjul på en arbetsbänk" loading="lazy" /></picture>
               <p className="service-guide__intro-caption">Samma kraft. En mjukare resa.</p>
@@ -160,7 +162,7 @@ export default function KopplingPage() {
                   <strong>Osäker på vad som gäller för din bil?</strong>
                   <span>Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar.</span>
                 </div>
-                <a href="/felsokning" className="service-guide__btn service-guide__btn--primary">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
+                <a href="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
               </div>
             </div>
           </div>
@@ -168,7 +170,7 @@ export default function KopplingPage() {
 
         {/* Varför är det viktigt att åtgärda i tid? */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="koppling-importance-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__importance">
               <div>
                 <h2 id="koppling-importance-title">Varför är det viktigt att åtgärda i tid?</h2>
@@ -189,7 +191,7 @@ export default function KopplingPage() {
 
         {/* Tecken på att kopplingen behöver ses över */}
         <section className="service-guide__section" aria-labelledby="koppling-symptoms-title">
-          <div className="service-guide__container service-guide__symptoms-layout">
+          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
             <div className="service-guide__symptoms-content">
               <h2 id="koppling-symptoms-title">Tecken på att kopplingen behöver ses över</h2>
               <p>Du behöver inte själv avgöra exakt vilken del som är problemet. De här signalerna är skäl att låta oss bedöma bilen.</p>
@@ -211,7 +213,7 @@ export default function KopplingPage() {
 
         {/* Det här kan vi hjälpa dig med */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="koppling-service-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__service-card">
               <div>
                 <h2 id="koppling-service-title">Det här kan vi hjälpa dig med</h2>
@@ -226,7 +228,7 @@ export default function KopplingPage() {
 
         {/* Mer info */}
         <section className="service-guide__section" aria-labelledby="koppling-info-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__info-heading">
               <h2 id="koppling-info-title">Mer info</h2>
               <p>Här finns generella riktvärden som kan hjälpa dig att förstå omfattningen. Vi bedömer alltid din bil utifrån dess faktiska skick.</p>
@@ -248,12 +250,12 @@ export default function KopplingPage() {
 
         {/* Så går det till hos oss */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="koppling-process-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__process">
               <div className="service-guide__process-text">
-                <h2 id="koppling-process-title">SÅ GÅR DET TILL<br /><span className="title-accent">HOS OSS</span></h2>
+                <h2 id="koppling-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför ett större drivlinearbete ibland behöver ta lite tid.</p>
-                <a href="tel:0705533395" className="service-guide__btn service-guide__btn--primary"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -271,22 +273,22 @@ export default function KopplingPage() {
 
         {/* Closing CTA */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="koppling-booking-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__closing">
               <div>
                 <h2 id="koppling-booking-title">Boka kopplingskontroll</h2>
                 <p>Priset beror på bilmodell, vilket typ av kopplingssats som krävs och om svänghjulet behöver bytas samtidigt. Ring oss på 070-553 33 95 för en tydlig prisuppgift innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="service-guide__btn service-guide__btn--primary">Boka tid</button>
-                <a href="tel:0705533395" className="service-guide__btn service-guide__btn--outline">Ring 070-553 33 95</a>
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
               </div>
             </div>
           </div>
         </section>
       </main>
       <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <Footer />
+      <PublicFooter onBookingClick={openModal} />
     </>
   )
 }

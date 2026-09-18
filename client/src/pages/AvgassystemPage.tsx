@@ -2,8 +2,10 @@
 // /koppling — this is the second page proving the template is reusable, not
 // a second design. No dependency on any page-specific rule in index.css.
 import { useEffect, useState } from 'react'
-import { Header } from '../components/layout/Header'
-import { Footer } from '../components/layout/Footer'
+import '../styles/design-tokens.css'
+import '../styles/shared-elements.css'
+import { PublicHeader } from '../components/layout/PublicHeader'
+import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -102,30 +104,30 @@ export default function AvgassystemPage() {
 
   return (
     <>
-      <Header onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openModal} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="exhaust-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
-                <div className="service-guide__eyebrow">Avgasrening &amp; ljuddämpning</div>
-                <h1 className="service-guide__title" id="exhaust-title">
-                  AVGASSYSTEM<br />
-                  FÖR TYST GÅNG<br />
-                  OCH <span className="title-accent">REN</span> MOTOR
+                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Avgasrening &amp; ljuddämpning</div>
+                <h1 className="bb-h1 service-guide__title" id="exhaust-title">
+                  Avgassystem<br />
+                  för tyst gång<br />
+                  och <span className="bb-accent">ren</span> motor
                 </h1>
-                <p className="service-guide__lead">
+                <p className="bb-lead bb-lead--dark service-guide__lead">
                   Avgassystemet renar utsläpp, dämpar motorljudet och säkerställer att motorns sensorer styr förbränningen optimalt. Vi lokaliserar läckage, byter ljuddämpare och felsöker lambdasonder och katalysatorer.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="service-guide__btn service-guide__btn--primary">Boka tid</button>
-                  <a href="tel:0705533395" className="service-guide__btn service-guide__btn--outline"><PhoneIcon />Ring 070-553 33 95</a>
+                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
                     <div className="service-guide__trust-item" key={title}>
-                      <Icon className="service-guide__trust-icon" aria-hidden="true" />
+                      <Icon className="bb-icon-bare service-guide__trust-icon" aria-hidden="true" />
                       <div><h3>{title}</h3><p>{text}</p></div>
                     </div>
                   ))}
@@ -145,7 +147,7 @@ export default function AvgassystemPage() {
 
         {/* Vad gör avgassystemet? */}
         <section className="service-guide__section" aria-labelledby="exhaust-intro-title">
-          <div className="service-guide__container service-guide__intro-layout">
+          <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
               <MediaPlaceholder label="Avgassystemets komponenter" note="Bild kommer" light />
               <p className="service-guide__intro-caption">Rent, tyst och lagligt.</p>
@@ -167,7 +169,7 @@ export default function AvgassystemPage() {
                   <strong>Osäker på vad som gäller för din bil?</strong>
                   <span>Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar.</span>
                 </div>
-                <a href="/felsokning" className="service-guide__btn service-guide__btn--primary">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
+                <a href="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
               </div>
             </div>
           </div>
@@ -175,7 +177,7 @@ export default function AvgassystemPage() {
 
         {/* Varför är det viktigt att åtgärda i tid? */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="exhaust-importance-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__importance">
               <div>
                 <h2 id="exhaust-importance-title">Varför är det viktigt att åtgärda i tid?</h2>
@@ -196,7 +198,7 @@ export default function AvgassystemPage() {
 
         {/* Tecken på fel i avgassystemet */}
         <section className="service-guide__section" aria-labelledby="exhaust-symptoms-title">
-          <div className="service-guide__container service-guide__symptoms-layout">
+          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
             <div className="service-guide__symptoms-content">
               <h2 id="exhaust-symptoms-title">Tecken på fel i avgassystemet</h2>
               <p>Ett skadat eller läckande avgassystem märks oftast tydligt på ljudnivån, lukten eller via bilens varningslampor. Här är de vanligaste tecknen du bör vara uppmärksam på.</p>
@@ -218,7 +220,7 @@ export default function AvgassystemPage() {
 
         {/* Det här kan vi hjälpa dig med */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="exhaust-service-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__service-card">
               <div>
                 <h2 id="exhaust-service-title">Det här kan vi hjälpa dig med</h2>
@@ -233,7 +235,7 @@ export default function AvgassystemPage() {
 
         {/* Mer info */}
         <section className="service-guide__section" aria-labelledby="exhaust-info-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__info-heading">
               <h2 id="exhaust-info-title">Viktig information om avgassystem</h2>
               <p>Här är praktiska riktlinjer och fakta kring avgassystemets funktion och åtgärder. Vi undersöker alltid bilens faktiska skick innan vi föreslår reservdelsbyten.</p>
@@ -258,12 +260,12 @@ export default function AvgassystemPage() {
 
         {/* Så går det till hos oss */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="exhaust-process-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__process">
               <div className="service-guide__process-text">
-                <h2 id="exhaust-process-title">SÅ GÅR DET TILL<br /><span className="title-accent">HOS OSS</span></h2>
+                <h2 id="exhaust-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att laga eller byta delar i avgassystemet kräver noggrann täthetskontroll och rätt upphängningar. Så här ser vår process ut.</p>
-                <a href="tel:0705533395" className="service-guide__btn service-guide__btn--primary"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -281,22 +283,22 @@ export default function AvgassystemPage() {
 
         {/* Closing CTA */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="exhaust-booking-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__closing">
               <div>
                 <h2 id="exhaust-booking-title">Boka reparation av avgassystem</h2>
                 <p>Priset beror helt på vilken del av avgassystemet som behöver åtgärdas — ett byte av en bakre ljuddämpare skiljer sig från byte av lambdasond eller katalysator. Ring oss på 070-553 33 95 så ger vi dig ett tydligt och transparent kostnadsförslag innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="service-guide__btn service-guide__btn--primary">Boka tid</button>
-                <a href="tel:0705533395" className="service-guide__btn service-guide__btn--outline">Ring 070-553 33 95</a>
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
               </div>
             </div>
           </div>
         </section>
       </main>
       <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <Footer />
+      <PublicFooter onBookingClick={openModal} />
     </>
   )
 }

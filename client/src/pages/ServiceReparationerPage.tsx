@@ -8,7 +8,7 @@
 // Real photography is not supplied yet; every image position below is an
 // intentional, clearly-labelled placeholder (data-image-slot) sized to the
 // final photo's geometry so it can be dropped in later with no layout change.
-import { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
@@ -85,29 +85,39 @@ export default function ServiceReparationerPage() {
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="solid" />
       <main className="bilservice">
         {/* Hero */}
-        <section className="bilservice__hero" id="bilservice" aria-labelledby="bilservice-hero-title">
-          <ImageSlot id="bilservice-hero-car" label="Bild — Bilservice hero, färdig bil" tone="dark" className="bilservice__hero-media" />
-          <div className="bilservice__hero-inner">
-            <div className="bilservice__hero-content">
-              <div className="bilservice__eyebrow">Din bilverkstad i Brynäs, Gävle</div>
-              <h1 className="bilservice__hero-title" id="bilservice-hero-title">
-                Din bil<br /><span className="bilservice__accent">förtjänar</span><br />det bästa
+        <section className="bb-hero" id="bilservice" aria-labelledby="bilservice-hero-title">
+          <div className="bb-hero__media" aria-hidden="true">
+            <ImageSlot id="bilservice-hero-car" label="Bild — Bilservice hero, färdig bil" tone="dark" className="bilservice__hero-slot" />
+          </div>
+          <div className="bb-hero__shade" aria-hidden="true" />
+          <PublicHeader onBookingClick={openModal} variant="overlay" />
+          <div className="bb-wrap bb-hero__content">
+            <div className="bb-hero__copy">
+              <p className="bb-eyebrow bb-eyebrow--dark">Din bilverkstad i Brynäs, Gävle</p>
+              <h1 className="bb-h1" id="bilservice-hero-title">
+                <span>Din bil</span>
+                <span className="bb-accent">förtjänar</span>
+                <span>det bästa</span>
               </h1>
-              <p className="bilservice__hero-lead">
+              <p>
                 Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation — för alla bilmärken, till konkurrenskraftiga priser.
               </p>
-              <div className="bilservice__actions">
-                <button type="button" onClick={openModal} className="bilservice__btn bilservice__btn--primary">Boka tid</button>
-                <a href="tel:0705533395" className="bilservice__btn bilservice__btn--outline"><PhoneIcon aria-hidden="true" /><span>Ring oss nu</span></a>
+              <div className="bb-hero__actions">
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">Boka tid</button>
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring oss nu</span></a>
               </div>
-              <div className="bilservice__hero-trust">
+            </div>
+            <div className="bb-hero__bottom">
+              <div className="bb-trust-row">
                 {trustRow.map(({ icon: Icon, title, text }) => (
-                  <div className="bilservice__hero-trust-item" key={title}>
-                    <span className="bilservice__hero-trust-badge"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
+                  <div className="bb-trust-row__item" key={title}>
+                    <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
+                    <span className="bb-trust-row__text">
+                      <b>{title}</b>
+                      <small>{text}</small>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -117,13 +127,13 @@ export default function ServiceReparationerPage() {
 
         {/* Vad kostar en bilservice? */}
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="bilservice-price-title">
-          <div className="bilservice__container bilservice__split">
+          <div className="bb-wrap bilservice__container bilservice__split">
             <div>
-              <h2 className="bilservice__price-heading" id="bilservice-price-title">Vad kostar en <span className="bilservice__accent">bilservice</span>?</h2>
-              <p className="bilservice__price-text">Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
+              <h2 className="bilservice__price-heading bb-h2" id="bilservice-price-title">Vad kostar en <span className="bb-accent">bilservice</span>?</h2>
+              <p className="bilservice__price-text bb-lead">Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
               <div className="bilservice__actions">
-                <button type="button" onClick={openModal} className="bilservice__btn bilservice__btn--primary">Boka tid för bilservice</button>
-                <a href="tel:0705533395" className="bilservice__btn bilservice__btn--outline">Ring 070-553 33 95</a>
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka tid för bilservice</button>
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember">Ring 070-553 33 95</a>
               </div>
             </div>
             <ImageSlot id="bilservice-servicebook-keys" label="Bild — Servicebok och bilnyckel" className="bilservice__split-media--right bilservice__image-slot--ar-16-9 bilservice__image-slot--radius-lg" />
@@ -132,19 +142,19 @@ export default function ServiceReparationerPage() {
 
         {/* Varför är bilservice viktigt? */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="bilservice-why-title">
-          <div className="bilservice__container">
+          <div className="bb-wrap bilservice__container">
             <div className="bilservice__intro">
-              <h2 id="bilservice-why-title">Varför är bilservice viktigt?</h2>
-              <p>Ett regelbundet serviceprogram är avgörande för flera skäl.</p>
+              <h2 className="bb-h2" id="bilservice-why-title">Varför är bilservice viktigt?</h2>
+              <p className="bb-lead">Ett regelbundet serviceprogram är avgörande för flera skäl.</p>
             </div>
             <div className="bilservice__value-grid">
               {serviceBenefits.map((benefit) => (
                 <article className="bilservice__value-card" key={benefit.title}>
                   <ImageSlot id={`bilservice-value-${benefit.title.toLowerCase()}`} label={`Bild — ${benefit.title}`} className="bilservice__image-slot--ar-4-3" />
                   <div className="bilservice__value-body">
-                    <span className="bilservice__value-icon"><benefit.icon aria-hidden="true" /></span>
+                    <span className="bb-icon-badge"><benefit.icon aria-hidden="true" /></span>
                     <h3>{benefit.title}</h3>
-                    <p>{benefit.description}</p>
+                    <p className="bb-lead--dark">{benefit.description}</p>
                   </div>
                 </article>
               ))}
@@ -154,10 +164,10 @@ export default function ServiceReparationerPage() {
 
         {/* Vilken service behöver din bil? */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="bilservice-levels-title">
-          <div className="bilservice__container">
+          <div className="bb-wrap bilservice__container">
             <div className="bilservice__intro">
-              <h2 id="bilservice-levels-title">Vilken service behöver din bil?</h2>
-              <p>Exakt vad som ingår styrs av tillverkarens rekommenderade intervall för just din bilmodell, men de flesta verkstäder – oss inkluderade – delar in service i tre nivåer.</p>
+              <h2 className="bb-h2" id="bilservice-levels-title">Vilken service behöver din bil?</h2>
+              <p className="bb-lead">Exakt vad som ingår styrs av tillverkarens rekommenderade intervall för just din bilmodell, men de flesta verkstäder – oss inkluderade – delar in service i tre nivåer.</p>
             </div>
             <div className="bilservice__levels-grid">
               {serviceLevels.map((level, index) => (
@@ -177,10 +187,10 @@ export default function ServiceReparationerPage() {
 
         {/* Mer än bara service */}
         <section className="bilservice__section--aqua" aria-labelledby="bilservice-more-title">
-          <div className="bilservice__container" style={{ paddingBlock: 'clamp(3rem, 5vw, 4rem)' }}>
+          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(3rem, 5vw, 4rem)' }}>
             <div className="bilservice__bridge">
-              <h2 id="bilservice-more-title">Mer än bara service</h2>
-              <p>
+              <h2 className="bb-h2" id="bilservice-more-title">Mer än bara service</h2>
+              <p className="bb-lead">
                 Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – <a href="/ac-service">AC-service</a>, <a href="/biltjanster#felsokning-diagnostik">diagnostik när en varningslampa lyser</a>, och <a href="/dackservice">däckhotell</a> om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med <a href="/bilar-till-salu">försäljning av begagnade bilar</a> och <a href="/bargning">transport av fordon</a>.
               </p>
             </div>
@@ -189,53 +199,50 @@ export default function ServiceReparationerPage() {
 
         {/* Så går det till hos oss */}
         <section className="bilservice__section bilservice__section--dark" aria-labelledby="bilservice-process-title">
-          <div className="bilservice__container bilservice__process">
+          <div className="bb-wrap bilservice__container bilservice__process">
             <div className="bilservice__process-text">
-              <h2 className="bilservice__process-heading" id="bilservice-process-title">Så går det till<br /><span className="bilservice__accent">hos oss</span></h2>
-              <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
-              <a href="tel:0705533395" className="bilservice__btn bilservice__btn--primary"><PhoneIcon aria-hidden="true" /><span>Ring oss: 070-553 33 95</span></a>
+              <h2 className="bilservice__process-heading bb-h2" id="bilservice-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
+              <p className="bb-lead--dark">Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
+              <a href="tel:0705533395" className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring oss: 070-553 33 95</span></a>
             </div>
-            <div className="bilservice__process-steps">
-              {processSteps.map((step, index) => (
-                <Fragment key={step.num}>
-                  {index > 0 && <span className="bilservice__process-arrow" aria-hidden="true"><ArrowRightIcon /></span>}
-                  <div className="bilservice__process-step">
-                    <span className="bilservice__process-icon"><step.icon aria-hidden="true" /></span>
-                    <span className="bilservice__process-num" aria-hidden="true">{step.num}</span>
-                    <h3>{step.title}</h3>
-                    <p>{step.desc}</p>
-                  </div>
-                </Fragment>
+            <ol className="bb-process-grid">
+              {processSteps.map((step) => (
+                <li key={step.num}>
+                  <b>{step.num}</b>
+                  <span className="bb-icon-bare"><step.icon aria-hidden="true" /></span>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
         {/* Letar du efter en begagnad bil? */}
         <section aria-labelledby="bilservice-cars-title">
-          <div className="bilservice__container" style={{ paddingBlock: 'clamp(1.25rem, 2vw, 1.75rem)' }}>
-            <div className="bilservice__promo">
-              <div>
-                <div className="bilservice__promo-eyebrow">Kvalitetskontrollerade fordon</div>
+          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(1.25rem, 2vw, 1.75rem)' }}>
+            <div className="bb-promo-card">
+              <div className="bb-promo-card__copy">
+                <p className="bb-eyebrow bb-eyebrow--dark">Kvalitetskontrollerade fordon</p>
                 <h3 id="bilservice-cars-title">Letar du efter en begagnad bil?</h3>
               </div>
-              <a href="/bilar-till-salu" className="bilservice__promo-link"><span>Se bilar till salu</span><ArrowRightIcon aria-hidden="true" /></a>
+              <a href="/bilar-till-salu" className="bb-btn bb-btn--teal"><span>Se bilar till salu</span><ArrowRightIcon aria-hidden="true" /></a>
             </div>
           </div>
         </section>
 
         {/* Alltid tydliga besked och ärliga priser */}
         <section aria-labelledby="bilservice-trust-title">
-          <div className="bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem)' }}>
-            <div className="bilservice__trust-card">
-              <span className="bilservice__trust-icon"><ShieldHeartIcon aria-hidden="true" /></span>
-              <div className="bilservice__trust-text">
+          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem)' }}>
+            <div className="bb-card--trust">
+              <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
+              <div className="bb-card--trust__text">
                 <h3 id="bilservice-trust-title">Alltid tydliga besked och ärliga priser</h3>
-                <p>Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
+                <p className="bb-lead">Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openModal} className="bilservice__btn bilservice__btn--primary">Boka tid nu</button>
-                <a href="tel:0705533395" className="bilservice__btn bilservice__btn--outline">Ring: 070-553 33 95</a>
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember">Ring: 070-553 33 95</a>
               </div>
             </div>
           </div>

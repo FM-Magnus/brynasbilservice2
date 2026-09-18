@@ -107,56 +107,64 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 3: Build Om oss & Kontakt as Unique Pages `[NEXT ACTIVE STEP]`
+### Step 3: Build Om oss & Kontakt as Unique Pages `[IN PROGRESS: Kontakt COMPLETE, Om oss PENDING]`
 - **Why this order**: These are the two most-trafficked pages after the landing page, and their content (personal brand story, direct contact/booking) is closest in tone to the landing page's proof already built — but each still needs its own dedicated visual identity and CSS island, not a shared "Style 1" template.
-- **Agent's Job**:
-  - Rebuild `/kontakt` (`ContactPage.tsx` + dedicated `ContactPage.css`, `.contact-page__*`): High-trust contact form (`<ContactFormCard />`), direct phone CTA, Google Maps card, verified hours.
-  - Rebuild `/om-oss` (`AboutPage.tsx` + dedicated `AboutPage.css`, `.about-page__*`): Authentic Maher Basher portrait, company transparency, "15%-regeln" consumer proof, workshop history, `<GalleryTeaserCard />`.
-  - Both pages mount `<PublicHeader />` and `<PublicFooter />`.
+- **Status**:
+  - **`/kontakt` (COMPLETE)**: Rebuilt from scratch (`ContactPage.tsx` + dedicated `ContactPage.css`, `.kontakt-page__*`). Mounted `<PublicHeader />` (overlay) and `<PublicFooter />`, integrated `<ContactFormCard />`, direct phone CTA, Google Maps card, verified hours. Playwright verified across 1440, 768, 390 with $\Delta = 0\text{px}$ overflow.
+  - **`/om-oss` (PENDING - NEXT UNIQUE PAGE)**: Rebuild `AboutPage.tsx` + dedicated `AboutPage.css` (`.omoss-page__*` to avoid legacy collisions). Authentic Maher Basher portrait, company transparency, "15%-regeln" consumer proof, workshop history, `<GalleryTeaserCard />`. Mount `<PublicHeader />` and `<PublicFooter />`.
 - **Your Job (HITL Decision)**:
-  - Test `/kontakt` and `/om-oss` in the browser. Confirm each page's own identity reads well on its own merits.
+  - Test `/kontakt` in the browser. Next up: approve rebuild of `/om-oss`.
 - **Steering Prompt**:
-  > *"Rebuild the Kontakt page (/kontakt) from scratch as its own unique page, using the canonical --bb-* tokens and public shell. Wrap it in PublicHeader and PublicFooter."*
+  > *"Rebuild Om oss (/om-oss) from scratch as its own unique page, using the canonical --bb-* tokens and public shell. Wrap it in PublicHeader and PublicFooter."*
 
 ---
 
-### Step 4: Roll Out the "Bilservice" Family
+### Step 4: Roll Out the "Bilservice" Family `[IN PROGRESS]`
 - **Why this order**: Bilservice (`/service-reparationer`) already has its standalone `.bilservice__*` CSS island. By mounting the new PublicHeader/Footer on Bilservice and aligning its tokens, it becomes the shared identity for the other three service-hub pages.
-- **Agent's Job**:
-  - Mount `<PublicHeader variant="solid" />` and `<PublicFooter />` on `ServiceReparationerPage.tsx`.
+- **Status**:
+  - **`Bilservice` (COMPLETE)**: Parent owner on `--bb-*` tokens and `.bb-hero` layout system, mounts `<PublicHeader />` and `<PublicFooter />`.
+- **Agent's Job (Next in this family)**:
   - Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template with OBD diagnostics focus and symptom selector.
   - Rebuild **`Däckservice`** (`/dackservice`) on the Bilservice family template with tire hotel (däckhotell) focus, legal requirements, and shift booking.
   - Rebuild **`AC-service`** (`/ac-service`) on the Bilservice family template with climate diagnostics, R134a/R1234yf options, and cleaning.
 - **Your Job (HITL Decision)**:
   - Review the service tier cards, pricing tables, and process steps across these 4 pages. Verify that technical wording and pricing caveats are clear.
 - **Steering Prompt**:
-  > *"Mount PublicHeader and PublicFooter on Bilservice, then rebuild Felsökning using Bilservice's shared family template."*
+  > *"Rebuild Felsökning (/felsokning) using Bilservice's shared family template (ServiceReparationerPage.css with .bilservice__* classes)."*
 
 ---
 
-### Step 5: Roll Out the "Guide" Family (All 10 Technical Guides)
-- **Why this order**: `Koppling`, `Avgassystem`, `Oljebyte`, and `Bromssystem` are already rebuilt on `ServiceGuideTemplate.css`. The remaining six guides (`Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, `Drivaxel & drivknutar`) join the **same** template rather than getting a second, separate one — there is no longer a second guide template in this architecture.
-- **Agent's Job**:
-  - Mount `<PublicHeader />` and `<PublicFooter />` on all 10 guide pages.
-  - Ensure `ServiceGuideTemplate.css` consumes `--bb-*` tokens cleanly.
-  - Migrate `Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, and `Drivaxel & drivknutar` onto `ServiceGuideTemplate.css`, following the pattern already proven on the first four.
+### Step 5: Roll Out the "Guide" Family (All 10 Technical Guides) `[IN PROGRESS: 4 PILOTS COMPLETE & SECOND PASS DONE]`
+- **Why this order**: All ten guides share one single template (`ServiceGuideTemplate.css`). The 4 pilot guides (`Koppling`, `Avgassystem`, `Bromssystem`, `Oljebyte`) have proven the template's reusability across standard, dual-accent, and deep-dive content blocks, and have all completed their **Second Pass** (100% canonical Level 0 `--bb-*` tokens, Level 1 `.bb-*` shared elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright verification).
+- **Status**:
+  - **`Koppling` (`/koppling`)**: Complete & Second Pass verified.
+  - **`Avgassystem` (`/avgassystem`)**: Complete & Second Pass verified.
+  - **`Bromssystem` (`/bromssystem`)**: Complete & Second Pass verified.
+  - **`Oljebyte` (`/oljebyte`)**: Complete & Second Pass verified (full-page topic blocks wrapped in `.bb-wrap`).
+- **Agent's Job (Next in this family)**:
+  - Migrate the remaining six guides onto `ServiceGuideTemplate.css` in pairs:
+    1. **`Kamrem`** (`/kamrem`) & **`Bilbatteri`** (`/bilbatteri`)
+    2. **`Stötdämpare & fjädrar`** (`/stodampare-fjadrar`) & **`Hjullagerbyte`** (`/hjullagerbyte`)
+    3. **`Styrning & kulleder`** (`/styrning-kulleder`) & **`Drivaxel & drivknutar`** (`/drivaxel-drivknutar`)
+  - Each guide mounts `<PublicHeader />` and `<PublicFooter />`, consumes `ServiceGuideTemplate.css`, and follows the mixed-case Archivo 800 heading standard.
 - **Your Job (HITL Decision)**:
-  - Check all 10 guide routes. Confirm the menu navigation and footer frame them seamlessly, and that the template holds up across all ten without needing a fork.
+  - Confirm the remaining 6 guides integrate cleanly into the shared template.
 - **Steering Prompt**:
-  > *"Connect PublicHeader and PublicFooter to the Style-3 guide pages already on ServiceGuideTemplate.css, then migrate Kamrem and Bilbatteri onto the same template as the next two."*
+  > *"Migrate Kamrem (/kamrem) and Bilbatteri (/bilbatteri) onto ServiceGuideTemplate.css, mounting PublicHeader and PublicFooter and using canonical tokens."*
 
 ---
 
-### Step 6: Build the Remaining Unique Pages
+### Step 6: Build the Remaining Unique Pages `[IN PROGRESS: Biltjänster COMPLETE]`
 - **Why this order**: `Bärgning`, `Bilar till salu`, `Galleri`, and `Biltjänster` don't share a template with each other or with anything else; each has its own unique UI requirements.
-- **Agent's Job**:
-  - Rebuild **`Bärgning`** (`/bargning`) as its own unique page — towing/transport dispatch focus, direct-call CTA.
+- **Status**:
+  - **`Biltjänster` (`/biltjanster`) (COMPLETE)**: Rebuilt as the service-catalog hub (`BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `<PublicHeader />` and `<PublicFooter />`.
+- **Agent's Job (Next in this group)**:
+  - Rebuild **`Bärgning`** (`/bargning`) as its own unique page (`BargningPage.css`, `.bargning-hub__*` or similar distinct prefix) — towing/transport dispatch focus, direct-call CTA.
   - Rebuild **`Bilar till salu`** (`/bilar-till-salu`) as its own unique page — vehicle spec badges, multi-photo viewer, and inquiry modal.
   - Rebuild **`Galleri`** (`/galleri`) as its own unique page — image-first layout and workshop overview.
-  - Rebuild **`Biltjänster`** (`/biltjanster`) as its own unique page — the service-catalog overview/index that the header's "Våra tjänster" link and the footer both point to.
-  - Mount `<PublicHeader />` and `<PublicFooter />` on all four.
+  - Mount `<PublicHeader />` and `<PublicFooter />` on all three.
 - **Your Job (HITL Decision)**:
-  - Inspect vehicle photos, test the gallery viewer, verify inquiry call-to-actions, and confirm the Biltjänster overview links out to all 10 guides plus the 4 Bilservice-family pages correctly.
+  - Inspect vehicle photos, test the gallery viewer, verify inquiry call-to-actions, and confirm all pages link to the public shell.
 
 ---
 

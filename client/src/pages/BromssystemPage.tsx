@@ -4,8 +4,10 @@
 // for the most safety-critical warning sign, alongside the existing teal
 // --featured modifier. No dependency on any page-specific rule in index.css.
 import { useEffect, useState } from 'react'
-import { Header } from '../components/layout/Header'
-import { Footer } from '../components/layout/Footer'
+import '../styles/design-tokens.css'
+import '../styles/shared-elements.css'
+import { PublicHeader } from '../components/layout/PublicHeader'
+import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -108,30 +110,30 @@ export default function BromssystemPage() {
 
   return (
     <>
-      <Header onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openModal} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="brake-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
-                <div className="service-guide__eyebrow">Bromsservice &amp; säkerhet</div>
-                <h1 className="service-guide__title" id="brake-title">
-                  BROMSSYSTEM<br />
-                  NÄR <span className="title-accent">SÄKERHETEN</span><br />
-                  MÅSTE FUNGERA
+                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Bromsservice &amp; säkerhet</div>
+                <h1 className="bb-h1 service-guide__title" id="brake-title">
+                  Bromssystem<br />
+                  när <span className="bb-accent">säkerheten</span><br />
+                  måste fungera
                 </h1>
-                <p className="service-guide__lead">
+                <p className="bb-lead bb-lead--dark service-guide__lead">
                   Bromsarna är bilens viktigaste säkerhetssystem – helt enkelt det som avgör om du stannar i tid eller inte. Slitna bromsar brukar varna i god tid, men bara om du vet vad du ska lyssna och känna efter.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="service-guide__btn service-guide__btn--primary">Boka bromsservice</button>
-                  <a href="tel:0705533395" className="service-guide__btn service-guide__btn--outline"><PhoneIcon />Ring 070-553 33 95</a>
+                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
+                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
                     <div className="service-guide__trust-item" key={title}>
-                      <Icon className="service-guide__trust-icon" aria-hidden="true" />
+                      <Icon className="bb-icon-bare service-guide__trust-icon" aria-hidden="true" />
                       <div><h3>{title}</h3><p>{text}</p></div>
                     </div>
                   ))}
@@ -151,7 +153,7 @@ export default function BromssystemPage() {
 
         {/* Vad ingår i bromssystemet? */}
         <section className="service-guide__section" aria-labelledby="brake-intro-title">
-          <div className="service-guide__container service-guide__intro-layout">
+          <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
               <MediaPlaceholder label="Bromssystemets komponenter" note="Bild kommer" light />
               <p className="service-guide__intro-caption">Säkra stopp, varje mil räknas.</p>
@@ -173,7 +175,7 @@ export default function BromssystemPage() {
 
         {/* Varför är bromsservice viktigt? */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="brake-importance-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__importance">
               <div>
                 <h2 id="brake-importance-title">Varför är bromsservice viktigt?</h2>
@@ -194,7 +196,7 @@ export default function BromssystemPage() {
 
         {/* Tecken på att bromsarna behöver ses över */}
         <section className="service-guide__section" aria-labelledby="brake-symptoms-title">
-          <div className="service-guide__container service-guide__symptoms-layout">
+          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
             <div className="service-guide__symptoms-content">
               <h2 id="brake-symptoms-title">Tecken på att bromsarna behöver ses över</h2>
               <p>Du behöver inte själv avgöra exakt vad som är fel. De här signalerna är skäl att låta oss kontrollera systemet.</p>
@@ -216,7 +218,7 @@ export default function BromssystemPage() {
 
         {/* Det här kan vi hjälpa dig med */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="brake-service-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__service-card">
               <div>
                 <h2 id="brake-service-title">Det här kan vi hjälpa dig med</h2>
@@ -231,7 +233,7 @@ export default function BromssystemPage() {
 
         {/* Mer info */}
         <section className="service-guide__section" aria-labelledby="brake-info-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__info-heading">
               <h2 id="brake-info-title">Mer info</h2>
               <p>Riktvärden kan skilja mellan bilmodeller, körstil och körmiljö. Vi bedömer alltid din bil utifrån dess faktiska skick.</p>
@@ -253,12 +255,12 @@ export default function BromssystemPage() {
 
         {/* Så går det till hos oss */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="brake-process-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__process">
               <div className="service-guide__process-text">
-                <h2 id="brake-process-title">SÅ GÅR DET TILL<br /><span className="title-accent">HOS OSS</span></h2>
+                <h2 id="brake-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en bromskontroll ibland behöver ta lite tid.</p>
-                <a href="tel:0705533395" className="service-guide__btn service-guide__btn--primary"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -276,22 +278,22 @@ export default function BromssystemPage() {
 
         {/* Closing CTA */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="brake-booking-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__closing">
               <div>
                 <h2 id="brake-booking-title">Boka bromskontroll</h2>
                 <p>Priset beror på vilka delar som behöver bytas. Ring oss på 070-553 33 95 för en tydlig prisuppgift innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="service-guide__btn service-guide__btn--primary">Boka bromsservice</button>
-                <a href="tel:0705533395" className="service-guide__btn service-guide__btn--outline">Ring 070-553 33 95</a>
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
               </div>
             </div>
           </div>
         </section>
       </main>
       <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <Footer />
+      <PublicFooter onBookingClick={openModal} />
     </>
   )
 }

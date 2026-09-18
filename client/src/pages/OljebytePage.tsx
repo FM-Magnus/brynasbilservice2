@@ -5,8 +5,10 @@
 // for the deep-dive viscosity/standards/oil-type/ageing/misconception
 // material, since nothing in Koppling or Avgassystem needed that shape.
 import { useEffect, useState } from 'react'
-import { Header } from '../components/layout/Header'
-import { Footer } from '../components/layout/Footer'
+import '../styles/design-tokens.css'
+import '../styles/shared-elements.css'
+import { PublicHeader } from '../components/layout/PublicHeader'
+import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -104,30 +106,30 @@ export default function OljebytePage() {
 
   return (
     <>
-      <Header onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openModal} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="oljebyte-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
-                <div className="service-guide__eyebrow">Motorolja &amp; motorunderhåll</div>
-                <h1 className="service-guide__title" id="oljebyte-title">
-                  OLJEBYTE<br />
-                  FÖR EN MOTOR<br />
-                  SOM <span className="title-accent">MÅR BRA</span>
+                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Motorolja &amp; motorunderhåll</div>
+                <h1 className="bb-h1 service-guide__title" id="oljebyte-title">
+                  Oljebyte<br />
+                  för en motor<br />
+                  som <span className="bb-accent">mår bra</span>
                 </h1>
-                <p className="service-guide__lead">
+                <p className="bb-lead bb-lead--dark service-guide__lead">
                   Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="service-guide__btn service-guide__btn--primary">Boka oljebyte</button>
-                  <a href="tel:0705533395" className="service-guide__btn service-guide__btn--outline"><PhoneIcon />Ring 070-553 33 95</a>
+                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka oljebyte</button>
+                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
                     <div className="service-guide__trust-item" key={title}>
-                      <Icon className="service-guide__trust-icon" aria-hidden="true" />
+                      <Icon className="bb-icon-bare service-guide__trust-icon" aria-hidden="true" />
                       <div><h3>{title}</h3><p>{text}</p></div>
                     </div>
                   ))}
@@ -147,7 +149,7 @@ export default function OljebytePage() {
 
         {/* Vad är ett oljebyte? */}
         <section className="service-guide__section" aria-labelledby="oljebyte-intro-title">
-          <div className="service-guide__container service-guide__intro-layout">
+          <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
               <picture><source srcSet={funnelWebp} type="image/webp" /><img src={funnelJpg} alt="Ny motorolja hälls i en tratt i motorrummet" loading="lazy" /></picture>
               <p className="service-guide__intro-caption">Rätt olja. Rätt mängd. Varje gång.</p>
@@ -169,7 +171,7 @@ export default function OljebytePage() {
                   <strong>Osäker på vilken olja din bil behöver?</strong>
                   <span>Vi läser av tillverkarens specifikation och väljer rätt viskositet och ACEA-klass åt dig.</span>
                 </div>
-                <a href="/felsokning" className="service-guide__btn service-guide__btn--primary">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
+                <a href="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
               </div>
             </div>
           </div>
@@ -177,7 +179,7 @@ export default function OljebytePage() {
 
         {/* Varför är det viktigt att åtgärda i tid? */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-importance-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__importance">
               <div>
                 <h2 id="oljebyte-importance-title">Fördelar med regelbundna oljebyten</h2>
@@ -198,7 +200,7 @@ export default function OljebytePage() {
 
         {/* Det här kan vi hjälpa dig med (Vad ingår) */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-service-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__service-card">
               <div>
                 <h2 id="oljebyte-service-title">Vad ingår i ett oljebyte hos oss?</h2>
@@ -213,7 +215,7 @@ export default function OljebytePage() {
 
         {/* Mer info divider */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-more-info-title">
-          <div className="service-guide__container service-guide__info-heading">
+          <div className="bb-wrap service-guide__container service-guide__info-heading">
             <h2 id="oljebyte-more-info-title">Mer info</h2>
             <p>Här har vi samlat fördjupande information om motorolja, intervall och vanliga frågor kring oljebyten.</p>
           </div>
@@ -221,7 +223,7 @@ export default function OljebytePage() {
 
         {/* Topic block 1: ageing */}
         <section className="service-guide__topic-block" aria-labelledby="oljebyte-ageing-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-ageing-title">Hur oljan blir sämre med tiden – även om bilen knappt körs</h2>
               <p>Olja som står oöppnad i en dunk åldras i praktiken inte. Det är först när den börjar arbeta i motorn som nedbrytningen startar, och det sker på flera sätt samtidigt:</p>
@@ -242,7 +244,7 @@ export default function OljebytePage() {
 
         {/* Topic block 2: viscosity */}
         <section className="service-guide__topic-block service-guide__topic-block--alt" aria-labelledby="oljebyte-viscosity-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-viscosity-title">Vad betyder egentligen siffrorna på oljedunken?</h2>
               <p>De flesta har sett beteckningar som 5W-30 eller 0W-20 utan att egentligen veta vad de betyder. Det är oljans viskositetsklass enligt SAE-systemet (Society of Automotive Engineers), och den beskriver hur trögflytande oljan är – inte hur bra kvalitet den håller.</p>
@@ -258,7 +260,7 @@ export default function OljebytePage() {
 
         {/* Topic block 3: API/ACEA standards */}
         <section className="service-guide__topic-block" aria-labelledby="oljebyte-standards-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-standards-title">API och ACEA – standarderna som faktiskt styr kvaliteten</h2>
               <p>Det som avgör om en olja verkligen passar din motor är inte viskositeten utan godkännandena bredvid den – API (amerikansk standard) och ACEA (europeisk standard). ACEA-klasserna är särskilt viktiga att förstå:</p>
@@ -274,7 +276,7 @@ export default function OljebytePage() {
 
         {/* Topic block 4: oil types */}
         <section className="service-guide__topic-block service-guide__topic-block--alt" aria-labelledby="oljebyte-types-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-types-title">Mineral-, halvsyntet- och helsyntetolja – vad är egentligen skillnaden?</h2>
               <p>Basoljan – den vätska additiven blandas i – delas in i grupper, och det är här den verkliga skillnaden mellan oljor ligger:</p>
@@ -290,7 +292,7 @@ export default function OljebytePage() {
 
         {/* Topic block 5: misconceptions */}
         <section className="service-guide__topic-block" aria-labelledby="oljebyte-misconceptions-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-misconceptions-title">Vanliga missförstånd om motorolja</h2>
             </div>
@@ -304,12 +306,12 @@ export default function OljebytePage() {
 
         {/* Så går det till hos oss */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-process-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__process">
               <div className="service-guide__process-text">
-                <h2 id="oljebyte-process-title">SÅ GÅR DET TILL<br /><span className="title-accent">HOS OSS</span></h2>
+                <h2 id="oljebyte-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
-                <a href="tel:0705533395" className="service-guide__btn service-guide__btn--primary"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -327,22 +329,22 @@ export default function OljebytePage() {
 
         {/* Closing CTA */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-booking-title">
-          <div className="service-guide__container">
+          <div className="bb-wrap service-guide__container">
             <div className="service-guide__closing">
               <div>
                 <h2 id="oljebyte-booking-title">Boka oljebyte</h2>
                 <p>Ring oss så hjälper vi dig att hitta en tid som passar och ger en tydlig prisuppgift innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="service-guide__btn service-guide__btn--primary">Boka oljebyte</button>
-                <a href="tel:0705533395" className="service-guide__btn service-guide__btn--outline">Ring 070-553 33 95</a>
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka oljebyte</button>
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
               </div>
             </div>
           </div>
         </section>
       </main>
       <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <Footer />
+      <PublicFooter onBookingClick={openModal} />
     </>
   )
 }

@@ -42,7 +42,7 @@ function RouteFallback() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'var(--redesign-page)',
+        background: 'var(--bb-color-page)',
       }}
       aria-busy="true"
       aria-label="Laddar sidan"

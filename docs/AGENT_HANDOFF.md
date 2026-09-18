@@ -25,15 +25,22 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
   - `GoogleReviewsCard` (`GoogleReviewsCard.tsx` + `GoogleReviewsCard.css`): Standalone Google reviews module with verified data, cyclic rotation, and frosted-glass transparent bounding field (`hero-overlay`) with zero layout shift / 0.0px CLS across viewports.
   - `ContactFormCard` (`ContactFormCard.tsx` + `ContactFormCard.css`): Standalone single-source-of-truth contact component (`defaultContactSubjects`) supporting `full-section` and `card-only` variants.
   - All five elements are mounted on Startsidan (`/`), 100% independent of legacy `index.css`.
-- **NEXT ACTIVE ROADMAP TASK**: Step 3 in `HITL_Temporary_roadmap.md` — Rebuilding **`Kontakt`** (`/kontakt`) and **`Om oss`** (`/om-oss`) from scratch as Style 1 (Brand & Conversion Hub), wrapped in `PublicHeader` and `PublicFooter`, using `ContactFormCard` and `GalleryTeaserCard`.
-- Dedicated hero background WebP/JPG pairs implemented across **Om oss** (`/om-oss`), **AC-service** (`/ac-service`), **Bärgning** (`/bargning`), and **Däckservice** (`/dackservice`), each styled via colocated scoped CSS files (`AboutPage.css`, `AcServicePage.css`, `BargningPage.css`, `DackservicePage.css`) using `image-set()` and the standard overlay gradient (`opacity: 0.85`).
-- `/galleri` is a dedicated workshop gallery subpage (`GalleryPage.tsx`) featuring real workshop photos, dark hero, closing CTA, and booking modal.
-- `/om-oss` features Maher Basher intro copy, consumer law proof ("15 procent"), authentic portrait card, and a stylish pill CTA button linking to `/galleri`.
-- `/biltjanster` is the Biltjänster hub headed **“Våra biltjänster”**, with linked summary cards for the current service guides and clearly labelled CSS image placeholders.
-- `/felsokning` is a separate main-navigation destination immediately after Biltjänster, using the established service-page pattern and a future-image placeholder.
-- Raw photos, blue-tone backgrounds and non-photographic layout graphics enter through `_incoming-assets/`. Its README defines the subject-based folders; selected web exports belong strictly in `client/src/assets/images/` and its subdirectories.
-
-For the authoritative current route map and copy/image status, use [`PROJECT_STATUS.md`](PROJECT_STATUS.md).
+- **PROGRESS & CURRENT CONTINUATION (2026-09-18 Antigravity)**:
+  - **Level 0 Public Shell & Canonical Design Tokens**: Completed & locked (`design-tokens.css`, `shared-elements.css`, `PublicHeader`, `PublicFooter`, `GalleryTeaserCard`, `GoogleReviewsCard`, `ContactFormCard`).
+  - **Unique Pages**:
+    - Startsidan (`/`): Complete (`LandingPage.tsx` / `LandingPage.css`, `.landing-v2__*`).
+    - Kontakt (`/kontakt`): Complete (`ContactPage.tsx` / `ContactPage.css`, `.kontakt-page__*`), mounts `PublicHeader` + `PublicFooter` + `ContactFormCard`.
+    - Biltjänster (`/biltjanster`): Complete (`BiltjansterPage.tsx` / `BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter`.
+  - **Bilservice Family (Parent complete)**:
+    - Bilservice (`/service-reparationer`): Complete on `.bb-hero` layout system, `--bb-*` tokens, mounts `PublicHeader` + `PublicFooter`.
+    - Next in family: Rebuild `Felsökning` (`/felsokning`), `Däckservice` (`/dackservice`), `AC-service` (`/ac-service`) on family template.
+  - **Guide Family (4 Pilots complete & Second Pass verified)**:
+    - `Koppling` (`/koppling`), `Avgassystem` (`/avgassystem`), `Bromssystem` (`/bromssystem`), and `Oljebyte` (`/oljebyte`) are fully aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
+    - Next in family: Migrate `Kamrem` (`/kamrem`) & `Bilbatteri` (`/bilbatteri`) onto `ServiceGuideTemplate.css`.
+- **IMMEDIATE NEXT TASKS (Options for user)**:
+  1. **Option A (Step 3)**: Rebuild **`Om oss`** (`/om-oss`) from scratch as unique page (`AboutPage.tsx` + dedicated `AboutPage.css`, `.omoss-page__*`), mounting `PublicHeader` + `PublicFooter` + `GalleryTeaserCard`.
+  2. **Option B (Step 5)**: Migrate **`Kamrem`** (`/kamrem`) & **`Bilbatteri`** (`/bilbatteri`) onto `ServiceGuideTemplate.css`.
+  3. **Option C (Step 4)**: Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template (`ServiceReparationerPage.css`).
 
 ## Authority and references
 

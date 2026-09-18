@@ -36,4 +36,12 @@
   --bb-radius-sm: 8px;
   --bb-radius-md: 14px;
   --bb-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Hero geometry (canonical standard from Landing) */
+  --bb-hero-min-height: clamp(700px, 58vw, 850px);
+  --bb-hero-min-height-mobile: 780px;
+  --bb-hero-copy-max-width: 540px;
+  --bb-hero-padding-top: clamp(7rem, 11vw, 9rem);
+  --bb-hero-padding-bottom: clamp(2rem, 3.5vw, 3.5rem);
+  --bb-hero-padding-top-mobile: 7rem;
+  --bb-hero-padding-bottom-mobile: 1.6rem;
 }

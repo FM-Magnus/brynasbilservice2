@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import '../styles/design-tokens.css'
+import '../styles/shared-elements.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
@@ -10,6 +12,8 @@ import { ClockIcon } from '../components/icons/ClockIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { defaultContactSubjects } from '../components/ui/ContactFormCard'
+import aboutHeroWebp from '../assets/images/about/about-hero-bg.webp'
+import aboutHeroJpg from '../assets/images/about/about-hero-bg.jpg'
 import './ContactPage.css'
 
 function MailIcon({ className }: { className?: string }) {
@@ -56,39 +60,48 @@ export default function ContactPage() {
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="overlay" />
-
       <main className="kontakt-page" id="main-content">
-        <section className="kontakt-page__hero" aria-labelledby="contact-hero-title">
-          <div className="kontakt-page__wrap kontakt-page__hero-content">
-            <p className="kontakt-page__eyebrow">Din lokala bilverkstad i Brynäs, Gävle</p>
-            <h1 className="kontakt-page__title" id="contact-hero-title">
-              <span className="kontakt-page__accent">Hör av dig</span> till Brynäs Bilservice
-            </h1>
-            <p className="kontakt-page__lead">
-              Har du frågor om din bil, behöver rådgivning eller vill skicka en förfrågan? Vår verkstad ligger på Utmarksvägen i Brynäs, Gävle och vi hjälper dig gärna med snabba och raka besked.
-            </p>
-            <p className="kontakt-page__sub">
-              Välj det sätt som passar dig bäst: skicka ett meddelande via formuläret, ring oss direkt eller boka tid via vårt bokningssystem.
-            </p>
-            <div className="kontakt-page__hero-actions">
-              <button type="button" onClick={openModal} className="kontakt-page__btn kontakt-page__btn--primary">
-                <span>Boka tid</span>
-              </button>
-              <a href="tel:0705533395" className="kontakt-page__btn kontakt-page__btn--outline">
-                <PhoneIcon className="kontakt-page__btn-icon" />
-                <span>Ring: 070-553 33 95</span>
-              </a>
+        <section className="bb-hero kontakt-page__hero" aria-labelledby="contact-hero-title">
+          <div className="bb-hero__media" aria-hidden="true">
+            <picture>
+              <source srcSet={aboutHeroWebp} type="image/webp" />
+              <img src={aboutHeroJpg} alt="" />
+            </picture>
+          </div>
+          <div className="bb-hero__shade" aria-hidden="true" />
+          <PublicHeader onBookingClick={openModal} variant="overlay" />
+
+          <div className="bb-wrap bb-hero__content">
+            <div className="bb-hero__copy">
+              <p className="bb-eyebrow bb-eyebrow--dark">Din lokala bilverkstad i Brynäs, Gävle</p>
+              <h1 className="bb-h1" id="contact-hero-title">
+                <span className="bb-accent">Hör av dig</span> till Brynäs Bilservice
+              </h1>
+              <p className="bb-lead--dark kontakt-page__lead">
+                Har du frågor om din bil, behöver rådgivning eller vill skicka en förfrågan? Vår verkstad ligger på Utmarksvägen i Brynäs, Gävle och vi hjälper dig gärna med snabba och raka besked.
+              </p>
+              <p className="bb-lead--dark kontakt-page__sub">
+                Välj det sätt som passar dig bäst: skicka ett meddelande via formuläret, ring oss direkt eller boka tid via vårt bokningssystem.
+              </p>
+              <div className="bb-hero__actions">
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">
+                  <span>Boka tid</span>
+                </button>
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember">
+                  <PhoneIcon aria-hidden="true" />
+                  <span>Ring: 070-553 33 95</span>
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
         <section className="kontakt-page__main" aria-label="Kontaktinformation och formulär">
-          <div className="kontakt-page__wrap kontakt-page__grid">
+          <div className="bb-wrap kontakt-page__grid">
             <div className="kontakt-page__info-col">
               <div className="kontakt-page__card kontakt-page__card--dark">
-                <span className="kontakt-page__card-eyebrow">Direktkontakt</span>
-                <h2 className="kontakt-page__card-title">Kontakt &amp; Besöksadress</h2>
+                <span className="bb-eyebrow bb-eyebrow--dark">Direktkontakt</span>
+                <h2 className="bb-h2 kontakt-page__card-title">Kontakt &amp; Besöksadress</h2>
 
                 <ul className="kontakt-page__details-list">
                   <li className="kontakt-page__detail-item">
@@ -142,7 +155,7 @@ export default function ContactPage() {
               </div>
 
               <div className="kontakt-page__card kontakt-page__card--light">
-                <span className="kontakt-page__card-eyebrow kontakt-page__card-eyebrow--light">Så fungerar det</span>
+                <span className="bb-eyebrow">Så fungerar det</span>
                 <h3 className="kontakt-page__steps-title">Från förfrågan till bekräftad tid</h3>
                 <div className="kontakt-page__steps-list">
                   <div className="kontakt-page__step-item">
@@ -172,8 +185,8 @@ export default function ContactPage() {
 
             <div className="kontakt-page__form-col">
               <div className="kontakt-page__form-card">
-                <h2 className="kontakt-page__form-heading">Skicka ett meddelande</h2>
-                <p className="kontakt-page__form-intro">Fyll i dina uppgifter och vad ärendet gäller. Fält markerade med * är obligatoriska.</p>
+                <h2 className="bb-h2 kontakt-page__form-heading">Skicka ett meddelande</h2>
+                <p className="bb-lead kontakt-page__form-intro">Fyll i dina uppgifter och vad ärendet gäller. Fält markerade med * är obligatoriska.</p>
 
                 <div className="kontakt-page__notice" role="note">
                   <InfoIcon className="kontakt-page__notice-icon" />
@@ -189,7 +202,7 @@ export default function ContactPage() {
                     <p className="kontakt-page__success-desc">
                       Vi har tagit emot din förfrågan och återkommer till dig så snart vi kan under våra öppettider (Mån–Fre 08:00–17:00).
                     </p>
-                    <button type="button" className="kontakt-page__reset-btn" onClick={() => setSubmitted(false)}>
+                    <button type="button" className="bb-btn bb-btn--teal kontakt-page__reset-btn" onClick={() => setSubmitted(false)}>
                       Skicka ett till meddelande
                     </button>
                   </div>
@@ -231,9 +244,9 @@ export default function ContactPage() {
                     </div>
 
                     <div className="kontakt-page__form-action">
-                      <button type="submit" className="kontakt-page__submit-btn">
+                      <button type="submit" className="bb-btn bb-btn--ember-solid">
                         <span>Skicka meddelande</span>
-                        <SendIcon className="kontakt-page__submit-icon" />
+                        <SendIcon />
                       </button>
                     </div>
                   </form>
@@ -244,7 +257,7 @@ export default function ContactPage() {
         </section>
 
         <section className="kontakt-page__find" aria-labelledby="contact-find-title">
-          <div className="kontakt-page__wrap kontakt-page__find-grid">
+          <div className="bb-wrap kontakt-page__find-grid">
             <div className="kontakt-page__map-card">
               <iframe
                 title="Karta till Brynäs Bilservice, Utmarksvägen 21B, Gävle"
@@ -254,11 +267,11 @@ export default function ContactPage() {
               />
             </div>
             <div className="kontakt-page__find-card">
-              <h2 className="kontakt-page__find-title" id="contact-find-title">Hitta till oss</h2>
+              <h2 className="bb-h2 kontakt-page__find-title" id="contact-find-title">Hitta till oss</h2>
               <p className="kontakt-page__find-address">{ADDRESS}</p>
               <div className="kontakt-page__find-actions">
-                <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="kontakt-page__btn kontakt-page__btn--primary">
-                  <MapPinIcon className="kontakt-page__btn-icon" />
+                <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="bb-btn bb-btn--teal">
+                  <MapPinIcon />
                   <span>Vägbeskrivning</span>
                 </a>
               </div>
@@ -270,30 +283,30 @@ export default function ContactPage() {
         </section>
 
         <section className="kontakt-page__focus" aria-labelledby="contact-focus-title">
-          <div className="kontakt-page__wrap kontakt-page__focus-content">
-            <h2 className="kontakt-page__focus-title" id="contact-focus-title">Personlig service<br />i fokus</h2>
-            <p className="kontakt-page__focus-lead">Vi tar hand om din bil med noggrannhet, erfarenhet och engagemang.</p>
+          <div className="bb-wrap kontakt-page__focus-content">
+            <h2 className="bb-h2 kontakt-page__focus-title" id="contact-focus-title">Personlig service<br /><span className="bb-accent">i fokus</span></h2>
+            <p className="bb-lead--dark kontakt-page__focus-lead">Vi tar hand om din bil med noggrannhet, erfarenhet och engagemang.</p>
           </div>
         </section>
 
         <section className="kontakt-page__closing" aria-labelledby="contact-closing-title">
-          <div className="kontakt-page__wrap">
+          <div className="bb-wrap">
             <div className="kontakt-page__closing-card">
-              <p className="kontakt-page__eyebrow">Kom i kontakt med oss</p>
-              <h2 className="kontakt-page__closing-title" id="contact-closing-title">Behöver du hjälp med din bil?</h2>
-              <p className="kontakt-page__closing-desc">
+              <p className="bb-eyebrow bb-eyebrow--dark">Kom i kontakt med oss</p>
+              <h2 className="bb-h2 kontakt-page__closing-title" id="contact-closing-title">Behöver du hjälp med din bil?</h2>
+              <p className="bb-lead--dark kontakt-page__closing-desc">
                 Oavsett om det gäller regelbunden service, felsökning eller däckskifte är du varmt välkommen att kontakta oss.
               </p>
               <div className="kontakt-page__closing-actions">
-                <button type="button" onClick={openModal} className="kontakt-page__btn kontakt-page__btn--primary">
+                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">
                   <span>Boka tid nu</span>
                 </button>
-                <a href="tel:0705533395" className="kontakt-page__btn kontakt-page__btn--outline">
-                  <PhoneIcon className="kontakt-page__btn-icon" />
+                <a href="tel:0705533395" className="bb-btn bb-btn--ember">
+                  <PhoneIcon />
                   <span>Ring: 070-553 33 95</span>
                 </a>
-                <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="kontakt-page__btn kontakt-page__btn--outline">
-                  <MapPinIcon className="kontakt-page__btn-icon" />
+                <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="bb-btn bb-btn--ember">
+                  <MapPinIcon />
                   <span>Vägbeskrivning</span>
                 </a>
               </div>

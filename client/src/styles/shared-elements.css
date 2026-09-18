@@ -227,3 +227,301 @@
   justify-content: center;
 }
 .bb-icon-bare svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)); }
+
+/* ---------- 3-Pillar Trust Row (Hero / Footer Anchor) ---------- */
+.bb-trust-row {
+  display: grid;
+  gap: clamp(0.5rem, 2.2vw, 1.6rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 660px;
+}
+.bb-trust-row__item {
+  align-items: center;
+  display: flex;
+  gap: 0.55rem;
+}
+.bb-trust-row__item .bb-icon-bare {
+  flex: 0 0 auto;
+  height: 31px;
+  width: 31px;
+}
+.bb-trust-row__item .bb-icon-bare svg {
+  height: 24px;
+  width: 24px;
+}
+.bb-trust-row__text {
+  display: grid;
+  line-height: 1.25;
+}
+.bb-trust-row__text b,
+.bb-trust-row__text strong {
+  color: var(--bb-color-text-inverse, #fff);
+  font-family: var(--bb-font-body);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.bb-trust-row__text small,
+.bb-trust-row__text span {
+  color: rgba(255, 255, 255, 0.73);
+  font-family: var(--bb-font-body);
+  font-size: var(--bb-font-size-label, 0.78rem);
+  font-weight: 400;
+}
+@media (max-width: 650px) {
+  .bb-trust-row {
+    gap: 0.5rem;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 5-Step Process Grid (Workshop Protocol) ---------- */
+.bb-process-grid {
+  align-items: start;
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bb-process-grid > li {
+  min-height: 165px;
+  padding: 0 0.75rem;
+  position: relative;
+  text-align: left;
+}
+.bb-process-grid > li::after {
+  background: linear-gradient(90deg, var(--bb-color-amber-500), rgba(240, 149, 5, 0.18));
+  content: '';
+  height: 1px;
+  left: calc(50% + 20px);
+  position: absolute;
+  right: calc(-50% + 20px);
+  top: 22px;
+}
+.bb-process-grid > li:last-child::after {
+  display: none;
+}
+.bb-process-grid > li > b,
+.bb-process-grid > li > .bb-process-grid__num {
+  color: var(--bb-color-text-inverse, #fff);
+  display: block;
+  font-family: var(--bb-font-body);
+  font-size: var(--bb-font-size-label, 0.78rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+.bb-process-grid > li > .bb-icon-bare {
+  align-items: center;
+  color: var(--bb-color-amber-500);
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  margin-bottom: 0.7rem;
+  position: relative;
+  width: 44px;
+  z-index: 1;
+}
+.bb-process-grid > li > .bb-icon-bare svg {
+  height: 21px;
+  width: 21px;
+}
+.bb-process-grid > li h3 {
+  color: var(--bb-color-text-inverse, #fff);
+  font-family: var(--bb-font-body);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 0.4rem;
+}
+.bb-process-grid > li p {
+  color: rgba(255, 255, 255, 0.68);
+  font-family: var(--bb-font-body);
+  font-size: 0.76rem;
+  line-height: var(--bb-line-height-support, 1.55);
+  margin: 0;
+}
+@media (max-width: 1024px) {
+  .bb-process-grid {
+    gap: 1.2rem 0.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .bb-process-grid > li::after { display: none; }
+}
+@media (max-width: 650px) {
+  .bb-process-grid {
+    gap: 1.2rem 0.4rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .bb-process-grid > li { min-height: 145px; padding: 0 0.3rem; }
+  .bb-process-grid > li h3 { font-size: 0.78rem; }
+  .bb-process-grid > li p { font-size: 0.7rem; }
+}
+
+/* ---------- Dark Cross-Sell / Promo Banner ---------- */
+.bb-promo-card {
+  align-items: center;
+  background: linear-gradient(135deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%);
+  border-radius: var(--bb-radius-card);
+  color: var(--bb-color-text-inverse, #fff);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 2.5vw, 2rem) clamp(1.75rem, 3vw, 2.5rem);
+}
+.bb-promo-card__copy h3 {
+  color: var(--bb-color-text-inverse, #fff);
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0.4rem 0 0;
+}
+@media (max-width: 640px) {
+  .bb-promo-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* ---------- Light Surface Reassurance Card ---------- */
+.bb-card--trust {
+  align-items: center;
+  background: var(--bb-color-surface, #fff);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+}
+.bb-card--trust__icon {
+  flex: 0 0 auto;
+  height: 48px;
+  width: 48px;
+}
+.bb-card--trust__text {
+  flex: 1 1 320px;
+}
+.bb-card--trust__text h3 {
+  color: var(--bb-color-text);
+  font-family: var(--bb-font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 0 0 0.4rem;
+}
+@media (max-width: 640px) {
+  .bb-card--trust {
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
+  }
+}
+
+/* ---------- Full-Bleed Hero System (Standardized from Landing) ---------- */
+.bb-hero {
+  background: var(--bb-color-ink-950);
+  color: var(--bb-color-text-inverse, #fff);
+  isolation: isolate;
+  min-height: var(--bb-hero-min-height);
+  position: relative;
+}
+.bb-hero__media,
+.bb-hero__media img,
+.bb-hero__media picture,
+.bb-hero__shade {
+  inset: 0;
+  position: absolute;
+}
+.bb-hero__media {
+  overflow: hidden;
+  z-index: -2;
+}
+.bb-hero__media img {
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 53%;
+  width: 100%;
+}
+.bb-hero__shade {
+  background:
+    linear-gradient(90deg, rgba(2, 17, 20, 0.96) 0%, rgba(2, 18, 21, 0.89) 27%, rgba(2, 19, 22, 0.48) 57%, rgba(2, 14, 16, 0.25) 100%),
+    linear-gradient(0deg, rgba(0, 19, 22, 0.63) 0%, transparent 42%);
+  pointer-events: none;
+  z-index: -1;
+}
+.bb-hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: inherit;
+  padding-bottom: var(--bb-hero-padding-bottom);
+  padding-top: var(--bb-hero-padding-top);
+}
+.bb-hero__copy {
+  max-width: var(--bb-hero-copy-max-width);
+}
+.bb-hero__copy h1,
+.bb-hero__copy .bb-h1 {
+  display: flex;
+  flex-direction: column;
+}
+.bb-hero__copy > p:not(.bb-eyebrow) {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--bb-font-body);
+  font-size: var(--bb-font-size-body);
+  line-height: var(--bb-line-height-body);
+  margin: 1.2rem 0 1.4rem;
+  max-width: 54ch;
+}
+.bb-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.bb-hero__bottom {
+  align-items: end;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, auto);
+  margin-top: clamp(2.1rem, 6vw, 5.8rem);
+}
+@media (max-width: 1120px) {
+  .bb-hero__bottom {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 650px) {
+  .bb-hero {
+    min-height: var(--bb-hero-min-height-mobile);
+  }
+  .bb-hero__media img {
+    object-position: 61% 52%;
+  }
+  .bb-hero__shade {
+    background:
+      linear-gradient(90deg, rgba(2, 15, 18, 0.95), rgba(2, 16, 19, 0.72)),
+      linear-gradient(0deg, rgba(0, 18, 21, 0.83), transparent 58%);
+  }
+  .bb-hero__content {
+    justify-content: flex-end;
+    padding-bottom: var(--bb-hero-padding-bottom-mobile);
+    padding-top: var(--bb-hero-padding-top-mobile);
+  }
+  .bb-hero__copy h1,
+  .bb-hero__copy .bb-h1 {
+    font-size: clamp(2.75rem, 13vw, 4rem);
+  }
+  .bb-hero__copy > p:not(.bb-eyebrow) {
+    font-size: var(--bb-font-size-support, 0.92rem);
+    line-height: var(--bb-line-height-body);
+    margin: 1rem 0 1.15rem;
+  }
+  .bb-hero__bottom {
+    gap: 1.3rem;
+    margin-top: 1.75rem;
+  }
+}

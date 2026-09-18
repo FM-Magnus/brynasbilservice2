@@ -6,23 +6,27 @@
    scoped under .bilservice and has zero dependency on index.css. */
 
 .bilservice {
-  --bilservice-page-bg: #f5f3ee;
-  --bilservice-surface: #faf9f6;
+  --bilservice-page-bg: var(--bb-color-page);
+  --bilservice-surface: var(--bb-color-surface);
   --bilservice-aqua-100: #e6f4f3;
   --bilservice-ink: var(--bb-color-text);
-  --bilservice-muted: #536166;
-  --bilservice-petrol-950: #07181c;
-  --bilservice-petrol-900: #0a2429;
+  --bilservice-muted: var(--bb-color-text-muted);
   --bilservice-teal-800: var(--bb-color-teal-800);
   --bilservice-teal-700: var(--bb-color-teal-600);
   --bilservice-teal-600: #10a6af;
-  --bilservice-amber: #f3a51d;
-  --bilservice-amber-soft: #ffd46b;
-  --bilservice-container-max: 1300px;
+  --bilservice-amber: var(--bb-color-amber-500);
+  --bilservice-amber-soft: rgba(240, 149, 5, 0.18);
+  --bilservice-container-max: var(--bb-wrap-max);
   --bilservice-gutter: clamp(1.5rem, 4vw, 4rem);
   background: var(--bilservice-page-bg);
   color: var(--bilservice-ink);
 }
+
+.bilservice *, .bilservice *::before, .bilservice *::after { box-sizing: border-box; }
+.bilservice :where(a) { color: inherit; text-decoration: none; }
+.bilservice :where(button, input, textarea, select) { font: inherit; }
+.bilservice button { cursor: pointer; }
+.bilservice :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
 
 .bilservice__container {
   max-width: var(--bilservice-container-max);
@@ -36,60 +40,11 @@
    canvas, not a series of chapter breaks — only the hero->content and
    white->aqua/dark transitions keep the fuller padding above. */
 .bilservice__section--flow-bottom { padding-bottom: clamp(2.5rem, 4vw, 3rem); }
-.bilservice__section--dark { background: linear-gradient(150deg, var(--bilservice-petrol-950) 0%, var(--bilservice-petrol-900) 100%); color: #fff; }
+.bilservice__section--dark { background: linear-gradient(150deg, var(--bb-color-ink-950) 0%, var(--bb-color-ink-900) 100%); color: #fff; }
 .bilservice__section--aqua { background: var(--bilservice-aqua-100); }
 
-.bilservice__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 0.85rem;
-  color: var(--bilservice-teal-700);
-  font: 700 0.78rem/1 var(--bb-font-body);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.bilservice__eyebrow::before { content: ''; width: 22px; height: 2px; background: currentColor; border-radius: 2px; }
-.bilservice__section--dark .bilservice__eyebrow,
-.bilservice__hero .bilservice__eyebrow { color: var(--bilservice-teal-600); }
-
-/* ---------- Buttons ---------- */
+/* ---------- Action layouts ---------- */
 .bilservice__actions { display: flex; flex-wrap: wrap; gap: 0.85rem; }
-.bilservice__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  height: 52px;
-  padding-inline: 1.7rem;
-  border-radius: var(--bb-radius-control);
-  font: 700 0.95rem/1 var(--bb-font-body);
-  text-decoration: none;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  white-space: nowrap;
-}
-.bilservice__btn svg { width: 18px; height: 18px; }
-.bilservice__btn--primary {
-  background: var(--bilservice-teal-700);
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(0, 140, 150, 0.2);
-}
-.bilservice__btn--primary:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(0, 140, 150, 0.28); }
-.bilservice__btn--outline {
-  background: transparent;
-  color: var(--bilservice-ink);
-  border-color: rgba(7, 24, 28, 0.18);
-}
-.bilservice__btn--outline:hover { border-color: rgba(7, 24, 28, 0.35); }
-.bilservice__hero .bilservice__btn--outline,
-.bilservice__section--dark .bilservice__btn--outline {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.35);
-}
-.bilservice__hero .bilservice__btn--outline:hover,
-.bilservice__section--dark .bilservice__btn--outline:hover { border-color: rgba(255, 255, 255, 0.6); }
 
 /* ---------- Image placeholders ---------- */
 .bilservice__image-slot {
@@ -120,71 +75,19 @@
   border-color: rgba(255, 255, 255, 0.22);
   color: rgba(255, 255, 255, 0.6);
 }
-.bilservice__image-slot--radius-lg { border-radius: 28px; }
-.bilservice__image-slot--radius-md { border-radius: 20px; }
+.bilservice__image-slot--radius-lg { border-radius: var(--bb-radius-lg); }
+.bilservice__image-slot--radius-md { border-radius: var(--bb-radius-card); }
 .bilservice__image-slot--ar-16-9 { aspect-ratio: 16 / 9; }
 .bilservice__image-slot--ar-4-3 { aspect-ratio: 4 / 3; }
 
-/* ---------- Hero ---------- */
-.bilservice__hero {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(100deg, var(--bilservice-petrol-950) 0%, var(--bilservice-petrol-900) 42%, var(--bilservice-teal-800) 70%, var(--bilservice-teal-700) 100%);
-  color: #fff;
-  min-height: clamp(650px, calc(100svh - 60px), 760px);
-}
-.bilservice__hero-media {
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: 56%;
+/* Hero placeholder fill */
+.bb-hero__media .bilservice__hero-slot {
   border: none;
   border-radius: 0;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
 }
-.bilservice__hero-media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--bilservice-petrol-950) 0%, rgba(7, 24, 28, 0.55) 22%, rgba(7, 24, 28, 0) 46%);
-  pointer-events: none;
-}
-.bilservice__hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: var(--bilservice-container-max);
-  margin-inline: auto;
-  padding-inline: var(--bilservice-gutter);
-  min-height: inherit;
-  display: flex;
-  align-items: center;
-  padding-block: clamp(11rem, 7vw + 6rem, 12.5rem) clamp(2.5rem, 4vw, 3.5rem);
-}
-.bilservice__hero-content { max-width: 560px; display: flex; flex-direction: column; }
-.bilservice__hero-title {
-  margin: 0 0 1.1rem;
-  color: #fff;
-  font: 800 clamp(2.5rem, 2vw + 2.4rem, 4.5rem) / 0.98 var(--bb-font-display);
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-.bilservice__accent { color: var(--bilservice-teal-600); }
-.bilservice__hero-lead { margin: 0 0 1.9rem; max-width: 54ch; color: rgba(255, 255, 255, 0.78); font: 400 1.02rem/1.6 var(--bb-font-body); }
-.bilservice__hero-trust { display: flex; flex-wrap: wrap; gap: 1.75rem; margin-top: 2.4rem; }
-.bilservice__hero-trust-item { display: flex; align-items: flex-start; gap: 0.65rem; max-width: 190px; }
-.bilservice__hero-trust-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: rgba(16, 166, 175, 0.16);
-  color: var(--bilservice-teal-600);
-}
-.bilservice__hero-trust-badge svg { width: 17px; height: 17px; }
-.bilservice__hero-trust-item:first-child .bilservice__hero-trust-badge { background: rgba(243, 165, 29, 0.18); color: var(--bilservice-amber-soft); }
-.bilservice__hero-trust-item h3 { margin: 0 0 0.15rem; color: #fff; font: 700 0.88rem/1.3 var(--bb-font-body); }
-.bilservice__hero-trust-item p { margin: 0; color: rgba(255, 255, 255, 0.6); font: 400 0.78rem/1.45 var(--bb-font-body); }
 
 /* ---------- Price / transparency ---------- */
 .bilservice__split {
@@ -194,44 +97,39 @@
   align-items: center;
 }
 .bilservice__split-media--right { order: 2; }
-.bilservice__price-heading { margin: 0 0 0.9rem; color: var(--bilservice-ink); font: 800 clamp(1.9rem, 2.4vw, 2.7rem) / 1.1 var(--bb-font-display); }
-.bilservice__price-text { margin: 0 0 1.9rem; max-width: 52ch; color: var(--bilservice-muted); font: 400 1rem/1.65 var(--bb-font-body); }
+.bilservice__price-heading { margin: 0 0 0.9rem; color: var(--bilservice-ink); }
+.bilservice__price-text { margin: 0 0 1.9rem; max-width: 52ch; font: 400 1rem/1.65 var(--bb-font-body); }
 
 /* ---------- Why service matters (4 value cards) ---------- */
 .bilservice__intro { max-width: 62ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
-.bilservice__intro h2 { margin: 0 0 0.6rem; color: var(--bilservice-ink); font: 800 clamp(1.9rem, 2.4vw, 2.7rem) / 1.15 var(--bb-font-display); }
-.bilservice__intro p { margin: 0; color: var(--bilservice-muted); font: 400 1rem/1.6 var(--bb-font-body); }
+.bilservice__intro h2 { margin: 0 0 0.6rem; color: var(--bilservice-ink); }
+.bilservice__intro p { margin: 0; font: 400 1rem/1.6 var(--bb-font-body); }
 
 .bilservice__value-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.4rem); }
 .bilservice__value-card {
   display: flex;
   flex-direction: column;
-  border-radius: 22px;
+  border-radius: var(--bb-radius-card);
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(5, 30, 34, 0.14);
+  box-shadow: var(--bb-shadow-card);
+  background: var(--bb-color-ink-900);
 }
 .bilservice__value-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 1.4rem 1.3rem 1.6rem;
-  background: linear-gradient(165deg, var(--bilservice-teal-800) 0%, var(--bilservice-petrol-900) 100%);
+  background: linear-gradient(165deg, var(--bb-color-teal-800) 0%, var(--bb-color-ink-900) 100%);
   color: #fff;
 }
 .bilservice__value-card:nth-child(even) .bilservice__value-body {
-  background: linear-gradient(165deg, var(--bilservice-petrol-900) 0%, var(--bilservice-petrol-950) 100%);
+  background: linear-gradient(165deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%);
 }
-.bilservice__value-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
+.bilservice__value-body .bb-icon-badge {
   margin-bottom: 0.9rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
-  color: var(--bilservice-teal-600);
 }
-.bilservice__value-icon svg { width: 20px; height: 20px; }
 .bilservice__value-card h3 { margin: 0 0 0.4rem; color: #fff; font: 800 1.1rem/1.25 var(--bb-font-display); }
-.bilservice__value-card p { margin: 0; color: rgba(255, 255, 255, 0.68); font: 400 0.92rem/1.55 var(--bb-font-body); }
+.bilservice__value-card p { margin: 0; font: 400 0.92rem/1.55 var(--bb-font-body); }
 
 /* ---------- Service tier ladder ---------- */
 .bilservice__levels-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); align-items: stretch; }
@@ -239,11 +137,11 @@
   display: flex;
   flex-direction: column;
   padding: clamp(1.7rem, 2.4vw, 2.2rem);
-  border-radius: 24px;
+  border-radius: var(--bb-radius-card);
 }
 .bilservice__level-card--01 { background: var(--bilservice-aqua-100); color: var(--bilservice-ink); }
-.bilservice__level-card--02 { background: linear-gradient(155deg, var(--bilservice-teal-700) 0%, var(--bilservice-teal-800) 100%); color: #fff; box-shadow: 0 16px 34px rgba(16, 118, 128, 0.28); }
-.bilservice__level-card--03 { background: linear-gradient(155deg, var(--bilservice-petrol-900) 0%, var(--bilservice-petrol-950) 100%); color: #fff; }
+.bilservice__level-card--02 { background: linear-gradient(155deg, var(--bilservice-teal-700) 0%, var(--bilservice-teal-800) 100%); color: #fff; box-shadow: var(--bb-shadow-card); }
+.bilservice__level-card--03 { background: linear-gradient(155deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%); color: #fff; }
 .bilservice__level-badge {
   display: inline-flex;
   align-items: center;
@@ -251,10 +149,10 @@
   width: 40px;
   height: 40px;
   margin-bottom: 1rem;
-  border-radius: 50%;
+  border-radius: var(--bb-radius-sm);
   font: 800 0.85rem var(--bb-font-display);
 }
-.bilservice__level-card--01 .bilservice__level-badge { background: var(--bilservice-amber-soft); color: var(--bilservice-petrol-950); }
+.bilservice__level-card--01 .bilservice__level-badge { background: var(--bilservice-amber-soft); color: var(--bb-color-ink-950); }
 .bilservice__level-card--02 .bilservice__level-badge { background: rgba(255, 255, 255, 0.22); color: #fff; }
 .bilservice__level-card--03 .bilservice__level-badge { background: rgba(16, 166, 175, 0.28); color: #7fe0e6; }
 .bilservice__level-card h3 { margin: 0 0 0.6rem; font: 800 1.25rem/1.25 var(--bb-font-display); }
@@ -262,112 +160,25 @@
 .bilservice__level-divider { height: 1px; margin-bottom: 1.1rem; background: currentColor; opacity: 0.15; }
 .bilservice__level-card ul { display: flex; flex-direction: column; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
 .bilservice__level-card li { display: flex; align-items: flex-start; gap: 0.5rem; font: 400 0.9rem/1.4 var(--bb-font-body); }
-.bilservice__level-card li svg { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 0.15rem; color: var(--bilservice-teal-600); }
-.bilservice__level-card--01 li svg { color: var(--bilservice-teal-800); }
+.bilservice__level-card li svg { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 0.15rem; color: var(--bb-color-amber-500); }
+.bilservice__level-card--01 li svg { color: var(--bb-color-amber-500); }
 
 /* ---------- Info bridge ---------- */
 .bilservice__bridge {
   padding: clamp(2.4rem, 4vw, 3rem);
-  border-radius: 30px;
+  border-radius: var(--bb-radius-card);
   background: var(--bilservice-aqua-100);
   border: 1px solid rgba(16, 118, 128, 0.18);
 }
-.bilservice__bridge h2 { margin: 0 0 0.9rem; color: var(--bilservice-ink); font: 800 clamp(1.6rem, 2vw, 2.1rem) / 1.2 var(--bb-font-display); }
-.bilservice__bridge p { margin: 0; max-width: 78ch; color: var(--bilservice-muted); font: 400 1rem/1.7 var(--bb-font-body); }
+.bilservice__bridge h2 { margin: 0 0 0.9rem; color: var(--bilservice-ink); }
+.bilservice__bridge p { margin: 0; max-width: 78ch; font: 400 1rem/1.7 var(--bb-font-body); }
 .bilservice__bridge p a { color: var(--bilservice-teal-800); font-weight: 700; text-decoration: none; }
 .bilservice__bridge p a:hover { text-decoration: underline; }
 
 /* ---------- Process anchor ---------- */
 .bilservice__process { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
-.bilservice__process-heading { margin: 0 0 0.9rem; color: #fff; font: 800 clamp(1.8rem, 2.6vw, 2.4rem) / 1.12 var(--bb-font-display); text-transform: uppercase; }
-.bilservice__process-text > p { margin: 0 0 1.5rem; max-width: 34ch; color: rgba(255, 255, 255, 0.68); font: 400 0.95rem/1.6 var(--bb-font-body); }
-.bilservice__process-steps { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.5rem; }
-.bilservice__process-step { position: relative; flex: 1 1 110px; min-width: 0; text-align: left; padding-inline-end: 0.4rem; }
-.bilservice__process-arrow {
-  display: none;
-  flex: 0 0 auto;
-  align-items: center;
-  width: 16px;
-  height: 42px;
-  color: rgba(255, 255, 255, 0.3);
-}
-.bilservice__process-arrow svg { width: 16px; height: 16px; }
-@media (min-width: 1024px) {
-  .bilservice__process-arrow { display: flex; }
-}
-.bilservice__process-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  margin-bottom: 0.9rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: var(--bilservice-teal-600);
-}
-.bilservice__process-icon svg { width: 19px; height: 19px; }
-.bilservice__process-num { display: block; margin-bottom: 0.35rem; color: var(--bilservice-teal-600); font: 800 0.72rem var(--bb-font-body); letter-spacing: 0.08em; }
-.bilservice__process-step h3 { margin: 0 0 0.35rem; color: #fff; font: 700 0.92rem/1.3 var(--bb-font-body); }
-.bilservice__process-step p { margin: 0; color: rgba(255, 255, 255, 0.6); font: 400 0.82rem/1.5 var(--bb-font-body); }
-
-/* ---------- Used vehicle promo strip ---------- */
-.bilservice__promo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: clamp(1.5rem, 2.5vw, 2rem) clamp(1.75rem, 3vw, 2.5rem);
-  border-radius: 24px;
-  background: linear-gradient(120deg, var(--bilservice-petrol-900) 0%, var(--bilservice-petrol-950) 100%);
-  color: #fff;
-}
-.bilservice__promo-eyebrow { color: var(--bilservice-teal-600); font: 700 0.72rem/1 var(--bb-font-body); letter-spacing: 0.12em; text-transform: uppercase; }
-.bilservice__promo h3 { margin: 0.4rem 0 0; color: #fff; font: 800 1.4rem/1.25 var(--bb-font-display); }
-.bilservice__promo-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.5rem;
-  border-radius: var(--bb-radius-control);
-  background: var(--bilservice-teal-700);
-  color: #fff;
-  font: 700 0.9rem/1 var(--bb-font-body);
-  text-decoration: none;
-  white-space: nowrap;
-}
-.bilservice__promo-link svg { width: 16px; height: 16px; }
-.bilservice__promo-link:hover { background: var(--bilservice-teal-600); }
-
-/* ---------- Trust / price reassurance ---------- */
-.bilservice__trust-card {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  padding: clamp(1.75rem, 3vw, 2.5rem);
-  border-radius: 26px;
-  background: var(--bilservice-surface);
-  box-shadow: 0 10px 25px rgba(5, 30, 34, 0.08);
-}
-.bilservice__trust-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(16, 118, 128, 0.1);
-  color: var(--bilservice-teal-800);
-}
-.bilservice__trust-icon svg { width: 24px; height: 24px; }
-.bilservice__trust-text { flex: 1 1 320px; }
-.bilservice__trust-text h3 { margin: 0 0 0.4rem; color: var(--bilservice-ink); font: 800 1.2rem/1.3 var(--bb-font-display); }
-.bilservice__trust-text p { margin: 0; max-width: 56ch; color: var(--bilservice-muted); font: 400 0.95rem/1.55 var(--bb-font-body); }
-
+.bilservice__process-heading { margin: 0 0 0.9rem; color: #fff; }
+.bilservice__process-text > p { margin: 0 0 1.5rem; max-width: 34ch; font: 400 0.95rem/1.6 var(--bb-font-body); }
 /* ---------- Responsive ---------- */
 @media (max-width: 1180px) {
   .bilservice__value-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -375,18 +186,10 @@
   .bilservice__process-text > p { max-width: none; }
 }
 @media (max-width: 1024px) {
-  .bilservice__hero-media { position: relative; inset: auto; width: 100%; min-height: 320px; order: -1; }
-  .bilservice__hero-media::after { background: linear-gradient(180deg, rgba(7, 24, 28, 0.15) 0%, rgba(7, 24, 28, 0.55) 100%); }
-  .bilservice__hero { min-height: 0; }
-  .bilservice__hero-inner { flex-direction: column; align-items: flex-start; padding-block: clamp(9rem, 4vw + 6rem, 10rem) 3rem; gap: 2rem; }
-  .bilservice__hero-content { max-width: none; }
   .bilservice__split { grid-template-columns: 1fr; }
   .bilservice__split-media--right { order: -1; }
   .bilservice__levels-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .bilservice__value-grid { grid-template-columns: 1fr; }
-  .bilservice__promo { flex-direction: column; align-items: flex-start; }
-  .bilservice__process-steps { flex-direction: column; }
-  .bilservice__trust-card { flex-direction: column; align-items: flex-start; text-align: left; }
 }

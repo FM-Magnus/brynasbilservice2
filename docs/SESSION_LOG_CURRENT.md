@@ -2,6 +2,209 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (Second Pass: Hero & Full-Page Canonical Alignment on /oljebyte)
+
+- **Standardized Oljebyte (`/oljebyte`) hero, topic blocks & sections to Landing truth**:
+  - **H1 Display Typography**: Converted hardcoded uppercase JSX to natural mixed-case `Oljebyte<br />för en motor<br />som <span className="bb-accent">mår bra</span>` using Archivo 800 `.bb-h1` and `.bb-accent`.
+  - **Full-Page Canonical Elements**:
+    - Eyebrow wired to `.bb-eyebrow.bb-eyebrow--dark` with canonical amber bar; lead paragraph to `.bb-lead.bb-lead--dark`.
+    - Hero, tip-strip, process, and closing CTAs connected to `.bb-btn.bb-btn--teal` and `.bb-btn.bb-btn--ember`.
+    - Hero trust items connected to `.bb-icon-bare` with amber accent and drop-shadow.
+    - All section containers and 5 deep-dive topic blocks (Ageing, Viscosity, Standards, Types, Misconceptions) wrapped with `.bb-wrap.service-guide__container`.
+    - Process section heading standardized to natural mixed-case `Så går det till<br /><span className="bb-accent">hos oss</span>`.
+  - **Shared Template Modernization (`ServiceGuideTemplate.css`)**: Standardized `.service-guide__topic-card` border-radius from hardcoded literal `20px` to `var(--bb-radius-card)`.
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run build`: Passed cleanly with zero errors in 1.88s.
+  - `git diff --check`: Clean, 0 whitespace errors.
+  - Playwright Multi-Viewport Verification (`/oljebyte`): 1440px desktop, 768px tablet, and 390px mobile viewports: $\Delta = 0\text{px}$ horizontal overflow across all checks. Secondary button text contrast verified (`rgb(255, 255, 255)` over ember border). Topic cards verified at `border-radius: 20px` with `--bb-shadow-card`.
+
+### 2026-09-18 — Antigravity (Second Pass: Hero & Canonical Alignment on /avgassystem)
+
+- **Standardized Avgassystem (`/avgassystem`) hero & sections to Landing truth**:
+  - **H1 Display Typography**: Converted hardcoded uppercase JSX to natural mixed-case `Avgassystem<br />för tyst gång<br />och <span className="bb-accent">ren</span> motor` using Archivo 800 `.bb-h1` and `.bb-accent`.
+  - **Kanoniska Knappar**: Connected hero, process, and closing actions to `.bb-btn.bb-btn--teal` ("Boka tid") and `.bb-btn.bb-btn--ember` ("Ring 070-553 33 95").
+  - **Eyebrow & Ingress**: Wired eyebrow ("Avgasrening & ljuddämpning") to `.bb-eyebrow.bb-eyebrow--dark` with canonical amber bar, and lead paragraph to `.bb-lead.bb-lead--dark`.
+  - **Trust Row**: Connected trust items to glowing `.bb-icon-bare` with amber accent and drop-shadow.
+  - **Wrappers & Process Title**: Added `.bb-wrap` across all section inner containers and updated process section title to natural mixed-case `Så går det till<br /><span className="bb-accent">hos oss</span>`.
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run build`: Passed cleanly with zero errors in 1.86s.
+  - `git diff --check`: Clean, 0 whitespace errors.
+  - Playwright Multi-Viewport Verification (`/avgassystem`): 1440px desktop, 768px tablet, and 390px mobile viewports: $\Delta = 0\text{px}$ horizontal overflow across all checks. Secondary button text contrast verified (`rgb(255, 255, 255)` over ember border).
+
+### 2026-09-18 — Antigravity (Second Pass: Hero & Canonical Alignment on /bromssystem)
+
+- **Standardized Bromssystem (`/bromssystem`) hero & sections to Landing truth**:
+  - **H1 Display Typography**: Converted hardcoded uppercase JSX to natural mixed-case `Bromssystem<br />när <span className="bb-accent">säkerheten</span><br />måste fungera` using Archivo 800 `.bb-h1` and `.bb-accent`.
+  - **Kanoniska Knappar**: Connected hero, process, and closing actions to `.bb-btn.bb-btn--teal` ("Boka bromsservice") and `.bb-btn.bb-btn--ember` ("Ring 070-553 33 95").
+  - **Eyebrow & Ingress**: Wired eyebrow ("Bromsservice & säkerhet") to `.bb-eyebrow.bb-eyebrow--dark` with canonical amber bar, and lead paragraph to `.bb-lead.bb-lead--dark`.
+  - **Trust Row**: Connected trust items to glowing `.bb-icon-bare` with amber accent and drop-shadow.
+  - **Wrappers & Process Title**: Added `.bb-wrap` across all section inner containers and updated process section title to natural mixed-case `Så går det till<br /><span className="bb-accent">hos oss</span>`.
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run build`: Passed cleanly with zero errors in 1.73s.
+  - `git diff --check`: Clean, 0 whitespace errors.
+  - Playwright Multi-Viewport Verification (`/bromssystem`): 1440px desktop, 768px tablet, and 390px mobile viewports: $\Delta = 0\text{px}$ horizontal overflow across all checks. Secondary button text contrast verified (`rgb(255, 255, 255)` over ember border).
+
+### 2026-09-18 — Antigravity (Second Pass: Hero & Canonical Alignment on /koppling & ServiceGuideTemplate.css)
+
+- **Standardized Koppling (`/koppling`) hero & template to Landing truth**:
+  - **H1 Display Typography**: Converted hardcoded uppercase JSX to natural mixed-case `Koppling <span className="bb-accent">när</span><br />kraften behöver<br />nå hjulen` and removed `text-transform: uppercase` from `.service-guide__title` and `.service-guide__process-text h2` in `ServiceGuideTemplate.css`.
+  - **Kanoniska Knappar**: Connected hero and closing actions to `.bb-btn.bb-btn--teal` and `.bb-btn.bb-btn--ember`. Fixed specificity bug where `.service-guide :where(a)` was overriding `.bb-btn--ember` text color — resolved by making resets truly zero-specificity via `:where(.service-guide) :where(a)` and removing conflicting `border: 1px solid transparent` from `.service-guide__btn`.
+  - **Eyebrow & Ingress**: Wired eyebrow to `.bb-eyebrow.bb-eyebrow--dark` with canonical amber bar, and lead paragraph to `.bb-lead.bb-lead--dark`.
+  - **Trust Row**: Connected trust items to glowing `.bb-icon-bare` with amber accent and drop-shadow.
+  - **Wrappers**: Added `.bb-wrap` across all section inner containers for consistent max-width and responsive margin/padding.
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run build`: Passed cleanly with zero errors in 1.72s.
+  - `git diff --check`: Clean, 0 whitespace errors.
+  - Playwright Multi-Viewport Verification (`/koppling`): 1440px desktop, 768px tablet, and 390px mobile viewports: $\Delta = 0\text{px}$ horizontal overflow across all checks. Secondary button text contrast verified (`rgb(255, 255, 255)` over ember border).
+
+### 2026-09-18 — Antigravity (Modernize ServiceGuideTemplate.css & Retrofit 4 Pilot Guide Pages)
+
+- **Modernized Guide Family Shared Template (`client/src/styles/ServiceGuideTemplate.css`)**:
+  - Completely eradicated legacy `--redesign-*` tokens (`--redesign-page`, `--redesign-hero-max`, `--redesign-accent`, `--redesign-ink`, `--redesign-surface`, `--redesign-radius-*`) and `--font-*` properties.
+  - Upgraded fully to canonical `--bb-*` design tokens (`--bb-color-page`, `--bb-wrap-max`, `--bb-color-ink-950`, `--bb-color-surface`, `--bb-color-teal-*`, `--bb-color-amber-*`, `--bb-font-display`, `--bb-font-sans`, `--bb-radius-card`, `--bb-radius-control`, `--bb-shadow-card`).
+  - Wrapped element resets in `.service-guide :where(...)` for zero-specificity protection.
+  - Modernized hero buttons with canonical gradients (`.bb-btn--teal` and `.bb-btn--ember` styling) and light-surface button variations.
+- **Retrofitted 4 Pilot Guide Pages (`/koppling`, `/avgassystem`, `/oljebyte`, `/bromssystem`)**:
+  - Replaced legacy `Header`/`Footer` with canonical Public Shell (`PublicHeader variant="overlay"` + `PublicFooter`).
+  - Preserved 100% of Swedish copy, FAQs, component logic, and booking modal triggers.
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run build`: Passed cleanly with zero errors.
+  - `git diff --check`: Clean, 0 whitespace errors.
+  - Playwright Multi-Viewport Verification across all 4 routes (`/koppling`, `/avgassystem`, `/oljebyte`, `/bromssystem`) at 1440px, 768px, and 390px viewports: $\Delta = 0\text{px}$ horizontal overflow across all 12 checks.
+  - Visual inspection confirmed crisp typography, clean hero clearance under sticky `PublicHeader`, and intact interactive modals.
+
+### 2026-09-18 — Antigravity (Retrofit Kontakt page to Canonical Design System & Shared Elements)
+
+- **Standardized Kontakt Page (`/kontakt`) to consume canonical design hierarchy**:
+  - **Canonical Design Tokens (`design-tokens.css`)**: Switched all local color codes, radii, spacing, and typography to canonical `--bb-*` tokens (`--bb-color-page`, `--bb-color-ink-950`, `--bb-color-ink-900`, `--bb-color-teal-*`, `--bb-color-amber-*`, `--bb-color-border-subtle`, `--bb-shadow-card`).
+  - **Canonical Shared Elements (`shared-elements.css`)**:
+    - Hero: Adopted `.bb-hero`, `.bb-hero__media` with picture tag (`about-hero-bg.webp`/`.jpg`), `.bb-hero__shade`, `.bb-hero__content`, `.bb-hero__copy`, and `.bb-hero__actions`.
+    - Containers: Replaced all `.kontakt-page__wrap` with canonical `.bb-wrap`.
+    - Typography: Converted headings and eyebrows to `.bb-h1`, `.bb-h2`, `.bb-accent`, `.bb-eyebrow`, `.bb-eyebrow--dark`, `.bb-lead`, `.bb-lead--dark`.
+    - Buttons: Replaced all `.kontakt-page__btn*` with `.bb-btn`, `.bb-btn--teal`, `.bb-btn--ember`, and `.bb-btn--ember-solid`.
+    - Reset safety: Scoped local resets with `:where(...)` to avoid specificity collisions.
+  - **Component & Stylesheet Refactoring (`ContactPage.tsx` / `ContactPage.css`)**:
+    - Preserved all Swedish copy, contact details, Google Maps URLs, form fields, and booking modal triggers verbatim.
+    - Pruned 120+ lines of redundant CSS from `ContactPage.css` (down from 469 lines to 349 lines).
+  - **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+  - **Verification**: Verified with Playwright across 1440px desktop, 768px tablet, and 390px mobile viewports:
+    - $\Delta = 0\text{px}$ horizontal overflow across all viewports.
+    - `npm --prefix client run build` passed with zero errors.
+    - Visual inspection of captured screenshots confirmed clean typography hierarchy, crisp buttons, proper contrast, and zero layout bugs.
+
+
+### 2026-09-18 — Antigravity (Canonical Full-Bleed Hero System Elevation: Landing as Truth)
+
+- **Elevated the Landing Page (`/`) Hero into the canonical standard for all full-bleed heroes on independent pages**:
+  - **Explicit Scope Boundary (confirmed by Magnus)**: Applies strictly to new independent pages disconnected from legacy `index.css` (currently Landing `/` and Bilservice `/service-reparationer`). Legacy pages connected to `index.css` remain 100% frozen.
+  - **Canonical Design Tokens (`design-tokens.css`)**:
+    - `--bb-hero-min-height: clamp(700px, 58vw, 850px);`
+    - `--bb-hero-min-height-mobile: 780px;`
+    - `--bb-hero-copy-max-width: 540px;`
+    - `--bb-hero-padding-top: clamp(7rem, 11vw, 9rem);`
+    - `--bb-hero-padding-bottom: clamp(2rem, 3.5vw, 3.5rem);`
+    - `--bb-hero-padding-top-mobile: 7rem;`
+    - `--bb-hero-padding-bottom-mobile: 1.6rem;`
+  - **Canonical Shared Elements (`shared-elements.css`)**:
+    - Added full `.bb-hero` class system: `.bb-hero`, `.bb-hero__media`, `.bb-hero__shade`, `.bb-hero__content`, `.bb-hero__copy`, `.bb-hero__actions`, and `.bb-hero__bottom`.
+    - Bakes in the dual-layer scrim overlay (`90deg` dark-to-translucent ink + `0deg` bottom-to-top vignette) on desktop and mobile.
+    - Standardizes the `display: flex; flex-direction: column;` title stacking, mixed-case `.bb-h1`, and `.bb-accent` teal word highlights.
+    - Anchors `.bb-trust-row` and conversion widgets in `.bb-hero__bottom` with automatic responsive column stacking at 1120px and 650px.
+  - **Refactored Landing Page (`LandingPage.tsx` / `LandingPage.css`)**:
+    - Adopted `.bb-hero*` in JSX; pruned all local `.landing-v2__hero*` desktop and mobile rules (~35 lines removed, `LandingPage.css` now down to 117 lines).
+  - **Refactored Bilservice Page (`ServiceReparationerPage.tsx` / `ServiceReparationerPage.css`)**:
+    - Adopted `.bb-hero` full-bleed structure; wired `PublicHeader` with `variant="overlay"`; anchored `.bb-trust-row` into `.bb-hero__bottom`.
+    - Sized `ImageSlot` placeholder to fill 100% within `.bb-hero__media` behind the `.bb-hero__shade` scrim, ready for drop-in real photography.
+    - Pruned all local `.bilservice__hero*` desktop rules, inner wrappers, and 1024px media query overrides (~40 lines removed, `ServiceReparationerPage.css` now down to 196 lines).
+  - **PublicHeader Alignment**:
+    - Verified `variant="overlay"` frosted navigation pill, white link contrast, and portal stacking context (`z-index: 100`) against the standardized dark hero canvas.
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed). `git diff --check` passed with 0 errors.
+- **Verification**: Verified via Playwright across 1440px desktop, 768px tablet, and 390px mobile viewports with 0px horizontal overflow (`delta = 0`) across both routes. Client build (`npm run build`) passed with 0 errors. Full test suite (`npm run test:browser`) passed 3/3.
+
+### 2026-09-18 — Antigravity (Site-wide Harmonization & Canonical Elevation: Landing + Bilservice)
+
+- **Harmonized Landing Page (`/`) and Bilservice Page (`/service-reparationer`) based on Magnus's three authoritative decisions**:
+  1. **Canvas**: Standardized on Landing's `--bb-color-page: #f8f7f3` site-wide (eliminating Bilservice's one-off `#f5f3ee` and `#faf9f6`).
+  2. **Dark Palette**: Adopted Canonical Ink (`--bb-color-ink-950: #071416`, `--bb-color-ink-900: #0d1f22`) site-wide (eliminating Bilservice's petrol drift `#07181c`, `#0a2429` in hero, value cards, tier cards, and promo banner).
+  3. **Process Layout**: Unified on Landing's process step layout as canonical standard (number `01` above `.bb-icon-bare`, glowing horizontal amber connector line `li::after`).
+- **Elevated 4 new canonical component patterns into `client/src/styles/shared-elements.css` (`.bb-*`)**:
+  - **`.bb-trust-row`**: 3-pillar hero trust pattern (*Personlig service*, *Erfarna mekaniker*, *Tryggt och enkelt*), containing `.bb-trust-row__item`, `.bb-icon-bare`, and `.bb-trust-row__text` (`<b>` + `<small>`). Responsive 1-column stack on mobile (<=650px).
+  - **`.bb-process-grid`**: 5-step workshop protocol process layout (`<ol className="bb-process-grid">`), number `01` above `.bb-icon-bare`, with glowing horizontal amber connector line across steps. Responsive 3-col on tablet, 2-col on mobile.
+  - **`.bb-promo-card`**: Dark cross-sell / promo banner card (`linear-gradient(135deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%)`), containing `.bb-promo-card__copy` (`.bb-eyebrow--dark` + `h3`) and `.bb-btn--teal`. Responsive column stack on mobile (<=640px).
+  - **`.bb-card--trust`**: Light surface reassurance card (`background: var(--bb-color-surface, #fff)` with `var(--bb-shadow-card)`), containing `.bb-card--trust__icon`, `.bb-card--trust__text` (display `h3` + `.bb-lead`), and action buttons. Responsive column stack on mobile (<=640px).
+- **Refactored pages and pruned redundant local rules**:
+  - `LandingPage.tsx`: Adopted `.bb-trust-row` in hero-bottom and `<ol className="bb-process-grid">` in process section.
+  - `LandingPage.css`: Mapped local variables directly to canonical tokens (`--landing-ink: var(--bb-color-ink-950);`, etc.), pruned redundant `.landing-v2__trust-row*` rules, and pruned `.landing-v2__process-content ol/li*` rules.
+  - `ServiceReparationerPage.tsx`: Replaced `.bilservice__hero-trust` with `.bb-trust-row`, replaced old arrowed process steps with `<ol className="bb-process-grid">`, replaced `.bilservice__promo` with `.bb-promo-card`, and replaced `.bilservice__trust-card` with `.bb-card--trust`. Removed unused `Fragment` import.
+  - `ServiceReparationerPage.css`: Updated canvas and surface to `var(--bb-color-page)` and `var(--bb-color-surface)`. Switched hero, value cards, and tier cards from petrol to canonical ink. Pruned all redundant local `.bilservice__hero-trust*`, `.bilservice__process-steps*`, `.bilservice__promo*`, and `.bilservice__trust-card*` rules (~70 lines removed).
+- **Documentation**: Updated `docs/DESIGN_SYSTEM.md` (§2a) with the 4 elevated components and the 3 harmonization decisions.
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Verification**: Verified via Playwright at 1440px desktop, 768px tablet, and 390px mobile viewports with 0px horizontal overflow across both Landing and Bilservice. Client build (`npm run build`) passed with 0 errors. Full test suite (`npm run test:browser`) passed 3/3.
+
+### 2026-09-18 — Antigravity (Bilservice `/service-reparationer` canonical CSS styling rules pass)
+
+- **Applied full canonical CSS styling rules from `shared-elements.css` and `design-tokens.css` across Bilservice page**:
+  - **Value Cards ("Varför är bilservice viktigt?")**:
+    - Converted non-canonical teal circle icons to canonical `.bb-icon-badge` (amber-tinted rounded square, `rgba(240, 149, 5, 0.15)` with `--bb-color-amber-500` icon).
+    - Fixed the card body stretch bug: added `flex: 1; display: flex; flex-direction: column;` to `.bilservice__value-body` and set dark card background `var(--bilservice-petrol-900)` so shorter cards (e.g. Card 3 "Prestation") stretch seamlessly with 0 white gaps at the bottom.
+    - Updated container to `border-radius: var(--bb-radius-card);` and `box-shadow: var(--bb-shadow-card);`.
+  - **Process Section ("Så går det till hos oss")**:
+    - Replaced local pale circle icon containers with canonical `.bb-icon-bare` (amber glyph with subtle drop-shadow).
+    - Re-styled step numbers to white (`#fff`) and step arrows to canonical amber (`var(--bb-color-amber-500)`).
+  - **Typography & Headings**:
+    - Removed `text-transform: uppercase` from `.bilservice__hero-title` and `.bilservice__process-heading` to respect canonical Archivo 800 mixed-case heading rules (`.bb-h1`, `.bb-h2`).
+    - Connected all body/supporting copy to `.bb-lead` (light surfaces) and `.bb-lead--dark` (dark surfaces).
+  - **Trust Card**:
+    - Updated icon to `.bb-icon-badge.bilservice__trust-icon` with `var(--bb-radius-sm)` and canonical amber accent.
+    - Updated card container to `border-radius: var(--bb-radius-card);` and `box-shadow: var(--bb-shadow-card);`.
+  - **Radius & Shadow Canonicalization**:
+    - Standardized all card, bridge, promo, and image-slot radii to `var(--bb-radius-card)` and `var(--bb-radius-lg)`, eliminating arbitrary literal radii (`22px`, `24px`, `26px`, `30px`).
+    - Converted local box-shadow definitions to `var(--bb-shadow-card)`.
+    - Aligned local color tokens to canonical tokens (`--bilservice-muted: var(--bb-color-text-muted);`, `--bilservice-amber: var(--bb-color-amber-500);`, `--bilservice-container-max: var(--bb-wrap-max);`).
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Browser & Overflow verification**: Verified via Playwright at 1440px desktop, 768px tablet, and 390px mobile viewports:
+  - `Viewport 1440px`: `clientWidth=1440`, `scrollWidth=1440`, `delta=0`
+  - `Viewport 768px`: `clientWidth=768`, `scrollWidth=768`, `delta=0`
+  - `Viewport 390px`: `clientWidth=390`, `scrollWidth=390`, `delta=0`
+  - Zero horizontal overflow across all breakpoints. Client build (`npm run build`) passed with 0 errors.
+
+### 2026-09-18 — Antigravity (Bilservice `/service-reparationer` retrofitted to canonical `shared-elements.css` layer)
+
+- **Retrofitted Bilservice page (`ServiceReparationerPage.tsx` / `ServiceReparationerPage.css`, parent of the "Bilservice" shared family)** to consume canonical Level 0 shared design elements from `client/src/styles/shared-elements.css` (`.bb-*`), removing redundant page-local CSS while keeping 100% visual fidelity:
+  - **Containers**: Wrapped all section inner containers with `.bb-wrap.bilservice__container` and hero inner container with `.bb-wrap.bilservice__hero-inner`.
+  - **Eyebrows**: Converted hero and used-car promo eyebrows to `<p className="bb-eyebrow bb-eyebrow--dark">`. Pruned local `.bilservice__eyebrow*` and `.bilservice__promo-eyebrow` rules from `ServiceReparationerPage.css`.
+  - **Headings & Accents**: Wired hero H1 to `.bb-h1`, section headings to `.bb-h2`, teal word highlights to `.bb-accent`. Pruned repetitive local display font clamps in `.bilservice__hero-title`, `.bilservice__price-heading`, `.bilservice__intro h2`, `.bilservice__bridge h2`, and `.bilservice__process-heading`.
+  - **Buttons & CTAs**:
+    - Hero & Process dark actions: Converted to `.bb-btn.bb-btn--teal` (primary "Boka tid" / "Ring oss") and `.bb-btn.bb-btn--ember` (outline call link).
+    - Pricing & Reassurance light actions: Converted to `.bb-btn.bb-btn--ember-solid` (solid "Boka tid för bilservice" / "Boka tid nu") and `.bb-btn.bb-btn--ember` (phone link).
+    - Used-car promo action: Converted to `.bb-btn.bb-btn--teal`.
+    - Pruned all local `.bilservice__btn*` and `.bilservice__promo-link*` rules (~45 lines removed).
+  - **Trust icons**: Converted hero trust row to `.bb-icon-bare` (amber glyph with subtle drop-shadow).
+  - **CSS Reset Specificity**: Applied `:where(a)` and `:where(button, input, textarea, select)` inside `.bilservice` root to guarantee zero specificity leaks against shared component classes.
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Browser & Overflow verification**: Verified via Playwright at 1440px desktop, 768px tablet, and 390px mobile viewports:
+  - `Viewport 1440px`: `clientWidth=1440`, `scrollWidth=1440`, `delta=0`
+  - `Viewport 768px`: `clientWidth=768`, `scrollWidth=768`, `delta=0`
+  - `Viewport 390px`: `clientWidth=390`, `scrollWidth=390`, `delta=0`
+  - Zero horizontal overflow across all breakpoints. Client build (`npm run build`) passed with 0 errors.
+
+### 2026-09-18 — Antigravity (Landing Page retrofitted to canonical `shared-elements.css` layer)
+
+- **Retrofitted Landing Page (`LandingPage.tsx` / `LandingPage.css`) to consume the Level 0 shared design elements** from `client/src/styles/shared-elements.css` (`.bb-*`), removing redundant page-local CSS while keeping 100% visual fidelity:
+  - **Wrap container**: Migrated `.landing-v2__wrap` to `.bb-wrap`.
+  - **Buttons**: Converted hero and dark-section primary actions to `.bb-btn.bb-btn--teal`, hero call action to `.bb-btn.bb-btn--ember`, and light-surface actions (Services, About) to `.bb-btn.bb-btn--ember-solid`. Removed ~30 lines of redundant `.landing-v2__book`/`.landing-v2__call` rules and section overrides from `LandingPage.css`.
+  - **Eyebrows**: Converted dark-surface eyebrows (Hero, Why, Process, Cars) to `.bb-eyebrow.bb-eyebrow--dark` and light-surface eyebrows (Services, About) to `.bb-eyebrow`. Removed local `.landing-v2__eyebrow*` and `.landing-v2__hero-eyebrow*` definitions.
+  - **Headings & Accents**: Connected `#landing-v2-hero-title` to `.bb-h1`, all 5 section headings to `.bb-h2`, inline teal heading highlights to `.bb-accent`, and lead text to `.bb-lead` / `.bb-lead--dark`. Removed repetitive desktop `h2` font-size clamp rules.
+  - **Cards & Arrows**: Converted Why-section reassurance panel to `.bb-card--glass`, Services-grid cards to `.bb-card--photo`, replaced legacy shade div with `.bb-card--photo::after`, and wired `.bb-card-arrow` for the bottom-right ember arrow.
+  - **Icons**: Connected Why-section icons to `.bb-icon-badge` (amber-tinted rounded square) and Hero trust-row / Process-step icons to `.bb-icon-bare` (amber glyph with subtle drop-shadow).
+- **Strict CSS safety**: `client/src/css/index.css` remained completely untouched (0 lines changed).
+- **Browser verification**: Verified via Playwright (`test:browser`) at 1440px desktop, 768px tablet, and 390px mobile viewports. All tests passed (3/3), screenshots visually verified, and 0px horizontal overflow across all viewports. Client build succeeded cleanly.
+
 ### 2026-09-18 — Claude (Docs sync pass; radius-safety audit; "too rounded" paused, not resolved)
 
 - **Magnus flagged cards and possibly buttons as "too rounded"** — paused rather than guessed, since the radius tokens aren't uniformly safe to touch. Audited `PublicHeader.css`/`PublicFooter.css`'s actual `var(--bb-*)` usage (grepped, not assumed) to find out which tokens are still isolated to Landing's preview versus already live on the shipped shared header/footer. Result: `--bb-radius-card`/`--bb-radius-md` are safe to tune against Landing alone; `--bb-radius-control` (the pill shape) is not — it's used by both the header's nav pill/booking button and the footer's book button, so changing it lands site-wide immediately, not just in preview. Same split found for several color/font/shadow tokens. Full safe/unsafe list now in `docs/DESIGN_SYSTEM.md` under "Radius tokens: what's safe to tune vs. already live," so this doesn't need re-deriving next time a token change is considered. **Not resolved** — waiting on Magnus to say whether "too rounded" means cards only or button shape too.

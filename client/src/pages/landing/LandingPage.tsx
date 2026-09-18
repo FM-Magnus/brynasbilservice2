@@ -51,19 +51,199 @@ const process = [['01', 'Bokning och inlämning', 'Du bokar en tid som passar di
 
 export default function LandingPage() {
   const [bookingOpen, setBookingOpen] = useState(false)
-  return <main className="landing-v2"><section className="landing-v2__hero" aria-labelledby="landing-v2-hero-title"><picture className="landing-v2__hero-media"><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Honda CR-V i verkstaden vid solnedgång" /></picture><div className="landing-v2__hero-shade" aria-hidden="true" /><PublicHeader onBookingClick={() => setBookingOpen(true)} variant="overlay" /><div className="landing-v2__wrap landing-v2__hero-content"><div className="landing-v2__hero-copy"><p className="landing-v2__hero-eyebrow">Din lokala bilverkstad i Gävle</p><h1 id="landing-v2-hero-title"><span>Din bil</span><span className="landing-v2__accent">förtjänar</span><span>det bästa</span></h1><p>Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation – för alla bilmärken, till konkurrenskraftiga priser.</p><div className="landing-v2__hero-actions"><button className="landing-v2__book" type="button" onClick={() => setBookingOpen(true)}><Icon name="calendar" />Boka tid</button><a className="landing-v2__call" href="tel:+46705533395"><Icon name="phone" />Ring oss nu</a></div></div><div className="landing-v2__hero-bottom"><div className="landing-v2__trust-row"><div><i><Icon name="shield" /></i><span><b>Personlig service</b><small>Du och din bil i fokus.</small></span></div><div><i><Icon name="wrench" /></i><span><b>Erfarna mekaniker</b><small>Mångårig erfarenhet.</small></span></div><div><i><Icon name="clock" /></i><span><b>Tryggt och enkelt</b><small>Från bokning till färdig bil.</small></span></div></div><GoogleReviewsCard variant="hero-overlay" /></div></div></section>
+  return (
+    <main className="landing-v2">
+      <section className="bb-hero" aria-labelledby="landing-v2-hero-title">
+        <picture className="bb-hero__media">
+          <source srcSet={heroWebp} type="image/webp" />
+          <img src={heroJpg} alt="Honda CR-V i verkstaden vid solnedgång" />
+        </picture>
+        <div className="bb-hero__shade" aria-hidden="true" />
+        <PublicHeader onBookingClick={() => setBookingOpen(true)} variant="overlay" />
+        <div className="bb-wrap bb-hero__content">
+          <div className="bb-hero__copy">
+            <p className="bb-eyebrow bb-eyebrow--dark">Din lokala bilverkstad i Gävle</p>
+            <h1 id="landing-v2-hero-title" className="bb-h1">
+              <span>Din bil</span>
+              <span className="bb-accent">förtjänar</span>
+              <span>det bästa</span>
+            </h1>
+            <p>
+              Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation – för alla bilmärken, till konkurrenskraftiga priser.
+            </p>
+            <div className="bb-hero__actions">
+              <button className="bb-btn bb-btn--teal" type="button" onClick={() => setBookingOpen(true)}>
+                <Icon name="calendar" />
+                Boka tid
+              </button>
+              <a className="bb-btn bb-btn--ember" href="tel:+46705533395">
+                <Icon name="phone" />
+                Ring oss nu
+              </a>
+            </div>
+          </div>
+          <div className="bb-hero__bottom">
+            <div className="bb-trust-row">
+              <div className="bb-trust-row__item">
+                <i className="bb-icon-bare"><Icon name="shield" /></i>
+                <span className="bb-trust-row__text"><b>Personlig service</b><small>Du och din bil i fokus.</small></span>
+              </div>
+              <div className="bb-trust-row__item">
+                <i className="bb-icon-bare"><Icon name="wrench" /></i>
+                <span className="bb-trust-row__text"><b>Erfarna mekaniker</b><small>Mångårig erfarenhet.</small></span>
+              </div>
+              <div className="bb-trust-row__item">
+                <i className="bb-icon-bare"><Icon name="clock" /></i>
+                <span className="bb-trust-row__text"><b>Tryggt och enkelt</b><small>Från bokning till färdig bil.</small></span>
+              </div>
+            </div>
+            <GoogleReviewsCard variant="hero-overlay" />
+          </div>
+        </div>
+      </section>
 
-  <ContactFormCard variant="full-section" />
+      <ContactFormCard variant="full-section" />
 
-  <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title"><img src={mechanicDiagnostic} alt="Mekaniker som arbetar med diagnostik i verkstaden" /><div className="landing-v2__why-shade" aria-hidden="true" /><div className="landing-v2__wrap landing-v2__why-content"><div><p className="landing-v2__eyebrow landing-v2__eyebrow--dark">Varför välja Brynäs Bilservice?</p><h2 id="landing-v2-why-title">Trygg bilservice<br />i <span className="landing-v2__accent">lokala Gävle</span></h2><p>Vi kombinerar erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.</p><Link className="landing-v2__book" to="/om-oss">Läs mer om oss <Icon name="arrow" /></Link></div><ul><li><i><Icon name="chat" /></i><span><b>Tydlig kommunikation</b><small>Vi håller dig uppdaterad genom hela processen.</small></span></li><li><i><Icon name="shield" /></i><span><b>Omsorg om din bil</b><small>Vi arbetar noggrant och med rätt kunskap.</small></span></li><li><i><Icon name="wrench" /></i><span><b>Personlig service</b><small>Du och din bil är alltid i fokus.</small></span></li><li><i><Icon name="pin" /></i><span><b>Lokal verkstad</b><small>Nära dig i Brynäs, Gävle.</small></span></li></ul></div></section>
+      <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
+        <img src={mechanicDiagnostic} alt="Mekaniker som arbetar med diagnostik i verkstaden" />
+        <div className="landing-v2__why-shade" aria-hidden="true" />
+        <div className="bb-wrap landing-v2__why-content">
+          <div>
+            <p className="bb-eyebrow bb-eyebrow--dark">Varför välja Brynäs Bilservice?</p>
+            <h2 id="landing-v2-why-title" className="bb-h2">
+              Trygg bilservice<br />i <span className="bb-accent">lokala Gävle</span>
+            </h2>
+            <p className="bb-lead--dark">
+              Vi kombinerar erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.
+            </p>
+            <Link className="bb-btn bb-btn--teal" to="/om-oss">
+              Läs mer om oss <Icon name="arrow" />
+            </Link>
+          </div>
+          <ul className="bb-card--glass">
+            <li>
+              <i className="bb-icon-badge"><Icon name="chat" /></i>
+              <span><b>Tydlig kommunikation</b><small>Vi håller dig uppdaterad genom hela processen.</small></span>
+            </li>
+            <li>
+              <i className="bb-icon-badge"><Icon name="shield" /></i>
+              <span><b>Omsorg om din bil</b><small>Vi arbetar noggrant och med rätt kunskap.</small></span>
+            </li>
+            <li>
+              <i className="bb-icon-badge"><Icon name="wrench" /></i>
+              <span><b>Personlig service</b><small>Du och din bil är alltid i fokus.</small></span>
+            </li>
+            <li>
+              <i className="bb-icon-badge"><Icon name="pin" /></i>
+              <span><b>Lokal verkstad</b><small>Nära dig i Brynäs, Gävle.</small></span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-  <section className="landing-v2__services-section" aria-labelledby="landing-v2-services-title"><div className="landing-v2__wrap landing-v2__services-layout"><header><p className="landing-v2__eyebrow">Vad vi hjälper dig med</p><h2 id="landing-v2-services-title">Service för<br /><span className="landing-v2__accent">hela bilen</span></h2><p>Vi utför allt från regelbunden service och mekaniska reparationer till avancerad diagnostik, däckservice och AC-service för alla bilmärken.</p><Link className="landing-v2__book" to="/biltjanster">Se alla tjänster <Icon name="arrow" /></Link></header><div className="landing-v2__service-grid">{services.map(service => <Link key={service.to} to={service.to} className="landing-v2__service-card"><img src={service.image} alt="" /><div className="landing-v2__service-card-shade" /><div className="landing-v2__service-card-content"><h3>{service.title}</h3><p>{service.desc}</p><span><Icon name="arrow" /></span></div></Link>)}</div></div></section>
+      <section className="landing-v2__services-section" aria-labelledby="landing-v2-services-title">
+        <div className="bb-wrap landing-v2__services-layout">
+          <header>
+            <p className="bb-eyebrow">Vad vi hjälper dig med</p>
+            <h2 id="landing-v2-services-title" className="bb-h2">
+              Service för<br /><span className="bb-accent">hela bilen</span>
+            </h2>
+            <p className="bb-lead">
+              Vi utför allt från regelbunden service och mekaniska reparationer till avancerad diagnostik, däckservice och AC-service för alla bilmärken.
+            </p>
+            <Link className="bb-btn bb-btn--ember-solid" to="/biltjanster">
+              Se alla tjänster <Icon name="arrow" />
+            </Link>
+          </header>
+          <div className="landing-v2__service-grid">
+            {services.map(service => (
+              <Link key={service.to} to={service.to} className="landing-v2__service-card bb-card--photo">
+                <img src={service.image} alt="" />
+                <div className="landing-v2__service-card-content">
+                  <h3>{service.title}</h3>
+                  <p>{service.desc}</p>
+                  <span className="bb-card-arrow"><Icon name="arrow" /></span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-  <section className="landing-v2__process-section" aria-labelledby="landing-v2-process-title"><img src={wrenchWorkbench} alt="Arbetsbänk med verktyg i Brynäs Bilservice verkstad" /><div className="landing-v2__process-shade" aria-hidden="true" /><div className="landing-v2__wrap landing-v2__process-content"><div><p className="landing-v2__eyebrow landing-v2__eyebrow--dark">Så går det till</p><h2 id="landing-v2-process-title">Så går det till<br /><span className="landing-v2__accent">hos oss</span></h2><p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p><a className="landing-v2__book" href="tel:+46705533395"><Icon name="phone" />Ring oss: 070–553 33 95</a></div><ol>{process.map(([number, title, text]) => <li key={number}><b>{number}</b><i><Icon name={number === '01' ? 'calendar' : number === '02' ? 'monitor' : number === '03' ? 'wrench' : number === '04' ? 'car' : 'check'} /></i><h3>{title}</h3><p>{text}</p></li>)}</ol></div></section>
+      <section className="landing-v2__process-section" aria-labelledby="landing-v2-process-title">
+        <img src={wrenchWorkbench} alt="Arbetsbänk med verktyg i Brynäs Bilservice verkstad" />
+        <div className="landing-v2__process-shade" aria-hidden="true" />
+        <div className="bb-wrap landing-v2__process-content">
+          <div>
+            <p className="bb-eyebrow bb-eyebrow--dark">Så går det till</p>
+            <h2 id="landing-v2-process-title" className="bb-h2">
+              Så går det till<br /><span className="bb-accent">hos oss</span>
+            </h2>
+            <p className="bb-lead--dark">
+              Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.
+            </p>
+            <a className="bb-btn bb-btn--teal" href="tel:+46705533395">
+              <Icon name="phone" />
+              Ring oss: 070–553 33 95
+            </a>
+          </div>
+          <ol className="bb-process-grid">
+            {process.map(([number, title, text]) => (
+              <li key={number}>
+                <b>{number}</b>
+                <i className="bb-icon-bare">
+                  <Icon name={number === '01' ? 'calendar' : number === '02' ? 'monitor' : number === '03' ? 'wrench' : number === '04' ? 'car' : 'check'} />
+                </i>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-  <section className="landing-v2__about-section" aria-labelledby="landing-v2-about-title"><div className="landing-v2__wrap landing-v2__about-grid"><GalleryTeaserCard /><div className="landing-v2__about-copy"><p className="landing-v2__eyebrow">Om Brynäs Bilservice</p><h2 id="landing-v2-about-title">Lokal verkstad.<br /><span className="landing-v2__accent">Personlig service.</span></h2><p>Brynäs Bilservice grundades 2021 och är din lokala, oberoende verkstad i Brynäs, Gävle. Vi brinner för bilar och för människorna som kör dem. Hos oss möts du av erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.</p><p>Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.</p><Link className="landing-v2__book" to="/om-oss">Läs mer om oss <Icon name="arrow" /></Link></div></div></section>
+      <section className="landing-v2__about-section" aria-labelledby="landing-v2-about-title">
+        <div className="bb-wrap landing-v2__about-grid">
+          <GalleryTeaserCard />
+          <div className="landing-v2__about-copy">
+            <p className="bb-eyebrow">Om Brynäs Bilservice</p>
+            <h2 id="landing-v2-about-title" className="bb-h2">
+              Lokal verkstad.<br /><span className="bb-accent">Personlig service.</span>
+            </h2>
+            <p className="bb-lead">
+              Brynäs Bilservice grundades 2021 och är din lokala, oberoende verkstad i Brynäs, Gävle. Vi brinner för bilar och för människorna som kör dem. Hos oss möts du av erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.
+            </p>
+            <p className="bb-lead">
+              Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
+            </p>
+            <Link className="bb-btn bb-btn--ember-solid" to="/om-oss">
+              Läs mer om oss <Icon name="arrow" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-  <section className="landing-v2__cars-section" aria-labelledby="landing-v2-cars-title"><img src={vehicleForSale} alt="Begagnad bil till salu hos Brynäs Bilservice" /><div className="landing-v2__cars-shade" aria-hidden="true" /><div className="landing-v2__wrap landing-v2__cars-content"><div><p className="landing-v2__eyebrow landing-v2__eyebrow--dark">Kvalitetskontrollerade fordon</p><h2 id="landing-v2-cars-title">Letar du efter en <span className="landing-v2__accent">begagnad bil?</span></h2><p>Vi säljer även noggrant genomgångna och besiktigade begagnade bilar i Gävle. Varje bil kontrolleras av våra mekaniker innan försäljning.</p><Link className="landing-v2__book" to="/bilar-till-salu">Se bilar till salu <Icon name="arrow" /></Link></div></div></section>
+      <section className="landing-v2__cars-section" aria-labelledby="landing-v2-cars-title">
+        <img src={vehicleForSale} alt="Begagnad bil till salu hos Brynäs Bilservice" />
+        <div className="landing-v2__cars-shade" aria-hidden="true" />
+        <div className="bb-wrap landing-v2__cars-content">
+          <div>
+            <p className="bb-eyebrow bb-eyebrow--dark">Kvalitetskontrollerade fordon</p>
+            <h2 id="landing-v2-cars-title" className="bb-h2">
+              Letar du efter en <span className="bb-accent">begagnad bil?</span>
+            </h2>
+            <p className="bb-lead--dark">
+              Vi säljer även noggrant genomgångna och besiktigade begagnade bilar i Gävle. Varje bil kontrolleras av våra mekaniker innan försäljning.
+            </p>
+            <Link className="bb-btn bb-btn--teal" to="/bilar-till-salu">
+              Se bilar till salu <Icon name="arrow" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-  <PublicFooter onBookingClick={() => setBookingOpen(true)} /><BookingFormModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} /></main>
+      <PublicFooter onBookingClick={() => setBookingOpen(true)} />
+      <BookingFormModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+    </main>
+  )
 }
