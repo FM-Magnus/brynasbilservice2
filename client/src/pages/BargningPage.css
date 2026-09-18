@@ -305,6 +305,13 @@
   z-index: 2;
 }
 
+.bargning-page__showcase-location-badge svg {
+  color: var(--bb-color-amber-400);
+  flex-shrink: 0;
+  height: 14px;
+  width: 14px;
+}
+
 .bargning-page__showcase-content {
   color: var(--bb-color-text-inverse);
   display: flex;
