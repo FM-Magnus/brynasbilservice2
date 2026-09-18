@@ -2,6 +2,29 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (Documentation Synchronization & Pre-Phase 2 Alignment)
+
+- **Roadmap & Architecture Synchronization**:
+  - `HITL_Temporary_roadmap.md`:
+    - Updated Step 3 to `[COMPLETED & LOCKED]` (both `/kontakt` and `/om-oss` are fully rebuilt from scratch on independent CSS islands, verified via Playwright, and live).
+    - Updated Step 6 to `[IN PROGRESS: Biltjänster & Bärgning COMPLETE]` reflecting that `/bargning` is rebuilt, token-aligned, and verified with Playwright. Remaining Step 6 pages are `Bilar till salu` and `Galleri`.
+    - Clarified Step 5 with `Kamrem` as the single First Sibling Proof.
+  - `docs/CSS_OWNERSHIP.md`:
+    - Corrected `/kontakt` class prefix in §2 table from `.contact-page__*` to `.kontakt-page__*` (preventing collision with legacy `index.css`).
+    - Clarified `BiltjansterPage.css` (`.biltjanster-hub__*`) in §2 list.
+  - `docs/AGENT_HANDOFF.md`:
+    - Synchronized unique pages list to include completed `Om oss` (`/om-oss`) and `Bärgning` (`/bargning`).
+    - Aligned immediate next task options with Phase 2 First Sibling Proof (`Kamrem`).
+- **Phase 1 Hardening (Commit `a24a481e`)**:
+  - `BookingForm.tsx`: Reverted `toISOString().split('T')[0]` date serialization to avoid timezone shift; preserved clean `Date | null` typing.
+  - `PublicFooter.css`: Added explicit `width: 18px; height: 18px` for `.bb-footer__social-btn svg` (eliminated implicit sizing risk).
+  - `.githooks/pre-commit`: Replaced hard line limit on `AGENTS.md` with mechanical Tailwind boundary check (`check_no_tailwind_in_public`) scanning staged public TSX files for utility classes while ignoring BEM classes.
+- **Verification**:
+  - `npm --prefix client run typecheck`: 0 errors.
+  - `npm --prefix client run build`: 0 errors (1.85s).
+  - `npm --prefix client run test:browser`: 12/12 Playwright tests passed with $\Delta = 0\text{px}$ overflow.
+  - `client/src/css/index.css`: 100% frozen (0 lines changed).
+
 ### 2026-09-18 — Antigravity (Phase 1: Foundation Validation, Manifest Trap Neutralization & TypeScript Baseline Hardening)
 
 - **Root Manifest Trap Neutralized (F-00, HIGH RISK)**:

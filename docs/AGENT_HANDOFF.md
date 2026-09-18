@@ -29,18 +29,21 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
   - **Level 0 Public Shell & Canonical Design Tokens**: Completed & locked (`design-tokens.css`, `shared-elements.css`, `PublicHeader`, `PublicFooter`, `GalleryTeaserCard`, `GoogleReviewsCard`, `ContactFormCard`).
   - **Unique Pages**:
     - Startsidan (`/`): Complete (`LandingPage.tsx` / `LandingPage.css`, `.landing-v2__*`).
-    - Kontakt (`/kontakt`): Complete (`ContactPage.tsx` / `ContactPage.css`, `.kontakt-page__*`), mounts `PublicHeader` + `PublicFooter` + `ContactFormCard`.
+    - Om oss (`/om-oss`): Complete (`AboutPage.tsx` / `AboutPage.css`, `.omoss-page__*`), mounts `PublicHeader` + `PublicFooter` + `GalleryTeaserCard`.
+    - Kontakt (`/kontakt`): Complete (`ContactPage.tsx` / `ContactPage.css`, `.kontakt-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` + `ContactFormCard`.
+    - Bärgning (`/bargning`): Complete (`BargningPage.tsx` / `BargningPage.css`, `.bargning-page__*`), mounts `PublicHeader` + `PublicFooter`.
     - Biltjänster (`/biltjanster`): Complete (`BiltjansterPage.tsx` / `BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter`.
+    - Remaining unique pages to rebuild: `Bilar till salu` (`/bilar-till-salu`), `Galleri` (`/galleri`).
   - **Bilservice Family (Parent complete)**:
     - Bilservice (`/service-reparationer`): Complete on `.bb-hero` layout system, `--bb-*` tokens, mounts `PublicHeader` + `PublicFooter`.
     - Next in family: Rebuild `Felsökning` (`/felsokning`), `Däckservice` (`/dackservice`), `AC-service` (`/ac-service`) on family template.
   - **Guide Family (4 Pilots complete & Second Pass verified)**:
     - `Koppling` (`/koppling`), `Avgassystem` (`/avgassystem`), `Bromssystem` (`/bromssystem`), and `Oljebyte` (`/oljebyte`) are fully aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
-    - Next in family: Migrate `Kamrem` (`/kamrem`) & `Bilbatteri` (`/bilbatteri`) onto `ServiceGuideTemplate.css`.
+    - Next in family: Execute Phase 2 First Sibling Proof with `Kamrem` (`/kamrem`) onto `ServiceGuideTemplate.css`, followed by `Bilbatteri` (`/bilbatteri`) and remaining 4 guides.
 - **IMMEDIATE NEXT TASKS (Options for user)**:
-  1. **Option A (Step 3)**: Rebuild **`Om oss`** (`/om-oss`) from scratch as unique page (`AboutPage.tsx` + dedicated `AboutPage.css`, `.omoss-page__*`), mounting `PublicHeader` + `PublicFooter` + `GalleryTeaserCard`.
-  2. **Option B (Step 5)**: Migrate **`Kamrem`** (`/kamrem`) & **`Bilbatteri`** (`/bilbatteri`) onto `ServiceGuideTemplate.css`.
-  3. **Option C (Step 4)**: Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template (`ServiceReparationerPage.css`).
+  1. **Option A (Step 5 / Phase 2)**: Execute **First Sibling Proof with `Kamrem`** (`/kamrem`) onto `ServiceGuideTemplate.css` with canonical Public Shell and DOM structure aligned to proof pages (`AvgassystemPage.tsx`, `BromssystemPage.tsx`).
+  2. **Option B (Step 4)**: Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template (`ServiceReparationerPage.css`).
+  3. **Option C (Step 6)**: Rebuild **`Bilar till salu`** (`/bilar-till-salu`) or **`Galleri`** (`/galleri`) as standalone unique page.
 
 ## Authority and references
 

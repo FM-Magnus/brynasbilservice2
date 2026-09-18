@@ -42,11 +42,11 @@ The redesign public shell is independent from the frozen legacy layer.
 2. **The 7 unique, standalone pages** — each owns its own bespoke design and its own colocated CSS island. No shared page template between them.
    - `Startsidan` (`/`) — `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`). Complete.
    - `Om oss` (`/om-oss`) — `AboutPage.tsx` + `AboutPage.css` (`.omoss-page__*`). Complete. Rebuilt from approved mockup with zero dependency on `index.css`.
-   - `Kontakt` (`/kontakt`) — `ContactPage.tsx` + `ContactPage.css` (`.contact-page__*`).
+   - `Kontakt` (`/kontakt`) — `ContactPage.tsx` + `ContactPage.css` (`.kontakt-page__*`). Complete. Rebuilt from approved mockup with zero dependency on `index.css`, mounts `PublicHeader` (overlay) + `PublicFooter`.
    - `Bärgning` (`/bargning`) — `BargningPage.tsx` + `BargningPage.css` (`.bargning-page__*`). Complete. Rebuilt from approved mockup with zero dependency on `index.css`, mounts `PublicHeader` + `PublicFooter`.
    - `Bilar till salu` (`/bilar-till-salu`) — `BilarTillSalu.tsx` + dedicated CSS.
    - `Galleri` (`/galleri`) — `GalleryPage.tsx` + dedicated CSS.
-   - `Biltjänster` (`/biltjanster`) — `BiltjansterPage.tsx` + dedicated CSS. The service-catalog overview/index page; links out to every page in both families below.
+   - `Biltjänster` (`/biltjanster`) — `BiltjansterPage.tsx` + `BiltjansterPage.css` (`.biltjanster-hub__*`). Complete. The service-catalog overview/index page; links out to every page in both families below.
 
 3. **"Bilservice" family (shared template)** — major service-hub pages, all structurally the same kind of page:
    - *Owner*: `ServiceReparationerPage.tsx` + `ServiceReparationerPage.css` (`.bilservice__*`).

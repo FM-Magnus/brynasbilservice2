@@ -107,15 +107,12 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 3: Build Om oss & Kontakt as Unique Pages `[IN PROGRESS: Kontakt COMPLETE, Om oss PENDING]`
+### Step 3: Build Om oss & Kontakt as Unique Pages `[COMPLETED & LOCKED]`
 - **Why this order**: These are the two most-trafficked pages after the landing page, and their content (personal brand story, direct contact/booking) is closest in tone to the landing page's proof already built — but each still needs its own dedicated visual identity and CSS island, not a shared "Style 1" template.
 - **Status**:
   - **`/kontakt` (COMPLETE)**: Rebuilt from scratch (`ContactPage.tsx` + dedicated `ContactPage.css`, `.kontakt-page__*`). Mounted `<PublicHeader />` (overlay) and `<PublicFooter />`, integrated `<ContactFormCard />`, direct phone CTA, Google Maps card, verified hours. Playwright verified across 1440, 768, 390 with $\Delta = 0\text{px}$ overflow.
-  - **`/om-oss` (PENDING - NEXT UNIQUE PAGE)**: Rebuild `AboutPage.tsx` + dedicated `AboutPage.css` (`.omoss-page__*` to avoid legacy collisions). Authentic Maher Basher portrait, company transparency, "15%-regeln" consumer proof, workshop history, `<GalleryTeaserCard />`. Mount `<PublicHeader />` and `<PublicFooter />`.
-- **Your Job (HITL Decision)**:
-  - Test `/kontakt` in the browser. Next up: approve rebuild of `/om-oss`.
-- **Steering Prompt**:
-  > *"Rebuild Om oss (/om-oss) from scratch as its own unique page, using the canonical --bb-* tokens and public shell. Wrap it in PublicHeader and PublicFooter."*
+  - **`/om-oss` (COMPLETE)**: Rebuilt from scratch (`AboutPage.tsx` + dedicated `AboutPage.css`, `.omoss-page__*`). Authentic Maher Basher portrait, company transparency, "15%-regeln" consumer proof, workshop history, `<GalleryTeaserCard />`. Mounted `<PublicHeader />` and `<PublicFooter />`. Playwright verified across 1440, 768, 390 with $\Delta = 0\text{px}$ overflow.
+- **Verification**: Verified via Playwright at 1440px, 768px, and 390px with zero horizontal overflow; 0 lines added to `index.css`.
 
 ---
 
@@ -143,7 +140,7 @@ Use this section to know **what the agent is doing**, **what you need to review/
   - **`Oljebyte` (`/oljebyte`)**: Complete & Second Pass verified (full-page topic blocks wrapped in `.bb-wrap`).
 - **Agent's Job (Next in this family)**:
   - Migrate the remaining six guides onto `ServiceGuideTemplate.css` in pairs:
-    1. **`Kamrem`** (`/kamrem`) & **`Bilbatteri`** (`/bilbatteri`)
+    1. **`Kamrem`** (`/kamrem`) & **`Bilbatteri`** (`/bilbatteri`) [Note: Kamrem is the First Sibling Proof]
     2. **`Stötdämpare & fjädrar`** (`/stodampare-fjadrar`) & **`Hjullagerbyte`** (`/hjullagerbyte`)
     3. **`Styrning & kulleder`** (`/styrning-kulleder`) & **`Drivaxel & drivknutar`** (`/drivaxel-drivknutar`)
   - Each guide mounts `<PublicHeader />` and `<PublicFooter />`, consumes `ServiceGuideTemplate.css`, and follows the mixed-case Archivo 800 heading standard.
@@ -154,15 +151,15 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 6: Build the Remaining Unique Pages `[IN PROGRESS: Biltjänster COMPLETE]`
+### Step 6: Build the Remaining Unique Pages `[IN PROGRESS: Biltjänster & Bärgning COMPLETE]`
 - **Why this order**: `Bärgning`, `Bilar till salu`, `Galleri`, and `Biltjänster` don't share a template with each other or with anything else; each has its own unique UI requirements.
 - **Status**:
   - **`Biltjänster` (`/biltjanster`) (COMPLETE)**: Rebuilt as the service-catalog hub (`BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `<PublicHeader />` and `<PublicFooter />`.
-- **Agent's Job (Next in this group)**:
-  - Rebuild **`Bärgning`** (`/bargning`) as its own unique page (`BargningPage.css`, `.bargning-hub__*` or similar distinct prefix) — towing/transport dispatch focus, direct-call CTA.
+  - **`Bärgning` (`/bargning`) (COMPLETE)**: Rebuilt from scratch (`BargningPage.tsx` + dedicated `BargningPage.css`, `.bargning-page__*`). Towing and breakdown dispatch focus, showcase split card, direct-call CTA, used-cars promo banner, emergency closing card. Mounted `<PublicHeader />` and `<PublicFooter />`. Playwright verified across 1440, 768, 390 with $\Delta = 0\text{px}$ overflow.
+- **Agent's Job (Remaining in this group)**:
   - Rebuild **`Bilar till salu`** (`/bilar-till-salu`) as its own unique page — vehicle spec badges, multi-photo viewer, and inquiry modal.
   - Rebuild **`Galleri`** (`/galleri`) as its own unique page — image-first layout and workshop overview.
-  - Mount `<PublicHeader />` and `<PublicFooter />` on all three.
+  - Mount `<PublicHeader />` and `<PublicFooter />` on both.
 - **Your Job (HITL Decision)**:
   - Inspect vehicle photos, test the gallery viewer, verify inquiry call-to-actions, and confirm all pages link to the public shell.
 
