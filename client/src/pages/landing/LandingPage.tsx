@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { BookingFormModal } from '../../components/BookingForm'
@@ -7,6 +7,7 @@ import { PublicFooter } from '../../components/layout/PublicFooter'
 import heroWebp from '../../assets/images/home/landing-v2/landing-sundown-hero.webp'
 import heroJpg from '../../assets/images/home/landing-v2/landing-sundown-hero.jpg'
 import { GalleryTeaserCard } from '../../components/ui/GalleryTeaserCard'
+import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import mechanicDiagnostic from '../../assets/images/services/diagnostics/diagnostics-mechanic-laptop-workshop.webp'
 import wrenchWorkbench from '../../assets/images/services/general/wrench-and-bolt-workbench.webp'
 import tireStorage from '../../assets/images/services/tires/tire-storage-rack.webp'
@@ -39,11 +40,6 @@ function Icon({ name, className = '' }: { name: IconName; className?: string }) 
   return <svg {...common}>{paths[name]}</svg>
 }
 
-function Star({ size = 15 }: { size?: number }) {
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="#FBBC04" stroke="#FBBC04" strokeWidth="1.2" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2 1.2-6.8-5-4.9 6.9-1L12 2Z" /></svg>
-}
-
-const reviews = [{ name: 'Inge', text: 'Fantastisk hjälp när vi hade bilproblem runt jul. Hjälpte till att ordna en hyrbil så att vi kunde fortsätta vår resa.' }, { name: 'Olle Blomgren', text: 'Fick problem med bromsok när jag var på väg hem efter semestern. Snabbt, schysst och professionellt.' }, { name: 'J. Niva', text: 'Utmärkt kundbemötande och bra priser. Har haft min bil på service och reparationer här flera gånger.' }, { name: 'Gunilla Lövgren', text: 'Mycket bra jobb, bra kundbemötande och hjälpsamma med beställning av tillbehör.' }]
 const services = [
   { title: 'Bilservice och reparationer', desc: 'Underhåll, oljebyte, bromsar, kamrem och mekaniska reparationer.', to: '/service-reparationer#bilservice', icon: 'wrench' as const, image: wrenchWorkbench },
   { title: 'Felsökning och diagnostik', desc: 'Felkodsläsning och noggrann analys av modern fordonselektronik.', to: '/felsokning', icon: 'monitor' as const, image: mechanicDiagnostic },
@@ -51,13 +47,6 @@ const services = [
   { title: 'AC-service', desc: 'Felsökning, provtryckning och påfyllning för god kupékomfort.', to: '/ac-service', icon: 'snowflake' as const, image: acManometers },
 ]
 const process = [['01', 'Bokning och inlämning', 'Du bokar en tid som passar din bil.'], ['02', 'Initial kontroll', 'Vi gör en första bedömning av behovet.'], ['03', 'Service enligt checklista', 'Arbetet följer den servicenivå som är aktuell.'], ['04', 'Godkännande vid extraarbete', 'Vi kontaktar dig innan vi går vidare.'], ['05', 'Slutkontroll och rapport', 'Du får en genomgång när bilen är klar.']]
-
-function LandingReviews() {
-  const [active, setActive] = useState(0)
-  useEffect(() => { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; const timer = window.setInterval(() => setActive(index => (index + 1) % reviews.length), 8000); return () => window.clearInterval(timer) }, [])
-  const review = reviews[active]
-  return <a className="landing-v2__reviews" href="https://maps.app.goo.gl/rXR1nz2RwaUQcvuW9" target="_blank" rel="noopener noreferrer" aria-label="Brynäs Bilservice har betyget 4,3 av 5 baserat på 50 omdömen. Läs omdömena på Google Maps."><div className="landing-v2__rating"><strong>4,3</strong><span className="landing-v2__stars">{[1, 2, 3, 4, 5].map(star => <Star key={star} />)}</span><small>50 recensioner</small></div><div className="landing-v2__google"><b>Google</b><small>Omdömen på Google Maps</small></div><div className="landing-v2__review"><span className="landing-v2__review-avatar">{review.name[0]}</span><div className="landing-v2__review-author"><b>{review.name}</b><span className="landing-v2__stars">{[1, 2, 3, 4, 5].map(star => <Star key={star} size={13} />)}</span></div><p>{review.text}</p></div></a>
-}
 
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
@@ -68,7 +57,7 @@ function ContactForm() {
 
 export default function LandingPage() {
   const [bookingOpen, setBookingOpen] = useState(false)
-  return <main className="landing-v2"><section className="landing-v2__hero" aria-labelledby="landing-v2-hero-title"><picture className="landing-v2__hero-media"><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Honda CR-V i verkstaden vid solnedgång" /></picture><div className="landing-v2__hero-shade" aria-hidden="true" /><PublicHeader onBookingClick={() => setBookingOpen(true)} variant="overlay" /><div className="landing-v2__wrap landing-v2__hero-content"><div className="landing-v2__hero-copy"><p className="landing-v2__hero-eyebrow">Din lokala bilverkstad i Gävle</p><h1 id="landing-v2-hero-title"><span>Din bil</span><span className="landing-v2__accent">förtjänar</span><span>det bästa</span></h1><p>Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation – för alla bilmärken, till konkurrenskraftiga priser.</p><div className="landing-v2__hero-actions"><button className="landing-v2__book" type="button" onClick={() => setBookingOpen(true)}><Icon name="calendar" />Boka tid</button><a className="landing-v2__call" href="tel:+46705533395"><Icon name="phone" />Ring oss nu</a></div></div><div className="landing-v2__hero-bottom"><div className="landing-v2__trust-row"><div><i><Icon name="shield" /></i><span><b>Personlig service</b><small>Du och din bil i fokus.</small></span></div><div><i><Icon name="wrench" /></i><span><b>Erfarna mekaniker</b><small>Mångårig erfarenhet.</small></span></div><div><i><Icon name="clock" /></i><span><b>Tryggt och enkelt</b><small>Från bokning till färdig bil.</small></span></div></div><LandingReviews /></div></div></section>
+  return <main className="landing-v2"><section className="landing-v2__hero" aria-labelledby="landing-v2-hero-title"><picture className="landing-v2__hero-media"><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Honda CR-V i verkstaden vid solnedgång" /></picture><div className="landing-v2__hero-shade" aria-hidden="true" /><PublicHeader onBookingClick={() => setBookingOpen(true)} variant="overlay" /><div className="landing-v2__wrap landing-v2__hero-content"><div className="landing-v2__hero-copy"><p className="landing-v2__hero-eyebrow">Din lokala bilverkstad i Gävle</p><h1 id="landing-v2-hero-title"><span>Din bil</span><span className="landing-v2__accent">förtjänar</span><span>det bästa</span></h1><p>Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation – för alla bilmärken, till konkurrenskraftiga priser.</p><div className="landing-v2__hero-actions"><button className="landing-v2__book" type="button" onClick={() => setBookingOpen(true)}><Icon name="calendar" />Boka tid</button><a className="landing-v2__call" href="tel:+46705533395"><Icon name="phone" />Ring oss nu</a></div></div><div className="landing-v2__hero-bottom"><div className="landing-v2__trust-row"><div><i><Icon name="shield" /></i><span><b>Personlig service</b><small>Du och din bil i fokus.</small></span></div><div><i><Icon name="wrench" /></i><span><b>Erfarna mekaniker</b><small>Mångårig erfarenhet.</small></span></div><div><i><Icon name="clock" /></i><span><b>Tryggt och enkelt</b><small>Från bokning till färdig bil.</small></span></div></div><GoogleReviewsCard variant="hero-overlay" /></div></div></section>
 
   <section className="landing-v2__contact-section" aria-labelledby="landing-v2-contact-title"><svg className="landing-v2__contact-art" viewBox="0 0 450 450" fill="none" aria-hidden="true"><path d="M75 140C50 115 50 75 75 50c25-25 65-25 90 0 15 15 20 35 15 55l80 80-35 35-80-80c-20 5-40 0-55-15Z" /><circle cx="90" cy="360" r="140" /><circle cx="90" cy="360" r="200" /></svg><div className="landing-v2__wrap landing-v2__contact-grid"><div className="landing-v2__contact-copy"><h2 id="landing-v2-contact-title">Hör av dig<br /><span className="landing-v2__accent">till oss</span></h2><p>Har du frågor, vill boka tid eller behöver rådgivning? Skicka ett meddelande så återkommer vi så snart vi kan.</p><div className="landing-v2__contact-list"><a href="tel:+46705533395"><i><Icon name="phone" /></i><span><small>Ring oss</small><b>070–553 33 95</b></span></a><a href="mailto:info@brynasbilservice.se"><i><Icon name="mail" /></i><span><small>Mejla oss</small><b>info@brynasbilservice.se</b></span></a><a href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle" target="_blank" rel="noopener noreferrer"><i><Icon name="pin" /></i><span><small>Besök oss</small><b>Utmarksvägen 21B<br />802 91 Gävle</b></span></a></div><p className="landing-v2__contact-note">Fyll i formuläret så återkommer vi till dig så snart som möjligt!</p></div><div className="landing-v2__form-card"><h2>Skicka ett meddelande</h2><p>Berätta hur vi kan hjälpa dig. Obligatoriska fält är markerade med *.</p><ContactForm /></div></div></section>
 

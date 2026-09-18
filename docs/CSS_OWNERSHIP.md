@@ -23,6 +23,7 @@ The redesign public shell is independent from the frozen legacy layer.
 - `client/src/components/layout/PublicHeader.tsx` and `PublicHeader.css` own the new shared header. It must not import `Header.tsx`, use legacy selectors or Tailwind utilities, or rely on `index.css` layout/control rules.
 - `client/src/components/layout/PublicFooter.tsx` and `PublicFooter.css` own the canonical shared footer matching the approved automotive mockup. It must not import legacy `Footer.tsx`, use legacy selectors or Tailwind utilities, or rely on `index.css` rules.
 - `client/src/components/ui/GalleryTeaserCard.tsx` and `GalleryTeaserCard.css` own the reusable interactive Ken Burns workshop slideshow card with a single-source slide registry (`defaultWorkshopSlides`).
+- `client/src/components/ui/GoogleReviewsCard.tsx` and `GoogleReviewsCard.css` own the standalone Google reviews UI component with single-source review registry (`defaultGoogleReviews`) and cyclic rotation (`.bb-reviews-card*`).
 - The legacy `Header.tsx`, `Footer.tsx` and `BookingForm.tsx` remain untouched until separately retired. A new page receives booking behaviour through callbacks or modals, mounting `PublicHeader` and `PublicFooter` directly.
 
 ## The 7-Style Rebuild Architecture (Master Blueprint)
@@ -33,6 +34,7 @@ The entire site is being rebuilt away from `index.css` into a canonical design t
    - `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens (colors, Archivo display/Manrope body type scales, radii, spacing, shadows).
    - `client/src/data/publicNavigation.ts` + `PublicHeader.tsx` / `PublicHeader.css` (free-standing navigation element) + `PublicFooter.tsx` / `PublicFooter.css` (canonical standalone global footer).
    - `client/src/components/ui/GalleryTeaserCard.tsx` / `GalleryTeaserCard.css` (reusable standalone workshop teaser card).
+   - `client/src/components/ui/GoogleReviewsCard.tsx` / `GoogleReviewsCard.css` (reusable standalone Google reviews card/overlay).
 
 2. **Style 1: Brand & Conversion Hub (Parent: Startsidan `/`)**:
    - *Parent*: `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`).

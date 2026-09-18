@@ -2,6 +2,17 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (Extract standalone reusable GoogleReviewsCard component)
+
+- Extracted the Google reviews module from `LandingPage.tsx` / `LandingPage.css` into a standalone, reusable Level 0 UI component: `client/src/components/ui/GoogleReviewsCard.tsx` and `GoogleReviewsCard.css`.
+- Single Source of Truth: Created `defaultGoogleReviews` array with verified Brynäs Bilservice reviews (4.3 rating, 50 reviews, link to Google Maps profile).
+- Multi-variant Architecture: Supports `variant="hero-overlay"` (transparent, text-shadowed, end-aligned for dark heros) and `variant="card"` (self-contained dark ink card with border and shadow for page bodies and sidebars).
+- Accessible & Motion-safe: Encapsulates 8s cyclic rotation, cleans up interval on unmount, respects `prefers-reduced-motion: reduce`, and renders as a single accessible `<a>` tag with clear `aria-label` and visible focus state.
+- Scoped CSS: Powered exclusively by `--bb-*` tokens (`--bb-font-display`, `--bb-font-body`, `--bb-color-amber-500`, `--bb-color-focus`).
+- Integrated into `LandingPage.tsx` and pruned redundant inline `LandingReviews`, inline reviews array, `Star` component, and ~30 lines of legacy `.landing-v2__reviews*` rules.
+- Real-browser verified via Playwright: 3/3 tests passed with 0px horizontal overflow at 1440px desktop, 768px tablet, and 390px mobile viewports; visual review confirmed zero regression.
+- Strict CSS safety: 0 lines edited in `client/src/css/index.css`; client production build succeeded with 0 errors.
+
 ### 2026-09-17 — Antigravity (Landing Page: Eyebrow Preceding Lines & Amber Accent on Dark Cards)
 
 - Added the standard preceding 23px accent line (`::before`) to all section eyebrows (`.landing-v2__eyebrow`), matching the hero format across the entire landing page.

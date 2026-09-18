@@ -38,6 +38,7 @@ LEVEL 0: CANONICAL GLOBAL LAYER & PUBLIC SHELL (Single Source of Truth)
   • PublicHeader.tsx / PublicHeader.css (Standalone sticky/portal header)
   • PublicFooter.tsx / PublicFooter.css (Standalone global automotive footer)
   • GalleryTeaserCard.tsx / GalleryTeaserCard.css (Standalone workshop slideshow card)
+  • GoogleReviewsCard.tsx / GoogleReviewsCard.css (Standalone Google reviews badge/card)
 ================================================================================
                                 │
         ┌───────────────────────┼───────────────────────┐
@@ -91,12 +92,13 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 2: Extract Canonical Tokens & Build `PublicFooter` & `GalleryTeaserCard` `[COMPLETED & LOCKED]`
+### Step 2: Extract Canonical Tokens & Build Standalone Public Shell Elements `[COMPLETED & LOCKED]`
 - **Status**: Completed.
   - Promoted universal `--bb-*` design tokens into `client/src/styles/design-tokens.css` (colors, Archivo 800 display, Manrope body, amber accent `#f09505`, spacing, `--bb-wrap-max: 1320px`).
   - Built standalone `PublicFooter.tsx` and `PublicFooter.css` faithfully matching Magnus's approved automotive mockup: 4-column layout, centered brand logo/eyebrow/trust badges/handwritten signature, quick links, contact badges, verified opening hours, booking CTA, and dynamic legal sub-footer over atmospheric wheel background asset (`footer-wheel-bg.webp`).
   - Extracted standalone `GalleryTeaserCard.tsx` and `GalleryTeaserCard.css` with single-source `defaultWorkshopSlides` array for site-wide Ken Burns workshop teasers.
-  - Mounted both on `LandingPage.tsx` and pruned redundant legacy CSS.
+  - Extracted standalone `GoogleReviewsCard.tsx` and `GoogleReviewsCard.css` with single-source `defaultGoogleReviews` array, cyclic review rotation (8s), `prefers-reduced-motion` check, and support for `hero-overlay` and `card` variants.
+  - Mounted on `LandingPage.tsx` and pruned redundant legacy CSS.
 - **Verification**: Verified via Playwright at 1440px, 768px, and 390px with zero horizontal overflow; 0 lines added to `index.css`.
 
 ---
