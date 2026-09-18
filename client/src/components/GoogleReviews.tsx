@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const reviews = [
   { name: 'Inge', rating: 5, text: 'Fantastisk hjälp när vi hade bilproblem runt jul. Hjälpte till att ordna en hyrbil så att vi kunde fortsätta vår resa. Och på vägen tillbaka var den reparerade bilen klar. Topp service!' },

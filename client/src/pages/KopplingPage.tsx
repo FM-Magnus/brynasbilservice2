@@ -3,7 +3,7 @@
 // page has NO dependency on any page-specific rule in client/src/css/index.css.
 // Reuse ServiceGuideTemplate.css for future rebuilds; do not fork its classes
 // into another colocated file, and do not add rules for this page to index.css.
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactElement } from 'react'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
@@ -52,13 +52,20 @@ const importance = [
   { icon: UsersIcon, title: 'Trygghet vid större arbete', text: 'Kopplingsbyte kräver att växellådan demonteras och är inte ett jobb att chansa med utan rätt verktyg och erfarenhet.' },
 ] as const
 
-const symptoms = [
+interface SymptomItem {
+  icon: (props: { className?: string; 'aria-hidden'?: string | boolean }) => ReactElement | null
+  title: string
+  text: string
+  featured?: boolean
+}
+
+const symptoms: readonly SymptomItem[] = [
   { icon: GaugeIcon, title: 'Kopplingen slirar', text: 'Motorvarvtalet stiger utan att farten hänger med. Det märks ofta först i uppförsbacke eller vid hård acceleration, och kan ibland lukta bränt.', featured: true },
   { icon: SlidersIcon, title: 'Greppunkten har flyttat sig', text: 'Om pedalen griper mycket högt upp, nära toppen av rörelsen, är friktionsbelägget ofta kraftigt nedslitet.' },
   { icon: WrenchIcon, title: 'Svårt att lägga i växlar', text: 'Knastrande eller knirrande ljud kan tyda på att kopplingen inte frikopplar ordentligt, ofta på grund av ett urtrampningsproblem.' },
   { icon: WavesIcon, title: 'Vibrationer eller ryck', text: 'När du släpper upp kopplingen kan vibrationer bero på sliten lamell, oljeläckage på belägget eller ett slitet svänghjul.' },
   { icon: Volume2Icon, title: 'Ljud när pedalen trycks ner', text: 'Ett gnisslande eller morrande ljud pekar ofta mot ett slitet urtrampningslager och försvinner ofta när pedalen släpps.' },
-] as const
+]
 
 const serviceItems = [
   'Bedömning av om hela kopplingssatsen behöver bytas eller om felet sitter i en enskild komponent, till exempel urtrampningslagret.',

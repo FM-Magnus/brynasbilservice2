@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type ReactNode } from 'react'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { BookingFormModal } from '../components/BookingForm'
@@ -25,7 +25,7 @@ interface ServiceCategory {
   description: string
   image: string
   imageAlt: string
-  icon: JSX.Element
+  icon: ReactNode
   actionType: 'booking' | 'call'
   items: string[]
   troubleshooting: string[]

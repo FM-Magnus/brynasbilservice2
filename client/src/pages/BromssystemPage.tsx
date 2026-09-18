@@ -48,7 +48,14 @@ const importance = [
   { icon: ClockIcon, title: 'Tidsbesparing', text: 'Ett bromsbyte är tekniskt krävande att göra själv, och hos oss är det klart samma dag i de flesta fall.' },
 ] as const
 
-const symptoms = [
+interface SymptomItem {
+  icon: (props: { className?: string }) => React.ReactElement | null
+  title: string
+  text: string
+  urgent?: boolean
+}
+
+const symptoms: readonly SymptomItem[] = [
   { icon: Volume2Icon, title: 'Ljud vid inbromsning', text: 'Gnisslande, pipande eller skrapande ljud är vanliga första varningstecken. Ett lätt gnissel efter ett nytt beläggbyte är normal inkörning, ett kraftigt ihållande skrap är det aldrig.' },
   { icon: WavesIcon, title: 'Vibrationer', text: 'Vibrationer i pedalen eller ratten vid inbromsning kan tyda på skeva eller ojämnt slitna bromsskivor.' },
   { icon: SlidersIcon, title: 'Förändrad pedalkänsla', text: 'Längre bromssträcka, hårdare tryck, mjuk eller svampig pedalkänsla kan tyda på slitage eller luft i systemet.' },
@@ -56,7 +63,7 @@ const symptoms = [
   { icon: GaugeIcon, title: 'Bilen drar åt sidan', text: 'Ojämn bromsverkan, ofta kopplad till bromsok, kan göra att bilen drar åt ena hållet vid inbromsning.' },
   { icon: InfoIcon, title: 'Synliga spår eller varningslampa', text: 'Repor eller en tydlig kant på bromsskivan kan ibland synas via fälgen. Även varningslampa för bromssystem eller ABS ska tas på allvar.' },
   { icon: WrenchIcon, title: 'Handbromsen förändras', text: 'Om handbromsen tar ovanligt högt upp eller bilen rullar trots att den är åtdragen kan den behöva justering.' },
-] as const
+]
 
 const serviceItems = [
   'Bedömning av vilka delar som faktiskt behöver bytas — belägg, skivor, ok, bromsrör/slangar eller en kombination.',

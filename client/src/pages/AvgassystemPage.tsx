@@ -44,14 +44,28 @@ const importance = [
   { icon: ThumbsUpIcon, title: 'Rätt åtgärd före dyrbyte', text: 'Vi provtrycker och felsöker innan vi byter dyra komponenter som katalysatorn, då grundorsaken ofta är ett flexrör eller en lambdasond.' },
 ] as const
 
-const symptoms = [
+interface SymptomItem {
+  icon: (props: { className?: string }) => React.ReactElement | null
+  title: string
+  text: string
+  featured?: boolean
+}
+
+interface InfoCardItem {
+  icon: (props: { className?: string }) => React.ReactElement | null
+  title: string
+  text: string
+  flag?: string
+}
+
+const symptoms: readonly SymptomItem[] = [
   { icon: Volume2Icon, title: 'Högt, dånande eller brummande ljud', text: 'Ett plötsligt dovt eller smattrande avgasljud som tilltar vid gaspådrag tyder på hål eller sprucken ljuddämpare.', featured: true },
   { icon: WavesIcon, title: 'Skrammel och rasslande missljud', text: 'Metalliskt skrammel under bilen vid tomgång eller gupp kan tyda på lös värmesköld eller trasig keramik i katalysatorn.' },
   { icon: AlertTriangleIcon, title: 'Lukt av avgaser i kupén', text: 'Stickande avgaslukt i bilens kupé ska tas på största allvar då det tyder på ett allvarligt läckage i främre systemet.' },
   { icon: SlidersIcon, title: 'Avgasröret hänger löst eller släpar', text: 'Rostiga fästen eller spruckna upphängningsgummin gör att rör och dämpare förlorar sin infästning.' },
   { icon: WrenchIcon, title: 'Synlig rost, sot eller hål', text: 'Mörka sotränder kring skarvar och flexrör eller synlig rost på ljuddämparens hölje avslöjar läckage.' },
   { icon: GaugeIcon, title: 'Tänd motorlampa & ojämn gång', text: 'Felkoder kopplade till katalysator eller lambdasond åtföljs ofta av ojämn tomgång eller försämrad motoreffekt.' },
-] as const
+]
 
 const serviceItems = [
   'Felsökning och täthetskontroll av hela avgassystemet för att lokalisera exakt var läckaget eller missljudet sitter.',
@@ -62,13 +76,13 @@ const serviceItems = [
   'Åtgärd och släckning av besiktningsanmärkningar och för höga emissionsvärden.',
 ]
 
-const infoCards = [
+const infoCards: readonly InfoCardItem[] = [
   { icon: ClockIcon, title: 'Rost börjar oftast bakifrån', text: 'Den bakre ljuddämparen slits i regel först eftersom kondensvatten och fukt samlas där vid korta körningar. Främre delar klarar sig oftast längre.' },
   { icon: ThumbsUpIcon, title: 'Spara pengar genom sektionsbyte', text: 'Nästan aldrig behöver hela avgassystemet bytas samtidigt. Det vanligaste och mest prisvärda är att byta enbart den skadade ljuddämparen eller rörbiten.' },
   { icon: AlertTriangleIcon, title: 'Varning för katalysatorstöld', text: 'Katalysatorer innehåller ädelmetaller och är stöldbegärliga. Om bilen plötsligt dånar extremt högt utan förvarning kan katalysatorn ha stulits.', flag: 'OBS' },
   { icon: InfoIcon, title: 'Katalysatorkod kan vara lambdasond', text: 'En felkod som P0420 betyder inte automatiskt att katalysatorn är slut. En felaktig lambdasond ger ofta samma felkod och är betydligt billigare att byta.' },
   { icon: GaugeIcon, title: 'Viktigt om motorlampan', text: 'En tänd motorlampa med en katalysator-relaterad felkod betyder inte automatiskt att själva katalysatorn är trasig. En felaktig lambdasond eller ett litet avgasläckage före sonden är minst lika vanligt och betydligt mer prisvärt att åtgärda.' },
-] as const
+]
 
 const processSteps = [
   ['01', 'Bokning och inlämning', 'Boka enkelt online eller ring oss på 070-553 33 95 och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.'],

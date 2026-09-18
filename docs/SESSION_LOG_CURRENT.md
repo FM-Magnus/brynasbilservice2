@@ -2,6 +2,40 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (Phase 1: Foundation Validation, Manifest Trap Neutralization & TypeScript Baseline Hardening)
+
+- **Root Manifest Trap Neutralized (F-00, HIGH RISK)**:
+  - Root `package.json`, `index.html`, `vite.config.ts`, `tsconfig.json` renamed to `*.disabled` via `git mv`.
+  - Confirmed `client/` is the sole application directory running React 18.2.0 and Tailwind CSS 3.4.17.
+  - Eliminated the risk of incoming agents generating Tailwind v4 syntax (`@theme`) or React 19 patterns.
+- **TypeScript Baseline Enforced & Hardened**:
+  - Added `"typecheck": "tsc -p tsconfig.app.json --noEmit"` to `client/package.json`.
+  - Fixed 22 true TypeScript errors previously masked by `vite build` esbuild transpilation:
+    - `PublicFooter.tsx`: Removed invalid `size` props from icons (managed cleanly by CSS).
+    - `AvgassystemPage.tsx`: Explicitly typed `symptoms` (`SymptomItem`) and `infoCards` (`InfoCardItem`).
+    - `BromssystemPage.tsx`: Explicitly typed `symptoms` (`SymptomItem`).
+    - `KopplingPage.tsx`: Explicitly typed `symptoms` (`SymptomItem` with optional `featured`).
+    - `BookingForm.tsx`: Typed `services` state (`Array<{ id: string | number; name: string }>`), `selectedDate` (`Date | null`), formatted ISO date string in submission, and handled `TimePicker` value conversion cleanly.
+    - `BookingManagement.tsx`: Narrowed `sortConfig` before `.sort` callback and handled optional properties with empty string fallback.
+    - `GoogleReviews.tsx`: Removed unused `React` default import.
+    - `ServicesPage.tsx`: Replaced obsolete `JSX.Element` namespace usage with `ReactNode`.
+  - Typecheck baseline: **0 errors** (`npm --prefix client run typecheck` passes cleanly).
+- **Architectural Policy & Precedence Codified**:
+  - Updated `AGENTS.md` with:
+    - 5-layer document precedence hierarchy (`AGENTS.md` -> `HITL_Temporary_roadmap.md` -> `docs/CSS_OWNERSHIP.md` -> `docs/DESIGN_SYSTEM.md` -> `docs/AGENT_HANDOFF.md`).
+    - Application root & manifest safety declaration.
+    - Strict Tailwind policy (permitted only in `/admin`, strictly forbidden on public pages).
+    - Guide Family architecture definition (shared parent is `ServiceGuideTemplate.css`, not a shared TSX layout component; note on sibling drift risk).
+    - Mandatory TypeScript typecheck rule.
+- **Readiness Verdict & Recommendation**:
+  - Verdict conditioned to `READY WITH NAMED CONSTRAINTS`.
+  - Recommended Phase 2 execution begins with **Kamrem** (`/kamrem`) alone as the single First Sibling Proof before scaling to remaining guides.
+- **Strict CSS Safety**: `client/src/css/index.css` remained 100% frozen (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run typecheck`: 0 errors.
+  - `npm --prefix client run build`: Built cleanly with 0 errors in 1.89s.
+  - `npm --prefix client run test:browser`: 12/12 Playwright tests passed across 1440px, 768px, 390px with $\Delta = 0\text{px}$ horizontal overflow.
+
 ### 2026-09-18 — Antigravity (Second Pass: Full-Page Canonical Alignment & Token Audit on /bargning)
 
 - **Standardized standalone Bärgning page (`BargningPage.tsx` / `BargningPage.css`) to Landing truth & canonical tokens**:

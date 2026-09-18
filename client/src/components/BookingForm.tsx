@@ -9,8 +9,8 @@ import 'react-clock/dist/Clock.css';
 import './BookingForm.css'; // Import custom styles for modal
 
 export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; initialComment?: string }> = ({ isOpen, onClose, initialComment = '' }) => {
-  const [services, setServices] = useState([]);
-  const [selectedDate, setSelectedDate] = useState('');
+  const [services, setServices] = useState<Array<{ id: string | number; name: string }>>([]);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedService, setSelectedService] = useState('');
   const [customerName, setCustomerName] = useState('');
@@ -119,7 +119,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
       customerEmail,
       customerPhone,
       serviceId: selectedService,
-      date: selectedDate,
+      date: selectedDate ? selectedDate.toISOString().split('T')[0] : '',
       time: selectedTime,
       comment_customer: customerComment,
     };
@@ -165,8 +165,8 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
               </label>
               <DatePicker
                 id="booking-date"
-                selected={selectedDate ? new Date(selectedDate) : null}
-                onChange={(date) => setSelectedDate(date)}
+                selected={selectedDate}
+                onChange={(date: Date | null) => setSelectedDate(date)}
                 locale={sv}
                 dateFormat="EEEE, dd/MM" // Update format to include day of the week
                 className="modal-input w-full"
@@ -181,7 +181,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
               </label>
               <TimePicker
                 id="booking-time"
-                onChange={setSelectedTime}
+                onChange={(val) => setSelectedTime(val ? String(val) : '')}
                 value={selectedTime}
                 clockIcon={null}
                 disableClock={true}

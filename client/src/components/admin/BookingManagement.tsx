@@ -82,12 +82,15 @@ export function BookingManagement() {
     }
 
     if (!sortConfig) return filtered;
+    const config = sortConfig;
 
     const sorted = [...filtered].sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1;
-      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1;
+      const aVal = a[config.key] ?? '';
+      const bVal = b[config.key] ?? '';
+      if (aVal < bVal) return config.direction === 'asc' ? -1 : 1;
+      if (aVal > bVal) return config.direction === 'asc' ? 1 : -1;
 
-      if (sortConfig.key === 'date') {
+      if (config.key === 'date') {
         if (a.time < b.time) return -1;
         if (a.time > b.time) return 1;
       }

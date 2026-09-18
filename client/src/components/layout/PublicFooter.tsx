@@ -88,21 +88,21 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
 
             <div className="bb-footer__trust-row">
               <div className="bb-footer__trust-item bb-footer__trust-item--amber">
-                <i><ShieldIcon size={20} /></i>
+                <i><ShieldIcon /></i>
                 <div>
                   <b>Tryggt</b>
                   <small>och enkelt</small>
                 </div>
               </div>
               <div className="bb-footer__trust-item bb-footer__trust-item--cyan">
-                <i><UsersIcon size={20} /></i>
+                <i><UsersIcon /></i>
                 <div>
                   <b>Personlig</b>
                   <small>service</small>
                 </div>
               </div>
               <div className="bb-footer__trust-item bb-footer__trust-item--amber">
-                <i><WrenchIcon size={20} /></i>
+                <i><WrenchIcon /></i>
                 <div>
                   <b>Erfarna</b>
                   <small>mekaniker</small>
@@ -143,7 +143,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
             <div className="bb-footer__contact-items">
               <div className="bb-footer__contact-card">
                 <div className="bb-footer__contact-badge bb-footer__contact-badge--amber">
-                  <PhoneIcon size={18} />
+                  <PhoneIcon />
                 </div>
                 <div className="bb-footer__contact-info">
                   <span className="bb-footer__contact-label">Telefon</span>
@@ -197,7 +197,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
             
             <div className="bb-footer__hours-box">
               <div className="bb-footer__clock-badge">
-                <ClockIcon size={22} />
+                <ClockIcon />
               </div>
               <dl className="bb-footer__hours-dl">
                 <div className="bb-footer__hours-row">
@@ -238,7 +238,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
               )}
 
               <a href="tel:+46705533395" className="bb-footer__call-link">
-                <i className="bb-footer__call-icon"><PhoneIcon size={16} /></i>
+                <i className="bb-footer__call-icon"><PhoneIcon /></i>
                 <span>RING OSS: 070-553 33 95</span>
               </a>
             </div>
@@ -261,7 +261,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
               className="bb-footer__social-btn"
               aria-label="Följ Brynäs Bilservice på Facebook"
             >
-              <FacebookIcon size={18} />
+              <FacebookIcon />
             </a>
             <a
               href="https://www.instagram.com"
