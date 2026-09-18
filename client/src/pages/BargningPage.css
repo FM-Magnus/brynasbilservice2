@@ -31,7 +31,7 @@
    1. HERO SECTION
    ------------------------------------------------------------- */
 .bargning-page__hero {
-  background-color: #071518;
+  background-color: var(--bb-color-ink-950);
   background-image: image-set(
     url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
     url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
@@ -229,7 +229,6 @@
   font-weight: 800;
   letter-spacing: -0.01em;
   margin: 0 0 0.5rem;
-  text-transform: uppercase;
 }
 
 .bargning-page__quick-step-desc {
@@ -408,13 +407,19 @@
   font-size: 0.92rem;
   font-weight: 600;
   gap: 0.5rem;
-  padding: 0;
+  padding: 0.25rem 0.5rem;
   transition: color 0.15s ease, transform 0.15s ease;
 }
 
 .bargning-page__showcase-book-link:hover {
   color: var(--bb-color-teal-500);
   transform: translateX(3px);
+}
+
+.bargning-page__showcase-book-link:focus-visible {
+  outline: 3px solid var(--bb-color-focus);
+  outline-offset: 3px;
+  border-radius: var(--bb-radius-sm);
 }
 
 /* -------------------------------------------------------------
@@ -800,6 +805,12 @@
 
 .bargning-page__fact-link:hover {
   color: var(--bb-color-teal-500);
+}
+
+.bargning-page__fact-link:focus-visible {
+  outline: 3px solid var(--bb-color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .bargning-page__fact-hours {

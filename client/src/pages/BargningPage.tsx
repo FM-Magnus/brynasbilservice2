@@ -239,9 +239,9 @@ export default function BargningPage() {
               </div>
 
               <div className="bargning-page__showcase-content">
-                <h3 className="bb-h2 bargning-page__showcase-title" id="showcase-title">
+                <h2 className="bb-h2 bargning-page__showcase-title" id="showcase-title">
                   Bärgning &amp; Biltransport
-                </h3>
+                </h2>
                 <div className="bargning-page__showcase-pill">
                   Lokal bärgningshjälp och säker fordonstransport i Gävle med omnejd
                 </div>
@@ -397,7 +397,7 @@ export default function BargningPage() {
           <div className="bb-wrap">
             <div className="bargning-page__process-header">
               <p className="bb-eyebrow bb-eyebrow--dark">
-                Från vägkant till färdig reparation
+                Steg för steg
               </p>
               <h2 className="bb-h2 bargning-page__process-title" id="process-title">
                 Från vägkant till färdig reparation
@@ -489,7 +489,7 @@ export default function BargningPage() {
                   Vi tar emot din bil direkt när den har bärgats till vår verkstad. Här kan vi snabbt påbörja felsökning och ge dig ett tydligt kostnadsförslag innan reparation. Hos oss får du personlig service av erfarna mekaniker – oavsett vilka problem som har gjort att din bil inte kunde köras vidare.
                 </p>
                 <div className="bargning-page__intake-action">
-                  <Link to="/om-oss" className="bb-btn bb-btn--teal">
+                  <Link to="/om-oss" className="bb-btn bb-btn--ember-solid">
                     <span>Läs mer om oss</span>
                     <ArrowRightIcon className="w-4 h-4" />
                   </Link>
@@ -563,9 +563,9 @@ export default function BargningPage() {
           <div className="bb-wrap">
             <div className="bargning-page__cars-card">
               <div className="bargning-page__cars-copy">
-                <h3 className="bargning-page__cars-title" id="used-cars-title">
+                <h2 className="bb-h2 bargning-page__cars-title" id="used-cars-title">
                   Letar du efter en begagnad bil?
-                </h3>
+                </h2>
                 <p className="bargning-page__cars-desc">
                   Vi säljer även noggrant genomgångna och besiktigade begagnade bilar i Gävle. Varje bil kontrolleras av våra mekaniker innan försäljning.
                 </p>

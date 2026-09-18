@@ -2,6 +2,27 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (Second Pass: Full-Page Canonical Alignment & Token Audit on /bargning)
+
+- **Standardized standalone Bärgning page (`BargningPage.tsx` / `BargningPage.css`) to Landing truth & canonical tokens**:
+  - **Typography & Display Headings**:
+    - Standardized H1 with `.bb-h1` and `.bb-accent` (`Bärgning & <span className="bb-accent">Biltransport</span>`).
+    - Standardized H2 headings across all sections (`.bb-h2`).
+    - Removed `text-transform: uppercase` from `.bargning-page__quick-step-heading` to preserve natural mixed-case Archivo display typography.
+  - **Eyebrows & Accents**:
+    - Replaced duplicate process eyebrow with canonical `<p className="bb-eyebrow bb-eyebrow--dark">Steg för steg</p>`.
+    - Maintained light-surface `<p className="bb-eyebrow">Din lokala verkstad</p>` with teal-800 text and teal dash.
+  - **Shared Button Variants (`shared-elements.css`)**:
+    - Replaced `.bb-btn--teal` on the white intake card with canonical `.bb-btn.bb-btn--ember-solid` (the designated button pattern for light surfaces).
+    - Preserved dark-surface `.bb-btn.bb-btn--teal` and `.bb-btn.bb-btn--ember` across hero, showcase, used cars, and closing CTA.
+  - **Interactive States & Focus Rings**:
+    - Added `:focus-visible` with `var(--bb-color-focus)` (`outline: 3px solid var(--bb-color-focus); outline-offset: 3px;`) to `.bargning-page__showcase-book-link` and `.bargning-page__fact-link`.
+    - Standardized background-color to `var(--bb-color-ink-950)`.
+  - **Strict CSS Safety**: `client/src/css/index.css` remained 100% frozen (0 lines changed).
+- **Verification**:
+  - `npm --prefix client run build`: Built cleanly with 0 errors in 1.84s.
+  - Playwright visual test (`client/tests/browser/bargning.visual.spec.ts`): All 3 tests passed in 3.2s with $\Delta = 0\text{px}$ horizontal overflow across 1440px desktop, 768px tablet, and 390px mobile viewports. Modal interaction verified.
+
 ### 2026-09-18 — Antigravity (Rebuilt "Bärgning & Biltransport" /bargning from scratch against final mockup)
 
 - **Rebuilt Bärgning page (`BargningPage.tsx` / `BargningPage.css`) from approved visual mockup**:
