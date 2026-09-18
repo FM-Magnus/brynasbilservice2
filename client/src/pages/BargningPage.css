@@ -1,35 +1,996 @@
-/* Scoped styles for BargningPage */
+/* BargningPage.css — Isolated CSS island for /bargning
+   Zero dependency on index.css. Consumes canonical --bb-* tokens and shared-elements.css. */
 
-.bargning-hero {
+/* Scope root */
+.bargning-page {
+  background-color: var(--bb-color-page);
+  color: var(--bb-color-text);
+  font-family: var(--bb-font-body);
+  font-size: var(--bb-font-size-body);
+  line-height: var(--bb-line-height-body);
+  min-height: 100vh;
+  overflow-x: hidden;
   position: relative;
-  background-color: #0e1416;
+  width: 100%;
+}
+
+/* Reset specificity protection via :where() per shared-elements.css */
+.bargning-page :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+.bargning-page :where(button, input, textarea, select) {
+  font: inherit;
+}
+.bargning-page :where(img) {
+  display: block;
+  max-width: 100%;
+}
+
+/* -------------------------------------------------------------
+   1. HERO SECTION
+   ------------------------------------------------------------- */
+.bargning-page__hero {
+  background-color: #071518;
   background-image: image-set(
     url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
     url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
   );
-  background-size: cover;
   background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--bb-color-text-inverse);
+  overflow: hidden;
+  padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+  padding-top: clamp(7.5rem, 11vw, 9.5rem);
+  position: relative;
+}
+
+.bargning-page__hero::before {
+  background: linear-gradient(
+    90deg,
+    rgba(7, 20, 22, 0.96) 0%,
+    rgba(7, 20, 22, 0.90) 38%,
+    rgba(7, 20, 22, 0.72) 65%,
+    rgba(7, 20, 22, 0.45) 100%
+  );
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.bargning-page__hero-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
+  position: relative;
+  z-index: 2;
+}
+
+.bargning-page__hero-eyebrow {
+  margin-bottom: 1.1rem;
+}
+
+.bargning-page__hero-title {
+  color: var(--bb-color-text-inverse);
+  margin: 0 0 1.35rem;
+}
+
+.bargning-page__hero-lead {
+  font-size: clamp(1.02rem, 1.25vw, 1.15rem);
+  line-height: 1.6;
+  margin: 0 0 2rem;
+  max-width: 580px;
+}
+
+.bargning-page__hero-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+}
+
+.bargning-page__hero-phone-btn {
+  font-size: 0.95rem;
+}
+
+.bargning-page__hero-book-btn {
+  font-size: 0.95rem;
+}
+
+.bargning-page__hero-trust-row {
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding-top: 1.75rem;
+}
+
+.bargning-page__hero-trust-item {
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  font-size: 0.88rem;
+  font-weight: 600;
+  gap: 0.65rem;
+}
+
+.bargning-page__hero-trust-icon {
+  align-items: center;
+  color: var(--bb-color-amber-500);
+  display: flex;
+  flex-shrink: 0;
+}
+
+.bargning-page__hero-trust-icon svg {
+  height: 20px;
+  width: 20px;
+}
+
+/* -------------------------------------------------------------
+   2. QUICK 3-STEP ACTION BAR
+   ------------------------------------------------------------- */
+.bargning-page__quick-steps {
+  background-color: var(--bb-color-page);
+  padding-bottom: clamp(3.5rem, 5vw, 5rem);
+  padding-top: clamp(3.5rem, 5vw, 5rem);
+}
+
+.bargning-page__quick-steps-header {
+  margin: 0 auto clamp(2.25rem, 4vw, 3.25rem);
+  max-width: 640px;
+  text-align: center;
+}
+
+.bargning-page__quick-steps-title {
+  color: var(--bb-color-ink-950);
+  margin: 0 0 0.65rem;
+}
+
+.bargning-page__quick-steps-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.bargning-page__quick-steps-grid {
+  align-items: center;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+.bargning-page__quick-step-card {
+  align-items: center;
+  background: var(--bb-color-surface);
+  border: 1px solid rgba(7, 20, 22, 0.08);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 2.25rem 1.75rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bargning-page__quick-step-card:hover {
+  box-shadow: 0 14px 34px rgba(7, 20, 22, 0.12);
+  transform: translateY(-3px);
+}
+
+.bargning-page__quick-step-icon-wrap {
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.bargning-page__quick-step-badge {
+  background: var(--bb-color-amber-500);
+  border: 2px solid var(--bb-color-surface);
+  border-radius: 999px;
+  color: var(--bb-color-ink-950);
+  font-family: var(--bb-font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  height: 22px;
+  left: -6px;
+  line-height: 18px;
+  position: absolute;
+  text-align: center;
+  top: -4px;
+  width: 22px;
+  z-index: 2;
+}
+
+.bargning-page__quick-step-icon {
+  align-items: center;
+  background: var(--bb-color-teal-700);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  height: 56px;
+  justify-content: center;
+  width: 56px;
+}
+
+.bargning-page__quick-step-icon svg {
+  height: 26px;
+  width: 26px;
+}
+
+.bargning-page__quick-step-heading {
+  color: var(--bb-color-ink-950);
+  font-family: var(--bb-font-display);
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.bargning-page__quick-step-desc {
+  color: var(--bb-color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.bargning-page__quick-step-arrow {
+  align-items: center;
+  color: var(--bb-color-amber-500);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.bargning-page__quick-step-arrow svg {
+  height: 24px;
+  width: 24px;
+}
+
+/* -------------------------------------------------------------
+   3. MAIN SHOWCASE SPLIT CARD
+   ------------------------------------------------------------- */
+.bargning-page__showcase {
+  padding-bottom: clamp(3.5rem, 5vw, 5.5rem);
+}
+
+.bargning-page__showcase-card {
+  align-items: stretch;
+  background: var(--bb-color-ink-950);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-floating);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
   overflow: hidden;
 }
 
-/* Remove duplicate gradients since the hero image is already graded */
-.bargning-hero::before {
-  display: none;
+.bargning-page__showcase-media {
+  min-height: 380px;
+  position: relative;
 }
 
-.bargning-hero > .container {
+.bargning-page__showcase-media picture {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.bargning-page__showcase-img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.bargning-page__showcase-location-badge {
+  align-items: center;
+  background: rgba(7, 20, 22, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--bb-radius-control);
+  bottom: 1.25rem;
+  color: var(--bb-color-text-inverse);
+  display: inline-flex;
+  font-size: 0.84rem;
+  font-weight: 600;
+  gap: 0.5rem;
+  left: 1.25rem;
+  padding: 0.5rem 0.95rem;
+  position: absolute;
+  z-index: 2;
+}
+
+.bargning-page__showcase-content {
+  color: var(--bb-color-text-inverse);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.bargning-page__showcase-title {
+  color: var(--bb-color-text-inverse);
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  margin: 0 0 0.85rem;
+}
+
+.bargning-page__showcase-pill {
+  background: rgba(19, 154, 140, 0.15);
+  border: 1px solid rgba(19, 154, 140, 0.35);
+  border-radius: var(--bb-radius-control);
+  color: var(--bb-color-teal-500);
+  display: inline-block;
+  font-size: 0.86rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding: 0.4rem 0.85rem;
+  width: fit-content;
+}
+
+.bargning-page__showcase-lead {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1.75rem;
+}
+
+.bargning-page__showcase-lists {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 2rem;
+}
+
+.bargning-page__showcase-list-title {
+  color: var(--bb-color-text-inverse);
+  font-family: var(--bb-font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.85rem;
+}
+
+.bargning-page__feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bargning-page__feature-list li {
+  align-items: flex-start;
+  color: rgba(255, 255, 255, 0.82);
+  display: flex;
+  font-size: 0.88rem;
+  gap: 0.6rem;
+  line-height: 1.45;
+}
+
+.bargning-page__check-icon {
+  color: var(--bb-color-teal-500);
+  display: flex;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.bargning-page__check-icon svg {
+  height: 16px;
+  width: 16px;
+}
+
+.bargning-page__showcase-actions {
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.bargning-page__showcase-phone-btn {
+  font-size: 0.92rem;
+}
+
+.bargning-page__showcase-book-link {
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--bb-color-text-inverse);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.92rem;
+  font-weight: 600;
+  gap: 0.5rem;
+  padding: 0;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.bargning-page__showcase-book-link:hover {
+  color: var(--bb-color-teal-500);
+  transform: translateX(3px);
+}
+
+/* -------------------------------------------------------------
+   4. TOWING SCENARIOS GRID
+   ------------------------------------------------------------- */
+.bargning-page__scenarios {
+  background-color: var(--bb-color-page);
+  padding-bottom: clamp(3.5rem, 5vw, 5.5rem);
+  padding-top: clamp(1rem, 2vw, 2rem);
+}
+
+.bargning-page__scenarios-header {
+  margin: 0 auto clamp(2.25rem, 4vw, 3.25rem);
+  max-width: 640px;
+  text-align: center;
+}
+
+.bargning-page__scenarios-title {
+  color: var(--bb-color-ink-950);
+  margin: 0 0 0.65rem;
+}
+
+.bargning-page__scenarios-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.bargning-page__scenarios-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.bargning-page__scenario-card {
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  overflow: hidden;
+  padding: 2rem 1.65rem;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bargning-page__scenario-card:hover {
+  box-shadow: 0 14px 34px rgba(7, 20, 22, 0.14);
+  transform: translateY(-4px);
+}
+
+.bargning-page__scenario-icon {
+  margin-bottom: 1.25rem;
+}
+
+.bargning-page__scenario-icon--amber {
+  color: var(--bb-color-amber-500);
+}
+
+.bargning-page__scenario-icon svg {
+  height: 28px;
+  width: 28px;
+}
+
+.bargning-page__scenario-heading {
+  font-family: var(--bb-font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 0 0 0.65rem;
+}
+
+.bargning-page__scenario-desc {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Card variations */
+.bargning-page__scenario-card--light {
+  background: var(--bb-color-surface);
+  border: 1px solid rgba(7, 20, 22, 0.08);
+}
+.bargning-page__scenario-card--light .bargning-page__scenario-heading {
+  color: var(--bb-color-ink-950);
+}
+.bargning-page__scenario-card--light .bargning-page__scenario-desc {
+  color: var(--bb-color-text-muted);
+}
+
+.bargning-page__scenario-card--teal-gradient {
+  background: linear-gradient(145deg, #0c2b30 0%, #07191d 100%);
+  border: 1px solid rgba(19, 154, 140, 0.3);
+  color: var(--bb-color-text-inverse);
+}
+.bargning-page__scenario-card--teal-gradient .bargning-page__scenario-heading {
+  color: var(--bb-color-text-inverse);
+}
+.bargning-page__scenario-card--teal-gradient .bargning-page__scenario-desc {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.bargning-page__scenario-card--dark {
+  background: var(--bb-color-ink-950);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--bb-color-text-inverse);
+}
+.bargning-page__scenario-card--dark .bargning-page__scenario-heading {
+  color: var(--bb-color-text-inverse);
+}
+.bargning-page__scenario-card--dark .bargning-page__scenario-desc {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.bargning-page__scenario-card--photo {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--bb-color-text-inverse);
+  padding: 0;
+}
+
+.bargning-page__scenario-photo {
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.bargning-page__scenario-photo-img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.bargning-page__scenario-photo::after {
+  background: linear-gradient(180deg, rgba(7, 20, 22, 0.6) 0%, rgba(7, 20, 22, 0.92) 80%);
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.bargning-page__scenario-photo-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem 1.65rem;
   position: relative;
   z-index: 1;
 }
 
-.bargning-hero .services-page__hero-content {
+.bargning-page__scenario-photo-content .bargning-page__scenario-heading {
+  color: var(--bb-color-text-inverse);
+}
+
+.bargning-page__scenario-photo-content .bargning-page__scenario-desc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* -------------------------------------------------------------
+   5. STEP-BY-STEP WORKSHOP PROTOCOL
+   ------------------------------------------------------------- */
+.bargning-page__process {
+  background-color: var(--bb-color-ink-950);
+  background-image: 
+    radial-gradient(circle at 85% 50%, rgba(19, 154, 140, 0.08) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  color: var(--bb-color-text-inverse);
+  padding-bottom: clamp(4.5rem, 6.5vw, 6rem);
+  padding-top: clamp(4.5rem, 6.5vw, 6rem);
   position: relative;
-  z-index: 1;
+}
+
+.bargning-page__process-header {
+  margin: 0 auto clamp(2.5rem, 4.5vw, 3.5rem);
   max-width: 680px;
+  text-align: center;
+}
+
+.bargning-page__process-header .bb-eyebrow--dark {
+  justify-content: center;
+}
+
+.bargning-page__process-title {
+  color: var(--bb-color-text-inverse);
+  margin: 0 0 0.85rem;
+}
+
+.bargning-page__process-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.bargning-page__process-flow {
+  align-items: stretch;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.bargning-page__process-card {
+  background: rgba(12, 35, 39, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--bb-radius-card);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 2.25rem 1.85rem;
+  position: relative;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.bargning-page__process-card:hover {
+  border-color: rgba(19, 154, 140, 0.45);
+  transform: translateY(-3px);
+}
+
+.bargning-page__process-card-top {
+  align-items: center;
+  display: flex;
+  gap: 0.9rem;
+  margin-bottom: 1.35rem;
+}
+
+.bargning-page__process-step-num {
+  background: var(--bb-color-teal-500);
+  border-radius: var(--bb-radius-control);
+  color: var(--bb-color-ink-950);
+  font-family: var(--bb-font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 0.35rem 0.75rem;
+}
+
+.bargning-page__process-icon {
+  color: var(--bb-color-teal-500);
+}
+
+.bargning-page__process-icon svg {
+  height: 22px;
+  width: 22px;
+}
+
+.bargning-page__process-step-title {
+  color: var(--bb-color-text-inverse);
+  font-family: var(--bb-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.85rem;
+}
+
+.bargning-page__process-step-desc {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.93rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.bargning-page__process-connector {
+  align-items: center;
+  color: var(--bb-color-amber-500);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  padding: 0 0.25rem;
+}
+
+.bargning-page__process-connector svg {
+  height: 26px;
+  width: 26px;
+}
+
+/* -------------------------------------------------------------
+   6. WORKSHOP INTAKE & REASSURANCE SECTION
+   ------------------------------------------------------------- */
+.bargning-page__workshop-intake {
+  background-color: var(--bb-color-page);
+  padding-bottom: clamp(3.5rem, 5vw, 5rem);
+  padding-top: clamp(4rem, 6vw, 5.5rem);
+}
+
+.bargning-page__intake-card {
+  align-items: stretch;
+  background: var(--bb-color-surface);
+  border: 1px solid rgba(7, 20, 22, 0.08);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 0.95fr 1.25fr 0.95fr;
+  overflow: hidden;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.bargning-page__intake-media {
+  border-radius: var(--bb-radius-md);
+  overflow: hidden;
+  position: relative;
+}
+
+.bargning-page__intake-media picture {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.bargning-page__intake-img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.bargning-page__intake-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bargning-page__intake-title {
+  color: var(--bb-color-ink-950);
+  margin: 0 0 1rem;
+}
+
+.bargning-page__intake-text {
+  color: var(--bb-color-text-muted);
+  font-size: 0.96rem;
+  line-height: 1.65;
+  margin: 0 0 1.5rem;
+}
+
+.bargning-page__intake-action {
+  display: flex;
+}
+
+.bargning-page__intake-facts {
+  background: var(--bb-color-page);
+  border: 1px solid rgba(7, 20, 22, 0.08);
+  border-radius: var(--bb-radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.bargning-page__fact-item {
+  align-items: flex-start;
+  display: flex;
+  font-size: 0.86rem;
+  gap: 0.75rem;
+  line-height: 1.45;
+}
+
+.bargning-page__fact-icon {
+  color: var(--bb-color-teal-700);
+  display: flex;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.bargning-page__fact-icon svg {
+  height: 18px;
+  width: 18px;
+}
+
+.bargning-page__fact-label {
+  color: var(--bb-color-ink-950);
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.bargning-page__fact-link {
+  color: var(--bb-color-teal-700);
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.bargning-page__fact-link:hover {
+  color: var(--bb-color-teal-500);
+}
+
+.bargning-page__fact-hours {
+  color: var(--bb-color-text-muted);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------
+   7. USED CARS CROSS-SELL BANNER
+   ------------------------------------------------------------- */
+.bargning-page__cars-banner {
+  padding-bottom: clamp(3rem, 4.5vw, 4.5rem);
+}
+
+.bargning-page__cars-card {
+  align-items: stretch;
+  background: linear-gradient(135deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  color: var(--bb-color-text-inverse);
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  overflow: hidden;
+}
+
+.bargning-page__cars-copy {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(2rem, 3.5vw, 2.75rem) clamp(2rem, 4vw, 3rem);
+}
+
+.bargning-page__cars-title {
+  color: var(--bb-color-text-inverse);
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.65rem;
+}
+
+.bargning-page__cars-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  max-width: 520px;
+}
+
+.bargning-page__cars-btn {
+  width: fit-content;
+}
+
+.bargning-page__cars-media {
+  align-self: stretch;
+  height: 100%;
+  min-height: 220px;
+  position: relative;
+}
+
+.bargning-page__cars-media picture {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.bargning-page__cars-img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+/* -------------------------------------------------------------
+   8. CLOSING EMERGENCY CTA BANNER
+   ------------------------------------------------------------- */
+.bargning-page__cta {
+  padding-bottom: clamp(4rem, 6vw, 5.5rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.bargning-page__cta-card {
+  background-color: var(--bb-color-ink-950);
+  background-image: 
+    linear-gradient(rgba(7, 20, 22, 0.90), rgba(7, 20, 22, 0.94)),
+    image-set(
+      url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
+      url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
+    );
+  background-position: center;
+  background-size: cover;
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-floating);
+  color: var(--bb-color-text-inverse);
+  padding: clamp(3rem, 5vw, 4.5rem) clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
+}
+
+.bargning-page__cta-eyebrow {
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.bargning-page__cta-title {
+  color: var(--bb-color-text-inverse);
+  margin: 0 auto 0.85rem;
+  max-width: 650px;
+}
+
+.bargning-page__cta-desc {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 auto 2.25rem;
+  max-width: 580px;
+}
+
+.bargning-page__cta-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* -------------------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+   ------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .bargning-page__showcase-card {
+    grid-template-columns: 1fr;
+  }
+  .bargning-page__scenarios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bargning-page__intake-card {
+    grid-template-columns: 1fr;
+  }
+  .bargning-page__cars-card {
+    grid-template-columns: 1fr;
+  }
+  .bargning-page__cars-media {
+    height: 220px;
+    max-height: 240px;
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
-  .bargning-hero {
-    background-position: 80% center;
+  .bargning-page__hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bargning-page__hero-trust-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .bargning-page__quick-steps-grid {
+    flex-direction: column;
+  }
+  .bargning-page__quick-step-arrow {
+    transform: rotate(90deg);
+    padding: 0.25rem 0;
+  }
+  .bargning-page__showcase-lists {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .bargning-page__process-flow {
+    flex-direction: column;
+  }
+  .bargning-page__process-connector {
+    transform: rotate(90deg);
+    padding: 0.5rem 0;
+  }
+  .bargning-page__cta-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
+
+@media (max-width: 560px) {
+  .bargning-page__scenarios-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bargning-page * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+

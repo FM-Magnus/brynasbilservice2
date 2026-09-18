@@ -43,7 +43,7 @@ The redesign public shell is independent from the frozen legacy layer.
    - `Startsidan` (`/`) — `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`). Complete.
    - `Om oss` (`/om-oss`) — `AboutPage.tsx` + `AboutPage.css` (`.omoss-page__*`). Complete. Rebuilt from approved mockup with zero dependency on `index.css`.
    - `Kontakt` (`/kontakt`) — `ContactPage.tsx` + `ContactPage.css` (`.contact-page__*`).
-   - `Bärgning` (`/bargning`) — `BargningPage.tsx` + `BargningPage.css` (`.bargning-page__*` — pick a prefix distinct from other pages when rebuilding).
+   - `Bärgning` (`/bargning`) — `BargningPage.tsx` + `BargningPage.css` (`.bargning-page__*`). Complete. Rebuilt from approved mockup with zero dependency on `index.css`, mounts `PublicHeader` + `PublicFooter`.
    - `Bilar till salu` (`/bilar-till-salu`) — `BilarTillSalu.tsx` + dedicated CSS.
    - `Galleri` (`/galleri`) — `GalleryPage.tsx` + dedicated CSS.
    - `Biltjänster` (`/biltjanster`) — `BiltjansterPage.tsx` + dedicated CSS. The service-catalog overview/index page; links out to every page in both families below.
@@ -61,7 +61,7 @@ The redesign public shell is independent from the frozen legacy layer.
 | Route | Architecture Group | Status | CSS Owner |
 | --- | --- | --- | --- |
 | `/` | Unique | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` |
-| `/om-oss` | Unique | Step 3: Rebuild as unique page | Transitional (`AboutPage.css`) → Will mount `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
+| `/om-oss` | Unique | Complete | `AboutPage.css` (`.omoss-page__*`), mounts `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
 | `/kontakt` | Unique | Complete | `ContactPage.css` (`.kontakt-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/service-reparationer` | Bilservice family (owner) | Complete — on `--bb-*` tokens & `shared-elements.css` (`.bb-*`), mounts `PublicHeader`/`PublicFooter` | `ServiceReparationerPage.css` (`.bilservice__*`) |
 | `/felsokning` | Bilservice family | Transitional -> Rebuild on family template | Legacy dependent |
@@ -77,7 +77,7 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/hjullagerbyte` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`HjullagerbytePage.css`) |
 | `/styrning-kulleder` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`StyrningKullederPage.css`) |
 | `/drivaxel-drivknutar` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`DrivaxelDrivknutarPage.css`) |
-| `/bargning` | Unique | Step 6: Rebuild as unique page | Legacy transitional (`BargningPage.css`) |
+| `/bargning` | Unique | Complete | `BargningPage.css` (`.bargning-page__*`), mounts `PublicHeader` + `PublicFooter` |
 | `/galleri` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
 | `/bilar-till-salu` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
 | `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter` |

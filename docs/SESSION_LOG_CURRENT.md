@@ -2,6 +2,24 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (Rebuilt "Bärgning & Biltransport" /bargning from scratch against final mockup)
+
+- **Rebuilt Bärgning page (`BargningPage.tsx` / `BargningPage.css`) from approved visual mockup**:
+  - **CSS Safety & Architectural Isolation**: Built completely from scratch as an isolated CSS island with unique class prefix `.bargning-page__*`. Zero touches or dependencies on legacy `index.css` (0 lines changed). Consumes Level 0 `--bb-*` design tokens from `client/src/styles/design-tokens.css` and canonical shared patterns (`.bb-*`) from `client/src/styles/shared-elements.css`.
+  - **Public Shell & Modal**: Mounted canonical `PublicHeader` and `PublicFooter`, wired all booking CTAs to `BookingFormModal`, featured prominent emergency phone number `070-553 33 95`.
+  - **Existing Asset Reuse**: Reused existing optimized WebP/JPG assets for hero/closing backgrounds (`towing-hero-bg`), Iveco tow truck (`tow-truck-at-workshop`), workshop car lift (`workshop-car-on-lift`), and used car banner (`peugeot-307-cc-side-profile`).
+  - **Section 1: Hero (`.bargning-page__hero`)**: Natural mixed-case H1 `Bärgning & Biltransport i <span className="bb-accent">Gävle med omnejd</span>`, amber pill eyebrow `Snabb assistans vid haveri eller olycka`, primary teal phone CTA (`.bb-btn--teal`), secondary booking button (`.bb-btn--ember`), and 3 trust badges (Snabb utryckning, Trygg transport, Direkt till verkstad).
+  - **Section 2: Quick 3-Step Action Bar (`.bargning-page__quick-steps`)**: 3 high-contrast numbered action steps with amber numeric badges (`01`, `02`, `03`), circular teal icons, and amber connector arrows.
+  - **Section 3: Showcase Split Card (`.bargning-page__showcase`)**: Responsive split card featuring Iveco tow truck photo with floating badge "Egen bärgningsbil i Gävle", dark petrol card with service pill, 2-column feature checkmarks, emergency phone CTA and booking link.
+  - **Section 4: Towing Scenarios Grid (`.bargning-page__scenarios`)**: 4 distinct scenario cards (Akut motorstopp / haveri, Punktering & däckskador, Transport till verkstad, Starhhjälp & mindre åtgärder) matching mockup colors (clean light card, teal gradient card, dark petrol card, sunset road photo card).
+  - **Section 5: Step-by-Step Workshop Protocol (`.bargning-page__process`)**: Dark petrol band with technical grid, 3 numbered horizontal cards detailing workflow from roadside to inspection and finished repair.
+  - **Section 6: Workshop Intake Reassurance (`.bargning-page__workshop-intake`)**: Workshop lift photo, reassuring story copy, link to `/om-oss`, and workshop facts checklist panel.
+  - **Section 7: Used Cars Cross-Sell Banner (`.bargning-page__cars-banner`)**: Clean promo card with Peugeot 307 CC graphic and direct link to `/bilar-till-salu`.
+  - **Section 8: Closing Emergency CTA (`.bargning-page__cta`)**: Dark petrol closing card over towing background with dual action buttons.
+- **Verification**:
+  - `npm --prefix client run build`: Built cleanly with 0 errors in 1.74s.
+  - Playwright visual test (`client/tests/browser/bargning.visual.spec.ts`): Verified across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow across all checks. Booking modal trigger verified. Full-page screenshots generated and verified.
+
 ### 2026-09-18 — Antigravity (Second Pass: Full-Page Canonical Alignment & Token Cleanup on /om-oss)
 
 - **Standardized standalone "Om oss" page (`AboutPage.tsx` / `AboutPage.css`) to Landing truth & canonical tokens**:
