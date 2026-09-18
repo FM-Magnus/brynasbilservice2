@@ -33,6 +33,7 @@ The redesign public shell is independent from the frozen legacy layer.
 
 1. **Top: Canonical Design Layer & Shell**:
    - `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens (colors, Archivo display/Manrope body type scales, radii, spacing, shadows).
+   - `client/src/styles/shared-elements.css` owns global `.bb-*` pattern classes below the token layer (buttons, eyebrow, headings, card motifs, icon badges) — see `docs/DESIGN_SYSTEM.md` §2a. Not yet consumed by any page; retrofitting them is a deferred, separate step.
    - `client/src/data/publicNavigation.ts` + `PublicHeader.tsx` / `PublicHeader.css` (free-standing navigation element) + `PublicFooter.tsx` / `PublicFooter.css` (canonical standalone global footer).
    - `client/src/components/ui/GalleryTeaserCard.tsx` / `GalleryTeaserCard.css` (reusable standalone workshop teaser card).
    - `client/src/components/ui/GoogleReviewsCard.tsx` / `GoogleReviewsCard.css` (reusable standalone Google reviews card/overlay).
@@ -62,7 +63,7 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/` | Unique | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` |
 | `/om-oss` | Unique | Step 3: Rebuild as unique page | Transitional (`AboutPage.css`) → Will mount `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
 | `/kontakt` | Unique | Complete | `ContactPage.css` (`.kontakt-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
-| `/service-reparationer` | Bilservice family (owner) | Complete / Needs PublicHeader | `ServiceReparationerPage.css` |
+| `/service-reparationer` | Bilservice family (owner) | Complete — on `--bb-*` tokens, mounts `PublicHeader`/`PublicFooter` | `ServiceReparationerPage.css` (`.bilservice__*`) |
 | `/felsokning` | Bilservice family | Transitional -> Rebuild on family template | Legacy dependent |
 | `/dackservice` | Bilservice family | Transitional -> Rebuild on family template | Legacy transitional (`DackservicePage.css`) |
 | `/ac-service` | Bilservice family | Transitional -> Rebuild on family template | Legacy transitional (`AcServicePage.css`) |

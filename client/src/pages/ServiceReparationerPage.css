@@ -1,20 +1,20 @@
-/* Bilservice page — rebuilt from scratch 2026-09-16 as its own visual island,
-   the THIRD Brynäs page identity (clean automotive advertising / ownership
-   confidence), distinct from both index.css's legacy .services-page__* system
-   and the teal-technical ServiceGuideTemplate.css used by Koppling/Bromsar.
-   Only global design tokens (--redesign-*, --font-*) are shared. Every rule
-   below is scoped under .bilservice and has no effect on any other page. */
+/* Bilservice page — parent of the "Bilservice" shared-family template
+   (Felsökning, Däckservice, AC-service also mount on this CSS). Its own
+   visual island, distinct from both index.css's legacy .services-page__*
+   system and the teal-technical ServiceGuideTemplate.css used by the Guide
+   family. Only global --bb-* design tokens are shared; every rule below is
+   scoped under .bilservice and has zero dependency on index.css. */
 
 .bilservice {
   --bilservice-page-bg: #f5f3ee;
   --bilservice-surface: #faf9f6;
   --bilservice-aqua-100: #e6f4f3;
-  --bilservice-ink: var(--redesign-ink);
+  --bilservice-ink: var(--bb-color-text);
   --bilservice-muted: #536166;
   --bilservice-petrol-950: #07181c;
   --bilservice-petrol-900: #0a2429;
-  --bilservice-teal-800: var(--redesign-accent-dark);
-  --bilservice-teal-700: var(--redesign-accent);
+  --bilservice-teal-800: var(--bb-color-teal-800);
+  --bilservice-teal-700: var(--bb-color-teal-600);
   --bilservice-teal-600: #10a6af;
   --bilservice-amber: #f3a51d;
   --bilservice-amber-soft: #ffd46b;
@@ -45,7 +45,7 @@
   gap: 0.6rem;
   margin-bottom: 0.85rem;
   color: var(--bilservice-teal-700);
-  font: 700 0.78rem/1 var(--font-body);
+  font: 700 0.78rem/1 var(--bb-font-body);
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -62,8 +62,8 @@
   gap: 0.55rem;
   height: 52px;
   padding-inline: 1.7rem;
-  border-radius: var(--redesign-radius-pill);
-  font: 700 0.95rem/1 var(--font-body);
+  border-radius: var(--bb-radius-control);
+  font: 700 0.95rem/1 var(--bb-font-body);
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
@@ -109,7 +109,7 @@
 }
 .bilservice__image-slot span {
   max-width: 220px;
-  font: 700 0.7rem/1.4 var(--font-body);
+  font: 700 0.7rem/1.4 var(--bb-font-body);
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
@@ -162,12 +162,12 @@
 .bilservice__hero-title {
   margin: 0 0 1.1rem;
   color: #fff;
-  font: 800 clamp(2.5rem, 2vw + 2.4rem, 4.5rem) / 0.98 var(--font-heading);
+  font: 800 clamp(2.5rem, 2vw + 2.4rem, 4.5rem) / 0.98 var(--bb-font-display);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
-.bilservice__hero-title .title-accent { color: var(--bilservice-teal-600); }
-.bilservice__hero-lead { margin: 0 0 1.9rem; max-width: 54ch; color: rgba(255, 255, 255, 0.78); font: 400 1.02rem/1.6 var(--font-body); }
+.bilservice__accent { color: var(--bilservice-teal-600); }
+.bilservice__hero-lead { margin: 0 0 1.9rem; max-width: 54ch; color: rgba(255, 255, 255, 0.78); font: 400 1.02rem/1.6 var(--bb-font-body); }
 .bilservice__hero-trust { display: flex; flex-wrap: wrap; gap: 1.75rem; margin-top: 2.4rem; }
 .bilservice__hero-trust-item { display: flex; align-items: flex-start; gap: 0.65rem; max-width: 190px; }
 .bilservice__hero-trust-badge {
@@ -183,8 +183,8 @@
 }
 .bilservice__hero-trust-badge svg { width: 17px; height: 17px; }
 .bilservice__hero-trust-item:first-child .bilservice__hero-trust-badge { background: rgba(243, 165, 29, 0.18); color: var(--bilservice-amber-soft); }
-.bilservice__hero-trust-item h3 { margin: 0 0 0.15rem; color: #fff; font: 700 0.88rem/1.3 var(--font-body); }
-.bilservice__hero-trust-item p { margin: 0; color: rgba(255, 255, 255, 0.6); font: 400 0.78rem/1.45 var(--font-body); }
+.bilservice__hero-trust-item h3 { margin: 0 0 0.15rem; color: #fff; font: 700 0.88rem/1.3 var(--bb-font-body); }
+.bilservice__hero-trust-item p { margin: 0; color: rgba(255, 255, 255, 0.6); font: 400 0.78rem/1.45 var(--bb-font-body); }
 
 /* ---------- Price / transparency ---------- */
 .bilservice__split {
@@ -194,13 +194,13 @@
   align-items: center;
 }
 .bilservice__split-media--right { order: 2; }
-.bilservice__price-heading { margin: 0 0 0.9rem; color: var(--bilservice-ink); font: 800 clamp(1.9rem, 2.4vw, 2.7rem) / 1.1 var(--font-heading); }
-.bilservice__price-text { margin: 0 0 1.9rem; max-width: 52ch; color: var(--bilservice-muted); font: 400 1rem/1.65 var(--font-body); }
+.bilservice__price-heading { margin: 0 0 0.9rem; color: var(--bilservice-ink); font: 800 clamp(1.9rem, 2.4vw, 2.7rem) / 1.1 var(--bb-font-display); }
+.bilservice__price-text { margin: 0 0 1.9rem; max-width: 52ch; color: var(--bilservice-muted); font: 400 1rem/1.65 var(--bb-font-body); }
 
 /* ---------- Why service matters (4 value cards) ---------- */
 .bilservice__intro { max-width: 62ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
-.bilservice__intro h2 { margin: 0 0 0.6rem; color: var(--bilservice-ink); font: 800 clamp(1.9rem, 2.4vw, 2.7rem) / 1.15 var(--font-heading); }
-.bilservice__intro p { margin: 0; color: var(--bilservice-muted); font: 400 1rem/1.6 var(--font-body); }
+.bilservice__intro h2 { margin: 0 0 0.6rem; color: var(--bilservice-ink); font: 800 clamp(1.9rem, 2.4vw, 2.7rem) / 1.15 var(--bb-font-display); }
+.bilservice__intro p { margin: 0; color: var(--bilservice-muted); font: 400 1rem/1.6 var(--bb-font-body); }
 
 .bilservice__value-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.4rem); }
 .bilservice__value-card {
@@ -230,8 +230,8 @@
   color: var(--bilservice-teal-600);
 }
 .bilservice__value-icon svg { width: 20px; height: 20px; }
-.bilservice__value-card h3 { margin: 0 0 0.4rem; color: #fff; font: 800 1.1rem/1.25 var(--font-heading); }
-.bilservice__value-card p { margin: 0; color: rgba(255, 255, 255, 0.68); font: 400 0.92rem/1.55 var(--font-body); }
+.bilservice__value-card h3 { margin: 0 0 0.4rem; color: #fff; font: 800 1.1rem/1.25 var(--bb-font-display); }
+.bilservice__value-card p { margin: 0; color: rgba(255, 255, 255, 0.68); font: 400 0.92rem/1.55 var(--bb-font-body); }
 
 /* ---------- Service tier ladder ---------- */
 .bilservice__levels-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); align-items: stretch; }
@@ -252,16 +252,16 @@
   height: 40px;
   margin-bottom: 1rem;
   border-radius: 50%;
-  font: 800 0.85rem var(--font-heading);
+  font: 800 0.85rem var(--bb-font-display);
 }
 .bilservice__level-card--01 .bilservice__level-badge { background: var(--bilservice-amber-soft); color: var(--bilservice-petrol-950); }
 .bilservice__level-card--02 .bilservice__level-badge { background: rgba(255, 255, 255, 0.22); color: #fff; }
 .bilservice__level-card--03 .bilservice__level-badge { background: rgba(16, 166, 175, 0.28); color: #7fe0e6; }
-.bilservice__level-card h3 { margin: 0 0 0.6rem; font: 800 1.25rem/1.25 var(--font-heading); }
-.bilservice__level-card > p { margin: 0 0 1.1rem; font: 400 0.92rem/1.55 var(--font-body); opacity: 0.85; }
+.bilservice__level-card h3 { margin: 0 0 0.6rem; font: 800 1.25rem/1.25 var(--bb-font-display); }
+.bilservice__level-card > p { margin: 0 0 1.1rem; font: 400 0.92rem/1.55 var(--bb-font-body); opacity: 0.85; }
 .bilservice__level-divider { height: 1px; margin-bottom: 1.1rem; background: currentColor; opacity: 0.15; }
 .bilservice__level-card ul { display: flex; flex-direction: column; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
-.bilservice__level-card li { display: flex; align-items: flex-start; gap: 0.5rem; font: 400 0.9rem/1.4 var(--font-body); }
+.bilservice__level-card li { display: flex; align-items: flex-start; gap: 0.5rem; font: 400 0.9rem/1.4 var(--bb-font-body); }
 .bilservice__level-card li svg { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 0.15rem; color: var(--bilservice-teal-600); }
 .bilservice__level-card--01 li svg { color: var(--bilservice-teal-800); }
 
@@ -272,16 +272,15 @@
   background: var(--bilservice-aqua-100);
   border: 1px solid rgba(16, 118, 128, 0.18);
 }
-.bilservice__bridge h2 { margin: 0 0 0.9rem; color: var(--bilservice-ink); font: 800 clamp(1.6rem, 2vw, 2.1rem) / 1.2 var(--font-heading); }
-.bilservice__bridge p { margin: 0; max-width: 78ch; color: var(--bilservice-muted); font: 400 1rem/1.7 var(--font-body); }
+.bilservice__bridge h2 { margin: 0 0 0.9rem; color: var(--bilservice-ink); font: 800 clamp(1.6rem, 2vw, 2.1rem) / 1.2 var(--bb-font-display); }
+.bilservice__bridge p { margin: 0; max-width: 78ch; color: var(--bilservice-muted); font: 400 1rem/1.7 var(--bb-font-body); }
 .bilservice__bridge p a { color: var(--bilservice-teal-800); font-weight: 700; text-decoration: none; }
 .bilservice__bridge p a:hover { text-decoration: underline; }
 
 /* ---------- Process anchor ---------- */
 .bilservice__process { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
-.bilservice__process-heading { margin: 0 0 0.9rem; color: #fff; font: 800 clamp(1.8rem, 2.6vw, 2.4rem) / 1.12 var(--font-heading); text-transform: uppercase; }
-.bilservice__process-heading .title-accent { color: var(--bilservice-teal-600); }
-.bilservice__process-text > p { margin: 0 0 1.5rem; max-width: 34ch; color: rgba(255, 255, 255, 0.68); font: 400 0.95rem/1.6 var(--font-body); }
+.bilservice__process-heading { margin: 0 0 0.9rem; color: #fff; font: 800 clamp(1.8rem, 2.6vw, 2.4rem) / 1.12 var(--bb-font-display); text-transform: uppercase; }
+.bilservice__process-text > p { margin: 0 0 1.5rem; max-width: 34ch; color: rgba(255, 255, 255, 0.68); font: 400 0.95rem/1.6 var(--bb-font-body); }
 .bilservice__process-steps { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.5rem; }
 .bilservice__process-step { position: relative; flex: 1 1 110px; min-width: 0; text-align: left; padding-inline-end: 0.4rem; }
 .bilservice__process-arrow {
@@ -309,9 +308,9 @@
   color: var(--bilservice-teal-600);
 }
 .bilservice__process-icon svg { width: 19px; height: 19px; }
-.bilservice__process-num { display: block; margin-bottom: 0.35rem; color: var(--bilservice-teal-600); font: 800 0.72rem var(--font-body); letter-spacing: 0.08em; }
-.bilservice__process-step h3 { margin: 0 0 0.35rem; color: #fff; font: 700 0.92rem/1.3 var(--font-body); }
-.bilservice__process-step p { margin: 0; color: rgba(255, 255, 255, 0.6); font: 400 0.82rem/1.5 var(--font-body); }
+.bilservice__process-num { display: block; margin-bottom: 0.35rem; color: var(--bilservice-teal-600); font: 800 0.72rem var(--bb-font-body); letter-spacing: 0.08em; }
+.bilservice__process-step h3 { margin: 0 0 0.35rem; color: #fff; font: 700 0.92rem/1.3 var(--bb-font-body); }
+.bilservice__process-step p { margin: 0; color: rgba(255, 255, 255, 0.6); font: 400 0.82rem/1.5 var(--bb-font-body); }
 
 /* ---------- Used vehicle promo strip ---------- */
 .bilservice__promo {
@@ -325,17 +324,17 @@
   background: linear-gradient(120deg, var(--bilservice-petrol-900) 0%, var(--bilservice-petrol-950) 100%);
   color: #fff;
 }
-.bilservice__promo-eyebrow { color: var(--bilservice-teal-600); font: 700 0.72rem/1 var(--font-body); letter-spacing: 0.12em; text-transform: uppercase; }
-.bilservice__promo h3 { margin: 0.4rem 0 0; color: #fff; font: 800 1.4rem/1.25 var(--font-heading); }
+.bilservice__promo-eyebrow { color: var(--bilservice-teal-600); font: 700 0.72rem/1 var(--bb-font-body); letter-spacing: 0.12em; text-transform: uppercase; }
+.bilservice__promo h3 { margin: 0.4rem 0 0; color: #fff; font: 800 1.4rem/1.25 var(--bb-font-display); }
 .bilservice__promo-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem 1.5rem;
-  border-radius: var(--redesign-radius-pill);
+  border-radius: var(--bb-radius-control);
   background: var(--bilservice-teal-700);
   color: #fff;
-  font: 700 0.9rem/1 var(--font-body);
+  font: 700 0.9rem/1 var(--bb-font-body);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -366,8 +365,8 @@
 }
 .bilservice__trust-icon svg { width: 24px; height: 24px; }
 .bilservice__trust-text { flex: 1 1 320px; }
-.bilservice__trust-text h3 { margin: 0 0 0.4rem; color: var(--bilservice-ink); font: 800 1.2rem/1.3 var(--font-heading); }
-.bilservice__trust-text p { margin: 0; max-width: 56ch; color: var(--bilservice-muted); font: 400 0.95rem/1.55 var(--font-body); }
+.bilservice__trust-text h3 { margin: 0 0 0.4rem; color: var(--bilservice-ink); font: 800 1.2rem/1.3 var(--bb-font-display); }
+.bilservice__trust-text p { margin: 0; max-width: 56ch; color: var(--bilservice-muted); font: 400 0.95rem/1.55 var(--bb-font-body); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1180px) {

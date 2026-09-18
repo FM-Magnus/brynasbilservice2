@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import './css/index.css'
 import './styles/design-tokens.css'
+import './styles/shared-elements.css'
 import App from './App.tsx'
 import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
 

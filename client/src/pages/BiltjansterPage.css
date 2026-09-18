@@ -9,8 +9,8 @@
 }
 
 .biltjanster-hub *, .biltjanster-hub *::before, .biltjanster-hub *::after { box-sizing: border-box; }
-.biltjanster-hub a { color: inherit; text-decoration: none; }
-.biltjanster-hub button { cursor: pointer; font: inherit; }
+.biltjanster-hub :where(a) { color: inherit; text-decoration: none; }
+.biltjanster-hub :where(button) { cursor: pointer; font: inherit; }
 .biltjanster-hub h1, .biltjanster-hub h2, .biltjanster-hub p { margin: 0; }
 .biltjanster-hub :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
 
@@ -31,7 +31,7 @@
   text-transform: uppercase;
 }
 .biltjanster-hub__eyebrow::before { background: var(--bb-color-teal-500); content: ''; height: 2px; width: 23px; }
-.biltjanster-hub__eyebrow--dark { color: var(--bb-color-amber-500); }
+.biltjanster-hub__eyebrow--dark { color: #fff; }
 .biltjanster-hub__eyebrow--dark::before { background: var(--bb-color-amber-500); }
 
 /* Buttons */

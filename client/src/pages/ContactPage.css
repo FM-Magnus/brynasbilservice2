@@ -9,8 +9,8 @@
 }
 
 .kontakt-page *, .kontakt-page *::before, .kontakt-page *::after { box-sizing: border-box; }
-.kontakt-page a { color: inherit; text-decoration: none; }
-.kontakt-page button { cursor: pointer; font: inherit; }
+.kontakt-page :where(a) { color: inherit; text-decoration: none; }
+.kontakt-page :where(button) { cursor: pointer; font: inherit; }
 .kontakt-page h1, .kontakt-page h2, .kontakt-page h3, .kontakt-page h4, .kontakt-page p { margin: 0; }
 .kontakt-page :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
 

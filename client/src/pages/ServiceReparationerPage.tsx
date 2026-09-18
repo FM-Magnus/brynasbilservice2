@@ -1,14 +1,16 @@
-// Rebuilt from scratch 2026-09-16 as the THIRD Brynäs page identity: clean
-// automotive advertising / ownership confidence, distinct from both index.css
-// and the teal-technical ServiceGuideTemplate.css used by Koppling/Bromsar.
-// Styled entirely by ./ServiceReparationerPage.css (class prefix .bilservice__)
-// — this page has NO dependency on any .services-page__* rule in index.css.
+// Parent of the "Bilservice" shared-family template (Felsökning,
+// Däckservice and AC-service also mount on ServiceReparationerPage.css):
+// clean automotive advertising / ownership confidence, distinct from both
+// index.css and the teal-technical ServiceGuideTemplate.css used by the
+// Guide family. Styled entirely by ./ServiceReparationerPage.css (class
+// prefix .bilservice__) — zero dependency on index.css or its --redesign-*
+// tokens; consumes --bb-* tokens only.
 // Real photography is not supplied yet; every image position below is an
 // intentional, clearly-labelled placeholder (data-image-slot) sized to the
 // final photo's geometry so it can be dropped in later with no layout change.
 import { useState, useEffect, Fragment } from 'react'
-import { Header } from '../components/layout/Header'
-import { Footer } from '../components/layout/Footer'
+import { PublicHeader } from '../components/layout/PublicHeader'
+import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -83,7 +85,7 @@ export default function ServiceReparationerPage() {
 
   return (
     <>
-      <Header onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openModal} variant="solid" />
       <main className="bilservice">
         {/* Hero */}
         <section className="bilservice__hero" id="bilservice" aria-labelledby="bilservice-hero-title">
@@ -92,7 +94,7 @@ export default function ServiceReparationerPage() {
             <div className="bilservice__hero-content">
               <div className="bilservice__eyebrow">Din bilverkstad i Brynäs, Gävle</div>
               <h1 className="bilservice__hero-title" id="bilservice-hero-title">
-                Din bil<br /><span className="title-accent">förtjänar</span><br />det bästa
+                Din bil<br /><span className="bilservice__accent">förtjänar</span><br />det bästa
               </h1>
               <p className="bilservice__hero-lead">
                 Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation — för alla bilmärken, till konkurrenskraftiga priser.
@@ -117,7 +119,7 @@ export default function ServiceReparationerPage() {
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="bilservice-price-title">
           <div className="bilservice__container bilservice__split">
             <div>
-              <h2 className="bilservice__price-heading" id="bilservice-price-title">Vad kostar en <span className="title-accent">bilservice</span>?</h2>
+              <h2 className="bilservice__price-heading" id="bilservice-price-title">Vad kostar en <span className="bilservice__accent">bilservice</span>?</h2>
               <p className="bilservice__price-text">Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
               <div className="bilservice__actions">
                 <button type="button" onClick={openModal} className="bilservice__btn bilservice__btn--primary">Boka tid för bilservice</button>
@@ -189,7 +191,7 @@ export default function ServiceReparationerPage() {
         <section className="bilservice__section bilservice__section--dark" aria-labelledby="bilservice-process-title">
           <div className="bilservice__container bilservice__process">
             <div className="bilservice__process-text">
-              <h2 className="bilservice__process-heading" id="bilservice-process-title">Så går det till<br /><span className="title-accent">hos oss</span></h2>
+              <h2 className="bilservice__process-heading" id="bilservice-process-title">Så går det till<br /><span className="bilservice__accent">hos oss</span></h2>
               <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
               <a href="tel:0705533395" className="bilservice__btn bilservice__btn--primary"><PhoneIcon aria-hidden="true" /><span>Ring oss: 070-553 33 95</span></a>
             </div>
@@ -240,7 +242,7 @@ export default function ServiceReparationerPage() {
         </section>
       </main>
       <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <Footer />
+      <PublicFooter onBookingClick={openModal} />
     </>
   )
 }

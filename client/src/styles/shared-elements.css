@@ -1,0 +1,229 @@
+/* shared-elements.css — canonical patterns shared by every --bb-* page.
+   Global classes (no page prefix): use these directly in any new or
+   retrofitted page instead of writing a page-local equivalent. Extracted
+   from LandingPage.css 2026-09-18 after a full pass auditing it as the
+   finished reference implementation — re-synced against the live page via
+   getComputedStyle(), not just re-read from source, after Magnus's detail
+   pass (buttons, icons, cards, gradients). Consumes --bb-* tokens only;
+   never index.css. Not yet consumed by any page — see docs/SESSION_LOG_
+   CURRENT.md for the deferred implementation-round plan. */
+
+.bb-wrap {
+  margin-inline: auto;
+  width: min(100% - clamp(2rem, 6vw, 7rem), var(--bb-wrap-max));
+}
+
+/* Reset gotcha (found 2026-09-18, twice, in the same page): a broad reset
+   selector combining a class with an element type (e.g. `.page a`, `.page
+   button`) has HIGHER specificity than a single-class component rule (e.g.
+   `.page__btn`), even though the reset reads as "more generic." It silently
+   wins on color/font-weight/font-size and the bug hides in plain sight
+   whenever the ambient inherited value happens to coincidentally match.
+   Every reset on every page's own root selector must wrap the element list
+   in :where(), which has zero specificity:
+     .page :where(a) { color: inherit; text-decoration: none; }
+     .page :where(button, input, textarea, select) { font: inherit; }
+   This isn't optional per-page style — it's the only way a component's own
+   `color`/`font-weight` rule is guaranteed to win regardless of whether
+   it's a <button> or an <a>. */
+
+/* ---------- Buttons ---------- */
+.bb-btn {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--bb-radius-control);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--bb-font-body);
+  font-size: var(--bb-font-size-control);
+  font-weight: 700;
+  gap: 0.55rem;
+  justify-content: center;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  min-height: 52px;
+  padding: 0.75rem 1.3rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+.bb-btn:focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
+.bb-btn svg { height: 16px; width: 16px; }
+
+/* "teal_button" and "ember_button" (Magnus's names, 2026-09-18) — for DARK
+   surfaces only (hero, dark card, photo band). Transparent-to-color
+   horizontal gradient, so the effect depends on a dark backdrop showing
+   through; on a light card "transparent" just reads as a washed-out patch.
+   A light-surface variant is `.bb-btn--ember-solid` below, not these. */
+.bb-btn--teal {
+  background: linear-gradient(to right, transparent, #048a99);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: var(--bb-shadow-button);
+  color: var(--bb-color-text-inverse);
+}
+/* Hover fills in fully instead of just brightening — transparent-to-teal at
+   rest, solid two-tone teal gradient on hover. */
+.bb-btn--teal:hover { background: linear-gradient(135deg, #12cbd8, #057784); transform: translateY(-2px); }
+
+.bb-btn--ember {
+  background: linear-gradient(to right, transparent, rgba(240, 149, 5, 0.25));
+  border-color: var(--bb-color-amber-500);
+  color: var(--bb-color-text-inverse);
+}
+.bb-btn--ember:hover {
+  background: linear-gradient(to right, transparent, rgba(252, 163, 17, 0.45));
+  border-color: var(--bb-color-amber-400);
+  transform: translateY(-2px);
+}
+
+/* "ember_button" for LIGHT surfaces (warm-white page background, white
+   card) — a different treatment from `--ember` above, not a smaller
+   version of it: solid two-tone diagonal fill (no transparency, since
+   there's no dark backdrop to blend into), a neutral (not color-tinted)
+   drop shadow, and a slight inset bevel — light line on top, dark line on
+   bottom — for a touch of dimension. */
+.bb-btn--ember-solid {
+  background: linear-gradient(135deg, #f09505, #d48202);
+  border-color: rgba(255, 214, 158, 0.66);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  color: var(--bb-color-text-inverse);
+}
+.bb-btn--ember-solid:hover { background: linear-gradient(135deg, #fca311, #b56c01); transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-btn { transition: none; }
+}
+
+/* ---------- Eyebrow ---------- */
+/* Rule (established 2026-09-18): on a dark surface the dash stays amber but
+   the text turns white — never amber text on a dark background.
+   `.bb-eyebrow--dark` is ONLY for a dark card/section/photo background —
+   white text is illegible on the page's light/warm-white surface, so never
+   apply this modifier there. Use plain `.bb-eyebrow` (teal-800 text) on any
+   light surface; `--dark` is not a general "alternate style," it's specific
+   to dark backgrounds. */
+.bb-eyebrow {
+  align-items: center;
+  color: var(--bb-color-teal-800);
+  display: flex;
+  font-family: var(--bb-font-body);
+  font-size: var(--bb-font-size-label);
+  font-weight: 700;
+  gap: 0.7rem;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.9rem;
+  text-transform: uppercase;
+}
+.bb-eyebrow::before { background: currentColor; content: ''; height: 2px; width: 23px; }
+.bb-eyebrow--dark { color: var(--bb-color-text-inverse); }
+.bb-eyebrow--dark::before { background: var(--bb-color-amber-500); }
+
+/* ---------- Headings ---------- */
+/* Archivo 800, MIXED CASE — this is Landing's actual rule, not the older
+   "every hero heading is uppercase" rule documented elsewhere in this file
+   under the legacy hero-rule section. Kontakt, Biltjänster and Bilservice
+   currently uppercase their H1s; per Magnus (2026-09-18) Landing is the one
+   that's right, so this is the canonical spec those three pages will be
+   brought into line with during the implementation round — not yet done. */
+.bb-h1 {
+  color: inherit;
+  font-family: var(--bb-font-display);
+  font-size: clamp(2.75rem, 4.6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  margin: 0;
+}
+.bb-h2 {
+  color: inherit;
+  font-family: var(--bb-font-display);
+  font-size: clamp(2.1rem, 3vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* Teal word-highlight inside an otherwise plain heading (e.g. "Service för
+   <span>hela bilen</span>"). Same color on light or dark surfaces — it
+   reads fine on both, unlike the eyebrow. */
+.bb-accent { color: var(--bb-color-teal-500); }
+
+/* Muted body/lead paragraph. Font-size and line-height stay contextual
+   (Landing itself varies these by section — hero intro is larger than a
+   section's supporting copy), only the color is canonical. */
+.bb-lead { color: var(--bb-color-text-muted); }
+.bb-lead--dark { color: rgba(255, 255, 255, 0.85); }
+
+/* ---------- Card motifs ---------- */
+/* Dark image card: photo + bottom gradient scrim + content overlaid at the
+   bottom. Caller supplies the <img> and content; this owns the shell. */
+.bb-card--photo {
+  background: var(--bb-color-ink-900);
+  border-radius: var(--bb-radius-md);
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+.bb-card--photo > img {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  z-index: -2;
+}
+.bb-card--photo::after {
+  background: linear-gradient(180deg, rgba(0, 20, 23, 0.05), rgba(0, 20, 23, 0.78) 68%);
+  content: '';
+  inset: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+/* Bottom-right "go to" arrow inside a .bb-card--photo. Bare icon, no badge
+   background — ember, matching the site's "ember is the accent" call. */
+.bb-card-arrow { color: var(--bb-color-amber-500); display: flex; justify-content: flex-end; }
+.bb-card-arrow svg { height: 17px; width: 17px; }
+
+/* Translucent glass panel, for a list/detail block sitting on a dark photo
+   band (Landing's "why" section reassurance list). */
+.bb-card--glass {
+  background: rgba(2, 28, 32, 0.56);
+  border: 1px solid rgba(127, 220, 224, 0.19);
+  border-radius: var(--bb-radius-md);
+  color: var(--bb-color-text-inverse);
+}
+
+/* ---------- Icon badges ---------- */
+/* Two real shapes now (a third, a pale full circle, was tried on Landing's
+   process steps and explicitly removed 2026-09-18 — "remove the white
+   circular plates" — don't reintroduce it as a shared pattern). Ember is
+   the accent color for icons site-wide now, not teal. */
+
+/* Tinted rounded-square, for an icon sitting on a card or list (Landing's
+   "why" section reassurance list is the live example). */
+.bb-icon-badge {
+  align-items: center;
+  background: rgba(240, 149, 5, 0.15);
+  border-radius: var(--bb-radius-sm);
+  color: var(--bb-color-amber-500);
+  display: inline-flex;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+.bb-icon-badge svg { height: 17px; width: 17px; }
+
+/* Bare icon with no badge at all, floating directly on a busy photo/dark
+   surface with nothing behind it (hero trust row; process-step icons after
+   their plate was removed) — needs its own drop-shadow for legibility
+   since there's no background shape providing contrast. */
+.bb-icon-bare {
+  align-items: center;
+  color: var(--bb-color-amber-500);
+  display: inline-flex;
+  justify-content: center;
+}
+.bb-icon-bare svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)); }
