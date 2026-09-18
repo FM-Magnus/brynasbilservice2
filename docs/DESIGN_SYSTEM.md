@@ -1,7 +1,7 @@
 # Brynäs Bilservice — Design System
 
 This is the living reference for the site's visual tokens and patterns.
-**AUTHORITATIVE CANONICAL TOKENS**: `client/src/styles/design-tokens.css` defines the `--bb-*` design tokens that govern the 7 Page Design Archetypes and the standalone Public Shell (`PublicHeader`, `PublicFooter`, and `GalleryTeaserCard`). Legacy tokens in `client/src/css/index.css` are frozen and retained solely for unmigrated legacy pages.
+**AUTHORITATIVE CANONICAL TOKENS**: `client/src/styles/design-tokens.css` defines the `--bb-*` design tokens that govern the 7 Page Design Archetypes and the standalone Public Shell (`PublicHeader`, `PublicFooter`, `GalleryTeaserCard`, `GoogleReviewsCard`, and `ContactFormCard`). Legacy tokens in `client/src/css/index.css` are frozen and retained solely for unmigrated legacy pages.
 
 ## 1. Canonical Design Tokens (`--bb-*`) — Single Source of Truth
 
@@ -59,7 +59,7 @@ Located in [`client/src/styles/design-tokens.css`](../client/src/styles/design-t
 
 ## 2. Canonical Public Shell Components
 
-The site is framed by three standalone, self-contained components:
+The site is framed and anchored by five standalone, self-contained Level 0 Public Shell & Canonical Core components:
 
 1. **`PublicHeader`** ([`client/src/components/layout/PublicHeader.tsx`](../client/src/components/layout/PublicHeader.tsx) + [`PublicHeader.css`](../client/src/components/layout/PublicHeader.css)):
    - Renders at document root via React Portal (`z-index: 100`) so it clears all hero and stacking contexts.
@@ -75,6 +75,18 @@ The site is framed by three standalone, self-contained components:
 3. **`GalleryTeaserCard`** ([`client/src/components/ui/GalleryTeaserCard.tsx`](../client/src/components/ui/GalleryTeaserCard.tsx) + [`GalleryTeaserCard.css`](../client/src/components/ui/GalleryTeaserCard.css)):
    - Standalone Ken Burns workshop slideshow card with single-source `defaultWorkshopSlides` array.
    - Frosted "Grundat 2021" badge, active slide indicators, and bottom-right corner cutout badge linking to `/galleri`.
+4. **`GoogleReviewsCard`** ([`client/src/components/ui/GoogleReviewsCard.tsx`](../client/src/components/ui/GoogleReviewsCard.tsx) + [`GoogleReviewsCard.css`](../client/src/components/ui/GoogleReviewsCard.css)):
+   - Standalone Google reviews module with verified Brynäs reviews (`4,3` rating, 50 reviews, link to Google Maps).
+   - Encapsulates 8s cyclic rotation, 220ms cross-fade, cleans up interval on unmount, and respects `prefers-reduced-motion`.
+   - Single accessible `<a>` tag with visible focus ring.
+   - Dual variants:
+     - `variant="hero-overlay"`: Frosted-glass transparent bounding field (`background: rgba(3, 22, 26, 0.42); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; backdrop-filter: blur(8px)`) with locked author track width (`96px`/`88px`) and reserved min-heights (`84.6px` desktop/tablet, `158px` mobile) guaranteeing 0.0px layout shift (CLS = 0) during review cycling.
+     - `variant="card"`: Elevated dark-ink card (`#0d1f22`) with border and floating shadow for standard page body or sidebar placement.
+5. **`ContactFormCard`** ([`client/src/components/ui/ContactFormCard.tsx`](../client/src/components/ui/ContactFormCard.tsx) + [`ContactFormCard.css`](../client/src/components/ui/ContactFormCard.css)):
+   - Centralized Single Source of Truth for contact topics/subjects (`defaultContactSubjects = ['Bilservice & oljebyte', 'Reparation & felsökning', 'Däckservice & hjulinställning', 'AC-service', 'Bärgning & transport', 'Övrigt']`), direct phone/email/address details, and submission states.
+   - Dual variants:
+     - `variant="full-section"`: Two-column conversion section with background decorative brand art, left contact info column, and right form card.
+     - `variant="card-only"`: Standalone teal-gradient contact form card, perfectly suited for embedding in subpages, service guides, or modal flows.
 
 ---
 

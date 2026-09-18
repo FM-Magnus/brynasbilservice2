@@ -10,21 +10,22 @@
 
 Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/README.md) before editing. This document records the approved redesign state; it does not authorize work beyond the next stated phase.
 
-## Current continuation note — 2026-09-17
+## Current continuation note — 2026-09-18
 
 **AUTHORITATIVE REBUILD ROADMAP**: Consult [`HITL_Temporary_roadmap.md`](../HITL_Temporary_roadmap.md) before starting work.
 - **What it is**: Magnus's authoritative human-in-the-loop rebuild roadmap.
 - **Why it is there**: Keeps all agents aligned across sessions on the 7 design styles and prevents drift or unauthorized edits to frozen code.
 - **Why it is temporary**: Exists only while migrating away from `index.css`. Once all pages are rebuilt on their independent templates and `index.css` is deleted, this roadmap will be archived.
 
-
-- The canonical **Public Shell & Design Tokens** foundation is completed and locked:
+- The canonical **Level 0 Public Shell & Design Tokens** foundation is completed and locked:
   - `client/src/styles/design-tokens.css` defines the authoritative `--bb-*` canonical tokens (colors, amber accent `#f09505`, typography scales, spacing, radii, `--bb-wrap-max: 1320px`).
   - `PublicHeader` (`PublicHeader.tsx` + `PublicHeader.css` + `publicNavigation.ts`): Standalone sticky/portal header rendering above all page contexts.
   - `PublicFooter` (`PublicFooter.tsx` + `PublicFooter.css`): Standalone 4-column automotive footer matching Magnus's approved mockup, with wheel background asset (`footer-wheel-bg.webp`), verified hours, contact cards, CTA button, and dynamic copyright.
   - `GalleryTeaserCard` (`GalleryTeaserCard.tsx` + `GalleryTeaserCard.css`): Standalone Ken Burns workshop slideshow card with single-source `defaultWorkshopSlides` array.
-  - All three elements are mounted on Startsidan (`/`), 100% independent of legacy `index.css`.
-- **NEXT ACTIVE ROADMAP TASK**: Step 3 in `HITL_Temporary_roadmap.md` — Rebuilding **`Kontakt`** (`/kontakt`) and **`Om oss`** (`/om-oss`) from scratch as Style 1 (Brand & Conversion Hub), wrapped in `PublicHeader` and `PublicFooter`.
+  - `GoogleReviewsCard` (`GoogleReviewsCard.tsx` + `GoogleReviewsCard.css`): Standalone Google reviews module with verified data, cyclic rotation, and frosted-glass transparent bounding field (`hero-overlay`) with zero layout shift / 0.0px CLS across viewports.
+  - `ContactFormCard` (`ContactFormCard.tsx` + `ContactFormCard.css`): Standalone single-source-of-truth contact component (`defaultContactSubjects`) supporting `full-section` and `card-only` variants.
+  - All five elements are mounted on Startsidan (`/`), 100% independent of legacy `index.css`.
+- **NEXT ACTIVE ROADMAP TASK**: Step 3 in `HITL_Temporary_roadmap.md` — Rebuilding **`Kontakt`** (`/kontakt`) and **`Om oss`** (`/om-oss`) from scratch as Style 1 (Brand & Conversion Hub), wrapped in `PublicHeader` and `PublicFooter`, using `ContactFormCard` and `GalleryTeaserCard`.
 - Dedicated hero background WebP/JPG pairs implemented across **Om oss** (`/om-oss`), **AC-service** (`/ac-service`), **Bärgning** (`/bargning`), and **Däckservice** (`/dackservice`), each styled via colocated scoped CSS files (`AboutPage.css`, `AcServicePage.css`, `BargningPage.css`, `DackservicePage.css`) using `image-set()` and the standard overlay gradient (`opacity: 0.85`).
 - `/galleri` is a dedicated workshop gallery subpage (`GalleryPage.tsx`) featuring real workshop photos, dark hero, closing CTA, and booking modal.
 - `/om-oss` features Maher Basher intro copy, consumer law proof ("15 procent"), authentic portrait card, and a stylish pill CTA button linking to `/galleri`.

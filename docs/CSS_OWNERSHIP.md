@@ -23,8 +23,8 @@ The redesign public shell is independent from the frozen legacy layer.
 - `client/src/components/layout/PublicHeader.tsx` and `PublicHeader.css` own the new shared header. It must not import `Header.tsx`, use legacy selectors or Tailwind utilities, or rely on `index.css` layout/control rules.
 - `client/src/components/layout/PublicFooter.tsx` and `PublicFooter.css` own the canonical shared footer matching the approved automotive mockup. It must not import legacy `Footer.tsx`, use legacy selectors or Tailwind utilities, or rely on `index.css` rules.
 - `client/src/components/ui/GalleryTeaserCard.tsx` and `GalleryTeaserCard.css` own the reusable interactive Ken Burns workshop slideshow card with a single-source slide registry (`defaultWorkshopSlides`).
-- `client/src/components/ui/GoogleReviewsCard.tsx` and `GoogleReviewsCard.css` own the standalone Google reviews UI component with single-source review registry (`defaultGoogleReviews`) and cyclic rotation (`.bb-reviews-card*`).
-- `client/src/components/ui/ContactFormCard.tsx` and `ContactFormCard.css` own the standalone reusable contact module and form card (`.bb-contact-section*`, `.bb-contact-card*`).
+- `client/src/components/ui/GoogleReviewsCard.tsx` and `GoogleReviewsCard.css` own the standalone Google reviews UI component with single-source review registry (`defaultGoogleReviews`), cyclic rotation with smooth cross-fade, and stabilized transparent bounding field with zero layout shift (`.bb-reviews-card*`).
+- `client/src/components/ui/ContactFormCard.tsx` and `ContactFormCard.css` own the standalone reusable contact module and form card (`.bb-contact-section*`, `.bb-contact-form*`) with single-source contact subjects (`defaultContactSubjects`) and multi-variant support (`full-section`, `card-only`).
 - The legacy `Header.tsx`, `Footer.tsx` and `BookingForm.tsx` remain untouched until separately retired. A new page receives booking behaviour through callbacks or modals, mounting `PublicHeader` and `PublicFooter` directly.
 
 ## The 7-Style Rebuild Architecture (Master Blueprint)
@@ -64,9 +64,9 @@ The entire site is being rebuilt away from `index.css` into a canonical design t
 
 | Route | Architecture Group | Status | CSS Owner |
 | --- | --- | --- | --- |
-| `/` | Style 1 (Parent) | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` |
+| `/` | Style 1 (Parent) | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` |
 | `/om-oss` | Style 1 (Child) | Step 3: Rebuild to Style 1 | Transitional (`AboutPage.css`) → Will mount `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
-| `/kontakt` | Style 1 (Child) | Step 3: Rebuild to Style 1 | Legacy dependent → Will mount `PublicHeader` + `PublicFooter` |
+| `/kontakt` | Style 1 (Child) | Step 3: Rebuild to Style 1 | Legacy dependent → Will mount `PublicHeader` + `PublicFooter` + `ContactFormCard` |
 | `/service-reparationer` | Style 2 (Parent) | Complete / Needs PublicHeader | `ServiceReparationerPage.css` |
 | `/felsokning` | Style 2 (Child) | Transitional -> Rebuild to Style 2 | Legacy dependent |
 | `/dackservice` | Style 2 (Child) | Transitional -> Rebuild to Style 2 | Legacy transitional (`DackservicePage.css`) |
