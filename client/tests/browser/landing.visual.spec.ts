@@ -16,7 +16,7 @@ test('landing page renders without horizontal overflow', async ({ page }, testIn
     })
   }
 
-  const contactSection = page.locator('.landing-v2__contact-section')
+  const contactSection = page.locator('.bb-contact-section, .landing-v2__contact-section').first()
   if (await contactSection.isVisible()) {
     await contactSection.screenshot({
       path: testInfo.outputPath('landing-contact.png'),

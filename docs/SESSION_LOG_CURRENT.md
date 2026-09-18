@@ -2,6 +2,16 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (Extract standalone reusable ContactFormCard component)
+
+- Extracted the "Skicka ett meddelande" contact module and form from `LandingPage.tsx` / `LandingPage.css` into a standalone, reusable Level 0 UI component: `client/src/components/ui/ContactFormCard.tsx` and `ContactFormCard.css`.
+- Single Source of Truth: Centralized `defaultContactSubjects`, direct contact items (phone, email, address), and submission confirmation logic in one place so changes propagate site-wide.
+- Multi-variant Architecture: Supports `variant="full-section"` (two-column layout with background decorative art and contact info column) and `variant="card-only"` (standalone teal gradient card with form fields, ideal for embedding in subpages or service guides).
+- Scoped CSS: Built with `.bb-contact-section*` and `.bb-contact-form*` namespaces, fully driven by `--bb-*` design tokens (`--bb-font-display`, `--bb-font-body`, `--bb-color-teal-*`, `--bb-color-focus`).
+- Integrated into `LandingPage.tsx` and pruned inline `ContactForm` and ~45 lines of legacy `.landing-v2__contact-*` / `.landing-v2__form-*` rules.
+- Real-browser verified via Playwright: 3/3 tests passed with 0px horizontal overflow at 1440px, 768px, and 390px; visual review confirmed zero regression.
+- Strict CSS safety: 0 lines edited in `client/src/css/index.css`; client production build succeeded with 0 errors.
+
 ### 2026-09-18 — Antigravity (Extract standalone reusable GoogleReviewsCard component)
 
 - Extracted the Google reviews module from `LandingPage.tsx` / `LandingPage.css` into a standalone, reusable Level 0 UI component: `client/src/components/ui/GoogleReviewsCard.tsx` and `GoogleReviewsCard.css`.

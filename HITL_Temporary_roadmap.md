@@ -39,6 +39,7 @@ LEVEL 0: CANONICAL GLOBAL LAYER & PUBLIC SHELL (Single Source of Truth)
   • PublicFooter.tsx / PublicFooter.css (Standalone global automotive footer)
   • GalleryTeaserCard.tsx / GalleryTeaserCard.css (Standalone workshop slideshow card)
   • GoogleReviewsCard.tsx / GoogleReviewsCard.css (Standalone Google reviews badge/card)
+  • ContactFormCard.tsx / ContactFormCard.css (Standalone contact module & form card)
 ================================================================================
                                 │
         ┌───────────────────────┼───────────────────────┐
@@ -98,6 +99,7 @@ Use this section to know **what the agent is doing**, **what you need to review/
   - Built standalone `PublicFooter.tsx` and `PublicFooter.css` faithfully matching Magnus's approved automotive mockup: 4-column layout, centered brand logo/eyebrow/trust badges/handwritten signature, quick links, contact badges, verified opening hours, booking CTA, and dynamic legal sub-footer over atmospheric wheel background asset (`footer-wheel-bg.webp`).
   - Extracted standalone `GalleryTeaserCard.tsx` and `GalleryTeaserCard.css` with single-source `defaultWorkshopSlides` array for site-wide Ken Burns workshop teasers.
   - Extracted standalone `GoogleReviewsCard.tsx` and `GoogleReviewsCard.css` with single-source `defaultGoogleReviews` array, cyclic review rotation (8s), `prefers-reduced-motion` check, and support for `hero-overlay` and `card` variants.
+  - Extracted standalone `ContactFormCard.tsx` and `ContactFormCard.css` with single-source `defaultContactSubjects`, direct contact badges, teal gradient form card, and `full-section` / `card-only` variants.
   - Mounted on `LandingPage.tsx` and pruned redundant legacy CSS.
 - **Verification**: Verified via Playwright at 1440px, 768px, and 390px with zero horizontal overflow; 0 lines added to `index.css`.
 

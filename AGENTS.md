@@ -16,7 +16,7 @@
 
 ## Current state (last updated: 2026-09-17 by Antigravity, Claude and Codex)
 
-- **MASTER BLUEPRINT — 7 Page Design Archetypes (Authoritative Ground Truth)**: Total eradication of `index.css`. Top layer is Canonical Design Tokens (`client/src/styles/design-tokens.css` with `--bb-*`) + standalone Public Shell (`PublicHeader.tsx` + `PublicHeader.css` + `publicNavigation.ts` + `PublicFooter.tsx` + `PublicFooter.css` + `GalleryTeaserCard.tsx` + `GoogleReviewsCard.tsx`). Pages strictly belong to 7 types (see `docs/CSS_OWNERSHIP.md`):
+- **MASTER BLUEPRINT — 7 Page Design Archetypes (Authoritative Ground Truth)**: Total eradication of `index.css`. Top layer is Canonical Design Tokens (`client/src/styles/design-tokens.css` with `--bb-*`) + standalone Public Shell (`PublicHeader.tsx` + `PublicHeader.css` + `publicNavigation.ts` + `PublicFooter.tsx` + `PublicFooter.css` + `GalleryTeaserCard.tsx` + `GoogleReviewsCard.tsx` + `ContactFormCard.tsx`). Pages strictly belong to 7 types (see `docs/CSS_OWNERSHIP.md`):
   1. *Style 1 (Brand & Conversion Hub)*: Startsidan (`/`, parent), Om oss (`/om-oss`), Kontakt (`/kontakt`).
   2. *Style 2 (Major Services & Editorial)*: Bilservice (`/service-reparationer`, parent), Felsökning (`/felsokning`), Däckservice (`/dackservice`), AC-service (`/ac-service`).
   3. *Style 3 (Tech Guides Group A)*: Koppling, Oljebyte, Avgassystem, Bromssystem (`ServiceGuideTemplate.css`).
