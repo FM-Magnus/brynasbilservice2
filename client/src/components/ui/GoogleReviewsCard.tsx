@@ -69,6 +69,7 @@ export function GoogleReviewsCard({
   className = '',
 }: GoogleReviewsCardProps) {
   const [active, setActive] = useState(0)
+  const [fading, setFading] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -76,7 +77,11 @@ export function GoogleReviewsCard({
     if (reviews.length <= 1) return
 
     const timer = window.setInterval(() => {
-      setActive(index => (index + 1) % reviews.length)
+      setFading(true)
+      setTimeout(() => {
+        setActive(index => (index + 1) % reviews.length)
+        setFading(false)
+      }, 220)
     }, intervalMs)
 
     return () => window.clearInterval(timer)
@@ -107,7 +112,7 @@ export function GoogleReviewsCard({
         <small className="bb-reviews-card__google-sub">Omdömen på Google Maps</small>
       </div>
 
-      <div className="bb-reviews-card__review">
+      <div className={`bb-reviews-card__review ${fading ? 'bb-reviews-card__review--fading' : ''}`.trim()}>
         <span className="bb-reviews-card__avatar">{currentReview.name[0]}</span>
         <div className="bb-reviews-card__author">
           <b className="bb-reviews-card__author-name">{currentReview.name}</b>

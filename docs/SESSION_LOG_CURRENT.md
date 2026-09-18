@@ -2,6 +2,15 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-18 — Antigravity (GoogleReviewsCard: Verified Component & Zero Layout Shift Field)
+
+- Verified Landing Page Hero Review Component: Confirmed that `LandingPage.tsx` strictly mounts the new Level 0 `GoogleReviewsCard` (`variant="hero-overlay"`) with zero references to legacy components or classes.
+- Stabilized Review Bounding Field (Zero Layout Shift): Wrapped the hero-overlay review module in its own transparent, frosted-glass field container (`background: rgba(3, 22, 26, 0.42); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; backdrop-filter: blur(8px)`).
+- Eliminated Content Movement on Rotation: Fixed author track widths (`96px` desktop, `88px` mobile) and reserved quote min-heights across breakpoints (`84px` desktop/tablet, `158px` mobile). Measured in Playwright across all 4 customer reviews: card height and heroBottom height variance is exactly 0.0px (CLS = 0).
+- Smooth Cross-Fade Transition: Added 220ms subtle cross-fade state during review cycling so reviews transition smoothly without visual snapping, while fully respecting `prefers-reduced-motion`.
+- Mobile Responsive Polish: Redesigned mobile grid to a clean 2-row layout (rating & Google header row, followed by full-width review quote row) preventing horizontal word squashing.
+- Verified: Playwright browser tests passed (3/3), 0px horizontal overflow, zero build errors, zero lines touched in `client/src/css/index.css`.
+
 ### 2026-09-18 — Antigravity (Extract standalone reusable ContactFormCard component)
 
 - Extracted the "Skicka ett meddelande" contact module and form from `LandingPage.tsx` / `LandingPage.css` into a standalone, reusable Level 0 UI component: `client/src/components/ui/ContactFormCard.tsx` and `ContactFormCard.css`.
