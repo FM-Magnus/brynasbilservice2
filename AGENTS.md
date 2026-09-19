@@ -30,7 +30,7 @@
   1. *7 unique pages, one CSS island each — all complete*: Startsidan (`landing/LandingPage.css`, `.landing-v2__*`), Om oss (`AboutPage.css`, `.omoss-page__*`), Kontakt (`ContactPage.css`, `.kontakt-page__*`), Bärgning (`BargningPage.css`, `.bargning-page__*`), Biltjänster (`BiltjansterPage.css`, `.biltjanster-hub__*`), Bilar till salu (`BilarTillSalu.css`, `.bilartillsalu-page__*`), Galleri (`GalleryPage.css`, `.galleri-page__*`).
   2. *Bilservice family — `ServiceReparationerPage.css` (`.bilservice__*`)*: Bilservice (`/service-reparationer`, owner), Felsökning, Däckservice, AC-service. Complete.
   3. *Guide family — `styles/ServiceGuideTemplate.css` (`.service-guide__*`)*: all 10 guides. Complete.
-- **Next: Step 7 (delete `index.css`)** — `/tjanster` (`ServicesPage.tsx`, legacy `Header`/`Footer`) is the last *page* on `index.css`, but it is **not the only dependency**: `index.css` also holds the `@tailwind` directives (admin styling + global preflight), `BookingForm.css` reads six `--redesign-*` variables from it and the modal button uses `.btn`/`.btn--primary`, and `BiltjansterFaq` (13 pages) is styled only by it. Full checklist: `HITL_Temporary_roadmap.md` Step 7.
+- **Next: Step 7 (delete `index.css`)** — prep is done: Tailwind directives in `styles/tailwind.css` (not yet imported), global element defaults in `styles/base.css`, and the booking modal, the FAQ component and admin are free of `index.css`. A dry run without `index.css` was pixel-identical on all 21 public routes and `/admin`. Remaining: retire `/tjanster` (`ServicesPage.tsx`), remove the dead code, swap the import in `main.tsx`, delete `index.css`. Checklist: `HITL_Temporary_roadmap.md` Step 7.
 - **Anti-drift guardrails**: never invent a new shared template or force a unique page into one; tokens are `--bb-*` only; always mount `PublicHeader`/`PublicFooter` (never legacy `Header.tsx`/`Footer.tsx`); do not "fix" legacy code in place; verify every visual change with Playwright (`--disable-gpu`) at 1440, 768 and 390 with zero horizontal overflow.
 - **Data-driven, backend-ready pages** (contracts and backend proposal: `docs/BACKEND_HANDOFF.md`):
   - *Bilar till salu*: stock via `getPublicVehicles()` (`api/vehicles.ts`) from the static seed `data/vehicles.ts`; `VITE_VEHICLES_SOURCE=api` switches to the future API.
@@ -53,7 +53,6 @@
 8. **Booking modal backend limitation** — local API availability and real booking submission remain unverified.
 9. **Google review data is hardcoded** (`defaultGoogleReviews` in `components/ui/GoogleReviewsCard.tsx`) and will drift from the live profile. The legacy `components/GoogleReviews.tsx` is unused — delete in Step 7.
 10. **Unconfirmed copy, flagged in code**: Felsökning's "1–2 tim" estimate (`DRAFT GUIDANCE`, `FelsokningPage.tsx`); AC-service frequency (`DRAFT GUIDANCE`) and refrigerant capability (`FACT TO CONFIRM`) in `AcServicePage.tsx`. Däckservice's TPMS FAQ is deliberately generic.
-11. **Tailwind leftovers on completed public pages** — icon sizes `w-4 h-4` / `w-3 h-3` in `AboutPage.tsx` and `BargningPage.tsx`. Move them into each page's CSS island before Step 7, or the icons lose their size.
 
 ### Cars for sale (Bilar till salu)
 - Stock lives in `client/src/data/vehicles.ts`, not in the page. Current car: Peugeot 307 CC 2.0, 2006, mörkgrå, 141 147 km, 39 900 kr, nybesiktigad maj 2026.

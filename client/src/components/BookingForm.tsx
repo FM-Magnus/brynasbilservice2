@@ -169,7 +169,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
                 onChange={(date: Date | null) => setSelectedDate(date)}
                 locale={sv}
                 dateFormat="EEEE, dd/MM" // Update format to include day of the week
-                className="modal-input w-full"
+                className="modal-input"
                 placeholderText="Välj ett datum"
                 required
               />
@@ -186,7 +186,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
                 clockIcon={null}
                 disableClock={true}
                 format="HH:mm"
-                className="modal-input w-full"
+                className="modal-input"
                 required
               />
             </div>
@@ -200,7 +200,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
               id="booking-service"
               value={selectedService}
               onChange={(e) => setSelectedService(e.target.value)}
-              className="modal-input w-full"
+              className="modal-input"
               required
             >
               <option value="">Välj en service du vill ha utfört</option>
@@ -220,7 +220,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
               placeholder="Ange för- och efternamn"
-              className="modal-input w-full"
+              className="modal-input"
               required
             />
           </div>
@@ -235,7 +235,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
               value={customerEmail}
               onChange={(e) => setCustomerEmail(e.target.value)}
               placeholder="Ange din e-postadress"
-              className="modal-input w-full"
+              className="modal-input"
               required
             />
           </div>
@@ -250,7 +250,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
               placeholder="Ange ditt telefonnummer"
-              className="modal-input w-full"
+              className="modal-input"
               required
             />
           </div>
@@ -264,7 +264,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
               value={customerComment}
               onChange={(e) => setCustomerComment(e.target.value)}
               placeholder="Skriv eventuella kommentarer här (valfritt)"
-              className="modal-input w-full"
+              className="modal-input"
               rows={3}
             />
           </div>
@@ -272,7 +272,7 @@ export const BookingFormModal: React.FC<{ isOpen: boolean; onClose: () => void; 
             <div className="booking-form__required-note">
               Fält märkt med * är obligatoriska
             </div>
-            <button type="submit" className="modal-submit btn btn--primary">
+            <button type="submit" className="modal-submit">
               Skicka bokning
             </button>
           </div>

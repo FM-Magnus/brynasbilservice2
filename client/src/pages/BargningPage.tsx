@@ -111,7 +111,7 @@ export default function BargningPage() {
                   href="tel:0705533395"
                   className="bb-btn bb-btn--teal bargning-page__hero-phone-btn"
                 >
-                  <PhoneIcon className="w-4 h-4" />
+                  <PhoneIcon />
                   <span>Ring för bärgning: 070-553 33 95</span>
                 </a>
                 <button
@@ -233,7 +233,7 @@ export default function BargningPage() {
                   />
                 </picture>
                 <div className="bargning-page__showcase-location-badge">
-                  <MapPinIcon className="w-3.5 h-3.5 text-amber-400" />
+                  <MapPinIcon />
                   <span>Lokal bärgning i Gävle med omnejd</span>
                 </div>
               </div>
@@ -301,7 +301,7 @@ export default function BargningPage() {
                     className="bb-btn bb-btn--teal bargning-page__showcase-phone-btn"
                   >
                     <span>Ring 070-553 33 95</span>
-                    <PhoneIcon className="w-4 h-4" />
+                    <PhoneIcon />
                   </a>
                   <button
                     type="button"
@@ -309,7 +309,7 @@ export default function BargningPage() {
                     className="bargning-page__showcase-book-link"
                   >
                     <span>Boka tid direkt i verkstaden</span>
-                    <ArrowRightIcon className="w-4 h-4" />
+                    <ArrowRightIcon />
                   </button>
                 </div>
               </div>
@@ -491,7 +491,7 @@ export default function BargningPage() {
                 <div className="bargning-page__intake-action">
                   <Link to="/om-oss" className="bb-btn bb-btn--ember-solid">
                     <span>Läs mer om oss</span>
-                    <ArrowRightIcon className="w-4 h-4" />
+                    <ArrowRightIcon />
                   </Link>
                 </div>
               </div>
@@ -571,7 +571,7 @@ export default function BargningPage() {
                 </p>
                 <Link to="/bilar-till-salu" className="bb-btn bb-btn--teal bargning-page__cars-btn">
                   <span>Se bilar till salu</span>
-                  <ArrowRightIcon className="w-4 h-4" />
+                  <ArrowRightIcon />
                 </Link>
               </div>
 
@@ -609,7 +609,7 @@ export default function BargningPage() {
                   href="tel:0705533395"
                   className="bb-btn bb-btn--teal bargning-page__cta-phone-btn"
                 >
-                  <PhoneIcon className="w-4 h-4" />
+                  <PhoneIcon />
                   <span>Ring för bärgning: 070-553 33 95</span>
                 </a>
                 <button

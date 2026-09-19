@@ -46,8 +46,7 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
     - All 10 technical guides (`Koppling`, `Avgassystem`, `Bromssystem`, `Oljebyte`, `Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, and `Drivaxel & drivknutar`) are fully rebuilt on `ServiceGuideTemplate.css`, aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
     - **Step 5 is 100% COMPLETE**.
 - **IMMEDIATE NEXT TASKS (Step 7: delete `index.css`)**:
-  1. **Prepare Step 7** — remove the non-page dependencies on `index.css` first: the `@tailwind` directives, `BookingForm.css`'s `--redesign-*` variables and `.btn` classes, `BiltjansterFaq`'s classes, and the Tailwind icon sizes on Om oss and Bärgning. Checklist: `HITL_Temporary_roadmap.md` Step 7.
-  2. **Step 7** — retire `ServicesPage.tsx` (`/tjanster`, the last page on `index.css`) and the dead code, then delete `client/src/css/index.css` and its freeze in the pre-commit hook.
+  1. **Step 7** — prep is done (see `HITL_Temporary_roadmap.md` Step 7). Retire `ServicesPage.tsx` (`/tjanster`) and the dead code, replace `import './css/index.css'` with `import './styles/tailwind.css'` in `main.tsx`, delete `client/src/css/index.css`, and remove its freeze from the pre-commit hook.
 
 ## Authority and references
 

@@ -23,10 +23,10 @@
   overscroll-behavior: contain;
   border: 1px solid rgba(36, 150, 160, 0.22);
   border-radius: 24px;
-  background: var(--redesign-page, #f8f7f3);
+  background: var(--bb-color-page);
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
-  color: var(--redesign-ink, #101618);
-  font-family: var(--redesign-font-body, 'Barlow', Arial, sans-serif);
+  color: var(--bb-color-text);
+  font-family: var(--bb-font-body);
 }
 
 .modal-header {
@@ -38,13 +38,13 @@
   justify-content: space-between;
   gap: 1rem;
   padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 1.75rem) 1rem;
-  background: var(--redesign-page, #f8f7f3);
+  background: var(--bb-color-page);
 }
 
 .modal-title {
   margin: 0;
-  color: var(--redesign-ink, #101618);
-  font-family: var(--redesign-font-body, 'Barlow', Arial, sans-serif);
+  color: var(--bb-color-text);
+  font-family: var(--bb-font-body);
   font-size: clamp(1.65rem, 4vw, 2rem);
   font-weight: 700;
   line-height: 1.1;
@@ -58,8 +58,8 @@
   place-items: center;
   border: 1px solid rgba(16, 22, 24, 0.18);
   border-radius: 50%;
-  background: var(--redesign-surface, #ffffff);
-  color: var(--redesign-ink, #101618);
+  background: var(--bb-color-surface);
+  color: var(--bb-color-text);
   cursor: pointer;
   font-size: 1.85rem;
   line-height: 1;
@@ -67,9 +67,9 @@
 }
 
 .modal-close:hover {
-  border-color: var(--redesign-accent, #2496a0);
+  border-color: var(--bb-color-teal-600);
   background: rgba(36, 150, 160, 0.1);
-  color: var(--redesign-accent-dark, #1b747b);
+  color: var(--bb-color-teal-700);
 }
 
 .modal-form {
@@ -92,7 +92,7 @@
 .modal-label {
   display: block;
   margin-bottom: 0.4rem;
-  color: var(--redesign-ink, #101618);
+  color: var(--bb-color-text);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.07em;
@@ -100,7 +100,7 @@
 }
 
 .modal-required {
-  color: var(--redesign-accent-dark, #1b747b);
+  color: var(--bb-color-teal-700);
 }
 
 .modal-input,
@@ -110,8 +110,8 @@
   min-height: 48px;
   border: 1px solid rgba(16, 22, 24, 0.2);
   border-radius: 10px;
-  background: var(--redesign-surface, #ffffff);
-  color: var(--redesign-ink, #101618);
+  background: var(--bb-color-surface);
+  color: var(--bb-color-text);
   font: inherit;
   line-height: 1.2;
 }
@@ -151,7 +151,7 @@
 
 .modal-container .react-time-picker__inputGroup__input {
   background: transparent;
-  color: var(--redesign-ink, #101618);
+  color: var(--bb-color-text);
 }
 
 .modal-container .react-time-picker__inputGroup__input:invalid {
@@ -177,7 +177,7 @@
 .modal-submit:focus-visible {
   outline: 3px solid #7ed9dd;
   outline-offset: 2px;
-  border-color: var(--redesign-accent, #2496a0);
+  border-color: var(--bb-color-teal-600);
 }
 
 .booking-form__footer {
@@ -195,24 +195,37 @@
 }
 
 .modal-submit {
+  /* Self-contained since Step 7 prep: previously also styled by index.css .btn/.btn--primary. */
+  align-items: center;
+  display: inline-flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.85em 2.2em;
+  white-space: nowrap;
   min-height: 48px;
   flex: 0 0 auto;
-  border: 1px solid var(--redesign-accent-dark, #1b747b);
+  border: 1px solid var(--bb-color-teal-700);
   border-radius: 999px;
-  background: var(--redesign-accent-dark, #1b747b);
+  background: var(--bb-color-teal-700);
   color: #ffffff;
   cursor: pointer;
-  font-family: var(--redesign-font-body, 'Barlow', Arial, sans-serif);
+  font-family: var(--bb-font-body);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  transition: background 150ms ease, border-color 150ms ease;
+  transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
 .modal-submit:hover {
-  border-color: var(--redesign-accent, #2496a0);
-  background: var(--redesign-accent, #2496a0);
+  border-color: var(--bb-color-teal-600);
+  background: var(--bb-color-teal-600);
+  box-shadow: var(--bb-shadow-button);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-submit:hover { transform: none; }
 }
 
 @media (max-width: 480px) {

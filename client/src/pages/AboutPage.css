@@ -380,6 +380,7 @@
   color: #12cbd8;
   transform: translateX(3px);
 }
+.omoss-page__maps-link svg { flex-shrink: 0; height: 14px; width: 14px; }
 
 .omoss-page__story-text {
   display: flex;

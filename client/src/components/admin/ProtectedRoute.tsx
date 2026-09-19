@@ -65,7 +65,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
           {error && <div className="admin-login__error text-red-500 text-sm">{error}</div>}
           <button
             type="submit"
-            className="admin-login__submit group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-[var(--redesign-accent)] dark:hover:bg-[var(--redesign-accent-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="admin-login__submit group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-[var(--bb-color-teal-600)] dark:hover:bg-[var(--bb-color-teal-700)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             {t('confirmed')}
           </button>

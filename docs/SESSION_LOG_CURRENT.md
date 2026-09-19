@@ -2,6 +2,25 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Claude (Step 7 prep: everything but /tjanster is free of index.css)
+
+- **Tailwind:** `client/src/styles/tailwind.css` holds the `@tailwind` directives. It is not imported yet, because the frozen `index.css` still emits them; Step 7 swaps the import line in `main.tsx`.
+- **Global defaults:** `client/src/styles/base.css` carries over index.css's element rules (`html`, `body`, `h1–h6`, `p`, `img`, `a`, `ul`) and is imported now (harmless duplicate).
+  - It uses the **legacy font stacks** (`'Manrope', sans-serif`), not `--bb-font-*`. With the Arial fallback from the tokens, `/galleri` failed its CLS < 0.02 check about 70% of the time under load, because the fallback's line wrapping changes the Manrope swap-in shift (0.0202). With the legacy stacks it passed 8/8. Changing the stacks should go together with a font-loading fix (metric-matched fallback), which is a follow-up.
+  - A `scroll-behavior: auto` reduced-motion override was tried and dropped to keep strict parity.
+- **Booking modal:** `BookingForm.css` moved from six `--redesign-*` variables to `--bb-*` tokens. `.modal-submit` is now self-contained: layout, padding, and hover lift and shadow were previously inherited from `.btn`/`.btn--primary`. `.btn`, `.btn--primary` and the no-op `w-full` were removed from `BookingForm.tsx`.
+  - Intentional visible change: on mobile the full-width "Skicka bokning" label is now centred (it sat left-aligned before). The teal shades move slightly to the `--bb-color-teal-600/700` tokens.
+- **FAQ:** `BiltjansterFaq` has its own `components/ui/BiltjansterFaq.css` with a new `.bb-faq__*` prefix (collision check 0), rules carried over from index.css on `--bb-*` tokens. The legacy `.container` is gone.
+- **Tailwind leftovers:** removed 13 icon utilities from `AboutPage.tsx` and `BargningPage.tsx`. Icons inside `.bb-btn` were already sized by `.bb-btn svg`; two links got island rules (`.omoss-page__maps-link svg` 14px, `.bargning-page__showcase-book-link svg` 16px). `text-amber-400` was already overridden by island CSS.
+- **Admin:** 8 arbitrary Tailwind values `var(--redesign-accent[-dark])` in `ProtectedRoute`, `BookingManagement` and `ServiceManagement` now use `--bb-color-teal-600/700`. The dry run caught this: without index.css, the admin login button was invisible.
+- **Verification (temporary Playwright harness, not committed):**
+  - Pixel baselines of all 21 public routes at 1440 and 390 plus `/admin`, taken before the changes and stable on re-run (44/44).
+  - After the changes: identical within Playwright's default tolerance, except the intentional mobile modal-button centring.
+  - **Step 7 dry run** (index.css import swapped for tailwind.css): 44/44 identical, full suite 61 passed / 2 skipped.
+  - Typecheck 0 errors, build clean.
+- **Remaining for Step 7:** retire `/tjanster`, remove the dead code, swap the import, delete index.css and its hook freeze.
+- **Follow-up:** font-swap CLS site-wide (metric-matched fallback `@font-face` or preloading), then move `base.css` onto `--bb-font-*`.
+
 ### 2026-09-19 — Claude (repo audit + documentation sync)
 
 - **Audited the repo against the roadmap and docs.** Git clean; typecheck 0 errors; build clean; Playwright 61 passed / 2 skipped. All 21 public routes except `/tjanster` mount `PublicHeader`/`PublicFooter`.

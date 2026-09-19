@@ -422,6 +422,7 @@
   color: var(--bb-color-teal-500);
   transform: translateX(3px);
 }
+.bargning-page__showcase-book-link svg { flex-shrink: 0; height: 16px; width: 16px; }
 
 .bargning-page__showcase-book-link:focus-visible {
   outline: 3px solid var(--bb-color-focus);

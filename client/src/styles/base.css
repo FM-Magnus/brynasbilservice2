@@ -1,0 +1,46 @@
+/* base.css — global element defaults (Level 0, below the .bb-* patterns).
+   Carried over from the legacy index.css ahead of Step 7 so every page keeps
+   exactly the base it was built on. Values match the legacy ones: body
+   #080808 → --bb-color-ink-950, text #fff → --bb-color-text-inverse,
+   Archivo 800 headings, Manrope 400 body, line-height 1.6. Tailwind's
+   preflight (styles/tailwind.css, imported in Step 7) runs underneath.
+
+   Font stacks are deliberately the legacy ones ('Manrope', sans-serif), not
+   the --bb-font-* tokens ('Manrope', Arial, sans-serif): the fallback shown
+   before the web font arrives decides how text wraps, and a different
+   fallback enlarges the layout shift when Manrope swaps in (measured on
+   /galleri under load). Change them together with a font-loading fix. */
+
+html {
+  font-family: 'Manrope', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bb-color-ink-950);
+  color: var(--bb-color-text-inverse);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+p {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  text-transform: none;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }

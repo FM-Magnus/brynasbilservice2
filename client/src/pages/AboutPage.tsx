@@ -135,13 +135,13 @@ export default function AboutPage() {
                     className="bb-btn bb-btn--teal"
                   >
                     <span>Boka tid</span>
-                    <ArrowRightIcon className="w-4 h-4" />
+                    <ArrowRightIcon />
                   </button>
                   <a
                     href="tel:0705533395"
                     className="bb-btn bb-btn--ember omoss-page__hero-phone-btn"
                   >
-                    <PhoneIcon className="w-4 h-4" />
+                    <PhoneIcon />
                     <span>Ring 070-553 33 95</span>
                   </a>
                 </div>
@@ -308,7 +308,7 @@ export default function AboutPage() {
                       className="omoss-page__maps-link"
                     >
                       <span>Öppna i Google Maps</span>
-                      <ArrowRightIcon className="w-3.5 h-3.5" />
+                      <ArrowRightIcon />
                     </a>
                   </div>
                 </div>
@@ -487,7 +487,7 @@ export default function AboutPage() {
               </div>
               <Link to="/galleri" className="bb-btn bb-btn--teal">
                 <span>Se fler bilder i galleriet</span>
-                <ArrowRightIcon className="w-4 h-4" />
+                <ArrowRightIcon />
               </Link>
             </div>
 
@@ -566,7 +566,7 @@ export default function AboutPage() {
                   className="bb-btn bb-btn--teal"
                 >
                   <span>Boka tid nu</span>
-                  <ArrowRightIcon className="w-4 h-4" />
+                  <ArrowRightIcon />
                 </button>
                 <Link
                   to="/biltjanster"
@@ -578,7 +578,7 @@ export default function AboutPage() {
                   href="tel:0705533395"
                   className="bb-btn bb-btn--ember omoss-page__cta-phone-btn"
                 >
-                  <PhoneIcon className="w-4 h-4" />
+                  <PhoneIcon />
                   <span>Ring: 070-553 33 95</span>
                 </a>
               </div>

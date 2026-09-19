@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './BiltjansterFaq.css'
 
 export interface BiltjansterFaqItem {
   question: string
@@ -27,21 +28,21 @@ export function BiltjansterFaq({ heading, intro, items, id = 'biltjanster-faq' }
   }
 
   return (
-    <section className="biltjanster-faq" id={id} aria-labelledby={`${id}-title`}>
-      <div className="container biltjanster-faq__container">
-        <header className="biltjanster-faq__heading">
+    <section className="bb-faq" id={id} aria-labelledby={`${id}-title`}>
+      <div className="bb-faq__container">
+        <header className="bb-faq__heading">
           <h2 id={`${id}-title`}>{heading}</h2>
           {intro && <p>{intro}</p>}
         </header>
 
-        <div className="biltjanster-faq__list">
+        <div className="bb-faq__list">
           {items.map((item, index) => {
             const isOpen = openItems.has(index)
             const answerId = `${id}-answer-${index}`
             const questionId = `${id}-question-${index}`
 
             return (
-              <article className={`biltjanster-faq__item${isOpen ? ' is-open' : ''}`} key={item.question}>
+              <article className={`bb-faq__item${isOpen ? ' is-open' : ''}`} key={item.question}>
                 <h3>
                   <button
                     type="button"
@@ -51,7 +52,7 @@ export function BiltjansterFaq({ heading, intro, items, id = 'biltjanster-faq' }
                     onClick={() => toggleItem(index)}
                   >
                     <span>{item.question}</span>
-                    <span className="biltjanster-faq__symbol" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+                    <span className="bb-faq__symbol" aria-hidden="true">{isOpen ? '−' : '+'}</span>
                   </button>
                 </h3>
                 <div

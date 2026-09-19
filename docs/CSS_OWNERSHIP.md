@@ -38,7 +38,8 @@ The redesign public shell is independent from the frozen legacy layer.
    - `client/src/components/ui/GalleryTeaserCard.tsx` / `GalleryTeaserCard.css` (reusable standalone workshop teaser card).
    - `client/src/components/ui/GoogleReviewsCard.tsx` / `GoogleReviewsCard.css` (reusable standalone Google reviews card/overlay).
    - `client/src/components/ui/ContactFormCard.tsx` / `ContactFormCard.css` (reusable standalone contact module and form card).
-   - **Not yet independent (Step 7 blockers):** `client/src/components/BookingForm.tsx` / `BookingForm.css` (booking modal on 22 pages; reads `--redesign-*` and uses `.btn`/`.btn--primary` from `index.css`) and `client/src/components/ui/BiltjansterFaq.tsx` (13 pages; all its classes live in `index.css`). See `HITL_Temporary_roadmap.md` Step 7.
+   - `client/src/components/BookingForm.tsx` / `BookingForm.css` (booking modal, `.modal-*`, on `--bb-*` tokens) and `client/src/components/ui/BiltjansterFaq.tsx` / `BiltjansterFaq.css` (FAQ accordion, `.bb-faq__*`), both independent of `index.css` since 2026-09-19.
+   - `client/src/styles/base.css` (global element defaults, imported in `main.tsx`) and `client/src/styles/tailwind.css` (Tailwind directives; replaces the `index.css` import in Step 7).
 
 2. **The 7 unique, standalone pages** — each owns its own bespoke design and its own colocated CSS island. No shared page template between them.
    - `Startsidan` (`/`) — `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`). Complete.
@@ -83,7 +84,7 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/bilar-till-salu` | Unique | Complete | `BilarTillSalu.css` (`.bilartillsalu-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter` |
 | `/tjanster` | Legacy | Step 7: retire (redirect to `/biltjanster`) — last page on `index.css` and legacy `Header`/`Footer` | `index.css` (`.services-page__*`, `.services-category-card__*`) |
-| `/admin` | Admin | Internal utility | Tailwind (directives currently in `index.css`; move before Step 7) |
+| `/admin` | Admin | Internal utility | Tailwind utilities (directives in `index.css` until Step 7, then `styles/tailwind.css`) |
 
 ## Class-prefix collision check (mandatory before naming a new page's CSS island)
 

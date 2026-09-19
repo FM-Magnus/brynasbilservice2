@@ -173,16 +173,17 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ### Step 7: The Moment of Liberation (Deleting `index.css`)
 - **The Milestone**: Every active route lives on its own CSS island or one of the two family templates, wrapped in `PublicHeader` and `PublicFooter`.
-- **Status (audited 2026-09-19)**: `index.css` is imported once, globally, in `client/src/main.tsx:5`. Retiring `/tjanster` is **not enough** to delete it. These dependencies must be removed first:
-  1. **Tailwind directives**: `@tailwind base/components/utilities` exist only in `index.css` (lines 1–3). Move them into a dedicated stylesheet (for example `client/src/styles/tailwind.css`, imported in `main.tsx`) and decide consciously whether the Tailwind preflight reset stays global, since the public pages were built on top of it. Then verify `/admin`.
-  2. **Booking modal** (`components/BookingForm.tsx` + `BookingForm.css`, used on 22 pages): `BookingForm.css` reads `--redesign-accent`, `--redesign-accent-dark`, `--redesign-font-body`, `--redesign-ink`, `--redesign-page` and `--redesign-surface`, and the submit button uses `.btn`/`.btn--primary`. Move it to `--bb-*` tokens and its own button class.
-  3. **FAQ component** (`components/ui/BiltjansterFaq.tsx`, used on 13 guide and Bilservice-family pages): all 7 of its classes (`.biltjanster-faq*`, `.container`) are defined only in `index.css`. Give it its own stylesheet.
-  4. **Tailwind leftovers on public pages**: `w-4 h-4` / `w-3 h-3` icon sizes in `AboutPage.tsx` and `BargningPage.tsx`. Move them into those islands.
-  5. **`/tjanster`** (`pages/ServicesPage.tsx`): the last page on legacy `Header`/`Footer` and `index.css` classes. Redirect it to `/biltjanster` (or remove it) and check that nothing links to it.
-  6. **Dead code** that goes with it: `components/layout/Header.tsx`, `components/layout/Footer.tsx`, `components/GoogleReviews.tsx` (unused), `pages/admin/Login.tsx` (unused), and the 38 unreferenced files in `client/src/assets/images/gallery/workshop/` (list in `docs/SESSION_LOG_CURRENT.md`, Galleri entry).
-- **Agent's Job** (after 1–6):
+- **Status (updated 2026-09-19, Step 7 prep done)**: every non-page dependency on `index.css` has been removed. A dry run that replaced the `index.css` import with `styles/tailwind.css` rendered all 21 public routes (1440 + 390) and `/admin` pixel-identical to the current site, and the full Playwright suite passed.
+  1. ✅ **Tailwind directives** moved to `client/src/styles/tailwind.css`. It is not imported yet, because `index.css` still emits them; Step 7 swaps the import line. Preflight stays global.
+  2. ✅ **Global element defaults** (`html`, `body`, `h1–h6`, `p`, `img`, `a`, `ul`) carried over to `client/src/styles/base.css`, already imported in `main.tsx`. Legacy font stacks are kept on purpose; see the comment in that file.
+  3. ✅ **Booking modal** is on `--bb-*` tokens, and `.modal-submit` is self-contained (no `.btn`/`.btn--primary`, no `w-full`).
+  4. ✅ **FAQ component** has its own `components/ui/BiltjansterFaq.css` (`.bb-faq__*`).
+  5. ✅ **Public Tailwind leftovers** removed from `AboutPage.tsx` and `BargningPage.tsx`, with icon sizes moved into their islands. Admin's `var(--redesign-accent*)` arbitrary values now use `--bb-color-teal-*`.
+  6. ⏳ **`/tjanster`** (`pages/ServicesPage.tsx`): still the last page on legacy `Header`/`Footer` and `index.css` classes. Redirect to `/biltjanster` (or remove) and check that nothing links to it.
+  7. ⏳ **Dead code**: `components/layout/Header.tsx`, `components/layout/Footer.tsx`, `components/GoogleReviews.tsx`, `pages/admin/Login.tsx`, and the 38 unreferenced files in `client/src/assets/images/gallery/workshop/` (list in `docs/SESSION_LOG_CURRENT.md`, Galleri entry).
+- **Agent's Job** (after 6–7):
   - Search the codebase for any lingering reference to `index.css`, legacy class names and `--redesign-*`.
-  - Delete `client/src/css/index.css` and its import in `main.tsx`.
+  - In `main.tsx`, replace `import './css/index.css'` with `import './styles/tailwind.css'`, then delete `client/src/css/index.css`.
   - Remove the `index.css` freeze from `.githooks/pre-commit`, but keep the public-Tailwind check.
   - Run the full Playwright suite and the client production build, and screenshot every route at 1440/768/390.
 - **Your Job (HITL Decision)**:

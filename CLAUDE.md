@@ -43,7 +43,8 @@ src/
                           (frozen legacy), styles/design-tokens.css and styles/shared-elements.css
   App.tsx               — mounts pages/landing/LandingPage (route "/")
   css/index.css         — frozen legacy CSS (also holds the @tailwind directives); deleted in Step 7
-  styles/               — design-tokens.css (--bb-*), shared-elements.css (.bb-*), ServiceGuideTemplate.css
+  styles/               — design-tokens.css (--bb-*), base.css (element defaults), shared-elements.css (.bb-*),
+                          ServiceGuideTemplate.css, tailwind.css (directives; imported from Step 7)
   pages/                — one TSX + colocated CSS island per unique page / family owner; admin/
   components/
     layout/             — PublicHeader, PublicFooter (+ legacy Header/Footer, used only by /tjanster)
