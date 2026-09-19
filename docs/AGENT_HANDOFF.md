@@ -2,15 +2,14 @@
 
 ## Verified starting point
 
-- Repository: `/Users/magnusolsson/Documents/REPOS/brynasbilservice_repo`
-- Working branch: `redesign/blue-teal-v1`
-- Verified commit: `aac2f674e920624acc872e8e94f5cddcdf85c114` (`fix: improve booking modal accessibility`)
-- The branch intentionally has no upstream. Do not configure one and do not push without Magnus's explicit approval.
-- Build: `cd client && npm run build`
+- Repository: `/Users/magnusolsson/repos/brynasbilservice2` (remote `origin` = `FM-Magnus/brynasbilservice2`)
+- Working branch: `redesign/blue-teal-v1`, tracking `origin/redesign/blue-teal-v1`. Do not push without Magnus's explicit approval.
+- Last audited commit: `12ca91f1` (`feat(galleri): …`), audited 2026-09-19: typecheck 0 errors, `npm --prefix client run build` clean, Playwright 61 passed / 2 skipped (by design) at 1440/768/390.
+- Build: `npm --prefix client run build` (needs Node ≥18.17; see `docs/deployment.md`).
 
 Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/README.md) before editing. This document records the approved redesign state; it does not authorize work beyond the next stated phase.
 
-## Current continuation note — 2026-09-18
+## Current continuation note — 2026-09-19
 
 **AUTHORITATIVE REBUILD ROADMAP**: Consult [`HITL_Temporary_roadmap.md`](../HITL_Temporary_roadmap.md) before starting work.
 - **What it is**: Magnus's authoritative human-in-the-loop rebuild roadmap.
@@ -47,7 +46,8 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
     - All 10 technical guides (`Koppling`, `Avgassystem`, `Bromssystem`, `Oljebyte`, `Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, and `Drivaxel & drivknutar`) are fully rebuilt on `ServiceGuideTemplate.css`, aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
     - **Step 5 is 100% COMPLETE**.
 - **IMMEDIATE NEXT TASKS (Step 7: delete `index.css`)**:
-  1. **Step 7**: Retire `ServicesPage.tsx` (`/tjanster`, the last `index.css` consumer), then delete `client/src/css/index.css` and the pre-commit freeze hook.
+  1. **Prepare Step 7** — remove the non-page dependencies on `index.css` first: the `@tailwind` directives, `BookingForm.css`'s `--redesign-*` variables and `.btn` classes, `BiltjansterFaq`'s classes, and the Tailwind icon sizes on Om oss and Bärgning. Checklist: `HITL_Temporary_roadmap.md` Step 7.
+  2. **Step 7** — retire `ServicesPage.tsx` (`/tjanster`, the last page on `index.css`) and the dead code, then delete `client/src/css/index.css` and its freeze in the pre-commit hook.
 
 ## Authority and references
 

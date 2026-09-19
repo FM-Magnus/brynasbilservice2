@@ -39,23 +39,24 @@ Two developers:
 ### Client (`client/`)
 ```
 src/
-  App.tsx               — root component mounting LandingPage
-  main.tsx              — React root, BrowserRouter, LanguageProvider, routes
-  css/index.css         — frozen legacy CSS; never edit (enforced by hook)
-  styles/               — design-tokens.css (--bb-* tokens), ServiceGuideTemplate.css
-  data/                 — publicNavigation.ts (canonical menu registry)
+  main.tsx              — React root, BrowserRouter, LanguageProvider, routes; loads css/index.css
+                          (frozen legacy), styles/design-tokens.css and styles/shared-elements.css
+  App.tsx               — mounts pages/landing/LandingPage (route "/")
+  css/index.css         — frozen legacy CSS (also holds the @tailwind directives); deleted in Step 7
+  styles/               — design-tokens.css (--bb-*), shared-elements.css (.bb-*), ServiceGuideTemplate.css
+  pages/                — one TSX + colocated CSS island per unique page / family owner; admin/
   components/
-    layout/             — PublicHeader, PublicFooter, legacy Header/Footer
-    ui/                 — reusable UI components (BiltjansterFaq, etc.)
+    layout/             — PublicHeader, PublicFooter (+ legacy Header/Footer, used only by /tjanster)
+    ui/                 — GalleryTeaserCard, GoogleReviewsCard, ContactFormCard, BiltjansterFaq
     icons/              — SVG icon components
     admin/              — BookingManagement, ServiceManagement, ProtectedRoute
-    BookingForm.tsx     — booking modal (react-datepicker + react-time-picker)
-    GoogleReviews.tsx   — reviews widget for service pages
-    ThemeSwitcher.tsx   — admin theme switcher
-  pages/                — landing/LandingPage, service guides, subpages, admin
-  context/              — LanguageContext (sv/en i18n)
-  translations/         — en.ts, sv.ts
+    BookingForm.tsx     — BookingFormModal (react-datepicker + react-time-picker)
+  api/                  — axiosConfig.ts, vehicles.ts, gallery.ts (loaders; static source or API)
+  data/                 — publicNavigation.ts, vehicles.ts (car stock), gallery.ts + galleryHelpers.ts
+  types/                — vehicle.ts, gallery.ts (contracts; see docs/BACKEND_HANDOFF.md)
+  assets/galleri/       — gallery photos: drop in / delete a file (see LÄSMIG.md there)
   assets/images/        — final web-optimized image assets
+  context/, translations/ — LanguageContext (sv/en)
 ```
 
 ### Server (`server/`)
@@ -68,11 +69,11 @@ dist/             — server build output
 ```
 
 ### Routes
-`client/src/main.tsx` defines the public routes, including `/biltjanster`, `/service-reparationer`, `/felsokning`, the Biltjänster guide routes, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu` and `/kontakt`. `/admin` is protected; `/api/*` belongs to Express. The Header's Biltjänster dropdown starts with `Våra tjänster` (`/biltjanster`) then `Bilservice` (`/service-reparationer#bilservice`); the standalone `Felsökning` link follows Biltjänster in the main navigation. See [project status](docs/PROJECT_STATUS.md) for the current route map.
+`client/src/main.tsx` defines the public routes, including `/biltjanster`, `/service-reparationer`, `/felsokning`, the Biltjänster guide routes, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu` and `/kontakt`. `/admin` is protected; `/api/*` belongs to Express. Navigation for every public page comes from `client/src/data/publicNavigation.ts`, rendered by `PublicHeader`. The authoritative route → CSS-owner map is `docs/CSS_OWNERSHIP.md`.
 
 ### Image intake
 
-`_incoming-assets/` is a temporary, Git-ignored local intake for raw photography, background candidates and layout graphics. Read `_incoming-assets/README.md` before sorting or selecting assets. Do not import unselected raw files from there into the application: only chosen, web-exported files belong in `client/src/assets/images/`.
+`_incoming-assets/` is a temporary, Git-ignored local intake for raw photography, background candidates and layout graphics. Read `_incoming-assets/README.md` before sorting or selecting assets. Do not import unselected raw files from there into the application: only chosen, web-exported files belong in `client/src/assets/images/`. Exception: gallery photos go straight into `client/src/assets/galleri/` (originals; variants are generated at build time).
 
 ### API contract (server/index.js)
 All routes return JSON. No request validation, no error middleware — keep payloads tight.
@@ -89,7 +90,7 @@ All routes return JSON. No request validation, no error middleware — keep payl
 | PUT / DELETE | `/api/admin/services/:id` | admin | update / delete |
 | GET | `/api/admin/customers` | admin | — |
 
-Admin auth header: `Authorization: Bearer admin-secret-token` (hardcoded — not production-safe).
+Admin auth header: `Authorization: Bearer admin-secret-token` (hardcoded). **Security:** the admin login is checked only in the browser and the server accepts that fixed token from anyone — see `docs/BACKEND_HANDOFF.md` §2.1.
 Customers are deduplicated by **email** in `POST /api/bookings`.
 
 ### Database reality (live DB ≠ schema.sql)
@@ -115,6 +116,7 @@ cd client && npm run dev   # vite, port 5173
 
 Open `http://localhost:5173` in browser.
 The Axios configuration points directly to `http://localhost:3000` in development; it does not use a Vite `/api` proxy.
+The client build needs **Node ≥18.17** (`vite-imagetools`/sharp generates gallery images). Build locally or in CI, never on the production server (Node 16).
 
 ## Deploy
 **Intended flow** (when GitHub Actions is fixed): push to `main` → workflow builds the client and tars it to `$DEPLOY_PATH/public/` over SSH → `.env` is preserved across deploys → PM2 restarts the server. See `docs/deployment.md` for the full pipeline and required GitHub Secrets.
@@ -122,34 +124,29 @@ The Axios configuration points directly to `http://localhost:3000` in developmen
 The local frontend build is `npm --prefix client run build`. Do not treat a successful build or Git push as a verified deployment. Johnny owns production steps.
 
 ## Repo traps to avoid
-- **Don't touch root `package.json`, `vite.config.ts`, `tsconfig.json`, `index.html`** — they reference React 19 / Vite 8 / Tailwind 4, none of which is what the project actually uses. They're orphan scaffolding from an earlier attempt and confuse new agents. The real frontend project lives in `client/`.
+- **Ignore the root `*.disabled` files** (`package.json.disabled`, `vite.config.ts.disabled`, `tsconfig.json.disabled`, `index.html.disabled`) — orphan React 19 / Vite 8 / Tailwind 4 scaffolding. The real frontend project lives in `client/` (React 18.2, Vite 4.5, Tailwind 3.4).
 - **`server/.htaccess` and `docs/deployment.md` disagree** about port and `RewriteBase`. Neither proves the live setup; Johnny owns the resolution.
 - **Deployment workflow is not active at repo root.** A legacy file exists under `client/.github/workflows/`. Do not move or run it as a repair without a joint deployment decision.
 - **Git remote exists.** `origin` points to `FM-Magnus/brynasbilservice2`; verify the current branch and remote before any authorized Git operation.
 
 ## Design system
-All CSS custom properties are in `client/src/css/index.css` under `:root`.
+Canonical tokens are `--bb-*` in `client/src/styles/design-tokens.css`; shared patterns are `.bb-*` in `client/src/styles/shared-elements.css`. Details: `docs/DESIGN_SYSTEM.md`.
 
-**CSS hard freeze:** never modify `client/src/css/index.css`, including cleanup or deletion. Read `docs/CSS_OWNERSHIP.md` before any CSS task and edit only the route's listed CSS island. Existing legacy dependencies stay untouched; new designs use isolated stylesheets.
+**CSS hard freeze:** never modify `client/src/css/index.css`. Read `docs/CSS_OWNERSHIP.md` before any CSS task and edit only the route's listed CSS island. Never use `--redesign-*` or other `index.css` custom properties, and never reuse a legacy class prefix (run the collision check in `CSS_OWNERSHIP.md`).
 
-Current public-design tokens include `--redesign-accent` (teal), `--redesign-page` (warm white), `--redesign-ink`, `--font-heading` (Archivo) and `--font-body` (Manrope). Legacy red/black variables remain in the stylesheet; they are not the direction for new public UI. Yellow is limited to the landing-page Google field.
+**Headings:** Archivo 800 in **mixed case** (`.bb-h1`, `.bb-h2`), with a teal highlight via `.bb-accent`. The older "uppercase hero headings / `.title-accent` / `--redesign-accent`" rule is retired.
 
-Animations: `.fade-up` class + IntersectionObserver in App.tsx triggers `.visible` on scroll.
+**Colour:** amber (`--bb-color-amber-500`) is the small accent for icons, eyebrow dashes and badges; teal for heading highlights and dark-surface buttons. Google gold is limited to the Google-rating field.
 
-**Hero rule (site-wide, established 2026-09-15):** every page hero heading uses `text-transform: uppercase` with a teal-accented portion (`<span className="title-accent">`, colored via `var(--redesign-accent)`). Every hero container shares `min-height: clamp(640px, calc(100svh - 60px), 760px)` with `display:flex; align-items:center` — the same sizing as the landing page's `.hero__frame`. Apply this to any new page hero.
+**Tailwind** is allowed only under `/admin`. Public pages use semantic BEM classes in their CSS island (the pre-commit hook blocks new Tailwind utilities in public TSX).
 
-**Card motifs (established 2026-09-15):** two reusable card treatments break up all-white card grids — a **teal accent card** (`background: linear-gradient(145deg, #0b848e 0%, #066973 100%)`, white text) for "featured" content, and a **dark card** (`var(--redesign-ink)` background, white text, `#91d7d9` highlights) for "technical/serious" content. Reuse these (see AGENTS.md Current state for exact usages) before inventing a new card style.
+## Page section order (Startsidan)
+Owned by `client/src/pages/landing/LandingPage.tsx`: Hero (with Google-review field) → Contact/form → "Trygg bilservice" reassurance → Services preview → five-step process → About/gallery → used-car CTA → closing contact → Footer.
 
-## Page section order (App.tsx)
-Header → Hero → ContactIntro → EV (workshop process) → About → Services (preview) → Contact → Footer
-
-Nav link order (Header.tsx): Start → Om oss → Biltjänster → Felsökning → Däck → AC → Bärgning → Till salu → Kontakt
+Nav link order (`data/publicNavigation.ts`): Start → Om oss → Biltjänster → Felsökning → Däck → AC → Bärgning → Till salu → Kontakt
 
 ## Known issues / open TODOs
-1. **GoogleReviews.tsx** — real Brynäs review data is hardcoded and will become stale unless maintained
-2. **schema.sql out of sync** — missing columns: `customer_name`, `comment_customer`, `comment_admin`; missing `'erased'` from status ENUM; `service` column is VARCHAR but stores INT ID
-3. **comment_customer not saved** — BookingForm sends it, but server's insertBooking() doesn't include it in the INSERT
-4. **Admin comment read-only** — admin modal shows comment_admin but provides no way to save it
+The maintained list is "What is broken / incomplete" in `AGENTS.md`. Highlights: client-side-only admin auth (P0), `comment_customer` not saved, `schema.sql` out of sync, hardcoded Google-review data, and the Step 7 blockers in `HITL_Temporary_roadmap.md`.
 
 ## Agent handoff rules
 - **Read `AGENTS.md` first** — it is the bounded startup contract; read `docs/CSS_OWNERSHIP.md` before CSS work

@@ -55,7 +55,7 @@ Located in [`client/src/styles/design-tokens.css`](../client/src/styles/design-t
 | `--bb-radius-control`| `999px` | Fully rounded pills (buttons, search bars, badges) |
 | `--bb-shadow-floating` | `0 18px 44px rgba(0,0,0,0.34)` | Floating header & elevated dark card shadow |
 | `--bb-shadow-button` | `0 10px 20px rgba(0,166,180,0.26)` | `.bb-btn--teal`'s glow (added 2026-09-18) |
-| `--bb-shadow-card` | `0 10px 26px rgba(7,20,22,0.08)` | Resting card elevation (added 2026-09-18, not yet consumed anywhere) |
+| `--bb-shadow-card` | `0 10px 26px rgba(7,20,22,0.08)` | Resting card elevation (added 2026-09-18; used by `.bb-card--trust` and `ServiceGuideTemplate.css`) |
 | `--bb-transition-fast` | `150ms cubic-bezier(0.4, 0, 0.2, 1)` | Standard fast hover/focus transition |
 
 ### Radius tokens: what's safe to tune vs. already live (checked 2026-09-18)
@@ -104,7 +104,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
 
 ### 2a. `shared-elements.css` — canonical patterns below the token layer
 
-[`client/src/styles/shared-elements.css`](../client/src/styles/shared-elements.css), imported once globally in `main.tsx` alongside `design-tokens.css`. Global classes, no page prefix — use these directly instead of writing a page-local equivalent. Extracted from `LandingPage.css`, re-synced 2026-09-18 against Landing's fully-finished, live-verified state (not just re-read from source — checked with `getComputedStyle()`). Not yet consumed by any page — Landing/Kontakt/Biltjänster/Bilservice each still have their own page-local versions; retrofitting them is a separate, deliberately deferred step (planned: after a commit + fresh context window).
+[`client/src/styles/shared-elements.css`](../client/src/styles/shared-elements.css), imported once globally in `main.tsx` alongside `design-tokens.css`. Global classes, no page prefix — use these directly instead of writing a page-local equivalent. Extracted from `LandingPage.css`, re-synced 2026-09-18 against Landing's fully-finished, live-verified state (not just re-read from source — checked with `getComputedStyle()`). Used by every rebuilt page (7 unique pages + both families). Some islands still carry page-local variants of a pattern; prefer the shared class when touching them.
 
 - **`.bb-wrap`** — the `1320px` (`--bb-wrap-max`) content container, identical everywhere already.
 - **`.bb-btn` + three variants** — pill button, every state (hover, `:focus-visible`) defined once per variant:
@@ -185,9 +185,11 @@ These colors are used directly (not via a CSS variable) across the stylesheet, o
 
 ### Interaction states
 
-Confirmed IMPLEMENTED pattern: hover states go **darker**, not lighter. Example — `.btn--primary` (`client/src/css/index.css:124-130`) is `--redesign-accent` at rest and `--redesign-accent-dark` on hover. This is the opposite of the "lighter-on-hover" direction shown in the V2 reference sheets (see [Open decisions](#open-decisions)) — flagged as an unresolved GAP, not yet a decision either way.
+Confirmed IMPLEMENTED pattern (legacy example): hover states go **darker**, not lighter. Example — `.btn--primary` (`client/src/css/index.css:124-130`) is `--redesign-accent` at rest and `--redesign-accent-dark` on hover. This is the opposite of the "lighter-on-hover" direction shown in the V2 reference sheets (see [Open decisions](#open-decisions)) — flagged as an unresolved GAP, not yet a decision either way.
 
 ---
+
+> **Legacy reference — not current guidance.** The sections *Typography*, *Spacing*, *Radius*, *Motion* and *Layout* below document the legacy `index.css` / `--redesign-*` system, audited 2026-09-16. Current guidance is §1–§2a (`--bb-*` tokens and `.bb-*` patterns). These sections go away with `index.css` in Step 7.
 
 ## Typography
 
@@ -249,7 +251,7 @@ Note the jump from `--radius-lg` (16px) to `--redesign-radius-card` (40px) — t
 | `--dur-normal` | `300ms` |
 | `--ease` | `cubic-bezier(0.4, 0, 0.2, 1)` |
 
-Plus the `.fade-up` class + `IntersectionObserver` pattern in `App.tsx` for scroll-triggered reveals (adds `.visible` class), used site-wide.
+The former `.fade-up` + `IntersectionObserver` reveal pattern in `App.tsx` no longer exists (`App.tsx` only mounts `LandingPage`).
 
 ## Layout
 
@@ -300,6 +302,8 @@ Apply this in the reset block of every new unique page from the start — do not
 
 ## Card motifs
 
+> **Legacy (`index.css` pages).** On `--bb-*` pages, use the `.bb-card--*` patterns in `shared-elements.css` (§2a) instead.
+
 Two reusable card treatments exist for breaking up all-white card grids (established 2026-09-15, see `CLAUDE.md` "Design system"):
 
 ### Teal accent card
@@ -321,17 +325,9 @@ Used for "technical/serious" content that should read as more authoritative than
 
 ---
 
-## Hero rule (site-wide, established 2026-09-15)
+## Hero rule — RETIRED
 
-Every page hero heading:
-- `text-transform: uppercase`
-- has a teal-accented portion via `<span className="title-accent">`, colored `var(--redesign-accent)`
-
-Every hero container:
-- `min-height: clamp(640px, calc(100svh - 60px), 760px)`
-- `display: flex; align-items: center`
-
-This matches the shared page-hero baseline. The isolated start page owns its hero separately through `.landing-v2__*` in `pages/landing/LandingPage.css`; do not alter it through this generic rule. Apply this baseline to any new non-landing page hero — see `CLAUDE.md` for the full rule text and the list of hero containers it currently applies to.
+The 2026-09-15 rule (uppercase hero headings, `<span className="title-accent">` in `var(--redesign-accent)`, a shared `min-height` clamp) is **retired**. Current heroes use the `.bb-hero*` system and `.bb-h1` in **mixed case**, with `.bb-accent` for the teal highlight (§2a). Each page's own CSS clears the fixed header using its **measured** bottom edge (80px at ≤1279px, 122px at 1440px), never a `vw` clamp.
 
 ---
 
@@ -369,8 +365,8 @@ The route-to-stylesheet map and exact write rules live in [`CSS_OWNERSHIP.md`](C
 **Not yet resolved — do not treat either side as settled:**
 
 1. **Typography target.** Two V2 reference sheets (dark UI + light UI, supplied by Magnus) specify **Lato**. The site implements **Archivo 800 (display) / Manrope 400-700 (body)**. No decision has been made to adopt Lato, keep the current pair, or something else. A "Lato experiment" (real Lato rendering vs. the image model's rendered approximation in the V2 sheets) was proposed but not confirmed as run — verify with Magnus before treating the V2 sheets' typography as settled either way.
-2. **Accent color target.** V2 sheets specify `#159CA5`. Implemented is `#2496a0` (`--redesign-accent`). Not reconciled.
-3. **Hover direction.** V2 sheets imply lighter-on-hover. Implemented is darker-on-hover (`--redesign-accent` → `--redesign-accent-dark`). Not reconciled.
+2. **Accent color target.** V2 sheets specify `#159CA5`. Implemented on `--bb-*` pages is `--bb-color-teal-500` `#0ab2c1` (headings) with `--bb-color-teal-700`/`-800` for buttons and labels; the legacy `--redesign-accent` `#2496a0` survives only in `index.css` and `BookingForm.css`. Not reconciled.
+3. **Hover direction.** V2 sheets imply lighter-on-hover. Implemented `.bb-btn--*` hovers fill in or deepen the gradient (see `shared-elements.css`); the legacy `.btn--primary` goes darker. Not reconciled.
 4. **V2 sheet accuracy.** The two V2 sheets have at least one confirmed labeling error (Amber Dark shown as `#845309`/`#84530B` vs. its own written spec of `#B45309`) and one fabricated price (`595 kr` for hjulskifte — the real prices on `/dackservice` are 350/500 kr). A regeneration prompt was drafted to fix both issues and test real Lato instead of the rendered approximation. **Check with Magnus whether that regeneration happened** before using the sheets as a reliable source for anything beyond general direction.
 
 Until these are resolved, treat this document as the IMPLEMENTED baseline only. When a TARGET is confirmed, add it alongside the IMPLEMENTED value in the relevant table rather than overwriting — that's what makes the three-state model useful going forward.

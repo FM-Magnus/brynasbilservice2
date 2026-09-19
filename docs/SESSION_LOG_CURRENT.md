@@ -2,6 +2,23 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Claude (repo audit + documentation sync)
+
+- **Audited the repo against the roadmap and docs.** Git clean; typecheck 0 errors; build clean; Playwright 61 passed / 2 skipped. All 21 public routes except `/tjanster` mount `PublicHeader`/`PublicFooter`.
+- **Step 7 blockers found that the roadmap didn't list:**
+  1. The `@tailwind` directives live only in `index.css` (admin styling and global preflight).
+  2. `BookingForm.css` (booking modal, 22 pages) reads six `--redesign-*` variables from `index.css`, and its button uses `.btn`/`.btn--primary`.
+  3. `BiltjansterFaq` (13 pages) is styled only by `index.css`.
+  4. Tailwind icon sizes remain in `AboutPage.tsx` and `BargningPage.tsx`.
+- **Dead code found:** `components/GoogleReviews.tsx`, `pages/admin/Login.tsx`, and the legacy `Header`/`Footer` (only `/tjanster` uses them).
+- **Docs synced (no code changes apart from one stale comment in `shared-elements.css`):**
+  - `AGENTS.md`: current state rewritten, the broken list updated (client-side admin auth added as P0), and new sections for car stock and gallery photos. 308 → 279 lines.
+  - `CLAUDE.md`: client tree, routes/nav source, Node ≥18.17 build note, the `*.disabled` root files, and the design-system section (`--bb-*` tokens, mixed-case headings; the uppercase hero rule and `.fade-up` are retired).
+  - `HITL_Temporary_roadmap.md`: Step 7 checklist with blockers 1–6; stale "Next Horizon" fixed.
+  - `CSS_OWNERSHIP.md`: `.bb-*` usage corrected, Step 7 blockers listed, `/tjanster` and `/admin` rows.
+  - `AGENT_HANDOFF.md`: verified starting point (repo path, upstream, audited commit) and next tasks.
+  - `DESIGN_SYSTEM.md`: legacy sections labelled as reference only, the hero rule marked retired, the `--bb-shadow-card` usage and open decisions corrected.
+
 ### 2026-09-19 — Claude (Step 6 COMPLETE: Galleri rebuilt as a folder-driven unique page)
 
 - **Rebuilt `/galleri` from scratch.** `GalleryPage.tsx` + new `GalleryPage.css` (`.galleri-page__*`, collision check 0). Legacy `Header`/`Footer`, all `.about-page__*` / `.gallery-viewer__*` / `.section-eyebrow` / `.container` usage and the Tailwind utilities are gone. **Step 6 is complete; `ServicesPage.tsx` (`/tjanster`) is the last `index.css` consumer.**

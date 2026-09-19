@@ -5,8 +5,8 @@
    finished reference implementation — re-synced against the live page via
    getComputedStyle(), not just re-read from source, after Magnus's detail
    pass (buttons, icons, cards, gradients). Consumes --bb-* tokens only;
-   never index.css. Not yet consumed by any page — see docs/SESSION_LOG_
-   CURRENT.md for the deferred implementation-round plan. */
+   never index.css. Loaded globally in main.tsx and used by every rebuilt
+   page (7 unique pages + both families). */
 
 .bb-wrap {
   margin-inline: auto;

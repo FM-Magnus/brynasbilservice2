@@ -33,11 +33,12 @@ The redesign public shell is independent from the frozen legacy layer.
 
 1. **Top: Canonical Design Layer & Shell**:
    - `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens (colors, Archivo display/Manrope body type scales, radii, spacing, shadows).
-   - `client/src/styles/shared-elements.css` owns global `.bb-*` pattern classes below the token layer (buttons, eyebrow, headings, card motifs, icon badges) — see `docs/DESIGN_SYSTEM.md` §2a. Consumed by Startsidan (`/`); other pages pending retrofit.
+   - `client/src/styles/shared-elements.css` owns global `.bb-*` pattern classes below the token layer (buttons, eyebrow, headings, card motifs, icon badges) — see `docs/DESIGN_SYSTEM.md` §2a. Loaded globally in `client/src/main.tsx` together with `design-tokens.css`, and used by all rebuilt pages.
    - `client/src/data/publicNavigation.ts` + `PublicHeader.tsx` / `PublicHeader.css` (free-standing navigation element) + `PublicFooter.tsx` / `PublicFooter.css` (canonical standalone global footer).
    - `client/src/components/ui/GalleryTeaserCard.tsx` / `GalleryTeaserCard.css` (reusable standalone workshop teaser card).
    - `client/src/components/ui/GoogleReviewsCard.tsx` / `GoogleReviewsCard.css` (reusable standalone Google reviews card/overlay).
    - `client/src/components/ui/ContactFormCard.tsx` / `ContactFormCard.css` (reusable standalone contact module and form card).
+   - **Not yet independent (Step 7 blockers):** `client/src/components/BookingForm.tsx` / `BookingForm.css` (booking modal on 22 pages; reads `--redesign-*` and uses `.btn`/`.btn--primary` from `index.css`) and `client/src/components/ui/BiltjansterFaq.tsx` (13 pages; all its classes live in `index.css`). See `HITL_Temporary_roadmap.md` Step 7.
 
 2. **The 7 unique, standalone pages** — each owns its own bespoke design and its own colocated CSS island. No shared page template between them.
    - `Startsidan` (`/`) — `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`). Complete.
@@ -81,7 +82,8 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/galleri` | Unique | Complete | `GalleryPage.css` (`.galleri-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/bilar-till-salu` | Unique | Complete | `BilarTillSalu.css` (`.bilartillsalu-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter` |
-| `/admin` | Admin | Internal utility | Admin local |
+| `/tjanster` | Legacy | Step 7: retire (redirect to `/biltjanster`) — last page on `index.css` and legacy `Header`/`Footer` | `index.css` (`.services-page__*`, `.services-category-card__*`) |
+| `/admin` | Admin | Internal utility | Tailwind (directives currently in `index.css`; move before Step 7) |
 
 ## Class-prefix collision check (mandatory before naming a new page's CSS island)
 
