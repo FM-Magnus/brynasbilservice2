@@ -2,6 +2,20 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Antigravity (Phase 2 / Step 5: Kamrem Rebuild — First Sibling Proof)
+
+- **Rebuilt Kamrem page (`KamremPage.tsx` at `/kamrem`) onto `ServiceGuideTemplate.css`**:
+  - **Shared Template Proved**: Successfully proved `ServiceGuideTemplate.css` on the First Sibling Proof (`/kamrem`) without inventing a new CSS file. 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`. Wired all booking CTAs to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller kamremsbyte" />`.
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-wrap`, `.bb-eyebrow`, `.bb-h1`, `.bb-accent`, `.bb-lead`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`).
+  - **Hero Media**: Reused existing production workshop assets `timing-belt-in-hand.webp` and `timing-belt-in-hand.jpg` inside `<picture data-image-slot="timing-belt-hero">` with workshop reassurance badge card.
+  - **Preserved Approved Copy**: Retained all Swedish copy verbatim across parts, benefits, warning symptoms, service items, guidance, 5-step process, and FAQs.
+  - **TypeScript & Verification**:
+    - Installed `typescript`, `@types/react`, `@types/react-dom` in `client/` devDependencies.
+    - `npm --prefix client run typecheck`: 0 errors.
+    - `npm --prefix client run build`: Built cleanly with 0 errors (9.99s).
+    - `npm --prefix client run test:browser -- tests/browser/kamrem.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal interaction verified.
+
 ### 2026-09-18 — Antigravity (Documentation Synchronization & Pre-Phase 2 Alignment)
 
 - **Roadmap & Architecture Synchronization**:

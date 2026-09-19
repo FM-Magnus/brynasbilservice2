@@ -71,7 +71,7 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/avgassystem` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
 | `/oljebyte` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
 | `/bromssystem` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
-| `/kamrem` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy dependent |
+| `/kamrem` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (First Sibling Proof verified) | `ServiceGuideTemplate.css` |
 | `/bilbatteri` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy dependent |
 | `/stodampare-fjadrar` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`StodampareFjadrarPage.css`) |
 | `/hjullagerbyte` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`HjullagerbytePage.css`) |
