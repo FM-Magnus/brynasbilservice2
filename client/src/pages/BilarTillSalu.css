@@ -32,6 +32,74 @@
 
 .bilartillsalu-page__hero-copy { max-width: 600px; }
 
+/* Featured-vehicle panel: first available vehicle from the data, framed as a
+   separate photo (never composited into the workshop scene). Shown ≥1024px only;
+   below that the listing card follows immediately and the <picture> serves an
+   empty source, so the eager image is not downloaded. */
+.bilartillsalu-page__hero-feature { display: none; }
+
+@media (min-width: 1024px) {
+  /* The panel reaches the top of the content box; the canonical 9rem only
+     leaves ~20px under the 122px desktop header (measured @1440/1728). */
+  .bilartillsalu-page__hero .bb-hero__content { padding-top: calc(var(--bb-hero-padding-top) + 2rem); }
+  .bilartillsalu-page__hero-grid {
+    align-items: center;
+    display: grid;
+    gap: clamp(2rem, 4vw, 4rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+  .bilartillsalu-page__hero-feature {
+    aspect-ratio: 16 / 10;
+    background: var(--bb-color-ink-900);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--bb-radius-card);
+    box-shadow: var(--bb-shadow-floating);
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+  .bilartillsalu-page__hero-feature picture,
+  .bilartillsalu-page__hero-feature img { height: 100%; width: 100%; }
+  .bilartillsalu-page__hero-feature img { object-fit: cover; transition: transform 0.4s ease; }
+  .bilartillsalu-page__hero-feature:hover img { transform: scale(1.03); }
+  .bilartillsalu-page__hero-feature:focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 4px; }
+}
+
+.bilartillsalu-page__hero-feature-caption {
+  align-items: center;
+  /* Denser than .bb-card--glass so white text stays AA over any photo. rgba of --bb-color-ink-950. */
+  background: rgba(7, 20, 22, 0.86); /* amber CTA ≥5.4:1 even over a pure-white photo */
+  bottom: 0.9rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  left: 0.9rem;
+  padding: 0.85rem 1.1rem;
+  position: absolute;
+  right: 0.9rem;
+}
+.bilartillsalu-page__hero-feature-text { display: grid; gap: 0.15rem; min-width: 0; }
+.bilartillsalu-page__hero-feature-text strong {
+  font-family: var(--bb-font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.bilartillsalu-page__hero-feature-text span { color: rgba(255, 255, 255, 0.85); font-weight: 700; }
+.bilartillsalu-page__hero-feature-cta {
+  align-items: center;
+  color: var(--bb-color-amber-500);
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: var(--bb-font-size-label);
+  font-weight: 700;
+  gap: 0.4rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.bilartillsalu-page__hero-feature-cta svg { height: 16px; width: 16px; }
+
 .bilartillsalu-page__hero-meta {
   color: rgba(255, 255, 255, 0.82);
   display: flex;
@@ -46,6 +114,23 @@
 .bilartillsalu-page__hero-meta a:hover { text-decoration-color: var(--bb-color-amber-500); }
 
 .bilartillsalu-page__trust { margin-top: clamp(2rem, 4vw, 3rem); max-width: 860px; }
+@media (min-width: 1024px) {
+  .bilartillsalu-page__trust { max-width: none; }
+}
+
+/* Amber outline ring around each trust icon (page-local; .bb-icon-bare untouched). */
+.bilartillsalu-page__trust-icon {
+  align-items: center;
+  border: 1.5px solid var(--bb-color-amber-500);
+  border-radius: 50%;
+  color: var(--bb-color-amber-500);
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+.bilartillsalu-page__trust-icon svg { height: 20px; width: 20px; }
 
 /* ---------- 2. Listings ---------- */
 .bilartillsalu-page__listings { padding-block: clamp(3rem, 6vw, 5rem); }
@@ -56,6 +141,8 @@
 
 /* Featured vehicle card: gallery left, details right; stacks below 960px. */
 .bilartillsalu-page__vehicle {
+  /* Clears the sticky header: measured bottom edge 122px @1440, 80px @768/390. */
+  scroll-margin-top: 144px;
   background: var(--bb-color-surface);
   border-radius: var(--bb-radius-card);
   box-shadow: var(--bb-shadow-card);
@@ -119,7 +206,7 @@
 .bilartillsalu-page__thumbs {
   display: grid;
   gap: 0.6rem;
-  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .bilartillsalu-page__thumb {
   aspect-ratio: 16 / 10;
@@ -152,7 +239,8 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: clamp(0.25rem, 1.5vw, 1rem) clamp(0.25rem, 1.5vw, 1rem) clamp(0.5rem, 1.5vw, 1rem) 0;
+  /* Top padding only: the actions pin to the bottom and line up with the thumbnails. */
+  padding-top: clamp(0.25rem, 1.5vw, 1rem);
 }
 
 .bilartillsalu-page__vehicle-meta {
@@ -169,6 +257,7 @@
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin-top: 0.4rem;
+  overflow-wrap: anywhere;
 }
 
 .bilartillsalu-page__specs {
@@ -197,6 +286,7 @@
 
 .bilartillsalu-page__description {
   color: var(--bb-color-text-muted);
+  overflow-wrap: anywhere;
   line-height: var(--bb-line-height-body);
   margin-top: 1.25rem;
   white-space: pre-line;
@@ -204,11 +294,12 @@
 
 .bilartillsalu-page__vehicle-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.75rem;
   margin-top: auto;
   padding-top: 1.5rem;
 }
+.bilartillsalu-page__vehicle-actions .bb-btn { white-space: normal; width: 100%; }
 
 /* Light-surface secondary button (no shared equivalent exists for light cards). */
 .bilartillsalu-page__btn-outline {
@@ -236,12 +327,16 @@
 }
 
 /* Loading skeleton — reserves the card's geometry so the page does not jump. */
+/* rgba of --bb-color-ink-950 at low alpha. */
 .bilartillsalu-page__vehicle--skeleton .bilartillsalu-page__viewer,
 .bilartillsalu-page__vehicle--skeleton .bilartillsalu-page__details {
-  background: linear-gradient(90deg, #eceae4, #f4f2ed, #eceae4);
+  background: rgba(7, 20, 22, 0.06);
   border-radius: var(--bb-radius-md);
-  min-height: 320px;
 }
+.bilartillsalu-page__vehicle--skeleton .bilartillsalu-page__details { min-height: 320px; }
+
+/* Hero panel placeholder while vehicles load: same box, no image. */
+.bilartillsalu-page__hero-feature--placeholder { background: var(--bb-color-ink-900); box-shadow: none; }
 
 /* Empty and error states */
 .bilartillsalu-page__notice {
@@ -289,17 +384,17 @@
 
 @media (max-width: 650px) {
   .bilartillsalu-page__hero { min-height: 0; }
-  .bilartillsalu-page__thumbs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   /* .bb-card--trust stacks as a column at ≤640px, where its text block's
      320px flex-basis would turn into a 320px height. */
   .bilartillsalu-page__closing-card .bb-card--trust__text { flex-basis: auto; }
-  .bilartillsalu-page__vehicle-actions .bb-btn,
   .bilartillsalu-page__closing-actions .bb-btn,
   .bilartillsalu-page__notice .bb-btn { white-space: normal; width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .bilartillsalu-page__thumb,
-  .bilartillsalu-page__thumb::after { transition: none; }
+  .bilartillsalu-page__thumb::after,
+  .bilartillsalu-page__hero-feature img { transition: none; }
+  .bilartillsalu-page__hero-feature:hover img { transform: none; }
   .bilartillsalu-page__btn-outline:hover { transform: none; }
 }

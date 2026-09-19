@@ -2,6 +2,15 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Claude (Bilar till salu: mockup alignment pass)
+
+- Aligned `/bilar-till-salu` with Magnus's supplied mockup. Only `BilarTillSalu.tsx`, `BilarTillSalu.css` and the page's Playwright spec changed; data layer, shared styles, shell and `index.css` untouched.
+- **Hero:** two-column at ≥1024px with a new featured-vehicle panel (first available vehicle *with images* from `getPublicVehicles()`, linking to `#vehicle-{slug}`, glass caption with name/price/"Se bilen"). The mockup's AI-composited hero (car pasted into a workshop with an invented wall sign) was deliberately not reproduced; the real workshop photo stays as background and the car is a separate framed photo. Loading reserves the panel box; hidden below 1024px, where a `media` source serves a 1×1 GIF so the eager image is not downloaded. Extra 2rem top padding ≥1024px (panel sat ~20px under the 122px header at 1440/1728; now 51–106px).
+- **Trust row:** amber outline rings (page-local `.bilartillsalu-page__trust-icon`), full width ≥1024px. Descriptions kept (approved copy); the mockup's title-only row needs Magnus's OK.
+- **Listing card:** `id="vehicle-{slug}"` + `scroll-margin-top: 144px` (measured header bottom 122/80/80px at 1440/768/390); three equal thumbnail columns; full-width stacked actions pinned to the thumbnail baseline; `srcset`/`sizes` over the contract's thumb/main variants; `overflow-wrap: anywhere` on title and description (a long unbroken word escaped the column).
+- **Perf/a11y:** hero panel image `fetchpriority="high"` (lowercase attribute for React 18.2, no warning). CLS measured 0.0000–0.0011. Caption background raised to 86% ink so the amber CTA keeps ≥5.4:1 even over a white photo (4.37:1 at 80%). Skeleton uses a token-derived tint instead of raw hex.
+- **Verification:** typecheck 0 errors, build clean, full suite 42/42. Spec extended: hero panel (desktop only, href, price, fetchpriority), srcset/sizes, equal thumbnails, button widths, CLS < 0.02, jump target clears header, clean console on load. Edge cases checked with temporary seed edits (reverted): 4 available incl. 0-image / 1-image / very long name and description, sold mix, and zero available (no panel, empty state).
+
 ### 2026-09-19 — Claude (Step 6: Bilar till salu rebuilt as unique page, backend-ready)
 
 - Rebuilt `/bilar-till-salu` from scratch: `BilarTillSalu.tsx` + new `BilarTillSalu.css` (`.bilartillsalu-page__*`). Legacy `Header`/`Footer` replaced by `PublicHeader` (overlay) + `PublicFooter`. Beyond `.cars-page__*` (59 rules), `index.css` also defines `.car-card__*` (32) and `.cars-grid` (3); none of those selectors are used any more (asserted in the Playwright spec).

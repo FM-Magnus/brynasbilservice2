@@ -1,6 +1,21 @@
 import { expect, test } from '@playwright/test'
 
 test('bilar till salu renders on its own island without horizontal overflow', async ({ page }, testInfo) => {
+  const consoleProblems: string[] = []
+  page.on('console', (message) => {
+    if (message.type() === 'error' || message.type() === 'warning') consoleProblems.push(message.text())
+  })
+  // Accumulate CLS from the first paint, before any page script runs.
+  await page.addInitScript(() => {
+    const w = window as unknown as { __cls: number }
+    w.__cls = 0
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries() as unknown as Array<{ value: number; hadRecentInput: boolean }>) {
+        if (!entry.hadRecentInput) w.__cls += entry.value
+      }
+    }).observe({ type: 'layout-shift', buffered: true })
+  })
+
   await page.goto('/bilar-till-salu')
   await page.waitForLoadState('networkidle')
   await page.evaluate(() => document.fonts.ready)
@@ -29,6 +44,58 @@ test('bilar till salu renders on its own island without horizontal overflow', as
   const viewerBox = await vehicle.locator('.bilartillsalu-page__viewer').boundingBox()
   expect(viewerBox).not.toBeNull()
   expect(Math.abs(viewerBox!.width / viewerBox!.height - 1.6)).toBeLessThan(0.02)
+
+  // Responsive images on the main viewer
+  const viewerImg = vehicle.locator('.bilartillsalu-page__viewer img')
+  await expect(viewerImg).toHaveAttribute('srcset', /640w.*1920w/)
+  await expect(viewerImg).toHaveAttribute('sizes', /.+/)
+
+  // Hero vehicle panel: data-driven, desktop only
+  const heroPanel = page.locator('a.bilartillsalu-page__hero-feature')
+  const isDesktop = testInfo.project.name === 'desktop-1440'
+  if (isDesktop) {
+    await expect(heroPanel).toBeVisible()
+    await expect(heroPanel).toHaveAttribute('href', '#vehicle-peugeot-307-cc-2-0-2006')
+    await expect(heroPanel).toContainText('39 900 kr')
+    await expect(heroPanel.locator('img')).toHaveAttribute('fetchpriority', 'high')
+  } else {
+    await expect(heroPanel).toBeHidden()
+  }
+
+  // Equal-width thumbnails; full-width stacked actions
+  const thumbWidths = await vehicle.locator('.bilartillsalu-page__thumb').evaluateAll((els) => els.map((el) => el.getBoundingClientRect().width))
+  expect(Math.max(...thumbWidths) - Math.min(...thumbWidths)).toBeLessThanOrEqual(1)
+  const detailsWidth = await vehicle.locator('.bilartillsalu-page__details').evaluate((el) => el.clientWidth - parseFloat(getComputedStyle(el).paddingLeft) - parseFloat(getComputedStyle(el).paddingRight))
+  for (const button of await vehicle.locator('.bilartillsalu-page__vehicle-actions .bb-btn').all()) {
+    const box = await button.boundingBox()
+    expect(Math.abs(box!.width - detailsWidth)).toBeLessThanOrEqual(2)
+  }
+
+  // CLS after load and one full scroll
+  await page.evaluate(async () => {
+    for (let y = 0; y <= document.documentElement.scrollHeight; y += 300) {
+      window.scrollTo(0, y)
+      await new Promise((resolve) => setTimeout(resolve, 50))
+    }
+    window.scrollTo(0, 0)
+  })
+  await page.waitForTimeout(300)
+  const cls = await page.evaluate(() => (window as unknown as { __cls: number }).__cls)
+  expect(cls).toBeLessThan(0.02)
+
+  // Clean console on load. Checked before the booking modal opens: the modal
+  // fetches /api/services, which has no backend in this dev-only test run.
+  expect(consoleProblems).toEqual([])
+
+  // Hero panel jumps to the card with the title clear of the sticky header
+  if (isDesktop) {
+    await heroPanel.click()
+    await page.waitForTimeout(600)
+    const headerBottom = await page.locator('.public-header').evaluate((el) => el.getBoundingClientRect().bottom)
+    const titleTop = await vehicle.getByRole('heading', { level: 3 }).evaluate((el) => el.getBoundingClientRect().top)
+    expect(titleTop).toBeGreaterThan(headerBottom)
+    await page.evaluate(() => window.scrollTo(0, 0))
+  }
 
   // Thumbnails switch the main image
   const mainImg = vehicle.locator('.bilartillsalu-page__viewer img')

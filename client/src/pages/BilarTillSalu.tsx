@@ -9,8 +9,9 @@ import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { CarSaleIcon } from '../components/icons/CarSaleIcon'
+import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { getPublicVehicles } from '../api/vehicles'
-import type { Vehicle } from '../types/vehicle'
+import type { Vehicle, VehicleImage } from '../types/vehicle'
 import heroWebp from '../assets/images/gallery/workshop/workshop-service-aisle.webp'
 import heroJpg from '../assets/images/gallery/workshop/workshop-service-aisle.jpg'
 
@@ -28,7 +29,54 @@ const formatMileage = (km: number) => `${Math.round(km / 10).toLocaleString('sv-
 const vehicleName = (vehicle: Vehicle) => `${vehicle.make} ${vehicle.model}`
 const inquiryComment = (vehicle: Vehicle) => `Gäller förfrågan om ${vehicleName(vehicle)} (${vehicle.year})`
 
+// 1×1 transparent GIF: used as the <picture> source below the hero panel's
+// breakpoint so the hidden panel's eager image is never downloaded on mobile.
+const EMPTY_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+const VIEWER_SIZES = '(min-width: 1440px) 690px, (min-width: 961px) 50vw, 100vw'
+const HERO_PANEL_SIZES = '(min-width: 1440px) 620px, 45vw'
+
+// React 18.2 only forwards fetch priority as a lowercase attribute.
+const HIGH_PRIORITY = { fetchpriority: 'high' } as Record<string, string>
+
+const srcSet = (image: VehicleImage, format: 'webp' | 'jpg') =>
+  `${image.thumb[format]} ${image.thumb.width}w, ${image.main[format]} ${image.main.width}w`
+
 type LoadState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; vehicles: Vehicle[] }
+
+function HeroVehiclePanel({ vehicle }: { vehicle: Vehicle }) {
+  const image = vehicle.images[0]
+  const name = vehicleName(vehicle)
+  const price = formatPrice(vehicle.priceSek)
+
+  return (
+    <a className="bilartillsalu-page__hero-feature" href={`#vehicle-${vehicle.slug}`} aria-label={`Se ${name}, ${price}`}>
+      <picture>
+        <source media="(max-width: 1023.98px)" srcSet={EMPTY_IMAGE} />
+        <source type="image/webp" srcSet={srcSet(image, 'webp')} sizes={HERO_PANEL_SIZES} />
+        <img
+          src={image.main.jpg}
+          srcSet={srcSet(image, 'jpg')}
+          sizes={HERO_PANEL_SIZES}
+          alt=""
+          width={image.main.width}
+          height={image.main.height}
+          loading="eager"
+          decoding="async"
+          {...HIGH_PRIORITY}
+        />
+      </picture>
+      <span className="bb-card--glass bilartillsalu-page__hero-feature-caption" aria-hidden="true">
+        <span className="bilartillsalu-page__hero-feature-text">
+          <strong>{name}</strong>
+          <span>{price}</span>
+        </span>
+        <span className="bilartillsalu-page__hero-feature-cta">
+          Se bilen <ArrowRightIcon />
+        </span>
+      </span>
+    </a>
+  )
+}
 
 function VehicleCard({ vehicle, eager, onInquiry }: { vehicle: Vehicle; eager: boolean; onInquiry: (vehicle: Vehicle) => void }) {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -46,15 +94,18 @@ function VehicleCard({ vehicle, eager, onInquiry }: { vehicle: Vehicle; eager: b
   return (
     <article
       className={`bilartillsalu-page__vehicle${sold ? ' bilartillsalu-page__vehicle--sold' : ''}`}
+      id={`vehicle-${vehicle.slug}`}
       aria-labelledby={`vehicle-${vehicle.id}-title`}
     >
       <div className="bilartillsalu-page__gallery">
         <div className="bilartillsalu-page__viewer">
           {active ? (
             <picture>
-              <source srcSet={active.main.webp} type="image/webp" />
+              <source type="image/webp" srcSet={srcSet(active, 'webp')} sizes={VIEWER_SIZES} />
               <img
                 src={active.main.jpg}
+                srcSet={srcSet(active, 'jpg')}
+                sizes={VIEWER_SIZES}
                 alt={active.alt}
                 width={active.main.width}
                 height={active.main.height}
@@ -144,6 +195,7 @@ export default function BilarTillSalu() {
   const vehicles = load.status === 'ready' ? load.vehicles : []
   const available = vehicles.filter((vehicle) => vehicle.status === 'available')
   const sold = vehicles.filter((vehicle) => vehicle.status === 'sold')
+  const featured = available.find((vehicle) => vehicle.images.length > 0)
 
   return (
     <>
@@ -161,52 +213,57 @@ export default function BilarTillSalu() {
           <div className="bb-hero__shade" aria-hidden="true" />
 
           <div className="bb-wrap bb-hero__content">
-            <div className="bb-hero__copy bilartillsalu-page__hero-copy">
-              <p className="bb-eyebrow bb-eyebrow--dark">Begagnade bilar i Brynäs</p>
-              <h1 className="bb-h1 bilartillsalu-page__hero-title" id="bilartillsalu-hero-title">
-                <span>Bilar till <span className="bb-accent">salu</span></span>
-              </h1>
-              <p>
-                Alla våra bilar är noggrant genomgångna, kontrollerade och servade av våra egna mekaniker på Brynäs Bilservice. Vi säkerställer att bilen är trygg och trafiksäker innan den säljs.
-              </p>
-              <div className="bb-hero__actions">
-                <a href={PHONE_HREF} className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
-                  <PhoneIcon />
-                  <span>Ring: 070-553 33 95</span>
-                </a>
-                <button type="button" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onClick={openBooking}>
-                  Boka tid för visning
-                </button>
+            <div className="bilartillsalu-page__hero-grid">
+              <div className="bb-hero__copy bilartillsalu-page__hero-copy">
+                <p className="bb-eyebrow bb-eyebrow--dark">Begagnade bilar i Brynäs</p>
+                <h1 className="bb-h1 bilartillsalu-page__hero-title" id="bilartillsalu-hero-title">
+                  <span>Bilar till <span className="bb-accent">salu</span></span>
+                </h1>
+                <p>
+                  Alla våra bilar är noggrant genomgångna, kontrollerade och servade av våra egna mekaniker på Brynäs Bilservice. Vi säkerställer att bilen är trygg och trafiksäker innan den säljs.
+                </p>
+                <div className="bb-hero__actions">
+                  <a href={PHONE_HREF} className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
+                    <PhoneIcon />
+                    <span>Ring: 070-553 33 95</span>
+                  </a>
+                  <button type="button" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onClick={openBooking}>
+                    Boka tid för visning
+                  </button>
+                </div>
+                <ul className="bilartillsalu-page__hero-meta">
+                  <li>
+                    <MapPinIcon />
+                    <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer">Utmarksvägen 21B, 802 91 Gävle</a>
+                  </li>
+                  <li>
+                    <ClockIcon />
+                    <span>Mån–Fre 08:00–17:00 (Lör förfrågan)</span>
+                  </li>
+                </ul>
               </div>
-              <ul className="bilartillsalu-page__hero-meta">
-                <li>
-                  <MapPinIcon />
-                  <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer">Utmarksvägen 21B, 802 91 Gävle</a>
-                </li>
-                <li>
-                  <ClockIcon />
-                  <span>Mån–Fre 08:00–17:00 (Lör förfrågan)</span>
-                </li>
-              </ul>
+
+              {load.status === 'loading' && <div className="bilartillsalu-page__hero-feature bilartillsalu-page__hero-feature--placeholder" aria-hidden="true" />}
+              {featured && <HeroVehiclePanel vehicle={featured} />}
             </div>
 
             <ul className="bb-trust-row bilartillsalu-page__trust" aria-label="Därför kan du lita på våra bilar">
               <li className="bb-trust-row__item">
-                <span className="bb-icon-bare" aria-hidden="true"><ShieldHeartIcon /></span>
+                <span className="bilartillsalu-page__trust-icon" aria-hidden="true"><ShieldHeartIcon /></span>
                 <span className="bb-trust-row__text">
                   <strong>Verkstadsinspekterade</strong>
                   <span>Genomgångna och testade av våra egna mekaniker före försäljning.</span>
                 </span>
               </li>
               <li className="bb-trust-row__item">
-                <span className="bb-icon-bare" aria-hidden="true"><CheckIcon /></span>
+                <span className="bilartillsalu-page__trust-icon" aria-hidden="true"><CheckIcon /></span>
                 <span className="bb-trust-row__text">
                   <strong>Färdiga för leverans</strong>
                   <span>Besiktigade, provkörda och redo att rulla ut direkt.</span>
                 </span>
               </li>
               <li className="bb-trust-row__item">
-                <span className="bb-icon-bare" aria-hidden="true"><ChatDotsIcon /></span>
+                <span className="bilartillsalu-page__trust-icon" aria-hidden="true"><ChatDotsIcon /></span>
                 <span className="bb-trust-row__text">
                   <strong>Personlig kontakt</strong>
                   <span>Tydlig rådgivning och personlig provkörning utan mellanhänder.</span>
