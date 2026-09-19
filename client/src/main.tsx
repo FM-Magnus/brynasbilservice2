@@ -1,10 +1,10 @@
 import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
-import './css/index.css'
+import './styles/tailwind.css'
 import './styles/design-tokens.css'
-import './styles/base.css' // global element defaults; Step 7 replaces css/index.css with styles/tailwind.css
+import './styles/base.css'
 import './styles/shared-elements.css'
 import App from './App.tsx'
 import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
@@ -14,7 +14,6 @@ import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
 // bundle on every page load. See docs/DESIGN_SYSTEM.md#js-code-splitting.
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard.tsx'))
 const BilarTillSalu = lazy(() => import('./pages/BilarTillSalu.tsx'))
-const ServicesPage = lazy(() => import('./pages/ServicesPage.tsx'))
 const ServiceReparationerPage = lazy(() => import('./pages/ServiceReparationerPage.tsx'))
 const BiltjansterPage = lazy(() => import('./pages/BiltjansterPage.tsx'))
 const FelsokningPage = lazy(() => import('./pages/FelsokningPage.tsx'))
@@ -67,7 +66,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/" element={<App />} />
             <Route path="/om-oss" element={<AboutPage />} />
             <Route path="/galleri" element={<GalleryPage />} />
-            <Route path="/tjanster" element={<ServicesPage />} />
+            <Route path="/tjanster" element={<Navigate to="/biltjanster" replace />} />
             <Route path="/service-reparationer" element={<ServiceReparationerPage />} />
             <Route path="/biltjanster" element={<BiltjansterPage />} />
             <Route path="/felsokning" element={<FelsokningPage />} />

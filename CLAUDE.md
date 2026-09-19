@@ -24,7 +24,7 @@ Two developers:
 
 ## Division of responsibility
 **Magnus owns (edit only within the current task's explicit write scope):**
-- `client/src/` — frontend components, sections, CSS islands and assets; `client/src/css/index.css` is frozen even though it is frontend-owned
+- `client/src/` — frontend components, sections, CSS islands and assets (the global layer in `client/src/styles/` changes only with explicit approval)
 - `client/package.json`
 - `client/tailwind.config.js`, `client/vite.config.ts`
 
@@ -39,15 +39,14 @@ Two developers:
 ### Client (`client/`)
 ```
 src/
-  main.tsx              — React root, BrowserRouter, LanguageProvider, routes; loads css/index.css
-                          (frozen legacy), styles/design-tokens.css and styles/shared-elements.css
+  main.tsx              — React root, BrowserRouter, LanguageProvider, routes; loads the global layer:
+                          styles/tailwind.css, design-tokens.css, base.css, shared-elements.css
   App.tsx               — mounts pages/landing/LandingPage (route "/")
-  css/index.css         — frozen legacy CSS (also holds the @tailwind directives); deleted in Step 7
   styles/               — design-tokens.css (--bb-*), base.css (element defaults), shared-elements.css (.bb-*),
-                          ServiceGuideTemplate.css, tailwind.css (directives; imported from Step 7)
+                          ServiceGuideTemplate.css, tailwind.css (directives; utilities for /admin only)
   pages/                — one TSX + colocated CSS island per unique page / family owner; admin/
   components/
-    layout/             — PublicHeader, PublicFooter (+ legacy Header/Footer, used only by /tjanster)
+    layout/             — PublicHeader, PublicFooter
     ui/                 — GalleryTeaserCard, GoogleReviewsCard, ContactFormCard, BiltjansterFaq
     icons/              — SVG icon components
     admin/              — BookingManagement, ServiceManagement, ProtectedRoute
@@ -70,7 +69,7 @@ dist/             — server build output
 ```
 
 ### Routes
-`client/src/main.tsx` defines the public routes, including `/biltjanster`, `/service-reparationer`, `/felsokning`, the Biltjänster guide routes, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu` and `/kontakt`. `/admin` is protected; `/api/*` belongs to Express. Navigation for every public page comes from `client/src/data/publicNavigation.ts`, rendered by `PublicHeader`. The authoritative route → CSS-owner map is `docs/CSS_OWNERSHIP.md`.
+`client/src/main.tsx` defines the public routes, including `/biltjanster`, `/service-reparationer`, `/felsokning`, the Biltjänster guide routes, `/dackservice`, `/ac-service`, `/bargning`, `/bilar-till-salu` and `/kontakt`. `/tjanster` redirects to `/biltjanster`. `/admin` is protected; `/api/*` belongs to Express. Navigation for every public page comes from `client/src/data/publicNavigation.ts`, rendered by `PublicHeader`. The authoritative route → CSS-owner map is `docs/CSS_OWNERSHIP.md`.
 
 ### Image intake
 
@@ -133,7 +132,7 @@ The local frontend build is `npm --prefix client run build`. Do not treat a succ
 ## Design system
 Canonical tokens are `--bb-*` in `client/src/styles/design-tokens.css`; shared patterns are `.bb-*` in `client/src/styles/shared-elements.css`. Details: `docs/DESIGN_SYSTEM.md`.
 
-**CSS hard freeze:** never modify `client/src/css/index.css`. Read `docs/CSS_OWNERSHIP.md` before any CSS task and edit only the route's listed CSS island. Never use `--redesign-*` or other `index.css` custom properties, and never reuse a legacy class prefix (run the collision check in `CSS_OWNERSHIP.md`).
+**CSS architecture:** the legacy `index.css` was deleted in Step 7 (2026-09-19). Global CSS is only the four files in `styles/` loaded by `main.tsx`; never add another. Read `docs/CSS_OWNERSHIP.md` before any CSS task and edit only the route's listed CSS island. Never use `--redesign-*` or other `index.css` custom properties, and never reuse a legacy class prefix (run the collision check in `CSS_OWNERSHIP.md`).
 
 **Headings:** Archivo 800 in **mixed case** (`.bb-h1`, `.bb-h2`), with a teal highlight via `.bb-accent`. The older "uppercase hero headings / `.title-accent` / `--redesign-accent`" rule is retired.
 

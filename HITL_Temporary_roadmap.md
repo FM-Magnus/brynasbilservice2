@@ -144,7 +144,7 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 6: Build the Remaining Unique Pages `[COMPLETED: all 7 unique pages rebuilt — Galleri finished 2026-09-19]`
+### Step 6: Build the Remaining Unique Pages `[COMPLETED 2026-09-19]`
 - **Why this order**: `Bärgning`, `Bilar till salu`, `Galleri`, and `Biltjänster` don't share a template with each other or with anything else; each has its own unique UI requirements and must be built as an isolated CSS island.
 - **Status**:
   - **`Biltjänster` (`/biltjanster`) (COMPLETE)**: Rebuilt as the service-catalog hub (`BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `<PublicHeader />` and `<PublicFooter />`.
@@ -171,23 +171,23 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 7: The Moment of Liberation (Deleting `index.css`)
+### Step 7: The Moment of Liberation (Deleting `index.css`) `[DONE 2026-09-19 — awaiting Magnus's sign-off]`
 - **The Milestone**: Every active route lives on its own CSS island or one of the two family templates, wrapped in `PublicHeader` and `PublicFooter`.
-- **Status (updated 2026-09-19, Step 7 prep done)**: every non-page dependency on `index.css` has been removed. A dry run that replaced the `index.css` import with `styles/tailwind.css` rendered all 21 public routes (1440 + 390) and `/admin` pixel-identical to the current site, and the full Playwright suite passed.
-  1. ✅ **Tailwind directives** moved to `client/src/styles/tailwind.css`. It is not imported yet, because `index.css` still emits them; Step 7 swaps the import line. Preflight stays global.
-  2. ✅ **Global element defaults** (`html`, `body`, `h1–h6`, `p`, `img`, `a`, `ul`) carried over to `client/src/styles/base.css`, already imported in `main.tsx`. Legacy font stacks are kept on purpose; see the comment in that file.
-  3. ✅ **Booking modal** is on `--bb-*` tokens, and `.modal-submit` is self-contained (no `.btn`/`.btn--primary`, no `w-full`).
-  4. ✅ **FAQ component** has its own `components/ui/BiltjansterFaq.css` (`.bb-faq__*`).
-  5. ✅ **Public Tailwind leftovers** removed from `AboutPage.tsx` and `BargningPage.tsx`, with icon sizes moved into their islands. Admin's `var(--redesign-accent*)` arbitrary values now use `--bb-color-teal-*`.
-  6. ⏳ **`/tjanster`** (`pages/ServicesPage.tsx`): still the last page on legacy `Header`/`Footer` and `index.css` classes. Redirect to `/biltjanster` (or remove) and check that nothing links to it.
-  7. ⏳ **Dead code**: `components/layout/Header.tsx`, `components/layout/Footer.tsx`, `components/GoogleReviews.tsx`, `pages/admin/Login.tsx`, and the 38 unreferenced files in `client/src/assets/images/gallery/workshop/` (list in `docs/SESSION_LOG_CURRENT.md`, Galleri entry).
-- **Agent's Job** (after 6–7):
-  - Search the codebase for any lingering reference to `index.css`, legacy class names and `--redesign-*`.
-  - In `main.tsx`, replace `import './css/index.css'` with `import './styles/tailwind.css'`, then delete `client/src/css/index.css`.
-  - Remove the `index.css` freeze from `.githooks/pre-commit`, but keep the public-Tailwind check.
-  - Run the full Playwright suite and the client production build, and screenshot every route at 1440/768/390.
+- **Done**:
+  - **Prep** (commit `80ec3958`): `styles/tailwind.css` and `styles/base.css` created; booking modal, FAQ component, admin and the Om oss/Bärgning icons decoupled from `index.css`.
+  - **Deletion**:
+    - `client/src/css/index.css` deleted; `main.tsx` now imports `styles/tailwind.css`.
+    - `/tjanster` redirects to `/biltjanster` (`<Navigate replace />`), and `pages/ServicesPage.tsx` is deleted.
+    - Dead code deleted: legacy `Header.tsx`/`Footer.tsx`, `GoogleReviews.tsx`, the unused admin `Login.tsx`, `SnowflakeIcon`/`TireIcon` (only ServicesPage used them), `home-workshop-hero.*` (only index.css used it), `mechanic-brake-repair.jpg`, and the 38 unreferenced `gallery/workshop/*` files.
+    - The pre-commit hook's `index.css` freeze is removed; the public-Tailwind check stays.
+  - **Result**: global CSS went from 287.8 KB to 100.0 KB (44.2 → 17.7 KB gzip, −60%).
+    - Pixel comparison against pre-change baselines: 21 public routes at 1440 + 390 and `/admin`, 44/44 identical.
+    - All 22 routes at 768: no overflow, no page errors.
+    - Full Playwright suite green, plus a new `tests/browser/step7.visual.spec.ts` guard (redirect; no legacy tokens or classes).
+  - **Left untouched on purpose**: `client/src/assets/images/archive/` (a deliberate archive) and seven assets that were already unreferenced before Step 7 (listed in `docs/SESSION_LOG_CURRENT.md`).
 - **Your Job (HITL Decision)**:
   - Click through every link in the menu on `http://localhost:5173/`. Enjoy the speed, elegance, and zero-bloat architecture. Celebrate the deletion of `index.css`!
+  - When satisfied, sign off. Per this document's own primer, it is then archived to `docs/archive/`, and `AGENTS.md` / `docs/AGENT_HANDOFF.md` point to `docs/CSS_OWNERSHIP.md` as the architecture reference.
 
 ---
 

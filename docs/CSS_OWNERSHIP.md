@@ -2,34 +2,29 @@
 
 This is the operational CSS map for Brynäs Bilservice. It is intentionally explicit so smaller coding models can follow it without interpreting architectural intent.
 
-## Non-negotiable rule
+## Non-negotiable rules
 
-`client/src/css/index.css` is a frozen legacy dependency layer.
+The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. The rebuild is complete.
 
-- NEVER add, delete, move, rename, reformat or clean rules in that file.
-- Existing pages may continue consuming it unchanged.
-- A rule that appears unused must remain in place.
-- If a task seems to require editing it, stop before editing and report `BLOCKED`.
-- Only Magnus may authorize a one-off bypass of the pre-commit lock.
+- Never recreate a global catch-all stylesheet, and never reintroduce `--redesign-*`, `--color-*` or legacy class systems.
+- Global CSS is exactly: `styles/tailwind.css`, `styles/design-tokens.css`, `styles/base.css`, `styles/shared-elements.css` (loaded in that order in `main.tsx`). Adding a fifth global file needs Magnus's approval.
+- Every page, family and shared component owns its CSS island, imported by its `.tsx`, with a unique class prefix.
+- If a task seems to require a new global rule, token or shared pattern, stop and propose it to Magnus first.
 
-Migration means building an independent CSS island until the legacy file becomes irrelevant. It does not mean extracting or deleting legacy rules.
+## Public shell and shared components
 
-## Redesign public shell
-
-The redesign public shell is independent from the frozen legacy layer.
-
-- `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens for new public work. New public components must not consume `--redesign-*`, `--color-*` or any other custom property defined by `index.css`.
-- `client/src/data/publicNavigation.ts` is the canonical navigation source for the new public header.
-- `client/src/components/layout/PublicHeader.tsx` and `PublicHeader.css` own the new shared header. It must not import `Header.tsx`, use legacy selectors or Tailwind utilities, or rely on `index.css` layout/control rules.
-- `client/src/components/layout/PublicFooter.tsx` and `PublicFooter.css` own the canonical shared footer matching the approved automotive mockup. It must not import legacy `Footer.tsx`, use legacy selectors or Tailwind utilities, or rely on `index.css` rules.
-- `client/src/components/ui/GalleryTeaserCard.tsx` and `GalleryTeaserCard.css` own the reusable interactive Ken Burns workshop slideshow card with a single-source slide registry (`defaultWorkshopSlides`).
-- `client/src/components/ui/GoogleReviewsCard.tsx` and `GoogleReviewsCard.css` own the standalone Google reviews UI component with single-source review registry (`defaultGoogleReviews`), cyclic rotation with smooth cross-fade, and stabilized transparent bounding field with zero layout shift (`.bb-reviews-card*`).
-- `client/src/components/ui/ContactFormCard.tsx` and `ContactFormCard.css` own the standalone reusable contact module and form card (`.bb-contact-section*`, `.bb-contact-form*`) with single-source contact subjects (`defaultContactSubjects`) and multi-variant support (`full-section`, `card-only`).
-- The legacy `Header.tsx`, `Footer.tsx` and `BookingForm.tsx` remain untouched until separately retired. A new page receives booking behaviour through callbacks or modals, mounting `PublicHeader` and `PublicFooter` directly.
+- `client/src/styles/design-tokens.css` owns the `--bb-*` tokens. Everything consumes these; there are no other token sets.
+- `client/src/data/publicNavigation.ts` is the navigation source for `PublicHeader`.
+- `client/src/components/layout/PublicHeader.tsx` / `PublicHeader.css` and `PublicFooter.tsx` / `PublicFooter.css` are the only header and footer. The legacy `Header.tsx`/`Footer.tsx` were deleted in Step 7.
+- `client/src/components/ui/GalleryTeaserCard.tsx` / `.css`: Ken Burns workshop slideshow card (`defaultWorkshopSlides`).
+- `client/src/components/ui/GoogleReviewsCard.tsx` / `.css`: Google reviews (`defaultGoogleReviews`, `.bb-reviews-card*`).
+- `client/src/components/ui/ContactFormCard.tsx` / `.css`: contact module (`defaultContactSubjects`, `.bb-contact-section*`, `.bb-contact-form*`).
+- `client/src/components/ui/BiltjansterFaq.tsx` / `.css`: FAQ accordion (`.bb-faq__*`).
+- `client/src/components/BookingForm.tsx` / `.css`: booking modal (`.modal-*`). Pages open it through callbacks; vehicle inquiries pass `initialComment`.
 
 ## The Rebuild Architecture (Master Blueprint)
 
-**Revised 2026-09-18**: The site is not a symmetrical set of 7 style archetypes. Most pages are too divergent in content and purpose to honestly share a template. The entire site is being rebuilt away from `index.css` into a canonical design token layer at the top, **7 fully unique standalone pages**, and **2 shared service-page families** (the only groups where the pages are genuinely the same kind of content):
+**Revised 2026-09-18**: The site is not a symmetrical set of 7 style archetypes. Most pages are too divergent in content and purpose to honestly share a template. The entire site was rebuilt away from the legacy `index.css` (deleted 2026-09-19) into a canonical design token layer at the top, **7 fully unique standalone pages**, and **2 shared service-page families** (the only groups where the pages are genuinely the same kind of content):
 
 1. **Top: Canonical Design Layer & Shell**:
    - `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens (colors, Archivo display/Manrope body type scales, radii, spacing, shadows).
@@ -39,7 +34,7 @@ The redesign public shell is independent from the frozen legacy layer.
    - `client/src/components/ui/GoogleReviewsCard.tsx` / `GoogleReviewsCard.css` (reusable standalone Google reviews card/overlay).
    - `client/src/components/ui/ContactFormCard.tsx` / `ContactFormCard.css` (reusable standalone contact module and form card).
    - `client/src/components/BookingForm.tsx` / `BookingForm.css` (booking modal, `.modal-*`, on `--bb-*` tokens) and `client/src/components/ui/BiltjansterFaq.tsx` / `BiltjansterFaq.css` (FAQ accordion, `.bb-faq__*`), both independent of `index.css` since 2026-09-19.
-   - `client/src/styles/base.css` (global element defaults, imported in `main.tsx`) and `client/src/styles/tailwind.css` (Tailwind directives; replaces the `index.css` import in Step 7).
+   - `client/src/styles/base.css` (global element defaults) and `client/src/styles/tailwind.css` (Tailwind directives; preflight global, utilities for `/admin` only), both imported in `main.tsx`.
 
 2. **The 7 unique, standalone pages** — each owns its own bespoke design and its own colocated CSS island. No shared page template between them.
    - `Startsidan` (`/`) — `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`). Complete.
@@ -83,20 +78,18 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/galleri` | Unique | Complete | `GalleryPage.css` (`.galleri-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/bilar-till-salu` | Unique | Complete | `BilarTillSalu.css` (`.bilartillsalu-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter` |
-| `/tjanster` | Legacy | Step 7: retire (redirect to `/biltjanster`) — last page on `index.css` and legacy `Header`/`Footer` | `index.css` (`.services-page__*`, `.services-category-card__*`) |
-| `/admin` | Admin | Internal utility | Tailwind utilities (directives in `index.css` until Step 7, then `styles/tailwind.css`) |
+| `/tjanster` | Redirect | Retired in Step 7 — `<Navigate to="/biltjanster" replace />` in `main.tsx` | — |
+| `/admin` | Admin | Internal utility | Tailwind utilities (`styles/tailwind.css`) |
 
-## Class-prefix collision check (mandatory before naming a new page's CSS island)
+## Class-prefix collision check (mandatory before naming a new CSS island)
 
-Every legacy page rebuilt so far (`ContactPage.tsx`, `AboutPage.tsx`, the guide pages before their template rebuilds, etc.) already has a same-named BEM block living in `index.css` — e.g. `.contact-page__*` had 107 rules in `index.css` before the `/kontakt` rebuild. `index.css` stays loaded globally for every route (`main.tsx` imports it unconditionally), so reusing a legacy page's own old class prefix for its "isolated" rebuild silently collides with those frozen rules instead of avoiding them — the page renders using an unpredictable mix of both stylesheets, not a clean island. Found live on the `/kontakt` rebuild (2026-09-18): the closing CTA rendered centered because `index.css:7440-7516`'s old `.contact-page__closing*` rules were still matching.
+Two stylesheets matching the same class makes a page render with a mix of both — found live on `/kontakt` (2026-09-18), when a legacy prefix was reused. `index.css` is gone, but the rule still applies between islands. **Before writing a new prefix**, confirm it's unused:
 
-**Before writing a new page's first class name**, run `grep -c "\.<old-prefix>__" client/src/css/index.css` for whatever prefix the page's *legacy* markup used. If it's non-zero, pick a visibly different prefix for the rebuild (e.g. `/kontakt` moved from `contact-page__*` to `kontakt-page__*`) — do not reuse the old name just because the route or component name matches.
+```bash
+grep -rn "\.<new-prefix>" client/src --include=*.css
+```
 
-### Collision-free prefixes established for Step 6:
-- **`/bilar-till-salu`**: Legacy markup used `.cars-page__*` (59 rules in `index.css`). **New prefix: `.bilartillsalu-page__*`** in colocated `BilarTillSalu.css`.
-- **`/galleri`**: Legacy markup borrowed `.about-page__*` (now owned by Om oss / `index.css`). **New prefix: `.galleri-page__*`** in colocated `GalleryPage.css`.
-- **`/biltjanster`**: Already complete as `.biltjanster-hub__*` in `BiltjansterPage.css`.
-- **`/bargning`**: Already complete as `.bargning-page__*` in `BargningPage.css`.
+It must return nothing. Prefixes in use include `.landing-v2__`, `.omoss-page__`, `.kontakt-page__`, `.bargning-page__`, `.biltjanster-hub__`, `.bilartillsalu-page__`, `.galleri-page__`, `.bilservice__`, `.service-guide__`, `.public-header`, `.bb-footer__`, `.bb-*` (shared) and `.modal-*` (booking).
 
 ## Required task contract
 
@@ -108,7 +101,7 @@ ALLOWED WRITES:
 - client/src/pages/ExamplePage.css
 
 FORBIDDEN WRITES:
-- client/src/css/index.css
+- client/src/styles/* (global layer — only with explicit approval)
 - AGENTS.md
 - server/**
 - every path not listed above
@@ -122,8 +115,7 @@ If another path is required, report BLOCKED before editing it.
 For a page or shared-island change:
 
 1. Confirm `git diff --name-only` contains only approved paths.
-2. Confirm `client/src/css/index.css` has no diff.
-3. Run `git diff --check`.
-4. Run `npm --prefix client run build`.
-5. Use Playwright for every real-browser UI evaluation. Check 1440, 768 and 390 CSS pixels when UI changed; capture screenshots, verify zero horizontal overflow and exercise the affected interactions.
-6. Write the dated work note to `docs/SESSION_LOG_CURRENT.md`, not `AGENTS.md`.
+2. Run `git diff --check`.
+3. Run `npm --prefix client run typecheck` and `npm --prefix client run build`.
+4. Use Playwright for every real-browser UI evaluation. Check 1440, 768 and 390 CSS pixels when UI changed; capture screenshots, verify zero horizontal overflow and exercise the affected interactions.
+5. Write the dated work note to `docs/SESSION_LOG_CURRENT.md`, not `AGENTS.md`.

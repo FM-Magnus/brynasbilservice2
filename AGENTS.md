@@ -1,16 +1,16 @@
 # Agent startup contract — Brynäs Bilservice
 
 **Read this file first. Do not append session logs here.** Write dated work notes to [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md).
-**CRITICAL ROADMAP**: Read [`HITL_Temporary_roadmap.md`](HITL_Temporary_roadmap.md) (authoritative phased plan; prevents drift across new chats/agents; temporary until `index.css` is eradicated). Read [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md), [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md), and [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md). Always verify with Playwright.
+**CRITICAL ROADMAP**: Read [`HITL_Temporary_roadmap.md`](HITL_Temporary_roadmap.md) (authoritative phased plan; all 7 steps done — `index.css` was deleted 2026-09-19; the roadmap is archived to `docs/archive/` once Magnus signs off Step 7). Read [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md), [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md), and [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md). Always verify with Playwright.
 
 ## CSS SAFETY — HIGHEST PRIORITY
 
-1. **NEVER edit `client/src/css/index.css`.** Do not add, delete, move, rename, reformat or “clean up” rules there.
-2. Existing pages may keep using `index.css` unchanged. Dead-looking rules stay in place.
-3. New or redesigned pages use an owned CSS island with a unique class prefix.
-4. Shared CSS is allowed only for a page family explicitly listed in `docs/CSS_OWNERSHIP.md`.
-5. If the requested work appears to require `index.css`, stop before editing and report `BLOCKED`.
-6. The pre-commit hook enforces this freeze. Never bypass it without Magnus's explicit approval.
+1. **There is no global legacy stylesheet any more.** `client/src/css/index.css` was deleted in Step 7 (2026-09-19). Never recreate it, and never reintroduce `--redesign-*`, `--color-*` or legacy class systems (`.services-page__*`, `.container`, `.btn`, …).
+2. Global CSS is exactly four Level 0/1 files, loaded in `main.tsx`: `styles/tailwind.css`, `styles/design-tokens.css`, `styles/base.css` and `styles/shared-elements.css`. Do not add another.
+3. Every page and shared component styles itself through its own CSS island, imported by its `.tsx`, with a unique class prefix. Check that the prefix isn't already used anywhere under `client/src`.
+4. Shared CSS is allowed only for a page family explicitly listed in `docs/CSS_OWNERSHIP.md` (Bilservice family, Guide family) and for `.bb-*` patterns in `shared-elements.css`.
+5. Tokens are `--bb-*` only. If a task seems to need a new global token or pattern, propose it to Magnus first.
+6. The pre-commit hook blocks Tailwind utilities in public TSX. Never bypass it without Magnus's explicit approval.
 
 ## OPERATIONAL HIERARCHY & ARCHITECTURAL SAFETY
 
@@ -25,13 +25,13 @@
 ## Current state (last updated: 2026-09-19 by Claude — Step 6 complete, Step 7 next)
 
 - **Architecture** (full route map and CSS owners in `docs/CSS_OWNERSHIP.md`):
-  - *Level 0/1*: `client/src/styles/design-tokens.css` (`--bb-*` tokens) and `client/src/styles/shared-elements.css` (`.bb-*` patterns), both loaded globally in `client/src/main.tsx` right after the frozen `css/index.css`.
-  - *Shared shell & UI*: `PublicHeader`, `PublicFooter` (`components/layout/`), `GalleryTeaserCard`, `GoogleReviewsCard`, `ContactFormCard`, `BiltjansterFaq` (`components/ui/`), `BookingFormModal` (`components/BookingForm.tsx`).
+  - *Level 0/1*: `client/src/styles/tailwind.css` (Tailwind directives), `design-tokens.css` (`--bb-*` tokens), `base.css` (element defaults) and `shared-elements.css` (`.bb-*` patterns), loaded globally in `client/src/main.tsx` in that order.
+  - *Shared shell & UI* (each with its own stylesheet): `PublicHeader`, `PublicFooter` (`components/layout/`), `GalleryTeaserCard`, `GoogleReviewsCard`, `ContactFormCard`, `BiltjansterFaq` (`components/ui/`), `BookingFormModal` (`components/BookingForm.tsx`).
   1. *7 unique pages, one CSS island each — all complete*: Startsidan (`landing/LandingPage.css`, `.landing-v2__*`), Om oss (`AboutPage.css`, `.omoss-page__*`), Kontakt (`ContactPage.css`, `.kontakt-page__*`), Bärgning (`BargningPage.css`, `.bargning-page__*`), Biltjänster (`BiltjansterPage.css`, `.biltjanster-hub__*`), Bilar till salu (`BilarTillSalu.css`, `.bilartillsalu-page__*`), Galleri (`GalleryPage.css`, `.galleri-page__*`).
   2. *Bilservice family — `ServiceReparationerPage.css` (`.bilservice__*`)*: Bilservice (`/service-reparationer`, owner), Felsökning, Däckservice, AC-service. Complete.
   3. *Guide family — `styles/ServiceGuideTemplate.css` (`.service-guide__*`)*: all 10 guides. Complete.
-- **Next: Step 7 (delete `index.css`)** — prep is done: Tailwind directives in `styles/tailwind.css` (not yet imported), global element defaults in `styles/base.css`, and the booking modal, the FAQ component and admin are free of `index.css`. A dry run without `index.css` was pixel-identical on all 21 public routes and `/admin`. Remaining: retire `/tjanster` (`ServicesPage.tsx`), remove the dead code, swap the import in `main.tsx`, delete `index.css`. Checklist: `HITL_Temporary_roadmap.md` Step 7.
-- **Anti-drift guardrails**: never invent a new shared template or force a unique page into one; tokens are `--bb-*` only; always mount `PublicHeader`/`PublicFooter` (never legacy `Header.tsx`/`Footer.tsx`); do not "fix" legacy code in place; verify every visual change with Playwright (`--disable-gpu`) at 1440, 768 and 390 with zero horizontal overflow.
+- **Step 7 done (2026-09-19)**: `index.css` deleted; `/tjanster` redirects to `/biltjanster`; legacy `Header`/`Footer`, `GoogleReviews.tsx`, the unused admin `Login.tsx` and orphaned assets removed. Global CSS went from 287.8 KB to 100.0 KB (44.2 → 17.7 KB gzip). Awaiting Magnus's click-through sign-off (roadmap Step 7, "Your Job").
+- **Anti-drift guardrails**: never invent a new shared template or force a unique page into one; tokens are `--bb-*` only; always mount `PublicHeader`/`PublicFooter`; verify every visual change with Playwright (`--disable-gpu`) at 1440, 768 and 390 with zero horizontal overflow.
 - **Data-driven, backend-ready pages** (contracts and backend proposal: `docs/BACKEND_HANDOFF.md`):
   - *Bilar till salu*: stock via `getPublicVehicles()` (`api/vehicles.ts`) from the static seed `data/vehicles.ts`; `VITE_VEHICLES_SOURCE=api` switches to the future API.
   - *Galleri*: photos are folder-driven from `client/src/assets/galleri/` (drop in / delete a file; captions in `bildtexter.json`; instructions in `LÄSMIG.md`), read via `getGalleryImages()` (`api/gallery.ts`); `VITE_GALLERY_SOURCE=api` switches to the future API.
@@ -45,13 +45,13 @@
 ### What is broken / incomplete
 1. **GitHub Actions deployment is intentionally absent from canonical history** — the legacy misplaced workflow was preserved on `legacy/pre-live-site-2026-09-09`. Do not restore or modify deployment automation without Magnus and Johnny agreeing on the `.htaccess` and server configuration.
 2. **`.htaccess` discrepancy** — `server/.htaccess` says port 3000 + has `RewriteBase`; `docs/deployment.md` says port 3001 + forbids `RewriteBase`. One will fail at deploy. Johnny owns the resolution.
-3. **Admin auth is client-side only (P0 security)** — `admin`/`admin123` is checked in the browser (`components/admin/ProtectedRoute.tsx`, `pages/admin/Login.tsx`, which is unused) and ships in the public bundle; the server accepts the fixed token `admin-secret-token` from anyone. Must be fixed before any upload feature ships. Proposal: `docs/BACKEND_HANDOFF.md` §2.1.
+3. **Admin auth is client-side only (P0 security)** — `admin`/`admin123` is checked in the browser (`components/admin/ProtectedRoute.tsx`) and ships in the public bundle; the server accepts the fixed token `admin-secret-token` from anyone. Must be fixed before any upload feature ships. Proposal: `docs/BACKEND_HANDOFF.md` §2.1.
 4. **comment_customer not saved** — `BookingForm` sends it, but `server/index.js` `insertBooking()` omits it from the INSERT. Vehicle inquiries ("Gäller förfrågan om …") depend on it.
 5. **admin comment read-only** — `comment_admin` is shown in the admin modal but cannot be saved.
 6. **schema.sql out of sync with live DB** — see "Database reality" in CLAUDE.md. The live DB is the source of truth.
 7. **Orphan root project configs** — `package.json.disabled`, `vite.config.ts.disabled` etc. at repo root are leftovers. The real frontend is `client/`.
 8. **Booking modal backend limitation** — local API availability and real booking submission remain unverified.
-9. **Google review data is hardcoded** (`defaultGoogleReviews` in `components/ui/GoogleReviewsCard.tsx`) and will drift from the live profile. The legacy `components/GoogleReviews.tsx` is unused — delete in Step 7.
+9. **Google review data is hardcoded** (`defaultGoogleReviews` in `components/ui/GoogleReviewsCard.tsx`) and will drift from the live profile.
 10. **Unconfirmed copy, flagged in code**: Felsökning's "1–2 tim" estimate (`DRAFT GUIDANCE`, `FelsokningPage.tsx`); AC-service frequency (`DRAFT GUIDANCE`) and refrigerant capability (`FACT TO CONFIRM`) in `AcServicePage.tsx`. Däckservice's TPMS FAQ is deliberately generic.
 
 ### Cars for sale (Bilar till salu)

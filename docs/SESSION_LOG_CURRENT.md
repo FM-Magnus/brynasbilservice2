@@ -2,6 +2,27 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Claude (Step 7 DONE: index.css deleted)
+
+- **`client/src/css/index.css` deleted** (7,531 lines). `main.tsx` imports `styles/tailwind.css` in its place; the global layer is now tailwind → design-tokens → base → shared-elements.
+- **`/tjanster` → `<Navigate to="/biltjanster" replace />`** (keeps old bookmarks and search hits). `pages/ServicesPage.tsx` is deleted; nothing linked to `/tjanster` any more.
+- **Dead code deleted:**
+  - components: `components/layout/Header.tsx`, `components/layout/Footer.tsx`, `components/GoogleReviews.tsx`, `pages/admin/Login.tsx`
+  - icons (only ServicesPage used them): `components/icons/SnowflakeIcon.tsx`, `TireIcon.tsx`
+  - assets: `assets/images/home/hero/home-workshop-hero.{jpg,webp}` (only index.css used them), `assets/images/services/repair/mechanic-brake-repair.jpg` (only ServicesPage), and the 38 unreferenced `assets/images/gallery/workshop/*` files. The 12 still referenced there remain.
+- **Not deleted (outside Step 7's scope):** `assets/images/archive/**` (deliberate archive) and seven assets that were already unreferenced before this step: `footer/footer-wheel-bg.png`, `footer/vi-haller-din-bil-i-rullning.png`, `people/maher-basher-portrait-thumb.{jpg,webp}`, `services/general/wrench-and-bolt-workbench.jpg`, `services/timing-belt/timing-belt-in-hand-thumb.webp`. Magnus decides.
+- **Pre-commit hook:** the index.css freeze is removed; the public-Tailwind check stays.
+- **Docs:**
+  - `AGENTS.md`: CSS safety rules rewritten for a world without a legacy stylesheet.
+  - `CSS_OWNERSHIP.md`: rules, shell list, collision check against all CSS, task contract, verification.
+  - `DESIGN_SYSTEM.md`: legacy sections replaced by a pointer to Git history (index.css exists up to `80ec3958`); CSS file organization rewritten.
+  - Also updated: `CLAUDE.md`, the roadmap (Step 7 done, awaiting sign-off; archive afterwards) and `AGENT_HANDOFF.md`.
+- **Verification:**
+  - Global CSS 287.8 KB → 100.0 KB (gzip 44.2 → 17.7 KB), measured by building HEAD~ in a temporary worktree.
+  - Pixel comparison vs pre-change baselines: 21 public routes × 1440/390 + `/admin` login and dashboard, 44/44 identical.
+  - All 22 routes at 768: 0px overflow, no page errors.
+  - Typecheck 0 errors, build clean. Full Playwright suite passed, including the new `tests/browser/step7.visual.spec.ts`: the `/tjanster` redirect, no `--redesign-*`/legacy variables in `:root`, no legacy selectors in any stylesheet, no element using `.container` (Tailwind emits its own `.container` utility, which is harmless while unused).
+
 ### 2026-09-19 — Claude (Step 7 prep: everything but /tjanster is free of index.css)
 
 - **Tailwind:** `client/src/styles/tailwind.css` holds the `@tailwind` directives. It is not imported yet, because the frozen `index.css` still emits them; Step 7 swaps the import line in `main.tsx`.

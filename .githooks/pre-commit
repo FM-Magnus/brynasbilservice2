@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Enforces the two files that caused real pain in this project:
-# client/src/css/index.css is a frozen legacy dependency layer, and AGENTS.md
-# is a bounded startup contract rather than a session log. See
-# docs/CSS_OWNERSHIP.md and docs/DESIGN_SYSTEM.md#css-file-organization.
+# Guards for this repository. The legacy client/src/css/index.css freeze was
+# removed in Step 7 (2026-09-19), when index.css itself was deleted. What
+# remains: Tailwind utilities are allowed only in /admin — public pages style
+# themselves through their CSS islands (see docs/CSS_OWNERSHIP.md).
 
 STAGED=$(git diff --cached --name-only)
 BLOCKED=0
@@ -60,11 +60,6 @@ check_no_tailwind_in_public () {
     BLOCKED=1
   fi
 }
-
-check_frozen "client/src/css/index.css" \
-  "Do not add, delete, move, rename, reformat or clean rules in this file.
-Existing legacy pages may keep using it unchanged. New or redesigned pages use
-an explicitly owned CSS island; see docs/CSS_OWNERSHIP.md."
 
 check_no_tailwind_in_public
 

@@ -45,8 +45,10 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
   - **Guide Family (10 / 10 Guides Complete & Locked)**:
     - All 10 technical guides (`Koppling`, `Avgassystem`, `Bromssystem`, `Oljebyte`, `Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, and `Drivaxel & drivknutar`) are fully rebuilt on `ServiceGuideTemplate.css`, aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
     - **Step 5 is 100% COMPLETE**.
-- **IMMEDIATE NEXT TASKS (Step 7: delete `index.css`)**:
-  1. **Step 7** — prep is done (see `HITL_Temporary_roadmap.md` Step 7). Retire `ServicesPage.tsx` (`/tjanster`) and the dead code, replace `import './css/index.css'` with `import './styles/tailwind.css'` in `main.tsx`, delete `client/src/css/index.css`, and remove its freeze from the pre-commit hook.
+- **STATUS: all 7 roadmap steps done (2026-09-19).** `index.css` is deleted; the global layer is `styles/tailwind.css`, `design-tokens.css`, `base.css` and `shared-elements.css`.
+- **IMMEDIATE NEXT TASKS**:
+  1. **Magnus signs off Step 7** by clicking through the site; then archive `HITL_Temporary_roadmap.md` to `docs/archive/`.
+  2. **Open follow-ups** (see `AGENTS.md` "What is broken" and the latest `docs/SESSION_LOG_CURRENT.md` entries): client-side admin auth (P0, Johnny), font-swap CLS (metric-matched fallback font, then move `base.css` onto `--bb-font-*`), `GalleryTeaserCard` reading from `assets/galleri/`, Om oss links to `/galleri?bild=`, and the seven pre-existing orphan assets plus `assets/images/archive/`.
 
 ## Authority and references
 
