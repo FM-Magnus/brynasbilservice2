@@ -2,6 +2,18 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Claude (Bilar till salu: scales to any stock size)
+
+- Magnus asked for a finished answer to "what if there are 5–6+ cars". Layout now adapts to the data, no config needed:
+  - **1–2 available:** unchanged, full cards stacked.
+  - **3+ available:** the lead vehicle (first available with photos — the same car as the hero panel) keeps the full card; the rest become compact cards (photo, price, name, year · mil · fuel · gearbox, "Skicka förfrågan" + "Visa mer") in a 3/2/1-column grid (≥1024 / ≥640 / below), labelled "Fler bilar i lager (n)".
+  - **More than 9 in the grid:** "Visa alla N bilar" reveals the rest (keeps the page length bounded).
+  - **"Visa mer"** expands a compact card in place into the full card (gallery, specs, description), spanning the grid row; focus moves to its title; "Visa mindre" collapses. One expanded card at a time.
+  - **Sold archive:** always compact, no inquiry button, capped at 6 with the same "Visa alla" button.
+  - Order follows the data (`sort_order` once the API is live), so the owner controls which car leads.
+- Constants `FULL_CARD_LIMIT = 2`, `GRID_INITIAL = 9`, `SOLD_INITIAL = 6` at the top of `BilarTillSalu.tsx`.
+- Tests: two new Playwright scenarios (12 available + 8 sold; 2 available) that fetch the real seed module in the dev server and append vehicles in the browser via `page.route` — no test hooks in page code, seed file untouched. Covers column counts per breakpoint, show-all, expand/collapse + focus, inquiry prefill from a compact card, sold cap, no overflow. Full suite 48/48; typecheck and build clean. Six-car layout reviewed at 1440/768/390 (320px: compact buttons wrap to two lines but stay inside the card).
+
 ### 2026-09-19 — Claude (Bilar till salu: mockup alignment pass)
 
 - Aligned `/bilar-till-salu` with Magnus's supplied mockup. Only `BilarTillSalu.tsx`, `BilarTillSalu.css` and the page's Playwright spec changed; data layer, shared styles, shell and `index.css` untouched.

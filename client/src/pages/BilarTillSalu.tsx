@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
@@ -32,6 +32,7 @@ const inquiryComment = (vehicle: Vehicle) => `Gäller förfrågan om ${vehicleNa
 // 1×1 transparent GIF: used as the <picture> source below the hero panel's
 // breakpoint so the hidden panel's eager image is never downloaded on mobile.
 const EMPTY_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+const COMPACT_SIZES = '(min-width: 1440px) 420px, (min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw'
 const VIEWER_SIZES = '(min-width: 1440px) 690px, (min-width: 961px) 50vw, 100vw'
 const HERO_PANEL_SIZES = '(min-width: 1440px) 620px, 45vw'
 
@@ -40,6 +41,13 @@ const HIGH_PRIORITY = { fetchpriority: 'high' } as Record<string, string>
 
 const srcSet = (image: VehicleImage, format: 'webp' | 'jpg') =>
   `${image.thumb[format]} ${image.thumb.width}w, ${image.main[format]} ${image.main.width}w`
+
+// Layout scales with stock: up to FULL_CARD_LIMIT vehicles get the full card;
+// beyond that the lead vehicle keeps the full card and the rest become compact
+// cards in a grid, capped at GRID_INITIAL until "Visa alla" is pressed.
+const FULL_CARD_LIMIT = 2
+const GRID_INITIAL = 9
+const SOLD_INITIAL = 6
 
 type LoadState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; vehicles: Vehicle[] }
 
@@ -78,8 +86,23 @@ function HeroVehiclePanel({ vehicle }: { vehicle: Vehicle }) {
   )
 }
 
-function VehicleCard({ vehicle, eager, onInquiry }: { vehicle: Vehicle; eager: boolean; onInquiry: (vehicle: Vehicle) => void }) {
+interface VehicleCardProps {
+  vehicle: Vehicle
+  eager: boolean
+  onInquiry: (vehicle: Vehicle) => void
+  onCollapse?: () => void
+}
+
+function VehicleCard({ vehicle, eager, onInquiry, onCollapse }: VehicleCardProps) {
   const [activeIndex, setActiveIndex] = useState(0)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+
+  // An expanded compact card moves focus to its title so keyboard and screen
+  // reader users land on the content they just opened.
+  const expanded = Boolean(onCollapse)
+  useEffect(() => {
+    if (expanded) titleRef.current?.focus()
+  }, [expanded])
   const sold = vehicle.status === 'sold'
   const active = vehicle.images[activeIndex]
   const name = vehicleName(vehicle)
@@ -93,7 +116,7 @@ function VehicleCard({ vehicle, eager, onInquiry }: { vehicle: Vehicle; eager: b
 
   return (
     <article
-      className={`bilartillsalu-page__vehicle${sold ? ' bilartillsalu-page__vehicle--sold' : ''}`}
+      className={`bilartillsalu-page__vehicle${sold ? ' bilartillsalu-page__vehicle--sold' : ''}${onCollapse ? ' bilartillsalu-page__vehicle--expanded' : ''}`}
       id={`vehicle-${vehicle.slug}`}
       aria-labelledby={`vehicle-${vehicle.id}-title`}
     >
@@ -146,7 +169,7 @@ function VehicleCard({ vehicle, eager, onInquiry }: { vehicle: Vehicle; eager: b
 
       <div className="bilartillsalu-page__details">
         <p className="bilartillsalu-page__vehicle-meta">{vehicle.color} · {vehicle.year}</p>
-        <h3 className="bilartillsalu-page__vehicle-title" id={`vehicle-${vehicle.id}-title`}>{name}</h3>
+        <h3 className="bilartillsalu-page__vehicle-title" id={`vehicle-${vehicle.id}-title`} ref={titleRef} tabIndex={onCollapse ? -1 : undefined}>{name}</h3>
 
         <dl className="bilartillsalu-page__specs">
           {specs.map((spec) => (
@@ -170,14 +193,125 @@ function VehicleCard({ vehicle, eager, onInquiry }: { vehicle: Vehicle; eager: b
             </a>
           </div>
         )}
+
+        {onCollapse && (
+          <button type="button" className="bilartillsalu-page__collapse" onClick={onCollapse} aria-expanded="true" aria-controls={`vehicle-${vehicle.slug}`}>
+            Visa mindre
+          </button>
+        )}
       </div>
     </article>
+  )
+}
+
+interface CompactVehicleCardProps {
+  vehicle: Vehicle
+  onInquiry: (vehicle: Vehicle) => void
+  onExpand: () => void
+}
+
+function CompactVehicleCard({ vehicle, onInquiry, onExpand }: CompactVehicleCardProps) {
+  const sold = vehicle.status === 'sold'
+  const image = vehicle.images[0]
+  const name = vehicleName(vehicle)
+
+  return (
+    <article
+      className={`bilartillsalu-page__compact${sold ? ' bilartillsalu-page__compact--sold' : ''}`}
+      id={`vehicle-${vehicle.slug}`}
+      aria-labelledby={`vehicle-${vehicle.id}-title`}
+    >
+      <div className="bilartillsalu-page__compact-media">
+        {image ? (
+          <picture>
+            <source type="image/webp" srcSet={srcSet(image, 'webp')} sizes={COMPACT_SIZES} />
+            <img
+              src={image.main.jpg}
+              srcSet={srcSet(image, 'jpg')}
+              sizes={COMPACT_SIZES}
+              alt={image.alt}
+              width={image.main.width}
+              height={image.main.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        ) : (
+          <div className="bilartillsalu-page__viewer-empty">
+            <CarSaleIcon />
+            <span>Bild kommer snart</span>
+          </div>
+        )}
+        <span className="bilartillsalu-page__price">{formatPrice(vehicle.priceSek)}</span>
+        {sold && <span className="bilartillsalu-page__sold-badge">Såld</span>}
+      </div>
+
+      <div className="bilartillsalu-page__compact-body">
+        <h3 className="bilartillsalu-page__compact-title" id={`vehicle-${vehicle.id}-title`}>{name}</h3>
+        <p className="bilartillsalu-page__compact-specs">
+          {vehicle.year} · {formatMileage(vehicle.mileageKm)} · {vehicle.fuel} · {vehicle.gearbox}
+        </p>
+        <div className="bilartillsalu-page__compact-actions">
+          {!sold && (
+            <button type="button" className="bb-btn bb-btn--ember-solid bilartillsalu-page__inquiry-btn" onClick={() => onInquiry(vehicle)}>
+              Skicka förfrågan
+            </button>
+          )}
+          <button
+            type="button"
+            className="bb-btn bilartillsalu-page__btn-outline bilartillsalu-page__expand-btn"
+            onClick={onExpand}
+            aria-expanded="false"
+            aria-controls={`vehicle-${vehicle.slug}`}
+          >
+            Visa mer
+          </button>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+interface VehicleGridProps {
+  vehicles: Vehicle[]
+  initial: number
+  expandedId: number | null
+  onExpand: (id: number | null) => void
+  onInquiry: (vehicle: Vehicle) => void
+}
+
+// Compact grid; one card at a time may expand to the full card, spanning the row.
+function VehicleGrid({ vehicles, initial, expandedId, onExpand, onInquiry }: VehicleGridProps) {
+  const [showAll, setShowAll] = useState(false)
+  const visible = showAll ? vehicles : vehicles.slice(0, initial)
+  const hidden = vehicles.length - visible.length
+
+  return (
+    <>
+      <div className="bilartillsalu-page__grid">
+        {visible.map((vehicle) =>
+          vehicle.id === expandedId ? (
+            <VehicleCard key={vehicle.id} vehicle={vehicle} eager={false} onInquiry={onInquiry} onCollapse={() => onExpand(null)} />
+          ) : (
+            <CompactVehicleCard key={vehicle.id} vehicle={vehicle} onInquiry={onInquiry} onExpand={() => onExpand(vehicle.id)} />
+          ),
+        )}
+      </div>
+      {hidden > 0 && (
+        <div className="bilartillsalu-page__show-all">
+          <button type="button" className="bb-btn bilartillsalu-page__btn-outline" onClick={() => setShowAll(true)}>
+            Visa alla {vehicles.length} bilar
+          </button>
+        </div>
+      )}
+    </>
   )
 }
 
 export default function BilarTillSalu() {
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
   const [modal, setModal] = useState({ open: false, comment: '' })
+  const [expandedId, setExpandedId] = useState<number | null>(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -195,7 +329,12 @@ export default function BilarTillSalu() {
   const vehicles = load.status === 'ready' ? load.vehicles : []
   const available = vehicles.filter((vehicle) => vehicle.status === 'available')
   const sold = vehicles.filter((vehicle) => vehicle.status === 'sold')
+  // The lead vehicle (hero panel + full card) is the first available one with
+  // photos; order otherwise follows the data (sort_order once the API is live).
   const featured = available.find((vehicle) => vehicle.images.length > 0)
+  const lead = featured ?? available[0]
+  const others = available.filter((vehicle) => vehicle !== lead)
+  const useGrid = available.length > FULL_CARD_LIMIT
 
   return (
     <>
@@ -314,23 +453,27 @@ export default function BilarTillSalu() {
               </div>
             )}
 
-            {available.length > 0 && (
+            {lead && !useGrid && (
               <div className="bilartillsalu-page__vehicle-list">
-                {available.map((vehicle, index) => (
+                {[lead, ...others].map((vehicle, index) => (
                   <VehicleCard key={vehicle.id} vehicle={vehicle} eager={index === 0} onInquiry={openInquiry} />
                 ))}
               </div>
+            )}
+
+            {lead && useGrid && (
+              <>
+                <VehicleCard vehicle={lead} eager onInquiry={openInquiry} />
+                <p className="bb-eyebrow bilartillsalu-page__grid-label">Fler bilar i lager ({others.length})</p>
+                <VehicleGrid vehicles={others} initial={GRID_INITIAL} expandedId={expandedId} onExpand={setExpandedId} onInquiry={openInquiry} />
+              </>
             )}
 
             {sold.length > 0 && (
               <section className="bilartillsalu-page__sold" aria-labelledby="bilartillsalu-sold-title">
                 <p className="bb-eyebrow">Arkiv</p>
                 <h2 className="bilartillsalu-page__sold-title" id="bilartillsalu-sold-title">Nyligen sålda bilar</h2>
-                <div className="bilartillsalu-page__vehicle-list bilartillsalu-page__vehicle-list--sold">
-                  {sold.map((vehicle) => (
-                    <VehicleCard key={vehicle.id} vehicle={vehicle} eager={false} onInquiry={openInquiry} />
-                  ))}
-                </div>
+                <VehicleGrid vehicles={sold} initial={SOLD_INITIAL} expandedId={expandedId} onExpand={setExpandedId} onInquiry={openInquiry} />
               </section>
             )}
           </div>

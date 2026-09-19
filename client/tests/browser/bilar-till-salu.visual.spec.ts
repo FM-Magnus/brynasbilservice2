@@ -126,3 +126,83 @@ test('bilar till salu renders on its own island without horizontal overflow', as
 
   await page.screenshot({ path: testInfo.outputPath('bilar-till-salu.png'), fullPage: true })
 })
+
+// Stock-size scenarios. The real seed module is fetched and extended in the
+// browser (dev server only), so the page code under test is unchanged.
+async function mockStock(page: import('@playwright/test').Page, available: number, sold: number) {
+  await page.route('**/src/data/vehicles.ts*', async (route) => {
+    const response = await route.fetch()
+    const extra = `
+const __base = seedVehicles[0]
+for (let i = 2; i <= ${available}; i++) seedVehicles.push({ ...__base, id: 100 + i, slug: 'bil-' + i, make: 'Testbil', model: 'Modell ' + i, priceSek: 30000 + i * 1000 })
+for (let i = 1; i <= ${sold}; i++) seedVehicles.push({ ...__base, id: 500 + i, slug: 'sald-' + i, make: 'Såld', model: 'Modell ' + i, status: 'sold', soldAt: '2026-09-01T00:00:00Z' })
+`
+    await route.fulfill({ response, body: (await response.text()) + extra, headers: { ...response.headers(), 'content-type': 'application/javascript' } })
+  })
+}
+
+const noOverflow = (page: import('@playwright/test').Page) =>
+  page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)
+
+test('many vehicles: lead card, compact grid, show-all and expand', async ({ page }, testInfo) => {
+  await mockStock(page, 12, 8)
+  await page.goto('/bilar-till-salu')
+  await page.waitForLoadState('networkidle')
+  await page.evaluate(() => document.fonts.ready)
+
+  // Lead vehicle keeps the full card; the other 11 are compact, 9 shown at first
+  await expect(page.locator('.bilartillsalu-page__listings .bb-wrap > .bilartillsalu-page__vehicle')).toHaveCount(1)
+  const listingGrid = page.locator('.bilartillsalu-page__listings .bb-wrap > .bilartillsalu-page__grid')
+  await expect(listingGrid.locator('.bilartillsalu-page__compact')).toHaveCount(9)
+  await expect(page.locator('.bilartillsalu-page__grid-label')).toHaveText('Fler bilar i lager (11)')
+
+  // Column count per breakpoint
+  const columnXs = await listingGrid.locator('.bilartillsalu-page__compact').evaluateAll((els) => new Set(els.map((el) => Math.round(el.getBoundingClientRect().left))).size)
+  const expectedColumns = { 'desktop-1440': 3, 'tablet-768': 2, 'mobile-390': 1 }[testInfo.project.name]
+  expect(columnXs).toBe(expectedColumns)
+  expect(await noOverflow(page)).toBe(true)
+
+  // Show all
+  const showAll = page.getByRole('button', { name: 'Visa alla 11 bilar' })
+  await showAll.click()
+  await expect(listingGrid.locator('.bilartillsalu-page__compact')).toHaveCount(11)
+  await expect(showAll).toHaveCount(0)
+
+  // Expand a compact card into the full card spanning the row, then collapse
+  const target = page.locator('#vehicle-bil-3')
+  await target.getByRole('button', { name: 'Visa mer' }).click()
+  const expanded = listingGrid.locator('.bilartillsalu-page__vehicle--expanded')
+  await expect(expanded).toHaveCount(1)
+  await expect(expanded.getByRole('heading', { level: 3 })).toBeFocused()
+  const gridWidth = (await listingGrid.boundingBox())!.width
+  expect(Math.abs((await expanded.boundingBox())!.width - gridWidth)).toBeLessThanOrEqual(1)
+  await expect(expanded.locator('.bilartillsalu-page__thumb')).toHaveCount(3)
+  expect(await noOverflow(page)).toBe(true)
+  await expanded.getByRole('button', { name: 'Visa mindre' }).click()
+  await expect(expanded).toHaveCount(0)
+  await expect(page.locator('#vehicle-bil-3.bilartillsalu-page__compact')).toBeVisible()
+
+  // Inquiry from a compact card is prefilled for that car
+  await page.locator('#vehicle-bil-5').getByRole('button', { name: 'Skicka förfrågan' }).click()
+  await expect(page.locator('#booking-comment')).toHaveValue('Gäller förfrågan om Testbil Modell 5 (2006)')
+  await page.keyboard.press('Escape')
+
+  // Sold archive: compact, no inquiry, capped at 6 of 8
+  const soldSection = page.locator('.bilartillsalu-page__sold')
+  await expect(soldSection.locator('.bilartillsalu-page__compact')).toHaveCount(6)
+  await expect(soldSection.getByRole('button', { name: 'Skicka förfrågan' })).toHaveCount(0)
+  await soldSection.getByRole('button', { name: 'Visa alla 8 bilar' }).click()
+  await expect(soldSection.locator('.bilartillsalu-page__compact')).toHaveCount(8)
+
+  expect(await noOverflow(page)).toBe(true)
+  await page.screenshot({ path: testInfo.outputPath('bilar-till-salu-many.png'), fullPage: true })
+})
+
+test('two vehicles: both keep the full card, no grid', async ({ page }) => {
+  await mockStock(page, 2, 0)
+  await page.goto('/bilar-till-salu')
+  await page.waitForLoadState('networkidle')
+  await expect(page.locator('.bilartillsalu-page__vehicle-list > .bilartillsalu-page__vehicle')).toHaveCount(2)
+  await expect(page.locator('.bilartillsalu-page__grid')).toHaveCount(0)
+  expect(await noOverflow(page)).toBe(true)
+})

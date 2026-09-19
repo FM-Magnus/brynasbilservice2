@@ -326,6 +326,98 @@
   margin-bottom: 1.5rem;
 }
 
+/* ---------- Stock grid (more than two vehicles) ---------- */
+.bilartillsalu-page__grid-label { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+
+.bilartillsalu-page__grid {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .bilartillsalu-page__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .bilartillsalu-page__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+/* An expanded card becomes the full card and takes the whole row. */
+.bilartillsalu-page__grid > .bilartillsalu-page__vehicle { grid-column: 1 / -1; }
+.bilartillsalu-page__vehicle-title:focus { outline: none; }
+.bilartillsalu-page__vehicle-title:focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
+
+.bilartillsalu-page__compact {
+  background: var(--bb-color-surface);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  scroll-margin-top: 144px;
+}
+.bilartillsalu-page__compact-media {
+  aspect-ratio: 16 / 10;
+  background: var(--bb-color-ink-900);
+  position: relative;
+}
+.bilartillsalu-page__compact-media picture,
+.bilartillsalu-page__compact-media img { height: 100%; width: 100%; }
+.bilartillsalu-page__compact-media img { object-fit: cover; }
+
+.bilartillsalu-page__compact-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.1rem 1.2rem 1.25rem;
+}
+.bilartillsalu-page__compact-title {
+  font-family: var(--bb-font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.bilartillsalu-page__compact-specs {
+  color: var(--bb-color-text-muted);
+  font-size: var(--bb-font-size-support);
+  font-weight: 600;
+}
+.bilartillsalu-page__compact-actions {
+  display: grid;
+  gap: 0.6rem;
+  /* One row: primary action fills, "Visa mer" takes its natural width. */
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-top: auto;
+  padding-top: 0.8rem;
+}
+.bilartillsalu-page__compact-actions .bb-btn { min-height: 46px; padding-inline: 1rem; white-space: normal; width: 100%; }
+.bilartillsalu-page__compact--sold .bilartillsalu-page__compact-actions { grid-template-columns: 1fr; }
+
+.bilartillsalu-page__compact--sold .bilartillsalu-page__compact-media img { filter: grayscale(0.7); }
+.bilartillsalu-page__compact--sold { box-shadow: none; }
+
+.bilartillsalu-page__collapse {
+  align-self: flex-start;
+  background: none;
+  border: 0;
+  color: var(--bb-color-teal-800);
+  cursor: pointer;
+  font-size: var(--bb-font-size-support);
+  font-weight: 700;
+  margin-top: 1rem;
+  padding: 0.25rem 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bilartillsalu-page__show-all {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+
 /* Loading skeleton — reserves the card's geometry so the page does not jump. */
 /* rgba of --bb-color-ink-950 at low alpha. */
 .bilartillsalu-page__vehicle--skeleton .bilartillsalu-page__viewer,
