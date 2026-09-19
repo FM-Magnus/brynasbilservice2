@@ -2,6 +2,33 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Antigravity (Step 5: Stötdämpare & fjädrar Rebuild — Guide Family Scaling)
+
+- **Rebuilt Stötdämpare & fjädrar page (`StodampareFjadrarPage.tsx` at `/stodampare-fjadrar`) onto `ServiceGuideTemplate.css`**:
+  - **Shared Template Scaled**: Migrated `/stodampare-fjadrar` onto `ServiceGuideTemplate.css` (`.service-guide__*`), eliminating the old `./StodampareFjadrarPage.css` import and all legacy `.services-page__*` selectors. 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`. Connected all booking actions to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller stötdämpare och fjädrar" />`.
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-wrap`, `.bb-eyebrow`, `.bb-h1`, `.bb-accent`, `.bb-lead`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`).
+  - **Hero Media & Placeholders**: Utilizes standard `MediaPlaceholder` components (`Fjädringsarbete i verkstaden`, `Hjulupphängningens delar`, `Inspektion av stötdämpare och fjädrar`) alongside the workshop trust badge card.
+  - **Preserved Approved Copy**: Retained all Swedish copy verbatim across parts, benefits, warning symptoms (with urgent/featured indicators), bounce-test tip strip, service checklist, guidance cards, safety strip, 5-step workshop process, and FAQs.
+  - **Verification**:
+    - `npm --prefix client run typecheck`: 0 errors.
+    - `npm --prefix client run build`: Built cleanly with 0 errors (10.50s).
+    - `npx --prefix client playwright test --config client/playwright.config.ts tests/browser/stodampare.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal opening/closing verified.
+
+
+### 2026-09-19 — Antigravity (Phase 2 / Step 5: Bilbatteri Rebuild — Guide Family Scaling)
+
+- **Rebuilt Bilbatteri page (`BilbatteriPage.tsx` at `/bilbatteri`) onto `ServiceGuideTemplate.css`**:
+  - **Shared Template Scaled**: Successfully migrated `/bilbatteri` to `ServiceGuideTemplate.css` (`.service-guide__*`) without inventing a new CSS file or modifying shared styles. 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`. Wired all booking CTAs to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller bilbatteri" />`.
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-wrap`, `.bb-eyebrow`, `.bb-h1`, `.bb-accent`, `.bb-lead`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`).
+  - **Production Workshop Imagery**: Connected existing production photo assets across hero (`battery-terminal-bolt-tightening.{webp,jpg}`), intro/components (`battery-multimeter-test-workshop.{webp,jpg}`), and symptoms/testing (`battery-terminal-voltage-closeup.{webp,jpg}`).
+  - **Preserved Approved Copy**: Retained all Swedish copy verbatim across battery types, benefits, warning signs (with urgent and featured modifiers), service checklist, guidance stats cards (with `.service-guide__info-flag`), 5-step process, underhållsråd safety strip, and FAQs.
+  - **Verification**:
+    - `npm --prefix client run typecheck`: 0 errors.
+    - `npm --prefix client run build`: Built cleanly with 0 errors (10.55s).
+    - `npm --prefix client run test:browser -- tests/browser/bilbatteri.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal interaction verified.
+
 ### 2026-09-19 — Antigravity (Phase 2 / Step 5: Kamrem Rebuild — First Sibling Proof)
 
 - **Rebuilt Kamrem page (`KamremPage.tsx` at `/kamrem`) onto `ServiceGuideTemplate.css`**:

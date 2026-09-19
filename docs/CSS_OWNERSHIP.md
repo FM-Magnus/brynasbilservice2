@@ -72,8 +72,8 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/oljebyte` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
 | `/bromssystem` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
 | `/kamrem` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (First Sibling Proof verified) | `ServiceGuideTemplate.css` |
-| `/bilbatteri` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy dependent |
-| `/stodampare-fjadrar` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`StodampareFjadrarPage.css`) |
+| `/bilbatteri` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
+| `/stodampare-fjadrar` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
 | `/hjullagerbyte` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`HjullagerbytePage.css`) |
 | `/styrning-kulleder` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`StyrningKullederPage.css`) |
 | `/drivaxel-drivknutar` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`DrivaxelDrivknutarPage.css`) |
