@@ -2,6 +2,48 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Antigravity (Step 5 COMPLETE: Drivaxel & drivknutar Rebuild — Guide Family 10/10)
+
+- **Rebuilt Drivaxel & drivknutar page (`DrivaxelDrivknutarPage.tsx` at `/drivaxel-drivknutar`) onto `ServiceGuideTemplate.css`**:
+  - **Shared Template 100% Completed**: Migrated the 10th and final guide `/drivaxel-drivknutar` onto `ServiceGuideTemplate.css` (`.service-guide__*`), eliminating `./DrivaxelDrivknutarPage.css` and all legacy `.services-page__*` selectors. **Step 5 is now 100% Complete with all 10 technical guides living on the shared template.** 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`. Connected all booking actions to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller drivaxel och drivknutar" />`.
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-wrap`, `.bb-eyebrow`, `.bb-h1`, `.bb-accent`, `.bb-lead`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`).
+  - **Hero Media**: Reused existing production photo asset pair (`cv-joint-workbench.webp` and `cv-joint-workbench.jpg`) inside `<picture data-image-slot="driveshaft-hero">` alongside the workshop reassurance badge card.
+  - **Preserved Approved Copy**: Retained all Swedish copy verbatim across parts, benefits, warning symptoms (with urgent/featured indicators), grease-leak tip strip, service checklist, guidance cards, safety strip, 5-step workshop process, and FAQs.
+  - **Verification**:
+    - `npm --prefix client run typecheck`: 0 errors.
+    - `npm --prefix client run build`: Built cleanly with 0 errors (9.68s).
+    - `npx --prefix client playwright test --config client/playwright.config.ts tests/browser/drivaxel.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal opening/closing verified.
+
+
+### 2026-09-19 — Antigravity (Step 5: Styrning & kulleder Rebuild — Guide Family Scaling)
+
+- **Rebuilt Styrning & kulleder page (`StyrningKullederPage.tsx` at `/styrning-kulleder`) onto `ServiceGuideTemplate.css`**:
+  - **Shared Template Scaled**: Migrated `/styrning-kulleder` onto `ServiceGuideTemplate.css` (`.service-guide__*`), eliminating the old `./StyrningKullederPage.css` import and all legacy `.services-page__*` selectors. 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`. Connected all booking actions to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller styrning & kulleder" />`.
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-wrap`, `.bb-eyebrow`, `.bb-h1`, `.bb-accent`, `.bb-lead`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`).
+  - **Hero Media & Placeholders**: Utilizes standard `MediaPlaceholder` components (`Styrningsarbete i verkstaden`, `Framvagnens leder & servokomponenter`, `Inspektion av framvagn och styrleder`) alongside the workshop trust badge card.
+  - **Preserved Approved Copy**: Retained all Swedish copy verbatim across parts, benefits, warning symptoms (with urgent/featured indicators), steering pull tip strip, service checklist, guidance cards, safety strip, 5-step workshop process, and FAQs.
+  - **Verification**:
+    - `npm --prefix client run typecheck`: 0 errors.
+    - `npm --prefix client run build`: Built cleanly with 0 errors (9.93s).
+    - `npx --prefix client playwright test --config client/playwright.config.ts tests/browser/styrning-kulleder.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal opening/closing verified.
+
+
+### 2026-09-19 — Antigravity (Step 5: Hjullagerbyte Rebuild — Guide Family Scaling)
+
+- **Rebuilt Hjullagerbyte page (`HjullagerbytePage.tsx` at `/hjullagerbyte`) onto `ServiceGuideTemplate.css`**:
+  - **Shared Template Scaled**: Migrated `/hjullagerbyte` onto `ServiceGuideTemplate.css` (`.service-guide__*`), eliminating the old `./HjullagerbytePage.css` import and all legacy `.services-page__*` selectors. 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`. Connected all booking actions to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller hjullagerbyte" />`.
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-wrap`, `.bb-eyebrow`, `.bb-h1`, `.bb-accent`, `.bb-lead`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`).
+  - **Hero Media & Placeholders**: Utilizes standard `MediaPlaceholder` components (`Hjullagerarbete i verkstaden`, `Hjullagrets komponenter & nav`, `Inspektion och kontroll av hjullager`) alongside the workshop trust badge card.
+  - **Preserved Approved Copy**: Retained all Swedish copy verbatim across parts, benefits, warning symptoms (with urgent/featured indicators), noise tip strip, service checklist, guidance cards, safety strip, 5-step workshop process, and FAQs.
+  - **Verification**:
+    - `npm --prefix client run typecheck`: 0 errors.
+    - `npm --prefix client run build`: Built cleanly with 0 errors (10.63s).
+    - `npx --prefix client playwright test --config client/playwright.config.ts tests/browser/hjullager.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal opening/closing verified.
+
+
 ### 2026-09-19 — Antigravity (Step 5: Stötdämpare & fjädrar Rebuild — Guide Family Scaling)
 
 - **Rebuilt Stötdämpare & fjädrar page (`StodampareFjadrarPage.tsx` at `/stodampare-fjadrar`) onto `ServiceGuideTemplate.css`**:

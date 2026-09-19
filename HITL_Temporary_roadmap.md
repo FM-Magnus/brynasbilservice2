@@ -131,9 +131,9 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 5: Roll Out the "Guide" Family (All 10 Technical Guides) `[IN PROGRESS: 7 GUIDES COMPLETE]`
-- **Why this order**: All ten guides share one single template (`ServiceGuideTemplate.css`). The 4 pilot guides (`Koppling`, `Avgassystem`, `Bromssystem`, `Oljebyte`), First Sibling Proof (`Kamrem`), `Bilbatteri`, and `Stötdämpare & fjädrar` have proven the template's reusability across standard, dual-accent, and deep-dive content blocks with 100% canonical Level 0 `--bb-*` tokens, Level 1 `.bb-*` shared elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright verification.
-- **Status**:
+### Step 5: Roll Out the "Guide" Family (All 10 Technical Guides) `[COMPLETED & LOCKED]`
+- **Why this order**: All ten guides share one single template (`ServiceGuideTemplate.css`). The entire Guide Family is now 100% rebuilt and verified with zero dependency on `index.css`, 100% canonical Level 0 `--bb-*` tokens, Level 1 `.bb-*` shared elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright verification across all viewports.
+- **Status (10 / 10 Guides Complete)**:
   - **`Koppling` (`/koppling`)**: Complete & Second Pass verified.
   - **`Avgassystem` (`/avgassystem`)**: Complete & Second Pass verified.
   - **`Bromssystem` (`/bromssystem`)**: Complete & Second Pass verified.
@@ -141,15 +141,13 @@ Use this section to know **what the agent is doing**, **what you need to review/
   - **`Kamrem` (`/kamrem`)**: Complete & First Sibling Proof verified via Playwright ($\Delta = 0\text{px}$ overflow).
   - **`Bilbatteri` (`/bilbatteri`)**: Complete & verified via Playwright ($\Delta = 0\text{px}$ overflow).
   - **`Stötdämpare & fjädrar` (`/stodampare-fjadrar`)**: Complete & verified via Playwright ($\Delta = 0\text{px}$ overflow).
-- **Agent's Job (Next in this family)**:
-  - Migrate the remaining three guides onto `ServiceGuideTemplate.css`:
-    1. **`Hjullagerbyte`** (`/hjullagerbyte`)
-    2. **`Styrning & kulleder`** (`/styrning-kulleder`) & **`Drivaxel & drivknutar`** (`/drivaxel-drivknutar`)
-  - Each guide mounts `<PublicHeader />` and `<PublicFooter />`, consumes `ServiceGuideTemplate.css`, and follows the mixed-case Archivo 800 heading standard.
-- **Your Job (HITL Decision)**:
-  - Confirm the remaining 3 guides integrate cleanly into the shared template.
-- **Steering Prompt**:
-  > *"Migrate Hjullagerbyte (/hjullagerbyte) onto ServiceGuideTemplate.css, mounting PublicHeader and PublicFooter and using canonical tokens."*
+  - **`Hjullagerbyte` (`/hjullagerbyte`)**: Complete & verified via Playwright ($\Delta = 0\text{px}$ overflow).
+  - **`Styrning & kulleder` (`/styrning-kulleder`)**: Complete & verified via Playwright ($\Delta = 0\text{px}$ overflow).
+  - **`Drivaxel & drivknutar` (`/drivaxel-drivknutar`)**: Complete & verified via Playwright ($\Delta = 0\text{px}$ overflow).
+- **Next Horizon**:
+  - Step 4: Rebuild remaining Bilservice family pages (`Felsökning`, `Däckservice`, `AC-service`) onto `ServiceReparationerPage.css` (`.bilservice__*`).
+  - Step 6: Rebuild remaining unique standalone pages (`Bilar till salu`, `Galleri`).
+  - Step 7: Delete `client/src/css/index.css`.
 
 ---
 

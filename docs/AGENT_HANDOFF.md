@@ -37,13 +37,13 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
   - **Bilservice Family (Parent complete)**:
     - Bilservice (`/service-reparationer`): Complete on `.bb-hero` layout system, `--bb-*` tokens, mounts `PublicHeader` + `PublicFooter`.
     - Next in family: Rebuild `Felsökning` (`/felsokning`), `Däckservice` (`/dackservice`), `AC-service` (`/ac-service`) on family template.
-  - **Guide Family (7 Guides complete)**:
-    - `Koppling` (`/koppling`), `Avgassystem` (`/avgassystem`), `Bromssystem` (`/bromssystem`), `Oljebyte` (`/oljebyte`), `Kamrem` (`/kamrem`), `Bilbatteri` (`/bilbatteri`), and `Stötdämpare & fjädrar` (`/stodampare-fjadrar`) are fully aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
-    - Next in family: Migrate `Hjullagerbyte` (`/hjullagerbyte`) onto `ServiceGuideTemplate.css`, followed by remaining 2 guides (`Styrning & kulleder`, `Drivaxel & drivknutar`).
+  - **Guide Family (10 / 10 Guides Complete & Locked)**:
+    - All 10 technical guides (`Koppling`, `Avgassystem`, `Bromssystem`, `Oljebyte`, `Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, and `Drivaxel & drivknutar`) are fully rebuilt on `ServiceGuideTemplate.css`, aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
+    - **Step 5 is 100% COMPLETE**.
 - **IMMEDIATE NEXT TASKS (Options for user)**:
-  1. **Option A (Step 5 / Phase 2)**: Migrate **`Hjullagerbyte`** (`/hjullagerbyte`) onto `ServiceGuideTemplate.css`.
-  2. **Option B (Step 4)**: Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template (`ServiceReparationerPage.css`).
-  3. **Option C (Step 6)**: Rebuild **`Bilar till salu`** (`/bilar-till-salu`) or **`Galleri`** (`/galleri`) as standalone unique page.
+  1. **Option A (Step 4: Bilservice Family)**: Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template (`ServiceReparationerPage.css`).
+  2. **Option B (Step 6: Unique Pages)**: Rebuild **`Bilar till salu`** (`/bilar-till-salu`) as its own standalone unique page.
+  3. **Option C (Step 6: Unique Pages)**: Rebuild **`Galleri`** (`/galleri`) as its own standalone unique page.
 
 ## Authority and references
 

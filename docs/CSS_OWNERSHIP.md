@@ -74,9 +74,9 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/kamrem` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (First Sibling Proof verified) | `ServiceGuideTemplate.css` |
 | `/bilbatteri` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
 | `/stodampare-fjadrar` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
-| `/hjullagerbyte` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`HjullagerbytePage.css`) |
-| `/styrning-kulleder` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`StyrningKullederPage.css`) |
-| `/drivaxel-drivknutar` | Guide family | Transitional -> Migrate to ServiceGuideTemplate.css | Legacy transitional (`DrivaxelDrivknutarPage.css`) |
+| `/hjullagerbyte` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
+| `/styrning-kulleder` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
+| `/drivaxel-drivknutar` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
 | `/bargning` | Unique | Complete | `BargningPage.css` (`.bargning-page__*`), mounts `PublicHeader` + `PublicFooter` |
 | `/galleri` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
 | `/bilar-till-salu` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
