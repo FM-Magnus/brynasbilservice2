@@ -2,6 +2,15 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Claude (Step 6: Bilar till salu rebuilt as unique page, backend-ready)
+
+- Rebuilt `/bilar-till-salu` from scratch: `BilarTillSalu.tsx` + new `BilarTillSalu.css` (`.bilartillsalu-page__*`). Legacy `Header`/`Footer` replaced by `PublicHeader` (overlay) + `PublicFooter`. Beyond `.cars-page__*` (59 rules), `index.css` also defines `.car-card__*` (32) and `.cars-grid` (3); none of those selectors are used any more (asserted in the Playwright spec).
+- Sections: `.bb-hero` (workshop-service-aisle photo, lead, call + visning buttons, address/hours, `.bb-trust-row` with the three approved trust badges) → listings (featured vehicle card: 16:10 viewer, `aria-pressed` thumbnails, price/Såld badges, 4 spec badges, description, "Skicka förfrågan" + call) → loading skeleton / error / empty states → sold archive (conditional) → closing `.bb-card--trust`. All existing Swedish copy kept verbatim.
+- Data layer split out for the future backend: `types/vehicle.ts` (contract, mirrors `docs/BACKEND_HANDOFF.md` §3.4), `data/vehicles.ts` (static seed), `api/vehicles.ts` (`getPublicVehicles()`, `VITE_VEHICLES_SOURCE=static|api`, seed lazily imported).
+- Inquiry prefill: "Gäller förfrågan om Peugeot 307 CC 2.0 (2006)". The modal is keyed by its comment so switching between a vehicle inquiry and a generic booking always starts from the right text (`BookingForm.tsx` untouched).
+- Fixed locally: `.bb-card--trust__text`'s `flex: 1 1 320px` becomes a 320px *height* once the shared card stacks as a column at ≤640px — overridden with `flex-basis: auto` in this island only. Felsökning uses the same card and likely shows the same gap on mobile; not touched.
+- Verification: typecheck 0 errors, build clean, new `tests/browser/bilar-till-salu.visual.spec.ts` 3/3, full suite 42/42 (all 3 viewports, 0px overflow). Empty state and sold archive verified by temporarily flipping the seed to `sold` (reverted, not committed). `index.css` untouched.
+
 ### 2026-09-19 — Antigravity (Step 4 COMPLETE: AC-service Rebuild — Bilservice Family Sibling 3 of 3)
 
 - **Rebuilt Climate & AC Service page (`AcServicePage.tsx` at `/ac-service`) onto `ServiceReparationerPage.css`**:

@@ -1,0 +1,305 @@
+/* BilarTillSalu.css — isolated CSS island for /bilar-till-salu (.bilartillsalu-page__*).
+   Unique page: consumes --bb-* tokens and shared-elements.css only. Zero dependency on
+   index.css — the legacy .cars-page__*, .car-card__* and .cars-grid rules there are
+   deliberately never referenced. */
+
+.bilartillsalu-page {
+  background: var(--bb-color-page);
+  color: var(--bb-color-text);
+  font-family: var(--bb-font-body);
+  font-size: var(--bb-font-size-body);
+  line-height: var(--bb-line-height-body);
+  overflow-x: clip;
+  width: 100%;
+}
+.bilartillsalu-page *,
+.bilartillsalu-page *::before,
+.bilartillsalu-page *::after { box-sizing: border-box; }
+
+/* Zero-specificity resets (see shared-elements.css reset gotcha). */
+.bilartillsalu-page :where(a) { color: inherit; text-decoration: none; }
+.bilartillsalu-page :where(button) { font: inherit; }
+.bilartillsalu-page :where(img) { display: block; max-width: 100%; }
+.bilartillsalu-page :where(ul, dl, dd) { list-style: none; margin: 0; padding: 0; }
+.bilartillsalu-page :where(h2, h3, p) { margin: 0; }
+.bilartillsalu-page :where(a, button):focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
+
+/* ---------- 1. Hero ---------- */
+/* Shorter than the canonical .bb-hero: the stock sits directly below and should
+   start above the fold on desktop. Top padding comes from --bb-hero-padding-top,
+   which clears the overlay header at every width. */
+.bilartillsalu-page__hero { min-height: clamp(560px, 46vw, 660px); }
+
+.bilartillsalu-page__hero-copy { max-width: 600px; }
+
+.bilartillsalu-page__hero-meta {
+  color: rgba(255, 255, 255, 0.82);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--bb-font-size-support);
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.4rem;
+}
+.bilartillsalu-page__hero-meta li { align-items: center; display: flex; gap: 0.5rem; }
+.bilartillsalu-page__hero-meta svg { color: var(--bb-color-amber-500); flex: 0 0 auto; height: 16px; width: 16px; }
+.bilartillsalu-page__hero-meta a { text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.35); text-underline-offset: 3px; }
+.bilartillsalu-page__hero-meta a:hover { text-decoration-color: var(--bb-color-amber-500); }
+
+.bilartillsalu-page__trust { margin-top: clamp(2rem, 4vw, 3rem); max-width: 860px; }
+
+/* ---------- 2. Listings ---------- */
+.bilartillsalu-page__listings { padding-block: clamp(3rem, 6vw, 5rem); }
+
+.bilartillsalu-page__section-head { margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
+
+.bilartillsalu-page__vehicle-list { display: grid; gap: clamp(1.5rem, 3vw, 2.25rem); }
+
+/* Featured vehicle card: gallery left, details right; stacks below 960px. */
+.bilartillsalu-page__vehicle {
+  background: var(--bb-color-surface);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  padding: clamp(0.9rem, 1.6vw, 1.25rem);
+}
+
+.bilartillsalu-page__gallery { display: grid; gap: 0.75rem; min-width: 0; }
+
+.bilartillsalu-page__viewer {
+  aspect-ratio: 16 / 10;
+  background: var(--bb-color-ink-900);
+  border-radius: var(--bb-radius-md);
+  overflow: hidden;
+  position: relative;
+}
+.bilartillsalu-page__viewer picture,
+.bilartillsalu-page__viewer img { height: 100%; width: 100%; }
+.bilartillsalu-page__viewer img { object-fit: cover; }
+
+.bilartillsalu-page__viewer-empty {
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  font-size: var(--bb-font-size-support);
+  gap: 0.6rem;
+  height: 100%;
+  justify-content: center;
+}
+.bilartillsalu-page__viewer-empty svg { height: 40px; width: 40px; }
+
+.bilartillsalu-page__price,
+.bilartillsalu-page__sold-badge {
+  border-radius: var(--bb-radius-control);
+  font-weight: 800;
+  line-height: 1;
+  position: absolute;
+  top: 0.9rem;
+}
+.bilartillsalu-page__price {
+  background: rgba(7, 20, 22, 0.86);
+  color: var(--bb-color-text-inverse);
+  font-family: var(--bb-font-display);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  padding: 0.65rem 1rem;
+  right: 0.9rem;
+}
+.bilartillsalu-page__sold-badge {
+  background: var(--bb-color-amber-500);
+  color: var(--bb-color-ink-950);
+  font-size: var(--bb-font-size-label);
+  left: 0.9rem;
+  letter-spacing: 0.12em;
+  padding: 0.55rem 0.85rem;
+  text-transform: uppercase;
+}
+
+.bilartillsalu-page__thumbs {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+}
+.bilartillsalu-page__thumb {
+  aspect-ratio: 16 / 10;
+  background: var(--bb-color-ink-900);
+  border: 0;
+  border-radius: var(--bb-radius-sm);
+  cursor: pointer;
+  opacity: 0.62;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  transition: opacity var(--bb-transition-fast);
+}
+.bilartillsalu-page__thumb::after {
+  border: 2px solid transparent;
+  border-radius: inherit;
+  content: '';
+  inset: 0;
+  position: absolute;
+  transition: border-color var(--bb-transition-fast);
+}
+.bilartillsalu-page__thumb:hover { opacity: 0.9; }
+.bilartillsalu-page__thumb[aria-pressed='true'] { opacity: 1; }
+.bilartillsalu-page__thumb[aria-pressed='true']::after { border-color: var(--bb-color-amber-500); }
+.bilartillsalu-page__thumb picture,
+.bilartillsalu-page__thumb img { height: 100%; width: 100%; }
+.bilartillsalu-page__thumb img { object-fit: cover; }
+
+.bilartillsalu-page__details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(0.25rem, 1.5vw, 1rem) clamp(0.25rem, 1.5vw, 1rem) clamp(0.5rem, 1.5vw, 1rem) 0;
+}
+
+.bilartillsalu-page__vehicle-meta {
+  color: var(--bb-color-teal-800);
+  font-size: var(--bb-font-size-label);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.bilartillsalu-page__vehicle-title {
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-top: 0.4rem;
+}
+
+.bilartillsalu-page__specs {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.4rem;
+}
+.bilartillsalu-page__spec {
+  background: var(--bb-color-teal-100);
+  border-radius: var(--bb-radius-sm);
+  padding: 0.7rem 0.85rem;
+}
+.bilartillsalu-page__spec dt {
+  color: var(--bb-color-text-muted);
+  font-size: var(--bb-font-size-label);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.bilartillsalu-page__spec dd {
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+.bilartillsalu-page__description {
+  color: var(--bb-color-text-muted);
+  line-height: var(--bb-line-height-body);
+  margin-top: 1.25rem;
+  white-space: pre-line;
+}
+
+.bilartillsalu-page__vehicle-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+/* Light-surface secondary button (no shared equivalent exists for light cards). */
+.bilartillsalu-page__btn-outline {
+  background: transparent;
+  border-color: rgba(18, 34, 37, 0.24);
+  color: var(--bb-color-text);
+}
+.bilartillsalu-page__btn-outline:hover {
+  border-color: var(--bb-color-teal-700);
+  color: var(--bb-color-teal-800);
+  transform: translateY(-2px);
+}
+
+/* Sold vehicles: same card, visibly archived. */
+.bilartillsalu-page__vehicle--sold .bilartillsalu-page__viewer img { filter: grayscale(0.7); }
+.bilartillsalu-page__vehicle--sold { box-shadow: none; }
+
+.bilartillsalu-page__sold { margin-top: clamp(3rem, 6vw, 4.5rem); }
+.bilartillsalu-page__sold-title {
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+/* Loading skeleton — reserves the card's geometry so the page does not jump. */
+.bilartillsalu-page__vehicle--skeleton .bilartillsalu-page__viewer,
+.bilartillsalu-page__vehicle--skeleton .bilartillsalu-page__details {
+  background: linear-gradient(90deg, #eceae4, #f4f2ed, #eceae4);
+  border-radius: var(--bb-radius-md);
+  min-height: 320px;
+}
+
+/* Empty and error states */
+.bilartillsalu-page__notice {
+  align-items: center;
+  background: var(--bb-color-surface);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-inline: auto;
+  max-width: 640px;
+  padding: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+}
+.bilartillsalu-page__notice .bb-icon-badge { height: 48px; width: 48px; }
+.bilartillsalu-page__notice .bb-icon-badge svg { height: 24px; width: 24px; }
+.bilartillsalu-page__notice h3 {
+  font-family: var(--bb-font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+.bilartillsalu-page__notice p { color: var(--bb-color-text-muted); }
+.bilartillsalu-page__notice .bb-btn { margin-top: 0.4rem; }
+
+/* ---------- 3. Closing reassurance ---------- */
+.bilartillsalu-page__closing { padding-bottom: clamp(3rem, 6vw, 5rem); }
+
+.bilartillsalu-page__closing-card .bb-card--trust__icon svg { height: 24px; width: 24px; }
+.bilartillsalu-page__closing-title {
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.bilartillsalu-page__closing-card .bb-eyebrow { margin-bottom: 0.6rem; }
+.bilartillsalu-page__closing-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .bilartillsalu-page__vehicle { grid-template-columns: 1fr; }
+  .bilartillsalu-page__details { padding: 0 0.4rem 0.6rem; }
+}
+
+@media (max-width: 650px) {
+  .bilartillsalu-page__hero { min-height: 0; }
+  .bilartillsalu-page__thumbs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* .bb-card--trust stacks as a column at ≤640px, where its text block's
+     320px flex-basis would turn into a 320px height. */
+  .bilartillsalu-page__closing-card .bb-card--trust__text { flex-basis: auto; }
+  .bilartillsalu-page__vehicle-actions .bb-btn,
+  .bilartillsalu-page__closing-actions .bb-btn,
+  .bilartillsalu-page__notice .bb-btn { white-space: normal; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bilartillsalu-page__thumb,
+  .bilartillsalu-page__thumb::after { transition: none; }
+  .bilartillsalu-page__btn-outline:hover { transform: none; }
+}

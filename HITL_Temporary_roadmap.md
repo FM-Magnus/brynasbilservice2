@@ -147,10 +147,11 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 6: Build the Remaining Unique Pages `[IN PROGRESS: Biltjänster & Bärgning COMPLETE; Bilar till salu & Galleri NEXT]`
+### Step 6: Build the Remaining Unique Pages `[IN PROGRESS: Biltjänster, Bärgning & Bilar till salu COMPLETE; Galleri NEXT]`
 - **Why this order**: `Bärgning`, `Bilar till salu`, `Galleri`, and `Biltjänster` don't share a template with each other or with anything else; each has its own unique UI requirements and must be built as an isolated CSS island.
 - **Status**:
   - **`Biltjänster` (`/biltjanster`) (COMPLETE)**: Rebuilt as the service-catalog hub (`BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `<PublicHeader />` and `<PublicFooter />`.
+  - **`Bilar till salu` (`/bilar-till-salu`) (COMPLETE, 2026-09-19)**: Rebuilt from scratch (`BilarTillSalu.tsx` + dedicated `BilarTillSalu.css`, `.bilartillsalu-page__*`). Hero with trust row, featured vehicle card (16:10 viewer, thumbnails, 4 spec badges, prefilled inquiry via `BookingFormModal`), empty/error/loading states, sold archive, closing `.bb-card--trust`. Stock is read through `getPublicVehicles()` (`client/src/api/vehicles.ts`) from the static seed `client/src/data/vehicles.ts`; switching to the future backend is `VITE_VEHICLES_SOURCE=api` (see `docs/BACKEND_HANDOFF.md`). Playwright verified across 1440, 768, 390 with $\Delta = 0\text{px}$ overflow.
   - **`Bärgning` (`/bargning`) (COMPLETE)**: Rebuilt from scratch (`BargningPage.tsx` + dedicated `BargningPage.css`, `.bargning-page__*`). Towing and breakdown dispatch focus, showcase split card, direct-call CTA, used-cars promo banner, emergency closing card. Mounted `<PublicHeader />` and `<PublicFooter />`. Playwright verified across 1440, 768, 390 with $\Delta = 0\text{px}$ overflow.
 - **Agent's Job (Remaining in this group — Claude Code Roadmap)**:
   1. **`Bilar till salu` (`/bilar-till-salu`)**:

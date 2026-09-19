@@ -1,344 +1,315 @@
-import { useState } from 'react'
-import peugeotRearJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter.jpg'
-import peugeotRearWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter.webp'
-import peugeotRearThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter-thumb.jpg'
-import peugeotRearThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter-thumb.webp'
-import peugeotWheelJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup.jpg'
-import peugeotWheelWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup.webp'
-import peugeotWheelThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup-thumb.jpg'
-import peugeotWheelThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup-thumb.webp'
-import peugeotSideJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.jpg'
-import peugeotSideWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
-import peugeotSideThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile-thumb.jpg'
-import peugeotSideThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile-thumb.webp'
-import { Header } from '../components/layout/Header'
-import { Footer } from '../components/layout/Footer'
+import { useEffect, useState } from 'react'
+import { PublicHeader } from '../components/layout/PublicHeader'
+import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
-import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
+import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
+import { CarSaleIcon } from '../components/icons/CarSaleIcon'
+import { getPublicVehicles } from '../api/vehicles'
+import type { Vehicle } from '../types/vehicle'
+import heroWebp from '../assets/images/gallery/workshop/workshop-service-aisle.webp'
+import heroJpg from '../assets/images/gallery/workshop/workshop-service-aisle.jpg'
 
-interface Car {
-  id: number
-  make: string
-  model: string
-  year: number
-  mileage: number
-  fuel: string
-  gearbox: string
-  price: number
-  description: string
-  color: string
-  images?: CarImage[]   // first image is the main one
-  sold?: boolean
-}
+import '../styles/design-tokens.css'
+import '../styles/shared-elements.css'
+import './BilarTillSalu.css'
 
-interface CarImage {
-  jpg: string
-  webp: string
-  thumbnailJpg: string
-  thumbnailWebp: string
-}
+// Stock is edited in data/vehicles.ts (or, once live, from /admin) — never here.
 
-// ── Edit this list when stock changes ──────────────────────────────────────
-// To add a car: import photos at the top of the file, then add an entry here.
-// mileage is in km — displayed as mil automatically.
-// Add sold: true to move a car to the "Nyligen sålda" section.
+const PHONE_HREF = 'tel:+46705533395'
+const MAPS_HREF = 'https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle'
 
-const cars: Car[] = [
-  {
-    id: 1,
-    make: 'Peugeot',
-    model: '307 CC 2.0',
-    year: 2006,
-    mileage: 141147,
-    fuel: 'Bensin',
-    gearbox: 'Manuell',
-    price: 39900,
-    color: 'Mörkgrå',
-    description:
-      'Snygg och välskött cabriolet med elektriskt hopfällbart hardtop. Nybesiktigad maj 2026 och godkänd till juli 2027. ' +
-      'Dragkrok. Aluminiumfälgar. Inga anmärkningar i senaste besiktning. ' +
-      'Perfekt sommarbil — ring oss för att boka en provkörning.',
-    images: [
-      { jpg: peugeotSideJpg, webp: peugeotSideWebp, thumbnailJpg: peugeotSideThumbJpg, thumbnailWebp: peugeotSideThumbWebp },
-      { jpg: peugeotRearJpg, webp: peugeotRearWebp, thumbnailJpg: peugeotRearThumbJpg, thumbnailWebp: peugeotRearThumbWebp },
-      { jpg: peugeotWheelJpg, webp: peugeotWheelWebp, thumbnailJpg: peugeotWheelThumbJpg, thumbnailWebp: peugeotWheelThumbWebp },
-    ],
-  },
-]
-// ──────────────────────────────────────────────────────────────────────────
+const formatPrice = (sek: number) => `${sek.toLocaleString('sv-SE')} kr`
+const formatMileage = (km: number) => `${Math.round(km / 10).toLocaleString('sv-SE')} mil`
+const vehicleName = (vehicle: Vehicle) => `${vehicle.make} ${vehicle.model}`
+const inquiryComment = (vehicle: Vehicle) => `Gäller förfrågan om ${vehicleName(vehicle)} (${vehicle.year})`
 
-function formatPrice(price: number) {
-  return price.toLocaleString('sv-SE') + ' kr'
-}
+type LoadState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; vehicles: Vehicle[] }
 
-function formatMileage(km: number) {
-  return km.toLocaleString('sv-SE') + ' mil'
-}
+function VehicleCard({ vehicle, eager, onInquiry }: { vehicle: Vehicle; eager: boolean; onInquiry: (vehicle: Vehicle) => void }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const sold = vehicle.status === 'sold'
+  const active = vehicle.images[activeIndex]
+  const name = vehicleName(vehicle)
 
-function CarCard({ car }: { car: Car }) {
-  const [activeImg, setActiveImg] = useState(0)
-  const images = car.images ?? []
-  const mainImg = images[activeImg]
+  const specs = [
+    { label: 'Årsmodell', value: String(vehicle.year) },
+    { label: 'Miltal', value: formatMileage(vehicle.mileageKm) },
+    { label: 'Drivmedel', value: vehicle.fuel },
+    { label: 'Växellåda', value: vehicle.gearbox },
+  ]
 
   return (
-    <article className={`car-card${car.sold ? ' car-card--sold' : ''}`}>
-      <div className="car-card__image-wrap">
-        {mainImg ? (
-          <picture>
-            <source srcSet={mainImg.webp} type="image/webp" />
-            <img
-              src={mainImg.jpg}
-              alt={`${car.make} ${car.model}`}
-              className="car-card__image"
-              loading="lazy"
-            />
-          </picture>
-        ) : (
-          <div className="car-card__image-placeholder">
-            <svg viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M8 22 L14 10 L50 10 L56 22 L56 26 L8 26 Z" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
-              <circle cx="18" cy="26" r="4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-              <circle cx="46" cy="26" r="4" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-              <path d="M16 10 L20 16 L44 16 L48 10" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-            </svg>
-            <span>Bild kommer snart</span>
+    <article
+      className={`bilartillsalu-page__vehicle${sold ? ' bilartillsalu-page__vehicle--sold' : ''}`}
+      aria-labelledby={`vehicle-${vehicle.id}-title`}
+    >
+      <div className="bilartillsalu-page__gallery">
+        <div className="bilartillsalu-page__viewer">
+          {active ? (
+            <picture>
+              <source srcSet={active.main.webp} type="image/webp" />
+              <img
+                src={active.main.jpg}
+                alt={active.alt}
+                width={active.main.width}
+                height={active.main.height}
+                loading={eager ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </picture>
+          ) : (
+            <div className="bilartillsalu-page__viewer-empty">
+              <CarSaleIcon />
+              <span>Bild kommer snart</span>
+            </div>
+          )}
+          <span className="bilartillsalu-page__price">{formatPrice(vehicle.priceSek)}</span>
+          {sold && <span className="bilartillsalu-page__sold-badge">Såld</span>}
+        </div>
+
+        {vehicle.images.length > 1 && (
+          <div className="bilartillsalu-page__thumbs" role="group" aria-label={`Bilder på ${name}`}>
+            {vehicle.images.map((image, index) => (
+              <button
+                key={image.id}
+                type="button"
+                className="bilartillsalu-page__thumb"
+                aria-pressed={index === activeIndex}
+                aria-label={`Visa bild ${index + 1} av ${vehicle.images.length}: ${image.alt}`}
+                onClick={() => setActiveIndex(index)}
+              >
+                <picture>
+                  <source srcSet={image.thumb.webp} type="image/webp" />
+                  <img src={image.thumb.jpg} alt="" width={image.thumb.width} height={image.thumb.height} loading="lazy" decoding="async" />
+                </picture>
+              </button>
+            ))}
           </div>
         )}
-        {car.sold && <div className="car-card__sold-badge">Såld</div>}
-        <div className="car-card__price-badge">{formatPrice(car.price)}</div>
       </div>
 
-      {/* Thumbnail strip — only shown when there are multiple images */}
-      {images.length > 1 && (
-        <div className="car-card__thumbs">
-          {images.map((image, i) => (
-            <button
-              key={i}
-              type="button"
-              className={`car-card__thumb${i === activeImg ? ' car-card__thumb--active' : ''}`}
-              onClick={() => setActiveImg(i)}
-              aria-label={`Visa bild ${i + 1}`}
-            >
-              <picture>
-                <source srcSet={image.thumbnailWebp} type="image/webp" />
-                <img src={image.thumbnailJpg} alt="" loading="lazy" />
-              </picture>
-            </button>
+      <div className="bilartillsalu-page__details">
+        <p className="bilartillsalu-page__vehicle-meta">{vehicle.color} · {vehicle.year}</p>
+        <h3 className="bilartillsalu-page__vehicle-title" id={`vehicle-${vehicle.id}-title`}>{name}</h3>
+
+        <dl className="bilartillsalu-page__specs">
+          {specs.map((spec) => (
+            <div className="bilartillsalu-page__spec" key={spec.label}>
+              <dt>{spec.label}</dt>
+              <dd>{spec.value}</dd>
+            </div>
           ))}
-        </div>
-      )}
+        </dl>
 
-      <div className="car-card__body">
-        <div className="car-card__header">
-          <h2 className="car-card__title">{car.make} {car.model}</h2>
-          <span className="car-card__year">{car.year}</span>
-        </div>
+        <p className="bilartillsalu-page__description">{vehicle.description}</p>
 
-        <div className="car-card__specs">
-          <span className="car-card__spec">{formatMileage(Math.round(car.mileage / 10))}</span>
-          <span className="car-card__spec-dot" />
-          <span className="car-card__spec">{car.fuel}</span>
-          <span className="car-card__spec-dot" />
-          <span className="car-card__spec">{car.gearbox}</span>
-          <span className="car-card__spec-dot" />
-          <span className="car-card__spec">{car.color}</span>
-        </div>
-
-        <p className="car-card__desc">{car.description}</p>
-
-        <a href="tel:+46705533395" className="car-card__cta">
-          <PhoneIcon className="car-card__cta-icon" />
-          <span>Ring för mer info & provkörning</span>
-        </a>
+        {!sold && (
+          <div className="bilartillsalu-page__vehicle-actions">
+            <button type="button" className="bb-btn bb-btn--ember-solid bilartillsalu-page__inquiry-btn" onClick={() => onInquiry(vehicle)}>
+              Skicka förfrågan
+            </button>
+            <a href={PHONE_HREF} className="bb-btn bilartillsalu-page__btn-outline">
+              <PhoneIcon />
+              <span>Ring för mer info &amp; provkörning</span>
+            </a>
+          </div>
+        )}
       </div>
     </article>
   )
 }
 
 export default function BilarTillSalu() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const available = cars.filter(c => !c.sold)
-  const sold = cars.filter(c => c.sold)
+  const [load, setLoad] = useState<LoadState>({ status: 'loading' })
+  const [modal, setModal] = useState({ open: false, comment: '' })
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    let cancelled = false
+    getPublicVehicles()
+      .then((vehicles) => { if (!cancelled) setLoad({ status: 'ready', vehicles }) })
+      .catch(() => { if (!cancelled) setLoad({ status: 'error' }) })
+    return () => { cancelled = true }
+  }, [])
+
+  const openBooking = () => setModal({ open: true, comment: '' })
+  const openInquiry = (vehicle: Vehicle) => setModal({ open: true, comment: inquiryComment(vehicle) })
+  const closeModal = () => setModal((current) => ({ ...current, open: false }))
+
+  const vehicles = load.status === 'ready' ? load.vehicles : []
+  const available = vehicles.filter((vehicle) => vehicle.status === 'available')
+  const sold = vehicles.filter((vehicle) => vehicle.status === 'sold')
 
   return (
     <>
-      <Header onBookingClick={() => setIsModalOpen(true)} />
+      <PublicHeader onBookingClick={openBooking} variant="overlay" />
 
-      <main className="cars-page">
-        {/* Page hero */}
-        <section className="cars-page__hero">
-          <div className="container">
-            <div className="cars-page__hero-content">
-              <div className="section-eyebrow">
-                <span className="eyebrow-line" aria-hidden="true" />
-                <span>Begagnade bilar i Brynäs</span>
-              </div>
-              <h1 className="cars-page__title">
-                Bilar till <span className="title-accent">salu</span>
+      <main className="bilartillsalu-page" id="main-content">
+        {/* 1. Hero */}
+        <section className="bb-hero bilartillsalu-page__hero" aria-labelledby="bilartillsalu-hero-title">
+          <div className="bb-hero__media">
+            <picture>
+              <source srcSet={heroWebp} type="image/webp" />
+              <img src={heroJpg} alt="" width={1920} height={1278} />
+            </picture>
+          </div>
+          <div className="bb-hero__shade" aria-hidden="true" />
+
+          <div className="bb-wrap bb-hero__content">
+            <div className="bb-hero__copy bilartillsalu-page__hero-copy">
+              <p className="bb-eyebrow bb-eyebrow--dark">Begagnade bilar i Brynäs</p>
+              <h1 className="bb-h1 bilartillsalu-page__hero-title" id="bilartillsalu-hero-title">
+                <span>Bilar till <span className="bb-accent">salu</span></span>
               </h1>
-              <p className="cars-page__lead">
+              <p>
                 Alla våra bilar är noggrant genomgångna, kontrollerade och servade av våra egna mekaniker på Brynäs Bilservice. Vi säkerställer att bilen är trygg och trafiksäker innan den säljs.
               </p>
-
-              <div className="cars-page__hero-actions">
-                <a href="tel:+46705533395" className="cars-page__btn cars-page__btn--primary">
-                  <PhoneIcon className="cars-page__btn-icon" />
+              <div className="bb-hero__actions">
+                <a href={PHONE_HREF} className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
+                  <PhoneIcon />
                   <span>Ring: 070-553 33 95</span>
-                  <span className="cars-page__btn-arrow" aria-hidden="true">
-                    <ArrowRightIcon />
-                  </span>
                 </a>
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(true)}
-                  className="cars-page__btn cars-page__btn--outline"
-                >
+                <button type="button" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onClick={openBooking}>
                   Boka tid för visning
                 </button>
               </div>
-
-              <div className="cars-page__meta-bar">
-                <div className="cars-page__meta-item">
+              <ul className="bilartillsalu-page__hero-meta">
+                <li>
                   <MapPinIcon />
-                  <a
-                    href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Utmarksvägen 21B, 802 91 Gävle
-                  </a>
-                </div>
-                <div className="cars-page__meta-item">
+                  <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer">Utmarksvägen 21B, 802 91 Gävle</a>
+                </li>
+                <li>
                   <ClockIcon />
                   <span>Mån–Fre 08:00–17:00 (Lör förfrågan)</span>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
+
+            <ul className="bb-trust-row bilartillsalu-page__trust" aria-label="Därför kan du lita på våra bilar">
+              <li className="bb-trust-row__item">
+                <span className="bb-icon-bare" aria-hidden="true"><ShieldHeartIcon /></span>
+                <span className="bb-trust-row__text">
+                  <strong>Verkstadsinspekterade</strong>
+                  <span>Genomgångna och testade av våra egna mekaniker före försäljning.</span>
+                </span>
+              </li>
+              <li className="bb-trust-row__item">
+                <span className="bb-icon-bare" aria-hidden="true"><CheckIcon /></span>
+                <span className="bb-trust-row__text">
+                  <strong>Färdiga för leverans</strong>
+                  <span>Besiktigade, provkörda och redo att rulla ut direkt.</span>
+                </span>
+              </li>
+              <li className="bb-trust-row__item">
+                <span className="bb-icon-bare" aria-hidden="true"><ChatDotsIcon /></span>
+                <span className="bb-trust-row__text">
+                  <strong>Personlig kontakt</strong>
+                  <span>Tydlig rådgivning och personlig provkörning utan mellanhänder.</span>
+                </span>
+              </li>
+            </ul>
           </div>
         </section>
 
-        {/* Trust Badges */}
-        <section className="cars-page__trust-section">
-          <div className="container">
-            <div className="cars-page__trust-grid">
-              <div className="cars-page__trust-item">
-                <div className="cars-page__trust-icon">
-                  <ShieldHeartIcon />
-                </div>
-                <div>
-                  <h3 className="cars-page__trust-title">Verkstadsinspekterade</h3>
-                  <p className="cars-page__trust-desc">Genomgångna och testade av våra egna mekaniker före försäljning.</p>
-                </div>
+        {/* 2. Listings */}
+        <section className="bilartillsalu-page__listings" aria-labelledby="bilartillsalu-listings-title" aria-busy={load.status === 'loading'}>
+          <div className="bb-wrap">
+            <header className="bilartillsalu-page__section-head">
+              <p className="bb-eyebrow">Aktuellt lager</p>
+              <h2 className="bb-h2" id="bilartillsalu-listings-title">Tillgängliga bilar just nu</h2>
+            </header>
+
+            {load.status === 'loading' && (
+              <div className="bilartillsalu-page__vehicle bilartillsalu-page__vehicle--skeleton" aria-hidden="true">
+                <div className="bilartillsalu-page__gallery"><div className="bilartillsalu-page__viewer" /></div>
+                <div className="bilartillsalu-page__details" />
               </div>
-              <div className="cars-page__trust-item">
-                <div className="cars-page__trust-icon">
-                  <CheckIcon />
-                </div>
-                <div>
-                  <h3 className="cars-page__trust-title">Färdiga för leverans</h3>
-                  <p className="cars-page__trust-desc">Besiktigade, provkörda och redo att rulla ut direkt.</p>
-                </div>
-              </div>
-              <div className="cars-page__trust-item">
-                <div className="cars-page__trust-icon">
+            )}
+
+            {load.status === 'error' && (
+              <div className="bilartillsalu-page__notice" role="status">
+                <span className="bb-icon-badge" aria-hidden="true"><CarSaleIcon /></span>
+                <h3>Vi kunde inte hämta bilarna just nu</h3>
+                <p>Försök igen om en stund, eller ring oss så berättar vi vad vi har i lager.</p>
+                <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
                   <PhoneIcon />
-                </div>
-                <div>
-                  <h3 className="cars-page__trust-title">Personlig kontakt</h3>
-                  <p className="cars-page__trust-desc">Tydlig rådgivning och personlig provkörning utan mellanhänder.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Car listings */}
-        <section className="cars-page__listings">
-          <div className="container">
-            <div className="cars-page__listings-header">
-              <div className="section-eyebrow">
-                <span className="eyebrow-line" aria-hidden="true" />
-                <span>Aktuellt lager</span>
-              </div>
-              <h2 className="cars-page__listings-title">Tillgängliga bilar just nu</h2>
-            </div>
-
-            {available.length === 0 ? (
-              <div className="cars-page__empty">
-                <div className="cars-page__empty-icon" aria-hidden="true">
-                  <ShieldHeartIcon />
-                </div>
-                <h3 className="cars-page__empty-title">Inga bilar i lager just nu</h3>
-                <p className="cars-page__empty-desc">
-                  Vi får löpande in nya noggrant kontrollerade bilar. Hör gärna av dig med dina önskemål så berättar vi vad som är på gång in.
-                </p>
-                <a href="tel:+46705533395" className="cars-page__btn cars-page__btn--primary">
-                  <PhoneIcon className="cars-page__btn-icon" />
                   <span>Ring oss på 070-553 33 95</span>
                 </a>
               </div>
-            ) : (
-              <div className="cars-grid">
-                {available.map(car => <CarCard key={car.id} car={car} />)}
+            )}
+
+            {load.status === 'ready' && available.length === 0 && (
+              <div className="bilartillsalu-page__notice bilartillsalu-page__empty">
+                <span className="bb-icon-badge" aria-hidden="true"><ShieldHeartIcon /></span>
+                <h3>Inga bilar i lager just nu</h3>
+                <p>
+                  Vi får löpande in nya noggrant kontrollerade bilar. Hör gärna av dig med dina önskemål så berättar vi vad som är på gång in.
+                </p>
+                <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
+                  <PhoneIcon />
+                  <span>Ring oss på 070-553 33 95</span>
+                </a>
+              </div>
+            )}
+
+            {available.length > 0 && (
+              <div className="bilartillsalu-page__vehicle-list">
+                {available.map((vehicle, index) => (
+                  <VehicleCard key={vehicle.id} vehicle={vehicle} eager={index === 0} onInquiry={openInquiry} />
+                ))}
               </div>
             )}
 
             {sold.length > 0 && (
-              <div className="cars-page__sold">
-                <div className="section-eyebrow">
-                  <span className="eyebrow-line" aria-hidden="true" />
-                  <span>Arkiv</span>
+              <section className="bilartillsalu-page__sold" aria-labelledby="bilartillsalu-sold-title">
+                <p className="bb-eyebrow">Arkiv</p>
+                <h2 className="bilartillsalu-page__sold-title" id="bilartillsalu-sold-title">Nyligen sålda bilar</h2>
+                <div className="bilartillsalu-page__vehicle-list bilartillsalu-page__vehicle-list--sold">
+                  {sold.map((vehicle) => (
+                    <VehicleCard key={vehicle.id} vehicle={vehicle} eager={false} onInquiry={openInquiry} />
+                  ))}
                 </div>
-                <h3 className="cars-page__sold-title">Nyligen sålda bilar</h3>
-                <div className="cars-grid cars-grid--sold">
-                  {sold.map(car => <CarCard key={car.id} car={car} />)}
-                </div>
-              </div>
+              </section>
             )}
           </div>
         </section>
 
-        {/* Closing card */}
-        <section className="cars-page__closing">
-          <div className="container">
-            <div className="cars-page__closing-card">
-              <div className="cars-page__closing-content">
-                <div className="section-eyebrow justify-center">
-                  <span className="eyebrow-line" aria-hidden="true" />
-                  <span>Frågor om våra bilar?</span>
-                  <span className="eyebrow-line" aria-hidden="true" />
-                </div>
-                <h2 className="cars-page__closing-title">Vill du provköra eller sälja din bil?</h2>
-                <p className="cars-page__closing-desc">
+        {/* 3. Closing reassurance */}
+        <section className="bilartillsalu-page__closing" aria-labelledby="bilartillsalu-closing-title">
+          <div className="bb-wrap">
+            <div className="bb-card--trust bilartillsalu-page__closing-card">
+              <span className="bb-icon-badge bb-card--trust__icon" aria-hidden="true"><ShieldHeartIcon /></span>
+              <div className="bb-card--trust__text">
+                <p className="bb-eyebrow">Frågor om våra bilar?</p>
+                <h2 className="bilartillsalu-page__closing-title" id="bilartillsalu-closing-title">Vill du provköra eller sälja din bil?</h2>
+                <p className="bb-lead">
                   Du är varmt välkommen att ringa oss eller svänga förbi verkstaden på Utmarksvägen i Brynäs för att titta på bilen eller diskutera bilaffärer.
                 </p>
-                <div className="cars-page__hero-actions justify-center">
-                  <a href="tel:+46705533395" className="cars-page__btn cars-page__btn--primary">
-                    <PhoneIcon className="cars-page__btn-icon" />
-                    <span>Ring 070-553 33 95</span>
-                  </a>
-                  <a
-                    href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cars-page__btn cars-page__btn--outline"
-                  >
-                    Hitta till oss
-                  </a>
-                </div>
+              </div>
+              <div className="bilartillsalu-page__closing-actions">
+                <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
+                  <PhoneIcon />
+                  <span>Ring 070-553 33 95</span>
+                </a>
+                <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" className="bb-btn bilartillsalu-page__btn-outline">
+                  <MapPinIcon />
+                  <span>Hitta till oss</span>
+                </a>
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <Footer />
+      {/* key remounts the modal when its context changes, so a vehicle
+          inquiry always starts from that vehicle's prefilled comment. */}
+      <BookingFormModal key={modal.comment} isOpen={modal.open} onClose={closeModal} initialComment={modal.comment} />
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }
