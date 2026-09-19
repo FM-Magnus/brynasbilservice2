@@ -1,0 +1,68 @@
+{
+  "arbetsbank-och-dackmaskiner": {
+    "titel": "Arbetsbänk och däckmaskiner",
+    "beskrivning": "En arbetsstation med verktyg, förvaring och utrustning för hjularbete.",
+    "kategori": "Verkstadsutrustning",
+    "alt": "Arbetsbänk, verktyg och däckmaskiner i Brynäs Bilservice verkstad"
+  },
+  "bil-med-oppen-motorhuv": {
+    "titel": "Bil på verkstadsgolvet",
+    "beskrivning": "En vy från verkstaden med arbetsplats och däckförvaring i bakgrunden.",
+    "kategori": "Verkstad",
+    "alt": "Bil med öppen motorhuv på verkstadsgolvet"
+  },
+  "billyftar-och-dackstall": {
+    "titel": "Lyftplatser och däckställ",
+    "beskrivning": "En öppen verkstadsvy med lyftar, verktyg och förvaring.",
+    "kategori": "Verkstad",
+    "alt": "Tomma billyftar med däckställ i verkstaden"
+  },
+  "bilplats-vid-dackstall": {
+    "titel": "Bilplats vid däckställen",
+    "beskrivning": "En verkstadsvy från serviceytan med däck- och fälgförvaring.",
+    "kategori": "Verkstad",
+    "alt": "Bilplats med däckställ och verktyg i verkstaden"
+  },
+  "bortre-billyftar": {
+    "titel": "Öppen yta vid lyftarna",
+    "beskrivning": "En vy mot verkstadens lyftplatser och däckförvaring.",
+    "kategori": "Verkstad",
+    "alt": "Tomma billyftar och arbetsyta i verkstaden"
+  },
+  "bred-oversikt-fran-lyft": {
+    "titel": "Överblick från lyften",
+    "beskrivning": "En bred vy över förvaring, arbetsytor och verkstadsgolvet.",
+    "kategori": "Verkstad",
+    "alt": "Överblick över verkstaden med däckställ och bil på golvet"
+  },
+  "dackmaskiner-och-verktyg": {
+    "titel": "Däckmaskiner och verktyg",
+    "beskrivning": "En arbetsstation med utrustning och förvaring för hjularbete.",
+    "kategori": "Däck & hjulservice",
+    "alt": "Däckmaskiner och verktyg vid en arbetsstation i verkstaden"
+  },
+  "dackstall-och-falgar": {
+    "titel": "Däckställ och fälgar",
+    "beskrivning": "En vy längs däckförvaringen med verkstadens arbetsutrustning.",
+    "kategori": "Däck & hjulservice",
+    "alt": "Däckställ med däck och fälgar i verkstaden"
+  },
+  "honda-pa-billyft": {
+    "titel": "Bil vid lyftplatsen",
+    "beskrivning": "En bild från verkstadsgolvet med arbetsyta och billyft.",
+    "kategori": "Verkstad",
+    "alt": "Bil på en lyftplats i verkstaden"
+  },
+  "oversikt-fran-lyft": {
+    "titel": "Verkstadsöversikt från lyften",
+    "beskrivning": "En vy över arbetsplatser, bil och däckförvaring från ovan.",
+    "kategori": "Verkstad",
+    "alt": "Verkstadsöversikt sedd från en lyft med bil och däckställ"
+  },
+  "servicegang-mot-kontor": {
+    "titel": "Servicegången i verkstaden",
+    "beskrivning": "En lång vy genom verkstadens arbetsyta och utrustning.",
+    "kategori": "Verkstad",
+    "alt": "Servicegång i verkstaden med utrustning och däckställ"
+  }
+}

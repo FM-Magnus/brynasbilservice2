@@ -45,7 +45,7 @@ The redesign public shell is independent from the frozen legacy layer.
    - `Kontakt` (`/kontakt`) — `ContactPage.tsx` + `ContactPage.css` (`.kontakt-page__*`). Complete. Rebuilt from approved mockup with zero dependency on `index.css`, mounts `PublicHeader` (overlay) + `PublicFooter`.
    - `Bärgning` (`/bargning`) — `BargningPage.tsx` + `BargningPage.css` (`.bargning-page__*`). Complete. Rebuilt from approved mockup with zero dependency on `index.css`, mounts `PublicHeader` + `PublicFooter`.
    - `Bilar till salu` (`/bilar-till-salu`) — `BilarTillSalu.tsx` + `BilarTillSalu.css` (`.bilartillsalu-page__*`). Complete. Zero dependency on `index.css`, mounts `PublicHeader` (overlay) + `PublicFooter`. Stock data lives outside the page in `client/src/data/vehicles.ts` behind `client/src/api/vehicles.ts` (backend-ready; see `docs/BACKEND_HANDOFF.md`).
-   - `Galleri` (`/galleri`) — `GalleryPage.tsx` + dedicated CSS.
+   - `Galleri` (`/galleri`) — `GalleryPage.tsx` + `GalleryPage.css` (`.galleri-page__*`). Complete. Zero dependency on `index.css`, mounts `PublicHeader` (overlay) + `PublicFooter`. Photos are folder-driven: `client/src/assets/galleri/` via `client/src/data/gallery.ts` → `client/src/api/gallery.ts` (see `LÄSMIG.md` in that folder).
    - `Biltjänster` (`/biltjanster`) — `BiltjansterPage.tsx` + `BiltjansterPage.css` (`.biltjanster-hub__*`). Complete. The service-catalog overview/index page; links out to every page in both families below.
 
 3. **"Bilservice" family (shared template)** — major service-hub pages, all structurally the same kind of page:
@@ -78,7 +78,7 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/styrning-kulleder` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
 | `/drivaxel-drivknutar` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceGuideTemplate.css` |
 | `/bargning` | Unique | Complete | `BargningPage.css` (`.bargning-page__*`), mounts `PublicHeader` + `PublicFooter` |
-| `/galleri` | Unique | Step 6: Rebuild as unique page | Legacy dependent |
+| `/galleri` | Unique | Complete | `GalleryPage.css` (`.galleri-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/bilar-till-salu` | Unique | Complete | `BilarTillSalu.css` (`.bilartillsalu-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter` |
 | `/admin` | Admin | Internal utility | Admin local |

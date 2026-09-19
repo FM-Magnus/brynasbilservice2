@@ -1,430 +1,351 @@
 import { useEffect, useRef, useState } from 'react'
-import { Header } from '../components/layout/Header'
-import { Footer } from '../components/layout/Footer'
+import type { KeyboardEvent, PointerEvent } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import { PublicHeader } from '../components/layout/PublicHeader'
+import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
+import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
+import { getGalleryImages } from '../api/gallery'
+import type { GalleryImage } from '../types/gallery'
 
-import workbenchWebp from '../assets/images/gallery/workshop/workshop-workbench-and-tire-machines.webp'
-import workbenchJpg from '../assets/images/gallery/workshop/workshop-workbench-and-tire-machines.jpg'
-import workbenchThumbWebp from '../assets/images/gallery/workshop/workshop-workbench-and-tire-machines-thumb.webp'
-import workbenchThumbJpg from '../assets/images/gallery/workshop/workshop-workbench-and-tire-machines-thumb.jpg'
-import openHoodWebp from '../assets/images/gallery/workshop/workshop-car-open-hood.webp'
-import openHoodJpg from '../assets/images/gallery/workshop/workshop-car-open-hood.jpg'
-import openHoodThumbWebp from '../assets/images/gallery/workshop/workshop-car-open-hood-thumb.webp'
-import openHoodThumbJpg from '../assets/images/gallery/workshop/workshop-car-open-hood-thumb.jpg'
-import liftsWebp from '../assets/images/gallery/workshop/workshop-lifts-and-tire-racks.webp'
-import liftsJpg from '../assets/images/gallery/workshop/workshop-lifts-and-tire-racks.jpg'
-import liftsThumbWebp from '../assets/images/gallery/workshop/workshop-lifts-and-tire-racks-thumb.webp'
-import liftsThumbJpg from '../assets/images/gallery/workshop/workshop-lifts-and-tire-racks-thumb.jpg'
-import carBayWebp from '../assets/images/gallery/workshop/workshop-car-bay-and-tire-racks.webp'
-import carBayJpg from '../assets/images/gallery/workshop/workshop-car-bay-and-tire-racks.jpg'
-import carBayThumbWebp from '../assets/images/gallery/workshop/workshop-car-bay-and-tire-racks-thumb.webp'
-import carBayThumbJpg from '../assets/images/gallery/workshop/workshop-car-bay-and-tire-racks-thumb.jpg'
-import emptyLiftsWebp from '../assets/images/gallery/workshop/workshop-empty-lifts.webp'
-import emptyLiftsJpg from '../assets/images/gallery/workshop/workshop-empty-lifts.jpg'
-import emptyLiftsThumbWebp from '../assets/images/gallery/workshop/workshop-empty-lifts-thumb.webp'
-import emptyLiftsThumbJpg from '../assets/images/gallery/workshop/workshop-empty-lifts-thumb.jpg'
-import overheadStorageWebp from '../assets/images/gallery/workshop/workshop-overhead-tire-storage.webp'
-import overheadStorageJpg from '../assets/images/gallery/workshop/workshop-overhead-tire-storage.jpg'
-import overheadStorageThumbWebp from '../assets/images/gallery/workshop/workshop-overhead-tire-storage-thumb.webp'
-import overheadStorageThumbJpg from '../assets/images/gallery/workshop/workshop-overhead-tire-storage-thumb.jpg'
-import tireMachineWebp from '../assets/images/gallery/workshop/workshop-tire-machine-and-tools.webp'
-import tireMachineJpg from '../assets/images/gallery/workshop/workshop-tire-machine-and-tools.jpg'
-import tireMachineThumbWebp from '../assets/images/gallery/workshop/workshop-tire-machine-and-tools-thumb.webp'
-import tireMachineThumbJpg from '../assets/images/gallery/workshop/workshop-tire-machine-and-tools-thumb.jpg'
-import tireRacksWebp from '../assets/images/gallery/workshop/workshop-tire-racks-and-rims.webp'
-import tireRacksJpg from '../assets/images/gallery/workshop/workshop-tire-racks-and-rims.jpg'
-import tireRacksThumbWebp from '../assets/images/gallery/workshop/workshop-tire-racks-and-rims-thumb.webp'
-import tireRacksThumbJpg from '../assets/images/gallery/workshop/workshop-tire-racks-and-rims-thumb.jpg'
-import carLiftWebp from '../assets/images/gallery/workshop/workshop-car-on-lift.webp'
-import carLiftJpg from '../assets/images/gallery/workshop/workshop-car-on-lift.jpg'
-import carLiftThumbWebp from '../assets/images/gallery/workshop/workshop-car-on-lift-thumb.webp'
-import carLiftThumbJpg from '../assets/images/gallery/workshop/workshop-car-on-lift-thumb.jpg'
-import overheadBayWebp from '../assets/images/gallery/workshop/workshop-overhead-car-bay.webp'
-import overheadBayJpg from '../assets/images/gallery/workshop/workshop-overhead-car-bay.jpg'
-import overheadBayThumbWebp from '../assets/images/gallery/workshop/workshop-overhead-car-bay-thumb.webp'
-import overheadBayThumbJpg from '../assets/images/gallery/workshop/workshop-overhead-car-bay-thumb.jpg'
-import serviceAisleWebp from '../assets/images/gallery/workshop/workshop-service-aisle.webp'
-import serviceAisleJpg from '../assets/images/gallery/workshop/workshop-service-aisle.jpg'
-import serviceAisleThumbWebp from '../assets/images/gallery/workshop/workshop-service-aisle-thumb.webp'
-import serviceAisleThumbJpg from '../assets/images/gallery/workshop/workshop-service-aisle-thumb.jpg'
+import '../styles/design-tokens.css'
+import '../styles/shared-elements.css'
+import './GalleryPage.css'
 
-interface GalleryItem {
-  id: string
-  imageWebp: string
-  imageJpg: string
-  thumbnailWebp: string
-  thumbnailJpg: string
-  alt: string
-  category: string
-  title: string
-  description: string
+// Images come from src/assets/galleri/ (see LÄSMIG.md there) via api/gallery.ts —
+// never import gallery images or the data module here.
+
+const PHONE_HREF = 'tel:+46705533395'
+const STAGE_SIZES = '(min-width: 1440px) 920px, (min-width: 1024px) 70vw, 92vw'
+const SWIPE_MIN_PX = 40
+
+// React 18.2 only forwards fetch priority as a lowercase attribute.
+const HIGH_PRIORITY = { fetchpriority: 'high' } as Record<string, string>
+
+type LoadState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; images: GalleryImage[] }
+
+const srcSet = (image: GalleryImage, format: 'webp' | 'jpg') =>
+  image.thumb.width === image.main.width
+    ? `${image.main[format]} ${image.main.width}w`
+    : `${image.thumb[format]} ${image.thumb.width}w, ${image.main[format]} ${image.main.width}w`
+
+const pad = (value: number, total: number) => String(value).padStart(Math.max(2, String(total).length), '0')
+
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+function preload(image: GalleryImage) {
+  const img = new Image()
+  img.sizes = STAGE_SIZES
+  img.srcset = srcSet(image, 'webp')
+  img.src = image.main.jpg
 }
 
-const galleryItems: GalleryItem[] = [
-  {
-    id: 'arbetsbank-och-dackmaskiner',
-    imageWebp: workbenchWebp,
-    imageJpg: workbenchJpg,
-    thumbnailWebp: workbenchThumbWebp,
-    thumbnailJpg: workbenchThumbJpg,
-    alt: 'Arbetsbänk, verktyg och däckmaskiner i Brynäs Bilservice verkstad',
-    category: 'Verkstadsutrustning',
-    title: 'Arbetsbänk och däckmaskiner',
-    description: 'En arbetsstation med verktyg, förvaring och utrustning för hjularbete.'
-  },
-  {
-    id: 'bil-med-oppen-motorhuv',
-    imageWebp: openHoodWebp,
-    imageJpg: openHoodJpg,
-    thumbnailWebp: openHoodThumbWebp,
-    thumbnailJpg: openHoodThumbJpg,
-    alt: 'Bil med öppen motorhuv på verkstadsgolvet',
-    category: 'Verkstad',
-    title: 'Bil på verkstadsgolvet',
-    description: 'En vy från verkstaden med arbetsplats och däckförvaring i bakgrunden.'
-  },
-  {
-    id: 'billyftar-och-dackstall',
-    imageWebp: liftsWebp,
-    imageJpg: liftsJpg,
-    thumbnailWebp: liftsThumbWebp,
-    thumbnailJpg: liftsThumbJpg,
-    alt: 'Tomma billyftar med däckställ i verkstaden',
-    category: 'Verkstad',
-    title: 'Lyftplatser och däckställ',
-    description: 'En öppen verkstadsvy med lyftar, verktyg och förvaring.'
-  },
-  {
-    id: 'bilplats-vid-dackstall',
-    imageWebp: carBayWebp,
-    imageJpg: carBayJpg,
-    thumbnailWebp: carBayThumbWebp,
-    thumbnailJpg: carBayThumbJpg,
-    alt: 'Bilplats med däckställ och verktyg i verkstaden',
-    category: 'Verkstad',
-    title: 'Bilplats vid däckställen',
-    description: 'En verkstadsvy från serviceytan med däck- och fälgförvaring.'
-  },
-  {
-    id: 'bortre-billyftar',
-    imageWebp: emptyLiftsWebp,
-    imageJpg: emptyLiftsJpg,
-    thumbnailWebp: emptyLiftsThumbWebp,
-    thumbnailJpg: emptyLiftsThumbJpg,
-    alt: 'Tomma billyftar och arbetsyta i verkstaden',
-    category: 'Verkstad',
-    title: 'Öppen yta vid lyftarna',
-    description: 'En vy mot verkstadens lyftplatser och däckförvaring.'
-  },
-  {
-    id: 'bred-oversikt-fran-lyft',
-    imageWebp: overheadStorageWebp,
-    imageJpg: overheadStorageJpg,
-    thumbnailWebp: overheadStorageThumbWebp,
-    thumbnailJpg: overheadStorageThumbJpg,
-    alt: 'Överblick över verkstaden med däckställ och bil på golvet',
-    category: 'Verkstad',
-    title: 'Överblick från lyften',
-    description: 'En bred vy över förvaring, arbetsytor och verkstadsgolvet.'
-  },
-  {
-    id: 'dackmaskiner-och-verktyg',
-    imageWebp: tireMachineWebp,
-    imageJpg: tireMachineJpg,
-    thumbnailWebp: tireMachineThumbWebp,
-    thumbnailJpg: tireMachineThumbJpg,
-    alt: 'Däckmaskiner och verktyg vid en arbetsstation i verkstaden',
-    category: 'Däck & hjulservice',
-    title: 'Däckmaskiner och verktyg',
-    description: 'En arbetsstation med utrustning och förvaring för hjularbete.'
-  },
-  {
-    id: 'dackstall-och-falgar',
-    imageWebp: tireRacksWebp,
-    imageJpg: tireRacksJpg,
-    thumbnailWebp: tireRacksThumbWebp,
-    thumbnailJpg: tireRacksThumbJpg,
-    alt: 'Däckställ med däck och fälgar i verkstaden',
-    category: 'Däck & hjulservice',
-    title: 'Däckställ och fälgar',
-    description: 'En vy längs däckförvaringen med verkstadens arbetsutrustning.'
-  },
-  {
-    id: 'honda-pa-billyft',
-    imageWebp: carLiftWebp,
-    imageJpg: carLiftJpg,
-    thumbnailWebp: carLiftThumbWebp,
-    thumbnailJpg: carLiftThumbJpg,
-    alt: 'Bil på en lyftplats i verkstaden',
-    category: 'Verkstad',
-    title: 'Bil vid lyftplatsen',
-    description: 'En bild från verkstadsgolvet med arbetsyta och billyft.'
-  },
-  {
-    id: 'oversikt-fran-lyft',
-    imageWebp: overheadBayWebp,
-    imageJpg: overheadBayJpg,
-    thumbnailWebp: overheadBayThumbWebp,
-    thumbnailJpg: overheadBayThumbJpg,
-    alt: 'Verkstadsöversikt sedd från en lyft med bil och däckställ',
-    category: 'Verkstad',
-    title: 'Verkstadsöversikt från lyften',
-    description: 'En vy över arbetsplatser, bil och däckförvaring från ovan.'
-  },
-  {
-    id: 'servicegang-mot-kontor',
-    imageWebp: serviceAisleWebp,
-    imageJpg: serviceAisleJpg,
-    thumbnailWebp: serviceAisleThumbWebp,
-    thumbnailJpg: serviceAisleThumbJpg,
-    alt: 'Servicegång i verkstaden med utrustning och däckställ',
-    category: 'Verkstad',
-    title: 'Servicegången i verkstaden',
-    description: 'En lång vy genom verkstadens arbetsyta och utrustning.'
+interface StageProps {
+  image: GalleryImage
+  eager: boolean
+  onSwipe: (direction: 1 | -1) => void
+  onLoaded: () => void
+}
+
+function GalleryStage({ image, eager, onSwipe, onLoaded }: StageProps) {
+  const start = useRef<{ x: number; y: number } | null>(null)
+
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse') return
+    start.current = { x: event.clientX, y: event.clientY }
   }
-]
+  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    const origin = start.current
+    start.current = null
+    if (!origin) return
+    const dx = event.clientX - origin.x
+    const dy = event.clientY - origin.y
+    if (Math.abs(dx) >= SWIPE_MIN_PX && Math.abs(dx) > Math.abs(dy)) onSwipe(dx < 0 ? 1 : -1)
+  }
+
+  return (
+    <div
+      className="galleri-page__stage"
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onPointerCancel={() => { start.current = null }}
+    >
+      <picture key={image.slug}>
+        <source type="image/webp" srcSet={srcSet(image, 'webp')} sizes={STAGE_SIZES} />
+        <img
+          className="galleri-page__stage-img"
+          src={image.main.jpg}
+          srcSet={srcSet(image, 'jpg')}
+          sizes={STAGE_SIZES}
+          alt={image.alt}
+          width={image.main.width}
+          height={image.main.height}
+          loading="eager"
+          decoding="async"
+          draggable={false}
+          onLoad={onLoaded}
+          {...(eager ? HIGH_PRIORITY : {})}
+        />
+      </picture>
+    </div>
+  )
+}
+
+interface CaptionProps {
+  image: GalleryImage
+  index: number
+  total: number
+  onStep: (direction: 1 | -1) => void
+}
+
+function GalleryCaption({ image, index, total, onStep }: CaptionProps) {
+  return (
+    <div className="galleri-page__caption">
+      <div className="galleri-page__caption-text">
+        <p className="galleri-page__category">{image.category}</p>
+        <p className="galleri-page__title">{image.title}</p>
+        <p className="galleri-page__description">{image.description || ' '}</p>
+      </div>
+      {total > 1 && (
+        <div className="galleri-page__nav">
+          <button type="button" className="galleri-page__arrow galleri-page__arrow--prev" onClick={() => onStep(-1)} aria-label="Föregående bild">
+            <ArrowRightIcon />
+          </button>
+          <span className="galleri-page__counter" aria-hidden="true">
+            {pad(index + 1, total)} <span className="galleri-page__counter-sep">/</span> {pad(total, total)}
+          </span>
+          <button type="button" className="galleri-page__arrow galleri-page__arrow--next" onClick={() => onStep(1)} aria-label="Nästa bild">
+            <ArrowRightIcon />
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+interface StripProps {
+  images: GalleryImage[]
+  activeIndex: number
+  onSelect: (index: number, focus: boolean) => void
+}
+
+function ThumbnailStrip({ images, activeIndex, onSelect }: StripProps) {
+  const stripRef = useRef<HTMLDivElement>(null)
+
+  // Keep the active thumbnail visible by scrolling the strip itself — never
+  // scrollIntoView, which would also scroll the page.
+  useEffect(() => {
+    const strip = stripRef.current
+    const thumb = strip?.children[activeIndex] as HTMLElement | undefined
+    if (!strip || !thumb) return
+    const left = thumb.offsetLeft - strip.offsetLeft
+    const right = left + thumb.offsetWidth
+    const padding = 32
+    let target: number | null = null
+    if (left - padding < strip.scrollLeft) target = left - padding
+    else if (right + padding > strip.scrollLeft + strip.clientWidth) target = right + padding - strip.clientWidth
+    if (target !== null) strip.scrollTo({ left: target, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+  }, [activeIndex])
+
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const keys: Record<string, number> = {
+      ArrowLeft: activeIndex - 1,
+      ArrowRight: activeIndex + 1,
+      Home: 0,
+      End: images.length - 1,
+    }
+    if (!(event.key in keys)) return
+    event.preventDefault()
+    event.stopPropagation()
+    onSelect(keys[event.key], true)
+  }
+
+  return (
+    <div ref={stripRef} className="galleri-page__strip" role="group" aria-label="Bildminiatyrer" onKeyDown={onKeyDown}>
+      {images.map((image, index) => (
+        <button
+          key={image.slug}
+          type="button"
+          className="galleri-page__thumb"
+          aria-pressed={index === activeIndex}
+          aria-label={`Visa bild ${index + 1} av ${images.length}: ${image.title}`}
+          tabIndex={index === activeIndex ? 0 : -1}
+          onClick={() => onSelect(index, false)}
+        >
+          <picture>
+            <source type="image/webp" srcSet={image.thumb.webp} />
+            <img src={image.thumb.jpg} alt="" width={image.thumb.width} height={image.thumb.height} loading="lazy" decoding="async" draggable={false} />
+          </picture>
+        </button>
+      ))}
+    </div>
+  )
+}
 
 export default function GalleryPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [isDragging, setIsDragging] = useState(false)
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([])
-  const dragState = useRef({ pointerId: null as number | null, startX: 0, startScrollLeft: 0, didDrag: false })
-
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
+  const [load, setLoad] = useState<LoadState>({ status: 'loading' })
+  const [modalOpen, setModalOpen] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const preloadedFor = useRef<string | null>(null)
+  const firstPaint = useRef(true)
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    let cancelled = false
+    getGalleryImages()
+      .then((images) => { if (!cancelled) setLoad({ status: 'ready', images }) })
+      .catch(() => { if (!cancelled) setLoad({ status: 'error' }) })
+    return () => { cancelled = true }
   }, [])
 
-  const selectImage = (index: number, moveFocus = false) => {
-    const nextIndex = (index + galleryItems.length) % galleryItems.length
-    setSelectedIndex(nextIndex)
+  const images = load.status === 'ready' ? load.images : []
+  const total = images.length
+  // The URL (?bild=slug) is the single source of the selection; unknown or
+  // missing slugs fall back to the first image.
+  const requested = images.findIndex((image) => image.slug === searchParams.get('bild'))
+  const activeIndex = requested >= 0 ? requested : 0
+  const active = images[activeIndex]
 
-    window.requestAnimationFrame(() => {
-      const thumbnail = thumbnailRefs.current[nextIndex]
-      thumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-      if (moveFocus) thumbnail?.focus()
-    })
+  const select = (index: number, focusThumb: boolean) => {
+    if (!total) return
+    const next = (index + total) % total
+    const params = new URLSearchParams(searchParams)
+    params.set('bild', images[next].slug)
+    setSearchParams(params, { replace: true, preventScrollReset: true })
+    if (focusThumb) {
+      window.requestAnimationFrame(() => {
+        document.querySelectorAll<HTMLButtonElement>('.galleri-page__thumb')[next]?.focus({ preventScroll: true })
+      })
+    }
+  }
+  const step = (direction: 1 | -1) => select(activeIndex + direction, false)
+
+  // Preload the neighbours once the current image has loaded (event, not effect).
+  const onStageLoaded = () => {
+    if (!active || preloadedFor.current === active.slug) return
+    preloadedFor.current = active.slug
+    firstPaint.current = false
+    if (total > 1) {
+      preload(images[(activeIndex + 1) % total])
+      preload(images[(activeIndex - 1 + total) % total])
+    }
   }
 
-  const moveSelection = (direction: number, moveFocus = false) => {
-    // The viewer wraps intentionally, so the gallery can be explored continuously.
-    selectImage(selectedIndex + direction, moveFocus)
+  const onViewerKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'ArrowRight') { event.preventDefault(); step(1) }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1) }
   }
 
-  const selectedItem = galleryItems[selectedIndex]
+  const openBooking = () => setModalOpen(true)
 
   return (
     <>
-      <Header onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openBooking} variant="overlay" />
 
-      <main className="about-page" id="main-content">
-        {/* Hero section */}
-        <section className="about-page__hero" aria-labelledby="gallery-hero-title">
-          <div className="container">
-            <div className="about-page__hero-grid">
-              <div className="about-page__hero-content">
-                <div className="section-eyebrow">
-                  <span className="eyebrow-line" aria-hidden="true" />
-                  Bilder &amp; Verkstadsmiljö
-                </div>
-                <h1 className="about-page__hero-title" id="gallery-hero-title">
-                  Bilder från Brynäs Bilservice
+      <main className="galleri-page" id="main-content">
+        {/* 1. Stage: heading + viewer + strip (this is the hero) */}
+        <section className="galleri-page__stage-section" aria-labelledby="galleri-title">
+          <div className="bb-wrap">
+            <header className="galleri-page__intro">
+              <div className="galleri-page__intro-heading">
+                <p className="bb-eyebrow bb-eyebrow--dark">Bilder &amp; Verkstadsmiljö</p>
+                <h1 className="bb-h1 galleri-page__h1" id="galleri-title">
+                  Bilder från <span className="bb-accent">Brynäs Bilservice</span>
                 </h1>
-                <p className="about-page__hero-lead">
+              </div>
+              <div className="galleri-page__intro-body">
+                <p className="bb-lead--dark galleri-page__lead">
                   Ta en titt in i vår verkstad och däckavdelning på Utmarksvägen i Brynäs. Här ser du lokalerna, utrustningen och miljön där vi tar hand om din bil.
                 </p>
-                <div className="about-page__hero-actions">
-                  <button
-                    type="button"
-                    onClick={openModal}
-                    className="about-page__btn about-page__btn--primary"
-                  >
-                    <span>Boka tid</span>
-                    <span className="about-page__btn-arrow" aria-hidden="true">
-                      <ArrowRightIcon className="w-4 h-4" />
-                    </span>
+                <div className="galleri-page__actions">
+                  <button type="button" className="bb-btn bb-btn--teal galleri-page__book" onClick={openBooking}>
+                    Boka tid
                   </button>
-                  <a
-                    href="tel:0705533395"
-                    className="about-page__btn about-page__btn--outline"
-                  >
-                    <PhoneIcon className="w-4 h-4 text-teal-400" />
+                  <a href={PHONE_HREF} className="bb-btn bb-btn--ember">
+                    <PhoneIcon />
                     <span>Ring: 070-553 33 95</span>
                   </a>
                 </div>
               </div>
-              <div className="about-page__hero-visual">
-                <div className="about-page__hero-card">
-                  <picture>
-                    <source srcSet={workbenchWebp} type="image/webp" />
-                    <img
-                      src={workbenchJpg}
-                      alt="Brynäs Bilservice verkstad med bilar och utrustning"
-                      className="about-page__hero-img"
-                    />
-                  </picture>
-                  <div className="about-page__hero-badge">Grundat 2021</div>
-                </div>
+            </header>
+
+            {load.status === 'loading' && (
+              <div className="galleri-page__viewer galleri-page__viewer--loading" aria-hidden="true">
+                <div className="galleri-page__stage" />
+                <div className="galleri-page__caption" />
+                <div className="galleri-page__strip" />
               </div>
-            </div>
+            )}
+
+            {load.status === 'error' && (
+              <div className="galleri-page__notice" role="status">
+                <p>Vi kunde inte visa bilderna just nu. Försök igen om en stund, eller ring oss.</p>
+                <a href={PHONE_HREF} className="bb-btn bb-btn--ember">
+                  <PhoneIcon />
+                  <span>Ring: 070-553 33 95</span>
+                </a>
+              </div>
+            )}
+
+            {load.status === 'ready' && total === 0 && (
+              <div className="galleri-page__notice" role="status">
+                <p>Här kommer snart bilder från verkstaden. Välkommen förbi Utmarksvägen 21B så visar vi gärna runt.</p>
+              </div>
+            )}
+
+            {active && (
+              <div
+                className="galleri-page__viewer"
+                role="region"
+                aria-roledescription="bildgalleri"
+                aria-label="Bildgalleri: verkstaden i bilder"
+                tabIndex={0}
+                onKeyDown={onViewerKeyDown}
+              >
+                <GalleryStage image={active} eager={firstPaint.current} onSwipe={step} onLoaded={onStageLoaded} />
+                <GalleryCaption image={active} index={activeIndex} total={total} onStep={step} />
+                {total > 1 && <ThumbnailStrip images={images} activeIndex={activeIndex} onSelect={select} />}
+                <p className="galleri-page__sr-only" aria-live="polite">
+                  {`Bild ${activeIndex + 1} av ${total}: ${active.title}`}
+                </p>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* Workshop gallery section */}
-        <section className="about-page__gallery" aria-labelledby="gallery-title">
-          <div className="container">
-            <div className="about-page__gallery-intro">
-              <div className="section-eyebrow section-eyebrow--dark">
-                <span className="eyebrow-line" aria-hidden="true" />
-                Vår verkstad i bilder
-              </div>
-              <h2 className="about-page__section-title" id="gallery-title">
-                Ta en titt inne hos oss
-              </h2>
-              <p className="about-page__gallery-lead">
-                Utforska verkstadsmiljön i din egen takt. Välj en bild eller dra i bildremsan för att se mer.
-              </p>
-            </div>
-
-            <div className="gallery-viewer">
-              <div className="gallery-viewer__main" aria-live="polite">
-                <picture>
-                  <source srcSet={selectedItem.imageWebp} type="image/webp" />
-                  <img src={selectedItem.imageJpg} alt={selectedItem.alt} className="gallery-viewer__image" />
-                </picture>
-                <div className="gallery-viewer__meta">
-                  <span>{selectedItem.category}</span>
-                  <strong>{selectedItem.title}</strong>
-                  <p>{selectedItem.description}</p>
-                </div>
-                <span className="gallery-viewer__count" aria-label={`Bild ${selectedIndex + 1} av ${galleryItems.length}`}>
-                  {String(selectedIndex + 1).padStart(2, '0')} <i aria-hidden="true" /> {String(galleryItems.length).padStart(2, '0')}
-                </span>
-              </div>
-
-              <div className="gallery-viewer__controls" aria-label="Navigera i bildgalleriet">
-                <button type="button" className="gallery-viewer__arrow" onClick={() => moveSelection(-1, true)} aria-label="Visa föregående bild">
-                  <span aria-hidden="true">←</span>
-                </button>
-                <div
-                  ref={carouselRef}
-                  className={`gallery-viewer__carousel${isDragging ? ' is-dragging' : ''}`}
-                  role="region"
-                  aria-label="Bildminiatyrer. Använd vänster och höger piltangent för att byta bild."
-                  tabIndex={0}
-                  onKeyDown={(event) => {
-                    if (event.key === 'ArrowLeft') { event.preventDefault(); moveSelection(-1, true) }
-                    if (event.key === 'ArrowRight') { event.preventDefault(); moveSelection(1, true) }
-                  }}
-                  onWheel={(event) => {
-                    if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-                      event.currentTarget.scrollLeft += event.deltaY
-                      event.preventDefault()
-                    }
-                  }}
-                  onPointerDown={(event) => {
-                    // Thumbnail buttons keep their native click/tap behaviour; drag the track between them.
-                    if ((event.target as HTMLElement).closest('button')) return
-                    const carousel = event.currentTarget
-                    carousel.setPointerCapture(event.pointerId)
-                    dragState.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: carousel.scrollLeft, didDrag: false }
-                    setIsDragging(true)
-                  }}
-                  onPointerMove={(event) => {
-                    const drag = dragState.current
-                    if (drag.pointerId !== event.pointerId) return
-                    const distance = event.clientX - drag.startX
-                    if (Math.abs(distance) > 5) drag.didDrag = true
-                    event.currentTarget.scrollLeft = drag.startScrollLeft - distance
-                  }}
-                  onPointerUp={(event) => {
-                    const drag = dragState.current
-                    if (drag.pointerId !== event.pointerId) return
-                    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId)
-                    dragState.current.pointerId = null
-                    setIsDragging(false)
-                  }}
-                  onPointerCancel={() => { dragState.current.pointerId = null; setIsDragging(false) }}
-                >
-                  {galleryItems.map((item, index) => (
-                    <button
-                      ref={(element) => { thumbnailRefs.current[index] = element }}
-                      type="button"
-                      key={item.id}
-                      className={`gallery-viewer__thumbnail${selectedIndex === index ? ' is-active' : ''}`}
-                      onClick={() => selectImage(index)}
-                      aria-label={`Visa bild ${index + 1}: ${item.title}`}
-                      aria-pressed={selectedIndex === index}
-                    >
-                      <picture>
-                        <source srcSet={item.thumbnailWebp} type="image/webp" />
-                        <img src={item.thumbnailJpg} alt="" />
-                      </picture>
-                    </button>
-                  ))}
-                </div>
-                <button type="button" className="gallery-viewer__arrow" onClick={() => moveSelection(1, true)} aria-label="Visa nästa bild">
-                  <span aria-hidden="true">→</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Closing CTA */}
-        <section className="about-page__cta" aria-labelledby="cta-title">
-          <div className="container">
-            <div className="about-page__cta-card">
-              <div className="about-page__cta-content">
-                <div className="section-eyebrow">
-                  <span className="eyebrow-line" aria-hidden="true" />
-                  Välkommen till oss
-                </div>
-                <h2 className="about-page__cta-title" id="cta-title">
-                  Redo att boka service eller reparation?
-                </h2>
-                <p className="about-page__cta-desc">
+        {/* 2. Closing reassurance */}
+        <section className="galleri-page__closing" aria-labelledby="galleri-closing-title">
+          <div className="bb-wrap">
+            <div className="bb-card--trust galleri-page__closing-card">
+              <span className="bb-icon-badge bb-card--trust__icon" aria-hidden="true"><ShieldHeartIcon /></span>
+              <div className="bb-card--trust__text">
+                <p className="bb-eyebrow">Välkommen till oss</p>
+                <h2 className="galleri-page__closing-title" id="galleri-closing-title">Redo att boka service eller reparation?</h2>
+                <p className="bb-lead">
                   Har du frågor om din bil eller vill du boka tid? Skicka en förfrågan via formuläret eller ring direkt till verkstaden på Utmarksvägen.
                 </p>
-                <div className="about-page__cta-actions">
-                  <button
-                    type="button"
-                    onClick={openModal}
-                    className="about-page__btn about-page__btn--primary"
-                  >
-                    <span>Boka tid nu</span>
-                    <span className="about-page__btn-arrow" aria-hidden="true">
-                      <ArrowRightIcon className="w-4 h-4" />
-                    </span>
-                  </button>
-                  <a
-                    href="/tjanster"
-                    className="about-page__btn about-page__btn--secondary"
-                  >
-                    <span>Se alla tjänster</span>
-                  </a>
-                  <a
-                    href="tel:0705533395"
-                    className="about-page__btn about-page__btn--outline"
-                  >
-                    <PhoneIcon className="w-4 h-4 text-teal-400" />
-                    <span>Ring: 070-553 33 95</span>
-                  </a>
-                </div>
+              </div>
+              <div className="galleri-page__closing-actions">
+                <button type="button" className="bb-btn bb-btn--ember-solid" onClick={openBooking}>
+                  Boka tid nu
+                </button>
+                <Link to="/biltjanster" className="bb-btn galleri-page__btn-outline">
+                  Se alla tjänster
+                </Link>
+                <a href={PHONE_HREF} className="bb-btn galleri-page__btn-outline">
+                  <PhoneIcon />
+                  <span>Ring: 070-553 33 95</span>
+                </a>
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <Footer />
+      <BookingFormModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

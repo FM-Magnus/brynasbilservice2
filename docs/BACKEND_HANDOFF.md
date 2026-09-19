@@ -484,3 +484,62 @@ The test database is emptied and reseeded before each run.
 - A dependency won't install or run on Node 16 / CentOS 7.
 - The Apache or nginx config would need changing.
 - The admin Bookings or Services tabs stop working in any phase.
+
+---
+
+## 7. Feature: gallery images (`/galleri`)
+
+### 7.1 Today: photos come from a folder in the repo
+
+`/galleri` shows every JPG, PNG or WebP in `client/src/assets/galleri/`.
+
+- **Variants:** `vite-imagetools` generates a `main` (≤1920px) and a `thumb` (≤640px) for each photo, in WebP and JPG, at build time.
+- **Captions** live in `bildtexter.json` in the same folder.
+- **Adding or removing a photo** is a file change followed by a build and deploy. See `client/src/assets/galleri/LÄSMIG.md`.
+- **No backend is involved yet.**
+
+### 7.2 Contract (`client/src/types/gallery.ts`)
+
+```json
+{
+  "id": 11,
+  "slug": "servicegang-mot-kontor",
+  "title": "Servicegången i verkstaden",
+  "description": "En lång vy genom verkstadens arbetsyta och utrustning.",
+  "category": "Verkstad",
+  "alt": "Servicegång i verkstaden med utrustning och däckställ",
+  "main":  { "webp": "/brynasbilservice/api/uploads/gallery/11-main.webp",  "jpg": "…-main.jpg",  "width": 1920, "height": 1278 },
+  "thumb": { "webp": "/brynasbilservice/api/uploads/gallery/11-thumb.webp", "jpg": "…-thumb.jpg", "width": 640,  "height": 426 }
+}
+```
+
+- The aspect ratio is free; the page never crops.
+- `slug` is used in page URLs (`/galleri?bild={slug}`), so it must stay stable once published.
+
+### 7.3 Endpoints (proposal)
+
+| Method | Path | Returns / body |
+|---|---|---|
+| GET | `/api/gallery` | `{ "images": GalleryImage[] }`, sorted by position. Public, `Cache-Control: public, max-age=60` |
+| GET | `/api/admin/gallery` | Same list, admin session required |
+| POST | `/api/admin/gallery` | multipart: `mainWebp`, `mainJpg`, `thumbWebp`, `thumbJpg`, plus `title`, `description`, `category`, `alt`, `width`, `height`, `noPeopleConfirmed=true` → `201` + image |
+| PATCH | `/api/admin/gallery/:id` | Any of `title`, `description`, `category`, `alt` |
+| PUT | `/api/admin/gallery/order` | `{ "imageIds": [...] }`, which must contain exactly all images |
+| DELETE | `/api/admin/gallery/:id` | `204`; also deletes the four files |
+
+- **Uploads:** same pipeline and storage as vehicle photos (§3.5, §6.2): resized in the browser, files outside `$DEPLOY_PATH`, served under `/api/uploads/gallery/`.
+- **Validation:** magic bytes, ≤2 MB per file, and a required, non-empty `alt`.
+
+### 7.4 Content rule: no people
+
+Gallery photos must not show people: no faces, customers or staff.
+
+- The admin upload form should have a required checkbox, **"Bilden innehåller inga personer"**, sent as `noPeopleConfirmed=true`.
+- The server rejects uploads without it (`422`).
+- This is a policy the owner confirms. The server cannot verify it.
+
+### 7.5 Switching from the folder to the backend
+
+1. Deploy the endpoints.
+2. Upload the folder's current photos once, as the starting set.
+3. Build with `VITE_GALLERY_SOURCE=api`. The page only ever calls `getGalleryImages()` (`client/src/api/gallery.ts`), so nothing else changes.

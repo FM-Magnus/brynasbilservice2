@@ -34,7 +34,8 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
     - Bärgning (`/bargning`): Complete (`BargningPage.tsx` / `BargningPage.css`, `.bargning-page__*`), mounts `PublicHeader` + `PublicFooter`.
     - Biltjänster (`/biltjanster`): Complete (`BiltjansterPage.tsx` / `BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter`.
     - Bilar till salu (`/bilar-till-salu`): Complete (`BilarTillSalu.tsx` / `BilarTillSalu.css`, `.bilartillsalu-page__*`), stock via `api/vehicles.ts` → `data/vehicles.ts`.
-    - Remaining unique page to rebuild: `Galleri` (`/galleri`).
+    - Galleri (`/galleri`): Complete (`GalleryPage.tsx` / `GalleryPage.css`, `.galleri-page__*`). **Gallery photos live in `client/src/assets/galleri/`** — adding/removing a file adds/removes it from the page; captions in `bildtexter.json`; instructions in [`LÄSMIG.md`](../client/src/assets/galleri/LÄSMIG.md).
+    - **Step 6 is 100% COMPLETE.**
   - **Backend handoff**: [`docs/BACKEND_HANDOFF.md`](BACKEND_HANDOFF.md) — frontend overview for Johnny, admin-auth security finding, vehicle-listings API contract, and a runbook for building the backend on a separate branch.
   - **Bilservice Family (Parent & All 3 Siblings 100% Complete & Locked)**:
     - Bilservice (`/service-reparationer`): Complete on `.bb-hero` layout system, `--bb-*` tokens, mounts `PublicHeader` + `PublicFooter`.
@@ -45,9 +46,8 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
   - **Guide Family (10 / 10 Guides Complete & Locked)**:
     - All 10 technical guides (`Koppling`, `Avgassystem`, `Bromssystem`, `Oljebyte`, `Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, and `Drivaxel & drivknutar`) are fully rebuilt on `ServiceGuideTemplate.css`, aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
     - **Step 5 is 100% COMPLETE**.
-- **IMMEDIATE NEXT TASKS (Step 6: Remaining Unique Pages)**:
-  2. **Option B (Step 6: Unique Pages)**: Rebuild **`Galleri`** (`/galleri`) as its own standalone unique page (`.galleri-page__*`), isolating from `index.css`.
-  3. **Step 7**: Complete eradication of legacy `index.css`.
+- **IMMEDIATE NEXT TASKS (Step 7: delete `index.css`)**:
+  1. **Step 7**: Retire `ServicesPage.tsx` (`/tjanster`, the last `index.css` consumer), then delete `client/src/css/index.css` and the pre-commit freeze hook.
 
 ## Authority and references
 

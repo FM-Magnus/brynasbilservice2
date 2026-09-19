@@ -1,0 +1,284 @@
+/* GalleryPage.css — isolated CSS island for /galleri (.galleri-page__*).
+   Unique page: consumes --bb-* tokens and shared-elements.css only. Zero dependency on
+   index.css — the legacy .about-page__*, .gallery-viewer__*, .section-eyebrow and
+   .container rules there are deliberately never referenced. */
+
+.galleri-page {
+  background: var(--bb-color-page);
+  color: var(--bb-color-text);
+  font-family: var(--bb-font-body);
+  font-size: var(--bb-font-size-body);
+  line-height: var(--bb-line-height-body);
+  overflow-x: clip;
+  width: 100%;
+}
+.galleri-page *,
+.galleri-page *::before,
+.galleri-page *::after { box-sizing: border-box; }
+
+/* Zero-specificity resets (see shared-elements.css reset gotcha). */
+.galleri-page :where(a) { color: inherit; text-decoration: none; }
+.galleri-page :where(button) { font: inherit; }
+.galleri-page :where(img) { display: block; max-width: 100%; }
+.galleri-page :where(h1, h2, p) { margin: 0; }
+.galleri-page :where(a, button, [tabindex]):focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
+
+.galleri-page__sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* ---------- 1. Stage section (hero) ---------- */
+.galleri-page__stage-section {
+  background: var(--bb-color-ink-950);
+  color: var(--bb-color-text-inverse);
+  /* Clears the overlay header: measured bottom edge 80px ≤1279px, 122px @1440. */
+  padding-block: 120px clamp(2.5rem, 5vw, 4rem);
+}
+@media (min-width: 1280px) {
+  .galleri-page__stage-section { padding-top: 160px; }
+}
+
+.galleri-page__intro {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+.galleri-page__h1 { color: var(--bb-color-text-inverse); font-size: clamp(2.4rem, 4vw, 3.6rem); }
+.galleri-page__lead { font-size: var(--bb-font-size-body); line-height: var(--bb-line-height-body); max-width: 56ch; }
+.galleri-page__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.1rem; }
+.galleri-page__actions svg { height: 16px; width: 16px; }
+
+@media (min-width: 1024px) {
+  .galleri-page__intro {
+    align-items: end;
+    gap: clamp(2rem, 4vw, 4rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Viewer: stage + caption + strip share one width. The stage is a fixed 3:2 box,
+   capped so it fits the first desktop viewport (68svh, and never taller than the
+   space left under the header and intro). */
+.galleri-page__viewer {
+  container-type: inline-size;
+  margin-inline: auto;
+  position: relative;
+  width: min(100%, calc(min(68svh, 100svh - 360px) * 1.5));
+}
+.galleri-page__viewer:focus-visible { border-radius: var(--bb-radius-card); outline-offset: 6px; }
+
+.galleri-page__stage {
+  aspect-ratio: 3 / 2;
+  background: var(--bb-color-ink-900);
+  border-radius: var(--bb-radius-card);
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-y;
+  user-select: none;
+}
+.galleri-page__stage picture,
+.galleri-page__stage-img { height: 100%; width: 100%; }
+.galleri-page__stage-img {
+  animation: galleri-page-fade 180ms ease-out;
+  object-fit: contain;
+}
+@keyframes galleri-page-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Caption row under the image; keeps its height when a photo has no description. */
+.galleri-page__caption {
+  align-items: start;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 92px;
+  padding-top: 1.1rem;
+}
+.galleri-page__category {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--bb-font-size-label);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.galleri-page__title {
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 0.3rem;
+  overflow-wrap: anywhere;
+}
+.galleri-page__description {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: var(--bb-font-size-support);
+  margin-top: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.galleri-page__nav { align-items: center; display: flex; gap: 0.75rem; }
+.galleri-page__counter {
+  color: var(--bb-color-text-inverse);
+  font-family: var(--bb-font-display);
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.galleri-page__counter-sep { color: var(--bb-color-amber-500); padding-inline: 0.15rem; }
+
+.galleri-page__arrow {
+  align-items: center;
+  /* rgba of --bb-color-ink-950 */
+  background: rgba(7, 20, 22, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  color: var(--bb-color-text-inverse);
+  cursor: pointer;
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  transition: background var(--bb-transition-fast), border-color var(--bb-transition-fast), transform var(--bb-transition-fast);
+  width: 48px;
+}
+.galleri-page__arrow svg { height: 20px; width: 20px; }
+.galleri-page__arrow--prev svg { transform: rotate(180deg); }
+.galleri-page__arrow:hover { background: var(--bb-color-teal-700); border-color: var(--bb-color-teal-500); }
+
+/* Desktop: arrows sit on the stage edges. The stage is 3:2, so its vertical
+   centre is 1/3 of the viewer's width (container query units). */
+@media (min-width: 1024px) {
+  .galleri-page__arrow {
+    position: absolute;
+    top: calc(100cqw / 3 - 24px);
+    z-index: 1;
+  }
+  .galleri-page__arrow--prev { left: 1rem; }
+  .galleri-page__arrow--next { right: 1rem; }
+  .galleri-page__arrow:hover { transform: scale(1.06); }
+}
+
+/* Thumbnail strip: native horizontal scrolling with snap; fade masks on both ends. */
+.galleri-page__strip {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+  min-height: 74px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding: 4px 24px;
+  scroll-padding-inline: 24px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.galleri-page__strip::-webkit-scrollbar { display: none; }
+
+.galleri-page__thumb {
+  aspect-ratio: 3 / 2;
+  background: var(--bb-color-ink-900);
+  border: 0;
+  border-radius: var(--bb-radius-sm);
+  cursor: pointer;
+  flex: 0 0 96px;
+  opacity: 0.6;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  scroll-snap-align: start;
+  transition: opacity var(--bb-transition-fast);
+}
+.galleri-page__thumb::after {
+  border: 2px solid transparent;
+  border-radius: inherit;
+  content: '';
+  inset: 0;
+  position: absolute;
+  transition: border-color var(--bb-transition-fast);
+}
+.galleri-page__thumb:hover { opacity: 0.85; }
+.galleri-page__thumb[aria-pressed='true'] { opacity: 1; }
+.galleri-page__thumb[aria-pressed='true']::after { border-color: var(--bb-color-amber-500); }
+.galleri-page__thumb picture,
+.galleri-page__thumb img { height: 100%; width: 100%; }
+.galleri-page__thumb img { object-fit: cover; }
+.galleri-page__thumb:focus-visible { outline-offset: 2px; }
+
+@media (min-width: 768px) {
+  .galleri-page__thumb { flex-basis: 144px; }
+  .galleri-page__strip { min-height: 104px; }
+}
+
+/* Loading: same geometry as the real viewer, no content. */
+.galleri-page__viewer--loading .galleri-page__caption { min-height: 92px; }
+.galleri-page__viewer--loading .galleri-page__strip { -webkit-mask-image: none; mask-image: none; }
+
+/* Error / empty */
+.galleri-page__notice {
+  align-items: flex-start;
+  /* rgba of --bb-color-ink-800 */
+  background: rgba(20, 55, 59, 0.5);
+  border-radius: var(--bb-radius-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+.galleri-page__notice svg { height: 16px; width: 16px; }
+
+/* ---------- 2. Closing reassurance ---------- */
+.galleri-page__closing { padding-block: clamp(3rem, 6vw, 5rem); }
+.galleri-page__closing-card .bb-card--trust__icon svg { height: 24px; width: 24px; }
+.galleri-page__closing-card .bb-eyebrow { margin-bottom: 0.6rem; }
+.galleri-page__closing-title {
+  font-family: var(--bb-font-display);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.galleri-page__closing-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.galleri-page__closing-actions svg { height: 16px; width: 16px; }
+
+/* Light-surface secondary button (no shared equivalent exists for light cards). */
+.galleri-page__btn-outline {
+  background: transparent;
+  border-color: rgba(18, 34, 37, 0.24); /* rgba of --bb-color-text */
+  color: var(--bb-color-text);
+}
+.galleri-page__btn-outline:hover {
+  border-color: var(--bb-color-teal-700);
+  color: var(--bb-color-teal-800);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 650px) {
+  .galleri-page__caption { grid-template-columns: 1fr; }
+  .galleri-page__nav { grid-row: 1; justify-content: space-between; }
+  .galleri-page__description { white-space: normal; }
+  .galleri-page__closing-actions .bb-btn { white-space: normal; width: 100%; }
+  /* .bb-card--trust stacks as a column at ≤640px, where its text block's
+     320px flex-basis would turn into a 320px height. */
+  .galleri-page__closing-card .bb-card--trust__text { flex-basis: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galleri-page__stage-img { animation: none; }
+  .galleri-page__arrow,
+  .galleri-page__thumb,
+  .galleri-page__thumb::after { transition: none; }
+  .galleri-page__arrow:hover,
+  .galleri-page__btn-outline:hover { transform: none; }
+}

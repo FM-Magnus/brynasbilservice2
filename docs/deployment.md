@@ -47,6 +47,8 @@ RewriteRule ^ public/index.html [L]                         # SPA fallback
 | Process manager | PM2 (via fnm) |
 | Port | **3001** (port 3000 is occupied by another process) |
 
+> The client build (vite-imagetools/sharp) needs Node ≥18.17; never build the client on the production server.
+
 ## Deploy directory layout
 
 ```bash

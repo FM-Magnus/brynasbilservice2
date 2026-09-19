@@ -2,6 +2,49 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Claude (Step 6 COMPLETE: Galleri rebuilt as a folder-driven unique page)
+
+- **Rebuilt `/galleri` from scratch.** `GalleryPage.tsx` + new `GalleryPage.css` (`.galleri-page__*`, collision check 0). Legacy `Header`/`Footer`, all `.about-page__*` / `.gallery-viewer__*` / `.section-eyebrow` / `.container` usage and the Tailwind utilities are gone. **Step 6 is complete; `ServicesPage.tsx` (`/tjanster`) is the last `index.css` consumer.**
+- **Folder-driven photos.**
+  - Every JPG/PNG/WebP in `client/src/assets/galleri/` becomes a gallery image (`import.meta.glob` + `vite-imagetools` 6.2.9, the only new dependency, dev).
+  - Each photo gets exactly 4 variants: ≤640 and ≤1920px, WebP and JPG, `quality=70`, never upscaled. 44 files for 11 photos, verified in `dist/`.
+  - Order follows the filename (natural sort; the numeric prefix is stripped from the slug).
+  - Captions live in `bildtexter.json`. Missing captions fall back to a title built from the filename, plus a dev-only `console.info`.
+  - Instructions for Magnus are in `LÄSMIG.md`, including the no-people rule.
+- **The 11 photos were copied** (not moved: other pages still import the originals) as `01-…` to `11-…`, with their captions extracted verbatim by script.
+- **Data layer:** `types/gallery.ts` (contract), `data/galleryHelpers.ts` (pure: `slugFromFilename`, `naturalCompare`, `resolveCaption`), `data/gallery.ts` (folder source), `api/gallery.ts` (`getGalleryImages()`, `VITE_GALLERY_SOURCE=api` for the future backend). `docs/BACKEND_HANDOFF.md` §7 has the gallery API contract and the "Bilden innehåller inga personer" upload rule.
+- **Page:**
+  - A dark ink stage doubles as the hero. It's a fixed 3:2 box with `object-fit: contain`, capped at `min(68svh, 100svh − 360px)`: 810×540 at 1440×900, and the whole stage sits in the first viewport.
+  - Caption row with category, title, description and a "01 / 11" counter.
+  - Prev/next buttons on the stage edges on desktop (container-query positioning), in a row with the counter on mobile.
+  - Native-scroll thumbnail strip with snap, fade masks and a roving tabindex.
+  - `?bild={slug}` deep links; unknown slugs fall back to image 1.
+  - ArrowLeft/Right on the viewer; Home/End in the strip; touch swipe with `touch-action: pan-y`.
+  - A single visually hidden live region; neighbour preload after load.
+  - Closing `.bb-card--trust` now links to `/biltjanster`.
+- **Dropped from the old page:** the wheel hijack (passive listener, console warning, hijacked page scroll), the custom pointer drag, the duplicate hero photo, `aria-live` on the whole viewer, the 44 hand-written imports, the `/tjanster` link, and the "Vår verkstad i bilder" intro block. That block told users to "dra i bildremsan", and dragging was removed.
+- **Vite config:**
+  - `vite.config.ts` loads `vite-imagetools` with a dynamic `import()`, because it's ESM-only and the config loads as CJS. `"type": "module"` was deliberately not added, since the other config files are CJS.
+  - **Bug found and fixed:** deleting a photo while a browser still requested one of its variants made sharp emit an unhandled `Input file is missing` error, which **crashed the dev server** (reproduced). A small guard wrapper in `vite.config.ts` attaches an error handler to the piped image stream and answers 404 with a `[galleri]` warning instead. This slightly exceeds "add the plugin, nothing else" for `vite.config.ts`; it's needed so Magnus can delete files safely.
+- **Measurements:**
+  - Header bottom edge: 122px at 1440, 80px at 768/390. Clearance is 38px at 1440 and 40px at 768/390.
+  - CLS < 0.02 across load, scroll and 10 image changes (asserted).
+  - Main image transferred: 230 KB at 1440/768 (1920w WebP), 37 KB at 390 (640w WebP).
+  - Build time: 9.96s → 12.4s.
+  - Dev server "instant" proof: an added file appears in 0.9–1.1s, a caption edit in 0.4–0.5s, a removal in 0.5s, with no restart. The test file and caption were removed afterwards, with no trace in `git status`.
+  - `imagetools` 6.2.9 has no disk cache (in-memory in dev only), so there's nothing to git-ignore.
+- **Tests:** new `tests/browser/galleri.visual.spec.ts`.
+  - The expected images are derived from the folder via `node:fs` + the helpers; nothing hardcoded.
+  - Covers helper unit tests, no legacy/Tailwind classes, order and labels, prev/next wrap, URL, live region, keyboard, deep links, image attributes, stage geometry, CLS, the wheel not being hijacked, a clean console, booking, a touch swipe (390px), and 0/1/60 images via in-browser module extension.
+  - Full suite 61 passed, 2 skipped (touch swipe on non-mobile projects).
+  - The swipe test was flaky once under load (it swiped the loading placeholder); fixed by waiting for the real image.
+- **Follow-ups (not done):**
+  1. Let `GalleryTeaserCard` read from `client/src/assets/galleri/` instead of its own `defaultWorkshopSlides` (shared component).
+  2. Point Om oss gallery links at `/galleri?bild={slug}`.
+  3. Retire `/tjanster` in Step 7.
+  4. Clean up the 38 files in `client/src/assets/images/gallery/workshop/` that no longer have an importer: every `-thumb.{jpg,webp}` plus the main `.jpg`/`.webp` of car-bay-and-tire-racks, empty-lifts, lifts-and-tire-racks, overhead-car-bay, overhead-tire-storage, tire-machine-and-tools, tire-racks-and-rims and workbench-and-tire-machines. The `-card.webp` files, car-on-lift, car-open-hood and service-aisle are still used by other pages.
+  5. Optional: category filter chips once the gallery passes about 24 photos; a lightbox.
+
 ### 2026-09-19 — Claude (Bilar till salu: scales to any stock size)
 
 - Magnus asked for a finished answer to "what if there are 5–6+ cars". Layout now adapts to the data, no config needed:

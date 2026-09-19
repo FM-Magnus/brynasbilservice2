@@ -147,7 +147,7 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 6: Build the Remaining Unique Pages `[IN PROGRESS: Biltjänster, Bärgning & Bilar till salu COMPLETE; Galleri NEXT]`
+### Step 6: Build the Remaining Unique Pages `[COMPLETED: all 7 unique pages rebuilt — Galleri finished 2026-09-19]`
 - **Why this order**: `Bärgning`, `Bilar till salu`, `Galleri`, and `Biltjänster` don't share a template with each other or with anything else; each has its own unique UI requirements and must be built as an isolated CSS island.
 - **Status**:
   - **`Biltjänster` (`/biltjanster`) (COMPLETE)**: Rebuilt as the service-catalog hub (`BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `<PublicHeader />` and `<PublicFooter />`.
@@ -160,14 +160,15 @@ Use this section to know **what the agent is doing**, **what you need to review/
      - **Vehicle Showcase**: Active vehicle (Peugeot 307 CC) with 3-photo interactive gallery (16:10 aspect ratio, thumbnail indicator), spec badges (Årsmodell, Miltal, Drivmedel, Växellåda), trust badges ("Verkstadsinspekterade", "Färdiga för leverans", "Personlig kontakt").
      - **Booking Wiring**: Prepopulate `<BookingFormModal />` with vehicle inquiry details (`"Gäller förfrågan om Peugeot 307 CC"`).
      - **Sections**: Active vehicles grid, sold vehicles section, clean empty state, and dark closing trust card (`.bb-card--trust`).
-  2. **`Galleri` (`/galleri`)**:
+  2. **`Galleri` (`/galleri`) (COMPLETE, 2026-09-19)**: Rebuilt from scratch as a folder-driven page (`GalleryPage.tsx` + `GalleryPage.css`, `.galleri-page__*`, zero `index.css` dependency). Photos come from `client/src/assets/galleri/` (drop in / delete a file; `vite-imagetools` generates 640/1920px WebP+JPG at build time; captions in `bildtexter.json`; see `LÄSMIG.md`). Dark image-first stage, `?bild={slug}` deep links, keyboard + swipe, Playwright verified across 1440/768/390. Original brief kept below for reference:
      - **File**: `client/src/pages/GalleryPage.tsx` + colocated `client/src/pages/GalleryPage.css` (`.galleri-page__*`). Zero dependency on `index.css`.
      - **Public Shell**: Mount `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`.
      - **Image-First Experience**: Large selected image viewer, tactile horizontal thumbnail carousel, explicit prev/next buttons, mouse-wheel / trackpad drag, Arrow-key navigation.
      - **STRICT Constraint**: Exactly 11 visually reviewed no-people workshop views (1920px WebP/JPG for main viewer, 640px `-thumb` for carousel). Zero people, portraits, reception, or handover imagery.
      - **Closing Section**: Closing reassurance card (`.bb-card--trust`) with direct booking and call CTAs.
-  3. **Legacy Route Cleanup**:
+  3. **Legacy Route Cleanup** (moves to Step 7):
      - Deprecate/redirect `client/src/pages/ServicesPage.tsx` (which still imports legacy `Header`/`Footer`) to `/biltjanster`.
+     - **`ServicesPage.tsx` (`/tjanster`) is now the last page consuming `index.css`.** Retiring it is the only thing left before `index.css` can be deleted.
 - **Your Job (HITL Decision)**:
   - Inspect vehicle photos, test the gallery viewer, verify inquiry call-to-actions, and confirm all pages link to the public shell.
 
