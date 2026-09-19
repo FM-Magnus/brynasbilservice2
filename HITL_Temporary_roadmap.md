@@ -116,18 +116,14 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 4: Roll Out the "Bilservice" Family `[IN PROGRESS]`
-- **Why this order**: Bilservice (`/service-reparationer`) already has its standalone `.bilservice__*` CSS island. By mounting the new PublicHeader/Footer on Bilservice and aligning its tokens, it becomes the shared identity for the other three service-hub pages.
-- **Status**:
+### Step 4: Roll Out the "Bilservice" Family `[COMPLETED & LOCKED]`
+- **Why this order**: Bilservice (`/service-reparationer`) already had its standalone `.bilservice__*` CSS island. By mounting the new PublicHeader/Footer on Bilservice and aligning its tokens, it became the shared identity for the other three service-hub pages.
+- **Status (4 / 4 Complete — 100% Rebuilt & Locked)**:
   - **`Bilservice` (COMPLETE)**: Parent owner on `--bb-*` tokens and `.bb-hero` layout system, mounts `<PublicHeader />` and `<PublicFooter />`.
-- **Agent's Job (Next in this family)**:
-  - Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template with OBD diagnostics focus and symptom selector.
-  - Rebuild **`Däckservice`** (`/dackservice`) on the Bilservice family template with tire hotel (däckhotell) focus, legal requirements, and shift booking.
-  - Rebuild **`AC-service`** (`/ac-service`) on the Bilservice family template with climate diagnostics, R134a/R1234yf options, and cleaning.
-- **Your Job (HITL Decision)**:
-  - Review the service tier cards, pricing tables, and process steps across these 4 pages. Verify that technical wording and pricing caveats are clear.
-- **Steering Prompt**:
-  > *"Rebuild Felsökning (/felsokning) using Bilservice's shared family template (ServiceReparationerPage.css with .bilservice__* classes)."*
+  - **`Felsökning` (COMPLETE)**: Rebuilt on `ServiceReparationerPage.css` (`.bilservice__*`), mounts `<PublicHeader />` and `<PublicFooter />`, interactive symptom selector, OBD code readout, 0 errors typecheck and Playwright verified ($\Delta = 0\text{px}$).
+  - **`Däckservice` (COMPLETE)**: Rebuilt on `ServiceReparationerPage.css` (`.bilservice__*`), mounts `<PublicHeader />` and `<PublicFooter />`, 6 tire service cards with photos & exact pricing, legal requirements banner, däckhotell card, 0 errors typecheck and Playwright verified ($\Delta = 0\text{px}$).
+  - **`AC-service` (COMPLETE)**: Rebuilt on `ServiceReparationerPage.css` (`.bilservice__*`), mounts `<PublicHeader />` and `<PublicFooter />`, interactive symptom selector with booking feedback, 3 pricing cards with exact pricing & caveats, manometer photo split card, process steps, tips, FAQs, 0 errors typecheck and Playwright verified ($\Delta = 0\text{px}$).
+- **Verification**: All 4 pages verified via Playwright at 1440px, 768px, and 390px with zero horizontal overflow; transitional CSS (`AcServicePage.css`, `DackservicePage.css`) deleted; 0 lines added to `index.css`.
 
 ---
 
@@ -151,15 +147,26 @@ Use this section to know **what the agent is doing**, **what you need to review/
 
 ---
 
-### Step 6: Build the Remaining Unique Pages `[IN PROGRESS: Biltjänster & Bärgning COMPLETE]`
-- **Why this order**: `Bärgning`, `Bilar till salu`, `Galleri`, and `Biltjänster` don't share a template with each other or with anything else; each has its own unique UI requirements.
+### Step 6: Build the Remaining Unique Pages `[IN PROGRESS: Biltjänster & Bärgning COMPLETE; Bilar till salu & Galleri NEXT]`
+- **Why this order**: `Bärgning`, `Bilar till salu`, `Galleri`, and `Biltjänster` don't share a template with each other or with anything else; each has its own unique UI requirements and must be built as an isolated CSS island.
 - **Status**:
   - **`Biltjänster` (`/biltjanster`) (COMPLETE)**: Rebuilt as the service-catalog hub (`BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `<PublicHeader />` and `<PublicFooter />`.
   - **`Bärgning` (`/bargning`) (COMPLETE)**: Rebuilt from scratch (`BargningPage.tsx` + dedicated `BargningPage.css`, `.bargning-page__*`). Towing and breakdown dispatch focus, showcase split card, direct-call CTA, used-cars promo banner, emergency closing card. Mounted `<PublicHeader />` and `<PublicFooter />`. Playwright verified across 1440, 768, 390 with $\Delta = 0\text{px}$ overflow.
-- **Agent's Job (Remaining in this group)**:
-  - Rebuild **`Bilar till salu`** (`/bilar-till-salu`) as its own unique page — vehicle spec badges, multi-photo viewer, and inquiry modal.
-  - Rebuild **`Galleri`** (`/galleri`) as its own unique page — image-first layout and workshop overview.
-  - Mount `<PublicHeader />` and `<PublicFooter />` on both.
+- **Agent's Job (Remaining in this group — Claude Code Roadmap)**:
+  1. **`Bilar till salu` (`/bilar-till-salu`)**:
+     - **File**: `client/src/pages/BilarTillSalu.tsx` + colocated `client/src/pages/BilarTillSalu.css` (`.bilartillsalu-page__*`). Zero dependency on `index.css`.
+     - **Public Shell**: Mount `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`.
+     - **Vehicle Showcase**: Active vehicle (Peugeot 307 CC) with 3-photo interactive gallery (16:10 aspect ratio, thumbnail indicator), spec badges (Årsmodell, Miltal, Drivmedel, Växellåda), trust badges ("Verkstadsinspekterade", "Färdiga för leverans", "Personlig kontakt").
+     - **Booking Wiring**: Prepopulate `<BookingFormModal />` with vehicle inquiry details (`"Gäller förfrågan om Peugeot 307 CC"`).
+     - **Sections**: Active vehicles grid, sold vehicles section, clean empty state, and dark closing trust card (`.bb-card--trust`).
+  2. **`Galleri` (`/galleri`)**:
+     - **File**: `client/src/pages/GalleryPage.tsx` + colocated `client/src/pages/GalleryPage.css` (`.galleri-page__*`). Zero dependency on `index.css`.
+     - **Public Shell**: Mount `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`.
+     - **Image-First Experience**: Large selected image viewer, tactile horizontal thumbnail carousel, explicit prev/next buttons, mouse-wheel / trackpad drag, Arrow-key navigation.
+     - **STRICT Constraint**: Exactly 11 visually reviewed no-people workshop views (1920px WebP/JPG for main viewer, 640px `-thumb` for carousel). Zero people, portraits, reception, or handover imagery.
+     - **Closing Section**: Closing reassurance card (`.bb-card--trust`) with direct booking and call CTAs.
+  3. **Legacy Route Cleanup**:
+     - Deprecate/redirect `client/src/pages/ServicesPage.tsx` (which still imports legacy `Header`/`Footer`) to `/biltjanster`.
 - **Your Job (HITL Decision)**:
   - Inspect vehicle photos, test the gallery viewer, verify inquiry call-to-actions, and confirm all pages link to the public shell.
 

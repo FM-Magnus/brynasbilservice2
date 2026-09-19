@@ -27,6 +27,7 @@
 .bilservice :where(button, input, textarea, select) { font: inherit; }
 .bilservice button { cursor: pointer; }
 .bilservice :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
+.bilservice .bb-h1 { overflow-wrap: break-word; }
 
 .bilservice__container {
   max-width: var(--bilservice-container-max);
@@ -179,6 +180,585 @@
 .bilservice__process { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
 .bilservice__process-heading { margin: 0 0 0.9rem; color: #fff; }
 .bilservice__process-text > p { margin: 0 0 1.5rem; max-width: 34ch; font: 400 0.95rem/1.6 var(--bb-font-body); }
+/* ---------- Diagnostics / OBD readout card ---------- */
+.bilservice__code-readout {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--bb-radius-md);
+  background: rgba(13, 31, 34, 0.88);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(12px);
+  max-width: 340px;
+}
+.bilservice__code-row { display: flex; align-items: center; gap: 0.65rem; }
+.bilservice__code-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bb-color-amber-500); flex: 0 0 auto; }
+.bilservice__code-dot--warn { background: #e05252; }
+.bilservice__code-row code { color: var(--bb-color-focus); font: 700 0.88rem / 1 'SFMono-Regular', Menlo, monospace; letter-spacing: 0.03em; }
+.bilservice__code-row span { color: rgba(255, 255, 255, 0.85); font: 400 0.82rem / 1.2 var(--bb-font-body); }
+
+/* ---------- 3-Column Card Grid (Categories, Features) ---------- */
+.bilservice__card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.4rem);
+  margin-top: clamp(2rem, 3.5vw, 2.75rem);
+}
+.bilservice__card--teal {
+  min-width: 0;
+  padding: clamp(1.4rem, 2.2vw, 1.8rem);
+  border-radius: var(--bb-radius-card);
+  background: linear-gradient(145deg, var(--bb-color-teal-800) 0%, var(--bb-color-ink-900) 100%);
+  color: #fff;
+  box-shadow: var(--bb-shadow-card);
+}
+.bilservice__card--teal h3 {
+  margin: 0 0 0.5rem;
+  font: 800 1.15rem / 1.25 var(--bb-font-display);
+  color: #fff;
+}
+.bilservice__card--teal p {
+  margin: 0;
+  font: 400 0.92rem / 1.6 var(--bb-font-body);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* ---------- Interactive Symptom Selector ---------- */
+.bilservice__symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.35rem);
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+.bilservice__symptom-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: clamp(1.3rem, 2.2vw, 1.6rem);
+  min-height: 180px;
+  background: var(--bb-color-ink-900);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  cursor: pointer;
+  transition: border-color var(--bb-transition-fast), transform var(--bb-transition-fast), box-shadow var(--bb-transition-fast);
+}
+.bilservice__symptom-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.bilservice__symptom-card.is-selected {
+  border-color: var(--bb-color-teal-500);
+  box-shadow: 0 0 0 2px var(--bb-color-teal-500), var(--bb-shadow-button);
+}
+.bilservice__symptom-card:focus-visible {
+  outline: 3px solid var(--bb-color-focus);
+  outline-offset: 3px;
+}
+.bilservice__symptom-question {
+  display: block;
+  font: 800 1.1rem / 1.3 var(--bb-font-display);
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.bilservice__symptom-desc {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.72);
+  font: 400 0.92rem / 1.55 var(--bb-font-body);
+}
+.bilservice__symptom-advice-block {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: right;
+}
+.bilservice__symptom-advice {
+  display: block;
+  font: 800 1.05rem / 1.3 var(--bb-font-display);
+  color: var(--bb-color-focus);
+}
+.bilservice__symptom-advice-detail {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.65);
+  font: 400 0.85rem / 1.5 var(--bb-font-body);
+}
+.bilservice__recommendation {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  padding: 1.1rem 1.4rem;
+  background: var(--bb-color-surface);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  color: var(--bb-color-text);
+}
+.bilservice__recommendation p {
+  margin: 0;
+  flex: 1 1 280px;
+  font: 400 0.95rem / 1.5 var(--bb-font-body);
+}
+.bilservice__recommendation strong {
+  color: var(--bb-color-teal-800);
+}
+
+/* ---------- Guidance Stats Grid ---------- */
+.bilservice__stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.4rem);
+}
+.bilservice__stat-card {
+  min-width: 0;
+  padding: clamp(1.4rem, 2.2vw, 1.8rem);
+  border-radius: var(--bb-radius-card);
+  background: linear-gradient(145deg, var(--bb-color-teal-800) 0%, var(--bb-color-ink-900) 100%);
+  color: #fff;
+  box-shadow: var(--bb-shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+.bilservice__stat-value {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--bb-color-focus);
+  font: 800 clamp(1.5rem, 2.4vw, 1.85rem) / 1 var(--bb-font-display);
+  letter-spacing: -0.02em;
+}
+.bilservice__stat-card h3 {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  font: 800 clamp(1rem, 1.4vw, 1.15rem) / 1.25 var(--bb-font-display);
+}
+.bilservice__stat-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font: 400 0.92rem / 1.6 var(--bb-font-body);
+}
+
+/* ---------- Service Card with Checklist ---------- */
+.bilservice__service-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  padding: clamp(1.6rem, 3.5vw, 2.75rem);
+  border-radius: var(--bb-radius-card);
+  background: linear-gradient(150deg, var(--bb-color-ink-950) 0%, var(--bb-color-ink-900) 100%);
+  color: #fff;
+  box-shadow: var(--bb-shadow-card);
+  align-items: center;
+}
+.bilservice__service-media {
+  border-radius: var(--bb-radius-md);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+.bilservice__service-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bilservice__service-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.2rem, 2vw, 1.6rem);
+}
+.bilservice__checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.bilservice__checklist li {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, 0.88);
+  font: 400 0.92rem / 1.5 var(--bb-font-body);
+}
+.bilservice__checklist li svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.15rem;
+  color: var(--bb-color-amber-500);
+}
+
+/* ---------- Winter Tire Legal Requirements Banner ---------- */
+.bilservice__dates-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  padding: 1.25rem 1.75rem;
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-surface);
+  border: 1px solid rgba(7, 24, 28, 0.1);
+  box-shadow: var(--bb-shadow-card);
+  margin-block: clamp(1.5rem, 3vw, 2.5rem);
+}
+.bilservice__dates-title {
+  margin: 0;
+  font: 800 1rem / 1.3 var(--bb-font-display);
+  color: var(--bb-color-ink-950);
+  flex: 0 0 auto;
+}
+.bilservice__dates-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.bilservice__dates-pills li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--bb-radius-control);
+  background: var(--bb-color-page);
+  border: 1px solid rgba(7, 24, 28, 0.08);
+  font: 500 0.82rem / 1.2 var(--bb-font-body);
+  color: var(--bb-color-text-muted);
+}
+.bilservice__dates-pills strong {
+  color: var(--bb-color-teal-800);
+  font-weight: 800;
+}
+
+/* ---------- 6-Card Tire Service Grid ---------- */
+.bilservice__tire-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.1rem, 2vw, 1.5rem);
+}
+.bilservice__tire-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bb-color-ink-900);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--bb-radius-card);
+  overflow: hidden;
+  box-shadow: var(--bb-shadow-card);
+  transition: transform var(--bb-transition-fast), border-color var(--bb-transition-fast);
+}
+.bilservice__tire-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.bilservice__tire-media {
+  height: 165px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bb-color-ink-950);
+}
+.bilservice__tire-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bilservice__tire-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.4rem;
+}
+.bilservice__tire-body h3 {
+  font: 800 1.35rem / 1.2 var(--bb-font-display);
+  color: #fff;
+  margin: 0 0 0.6rem;
+}
+.bilservice__tire-body > p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font: 400 0.9rem / 1.55 var(--bb-font-body);
+}
+.bilservice__tire-prices {
+  min-height: 84px;
+  margin-top: auto;
+  padding-block: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.bilservice__tire-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.bilservice__tire-price-label {
+  color: rgba(255, 255, 255, 0.72);
+  font: 500 0.82rem / 1.2 var(--bb-font-body);
+}
+.bilservice__tire-price-val {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  text-align: right;
+}
+.bilservice__tire-price-val > span,
+.bilservice__tire-price-val small {
+  color: rgba(255, 255, 255, 0.7);
+  font: 600 0.78rem / 1.2 var(--bb-font-body);
+}
+.bilservice__tire-price-val strong {
+  color: var(--bb-color-focus);
+  font: 800 1.25rem / 1 var(--bb-font-display);
+}
+.bilservice__tire-contact-price {
+  margin: 0;
+  color: var(--bb-color-amber-500);
+  font: 700 0.95rem / 1.2 var(--bb-font-body);
+}
+.bilservice__tire-cta {
+  margin-top: 1.15rem;
+  width: 100%;
+}
+
+/* ---------- Däckhotell Storage Card ---------- */
+.bilservice__storage-card {
+  padding: clamp(2rem, 3.5vw, 3rem);
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-surface);
+  border: 1px solid rgba(7, 24, 28, 0.08);
+  box-shadow: var(--bb-shadow-card);
+}
+.bilservice__storage-card h2 {
+  margin: 0 0 0.6rem;
+  color: var(--bb-color-ink-950);
+}
+.bilservice__storage-card > p {
+  margin: 0 0 1.5rem;
+  max-width: 65ch;
+  color: var(--bb-color-text-muted);
+  font: 400 1rem / 1.6 var(--bb-font-body);
+}
+.bilservice__storage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  list-style: none;
+}
+.bilservice__storage-grid li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  color: var(--bb-color-text);
+  font: 400 0.92rem / 1.55 var(--bb-font-body);
+}
+.bilservice__storage-grid li svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.15rem;
+  color: var(--bb-color-amber-500);
+}
+.bilservice__storage-grid strong {
+  color: var(--bb-color-ink-950);
+  font-weight: 700;
+}
+.bilservice__storage-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(7, 24, 28, 0.1);
+}
+.bilservice__storage-footer p {
+  margin: 0;
+  color: var(--bb-color-teal-800);
+  font: 700 0.95rem / 1.4 var(--bb-font-body);
+}
+
+/* ---------- Tire Advice Grid ---------- */
+.bilservice__advice-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.bilservice__advice-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.bilservice__advice-body p {
+  margin: 0;
+  color: var(--bb-color-text-muted);
+  font: 400 0.95rem / 1.65 var(--bb-font-body);
+}
+
+/* ---------- AC Service & Registration Hero Elements ---------- */
+.bilservice__hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.25rem 0;
+  padding: 0;
+  list-style: none;
+}
+.bilservice__hero-badges li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--bb-radius-pill);
+  background: rgba(16, 166, 175, 0.16);
+  border: 1px solid rgba(16, 166, 175, 0.45);
+  color: #fff;
+  font: 700 0.82rem / 1 var(--bb-font-body);
+}
+.bilservice__hero-badges li svg {
+  width: 14px;
+  height: 14px;
+  color: var(--bb-color-focus);
+}
+
+.bilservice__hero-reg {
+  margin: 1.5rem 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.bilservice__hero-reg-label {
+  color: rgba(255, 255, 255, 0.85);
+  font: 700 0.88rem / 1.2 var(--bb-font-body);
+}
+.bilservice__hero-reg-label small {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+.bilservice__hero-reg-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+.bilservice__hero-reg-input {
+  min-width: 160px;
+  max-width: 220px;
+  flex: 1 1 auto;
+  height: 48px;
+  padding: 0 1.15rem;
+  border-radius: var(--bb-radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: #ffffff;
+  color: var(--bb-color-ink-950);
+  font: 700 1rem / 1 var(--bb-font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color var(--bb-transition-fast), box-shadow var(--bb-transition-fast);
+}
+.bilservice__hero-reg-input:focus-visible {
+  border-color: var(--bb-color-focus);
+  box-shadow: 0 0 0 3px rgba(36, 187, 197, 0.3);
+}
+
+/* ---------- AC Pricing Cards Grid ---------- */
+.bilservice__price-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: stretch;
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+.bilservice__price-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bb-color-ink-900);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+}
+.bilservice__price-card h3 {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  font: 800 1.25rem / 1.25 var(--bb-font-display);
+}
+.bilservice__price-amount {
+  margin: 0 0 1.25rem;
+  color: var(--bb-color-focus);
+  font: 800 clamp(1.45rem, 2.2vw, 1.85rem) / 1.1 var(--bb-font-display);
+}
+.bilservice__price-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+  flex: 1 1 auto;
+}
+.bilservice__price-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: rgba(255, 255, 255, 0.85);
+  font: 400 0.9rem / 1.45 var(--bb-font-body);
+}
+.bilservice__price-list li svg {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  margin-top: 0.12rem;
+  color: var(--bb-color-amber-500);
+}
+.bilservice__price-note {
+  margin: 0 0 1.25rem;
+  color: rgba(255, 255, 255, 0.72);
+  font: 400 0.85rem / 1.5 var(--bb-font-body);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.85rem;
+}
+.bilservice__price-cta {
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Repair note callout */
+.bilservice__repair-note {
+  margin-top: clamp(2rem, 3.5vw, 3rem);
+  padding: 1.25rem 1.6rem;
+  border-radius: var(--bb-radius-card);
+  background: var(--bb-color-surface);
+  border-left: 4px solid var(--bb-color-amber-500);
+  box-shadow: var(--bb-shadow-card);
+  color: var(--bb-color-text);
+  font: 400 0.95rem / 1.6 var(--bb-font-body);
+}
+.bilservice__repair-note strong {
+  color: var(--bb-color-ink-950);
+  font-weight: 700;
+}
+.bilservice__refrigerant-note {
+  margin: 1.25rem 0 0;
+  color: var(--bb-color-text-muted);
+  font: 500 0.92rem / 1.6 var(--bb-font-body);
+  border-left: 3px solid var(--bb-color-teal-600);
+  padding-left: 0.9rem;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1180px) {
   .bilservice__value-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -189,7 +769,23 @@
   .bilservice__split { grid-template-columns: 1fr; }
   .bilservice__split-media--right { order: -1; }
   .bilservice__levels-grid { grid-template-columns: 1fr; }
+  .bilservice__card-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bilservice__price-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bilservice__symptom-grid { grid-template-columns: 1fr; }
+  .bilservice__stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bilservice__service-card { grid-template-columns: 1fr; }
+  .bilservice__tire-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bilservice__advice-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .bilservice__value-grid { grid-template-columns: 1fr; }
+  .bilservice__card-grid-3 { grid-template-columns: 1fr; }
+  .bilservice__price-grid { grid-template-columns: 1fr; }
+  .bilservice__stat-grid { grid-template-columns: 1fr; }
+  .bilservice__checklist { grid-template-columns: 1fr; }
+  .bilservice__dates-banner { flex-direction: column; align-items: flex-start; }
+  .bilservice__tire-grid { grid-template-columns: 1fr; }
+  .bilservice__storage-grid { grid-template-columns: 1fr; }
+  .bilservice__storage-footer { flex-direction: column; align-items: flex-start; }
+  .bilservice__hero-reg-input { max-width: none; width: 100%; }
 }

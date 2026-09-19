@@ -34,16 +34,19 @@ Read [AGENTS.md](../AGENTS.md) and [the Phase 0 baseline](redesign-phase-0/READM
     - Bärgning (`/bargning`): Complete (`BargningPage.tsx` / `BargningPage.css`, `.bargning-page__*`), mounts `PublicHeader` + `PublicFooter`.
     - Biltjänster (`/biltjanster`): Complete (`BiltjansterPage.tsx` / `BiltjansterPage.css`, `.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter`.
     - Remaining unique pages to rebuild: `Bilar till salu` (`/bilar-till-salu`), `Galleri` (`/galleri`).
-  - **Bilservice Family (Parent complete)**:
+  - **Bilservice Family (Parent & All 3 Siblings 100% Complete & Locked)**:
     - Bilservice (`/service-reparationer`): Complete on `.bb-hero` layout system, `--bb-*` tokens, mounts `PublicHeader` + `PublicFooter`.
-    - Next in family: Rebuild `Felsökning` (`/felsokning`), `Däckservice` (`/dackservice`), `AC-service` (`/ac-service`) on family template.
+    - Felsökning (`/felsokning`): Complete on `ServiceReparationerPage.css` (`.bilservice__*`), mounts `PublicHeader` (overlay) + `PublicFooter`, interactive symptom selector, OBD code readout, Playwright verified ($\Delta = 0\text{px}$).
+    - Däckservice (`/dackservice`): Complete on `ServiceReparationerPage.css` (`.bilservice__*`), mounts `PublicHeader` (overlay) + `PublicFooter`, 6 tire service cards with photos & exact pricing, legal requirements banner, däckhotell card, Playwright verified ($\Delta = 0\text{px}$).
+    - AC-service (`/ac-service`): Complete on `ServiceReparationerPage.css` (`.bilservice__*`), mounts `PublicHeader` (overlay) + `PublicFooter`, interactive symptom selector, 3 exact pricing cards with caveats, manometer photo split card, 4-step process, advice tips, FAQs, Playwright verified ($\Delta = 0\text{px}$).
+    - **Step 4 is 100% COMPLETE**.
   - **Guide Family (10 / 10 Guides Complete & Locked)**:
     - All 10 technical guides (`Koppling`, `Avgassystem`, `Bromssystem`, `Oljebyte`, `Kamrem`, `Bilbatteri`, `Stötdämpare & fjädrar`, `Hjullagerbyte`, `Styrning & kulleder`, and `Drivaxel & drivknutar`) are fully rebuilt on `ServiceGuideTemplate.css`, aligned with canonical Level 0 tokens, Level 1 `.bb-*` elements, mixed-case Archivo 800 H1s, zero-specificity reset bug fix, and Playwright multi-viewport verification ($\Delta = 0\text{px}$).
     - **Step 5 is 100% COMPLETE**.
-- **IMMEDIATE NEXT TASKS (Options for user)**:
-  1. **Option A (Step 4: Bilservice Family)**: Rebuild **`Felsökning`** (`/felsokning`) on the Bilservice family template (`ServiceReparationerPage.css`).
-  2. **Option B (Step 6: Unique Pages)**: Rebuild **`Bilar till salu`** (`/bilar-till-salu`) as its own standalone unique page.
-  3. **Option C (Step 6: Unique Pages)**: Rebuild **`Galleri`** (`/galleri`) as its own standalone unique page.
+- **IMMEDIATE NEXT TASKS (Step 6: Remaining Unique Pages)**:
+  1. **Option A (Step 6: Unique Pages)**: Rebuild **`Bilar till salu`** (`/bilar-till-salu`) as its own standalone unique page (`.bilartillsalu-page__*`), isolating from `index.css`.
+  2. **Option B (Step 6: Unique Pages)**: Rebuild **`Galleri`** (`/galleri`) as its own standalone unique page (`.galleri-page__*`), isolating from `index.css`.
+  3. **Step 7**: Complete eradication of legacy `index.css`.
 
 ## Authority and references
 

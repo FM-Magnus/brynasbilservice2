@@ -2,6 +2,71 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-19 — Antigravity (Step 4 COMPLETE: AC-service Rebuild — Bilservice Family Sibling 3 of 3)
+
+- **Rebuilt Climate & AC Service page (`AcServicePage.tsx` at `/ac-service`) onto `ServiceReparationerPage.css`**:
+  - **Shared Bilservice Family Template 100% Completed**: Rebuilt `/ac-service` onto `ServiceReparationerPage.css` (`.bilservice__*`), completely eliminating transitional `AcServicePage.css` (`git rm client/src/pages/AcServicePage.css`) and all legacy `index.css` rules (lines 5847–5916). **Step 4 (Bilservice Family) is now 100% Complete with all 4 pages living on the shared template.** 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={() => openModal()} variant="overlay" />` and `<PublicFooter onBookingClick={() => openModal()} />`. Wired all booking actions to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment={bookingComment} />` (auto-passes typed registration and selected symptom recommendation).
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-hero`, `.bb-wrap`, `.bb-eyebrow`, `.bb-eyebrow--dark`, `.bb-h1`, `.bb-h2`, `.bb-accent`, `.bb-lead`, `.bb-lead--dark`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`, `.bb-btn.bb-btn--ember-solid`, `.bb-trust-row`, `.bb-process-grid`, `.bb-card--trust`).
+  - **AC-Service Features Preserved & Hardened**:
+    - Hero media connects `ac-hero-bg.webp` and `ac-hero-bg.jpg` under `.bb-hero__media` with canonical dual scrim overlay, 3 value badges (`Bibehållen nybilsgaranti`, `Certifierad kylkompetens`, `Fasta priser`), optional registration number input, and 3-pillar local trust row (`DollarIcon`, `ShieldHeartIcon`, `MapPinIcon`).
+    - Value proposition cards (`.bilservice__card-grid-3`, `.bilservice__card--teal`).
+    - Interactive symptom selector (`.bilservice__symptom-grid`) on aqua canvas (`.bilservice__section--aqua`) with dynamic status recommendation banner and direct booking CTA.
+    - 3-card pricing grid (`.bilservice__price-grid`, `.bilservice__price-card`): AC-service (1 495 kr), AC-rengöring (800 kr arbetskostnad + cabin filter material note), and OBD-diagnostik (500 kr). Followed by repair vs service advisory and R134a/R1234yf refrigerant note.
+    - 4-step workshop process (`.bb-process-grid`).
+    - Reassurance split card (`.bilservice__service-card` with `ac-manometers-on-engine.jpg` workshop photo and 5-point certified checklist).
+    - Advice tips 3-card grid (`.bilservice__card-grid-3`) covering R134a/R1234yf identification, recommended service frequency, and running AC in winter.
+    - Customer reviews via canonical `<GoogleReviewsCard variant="card" />`.
+    - FAQ accordion (`<BiltjansterFaq id="ac-service-faq" />`).
+    - Closing reassurance card (`.bb-card--trust`).
+  - **Verification**:
+    - `npm run typecheck`: 0 errors.
+    - `npm run build`: Built cleanly with 0 errors (9.61s).
+    - `npm run test:browser -- tests/browser/ac-service.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal opening and symptom selection verified.
+    - Full Bilservice suite (Felsökning, Däckservice, AC-service): 9/9 Playwright tests passed across all 3 viewports.
+
+- **Rebuilt Tire Service page (`DackservicePage.tsx` at `/dackservice`) onto `ServiceReparationerPage.css`**:
+  - **Shared Bilservice Family Template**: Rebuilt `/dackservice` onto `ServiceReparationerPage.css` (`.bilservice__*`), completely eliminating transitional `DackservicePage.css` and all legacy `.services-page__*` and `.tyres-page__*` selectors. 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={() => openModal()} variant="overlay" />` and `<PublicFooter onBookingClick={() => openModal()} />`. Wired all booking actions to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment={bookingComment} />`.
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-hero`, `.bb-wrap`, `.bb-eyebrow`, `.bb-eyebrow--dark`, `.bb-h1`, `.bb-h2`, `.bb-accent`, `.bb-lead`, `.bb-lead--dark`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`, `.bb-btn.bb-btn--ember-solid`, `.bb-trust-row`, `.bb-process-grid`, `.bb-card--trust`).
+  - **Tire Service Features Preserved & Hardened**:
+    - Hero media connects `tires-hero-bg.webp` and `tires-hero-bg.jpg` under `.bb-hero__media` with canonical dual scrim overlay and 3-pillar local trust row (`UsersIcon`, `MapPinIcon`, `ClockIcon`).
+    - Dedicated winter tire legal requirements banner (`.bilservice__dates-banner` with 1 dec–31 mar, 1 okt–15 apr, 16 apr–30 sep, and 3PMSF requirement).
+    - 6-card tire service grid (`.bilservice__tire-grid`, `.bilservice__tire-card`) with real workshop photos (`wheel-change`, `storage-rack`, `refitting`, `wheel-alignment`, `wheel-balancing`, `puncture-repair`), exact pricing (Hjulskifte 350/500 kr, Däckförvaring 890/990 kr, Omläggning från 180 kr, Hjulinställning från 1 495 kr), and contextual booking button actions.
+    - Däckhotell highlight card (`.bilservice__storage-card`) on aqua background with 4-point benefits checklist and direct booking CTA.
+    - Legacy reassurance split card (`.bilservice__service-card` with `tire-storage-wheel.jpg` and 5 service checklist items with amber checkmarks).
+    - Advice section (`.bilservice__advice-grid`) covering cold tire pressure, legal vs recommended tread depths (1.6 mm / 3 mm vs 3–5 mm), 4-digit DOT code decoding, and rubber aging limits (6–10 years).
+    - 5-step workshop process (`.bb-process-grid`).
+    - Customer reviews via canonical `<GoogleReviewsCard variant="card" />`.
+    - FAQ accordion (`<BiltjansterFaq id="dackservice-faq" />`).
+    - Closing reassurance card (`.bb-card--trust`).
+  - **Verification**:
+    - `npm run typecheck`: 0 errors.
+    - `npm run build`: Built cleanly with 0 errors (10.38s).
+    - `npm run test:browser -- tests/browser/dackservice.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal opening and 6 tire service cards verified.
+
+
+### 2026-09-19 — Antigravity (Step 4: Felsökning Rebuild — Bilservice Family Sibling 1 of 3)
+
+- **Rebuilt Diagnostics guide page (`FelsokningPage.tsx` at `/felsokning`) onto `ServiceReparationerPage.css`**:
+  - **Shared Bilservice Family Template**: Rebuilt `/felsokning` onto `ServiceReparationerPage.css` (`.bilservice__*`), completely eliminating all legacy `.services-page__*` and `.diagnostics-page__*` selectors. 0 lines added, changed, or deleted in `client/src/css/index.css` (100% frozen).
+  - **Canonical Public Shell**: Mounted `<PublicHeader onBookingClick={openModal} variant="overlay" />` and `<PublicFooter onBookingClick={openModal} />`. Wired all booking actions to `<BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment={recommendation ? \`Önskad hjälp: \${recommendation}\` : 'Gäller felsökning & diagnostik'} />`.
+  - **Design Tokens & Shared Elements**: Inherits Level 0 `--bb-*` tokens and `.bb-*` elements (`.bb-hero`, `.bb-wrap`, `.bb-eyebrow--dark`, `.bb-h1`, `.bb-h2`, `.bb-accent`, `.bb-lead`, `.bb-lead--dark`, `.bb-btn.bb-btn--teal`, `.bb-btn.bb-btn--ember`, `.bb-btn.bb-btn--ember-solid`, `.bb-trust-row`, `.bb-process-grid`, `.bb-card--trust`).
+  - **Diagnostics Features Preserved & Hardened**:
+    - Hero OBD code readout card (`P0128 Kylvätsketemperatur`, `P0171 Bränslesystem för magert`) integrated cleanly into `.bb-hero__bottom` alongside `.bb-trust-row`.
+    - Category grid with 6 teal gradient cards (`.bilservice__card-grid-3`, `.bilservice__card--teal`).
+    - Interactive symptom selector (`.bilservice__symptom-grid`) on aqua background (`.bilservice__section--aqua`), updating `recommendation` and displaying dynamic status recommendation banner with direct booking CTA.
+    - Guidance stats 4-card grid (`.bilservice__stat-grid`).
+    - Capabilities checklist split card (`.bilservice__service-card` with `diagnostics-obd-connector-closeup` photo and 6-item checklist with amber checkmarks).
+    - 5-step workshop process (`.bb-process-grid`).
+    - FAQ accordion (`<BiltjansterFaq id="felsokning-faq" />`).
+    - Closing reassurance trust card (`.bb-card--trust`).
+  - **Verification**:
+    - `npm run typecheck`: 0 errors.
+    - `npm run build`: Built cleanly with 0 errors (10.85s).
+    - `npm run test:browser -- tests/browser/felsokning.visual.spec.ts`: 3/3 Playwright tests passed across 1440px desktop, 768px tablet, and 390px mobile viewports with $\Delta = 0\text{px}$ horizontal overflow. Modal opening/closing and symptom selection verified.
+
+
 ### 2026-09-19 — Antigravity (Step 5 COMPLETE: Drivaxel & drivknutar Rebuild — Guide Family 10/10)
 
 - **Rebuilt Drivaxel & drivknutar page (`DrivaxelDrivknutarPage.tsx` at `/drivaxel-drivknutar`) onto `ServiceGuideTemplate.css`**:

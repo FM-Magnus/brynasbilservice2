@@ -64,9 +64,9 @@ The redesign public shell is independent from the frozen legacy layer.
 | `/om-oss` | Unique | Complete | `AboutPage.css` (`.omoss-page__*`), mounts `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
 | `/kontakt` | Unique | Complete | `ContactPage.css` (`.kontakt-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/service-reparationer` | Bilservice family (owner) | Complete — on `--bb-*` tokens & `shared-elements.css` (`.bb-*`), mounts `PublicHeader`/`PublicFooter` | `ServiceReparationerPage.css` (`.bilservice__*`) |
-| `/felsokning` | Bilservice family | Transitional -> Rebuild on family template | Legacy dependent |
-| `/dackservice` | Bilservice family | Transitional -> Rebuild on family template | Legacy transitional (`DackservicePage.css`) |
-| `/ac-service` | Bilservice family | Transitional -> Rebuild on family template | Legacy transitional (`AcServicePage.css`) |
+| `/felsokning` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceReparationerPage.css` |
+| `/dackservice` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceReparationerPage.css` |
+| `/ac-service` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceReparationerPage.css` |
 | `/koppling` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
 | `/avgassystem` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
 | `/oljebyte` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
@@ -88,6 +88,12 @@ The redesign public shell is independent from the frozen legacy layer.
 Every legacy page rebuilt so far (`ContactPage.tsx`, `AboutPage.tsx`, the guide pages before their template rebuilds, etc.) already has a same-named BEM block living in `index.css` — e.g. `.contact-page__*` had 107 rules in `index.css` before the `/kontakt` rebuild. `index.css` stays loaded globally for every route (`main.tsx` imports it unconditionally), so reusing a legacy page's own old class prefix for its "isolated" rebuild silently collides with those frozen rules instead of avoiding them — the page renders using an unpredictable mix of both stylesheets, not a clean island. Found live on the `/kontakt` rebuild (2026-09-18): the closing CTA rendered centered because `index.css:7440-7516`'s old `.contact-page__closing*` rules were still matching.
 
 **Before writing a new page's first class name**, run `grep -c "\.<old-prefix>__" client/src/css/index.css` for whatever prefix the page's *legacy* markup used. If it's non-zero, pick a visibly different prefix for the rebuild (e.g. `/kontakt` moved from `contact-page__*` to `kontakt-page__*`) — do not reuse the old name just because the route or component name matches.
+
+### Collision-free prefixes established for Step 6:
+- **`/bilar-till-salu`**: Legacy markup used `.cars-page__*` (59 rules in `index.css`). **New prefix: `.bilartillsalu-page__*`** in colocated `BilarTillSalu.css`.
+- **`/galleri`**: Legacy markup borrowed `.about-page__*` (now owned by Om oss / `index.css`). **New prefix: `.galleri-page__*`** in colocated `GalleryPage.css`.
+- **`/biltjanster`**: Already complete as `.biltjanster-hub__*` in `BiltjansterPage.css`.
+- **`/bargning`**: Already complete as `.bargning-page__*` in `BargningPage.css`.
 
 ## Required task contract
 
