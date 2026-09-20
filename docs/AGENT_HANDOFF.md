@@ -3,8 +3,8 @@
 ## Start here (updated 2026-09-20)
 
 - **Repo:** `/Users/magnusolsson/repos/brynasbilservice2` (remote `origin` = `FM-Magnus/brynasbilservice2`).
-- **Branch:** `redesign/blue-teal-v1`, clean tree, **31 commits ahead of origin. Ready to push with Magnus's approval.**
-- **Last verified commit:** `d7f32759` (2026-09-20). All 4 undefined tokens resolved into canonical tokens; `PENDING_TOKENS` down to 1 (`--bb-font-sans`). `typecheck` 0 errors, `check:css` clean, `build` clean, Playwright **130 passed / 2 skipped** at 1440/768/390.
+- **Branch:** `redesign/blue-teal-v1`, clean tree, **pushed and in sync with `origin/redesign/blue-teal-v1`** (commit `915b12ad`).
+- **Last verified commit:** `915b12ad` (2026-09-20). Deep pre-push testing & verification completed: `typecheck` 0 errors, `check:css` clean, `build` clean, Playwright **130 passed / 2 skipped** at 1440/768/390.
 - **Commands:** `npm --prefix client run dev | typecheck | check:css | build | test:browser`.
 - **Two guards added 2026-09-20 — read before any CSS work.** `client/scripts/check-css.mjs` (run by the pre-commit hook) fails if any `var(--bb-*)` is undefined and unfallbacked, or if `--redesign-*` / `index.css` reappear; only `--bb-font-sans` sits in its `PENDING_TOKENS` list. `client/tests/browser/baseline.spec.ts` + `baseline-snapshots/` are now **the repository's visual authority**, because the seven locked mockups are absent from this machine — a visual change is approved by reviewing the snapshot diff and then running `test:browser -- --update-snapshots`. The hook also now enforces that `AGENTS.md` does not grow. The build needs **Node ≥18.17** (`vite-imagetools`/sharp); never build on the production server (Node 16).
 - **Read next:** [`AGENTS.md`](../AGENTS.md) (contract), [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) (route → CSS owner map, write rules), [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) (tokens and patterns), [`BACKEND_HANDOFF.md`](BACKEND_HANDOFF.md) (backend plan for Johnny), [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) (dated history, newest first).
