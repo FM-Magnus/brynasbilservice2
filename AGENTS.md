@@ -10,7 +10,7 @@
 3. Every page and shared component styles itself through its own CSS island, imported by its `.tsx`, with a unique class prefix. Check that the prefix isn't already used anywhere under `client/src`.
 4. Shared CSS is allowed only for a page family explicitly listed in `docs/CSS_OWNERSHIP.md` (Bilservice family, Guide family) and for `.bb-*` patterns in `shared-elements.css`.
 5. Tokens are `--bb-*` only. If a task seems to need a new global token or pattern, propose it to Magnus first.
-6. The pre-commit hook blocks Tailwind utilities in public TSX. Never bypass it without Magnus's explicit approval.
+6. The pre-commit hook runs `npm --prefix client run check:css` — every `var(--bb-*)` must resolve (an unresolved one silently drops the whole declaration), and `--redesign-*` / `index.css` are banned outright. It also blocks Tailwind utilities in public TSX. Never bypass it without Magnus's explicit approval.
 
 ## OPERATIONAL HIERARCHY & ARCHITECTURAL SAFETY
 
@@ -274,5 +274,5 @@ Do not append here. New entries belong in [`docs/SESSION_LOG_CURRENT.md`](docs/S
 
 - Replace stale Current state text concisely; do not append parallel versions.
 - Add new dated work notes to `docs/SESSION_LOG_CURRENT.md`, newest first.
-- `AGENTS.md` may not grow — a convention, not an enforced one: `.githooks/pre-commit` defines `check_no_growth` and `check_frozen` but calls neither (verified 2026-09-20). Its only active check blocks Tailwind utilities in public TSX.
+- `AGENTS.md` may not grow. `.githooks/pre-commit` enforces this, and also runs the canonical CSS check (`npm --prefix client run check:css`) and blocks Tailwind utilities in public TSX.
 - Never bypass the hook without Magnus's explicit approval.
