@@ -59,12 +59,58 @@ These are read-only observations of `server/index.js` as of this date.
 
 | # | Issue | Where |
 |---|---|---|
-| a | `comment_customer` is sent by the booking form but never stored; `insertBooking()` omits it. Vehicle inquiries rely on this field (§3.8). | `server/index.js:69`, `:86` |
+| a | `comment_customer` is sent by the booking form but never stored; the route neither reads it nor inserts it. Vehicle inquiries rely on this field (§3.8). Exact request contract and fix: §2.3. | `server/index.js:69`, `:101` |
 | b | `bookings.customer_name` is inserted but not in `schema.sql`; `schema.sql` is stale compared with the live DB. Please dump the live schema into the repo as the source of truth. | `server/database/schema.sql` |
 | c | A single `mysql.createConnection` with no reconnect. A pool (`mysql2.createPool`) would survive MySQL idle timeouts. | `server/index.js:21` |
 | d | No input validation or error middleware. | throughout |
 | e | Port / `RewriteBase` mismatch: `server/.htaccess` (3000 + RewriteBase) vs `docs/deployment.md` (3001, no RewriteBase). | yours to resolve |
 | f | `comment_admin` is shown in the admin UI but there is no endpoint to save it. | admin bookings |
+
+### 2.3 Booking request contract and the `comment_customer` fix
+
+The frontend is finished on its side of this. `client/src/api/bookings.ts` builds the body from `client/src/types/booking.ts`, and `client/tests/browser/booking-form.spec.ts` pins it.
+
+`POST /api/bookings` body, as sent today:
+
+```json
+{
+  "customerName": "Anna Andersson",
+  "customerEmail": "anna@example.se",
+  "customerPhone": "0701234567",
+  "serviceId": 3,
+  "date": "2026-09-20",
+  "time": "09:30",
+  "comment_customer": "Gäller förfrågan om Peugeot 307 CC (2006)"
+}
+```
+
+- `serviceId` is a number. `date` is the calendar day the customer picked, `yyyy-MM-dd`, **not a UTC timestamp**. `time` is 24-hour `HH:mm`. Text fields are trimmed.
+- `comment_customer` is **omitted** when the customer wrote nothing, so store `NULL`. The snake_case key is the existing contract and is kept on purpose.
+- **Date bug fixed on the client.** Until 2026-09-20 the client sent a JSON-serialised `Date`. A customer in Sweden picking 20 Sep sent `2026-09-19T22:00:00.000Z`, which `format(new Date(date), 'yyyy-MM-dd')` turns into 19 Sep on a UTC server. Bookings made before that fix may sit one day early in the live DB.
+
+Fix for §2.2a (two changes in the route; not applied, `server/index.js` is not ours):
+
+```js
+const { customerName, customerEmail, customerPhone, serviceId, date, time, comment_customer } = req.body;
+// ...
+const bookingQuery = 'INSERT INTO bookings (customer_id, customer_name, service, date, time, comment_customer) VALUES (?, ?, ?, ?, ?, ?)';
+db.query(bookingQuery, [customerId, customerName, serviceId, formattedDate, time, comment_customer || null], ...);
+```
+
+The admin list already selects `b.comment_customer` (`GET /api/admin/bookings`), so it shows the text once it is stored.
+
+Also for whoever implements it:
+
+- **Column type and length.** The live DB is the truth and is not in the repo. If `comment_customer` is `VARCHAR(255)` under strict SQL mode, a longer comment makes the INSERT fail. Check it, then validate the length server-side and return `422`. The client currently sets no `maxLength`; agree a limit and it will be added.
+- **Date parsing.** `date` now arrives as `yyyy-MM-dd`. Validate it against `^\d{4}-\d{2}-\d{2}$` and store it as is, instead of round-tripping through `new Date()`.
+- **Status codes drive the wording the customer sees.** No response, timeout, `429`, other `4xx` and `5xx` each get their own message (`client/src/hooks/useFormSubmission.ts`). Return `422` for content problems rather than `500`. Today every failure is a `500`.
+- **Remove** the `console.log('Received booking data:', req.body)` at `:70`; it logs customers' personal data (also §6.8).
+- **Acceptance test.**
+  ```bash
+  curl -s -X POST http://localhost:3000/api/bookings -H 'Content-Type: application/json' \
+    -d '{"customerName":"Test","customerEmail":"t@example.se","customerPhone":"0700000000","serviceId":1,"date":"2026-09-20","time":"09:30","comment_customer":"hej"}'
+  ```
+  Expect `201`, then `GET /api/admin/bookings` returns `"comment_customer": "hej"` and `date` `2026-09-20`.
 
 ---
 
@@ -282,7 +328,7 @@ Optionally, later: add a nullable `vehicle_id` to `bookings` so inquiries can be
 - [ ] Uploading a `.php` renamed to `.jpg` is rejected with 415.
 - [ ] Uploaded files survive a normal deploy.
 - [ ] Deleting an image removes its files; deleting a vehicle hides it publicly.
-- [ ] `comment_customer` is stored on bookings.
+- [ ] `comment_customer` is stored on bookings, and `date` is stored as sent (`yyyy-MM-dd`, no day shift). See §2.3.
 - [ ] Live DB schema is committed to `server/database/`.
 
 ## 5. Open decisions for you

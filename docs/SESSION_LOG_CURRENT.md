@@ -2,6 +2,20 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (booking submission lifecycle + payload; backend-readiness task 1 of 3)
+
+Scope: make the frontend a correct client of the documented contract. No backend was created or edited (`server/**` untouched).
+
+- **Booking modal** (`BookingFormModalImpl.tsx`, `BookingForm.css`): both `alert()` calls are gone. While sending, every control is disabled through a `<fieldset disabled>`, the button reads "Skickar…" and the form is `aria-busy`. Success replaces the form with a summary panel and moves focus to its heading. Errors show an inline `role="alert"` that keeps the entered data, takes focus and offers the phone number from `BUSINESS`.
+- **`hooks/useFormSubmission.ts`** (new, shared with the contact form in task 2): `idle → submitting → success | error`, a ref guard against double submit, a 15 s timeout, abort on unmount, and errors classified as network / timeout / 429 / 4xx / 5xx / unknown.
+- **`types/booking.ts` + `api/bookings.ts`** (new): `BookingRequest` and a pure `buildBookingRequest()`. Text is trimmed, `serviceId` is a number, an empty comment is omitted, and `date` is a local `yyyy-MM-dd`.
+- **Bug found by probing in a browser:** the client sent `date` as a serialised `Date`. Picking 20 Sep in Stockholm sent `2026-09-19T22:00:00.000Z`, which a UTC server stores as 19 Sep. Fixed on the client; the server side is documented in `BACKEND_HANDOFF.md` §2.3. Native `required` does block an empty date/time, so the "1970 booking" risk in the first plan did not materialise.
+- **Correction to the earlier plan:** the modal's state does not survive closing, because the `BookingFormModal` wrapper unmounts it. There was no stale-form-data problem to fix.
+- **`comment_customer`:** the client already sent it; the loss is server-side (`server/index.js:69`, `:101`). §2.3 now holds the exact contract, the two-line fix as text, open questions (column length, status codes) and a curl acceptance test.
+- **Tests:** `tests/browser/booking-form.spec.ts` (7 specs x 3 viewports) uses `page.route` doubles. It covers the payload, the `comment_customer` prefill from `/kamrem`, single request on double click, no native alert, focus, retry after a 500, and an unreachable server. Mutation-checked: restoring `toISOString()` makes the payload spec fail.
+- **Verification:** `typecheck` 0 errors; `check:css` 83 tokens, 20 stylesheets clean; `build` ok; full Playwright suite 151 passed / 2 skipped (touch-only); 0px horizontal overflow in error and success states at 390 and 1440. Ran with system Chrome (`channel: 'chrome'`) via a scratch config because no Playwright browser was installed.
+- **Not done here:** error styling uses literal colours in `BookingForm.css` because `design-tokens.css` has no error token; adding one needs Magnus's approval. Swedish success/error wording is a draft for Magnus to approve. Contact form (task 2) and admin auth (task 3) are untouched.
+
 ### 2026-09-20 — Antigravity (deep pre-push verification & push to origin)
 
 - **Deep pre-push verification completed:**

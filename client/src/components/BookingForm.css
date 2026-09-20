@@ -224,6 +224,131 @@
   transform: translateY(-2px);
 }
 
+/* Submission lifecycle ---------------------------------------------------- */
+
+/* <fieldset> disables every control while the request is in flight; it must
+   not add its own box, so it just repeats the form's column layout. */
+.booking-form__fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.booking-form__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.modal-submit:disabled,
+.modal-submit:disabled:hover {
+  border-color: var(--bb-color-teal-700);
+  background: var(--bb-color-teal-700);
+  box-shadow: none;
+  cursor: progress;
+  opacity: 0.7;
+  transform: none;
+}
+
+.modal-container .modal-input:disabled,
+.modal-container .react-datepicker__input-container input:disabled,
+.booking-form__fieldset:disabled .react-time-picker {
+  opacity: 0.65;
+}
+
+/* Error: literal colours on purpose. There is no error token in
+   design-tokens.css and adding a global one needs Magnus's approval.
+   #7a271a on #fef3f2 is 9.06:1. */
+.modal-error {
+  padding: 0.85rem 1rem;
+  border: 1px solid #fda29b;
+  border-left: 4px solid #d92d20;
+  border-radius: 10px;
+  background: #fef3f2;
+  color: #7a271a;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.modal-error p {
+  margin: 0;
+}
+
+.modal-error__title {
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+}
+
+.modal-error a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  white-space: nowrap; /* never break the phone number across lines */
+}
+
+.modal-error:focus-visible {
+  outline: 3px solid var(--bb-color-teal-700);
+  outline-offset: 2px;
+}
+
+/* Success replaces the form inside the same dialog. */
+.modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 1.75rem);
+  color: var(--bb-color-text);
+}
+
+.modal-success__title {
+  margin: 0;
+  font-family: var(--bb-font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.modal-success__title:focus-visible {
+  outline: 3px solid var(--bb-color-teal-700);
+  outline-offset: 4px;
+}
+
+.modal-success__text {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.modal-success__summary {
+  display: grid;
+  gap: 0.6rem;
+  width: 100%;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(16, 22, 24, 0.12);
+  border-radius: 10px;
+}
+
+.modal-success__summary dt {
+  color: var(--bb-color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.modal-success__summary dd {
+  margin: 0.1rem 0 0;
+  font-weight: 600;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .modal-submit:hover { transform: none; }
 }
