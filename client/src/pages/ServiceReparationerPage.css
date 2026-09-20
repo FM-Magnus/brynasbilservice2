@@ -40,6 +40,12 @@
   padding-inline: var(--bilservice-gutter);
 }
 
+/* The container has no block padding of its own; sections that carry no
+   .bilservice__section class take their vertical rhythm from one of these. */
+.bilservice__container--pad-sm { padding-block: clamp(1.25rem, 2vw, 1.75rem); }
+.bilservice__container--pad { padding-block: clamp(3rem, 5vw, 4rem); }
+.bilservice__container--flow { padding-block: clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem); }
+
 .bilservice__section { padding-block: clamp(4.5rem, 7vw, 6.5rem); }
 .bilservice__section--tight { padding-block: clamp(2.5rem, 4vw, 3rem); }
 /* Consecutive white-background sections should read as one continuous

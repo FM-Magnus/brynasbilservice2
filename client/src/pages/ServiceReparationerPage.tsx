@@ -188,7 +188,7 @@ export default function ServiceReparationerPage() {
 
         {/* Mer än bara service */}
         <section className="bilservice__section--aqua" aria-labelledby="bilservice-more-title">
-          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(3rem, 5vw, 4rem)' }}>
+          <div className="bb-wrap bilservice__container bilservice__container--pad">
             <div className="bilservice__bridge">
               <h2 className="bb-h2" id="bilservice-more-title">Mer än bara service</h2>
               <p className="bb-lead">
@@ -221,7 +221,7 @@ export default function ServiceReparationerPage() {
 
         {/* Letar du efter en begagnad bil? */}
         <section aria-labelledby="bilservice-cars-title">
-          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(1.25rem, 2vw, 1.75rem)' }}>
+          <div className="bb-wrap bilservice__container bilservice__container--pad-sm">
             <div className="bb-promo-card">
               <div className="bb-promo-card__copy">
                 <p className="bb-eyebrow bb-eyebrow--dark">Kvalitetskontrollerade fordon</p>
@@ -234,7 +234,7 @@ export default function ServiceReparationerPage() {
 
         {/* Alltid tydliga besked och ärliga priser */}
         <section aria-labelledby="bilservice-trust-title">
-          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem)' }}>
+          <div className="bb-wrap bilservice__container bilservice__container--flow">
             <div className="bb-card--trust">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
