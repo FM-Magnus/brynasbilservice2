@@ -15,6 +15,7 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 
 - `client/src/styles/design-tokens.css` owns the `--bb-*` tokens. Everything consumes these; there are no other token sets.
 - `client/src/data/publicNavigation.ts` is the navigation source for `PublicHeader`.
+- `client/src/data/business.ts` is the single source for the workshop's business facts (phone, e-mail, address, Google Maps link, opening hours, legal name, org.nr). Never hard-code one of these values in a page, a component or a test — import `BUSINESS` / `weekdayHours` instead.
 - `client/src/components/layout/PublicHeader.tsx` / `PublicHeader.css` and `PublicFooter.tsx` / `PublicFooter.css` are the only header and footer. The legacy `Header.tsx`/`Footer.tsx` were deleted in Step 7.
 - `client/src/components/ui/GalleryTeaserCard.tsx` / `.css`: Ken Burns workshop slideshow card (`defaultWorkshopSlides`).
 - `client/src/components/ui/GoogleReviewsCard.tsx` / `.css`: Google reviews (`defaultGoogleReviews`, `.bb-reviews-card*`).

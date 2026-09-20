@@ -3,8 +3,8 @@
 ## Start here (updated 2026-09-20)
 
 - **Repo:** `/Users/magnusolsson/repos/brynasbilservice2` (remote `origin` = `FM-Magnus/brynasbilservice2`).
-- **Branch:** `redesign/blue-teal-v1`, clean tree, **13 commits ahead of origin. Never push without Magnus's explicit approval.**
-- **Last verified commit:** `32343dfa` (2026-09-20). typecheck 0 errors, `npm --prefix client run build` clean, Playwright **67 passed / 2 skipped** (the 2 are touch-only tests skipped off mobile) at 1440/768/390.
+- **Branch:** `redesign/blue-teal-v1`, clean tree, **16 commits ahead of origin. Never push without Magnus's explicit approval.**
+- **Last verified commit:** `cc22940c` (2026-09-20). typecheck 0 errors, `npm --prefix client run build` clean, Playwright **67 passed / 2 skipped** (the 2 are touch-only tests skipped off mobile) at 1440/768/390.
 - **Commands:** `npm --prefix client run dev | typecheck | build | test:browser`. The build needs **Node ≥18.17** (`vite-imagetools`/sharp); never build on the production server (Node 16).
 - **Read next:** [`AGENTS.md`](../AGENTS.md) (contract), [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) (route → CSS owner map, write rules), [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) (tokens and patterns), [`BACKEND_HANDOFF.md`](BACKEND_HANDOFF.md) (backend plan for Johnny), [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) (dated history, newest first).
 
@@ -23,7 +23,8 @@ All 7 roadmap steps are done and the plan is archived at [`archive/HITL_Temporar
 
 - **Cars:** `client/src/data/vehicles.ts` (add an entry, or `status: 'sold'`). The page reads it through `api/vehicles.ts`; `VITE_VEHICLES_SOURCE=api` switches to the future backend.
 - **Gallery:** drop or delete an image in `client/src/assets/galleri/`; captions in `bildtexter.json`; Swedish instructions in `LÄSMIG.md` there. `VITE_GALLERY_SOURCE=api` switches to the future backend.
-- Both need a build and deploy to reach the live site.
+- **Business facts:** phone, e-mail, address, Google Maps link, opening hours, legal name and org.nr all live in `client/src/data/business.ts`. Change a value there and it updates everywhere, including the Playwright assertions.
+- All of these need a build and deploy to reach the live site.
 
 ## Open follow-ups (nothing is in progress)
 
@@ -31,7 +32,7 @@ All 7 roadmap steps are done and the plan is archived at [`archive/HITL_Temporar
 2. **Font-swap layout shift** site-wide: add a metric-matched fallback `@font-face`, then move `styles/base.css` onto `--bb-font-*` (it deliberately uses the legacy stacks today; see the comment in that file).
 3. `GalleryTeaserCard` still has its own six-image list; it could read `assets/galleri/` instead (shared-component change).
 4. Om oss gallery links could deep-link as `/galleri?bild={slug}`.
-5. Footer Instagram icon points at `instagram.com`, not the workshop profile; the phone number exists as both `tel:+46705533395` and `tel:0705533395`.
+5. Footer Instagram icon points at `instagram.com`, not the workshop profile — Magnus needs to supply the real URL or decide to drop the icon. (The phone-number split was resolved on 2026-09-20; everything now comes from `data/business.ts`.)
 6. Seven already-unreferenced assets plus `client/src/assets/images/archive/` — Magnus decides whether to delete.
 7. Server-side, Johnny: `comment_customer` not saved on bookings, `schema.sql` out of sync, `.htaccess` port/RewriteBase mismatch.
 

@@ -2,6 +2,17 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (business facts moved to one source)
+
+- **New `client/src/data/business.ts`** is the single source for the workshop's phone number, e-mail, address, Google Maps link, opening hours, legal name and org.nr. It sits beside `vehicles.ts` and `publicNavigation.ts` as a data module, not a CSS or layout change. No CSS file was touched.
+- **Resolved the drift the previous entry flagged:** the telephone link existed as `tel:0705533395` (77 rendered links) and `tel:+46705533395` (50). All 127 now render the E.164 form, which also works when a customer calls from abroad. The Google Maps link had two query variants (28 + 3); all 31 now use the one that was already on every page.
+- **Opening hours** were hard-coded in five files in five typographic variants (`08:00 – 17:00`, `08:00–17:00`, `08.00 – 17.00`, …). The values now come from `BUSINESS.hours`; each page keeps its own typography through the `weekdayHours({ dash, dots })` helper, so no visible copy changed.
+- **One deliberate visible change:** `ContactFormCard` rendered the number as `070–553 33 95` with an en dash, against `070-553 33 95` with a hyphen everywhere else. Normalised to the hyphen (majority form, and the correct Swedish convention). This is the only text difference on the whole site — see verification. **Magnus should confirm.**
+- **Ten Playwright specs** asserted the literal `tel:0705533395`; they now import `BUSINESS.phone.href`, so the tests cannot drift from the site either.
+- **Left as prose, on purpose:** sentences that mention `Utmarksvägen 21B i Brynäs` inside body copy. Only exact renderings of a whole fact were centralised; decomposing sentences into constants would hurt readability for no drift protection. The rule is written into `business.ts`.
+- **Verification:** `typecheck` 0 errors; `npm --prefix client run build` clean; Playwright **67 passed / 2 skipped**, matching the pre-change baseline. Additionally, the rendered `innerText` of all 21 public routes was captured before and after (4,947 lines) and diffed: **one line differs**, the en dash above. The `tel:`/`mailto:`/maps href inventory was diffed the same way, with no link gained or lost.
+- Committed on `redesign/blue-teal-v1`. **Not pushed.**
+
 ### 2026-09-20 — Claude (Step 7 sign-off check + roadmap archived)
 
 - **Automated click-through** of the whole public site: crawled every internal link from every page (nav, Biltjänster dropdown, footer, in-page CTAs). 22 routes reached, each with exactly one `h1`, `PublicHeader` and a footer, no page errors, and `/tjanster` → `/biltjanster`. No problems.
