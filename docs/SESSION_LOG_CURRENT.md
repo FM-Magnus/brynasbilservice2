@@ -2,6 +2,20 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (icon consolidation, audit point 1)
+
+Scope: consolidate duplicated local icon helpers into the shared set, with no visible change unless approved. No CSS, token, copy or `server/**` change.
+
+- **Phase 0 (measured, not assumed).** 45 local icon definitions in 7 files; 2,168 rendered svgs across 21 routes at 1440/390 recorded with computed styles and every matching CSS rule. Findings: zero rules reach inside an icon, zero `!important`, zero inline styles on svgs; the five `PublicHeader` icons are CSS-owned (stroke, stroke-width, linecap, fill come from `PublicHeader.css`); shared set is 20 icons at stroke 2 and 6 at 2.5, only 3 with round caps. Never rendered: Landing `mail`, `send`, `facebook`, `wheel`, `snowflake` (plus four unused `icon:` fields in the services array) and ContactFormCard `check`.
+- **New shared icons:** `MailIcon`, `SendIcon`, `CalendarIcon` (stroke 2, round caps/joins), rendered pixel-identical to the drawings they replace.
+- **Migrated, one commit each:** `ContactPage` (mail, send; send stroke 2.2 to 2 and round caps, approved), `ContactFormCard` (mail, send; check case deleted), `LandingPage` (calendar, wrench, monitor; eight local entries deleted; wrench and monitor lose round caps/joins, approved), `PublicFooter` (mail, send, calendar).
+- **Left local by decision:** phone, pin, arrow, check, clock, chat, shield, car (shared drawings differ or change meaning: the shared shield has no check mark and `CarSaleIcon` is a different glyph); header icons (CSS-owned); ContactPage chevron; Bärgning and Om oss one-offs.
+- **Verification per commit:** before/after crops at 4x, computed styles, rendered box sizes, winning rule per property and svg counts all compared. Everything unchanged except the approved deltas above. Footer verified on all 21 routes (168 instances, 0 changed pixels; 63 full-page captures with no overflow).
+- **Bundle:** total raw JS about -2 KB across the four migrations (per-step totals: ContactPage +76, ContactFormCard -363, LandingPage -854, PublicFooter -850 bytes; steps de-duplicated same-named chunks slightly differently, so treat it as approximate). Routes that load only the footer pay +92 bytes raw because the shared icons now sit in the footer chunk; Felsökning +59 bytes for a similar reason.
+- **Net lines:** -16, -18, +3 and -25 in the four consumers, +24 for the new icons.
+- **Test note:** one galleri spec timed out once while the machine was heavily loaded (load average above 130, swap in use); the full suite passed (151 passed, 2 skipped) with fewer workers. Playwright's own browser was not installed, so runs used system Chrome through a scratch config outside the repo.
+- **Not done, still open:** which look is canonical for phone, pin, arrow and check (needs Magnus); the header icons; the 6 shared icons at stroke 2.5. Points 2 to 6 of the audit (inline styles, breakpoints, hero, hex colours, error token) untouched.
+
 ### 2026-09-20 — Claude (booking submission lifecycle + payload; backend-readiness task 1 of 3)
 
 Scope: make the frontend a correct client of the documented contract. No backend was created or edited (`server/**` untouched).

@@ -139,6 +139,16 @@ Both Landing (`/`) and Bilservice (`/service-reparationer`) now actively consume
 
 ---
 
+### 2b. Icons (`client/src/components/icons/`)
+
+- **Shape.** One file per icon, `XxxIcon.tsx`, a named export taking only `{ className?: string }`. Decorative: `aria-hidden="true"`, `viewBox="0 0 24 24"`, `fill="none"`, `stroke="currentColor"`. Import each icon directly; there is no barrel file, so route-level code splitting keeps working.
+- **Drawing standard for new icons:** stroke 2 with round caps and joins (`MailIcon`, `SendIcon`, `CalendarIcon`). The 26 older icons predate it: 20 use stroke 2 and 6 use 2.5 (Arrow, Bolt, Dollar, MapPin, Phone, Check), and only 3 set round caps. They are not normalised, because that changes about 20 pages.
+- **Promotion rule.** A glyph becomes a shared icon when two or more files draw it. A glyph used in one file stays local.
+- **Size and colour are never in the icon.** Colour is `currentColor`. Size comes from the consumer's own island (`.bargning-page__hero-trust-icon svg`) or a shared pattern (`.bb-btn svg`, `.bb-card-arrow svg`, `.bb-icon-badge svg`, `.bb-icon-bare svg`).
+- **CSS beats SVG attributes.** Where a rule sets `stroke`, `stroke-width`, `fill` or linecap on `svg`, that rule owns the value. Today that is only `PublicHeader.css`, so the header's five icons stay local and attribute-free; a shared icon with its own attributes would state the same value twice.
+- **Adding or swapping an icon:** search the CSS for rules that touch `svg` in that context, then render the old and new drawing at the size actually used and compare before committing.
+- **Open (2026-09-20):** phone, pin, arrow and check exist in two looks, a lighter local drawing on the home page, header, footer and contact card and the bolder shared one elsewhere; `FlowArrowIcon` is duplicated in Bärgning and Om oss; one-offs in those two pages stay local. Which look is canonical is Magnus's decision.
+
 ## 3. Legacy system — removed in Step 7 (2026-09-19)
 
 The legacy `client/src/css/index.css` (7,531 lines, `--redesign-*` / `--color-*` tokens, `.services-page__*` and similar systems) was deleted in Step 7. Its audit (hex literals without tokens, legacy spacing, radius, motion, breakpoints, and the "teal accent card" and "dark card" motifs) lives in Git history (the file exists up to and including commit `80ec3958`). **Do not recreate any of it.** Every value now comes from §1 (`--bb-*`), and every shared pattern from §2a (`.bb-*`).
