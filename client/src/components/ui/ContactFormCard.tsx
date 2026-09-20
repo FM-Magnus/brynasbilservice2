@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { BUSINESS } from '../../data/business'
+import { MailIcon } from '../icons/MailIcon'
+import { SendIcon } from '../icons/SendIcon'
 import './ContactFormCard.css'
 
 export interface ContactFormData {
@@ -39,7 +41,7 @@ export interface ContactFormCardProps {
   onSubmitSuccess?: (data: ContactFormData) => void
 }
 
-function Icon({ name }: { name: 'phone' | 'mail' | 'pin' | 'send' | 'check' }) {
+function Icon({ name }: { name: 'phone' | 'pin' }) {
   const common = {
     viewBox: '0 0 24 24',
     fill: 'none',
@@ -57,31 +59,11 @@ function Icon({ name }: { name: 'phone' | 'mail' | 'pin' | 'send' | 'check' }) {
           <path d="M21 16.8v3a2 2 0 0 1-2.2 2 19.5 19.5 0 0 1-8.5-3.1A19 19 0 0 1 4.3 12a19.5 19.5 0 0 1-3.1-8.5A2 2 0 0 1 3.2 1.3h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1l-.9.9a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.8a2 2 0 0 1 1.7 2.1Z" />
         </svg>
       )
-    case 'mail':
-      return (
-        <svg {...common}>
-          <rect x="2" y="4" width="20" height="16" rx="2" />
-          <path d="m2 7 9 5.7a2 2 0 0 0 2 0L22 7" />
-        </svg>
-      )
     case 'pin':
       return (
         <svg {...common}>
           <path d="M20.5 10c0 6.5-8.5 12-8.5 12S3.5 16.5 3.5 10a8.5 8.5 0 1 1 17 0Z" />
           <circle cx="12" cy="10" r="2.5" />
-        </svg>
-      )
-    case 'send':
-      return (
-        <svg {...common}>
-          <path d="m22 2-7 20-4-9-9-4Z" />
-          <path d="M22 2 11 13" />
-        </svg>
-      )
-    case 'check':
-      return (
-        <svg {...common}>
-          <path d="m5 12 4.2 4.2L19 6.5" />
         </svg>
       )
   }
@@ -169,7 +151,7 @@ export function ContactFormCard({
           </label>
 
           <button className="bb-contact-form__submit" type="submit">
-            Skicka meddelande <Icon name="send" />
+            Skicka meddelande <SendIcon />
           </button>
         </form>
       )}
@@ -218,7 +200,7 @@ export function ContactFormCard({
 
             <a href={`mailto:${email}`}>
               <i>
-                <Icon name="mail" />
+                <MailIcon />
               </i>
               <span>
                 <small>Mejla oss</small>
