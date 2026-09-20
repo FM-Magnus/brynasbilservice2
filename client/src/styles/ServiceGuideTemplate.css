@@ -15,9 +15,21 @@
                                   card borders do not render on any of the
                                   10 guide pages.
     --bb-shadow-elevated      1x  box-shadow — measured `none`.
-    --bb-font-sans           35x  font-family — inert, because the property
-                                  then inherits body's 'Manrope', sans-serif
-                                  from base.css, which is what was wanted.
+    --bb-font-sans           35x  font-family — renders correctly today, but
+                                  do NOT simply delete these declarations.
+                                  Tried on 2026-09-20 and reverted: an invalid
+                                  var() still wins the cascade and only then
+                                  resolves to `unset`, so the element inherits
+                                  body's 'Manrope', sans-serif. Remove the
+                                  declaration and a lower-priority rule wins
+                                  instead, changing the stack to 'Manrope',
+                                  Arial, sans-serif. base.css explains why that
+                                  fallback difference matters: it changes how
+                                  text wraps before the web font arrives, and
+                                  enlarges the font-swap layout shift. These
+                                  35 declarations are accidentally pinning the
+                                  fallback; untangle them together with the
+                                  font-loading fix, not before.
   Defining these tokens would make 43 declarations activate at once and
   change the approved appearance, so it needs Magnus's decision first.
 */
