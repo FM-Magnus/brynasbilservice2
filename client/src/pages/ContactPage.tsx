@@ -11,29 +11,13 @@ import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { FacebookIcon } from '../components/icons/FacebookIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
+import { MailIcon } from '../components/icons/MailIcon'
+import { SendIcon } from '../components/icons/SendIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { defaultContactSubjects } from '../components/ui/ContactFormCard'
 import aboutHeroWebp from '../assets/images/about/about-hero-bg.webp'
 import aboutHeroJpg from '../assets/images/about/about-hero-bg.jpg'
 import './ContactPage.css'
-
-function MailIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  )
-}
-
-function SendIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
-      <path d="m22 2-7 20-4-9-9-4Z" />
-      <path d="M22 2 11 13" />
-    </svg>
-  )
-}
 
 function ChevronDownIcon({ className }: { className?: string }) {
   return (
