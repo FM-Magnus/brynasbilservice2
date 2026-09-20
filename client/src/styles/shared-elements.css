@@ -468,13 +468,15 @@
 .bb-hero__copy .bb-h1 {
   display: flex;
   flex-direction: column;
+  font-size: var(--bb-hero-h1-size);
 }
+.bb-hero__copy .bb-eyebrow { margin-bottom: 0.65rem; }
 .bb-hero__copy > p:not(.bb-eyebrow) {
   color: rgba(255, 255, 255, 0.9);
   font-family: var(--bb-font-body);
   font-size: var(--bb-font-size-body);
   line-height: var(--bb-line-height-body);
-  margin: 1.2rem 0 1.4rem;
+  margin: 0.9rem 0 1.05rem;
   max-width: 54ch;
 }
 .bb-hero__actions {

@@ -70,18 +70,19 @@
 }
 
 .bargning-page__hero-eyebrow {
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.85rem;
 }
 
 .bargning-page__hero-title {
   color: var(--bb-color-text-inverse);
-  margin: 0 0 1.35rem;
+  font-size: var(--bb-hero-h1-size);
+  margin: 0 0 1rem;
 }
 
 .bargning-page__hero-lead {
   font-size: clamp(1.02rem, 1.25vw, 1.15rem);
   line-height: 1.6;
-  margin: 0 0 2rem;
+  margin: 0 0 1.5rem;
   max-width: 580px;
 }
 
@@ -90,7 +91,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.7rem;
 }
 
 .bargning-page__hero-phone-btn {

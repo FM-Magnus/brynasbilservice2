@@ -28,9 +28,9 @@ body
   min-height: 0px
 h1
   font-family: Archivo, Arial, sans-serif
-  font-size: 44px
+  font-size: 36px
   font-weight: 800
-  line-height: 43.12px
+  line-height: 35.28px
   color: rgb(255, 255, 255)
   background-color: rgba(0, 0, 0, 0)
   border-top-width: 0px

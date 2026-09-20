@@ -83,18 +83,19 @@
 }
 
 .omoss-page__hero-eyebrow {
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.9rem;
 }
 
 .omoss-page__hero-title {
   color: var(--bb-color-text-inverse);
-  margin: 0 0 1.5rem;
+  font-size: var(--bb-hero-h1-size);
+  margin: 0 0 1.1rem;
 }
 
 .omoss-page__hero-lead {
   font-size: clamp(1.02rem, 1.3vw, 1.15rem);
   line-height: 1.6;
-  margin: 0 0 2rem;
+  margin: 0 0 1.5rem;
   max-width: 580px;
 }
 

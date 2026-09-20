@@ -77,6 +77,13 @@
 .service-guide__title .title-accent,
 .service-guide__title .bb-accent { color: var(--bb-color-teal-500); }
 
+/* Hero-only: a smaller H1 and tighter gaps so the hero fits a laptop screen. Scoped,
+   because these classes are also used further down the page. */
+.service-guide__hero .service-guide__eyebrow { margin-bottom: 0.75rem; }
+.service-guide__hero .service-guide__title { margin-bottom: 0.75rem; font-size: var(--bb-hero-h1-size); }
+.service-guide__hero .service-guide__lead { margin-bottom: 1.25rem; }
+.service-guide__hero .service-guide__actions { margin-bottom: 1.5rem; }
+
 .service-guide__lead {
   max-width: 46ch;
   margin: 0 0 1.75rem;

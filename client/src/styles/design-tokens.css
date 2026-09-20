@@ -47,6 +47,7 @@
   --bb-hero-min-height: clamp(520px, 70svh, 640px);
   --bb-hero-min-height-mobile: 780px;
   --bb-hero-copy-max-width: 540px;
+  --bb-hero-h1-size: clamp(2.25rem, 3.4vw + 0.6rem, 3rem);
   --bb-hero-padding-top: var(--bb-hero-clearance);
   --bb-hero-padding-bottom: clamp(2rem, 3.5vw, 3.5rem);
   --bb-hero-padding-top-mobile: 7rem;
