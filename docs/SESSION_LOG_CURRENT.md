@@ -2,6 +2,27 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Antigravity (four undefined CSS custom properties resolved)
+
+Resolved the four undefined `--bb-*` custom properties flagged in `PENDING_TOKENS` across the two family parents (`ServiceGuideTemplate.css` and `ServiceReparationerPage.css`).
+
+- **Derived, not invented values:**
+  - `--bb-color-border-subtle: rgba(255, 255, 255, 0.08)`: defined in `client/src/styles/design-tokens.css` for dark ink surfaces (`#071416`). Serves the 4 dark container cards in `ServiceGuideTemplate.css` (`.service-guide__importance`, `.service-guide__service-card`, `.service-guide__process`, `.service-guide__closing`), matching neighbouring dark rules (e.g. line 351 `rgba(255, 255, 255, 0.08)`).
+  - `--bb-color-border-subtle-light: rgba(7, 20, 22, 0.08)`: defined in `client/src/styles/design-tokens.css` for light surfaces (`#ffffff` / `#f8f7f3`). Serves the 3 light card rules in `ServiceGuideTemplate.css` (`.service-guide__symptom-row`, `.service-guide__info-card`, `.service-guide__topic-card`), matching canonical card borders across `ContactPage.css`, `BiltjansterPage.css`, `AboutPage.css`, `BargningPage.css`, and `--bb-shadow-card: 0 10px 26px rgba(7, 20, 22, 0.08)`.
+  - `--bb-shadow-elevated: 0 18px 44px rgba(0, 0, 0, 0.34)`: defined in `client/src/styles/design-tokens.css`. Serves `.service-guide__hero-media` inside `.service-guide__hero` (dark ink `#071416`). Derived from `--bb-shadow-floating` documented in `DESIGN_SYSTEM.md` as "Floating header & elevated dark card shadow".
+  - `--bb-radius-lg` and `--bb-radius-pill`: identified as misnamings of existing canonical tokens. `.bilservice__image-slot--radius-lg` in `ServiceReparationerPage.css` was mapped to `var(--bb-radius-card)` (20px), and `.bilservice__hero-badges li` and `.bilservice__hero-reg-input` to `var(--bb-radius-control)` (999px pill). No duplicate synonym tokens were introduced.
+- **`PENDING_TOKENS` in `client/scripts/check-css.mjs` shrunk from 5 to 1:** only `--bb-font-sans` remains on the list (intentionally preserved pending untangling with the font-loading fix).
+- **Two separate commits:**
+  1. `ce2ef37d` feat(css): resolve four undefined custom properties into canonical tokens
+  2. `3248080c` test(baseline): update snapshots for resolved guide card borders
+- **Verification:**
+  - `npm --prefix client run typecheck`: 0 errors.
+  - `npm --prefix client run check:css`: 84 tokens defined, 20 stylesheets clean, 1 pending token (`--bb-font-sans`).
+  - `npm --prefix client run build`: built cleanly in 12.41s; entry CSS moved by only +150 bytes.
+  - Baseline snapshots diff: verified that ONLY the intended properties moved on the 10 guide pages across 3 viewports (`border-top-width: 0px -> 1px`, `border-top-style: none -> solid`, `border-top-color: rgb(7, 20, 22) -> rgba(255, 255, 255, 0.08)`). No text diffs, no non-guide routes affected.
+  - Full test suite: **130 passed / 2 skipped** (touch-only tests skipped off mobile).
+  - Horizontal overflow: verified $\Delta = 0\text{px}$ across 1440, 768, and 390 viewports on `/kamrem`, `/avgassystem`, `/service-reparationer`, and `/ac-service`.
+
 ### 2026-09-20 — Claude (independence from external truth; token guard; first-load weight)
 
 Executed the workstreams from the Phase 1 proposal that carry no visual risk. Six commits, none pushed.
