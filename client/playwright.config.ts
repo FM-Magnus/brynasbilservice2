@@ -5,6 +5,11 @@ const baseURL = 'http://localhost:5173'
 export default defineConfig({
   testDir: './tests/browser',
   outputDir: 'test-results',
+  // Baseline snapshots record computed styles and rendered text, both of which
+  // are platform-independent. Playwright's default path includes the OS, which
+  // would make another machine silently write a fresh baseline instead of
+  // comparing against this one. Keep the project (viewport) and drop the OS.
+  snapshotPathTemplate: '{testDir}/baseline-snapshots/{projectName}/{arg}{ext}',
   fullyParallel: true,
   forbidOnly: true,
   retries: 0,
