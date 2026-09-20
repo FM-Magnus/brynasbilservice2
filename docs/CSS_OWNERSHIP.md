@@ -10,6 +10,7 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 - Global CSS is exactly: `styles/tailwind.css`, `styles/design-tokens.css`, `styles/base.css`, `styles/shared-elements.css` (loaded in that order in `main.tsx`). Adding a fifth global file needs Magnus's approval.
 - Every page, family and shared component owns its CSS island, imported by its `.tsx`, with a unique class prefix.
 - If a task seems to require a new global rule, token or shared pattern, stop and propose it to Magnus first.
+- Public TSX carries no inline `style=`. It beats every stylesheet rule, so it hides values from the CSS that is meant to own them; `check:css` fails on it (admin is exempt, like Tailwind). Put the value in the page's island or, for a family page, in the family stylesheet.
 
 ## Public shell and shared components
 
@@ -49,6 +50,8 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 3. **"Bilservice" family (shared template)** — major service-hub pages, all structurally the same kind of page:
    - *Owner*: `ServiceReparationerPage.tsx` + `ServiceReparationerPage.css` (`.bilservice__*`).
    - *Pages on this template*: `Bilservice` (`/service-reparationer`), `Felsökning` (`/felsokning`), `Däckservice` (`/dackservice`), `AC-service` (`/ac-service`).
+   - *Spacing modifiers (moved out of inline styles 2026-09-20; exact values kept):* `.bilservice__container--pad-sm` / `--pad` / `--pad-lg` / `--flow` (block padding for containers in unclassed sections), `.bilservice__intro--wide` / `--wide-sm` / `--tight`, `.bilservice__lead--intro` / `--intro-tight` / `--split` and `.bilservice__note`. Context rules under `.bilservice__service-content`, `.bilservice__intro`, `.bilservice__card--teal`, `.bilservice__price-amount` and `.bilservice__split-media--right` replaced the rest. Where a modifier sits under `.bilservice__intro`, that is deliberate: `.bilservice__intro p` (0,1,1) would beat a bare class. `.bilservice__symptom-grid--auto` is doubled for the same reason against a later media rule.
+   - *Near-duplicates kept on purpose (a design decision, not a bug):* `--pad` 64px vs `--pad-lg` 72px, `--wide` 78ch vs `--wide-sm` 75ch, `--intro` 0.5rem vs `--intro-tight` 0.4rem.
 
 4. **"Guide" family (shared template)** — technical repair-guide pages, all structurally the same kind of page. There is only one guide template; the remaining six guides join the same one already proven on the first four, not a second template.
    - *Owner*: `ServiceGuideTemplate.css` (`.service-guide__*`).

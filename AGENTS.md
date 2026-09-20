@@ -10,7 +10,7 @@
 3. Every page and shared component styles itself through its own CSS island, imported by its `.tsx`, with a unique class prefix. Check that the prefix isn't already used anywhere under `client/src`.
 4. Shared CSS is allowed only for a page family explicitly listed in `docs/CSS_OWNERSHIP.md` (Bilservice family, Guide family) and for `.bb-*` patterns in `shared-elements.css`.
 5. Tokens are `--bb-*` only. If a task seems to need a new global token or pattern, propose it to Magnus first.
-6. The pre-commit hook runs `npm --prefix client run check:css` — every `var(--bb-*)` must resolve (an unresolved one silently drops the whole declaration), and `--redesign-*` / `index.css` are banned outright. It also blocks Tailwind utilities in public TSX. Never bypass it without Magnus's explicit approval.
+6. The pre-commit hook runs `npm --prefix client run check:css` — every `var(--bb-*)` must resolve (an unresolved one silently drops the whole declaration), and `--redesign-*` / `index.css` are banned outright. It also blocks Tailwind utilities and inline `style=` in public TSX. Never bypass it without Magnus's explicit approval.
 
 ## OPERATIONAL HIERARCHY & ARCHITECTURAL SAFETY
 
