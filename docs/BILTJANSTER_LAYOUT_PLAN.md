@@ -1,5 +1,10 @@
 # Biltjänster page layout & imagery pass — working plan
 
+> **SUPERSEDED — historical record only (banner added 2026-09-20).** This file predates the Step 6/7 rebuild and its styling instructions are no longer true: `client/src/css/index.css` was deleted on 2026-09-19, the `--redesign-*` tokens no longer exist, and the uppercase `.title-accent` heading rule is retired. The pre-commit hook no longer freezes `index.css` either; it only blocks Tailwind utilities in public TSX.
+>
+> The current contract is [`AGENTS.md`](../AGENTS.md), with [`docs/CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) for the route → CSS-owner map and [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) for tokens and patterns. Do not follow the styling instructions below.
+
+
 Agreed with Magnus on 2026-09-16. This is the brief for a long, mostly-autonomous
 session bringing every page under the `Biltjänster` nav dropdown up to the visual
 bar the more complete pages already hit, with more layout variation page to page.

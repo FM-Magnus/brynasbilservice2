@@ -1,5 +1,10 @@
 # Antigravity handoff — Brynäs Bilservice Biltjänster
 
+> **SUPERSEDED — historical record only (banner added 2026-09-20).** This file predates the Step 6/7 rebuild and its styling instructions are no longer true: `client/src/css/index.css` was deleted on 2026-09-19, the `--redesign-*` tokens no longer exist, and the uppercase `.title-accent` heading rule is retired. The pre-commit hook no longer freezes `index.css` either; it only blocks Tailwind utilities in public TSX.
+>
+> The current contract is [`AGENTS.md`](../AGENTS.md), with [`docs/CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) for the route → CSS-owner map and [`docs/DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) for tokens and patterns. Do not follow the styling instructions below.
+
+
 Updated 2026-09-16. Migration to Antigravity 2 / Flash 3.8.
 
 ## READ THIS FIRST — the two files that must never bloat again
