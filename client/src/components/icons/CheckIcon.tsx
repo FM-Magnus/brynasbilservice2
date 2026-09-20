@@ -13,7 +13,7 @@ export function CheckIcon({ className, width = 18, height = 18, ...props }: Icon
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2.5"
+      strokeWidth="2"
       aria-hidden="true"
       {...props}
     >

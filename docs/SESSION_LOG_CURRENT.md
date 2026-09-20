@@ -2,6 +2,15 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (icon look decided: light, stroke 2 everywhere)
+
+- **Decision (Magnus):** the canonical icon look is the light one, stroke 2. Evidence shown first: bold (2.5) was the majority for phone (101 vs 24 instances), arrow (39 vs 8) and check (121 vs 1), light for the pin (23 vs 11), and 20 of the 26 shared icons were already stroke 2. One component mixed both looks: the footer contact list drew a bold phone next to a light mail and pin.
+- **Change:** `strokeWidth` 2.5 to 2 in `PhoneIcon`, `MapPinIcon`, `ArrowRightIcon`, `CheckIcon`, `BoltIcon`, `DollarIcon` (six lines, six files).
+- **Measured on all 559 rendered instances** (21 routes, 1440 and 390, 42 page states): the only computed-style change is `stroke-width: 2.5px` to `2px`; rendered sizes, colours, fill, filter, winning CSS rule per property, matched rule sets and svg counts are unchanged.
+- **Gates:** typecheck 0 errors; `check:css` clean; build ok (each icon chunk 2 bytes smaller, total -12 bytes, no route grows); full Playwright suite 151 passed, 2 skipped.
+- **Visible effect:** lines are 20% thinner on the affected icons: hero call buttons, check lists, contact details, arrows. In the contact list the phone, mail and pin now share one weight.
+- **Still open:** dedupe the local phone, pin, arrow and check drawings against the shared icons (differences left are round vs butt caps and the pin shape); the duplicated `FlowArrowIcon`; the header's CSS-owned icons; normalising caps on the 23 icons that use butt caps.
+
 ### 2026-09-20 — Claude (icon consolidation, audit point 1)
 
 Scope: consolidate duplicated local icon helpers into the shared set, with no visible change unless approved. No CSS, token, copy or `server/**` change.
