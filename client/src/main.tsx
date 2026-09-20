@@ -6,12 +6,18 @@ import './styles/tailwind.css'
 import './styles/design-tokens.css'
 import './styles/base.css'
 import './styles/shared-elements.css'
-import App from './App.tsx'
 import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
 
-// Every route below `/` is code-split: each page's JS only downloads when a
-// visitor actually navigates there, instead of every page shipping in one
-// bundle on every page load. See docs/DESIGN_SYSTEM.md#js-code-splitting.
+// Every route is code-split, including `/`: each page's JS and CSS only
+// download when a visitor actually navigates there, instead of every page
+// shipping in one bundle on every page load. See docs/DESIGN_SYSTEM.md#js-code-splitting.
+//
+// `/` was the one exception until 2026-09-20, which meant the landing page's
+// JS and CSS — and the shared cards only it uses — shipped on all 21 routes.
+// Splitting it redistributes rather than duplicates: total built assets changed
+// by 4 bytes, while a guide page's first-load CSS dropped from 92 KB to 72 KB.
+// The trade is that `/` now resolves one lazy chunk after the entry parses.
+const App = lazy(() => import('./App.tsx'))
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard.tsx'))
 const BilarTillSalu = lazy(() => import('./pages/BilarTillSalu.tsx'))
 const ServiceReparationerPage = lazy(() => import('./pages/ServiceReparationerPage.tsx'))
