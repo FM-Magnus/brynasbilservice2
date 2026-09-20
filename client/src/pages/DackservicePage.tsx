@@ -222,13 +222,13 @@ export default function DackservicePage() {
         {/* 6-Card Tire Service Grid */}
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="dackservice-services-title">
           <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro" style={{ maxWidth: '78ch' }}>
+            <div className="bilservice__intro bilservice__intro--wide">
               <p className="bb-eyebrow">Våra däcktjänster</p>
               <h2 className="bb-h2" id="dackservice-services-title">Allt för dina <span className="bb-accent">hjul</span></h2>
-              <p className="bb-lead" style={{ marginTop: '0.8rem', marginBottom: '0.5rem' }}>
+              <p className="bb-lead bilservice__lead--intro">
                 Från säsongsskifte till kontroll och reparation — välj den hjälp som passar din bil. Oavsett om det är dags att byta till vinterhjul, om ratten vibrerar vid motorväg, om ett däck fått en punktering eller om du bara vill slippa släpa på hjulen mellan säsongerna, hjälper vi dig hela vägen. Nedan hittar du våra vanligaste däck- och hjultjänster med tydliga priser, så att du vet vad som ingår innan du bokar.
               </p>
-              <small style={{ color: 'var(--bb-color-teal-800)', fontWeight: 700 }}>Samtliga priser är inklusive moms.</small>
+              <small>Samtliga priser är inklusive moms.</small>
             </div>
 
             <div className="bilservice__tire-grid">
@@ -281,7 +281,7 @@ export default function DackservicePage() {
 
         {/* Däckhotell Section */}
         <section className="bilservice__section--aqua" aria-labelledby="dackservice-storage-title">
-          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(3rem, 5vw, 4.5rem)' }}>
+          <div className="bb-wrap bilservice__container bilservice__container--pad-lg">
             <div className="bilservice__storage-card">
               <h2 className="bb-h2" id="dackservice-storage-title">Trångt i garaget? Låt oss förvara dina däck.</h2>
               <p>Slipp bära och lagra tunga hjul hemma — vi tar hand om dem tryggt mellan säsongerna.</p>
@@ -316,8 +316,8 @@ export default function DackservicePage() {
               </div>
               <div className="bilservice__service-content">
                 <div>
-                  <p className="bb-eyebrow bb-eyebrow--dark" style={{ marginBottom: '0.4rem' }}>Befintlig däckservice</p>
-                  <h2 className="bb-h2" id="dackservice-legacy-title" style={{ color: '#fff', marginBottom: '0.85rem' }}>Mer om vår däckservice</h2>
+                  <p className="bb-eyebrow bb-eyebrow--dark">Befintlig däckservice</p>
+                  <h2 className="bb-h2" id="dackservice-legacy-title">Mer om vår däckservice</h2>
                   <p className="bb-lead--dark">
                     Utöver skifte och balansering hjälper vi till med hjulinställning och säsongsförvaring. Vi ser över mönsterdjup, lufttryck och synliga bromskomponenter så att du får en bra överblick över hjulens skick.
                   </p>
@@ -392,7 +392,7 @@ export default function DackservicePage() {
         {/* Vad våra kunder säger (Google reviews) */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="dackservice-reviews-title">
           <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro" style={{ marginBottom: '1.5rem' }}>
+            <div className="bilservice__intro bilservice__intro--tight">
               <p className="bb-eyebrow">Kundomdömen</p>
               <h2 className="bb-h2" id="dackservice-reviews-title">Vad våra kunder säger</h2>
             </div>
@@ -405,7 +405,7 @@ export default function DackservicePage() {
 
         {/* Closing Reassurance Card */}
         <section aria-labelledby="dackservice-closing-title">
-          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem)' }}>
+          <div className="bb-wrap bilservice__container bilservice__container--flow">
             <div className="bb-card--trust">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
