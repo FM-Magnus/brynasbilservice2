@@ -3,10 +3,10 @@
 ## Start here (updated 2026-09-20)
 
 - **Repo:** `/Users/magnusolsson/repos/brynasbilservice2` (remote `origin` = `FM-Magnus/brynasbilservice2`).
-- **Branch:** `redesign/blue-teal-v1`, clean tree, **28 commits ahead of origin. Never push without Magnus's explicit approval.**
-- **Last verified commit:** `916b9173` (2026-09-20). typecheck 0 errors, `check:css` clean, `npm --prefix client run build` clean, Playwright **130 passed / 2 skipped** (the 2 are touch-only tests skipped off mobile) at 1440/768/390.
+- **Branch:** `redesign/blue-teal-v1`, clean tree, **31 commits ahead of origin. Ready to push with Magnus's approval.**
+- **Last verified commit:** `d7f32759` (2026-09-20). All 4 undefined tokens resolved into canonical tokens; `PENDING_TOKENS` down to 1 (`--bb-font-sans`). `typecheck` 0 errors, `check:css` clean, `build` clean, Playwright **130 passed / 2 skipped** at 1440/768/390.
 - **Commands:** `npm --prefix client run dev | typecheck | check:css | build | test:browser`.
-- **Two guards added 2026-09-20 — read before any CSS work.** `client/scripts/check-css.mjs` (run by the pre-commit hook) fails if any `var(--bb-*)` is undefined and unfallbacked, or if `--redesign-*` / `index.css` reappear; four known-undefined tokens sit in its `PENDING_TOKENS` list, which may only shrink. `client/tests/browser/baseline.spec.ts` + `baseline-snapshots/` are now **the repository's visual authority**, because the seven locked mockups are absent from this machine — a visual change is approved by reviewing the snapshot diff and then running `test:browser -- --update-snapshots`. The hook also now enforces that `AGENTS.md` does not grow. The build needs **Node ≥18.17** (`vite-imagetools`/sharp); never build on the production server (Node 16).
+- **Two guards added 2026-09-20 — read before any CSS work.** `client/scripts/check-css.mjs` (run by the pre-commit hook) fails if any `var(--bb-*)` is undefined and unfallbacked, or if `--redesign-*` / `index.css` reappear; only `--bb-font-sans` sits in its `PENDING_TOKENS` list. `client/tests/browser/baseline.spec.ts` + `baseline-snapshots/` are now **the repository's visual authority**, because the seven locked mockups are absent from this machine — a visual change is approved by reviewing the snapshot diff and then running `test:browser -- --update-snapshots`. The hook also now enforces that `AGENTS.md` does not grow. The build needs **Node ≥18.17** (`vite-imagetools`/sharp); never build on the production server (Node 16).
 - **Read next:** [`AGENTS.md`](../AGENTS.md) (contract), [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) (route → CSS owner map, write rules), [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) (tokens and patterns), [`BACKEND_HANDOFF.md`](BACKEND_HANDOFF.md) (backend plan for Johnny), [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) (dated history, newest first).
 
 ## The rebuild is finished (2026-09-19)
@@ -27,15 +27,20 @@ All 7 roadmap steps are done and the plan is archived at [`archive/HITL_Temporar
 - **Business facts:** phone, e-mail, address, Google Maps link, opening hours, legal name and org.nr all live in `client/src/data/business.ts`. Change a value there and it updates everywhere, including the Playwright assertions.
 - All of these need a build and deploy to reach the live site.
 
-## Open follow-ups (nothing is in progress)
+## Upcoming finalizing stages (roadmap)
+
+1. **Asset & media tranche (current stage):** Replace 25 placeholder slots (19 `MediaPlaceholder` across 7 guides, 6 `ImageSlot` on `/service-reparationer`) with optimized WebP/JPG `<picture>` elements; drop remaining unreferenced legacy raster assets.
+2. **Graphics & viewport micro-tuning:** Centralize remaining inline SVGs (`PublicHeader`, `PublicFooter`, `ContactFormCard`) into `components/icons/`; tune per-viewport aesthetics (1440/768/390 px) ensuring 0px horizontal overflow is maintained.
+3. **Backend wiring & handoff:** Johnny executes `docs/BACKEND_HANDOFF.md` (server-side session auth, `comment_customer` persistence, vehicle CRUD/upload endpoints). Frontend connects `BookingFormModalImpl` to `axiosInstance` and wires the contact form.
+
+## Open follow-ups
 
 1. **P0 security — admin auth is client-side only.** Credentials ship in the public bundle and the server accepts a fixed token from anyone. Plan: `BACKEND_HANDOFF.md` §2.1. Johnny owns `server/`.
 2. **Font-swap layout shift** site-wide: add a metric-matched fallback `@font-face`, then move `styles/base.css` onto `--bb-font-*` (it deliberately uses the legacy stacks today; see the comment in that file).
 3. `GalleryTeaserCard` still has its own six-image list; it could read `assets/galleri/` instead (shared-component change).
 4. Om oss gallery links could deep-link as `/galleri?bild={slug}`.
-5. Footer Instagram icon points at `instagram.com`, not the workshop profile — Magnus needs to supply the real URL or decide to drop the icon. (The phone-number split was resolved on 2026-09-20; everything now comes from `data/business.ts`.)
-6. Seven already-unreferenced assets plus `client/src/assets/images/archive/` — Magnus decides whether to delete.
-7. Server-side, Johnny: `comment_customer` not saved on bookings, `schema.sql` out of sync, `.htaccess` port/RewriteBase mismatch.
+5. Footer Instagram icon points at `instagram.com`, not the workshop profile — Magnus needs to supply the real URL or decide to drop the icon.
+6. Server-side, Johnny: `comment_customer` not saved on bookings, `schema.sql` out of sync, `.htaccess` port/RewriteBase mismatch.
 
 ## Authority and references
 
