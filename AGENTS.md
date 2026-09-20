@@ -1,7 +1,7 @@
 # Agent startup contract — Brynäs Bilservice
 
 **Read this file first. Do not append session logs here.** Write dated work notes to [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md).
-**CRITICAL ROADMAP**: Read [`HITL_Temporary_roadmap.md`](HITL_Temporary_roadmap.md) (authoritative phased plan; all 7 steps done — `index.css` was deleted 2026-09-19; the roadmap is archived to `docs/archive/` once Magnus signs off Step 7). Read [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md), [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md), and [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md). Always verify with Playwright.
+**ARCHITECTURE**: The rebuild is finished (all 7 roadmap steps; `index.css` deleted 2026-09-19). The living references are [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) (route → CSS owner map and write rules), [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) (tokens `--bb-*`, patterns `.bb-*`) and [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) (session status). The rebuild plan itself is archived at [`docs/archive/HITL_Temporary_roadmap.md`](docs/archive/HITL_Temporary_roadmap.md) — history, not instructions. Always verify with Playwright.
 
 ## CSS SAFETY — HIGHEST PRIORITY
 
@@ -14,7 +14,7 @@
 
 ## OPERATIONAL HIERARCHY & ARCHITECTURAL SAFETY
 
-1. **Document Precedence Hierarchy**: (1) `AGENTS.md` (Operational contract & highest authority) → (2) `HITL_Temporary_roadmap.md` (Authoritative phased plan) → (3) `docs/CSS_OWNERSHIP.md` (CSS islands & family mapping) → (4) `docs/DESIGN_SYSTEM.md` (Tokens `--bb-*` & patterns `.bb-*`) → (5) `docs/AGENT_HANDOFF.md`.
+1. **Document Precedence Hierarchy**: (1) `AGENTS.md` (Operational contract & highest authority) → (2) `docs/CSS_OWNERSHIP.md` (CSS islands & family mapping) → (3) `docs/DESIGN_SYSTEM.md` (Tokens `--bb-*` & patterns `.bb-*`) → (4) `docs/AGENT_HANDOFF.md` (session status).
 2. **Application Root & Manifest Safety (F-00, HIGH RISK)**: `client/` is the **SOLE** application directory (React 18.2.0, Tailwind CSS 3.4.17, Vite 4.5.3). Root configuration files are renamed to `*.disabled`. **NEVER** generate Tailwind v4 (`@theme`) or React 19 patterns. Run all commands prefixed to `client/` (`npm --prefix client ...`).
 3. **Tailwind Utility Policy**: Utilities (`flex`, `p-4`, etc.) are permitted **ONLY** in `/admin` (`client/src/components/admin/`). Strictly prohibited on all public-facing pages and components.
 4. **Guide Family Architecture**: Shared parent is `client/src/styles/ServiceGuideTemplate.css` (`.service-guide__*`), **NOT** a shared TSX layout component. Each guide is an independent TSX file. Verify markup structure against proof pages (`AvgassystemPage.tsx`, `BromssystemPage.tsx`) to prevent sibling drift.

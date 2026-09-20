@@ -2,6 +2,13 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (Step 7 sign-off check + roadmap archived)
+
+- **Automated click-through** of the whole public site: crawled every internal link from every page (nav, Biltjänster dropdown, footer, in-page CTAs). 22 routes reached, each with exactly one `h1`, `PublicHeader` and a footer, no page errors, and `/tjanster` → `/biltjanster`. No problems.
+- **Noted, not changed:** the footer's Instagram icon links to `https://www.instagram.com` rather than the workshop's profile, and the phone number appears as both `tel:+46705533395` and `tel:0705533395`. Both work; Magnus decides.
+- **`HITL_Temporary_roadmap.md` archived** to `docs/archive/` with a banner marking it history, per the document's own primer. References updated in `AGENTS.md` (including the precedence hierarchy, now 4 documents), `docs/AGENT_HANDOFF.md`, `instructions.md` and `docs/PROJECT_STATUS.md`.
+- **`docs/PROJECT_STATUS.md`** got a stale banner: it still describes the 2026-09-18 state and nothing else links to it.
+
 ### 2026-09-19 — Claude (Step 7 DONE: index.css deleted)
 
 - **`client/src/css/index.css` deleted** (7,531 lines). `main.tsx` imports `styles/tailwind.css` in its place; the global layer is now tailwind → design-tokens → base → shared-elements.

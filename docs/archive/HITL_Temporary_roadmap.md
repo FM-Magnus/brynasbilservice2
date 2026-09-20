@@ -1,3 +1,5 @@
+> **ARCHIVED 2026-09-20.** All 7 steps are done: the site was rebuilt as 7 unique pages plus 2 shared families, and the legacy `client/src/css/index.css` was deleted in Step 7 (commit `4626ee40`). This document is kept as the record of that rebuild and is **no longer an instruction to follow**. The living architecture reference is [`docs/CSS_OWNERSHIP.md`](../CSS_OWNERSHIP.md), with [`AGENTS.md`](../../AGENTS.md) as the operational contract.
+
 # Rebuilding Brynäs Bilservice — Human-in-the-Loop (HITL) Roadmap
 
 **Document Owner**: Magnus Olsson  

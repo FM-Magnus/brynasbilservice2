@@ -72,7 +72,7 @@ brynasbilservice/
 
 | What | Where |
 |---|---|
-| Master rebuild roadmap | `HITL_Temporary_roadmap.md` (7 Page Archetypes) |
+| Architecture map | `docs/CSS_OWNERSHIP.md` (7 unique pages + 2 families). The old rebuild roadmap is archived at `docs/archive/HITL_Temporary_roadmap.md`. |
 | Landing page & sections | `client/src/pages/landing/LandingPage.tsx` (`LandingPage.css`) |
 | Navigation registry | `client/src/data/publicNavigation.ts` |
 | Canonical header | `client/src/components/layout/PublicHeader.tsx` (`PublicHeader.css`) |
@@ -100,7 +100,7 @@ Opening hours appear in `LandingPage.tsx`, `Footer.tsx` and subpages. The verifi
 
 ## Adding a new service card or guide
 
-Follow `HITL_Temporary_roadmap.md`. Service guides belong to Style 2 (major services), Style 3 (Tech Guides A), or Style 4 (Tech Guides B). Put raw photos in `_incoming-assets/` first (which is Git-ignored). Only selected, web-exported images belong in `client/src/assets/images/`. Preserve the page's booking and telephone behaviour.
+Follow `docs/CSS_OWNERSHIP.md`. Service guides belong to the Guide family (`styles/ServiceGuideTemplate.css`); the service hubs belong to the Bilservice family (`ServiceReparationerPage.css`). Put raw photos in `_incoming-assets/` first (which is Git-ignored). Only selected, web-exported images belong in `client/src/assets/images/`. Preserve the page's booking and telephone behaviour.
 
 ---
 
