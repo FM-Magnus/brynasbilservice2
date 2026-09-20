@@ -156,6 +156,7 @@ on it.
 - **`ServiceReparationerPage.tsx` builds `bilservice__level-card--0${index + 1}`** from an
   array index, and the CSS defines `--01`, `--02`, `--03` only. `serviceLevels` currently
   has exactly 3 entries; a fourth renders unstyled.
+- **`--bb-header-height` mirrors `PublicHeader.css`.** Hero clearance is derived from it (`design-tokens.css`). If the header's padding or logo height changes, update the token; `tests/browser/hero.spec.ts` fails until you do.
 - **`LandingPage.css` ships on every route**, because `main.tsx` imports `App.tsx`
   statically and `App` mounts `LandingPage`. Its `.landing-v2__*` prefix contains it, but
   it is not route-scoped.
