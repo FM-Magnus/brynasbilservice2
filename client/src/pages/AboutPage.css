@@ -49,7 +49,7 @@
   color: var(--bb-color-text-inverse);
   overflow: hidden;
   padding-bottom: clamp(4rem, 6vw, 6.5rem);
-  padding-top: clamp(7.5rem, 11vw, 9.5rem);
+  padding-top: var(--bb-hero-clearance);
   position: relative;
 }
 

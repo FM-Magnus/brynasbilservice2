@@ -38,12 +38,22 @@
   --bb-radius-sm: 8px;
   --bb-radius-md: 14px;
   --bb-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Fixed public header: 80px up to 1320px wide; above that it grows with its own
+     padding (see the media query below and PublicHeader.css). */
+  --bb-header-height: 80px;
+  /* Space a hero keeps above its first line so the text clears the header. */
+  --bb-hero-clearance: calc(var(--bb-header-height) + 1.5rem);
   /* Hero geometry (canonical standard from Landing) */
-  --bb-hero-min-height: clamp(700px, 58vw, 850px);
+  --bb-hero-min-height: clamp(520px, 70svh, 640px);
   --bb-hero-min-height-mobile: 780px;
   --bb-hero-copy-max-width: 540px;
-  --bb-hero-padding-top: clamp(7rem, 11vw, 9rem);
+  --bb-hero-padding-top: var(--bb-hero-clearance);
   --bb-hero-padding-bottom: clamp(2rem, 3.5vw, 3.5rem);
   --bb-hero-padding-top-mobile: 7rem;
   --bb-hero-padding-bottom-mobile: 1.6rem;
+}
+
+/* Same formula as .public-header: 2 x its clamp() padding plus the 64px logo. */
+@media (min-width: 1321px) {
+  :root { --bb-header-height: calc(2 * clamp(1rem, 2vw, 1.9rem) + 64px); }
 }

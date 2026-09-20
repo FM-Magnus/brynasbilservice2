@@ -127,8 +127,8 @@
 /* ---------- Hero ---------- */
 .service-guide__hero {
   background: var(--bb-color-ink-950);
-  padding-block: clamp(9.5rem, 6vw + 6rem, 12rem) clamp(3rem, 5vw, 4.5rem);
-  min-height: clamp(640px, calc(100svh - 60px), 760px);
+  padding-block: var(--bb-hero-clearance) clamp(3rem, 5vw, 4.5rem);
+  min-height: var(--bb-hero-min-height);
 }
 .service-guide__hero-inner {
   display: grid;
