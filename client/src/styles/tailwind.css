@@ -1,12 +1,16 @@
-/* tailwind.css — Tailwind's directives, moved out of the legacy index.css.
-   NOT IMPORTED YET: index.css (frozen) still emits the same directives, so
-   importing both would generate Tailwind twice. Step 7 swaps the import in
-   main.tsx: `import './css/index.css'` → `import './styles/tailwind.css'`.
+/* tailwind.css — Tailwind's directives. Loaded first of the four global
+   stylesheets in src/main.tsx (tailwind → design-tokens → base →
+   shared-elements); the legacy index.css that used to emit these directives
+   was deleted in Step 7 (2026-09-19).
 
    - base: Tailwind's preflight reset. It stays global on purpose — every
      public page and CSS island was built and verified on top of it.
    - components/utilities: used only by /admin (Tailwind is not allowed on
-     public pages; the pre-commit hook blocks it). */
+     public pages; the pre-commit hook blocks new utilities in public TSX).
+
+   This project uses no cascade layers, so a conflict between a utility and a
+   CSS island is decided by specificity and then source order — and the island
+   stylesheets load after this file. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
