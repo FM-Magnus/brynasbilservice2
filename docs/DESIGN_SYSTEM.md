@@ -142,12 +142,13 @@ Both Landing (`/`) and Bilservice (`/service-reparationer`) now actively consume
 ### 2b. Icons (`client/src/components/icons/`)
 
 - **Shape.** One file per icon, `XxxIcon.tsx`, a named export taking only `{ className?: string }`. Decorative: `aria-hidden="true"`, `viewBox="0 0 24 24"`, `fill="none"`, `stroke="currentColor"`. Import each icon directly; there is no barrel file, so route-level code splitting keeps working.
-- **Drawing standard: stroke 2 for every shared icon** (decided 2026-09-20; the six that used 2.5 were normalised: Phone, MapPin, ArrowRight, Check, Bolt, Dollar). Round caps and joins are set on `MailIcon`, `SendIcon`, `CalendarIcon` and three older icons; the other 23 use the default butt caps and are not normalised.
+- **Drawing standard: stroke 2 for every shared icon** (decided 2026-09-20; all 29 use it). Round caps and joins are set on `MailIcon`, `SendIcon`, `CalendarIcon`, `MapPinIcon` and three older icons (ChatDots, ShieldHeart, Instagram); the other 22 use the default butt caps and are not normalised.
 - **Promotion rule.** A glyph becomes a shared icon when two or more files draw it. A glyph used in one file stays local.
 - **Size and colour are never in the icon.** Colour is `currentColor`. Size comes from the consumer's own island (`.bargning-page__hero-trust-icon svg`) or a shared pattern (`.bb-btn svg`, `.bb-card-arrow svg`, `.bb-icon-badge svg`, `.bb-icon-bare svg`).
 - **CSS beats SVG attributes.** Where a rule sets `stroke`, `stroke-width`, `fill` or linecap on `svg`, that rule owns the value. Today that is only `PublicHeader.css`, so the header's five icons stay local and attribute-free; a shared icon with its own attributes would state the same value twice.
 - **Adding or swapping an icon:** search the CSS for rules that touch `svg` in that context, then render the old and new drawing at the size actually used and compare before committing.
-- **Open (2026-09-20):** the local phone, pin, arrow and check drawings (Landing, Contact card, footer pin, header) still duplicate the shared icons. The stroke is now the same; what differs is round vs butt caps and, for the pin, its shape. `FlowArrowIcon` is duplicated in Bärgning and Om oss (stroke 2.2), and the header's five icons stay local because `PublicHeader.css` owns their paint.
+- **Still local, by decision (2026-09-20):** the header's five icons (`PublicHeader.css` owns their paint); Landing's chat, shield, clock and car (the shared shield has no check mark and `CarSaleIcon` is a different glyph); ContactPage's chevron; and one-offs in Bärgning (4) and Om oss (6). Phone, pin, arrow and check are deduplicated: the shared drawings won for phone, arrow and check, and `MapPinIcon` carries the footer pin's shape.
+- **Open:** round caps on the 22 butt-cap icons, and whether Landing's four local icons should get shared equivalents.
 
 ## 3. Legacy system — removed in Step 7 (2026-09-19)
 

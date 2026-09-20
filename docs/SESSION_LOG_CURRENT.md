@@ -2,6 +2,16 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (icon dedupe: majority wins per glyph)
+
+- **Decision (Magnus):** after strokes were equal, the remaining differences between local and shared phone, pin, arrow and check were shape, not caps (adding round caps moved the match by at most about 6 points, and made check worse). Majority wins per glyph: phone, arrow and check use the shared drawing; the pin, whose local drawing is on all 21 routes through the footer, became the shared `MapPinIcon` shape. Flow arrows in Bärgning and Om oss swap to the shared arrow.
+- **Commits, one consumer each:** `MapPinIcon` takes the footer pin shape (22 instances on 5 routes); `ContactFormCard` phone and pin (local `Icon` deleted entirely); `LandingPage` phone, pin, arrow, check; `BargningPage` and `AboutPage` flow arrows; `PublicFooter` pin.
+- **Measured per commit** (4x crops, computed styles, box sizes, winning rule per property, svg counts): pins are pixel-identical wherever the local pin was swapped (footer on all 21 routes, Landing, contact card); phone, arrow, check and the flow arrows show only the approved shape and cap change; every icon not being changed stayed at 0 changed pixels. Rendered sizes and winning CSS rules never changed.
+- **Bundle:** total JS -572 (ContactFormCard), -590 (Landing), -303 (Bärgning), -303 (Om oss), -810 (footer) bytes per step; MapPinIcon +65. The shared modules moved between chunks, so the entry chunk moved by +32, +31 and -192 bytes, which every route loads; net effect across the sequence is smaller.
+- **Net lines:** MapPin 0, ContactFormCard -26, Landing 0, Bärgning -9, Om oss -9, footer -8.
+- **Now local by decision:** header icons (CSS-owned), Landing chat, shield, clock and car, ContactPage chevron, and the one-offs in Bärgning (4) and Om oss (6). The shared set is 29 icons, all stroke 2.
+- **Open:** round caps on the 22 butt-cap shared icons; shared equivalents for Landing's four local icons.
+
 ### 2026-09-20 — Claude (icon look decided: light, stroke 2 everywhere)
 
 - **Decision (Magnus):** the canonical icon look is the light one, stroke 2. Evidence shown first: bold (2.5) was the majority for phone (101 vs 24 instances), arrow (39 vs 8) and check (121 vs 1), light for the pin (23 vs 11), and 20 of the 26 shared icons were already stroke 2. One component mixed both looks: the footer contact list drew a bold phone next to a light mail and pin.
