@@ -109,8 +109,11 @@
   align-items: center;
 }
 .bilservice__split-media--right { order: 2; }
+.bilservice__split-media--right picture { display: block; overflow: hidden; }
+.bilservice__split-media--right img { width: 100%; height: 100%; object-fit: cover; }
 .bilservice__price-heading { margin: 0 0 0.9rem; color: var(--bilservice-ink); }
 .bilservice__price-text { margin: 0 0 1.9rem; max-width: 52ch; font: 400 1rem/1.65 var(--bb-font-body); }
+.bilservice__lead--split { margin: 0.9rem 0 1.9rem; max-width: 52ch; }
 
 /* ---------- Why service matters (4 value cards) ---------- */
 .bilservice__intro { max-width: 62ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
@@ -378,6 +381,7 @@
   flex-direction: column;
   gap: clamp(1.2rem, 2vw, 1.6rem);
 }
+.bilservice__service-content .bb-h2 { margin-bottom: 0.85rem; }
 .bilservice__checklist {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -176,7 +176,7 @@ export default function FelsokningPage() {
             <div className="bilservice__split">
               <div>
                 <h2 className="bb-h2" id="felsokning-intro-title">Vad innebär en <span className="bb-accent">felsökning</span>?</h2>
-                <p className="bb-lead" style={{ marginTop: '0.9rem', marginBottom: '1.9rem', maxWidth: '52ch' }}>
+                <p className="bb-lead bilservice__lead--split">
                   Moderna bilar styrs av ett nätverk av datorer som ständigt övervakar motor, elsystem och avgasrening. När något avviker sparas en felkod i felminnet och en varningslampa kan tändas. Vi kopplar in diagnostikutrustning, läser av koderna och avgör vad de faktiskt betyder för just din bil — istället för att bara byta delar på måfå.
                 </p>
                 <div className="bilservice__actions">
@@ -185,9 +185,9 @@ export default function FelsokningPage() {
                 </div>
               </div>
               <div className="bilservice__split-media--right">
-                <picture data-image-slot="diagnostics-intro" className="bilservice__image-slot--radius-lg bilservice__image-slot--ar-16-9" style={{ display: 'block', overflow: 'hidden' }}>
+                <picture data-image-slot="diagnostics-intro" className="bilservice__image-slot--radius-lg bilservice__image-slot--ar-16-9">
                   <source srcSet={introWebp} type="image/webp" />
-                  <img src={introJpg} alt="Mekaniker analyserar diagnosdata på en bärbar dator i verkstaden" loading="lazy" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={introJpg} alt="Mekaniker analyserar diagnosdata på en bärbar dator i verkstaden" loading="lazy" />
                 </picture>
               </div>
             </div>
@@ -270,7 +270,7 @@ export default function FelsokningPage() {
               </div>
               <div className="bilservice__service-content">
                 <div>
-                  <h2 className="bb-h2" id="felsokning-service-title" style={{ color: '#fff', marginBottom: '0.85rem' }}>Det här kan vi hjälpa dig med</h2>
+                  <h2 className="bb-h2" id="felsokning-service-title">Det här kan vi hjälpa dig med</h2>
                   <p className="bb-lead--dark">Vi läser av bilens styrsystem och går igenom vad felkoderna faktiskt betyder innan något repareras.</p>
                 </div>
                 <ul className="bilservice__checklist">
@@ -312,7 +312,7 @@ export default function FelsokningPage() {
 
         {/* Alltid tydliga besked och ärliga priser */}
         <section aria-labelledby="felsokning-trust-title">
-          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem)' }}>
+          <div className="bb-wrap bilservice__container bilservice__container--flow">
             <div className="bb-card--trust">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
