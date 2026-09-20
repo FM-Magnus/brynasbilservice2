@@ -68,15 +68,6 @@ function RoadWayIcon({ className }: { className?: string }) {
   )
 }
 
-function FlowArrowIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <line x1="5" y1="12" x2="19" y2="12" />
-      <polyline points="12 5 19 12 12 19" />
-    </svg>
-  )
-}
-
 export default function BargningPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -179,7 +170,7 @@ export default function BargningPage() {
               </div>
 
               <div className="bargning-page__quick-step-arrow" aria-hidden="true">
-                <FlowArrowIcon />
+                <ArrowRightIcon />
               </div>
 
               <div className="bargning-page__quick-step-card">
@@ -196,7 +187,7 @@ export default function BargningPage() {
               </div>
 
               <div className="bargning-page__quick-step-arrow" aria-hidden="true">
-                <FlowArrowIcon />
+                <ArrowRightIcon />
               </div>
 
               <div className="bargning-page__quick-step-card">
@@ -423,7 +414,7 @@ export default function BargningPage() {
               </div>
 
               <div className="bargning-page__process-connector" aria-hidden="true">
-                <FlowArrowIcon />
+                <ArrowRightIcon />
               </div>
 
               <div className="bargning-page__process-card">
@@ -440,7 +431,7 @@ export default function BargningPage() {
               </div>
 
               <div className="bargning-page__process-connector" aria-hidden="true">
-                <FlowArrowIcon />
+                <ArrowRightIcon />
               </div>
 
               <div className="bargning-page__process-card">
