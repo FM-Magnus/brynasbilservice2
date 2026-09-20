@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { BUSINESS } from '../../data/business'
 import { MailIcon } from '../icons/MailIcon'
+import { MapPinIcon } from '../icons/MapPinIcon'
+import { PhoneIcon } from '../icons/PhoneIcon'
 import { SendIcon } from '../icons/SendIcon'
 import './ContactFormCard.css'
 
@@ -39,34 +41,6 @@ export interface ContactFormCardProps {
   googleMapsUrl?: string
   className?: string
   onSubmitSuccess?: (data: ContactFormData) => void
-}
-
-function Icon({ name }: { name: 'phone' | 'pin' }) {
-  const common = {
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    stroke: 'currentColor',
-    strokeWidth: 2,
-    strokeLinecap: 'round' as const,
-    strokeLinejoin: 'round' as const,
-    'aria-hidden': true,
-  }
-
-  switch (name) {
-    case 'phone':
-      return (
-        <svg {...common}>
-          <path d="M21 16.8v3a2 2 0 0 1-2.2 2 19.5 19.5 0 0 1-8.5-3.1A19 19 0 0 1 4.3 12a19.5 19.5 0 0 1-3.1-8.5A2 2 0 0 1 3.2 1.3h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1l-.9.9a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.8a2 2 0 0 1 1.7 2.1Z" />
-        </svg>
-      )
-    case 'pin':
-      return (
-        <svg {...common}>
-          <path d="M20.5 10c0 6.5-8.5 12-8.5 12S3.5 16.5 3.5 10a8.5 8.5 0 1 1 17 0Z" />
-          <circle cx="12" cy="10" r="2.5" />
-        </svg>
-      )
-  }
 }
 
 export function ContactFormCard({
@@ -190,7 +164,7 @@ export function ContactFormCard({
           <div className="bb-contact-section__list">
             <a href={`tel:${phone}`}>
               <i>
-                <Icon name="phone" />
+                <PhoneIcon />
               </i>
               <span>
                 <small>Ring oss</small>
@@ -210,7 +184,7 @@ export function ContactFormCard({
 
             <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
               <i>
-                <Icon name="pin" />
+                <MapPinIcon />
               </i>
               <span>
                 <small>Besök oss</small>
