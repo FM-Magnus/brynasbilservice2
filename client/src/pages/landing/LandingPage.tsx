@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import { BookingFormModal } from '../../components/BookingForm'
 import { PublicHeader } from '../../components/layout/PublicHeader'
 import { PublicFooter } from '../../components/layout/PublicFooter'
+import { CalendarIcon } from '../../components/icons/CalendarIcon'
+import { MonitorIcon } from '../../components/icons/MonitorIcon'
+import { WrenchIcon } from '../../components/icons/WrenchIcon'
 import heroWebp from '../../assets/images/home/landing-v2/landing-sundown-hero.webp'
 import heroJpg from '../../assets/images/home/landing-v2/landing-sundown-hero.jpg'
 import { GalleryTeaserCard } from '../../components/ui/GalleryTeaserCard'
@@ -17,25 +20,17 @@ import vehicleForSale from '../../assets/images/vehicles/peugeot-307-cc/peugeot-
 import { BUSINESS } from '../../data/business'
 import './LandingPage.css'
 
-type IconName = 'calendar' | 'phone' | 'mail' | 'pin' | 'arrow' | 'wrench' | 'monitor' | 'wheel' | 'snowflake' | 'chat' | 'shield' | 'clock' | 'send' | 'facebook' | 'car' | 'check'
+type IconName = 'phone' | 'pin' | 'arrow' | 'chat' | 'shield' | 'clock' | 'car' | 'check'
 
 function Icon({ name, className = '' }: { name: IconName; className?: string }) {
   const common = { className, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true }
   const paths: Record<IconName, ReactNode> = {
-    calendar: <><path d="M7 3v3M17 3v3M4 9h16" /><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 13h2M14 13h2M8 17h2M14 17h2" /></>,
     phone: <path d="M21 16.8v3a2 2 0 0 1-2.2 2 19.5 19.5 0 0 1-8.5-3.1A19 19 0 0 1 4.3 12a19.5 19.5 0 0 1-3.1-8.5A2 2 0 0 1 3.2 1.3h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1l-.9.9a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.8a2 2 0 0 1 1.7 2.1Z" />,
-    mail: <><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m2 7 9 5.7a2 2 0 0 0 2 0L22 7" /></>,
     pin: <><path d="M20.5 10c0 6.5-8.5 12-8.5 12S3.5 16.5 3.5 10a8.5 8.5 0 1 1 17 0Z" /><circle cx="12" cy="10" r="2.5" /></>,
     arrow: <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
-    wrench: <path d="M14.8 6.2a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-8 8l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 8-8l-3.8 3.7Z" />,
-    monitor: <><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></>,
-    wheel: <><circle cx="12" cy="12" r="9.5" /><circle cx="12" cy="12" r="3" /><path d="M12 2.5v6.5M21.5 12H15M12 21.5V15M2.5 12H9" /></>,
-    snowflake: <><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M4.9 19.1 19.1 4.9" /><path d="m8 2 4 4 4-4M8 22l4-4 4 4M2 8l4 4-4 4M22 8l-4 4 4 4" /></>,
     chat: <><path d="M20 11.5a7.8 7.8 0 0 1-8 7.5 8.6 8.6 0 0 1-3.5-.7L4 20l1.3-3.6A7.3 7.3 0 0 1 4 12a7.8 7.8 0 0 1 8-7.5 7.8 7.8 0 0 1 8 7Z" /><path d="M8 12h.01M12 12h.01M16 12h.01" /></>,
     shield: <><path d="M12 3 20 6v5c0 5-3.5 8.4-8 10-4.5-1.6-8-5-8-10V6l8-3Z" /><path d="m8.5 12 2.2 2.2 4.8-5" /></>,
     clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
-    send: <><path d="m22 2-7 20-4-9-9-4 20-7Z" /><path d="m22 2-11 11" /></>,
-    facebook: <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />,
     car: <><path d="m5 17-1 3M19 17l1 3M3 13l2.4-6.1A2 2 0 0 1 7.2 5.5h9.6a2 2 0 0 1 1.8 1.4L21 13v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5Z" /><path d="M3 13h18M7 16h.01M17 16h.01" /></>,
     check: <path d="m5 12 4.2 4.2L19 6.5" />,
   }
@@ -43,12 +38,20 @@ function Icon({ name, className = '' }: { name: IconName; className?: string }) 
 }
 
 const services = [
-  { title: 'Bilservice och reparationer', desc: 'Underhåll, oljebyte, bromsar, kamrem och mekaniska reparationer.', to: '/service-reparationer#bilservice', icon: 'wrench' as const, image: wrenchWorkbench },
-  { title: 'Felsökning och diagnostik', desc: 'Felkodsläsning och noggrann analys av modern fordonselektronik.', to: '/felsokning', icon: 'monitor' as const, image: mechanicDiagnostic },
-  { title: 'Däckservice och däckhotell', desc: 'Däckskifte, balansering, hjulinställning och förvaring.', to: '/dackservice', icon: 'wheel' as const, image: tireStorage },
-  { title: 'AC-service', desc: 'Felsökning, provtryckning och påfyllning för god kupékomfort.', to: '/ac-service', icon: 'snowflake' as const, image: acManometers },
+  { title: 'Bilservice och reparationer', desc: 'Underhåll, oljebyte, bromsar, kamrem och mekaniska reparationer.', to: '/service-reparationer#bilservice', image: wrenchWorkbench },
+  { title: 'Felsökning och diagnostik', desc: 'Felkodsläsning och noggrann analys av modern fordonselektronik.', to: '/felsokning', image: mechanicDiagnostic },
+  { title: 'Däckservice och däckhotell', desc: 'Däckskifte, balansering, hjulinställning och förvaring.', to: '/dackservice', image: tireStorage },
+  { title: 'AC-service', desc: 'Felsökning, provtryckning och påfyllning för god kupékomfort.', to: '/ac-service', image: acManometers },
 ]
 const process = [['01', 'Bokning och inlämning', 'Du bokar en tid som passar din bil.'], ['02', 'Initial kontroll', 'Vi gör en första bedömning av behovet.'], ['03', 'Service enligt checklista', 'Arbetet följer den servicenivå som är aktuell.'], ['04', 'Godkännande vid extraarbete', 'Vi kontaktar dig innan vi går vidare.'], ['05', 'Slutkontroll och rapport', 'Du får en genomgång när bilen är klar.']]
+
+const processIcons: Record<string, ReactNode> = {
+  '01': <CalendarIcon />,
+  '02': <MonitorIcon />,
+  '03': <WrenchIcon />,
+  '04': <Icon name="car" />,
+  '05': <Icon name="check" />,
+}
 
 export default function LandingPage() {
   const [bookingOpen, setBookingOpen] = useState(false)
@@ -74,7 +77,7 @@ export default function LandingPage() {
             </p>
             <div className="bb-hero__actions">
               <button className="bb-btn bb-btn--teal" type="button" onClick={() => setBookingOpen(true)}>
-                <Icon name="calendar" />
+                <CalendarIcon />
                 Boka tid
               </button>
               <a className="bb-btn bb-btn--ember" href={BUSINESS.phone.href}>
@@ -90,7 +93,7 @@ export default function LandingPage() {
                 <span className="bb-trust-row__text"><b>Personlig service</b><small>Du och din bil i fokus.</small></span>
               </div>
               <div className="bb-trust-row__item">
-                <i className="bb-icon-bare"><Icon name="wrench" /></i>
+                <i className="bb-icon-bare"><WrenchIcon /></i>
                 <span className="bb-trust-row__text"><b>Erfarna mekaniker</b><small>Mångårig erfarenhet.</small></span>
               </div>
               <div className="bb-trust-row__item">
@@ -131,7 +134,7 @@ export default function LandingPage() {
               <span><b>Omsorg om din bil</b><small>Vi arbetar noggrant och med rätt kunskap.</small></span>
             </li>
             <li>
-              <i className="bb-icon-badge"><Icon name="wrench" /></i>
+              <i className="bb-icon-badge"><WrenchIcon /></i>
               <span><b>Personlig service</b><small>Du och din bil är alltid i fokus.</small></span>
             </li>
             <li>
@@ -193,7 +196,7 @@ export default function LandingPage() {
               <li key={number}>
                 <b>{number}</b>
                 <i className="bb-icon-bare">
-                  <Icon name={number === '01' ? 'calendar' : number === '02' ? 'monitor' : number === '03' ? 'wrench' : number === '04' ? 'car' : 'check'} />
+                  {processIcons[number]}
                 </i>
                 <h3>{title}</h3>
                 <p>{text}</p>
