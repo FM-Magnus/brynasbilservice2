@@ -2,6 +2,12 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (health check, hand-off to Antigravity/Gemini, push)
+
+- **Health check (read-only, measured):** 0 import cycles, no layering violations (nothing lower imports a page; icons import nothing else), no unimported files, 0 `any`/`@ts-ignore`, CSS-ownership mismatches only the documented families, guide pages share 8% of their lines, about 11 of about 800 CSS selectors unreferenced (some built dynamically), comments about 2% of lines, 19 exports unused outside their file, largest files `BargningPage.css` 1,016 / `AboutPage.css` 909 / `ServiceReparationerPage.css` 819 lines (content-rich, not padded). Findings that need action are collected as the hygiene backlog in `AGENT_HANDOFF.md` "Where to pick up" (unused `classnames` and `@types/axios`, two admin `console.log`s printing bookings, repeated per-page modal boilerplate, a 1,100-line session log, five superseded handovers, an unused 2.1 MB archived image). Not fixed here.
+- **Hand-off prompt** for Antigravity/Gemini written (kept outside the repo so it does not add a sixth handover file): read order, Magnus's working rules, hard rules, the check commands, current state, the first task (hero step 3, compact guide trust row, with the measured facts and the measure, propose, implement, prove, show, approve sequence), traps, and a fixed report format. It points at `AGENT_HANDOFF.md` rather than repeating it.
+- **Push:** Magnus asked for the docs to be brought up to date, committed and pushed. The branch was 27 commits ahead and 0 behind `origin/redesign/blue-teal-v1` (his own fork), so a plain fast-forward push; the docs that said “not pushed” were updated first.
+
 ### 2026-09-20 — Claude (handover: docs brought in line with the repo)
 
 - **Why:** the session ended after a long run of changes; the startup docs still described an earlier state (Step 6/7, 67 tests, 46 undefined tokens, `Login.tsx`, the frozen 2026-09-15/16 log inside `AGENTS.md`).
@@ -9,7 +15,7 @@ This file receives new dated session entries, newest first. It is not a mandator
 - **AGENT_HANDOFF.md:** “Start here” rewritten (branch state, 155/4 checks, the three guards, how Magnus wants to work, where the proof scripts are); new “what the session finished” and an ordered “where to pick up” (hero step 3, audit points 3/5/6, contact form, admin client half, images with the proposed file-naming convention, small leftovers, push); traps that already cost time.
 - **CSS_OWNERSHIP.md:** the undefined-token warning replaced by the one real pending token (`--bb-font-sans`); test counts, coverage and the lint note corrected. **BACKEND_HANDOFF.md:** stale `index.css`/`Login.tsx` references fixed; the reviewed client plan for admin auth added. **CLAUDE.md:** API row, archived-roadmap path and the working rules added.
 - **`docs/audit-harness/`** (new): 22 read-only measurement scripts plus a README (prerequisites, the before/after-invariant method, and the traps: transitions, lazy images, `**/api/**` mocks, fixed elements, specificity). Copied from the session scratch folder with absolute paths made relocatable; syntax-checked and two scripts run from the new location. Not production code; nothing in `client/` imports it.
-- **Nothing pushed.**
+- **Pushed later the same day** (see the entry above).
 
 ### 2026-09-20 — Claude (audit point 4: hero size and uniformity, steps 1 and 2 of 3)
 
@@ -19,7 +25,7 @@ This file receives new dated session entries, newest first. It is not a mandator
 - **Step 1 (`ac6f6b10`):** `--bb-header-height`, `--bb-hero-clearance`, hero padding-top and min-height tokens, guide/Om oss/Bärgning top padding. Proof: 126 page-states before and after, everything below each hero shifts by exactly the hero's height change, no hero text block changes size, no overflow (0 violations); harness determinism checked. New permanent `tests/browser/hero.spec.ts` (mutation-checked).
 - **Step 2 (this commit):** `--bb-hero-h1-size` (max 48px, min 36px on phones) and about 25% tighter gaps between eyebrow, H1, lead and buttons, scoped to heroes. Same invariant, 0 violations. The 60 changed lines in the baseline snapshots were inspected: only the H1's `font-size` and `line-height` (57.6, 66.24 and 44px to 48 or 36px).
 - **Measured result at 1280x720:** see DESIGN_SYSTEM 2c. Gains from step 2 were smaller than the what-if predicted (guides 3-7 points); Kamrem, Om oss and Bilar till salu did not change (image or side column sets their height).
-- **Not done:** step 3 (compact guide trust row) was postponed at Magnus's request; without it most guides stay at 96-105%. Nothing is pushed: the branch is about 26 commits ahead of origin.
+- **Not done:** step 3 (compact guide trust row) was postponed at Magnus's request; without it most guides stay at 96-105%. Pushed later the same day (see the push entry above).
 - **Next context, start here:** (1) step 3, then re-measure with `hero-phase0` scripts (scratch, not in the repo: `collect.cjs`, `herosnap.cjs`, `herodiff.cjs`); (2) decide AC-service and the image-driven heroes; (3) audit points 3 (16 breakpoints, incl. 1320/1321), 5 (hard-coded hex colours) and 6 (no error token); (4) whether to push.
 
 ### 2026-09-20 — Claude (audit point 2: inline styles in the Bilservice family)
