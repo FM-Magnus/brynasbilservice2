@@ -8,6 +8,9 @@ import { UsersIcon } from '../icons/UsersIcon'
 import { WrenchIcon } from '../icons/WrenchIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
 import { ClockIcon } from '../icons/ClockIcon'
+import { MailIcon } from '../icons/MailIcon'
+import { SendIcon } from '../icons/SendIcon'
+import { CalendarIcon } from '../icons/CalendarIcon'
 import { BUSINESS, weekdayHours } from '../../data/business'
 import './PublicFooter.css'
 
@@ -15,39 +18,11 @@ export interface PublicFooterProps {
   onBookingClick?: () => void
 }
 
-function MailIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="m2 7 9 5.7a2 2 0 0 0 2 0L22 7" />
-    </svg>
-  )
-}
-
 function PinIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M20.5 10c0 6.5-8.5 12-8.5 12S3.5 16.5 3.5 10a8.5 8.5 0 1 1 17 0Z" />
       <circle cx="12" cy="10" r="2.5" />
-    </svg>
-  )
-}
-
-function SendArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="m22 2-7 20-4-9-9-4 20-7Z" />
-      <path d="m22 2-11 11" />
-    </svg>
-  )
-}
-
-function CalendarIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M7 3v3M17 3v3M4 9h16" />
-      <rect x="4" y="5" width="16" height="15" rx="2" />
-      <path d="M8 13h2M14 13h2M8 17h2M14 17h2" />
     </svg>
   )
 }
@@ -176,7 +151,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
 
               <div className="bb-footer__contact-card bb-footer__contact-card--action">
                 <div className="bb-footer__contact-badge bb-footer__contact-badge--cyan">
-                  <SendArrowIcon />
+                  <SendIcon />
                 </div>
                 <div className="bb-footer__contact-info">
                   <a
