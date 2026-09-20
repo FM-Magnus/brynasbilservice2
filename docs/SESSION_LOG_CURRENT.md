@@ -2,6 +2,20 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (independence from external truth; token guard; first-load weight)
+
+Executed the workstreams from the Phase 1 proposal that carry no visual risk. Six commits, none pushed.
+
+- **`client/scripts/check-css.mjs` + `npm --prefix client run check:css`**, wired into the pre-commit hook. Fails if any `var(--bb-*)` is undefined and unfallbacked, or if `--redesign-*` / `index.css` reappear. This is what makes the legacy isolation structural rather than a convention held up by documents — three of which were telling agents to go back to `--redesign-*`. Proven by writing deliberate violations and watching the hook block the commit. The five known-undefined tokens sit in a `PENDING_TOKENS` list that may only shrink.
+- **`client/tests/browser/baseline.spec.ts` — the repository is now its own visual authority.** 21 routes x 3 viewports, recording rendered text plus a computed-style fingerprint of the shell, the shared primitives and both family parents. Not pixels: those would add tens of MB and break on any font-rendering difference. 424 KB total. Suite 67 -> 130 passed. Proven by temporarily defining `--bb-color-border-subtle` and watching the exact expected diff appear.
+- **Booking modal split behind a lazy boundary.** react-datepicker, react-time-picker, react-clock and date-fns shipped in the main chunk for every route although the modal only opens on click. Main JS **500,092 -> 238,410 B** (gzip 148.12 -> 73.79 kB); main CSS **100,019 -> 69,624 B**. The boundary is inside `BookingForm.tsx`, so none of the 22 call sites changed. Verified by a pre-existing test that opens the dialog, plus a manual check of focus trap, Escape, reopen and network timing.
+- **Landing route code-split like every other route.** It was the only static one, so its JS and CSS shipped on all 21 routes. Main JS **238,726 -> 200,910 B**, main CSS **69,624 -> 33,975 B**; a guide page's first-load CSS went 92 KB -> 72 KB. Checked for duplication, which was the real risk: total built CSS moved by 4 bytes, and Vite pulled PublicFooter/ContactFormCard/GoogleReviewsCard into their own shared chunks. The trade is one extra lazy chunk on `/`; reverts cleanly if that matters more.
+- **Two mistakes, both caught by tooling, both reverted — worth reading.**
+  1. I removed the `brynas` palette from `tailwind.config.js` as dead code. The build shrank 1,465 bytes: `/admin` consumes it through `dark:` variants that a grep for `bg-brynas-` does not match. Reverted; recorded in `CSS_OWNERSHIP.md`.
+  2. I removed all 35 inert `font-family: var(--bb-font-sans)` declarations as a provable no-op. 30 baseline snapshots failed. An invalid `var()` still **wins** the cascade and only then resolves to `unset` (inherit); delete the declaration and a lower-priority rule wins instead, changing the stack to `'Manrope', Arial, sans-serif`. Those declarations are accidentally pinning the fallback that `base.css` warns governs font-swap layout shift. Reverted; recorded at the code site.
+- **Still awaiting Magnus:** whether the four remaining undefined tokens (`--bb-color-border-subtle`, `--bb-shadow-elevated`, `--bb-radius-lg`, `--bb-radius-pill`) should render their intended treatment. Defining them activates 8 declarations and changes approved appearance on 14 pages.
+- **Verification:** typecheck 0 errors, `check:css` clean, build clean, **130 passed / 2 skipped**, tree clean, no dependency added.
+
 ### 2026-09-20 — Claude (Phase 1: foundation validation and family lock)
 
 Audit with small authorised corrections. Baseline was clean at `422753a7`; no pre-existing uncommitted work existed to protect.
