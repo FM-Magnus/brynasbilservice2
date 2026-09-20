@@ -14,6 +14,7 @@ import wrenchWorkbench from '../../assets/images/services/general/wrench-and-bol
 import tireStorage from '../../assets/images/services/tires/tire-storage-rack.webp'
 import acManometers from '../../assets/images/services/ac/ac-manometers-on-engine.jpg'
 import vehicleForSale from '../../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
+import { BUSINESS } from '../../data/business'
 import './LandingPage.css'
 
 type IconName = 'calendar' | 'phone' | 'mail' | 'pin' | 'arrow' | 'wrench' | 'monitor' | 'wheel' | 'snowflake' | 'chat' | 'shield' | 'clock' | 'send' | 'facebook' | 'car' | 'check'
@@ -76,7 +77,7 @@ export default function LandingPage() {
                 <Icon name="calendar" />
                 Boka tid
               </button>
-              <a className="bb-btn bb-btn--ember" href="tel:+46705533395">
+              <a className="bb-btn bb-btn--ember" href={BUSINESS.phone.href}>
                 <Icon name="phone" />
                 Ring oss nu
               </a>
@@ -182,7 +183,7 @@ export default function LandingPage() {
             <p className="bb-lead--dark">
               Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.
             </p>
-            <a className="bb-btn bb-btn--teal" href="tel:+46705533395">
+            <a className="bb-btn bb-btn--teal" href={BUSINESS.phone.href}>
               <Icon name="phone" />
               Ring oss: 070–553 33 95
             </a>

@@ -4,6 +4,7 @@
 // for the most safety-critical warning sign, alongside the existing teal
 // --featured modifier. No dependency on any page-specific rule in index.css.
 import { useEffect, useState } from 'react'
+import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
@@ -135,7 +136,7 @@ export default function BromssystemPage() {
                 </p>
                 <div className="service-guide__actions">
                   <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
-                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
@@ -267,7 +268,7 @@ export default function BromssystemPage() {
               <div className="service-guide__process-text">
                 <h2 id="brake-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en bromskontroll ibland behöver ta lite tid.</p>
-                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -289,11 +290,11 @@ export default function BromssystemPage() {
             <div className="service-guide__closing">
               <div>
                 <h2 id="brake-booking-title">Boka bromskontroll</h2>
-                <p>Priset beror på vilka delar som behöver bytas. Ring oss på 070-553 33 95 för en tydlig prisuppgift innan vi sätter igång.</p>
+                <p>Priset beror på vilka delar som behöver bytas. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

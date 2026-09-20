@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import brandLogo from '../../assets/images/brand/brynas-bilservice-logo.svg'
 import { publicNavigation, type PublicNavigationItem } from '../../data/publicNavigation'
+import { BUSINESS } from '../../data/business'
 import './PublicHeader.css'
 
 type PublicHeaderProps = {
@@ -165,7 +166,7 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
       <nav ref={mobilePanelRef} className="public-header__mobile-panel" id="public-mobile-navigation" aria-label="Mobilnavigation" hidden={!mobileOpen}>
         {publicNavigation.map((item) => <Link key={item.to} to={item.to} className={`public-header__mobile-link${isActive(item) ? ' is-active' : ''}`} aria-current={isActive(item) ? 'page' : undefined} onClick={handleLinkClick}>{item.label}</Link>)}
         <div className="public-header__mobile-actions">
-          <a className="public-header__mobile-call" href="tel:0705533395"><PhoneIcon />Ring oss: 070-553 33 95</a>
+          <a className="public-header__mobile-call" href={BUSINESS.phone.href}><PhoneIcon />Ring oss: {BUSINESS.phone.display}</a>
           <button className="public-header__mobile-booking" type="button" onClick={handleBookingClick}>Boka tid</button>
         </div>
       </nav>

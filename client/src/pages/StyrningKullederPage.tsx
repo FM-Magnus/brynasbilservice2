@@ -2,6 +2,7 @@
 // Proves template reusability for /styrning-kulleder without inventing a new CSS file.
 // Zero dependency on index.css; inherits Level 0 tokens and shared-elements.
 import { useEffect, useState } from 'react'
+import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import '../styles/ServiceGuideTemplate.css'
@@ -84,7 +85,7 @@ const infoCards: readonly InfoCardItem[] = [
 ]
 
 const processSteps = [
-  ['01', 'Bokning och inlämning', 'Boka enkelt online eller ring oss på 070-553 33 95 och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.'],
+  ['01', 'Bokning och inlämning', `Boka enkelt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.`],
   ['02', 'Framvagnslyft & glapptest', 'Vi hissar upp bilen och känner mekaniskt efter minsta spel och glapp i alla leder, stag, bussningar och kuggstång.'],
   ['03', 'Servodiagnostik vid behov', 'Vi mäter hydrauliskt servotryck och oljekvalitet eller kopplar upp diagnosverktyg för att läsa av EPS-sensorer.'],
   ['04', 'Fackmannamässigt ledbyte', 'Slitna komponenter demonteras och ersätts med nya kvalitetsdelar och nya låsmuttrar med exakt åtdragningsmoment.'],
@@ -133,7 +134,7 @@ export default function StyrningKullederPage() {
                 </p>
                 <div className="service-guide__actions">
                   <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
@@ -283,7 +284,7 @@ export default function StyrningKullederPage() {
               <div className="service-guide__process-text">
                 <h2 id="steering-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att byta styrleder och kulleder kräver fackmannamässig glappkontroll och efterföljande hjulinställning. Så här ser vår process ut.</p>
-                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -305,11 +306,11 @@ export default function StyrningKullederPage() {
             <div className="service-guide__closing">
               <div>
                 <h2 id="steering-booking-title">Boka kontroll av styrning &amp; kulleder</h2>
-                <p>Priset beror helt på vad som behöver åtgärdas — ett byte av en yttre styrled är ett prisvärt ingrepp, medan reparation av servopump eller kuggstång är mer omfattande. Ring oss på 070-553 33 95 så felsöker vi och ger dig ett tydligt kostnadsförslag innan vi sätter igång.</p>
+                <p>Priset beror helt på vad som behöver åtgärdas — ett byte av en yttre styrled är ett prisvärt ingrepp, medan reparation av servopump eller kuggstång är mer omfattande. Ring oss på {BUSINESS.phone.display} så felsöker vi och ger dig ett tydligt kostnadsförslag innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

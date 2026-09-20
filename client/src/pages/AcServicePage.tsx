@@ -22,6 +22,7 @@ import { ShieldIcon } from '../components/icons/ShieldIcon'
 import heroBgJpg from '../assets/images/services/ac/ac-hero-bg.jpg'
 import heroBgWebp from '../assets/images/services/ac/ac-hero-bg.webp'
 import manometersJpg from '../assets/images/services/ac/ac-manometers-on-engine.jpg'
+import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 
 const valueProps = [
@@ -146,9 +147,9 @@ export default function AcServicePage() {
                   <button type="button" onClick={() => openModal()} className="bb-btn bb-btn--teal">
                     Boka tid
                   </button>
-                  <a href="tel:0705533395" className="bb-btn bb-btn--ember">
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                     <PhoneIcon aria-hidden="true" />
-                    <span>Ring oss: 070-553 33 95</span>
+                    <span>Ring oss: {BUSINESS.phone.display}</span>
                   </a>
                 </div>
               </div>
@@ -341,9 +342,9 @@ export default function AcServicePage() {
               <p className="bb-lead--dark">
                 Vi följer en noggrann process så att du vet att ditt AC-system fungerar tryggt och effektivt.
               </p>
-              <a href="tel:0705533395" className="bb-btn bb-btn--teal">
+              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal">
                 <PhoneIcon aria-hidden="true" />
-                <span>Ring oss: 070-553 33 95</span>
+                <span>Ring oss: {BUSINESS.phone.display}</span>
               </a>
             </div>
             <ol className="bb-process-grid">
@@ -450,8 +451,8 @@ export default function AcServicePage() {
                 <button type="button" onClick={() => openModal()} className="bb-btn bb-btn--ember-solid">
                   Öppna bokning
                 </button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">
-                  Ring: 070-553 33 95
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                  Ring: {BUSINESS.phone.display}
                 </a>
               </div>
             </div>

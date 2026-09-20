@@ -2,6 +2,7 @@
 // Proves template reusability for /hjullagerbyte without inventing a new CSS file.
 // Zero dependency on index.css; inherits Level 0 tokens and shared-elements.
 import { useEffect, useState } from 'react'
+import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import '../styles/ServiceGuideTemplate.css'
@@ -133,7 +134,7 @@ export default function HjullagerbytePage() {
                 </p>
                 <div className="service-guide__actions">
                   <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
@@ -283,7 +284,7 @@ export default function HjullagerbytePage() {
               <div className="service-guide__process-text">
                 <h2 id="wheel-bearing-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att byta hjullager kräver fackmannamässiga verktyg, renhet och rätt åtdragningsmoment. Så här ser vår strukturerade process ut.</p>
-                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -305,11 +306,11 @@ export default function HjullagerbytePage() {
             <div className="service-guide__closing">
               <div>
                 <h2 id="wheel-bearing-booking-title">Boka byte av hjullager</h2>
-                <p>Priset för att byta hjullager varierar beroende på om din bil har en bultad komplett navenhet eller ett pressat lager, samt om det gäller fram- eller bakhjul. Ring oss på 070-553 33 95 för en tydlig prisuppgift anpassad för din bilmodell.</p>
+                <p>Priset för att byta hjullager varierar beroende på om din bil har en bultad komplett navenhet eller ett pressat lager, samt om det gäller fram- eller bakhjul. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift anpassad för din bilmodell.</p>
               </div>
               <div className="service-guide__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

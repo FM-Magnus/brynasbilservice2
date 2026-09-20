@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { BUSINESS } from '../../src/data/business'
 
 test('däckservice & hjulskifte page renders without horizontal overflow across breakpoints', async ({ page }, testInfo) => {
   await page.goto('/dackservice')
@@ -29,7 +30,7 @@ test('däckservice & hjulskifte page renders without horizontal overflow across 
   await expect(page.locator('.bb-card--trust').first()).toBeVisible()
 
   // Verify call link exists with correct tel URI
-  const callBtn = page.locator('.bb-hero__actions a[href="tel:0705533395"]').first()
+  const callBtn = page.locator(`.bb-hero__actions a[href="${BUSINESS.phone.href}"]`).first()
   await expect(callBtn).toBeVisible()
 
   // Verify tire service cards exist (6 cards)

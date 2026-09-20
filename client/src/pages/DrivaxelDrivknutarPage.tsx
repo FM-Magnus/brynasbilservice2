@@ -2,6 +2,7 @@
 // Achieves 100% completion of the Guide Family on ServiceGuideTemplate.css without inventing a new CSS file.
 // Zero dependency on index.css; inherits Level 0 tokens and shared-elements.
 import { useEffect, useState } from 'react'
+import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import '../styles/ServiceGuideTemplate.css'
@@ -86,7 +87,7 @@ const infoCards: readonly InfoCardItem[] = [
 ]
 
 const processSteps = [
-  ['01', 'Bokning och inlämning', 'Boka tid smidigt online eller ring oss på 070-553 33 95 och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.'],
+  ['01', 'Bokning och inlämning', `Boka tid smidigt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.`],
   ['02', 'Lyft & damaskkontroll', 'Vi hissar upp bilen och inspekterar alla fyra damasker efter sprickor och fettläckage samt känner mekaniskt efter glapp.'],
   ['03', 'Fastställande av åtgärd', 'Vi bedömer om det räcker med ett damaskbyte, byte av yttre drivknut eller om hela drivaxeln behöver bytas ut.'],
   ['04', 'Demontering & montering', 'Komponenterna demonteras fackmannamässigt och ersätts med nya kvalitetsdelar, specialfett och nya låsklämmor.'],
@@ -135,7 +136,7 @@ export default function DrivaxelDrivknutarPage() {
                 </p>
                 <div className="service-guide__actions">
                   <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
@@ -288,7 +289,7 @@ export default function DrivaxelDrivknutarPage() {
               <div className="service-guide__process-text">
                 <h2 id="driveshaft-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att byta damasker eller drivaxlar kräver noggrannhet, rätt fettmängd och föreskrivna åtdragningsmoment. Så här ser vår process ut.</p>
-                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -310,11 +311,11 @@ export default function DrivaxelDrivknutarPage() {
             <div className="service-guide__closing">
               <div>
                 <h2 id="driveshaft-booking-title">Boka kontroll eller byte av drivaxel</h2>
-                <p>Priset beror på om det räcker med ett damaskbyte, om det är en yttre drivknut som byts separat eller om en hel drivaxel behöver ersättas. Ring oss på 070-553 33 95 så ger vi dig ett tydligt och transparent kostnadsförslag anpassat för din bilmodell.</p>
+                <p>Priset beror på om det räcker med ett damaskbyte, om det är en yttre drivknut som byts separat eller om en hel drivaxel behöver ersättas. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag anpassat för din bilmodell.</p>
               </div>
               <div className="service-guide__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ import { UsersIcon } from '../icons/UsersIcon'
 import { WrenchIcon } from '../icons/WrenchIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
 import { ClockIcon } from '../icons/ClockIcon'
+import { BUSINESS, weekdayHours } from '../../data/business'
 import './PublicFooter.css'
 
 export interface PublicFooterProps {
@@ -147,7 +148,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
                 </div>
                 <div className="bb-footer__contact-info">
                   <span className="bb-footer__contact-label">Telefon</span>
-                  <a href="tel:+46705533395" className="bb-footer__contact-val">070-553 33 95</a>
+                  <a href={BUSINESS.phone.href} className="bb-footer__contact-val">{BUSINESS.phone.display}</a>
                 </div>
               </div>
 
@@ -157,7 +158,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
                 </div>
                 <div className="bb-footer__contact-info">
                   <span className="bb-footer__contact-label">E-post</span>
-                  <a href="mailto:info@brynasbilservice.se" className="bb-footer__contact-val">info@brynasbilservice.se</a>
+                  <a href={BUSINESS.email.href} className="bb-footer__contact-val">{BUSINESS.email.address}</a>
                 </div>
               </div>
 
@@ -179,7 +180,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
                 </div>
                 <div className="bb-footer__contact-info">
                   <a
-                    href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle"
+                    href={BUSINESS.address.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bb-footer__maps-link"
@@ -202,15 +203,15 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
               <dl className="bb-footer__hours-dl">
                 <div className="bb-footer__hours-row">
                   <dt>Måndag – Fredag</dt>
-                  <dd>08:00 – 17:00</dd>
+                  <dd>{weekdayHours({ dash: ' – ' })}</dd>
                 </div>
                 <div className="bb-footer__hours-row">
                   <dt>Lördag</dt>
-                  <dd>Förfrågan</dd>
+                  <dd>{BUSINESS.hours.saturday}</dd>
                 </div>
                 <div className="bb-footer__hours-row">
                   <dt>Söndag</dt>
-                  <dd>Stängt</dd>
+                  <dd>{BUSINESS.hours.sunday}</dd>
                 </div>
               </dl>
             </div>
@@ -237,9 +238,9 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
                 </Link>
               )}
 
-              <a href="tel:+46705533395" className="bb-footer__call-link">
+              <a href={BUSINESS.phone.href} className="bb-footer__call-link">
                 <i className="bb-footer__call-icon"><PhoneIcon /></i>
-                <span>RING OSS: 070-553 33 95</span>
+                <span>RING OSS: {BUSINESS.phone.display}</span>
               </a>
             </div>
           </div>

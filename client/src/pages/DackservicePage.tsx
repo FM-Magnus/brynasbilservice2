@@ -35,6 +35,7 @@ import balancingJpg from '../assets/images/services/tires/tire-wheel-balancing.j
 import balancingWebp from '../assets/images/services/tires/tire-wheel-balancing.webp'
 import punctureRepairJpg from '../assets/images/services/tires/tire-puncture-repair.jpg'
 import punctureRepairWebp from '../assets/images/services/tires/tire-puncture-repair.webp'
+import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 
 type PriceEntry = { label?: string; prefix?: string; amount?: string; unit?: string; contactText?: string }
@@ -177,9 +178,9 @@ export default function DackservicePage() {
                 <button type="button" onClick={() => openModal('Gäller däckservice & hjulskifte')} className="bb-btn bb-btn--teal">
                   Boka tid
                 </button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
-                  <span>Ring oss: 070-553 33 95</span>
+                  <span>Ring oss: {BUSINESS.phone.display}</span>
                 </a>
               </div>
             </div>
@@ -370,9 +371,9 @@ export default function DackservicePage() {
               <p className="bb-lead--dark">
                 Att förstå processen gör det enklare att veta vad som händer med bilen från bokning till klar service.
               </p>
-              <a href="tel:0705533395" className="bb-btn bb-btn--teal">
+              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal">
                 <PhoneIcon aria-hidden="true" />
-                <span>Ring oss: 070-553 33 95</span>
+                <span>Ring oss: {BUSINESS.phone.display}</span>
               </a>
             </div>
             <ol className="bb-process-grid">
@@ -415,8 +416,8 @@ export default function DackservicePage() {
                 <button type="button" onClick={() => openModal('Gäller genomgång av hjul & däck')} className="bb-btn bb-btn--ember-solid">
                   Boka tid
                 </button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">
-                  Ring: 070-553 33 95
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                  Ring: {BUSINESS.phone.display}
                 </a>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { BUSINESS } from '../../src/data/business'
 
 test('bargning page renders without horizontal overflow across breakpoints', async ({ page }, testInfo) => {
   await page.goto('/bargning')
@@ -28,7 +29,7 @@ test('bargning page renders without horizontal overflow across breakpoints', asy
 
   // Verify emergency call link exists with correct tel URI
   const heroCallBtn = page.locator('.bargning-page__hero-phone-btn')
-  await expect(heroCallBtn).toHaveAttribute('href', 'tel:0705533395')
+  await expect(heroCallBtn).toHaveAttribute('href', BUSINESS.phone.href)
 
   // Verify booking modal opens from hero button
   const bookBtn = page.locator('.bargning-page__hero-book-btn')

@@ -15,14 +15,15 @@ import type { Vehicle, VehicleImage } from '../types/vehicle'
 import heroWebp from '../assets/images/gallery/workshop/workshop-service-aisle.webp'
 import heroJpg from '../assets/images/gallery/workshop/workshop-service-aisle.jpg'
 
+import { BUSINESS, weekdayHours } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import './BilarTillSalu.css'
 
 // Stock is edited in data/vehicles.ts (or, once live, from /admin) — never here.
 
-const PHONE_HREF = 'tel:+46705533395'
-const MAPS_HREF = 'https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle'
+const PHONE_HREF = BUSINESS.phone.href
+const MAPS_HREF = BUSINESS.address.mapsUrl
 
 const formatPrice = (sek: number) => `${sek.toLocaleString('sv-SE')} kr`
 const formatMileage = (km: number) => `${Math.round(km / 10).toLocaleString('sv-SE')} mil`
@@ -364,7 +365,7 @@ export default function BilarTillSalu() {
                 <div className="bb-hero__actions">
                   <a href={PHONE_HREF} className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
                     <PhoneIcon />
-                    <span>Ring: 070-553 33 95</span>
+                    <span>Ring: {BUSINESS.phone.display}</span>
                   </a>
                   <button type="button" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onClick={openBooking}>
                     Boka tid för visning
@@ -373,11 +374,11 @@ export default function BilarTillSalu() {
                 <ul className="bilartillsalu-page__hero-meta">
                   <li>
                     <MapPinIcon />
-                    <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer">Utmarksvägen 21B, 802 91 Gävle</a>
+                    <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer">{BUSINESS.address.full}</a>
                   </li>
                   <li>
                     <ClockIcon />
-                    <span>Mån–Fre 08:00–17:00 (Lör förfrågan)</span>
+                    <span>Mån–Fre {weekdayHours()} (Lör förfrågan)</span>
                   </li>
                 </ul>
               </div>
@@ -434,7 +435,7 @@ export default function BilarTillSalu() {
                 <p>Försök igen om en stund, eller ring oss så berättar vi vad vi har i lager.</p>
                 <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
                   <PhoneIcon />
-                  <span>Ring oss på 070-553 33 95</span>
+                  <span>Ring oss på {BUSINESS.phone.display}</span>
                 </a>
               </div>
             )}
@@ -448,7 +449,7 @@ export default function BilarTillSalu() {
                 </p>
                 <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
                   <PhoneIcon />
-                  <span>Ring oss på 070-553 33 95</span>
+                  <span>Ring oss på {BUSINESS.phone.display}</span>
                 </a>
               </div>
             )}
@@ -494,7 +495,7 @@ export default function BilarTillSalu() {
               <div className="bilartillsalu-page__closing-actions">
                 <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
                   <PhoneIcon />
-                  <span>Ring 070-553 33 95</span>
+                  <span>Ring {BUSINESS.phone.display}</span>
                 </a>
                 <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" className="bb-btn bilartillsalu-page__btn-outline">
                   <MapPinIcon />

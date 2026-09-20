@@ -23,6 +23,7 @@ import introJpg from '../assets/images/services/diagnostics/diagnostics-mechanic
 import introWebp from '../assets/images/services/diagnostics/diagnostics-mechanic-laptop-workshop.webp'
 import serviceJpg from '../assets/images/services/diagnostics/diagnostics-obd-connector-closeup.jpg'
 import serviceWebp from '../assets/images/services/diagnostics/diagnostics-obd-connector-closeup.webp'
+import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 
 const trustRow = [
@@ -97,7 +98,7 @@ const faqs = [
   { question: 'Behöver jag veta vad problemet är innan jag bokar?', answer: 'Nej. Berätta gärna vad du har märkt — ljud, lampor eller beteende — men du behöver inte kunna peka ut orsaken själv. Det är det vi hjälper till med.' },
   { question: 'Bör jag felsöka bilen innan besiktningen?', answer: 'Ja, om en varningslampa lyser är det klokt att åtgärda orsaken innan besiktningen. Annars riskerar bilen bli underkänd och kräva en omkörning.' },
   { question: 'Förklarar ni vad felkoderna betyder?', answer: 'Ja, vi går igenom vad koderna innebär i klartext och vad vi rekommenderar innan något repareras.' },
-  { question: 'Vad kostar en felsökning?', answer: 'Kostnaden beror på hur omfattande felsökningen blir. Ring oss på 070-553 33 95 så ger vi en tydlig prisuppgift innan vi sätter igång.' },
+  { question: 'Vad kostar en felsökning?', answer: `Kostnaden beror på hur omfattande felsökningen blir. Ring oss på ${BUSINESS.phone.display} så ger vi en tydlig prisuppgift innan vi sätter igång.` },
 ]
 
 export default function FelsokningPage() {
@@ -135,9 +136,9 @@ export default function FelsokningPage() {
               </p>
               <div className="bb-hero__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">Boka tid</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
-                  <span>Ring 070-553 33 95</span>
+                  <span>Ring {BUSINESS.phone.display}</span>
                 </a>
               </div>
             </div>
@@ -180,7 +181,7 @@ export default function FelsokningPage() {
                 </p>
                 <div className="bilservice__actions">
                   <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka felsökning</button>
-                  <a href="tel:0705533395" className="bb-btn bb-btn--ember">Ring 070-553 33 95</a>
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
                 </div>
               </div>
               <div className="bilservice__split-media--right">
@@ -291,7 +292,7 @@ export default function FelsokningPage() {
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="felsokning-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
               <p className="bb-lead--dark">Att förstå processen gör det enklare att veta vad som händer med bilen och varför en felsökning ibland behöver ta lite tid.</p>
-              <a href="tel:0705533395" className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring oss: 070-553 33 95</span></a>
+              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring oss: {BUSINESS.phone.display}</span></a>
             </div>
             <ol className="bb-process-grid">
               {processSteps.map((step) => (
@@ -320,7 +321,7 @@ export default function FelsokningPage() {
               </div>
               <div className="bilservice__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">Ring: 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring: {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

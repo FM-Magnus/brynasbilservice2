@@ -4,6 +4,7 @@
 // Reuse ServiceGuideTemplate.css for future rebuilds; do not fork its classes
 // into another colocated file, and do not add rules for this page to index.css.
 import { useEffect, useState, type ReactElement } from 'react'
+import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
@@ -122,7 +123,7 @@ export default function KopplingPage() {
                 </p>
                 <div className="service-guide__actions">
                   <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
@@ -262,7 +263,7 @@ export default function KopplingPage() {
               <div className="service-guide__process-text">
                 <h2 id="koppling-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför ett större drivlinearbete ibland behöver ta lite tid.</p>
-                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -284,11 +285,11 @@ export default function KopplingPage() {
             <div className="service-guide__closing">
               <div>
                 <h2 id="koppling-booking-title">Boka kopplingskontroll</h2>
-                <p>Priset beror på bilmodell, vilket typ av kopplingssats som krävs och om svänghjulet behöver bytas samtidigt. Ring oss på 070-553 33 95 för en tydlig prisuppgift innan vi sätter igång.</p>
+                <p>Priset beror på bilmodell, vilket typ av kopplingssats som krävs och om svänghjulet behöver bytas samtidigt. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

@@ -22,6 +22,7 @@ import imgPeugeotFrontJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot
 import imgSunsetRoadWebp from '../assets/images/home/landing-v2/landing-sundown-hero.webp'
 import imgSunsetRoadJpg from '../assets/images/home/landing-v2/landing-sundown-hero.jpg'
 
+import { BUSINESS, weekdayHours } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import './BargningPage.css'
@@ -108,11 +109,11 @@ export default function BargningPage() {
               </p>
               <div className="bargning-page__hero-actions">
                 <a
-                  href="tel:0705533395"
+                  href={BUSINESS.phone.href}
                   className="bb-btn bb-btn--teal bargning-page__hero-phone-btn"
                 >
                   <PhoneIcon />
-                  <span>Ring för bärgning: 070-553 33 95</span>
+                  <span>Ring för bärgning: {BUSINESS.phone.display}</span>
                 </a>
                 <button
                   type="button"
@@ -297,10 +298,10 @@ export default function BargningPage() {
 
                 <div className="bargning-page__showcase-actions">
                   <a
-                    href="tel:0705533395"
+                    href={BUSINESS.phone.href}
                     className="bb-btn bb-btn--teal bargning-page__showcase-phone-btn"
                   >
-                    <span>Ring 070-553 33 95</span>
+                    <span>Ring {BUSINESS.phone.display}</span>
                     <PhoneIcon />
                   </a>
                   <button
@@ -417,7 +418,7 @@ export default function BargningPage() {
                 </div>
                 <h3 className="bargning-page__process-step-title">Kontakta oss vid haveri</h3>
                 <p className="bargning-page__process-step-desc">
-                  Ring 070-553 33 95 och berätta var bilen står och vad som har hänt.
+                  Ring {BUSINESS.phone.display} och berätta var bilen står och vad som har hänt.
                 </p>
               </div>
 
@@ -504,12 +505,12 @@ export default function BargningPage() {
                   <div>
                     <span className="bargning-page__fact-label">Verkstad:</span>
                     <a
-                      href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B,+802+91+G%C3%A4vle"
+                      href={BUSINESS.address.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bargning-page__fact-link"
                     >
-                      Utmarksvägen 21B, 802 91 Gävle
+                      {BUSINESS.address.full}
                     </a>
                   </div>
                 </div>
@@ -520,8 +521,8 @@ export default function BargningPage() {
                   </div>
                   <div>
                     <span className="bargning-page__fact-label">Telefon:</span>
-                    <a href="tel:0705533395" className="bargning-page__fact-link">
-                      070-553 33 95
+                    <a href={BUSINESS.phone.href} className="bargning-page__fact-link">
+                      {BUSINESS.phone.display}
                     </a>
                   </div>
                 </div>
@@ -532,8 +533,8 @@ export default function BargningPage() {
                   </div>
                   <div>
                     <span className="bargning-page__fact-label">E-post:</span>
-                    <a href="mailto:info@brynasbilservice.se" className="bargning-page__fact-link">
-                      info@brynasbilservice.se
+                    <a href={BUSINESS.email.href} className="bargning-page__fact-link">
+                      {BUSINESS.email.address}
                     </a>
                   </div>
                 </div>
@@ -545,9 +546,9 @@ export default function BargningPage() {
                   <div>
                     <span className="bargning-page__fact-label">Öppettider:</span>
                     <p className="bargning-page__fact-hours">
-                      Mån–Fre: 08:00 – 17:00<br />
-                      Lördag: Förfrågan<br />
-                      Söndag: Stängt
+                      Mån–Fre: {weekdayHours({ dash: ' – ' })}<br />
+                      Lördag: {BUSINESS.hours.saturday}<br />
+                      Söndag: {BUSINESS.hours.sunday}
                     </p>
                   </div>
                 </div>
@@ -606,11 +607,11 @@ export default function BargningPage() {
               </p>
               <div className="bargning-page__cta-actions">
                 <a
-                  href="tel:0705533395"
+                  href={BUSINESS.phone.href}
                   className="bb-btn bb-btn--teal bargning-page__cta-phone-btn"
                 >
                   <PhoneIcon />
-                  <span>Ring för bärgning: 070-553 33 95</span>
+                  <span>Ring för bärgning: {BUSINESS.phone.display}</span>
                 </a>
                 <button
                   type="button"

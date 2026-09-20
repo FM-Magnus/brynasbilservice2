@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import { BUSINESS, weekdayHours } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
@@ -42,7 +43,7 @@ function ChevronDownIcon({ className }: { className?: string }) {
   )
 }
 
-const ADDRESS = 'Utmarksvägen 21B, 802 91 Gävle'
+const ADDRESS = BUSINESS.address.full
 const GOOGLE_MAPS_URL = 'https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle'
 const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?q=Utmarksv%C3%A4gen+21B,+802+91+G%C3%A4vle&output=embed'
 
@@ -87,9 +88,9 @@ export default function ContactPage() {
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">
                   <span>Boka tid</span>
                 </button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
-                  <span>Ring: 070-553 33 95</span>
+                  <span>Ring: {BUSINESS.phone.display}</span>
                 </a>
               </div>
             </div>
@@ -108,14 +109,14 @@ export default function ContactPage() {
                     <span className="kontakt-page__detail-icon" aria-hidden="true"><PhoneIcon /></span>
                     <span className="kontakt-page__detail-content">
                       <span className="kontakt-page__detail-label">Telefon</span>
-                      <a href="tel:0705533395" className="kontakt-page__detail-link">070-553 33 95</a>
+                      <a href={BUSINESS.phone.href} className="kontakt-page__detail-link">{BUSINESS.phone.display}</a>
                     </span>
                   </li>
                   <li className="kontakt-page__detail-item">
                     <span className="kontakt-page__detail-icon" aria-hidden="true"><MailIcon /></span>
                     <span className="kontakt-page__detail-content">
                       <span className="kontakt-page__detail-label">E-post</span>
-                      <a href="mailto:info@brynasbilservice.se" className="kontakt-page__detail-link">info@brynasbilservice.se</a>
+                      <a href={BUSINESS.email.href} className="kontakt-page__detail-link">{BUSINESS.email.address}</a>
                     </span>
                   </li>
                   <li className="kontakt-page__detail-item">
@@ -147,9 +148,9 @@ export default function ContactPage() {
                     <span className="kontakt-page__hours-title">Öppettider</span>
                   </div>
                   <div className="kontakt-page__hours-list">
-                    <div className="kontakt-page__hours-row"><span>Måndag – Fredag</span><span className="kontakt-page__hours-val">08:00 – 17:00</span></div>
-                    <div className="kontakt-page__hours-row"><span>Lördag</span><span className="kontakt-page__hours-val kontakt-page__hours-val--accent">Förfrågan</span></div>
-                    <div className="kontakt-page__hours-row"><span>Söndag</span><span className="kontakt-page__hours-val kontakt-page__hours-val--muted">Stängt</span></div>
+                    <div className="kontakt-page__hours-row"><span>Måndag – Fredag</span><span className="kontakt-page__hours-val">{weekdayHours({ dash: ' – ' })}</span></div>
+                    <div className="kontakt-page__hours-row"><span>Lördag</span><span className="kontakt-page__hours-val kontakt-page__hours-val--accent">{BUSINESS.hours.saturday}</span></div>
+                    <div className="kontakt-page__hours-row"><span>Söndag</span><span className="kontakt-page__hours-val kontakt-page__hours-val--muted">{BUSINESS.hours.sunday}</span></div>
                   </div>
                 </div>
               </div>
@@ -200,7 +201,7 @@ export default function ContactPage() {
                     <span className="kontakt-page__success-icon">✓</span>
                     <h3 className="kontakt-page__success-title">Tack för ditt meddelande!</h3>
                     <p className="kontakt-page__success-desc">
-                      Vi har tagit emot din förfrågan och återkommer till dig så snart vi kan under våra öppettider (Mån–Fre 08:00–17:00).
+                      Vi har tagit emot din förfrågan och återkommer till dig så snart vi kan under våra öppettider (Mån–Fre {weekdayHours()}).
                     </p>
                     <button type="button" className="bb-btn bb-btn--teal kontakt-page__reset-btn" onClick={() => setSubmitted(false)}>
                       Skicka ett till meddelande
@@ -301,9 +302,9 @@ export default function ContactPage() {
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">
                   <span>Boka tid nu</span>
                 </button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                   <PhoneIcon />
-                  <span>Ring: 070-553 33 95</span>
+                  <span>Ring: {BUSINESS.phone.display}</span>
                 </a>
                 <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="bb-btn bb-btn--ember">
                   <MapPinIcon />

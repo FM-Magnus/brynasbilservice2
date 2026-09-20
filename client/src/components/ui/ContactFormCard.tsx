@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import { BUSINESS } from '../../data/business'
 import './ContactFormCard.css'
 
 export interface ContactFormData {
@@ -95,11 +96,11 @@ export function ContactFormCard({
   sectionTitle = 'Hör av dig',
   sectionAccent = 'till oss',
   sectionDescription = 'Har du frågor, vill boka tid eller behöver rådgivning? Skicka ett meddelande så återkommer vi så snart vi kan.',
-  phone = '+46705533395',
-  phoneDisplay = '070–553 33 95',
-  email = 'info@brynasbilservice.se',
-  address = 'Utmarksvägen 21B, 802 91 Gävle',
-  googleMapsUrl = 'https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle',
+  phone = BUSINESS.phone.e164,
+  phoneDisplay = BUSINESS.phone.display,
+  email = BUSINESS.email.address,
+  address = BUSINESS.address.full,
+  googleMapsUrl = BUSINESS.address.mapsUrl,
   className = '',
   onSubmitSuccess,
 }: ContactFormCardProps) {

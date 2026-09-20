@@ -23,6 +23,7 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { CarSaleIcon } from '../components/icons/CarSaleIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
+import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 
 const trustRow = [
@@ -106,7 +107,7 @@ export default function ServiceReparationerPage() {
               </p>
               <div className="bb-hero__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">Boka tid</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring oss nu</span></a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring oss nu</span></a>
               </div>
             </div>
             <div className="bb-hero__bottom">
@@ -133,7 +134,7 @@ export default function ServiceReparationerPage() {
               <p className="bilservice__price-text bb-lead">Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
               <div className="bilservice__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka tid för bilservice</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">Ring 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
             <ImageSlot id="bilservice-servicebook-keys" label="Bild — Servicebok och bilnyckel" className="bilservice__split-media--right bilservice__image-slot--ar-16-9 bilservice__image-slot--radius-lg" />
@@ -203,7 +204,7 @@ export default function ServiceReparationerPage() {
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="bilservice-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
               <p className="bb-lead--dark">Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
-              <a href="tel:0705533395" className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring oss: 070-553 33 95</span></a>
+              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring oss: {BUSINESS.phone.display}</span></a>
             </div>
             <ol className="bb-process-grid">
               {processSteps.map((step) => (
@@ -242,7 +243,7 @@ export default function ServiceReparationerPage() {
               </div>
               <div className="bilservice__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember">Ring: 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring: {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

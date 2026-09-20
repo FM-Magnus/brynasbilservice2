@@ -25,6 +25,7 @@ import gallery3Jpg from '../assets/images/gallery/workshop/workshop-car-open-hoo
 import gallery4Webp from '../assets/images/gallery/workshop/workshop-car-on-lift.webp'
 import gallery4Jpg from '../assets/images/gallery/workshop/workshop-car-on-lift.jpg'
 
+import { BUSINESS, weekdayHours } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import './AboutPage.css'
@@ -138,11 +139,11 @@ export default function AboutPage() {
                     <ArrowRightIcon />
                   </button>
                   <a
-                    href="tel:0705533395"
+                    href={BUSINESS.phone.href}
                     className="bb-btn bb-btn--ember omoss-page__hero-phone-btn"
                   >
                     <PhoneIcon />
-                    <span>Ring 070-553 33 95</span>
+                    <span>Ring {BUSINESS.phone.display}</span>
                   </a>
                 </div>
               </div>
@@ -262,24 +263,24 @@ export default function AboutPage() {
                         <span className="omoss-page__fact-label">Verkstad:</span>
                         <span className="omoss-page__fact-val">
                           <a
-                            href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B,+802+91+G%C3%A4vle"
+                            href={BUSINESS.address.mapsUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            Utmarksvägen 21B, 802 91 Gävle
+                            {BUSINESS.address.full}
                           </a>
                         </span>
                       </div>
                       <div className="omoss-page__fact-row">
                         <span className="omoss-page__fact-label">Telefon:</span>
                         <span className="omoss-page__fact-val">
-                          <a href="tel:0705533395">070-553 33 95</a>
+                          <a href={BUSINESS.phone.href}>{BUSINESS.phone.display}</a>
                         </span>
                       </div>
                       <div className="omoss-page__fact-row">
                         <span className="omoss-page__fact-label">E-post:</span>
                         <span className="omoss-page__fact-val">
-                          <a href="mailto:info@brynasbilservice.se">info@brynasbilservice.se</a>
+                          <a href={BUSINESS.email.href}>{BUSINESS.email.address}</a>
                         </span>
                       </div>
                     </div>
@@ -290,19 +291,19 @@ export default function AboutPage() {
                     <div className="omoss-page__hours-list">
                       <div className="omoss-page__hours-row">
                         <span className="omoss-page__hours-day">Måndag - Fredag:</span>
-                        <span className="omoss-page__hours-time">08.00 – 17.00</span>
+                        <span className="omoss-page__hours-time">{weekdayHours({ dash: ' – ', dots: true })}</span>
                       </div>
                       <div className="omoss-page__hours-row">
                         <span className="omoss-page__hours-day">Lördag:</span>
-                        <span className="omoss-page__hours-inquiry">Förfrågan</span>
+                        <span className="omoss-page__hours-inquiry">{BUSINESS.hours.saturday}</span>
                       </div>
                       <div className="omoss-page__hours-row">
                         <span className="omoss-page__hours-day">Söndag:</span>
-                        <span className="omoss-page__hours-closed">Stängt</span>
+                        <span className="omoss-page__hours-closed">{BUSINESS.hours.sunday}</span>
                       </div>
                     </div>
                     <a
-                      href="https://maps.google.com/?q=Utmarksv%C3%A4gen+21B,+802+91+G%C3%A4vle"
+                      href={BUSINESS.address.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="omoss-page__maps-link"
@@ -575,11 +576,11 @@ export default function AboutPage() {
                   <span>Se alla tjänster</span>
                 </Link>
                 <a
-                  href="tel:0705533395"
+                  href={BUSINESS.phone.href}
                   className="bb-btn bb-btn--ember omoss-page__cta-phone-btn"
                 >
                   <PhoneIcon />
-                  <span>Ring: 070-553 33 95</span>
+                  <span>Ring: {BUSINESS.phone.display}</span>
                 </a>
               </div>
             </div>

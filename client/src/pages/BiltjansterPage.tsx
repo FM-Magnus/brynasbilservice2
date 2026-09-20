@@ -18,6 +18,7 @@ import bilbatteriThumbJpg from '../assets/images/services/battery/battery-termin
 import bilbatteriThumbWebp from '../assets/images/services/battery/battery-terminal-bolt-tightening-thumb-card.webp'
 import drivaxelThumbJpg from '../assets/images/services/driveshaft/cv-joint-workbench-thumb.jpg'
 import drivaxelThumbWebp from '../assets/images/services/driveshaft/cv-joint-workbench-thumb.webp'
+import { BUSINESS } from '../data/business'
 import './BiltjansterPage.css'
 
 interface ServiceGuide {
@@ -148,9 +149,9 @@ export default function BiltjansterPage() {
               <button type="button" onClick={openModal} className="biltjanster-hub__btn biltjanster-hub__btn--primary">
                 <span>Boka tid</span>
               </button>
-              <a href="tel:0705533395" className="biltjanster-hub__btn biltjanster-hub__btn--outline">
+              <a href={BUSINESS.phone.href} className="biltjanster-hub__btn biltjanster-hub__btn--outline">
                 <PhoneIcon className="biltjanster-hub__btn-icon" />
-                <span>Ring 070-553 33 95</span>
+                <span>Ring {BUSINESS.phone.display}</span>
               </a>
             </div>
           </div>
@@ -230,9 +231,9 @@ export default function BiltjansterPage() {
               <button type="button" onClick={openModal} className="biltjanster-hub__btn biltjanster-hub__btn--primary">
                 <span>Boka tid</span>
               </button>
-              <a href="tel:0705533395" className="biltjanster-hub__btn biltjanster-hub__btn--outline">
+              <a href={BUSINESS.phone.href} className="biltjanster-hub__btn biltjanster-hub__btn--outline">
                 <PhoneIcon className="biltjanster-hub__btn-icon" />
-                <span>Ring: 070-553 33 95</span>
+                <span>Ring: {BUSINESS.phone.display}</span>
               </a>
             </div>
           </div>

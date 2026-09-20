@@ -10,6 +10,7 @@ import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { getGalleryImages } from '../api/gallery'
 import type { GalleryImage } from '../types/gallery'
 
+import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import './GalleryPage.css'
@@ -17,7 +18,7 @@ import './GalleryPage.css'
 // Images come from src/assets/galleri/ (see LÄSMIG.md there) via api/gallery.ts —
 // never import gallery images or the data module here.
 
-const PHONE_HREF = 'tel:+46705533395'
+const PHONE_HREF = BUSINESS.phone.href
 const STAGE_SIZES = '(min-width: 1440px) 920px, (min-width: 1024px) 70vw, 92vw'
 const SWIPE_MIN_PX = 40
 
@@ -265,7 +266,7 @@ export default function GalleryPage() {
                   </button>
                   <a href={PHONE_HREF} className="bb-btn bb-btn--ember">
                     <PhoneIcon />
-                    <span>Ring: 070-553 33 95</span>
+                    <span>Ring: {BUSINESS.phone.display}</span>
                   </a>
                 </div>
               </div>
@@ -284,7 +285,7 @@ export default function GalleryPage() {
                 <p>Vi kunde inte visa bilderna just nu. Försök igen om en stund, eller ring oss.</p>
                 <a href={PHONE_HREF} className="bb-btn bb-btn--ember">
                   <PhoneIcon />
-                  <span>Ring: 070-553 33 95</span>
+                  <span>Ring: {BUSINESS.phone.display}</span>
                 </a>
               </div>
             )}
@@ -336,7 +337,7 @@ export default function GalleryPage() {
                 </Link>
                 <a href={PHONE_HREF} className="bb-btn galleri-page__btn-outline">
                   <PhoneIcon />
-                  <span>Ring: 070-553 33 95</span>
+                  <span>Ring: {BUSINESS.phone.display}</span>
                 </a>
               </div>
             </div>

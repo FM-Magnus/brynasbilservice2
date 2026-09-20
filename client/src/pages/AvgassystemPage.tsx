@@ -2,6 +2,7 @@
 // /koppling — this is the second page proving the template is reusable, not
 // a second design. No dependency on any page-specific rule in index.css.
 import { useEffect, useState } from 'react'
+import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
@@ -85,7 +86,7 @@ const infoCards: readonly InfoCardItem[] = [
 ]
 
 const processSteps = [
-  ['01', 'Bokning och inlämning', 'Boka enkelt online eller ring oss på 070-553 33 95 och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.'],
+  ['01', 'Bokning och inlämning', `Boka enkelt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.`],
   ['02', 'Lyft & läckagekontroll', 'Vi hissar upp bilen och inspekterar hela avgassystemet från grenrör till slutrör för att lokalisera sprickor och rost.'],
   ['03', 'Sensordiagnostik', 'Vid tänd motorlampa läser vi av lambdasondernas signalvärden och felminnet i bilens motorstyrdon.'],
   ['04', 'Montering & tätning', 'Vi demonterar den trasiga delen och monterar nya kvalitetsdelar med nya packningar, klammor och upphängningar.'],
@@ -136,7 +137,7 @@ export default function AvgassystemPage() {
                 </p>
                 <div className="service-guide__actions">
                   <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="service-guide__trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
@@ -279,7 +280,7 @@ export default function AvgassystemPage() {
               <div className="service-guide__process-text">
                 <h2 id="exhaust-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
                 <p>Att laga eller byta delar i avgassystemet kräver noggrann täthetskontroll och rätt upphängningar. Så här ser vår process ut.</p>
-                <a href="tel:0705533395" className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
               </div>
               <div className="service-guide__process-steps">
                 {processSteps.map(([num, title, text]) => (
@@ -301,11 +302,11 @@ export default function AvgassystemPage() {
             <div className="service-guide__closing">
               <div>
                 <h2 id="exhaust-booking-title">Boka reparation av avgassystem</h2>
-                <p>Priset beror helt på vilken del av avgassystemet som behöver åtgärdas — ett byte av en bakre ljuddämpare skiljer sig från byte av lambdasond eller katalysator. Ring oss på 070-553 33 95 så ger vi dig ett tydligt och transparent kostnadsförslag innan vi sätter igång.</p>
+                <p>Priset beror helt på vilken del av avgassystemet som behöver åtgärdas — ett byte av en bakre ljuddämpare skiljer sig från byte av lambdasond eller katalysator. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href="tel:0705533395" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring 070-553 33 95</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
