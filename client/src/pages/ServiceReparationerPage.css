@@ -121,9 +121,12 @@
 .bilservice__intro h2 { margin: 0 0 0.6rem; color: var(--bilservice-ink); }
 .bilservice__intro p { margin: 0; font: 400 1rem/1.6 var(--bb-font-body); }
 .bilservice__intro--wide { max-width: 78ch; }
+.bilservice__intro--wide-sm { max-width: 75ch; }
 .bilservice__intro--tight { margin-bottom: 1.5rem; }
 .bilservice__intro small { color: var(--bb-color-teal-800); font-weight: 700; }
 .bilservice__intro .bilservice__lead--intro { margin: 0.8rem 0 0.5rem; }
+.bilservice__intro .bilservice__lead--intro-tight { margin: 0.8rem 0 0.4rem; }
+.bilservice__intro .bilservice__note { margin-top: 0.5rem; }
 
 .bilservice__value-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.4rem); }
 .bilservice__value-card {
@@ -242,6 +245,7 @@
   font: 400 0.92rem / 1.6 var(--bb-font-body);
   color: rgba(255, 255, 255, 0.88);
 }
+.bilservice__card--teal .bb-icon-badge { margin-bottom: 1rem; }
 
 /* ---------- Interactive Symptom Selector ---------- */
 .bilservice__symptom-grid {
@@ -250,6 +254,8 @@
   gap: clamp(1rem, 2vw, 1.35rem);
   margin-top: clamp(1.5rem, 3vw, 2rem);
 }
+/* Doubled class: the 1fr rule in the small-screen media query comes later with the same specificity and would otherwise win. */
+.bilservice__symptom-grid.bilservice__symptom-grid--auto { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .bilservice__symptom-card {
   display: flex;
   flex-direction: column;
@@ -722,6 +728,7 @@
   color: var(--bb-color-focus);
   font: 800 clamp(1.45rem, 2.2vw, 1.85rem) / 1.1 var(--bb-font-display);
 }
+.bilservice__price-amount small { font-size: 0.82rem; font-weight: 600; color: rgba(255, 255, 255, 0.7); }
 .bilservice__price-list {
   display: flex;
   flex-direction: column;

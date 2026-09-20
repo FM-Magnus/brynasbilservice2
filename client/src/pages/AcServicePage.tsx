@@ -180,7 +180,7 @@ export default function AcServicePage() {
             <div className="bilservice__card-grid-3">
               {valueProps.map(({ icon: Icon, title, text }) => (
                 <article className="bilservice__card--teal" key={title}>
-                  <div className="bb-icon-badge" style={{ marginBottom: '1rem' }}><Icon aria-hidden="true" /></div>
+                  <div className="bb-icon-badge"><Icon aria-hidden="true" /></div>
                   <h3>{title}</h3>
                   <p>{text}</p>
                 </article>
@@ -195,11 +195,11 @@ export default function AcServicePage() {
             <div className="bilservice__intro">
               <p className="bb-eyebrow">Hitta rätt hjälp</p>
               <h2 className="bb-h2" id="ac-symptoms-title">Känner du igen något av detta?</h2>
-              <p style={{ marginTop: '0.5rem' }}>
+              <p className="bilservice__note">
                 Klicka på ett symptom för att få vår rekommendation på rätt åtgärd inför din bokning.
               </p>
             </div>
-            <div className="bilservice__symptom-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+            <div className="bilservice__symptom-grid bilservice__symptom-grid--auto">
               {symptoms.map(({ question, advice, description }) => {
                 const isSelected = recommendation === advice
                 return (
@@ -241,14 +241,14 @@ export default function AcServicePage() {
         {/* Tydliga priser / Service för renare och svalare kupé */}
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="ac-prices-title">
           <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro" style={{ maxWidth: '75ch' }}>
+            <div className="bilservice__intro bilservice__intro--wide-sm">
               <p className="bb-eyebrow">Tydliga priser</p>
               <h2 className="bb-h2" id="ac-prices-title">Service för renare och svalare kupé</h2>
               {/* DRAFT GUIDANCE: Branschmässigt riktvärde (enklare årlig kontroll, full service ca vartannat år), ej bekräftad fast Brynäs-policy. */}
-              <p className="bb-lead" style={{ marginTop: '0.8rem', marginBottom: '0.4rem' }}>
+              <p className="bb-lead bilservice__lead--intro-tight">
                 En enklare kontroll årligen räcker för de flesta bilar, medan en fullständig AC-service med läckagesökning och kompressorolja normalt behövs vartannat år.
               </p>
-              <small style={{ color: 'var(--bb-color-teal-800)', fontWeight: 700 }}>
+              <small>
                 Samtliga priser är inklusive moms.
               </small>
             </div>
@@ -277,7 +277,7 @@ export default function AcServicePage() {
               <article className="bilservice__price-card">
                 <h3>AC-rengöring</h3>
                 <p className="bilservice__price-amount">
-                  800 kr <small style={{ fontSize: '0.82rem', fontWeight: 600, color: 'rgba(255,255,255,0.7)' }}>arbetskostnad</small>
+                  800 kr <small>arbetskostnad</small>
                 </p>
                 <ul className="bilservice__price-list">
                   {['Antibakteriell rengöring av luftkanaler/förångare', 'Arbete för byte av kupéfilter'].map((item) => (
@@ -373,8 +373,8 @@ export default function AcServicePage() {
               </div>
               <div className="bilservice__service-content">
                 <div>
-                  <p className="bb-eyebrow bb-eyebrow--dark" style={{ marginBottom: '0.4rem' }}>Fackmässigt arbete</p>
-                  <h2 className="bb-h2" id="ac-trust-title" style={{ color: '#fff', marginBottom: '0.85rem' }}>
+                  <p className="bb-eyebrow bb-eyebrow--dark">Fackmässigt arbete</p>
+                  <h2 className="bb-h2" id="ac-trust-title">
                     Omsorg om systemet och bilen
                   </h2>
                   <p className="bb-lead--dark">
@@ -423,7 +423,7 @@ export default function AcServicePage() {
         {/* Vad våra kunder säger (Google reviews) */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="ac-reviews-title">
           <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro" style={{ marginBottom: '1.5rem' }}>
+            <div className="bilservice__intro bilservice__intro--tight">
               <p className="bb-eyebrow">Kundomdömen</p>
               <h2 className="bb-h2" id="ac-reviews-title">Vad våra kunder säger</h2>
             </div>
@@ -436,7 +436,7 @@ export default function AcServicePage() {
 
         {/* Closing Reassurance Card */}
         <section aria-labelledby="ac-closing-title">
-          <div className="bb-wrap bilservice__container" style={{ paddingBlock: 'clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem)' }}>
+          <div className="bb-wrap bilservice__container bilservice__container--flow">
             <div className="bb-card--trust">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
