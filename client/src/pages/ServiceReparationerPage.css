@@ -3,7 +3,14 @@
    visual island, distinct from both index.css's legacy .services-page__*
    system and the teal-technical ServiceGuideTemplate.css used by the Guide
    family. Only global --bb-* design tokens are shared; every rule below is
-   scoped under .bilservice and has zero dependency on index.css. */
+   scoped under .bilservice and has zero dependency on index.css.
+
+   KNOWN DEFECT, do not copy into a new sibling (verified 2026-09-20):
+   --bb-radius-lg (1x) and --bb-radius-pill (2x) are not defined in
+   design-tokens.css and carry no var() fallback, so those border-radius
+   declarations are invalid at computed-value time and compute to 0px
+   (measured on /service-reparationer). Defining them would change the
+   approved appearance, so it needs Magnus's decision first. */
 
 .bilservice {
   --bilservice-page-bg: var(--bb-color-page);

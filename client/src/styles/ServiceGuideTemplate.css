@@ -4,6 +4,22 @@
   keep page-specific one-offs in that page's own colocated CSS file.
   Depends ONLY on the canonical design tokens in client/src/styles/design-tokens.css
   (--bb-*) and shared elements — zero dependency on index.css.
+
+  KNOWN DEFECT, do not copy into a new sibling (verified 2026-09-20):
+  three --bb-* names used below are not defined in design-tokens.css, and
+  none of the references carry a var() fallback. An unresolved custom
+  property makes the whole declaration invalid at computed-value time, so
+  these do not fall back — they drop out:
+    --bb-color-border-subtle  7x  `border: 1px solid var(...)` — measured
+                                  border-top-style: none on /kamrem, i.e. the
+                                  card borders do not render on any of the
+                                  10 guide pages.
+    --bb-shadow-elevated      1x  box-shadow — measured `none`.
+    --bb-font-sans           35x  font-family — inert, because the property
+                                  then inherits body's 'Manrope', sans-serif
+                                  from base.css, which is what was wanted.
+  Defining these tokens would make 43 declarations activate at once and
+  change the approved appearance, so it needs Magnus's decision first.
 */
 
 .service-guide {
