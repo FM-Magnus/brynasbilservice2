@@ -3,7 +3,7 @@
  * Guards the canonical CSS layer. Run with `npm --prefix client run check:css`;
  * the pre-commit hook runs it too.
  *
- * Two things are enforced, both of which have already gone wrong in this
+ * Three things are enforced, all of which have already gone wrong in this
  * repository:
  *
  * 1. Every `var(--bb-*)` reference resolves. An unresolved custom property
@@ -15,6 +15,11 @@
  *    removed on 2026-09-19 and the `--redesign-*` token family with it, but
  *    several documents still describe them, so a new file can reintroduce them
  *    by following stale instructions.
+ * 3. Public pages carry no inline `style=`. Inline styles beat every stylesheet
+ *    rule, so they hid the section rhythm of four pages from their family CSS
+ *    and made a duplicated value impossible to find (27 sites, all moved into
+ *    `pages/ServiceReparationerPage.css` on 2026-09-20). Admin is exempt, as it
+ *    is for Tailwind utilities.
  */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -90,6 +95,21 @@ for (const file of sourceFiles) {
       for (const m of line.matchAll(pattern)) {
         problems.push(`${rel(file)}:${i + 1}  ${label}: ${m[0]}`)
       }
+    }
+  })
+}
+
+// 3. no inline styles in public TSX
+const isPublicTsx = (file) => {
+  const r = path.relative(SRC, file).split(path.sep).join('/')
+  return (r.startsWith('pages/') || r.startsWith('components/'))
+    && !r.startsWith('pages/admin/') && !r.startsWith('components/admin/')
+    && r !== 'components/ThemeSwitcher.tsx'
+}
+for (const file of sourceFiles.filter((f) => f.endsWith('.tsx') && isPublicTsx(f))) {
+  readStripped(file).split('\n').forEach((line, i) => {
+    if (/\bstyle=\{/.test(line)) {
+      problems.push(`${rel(file)}:${i + 1}  inline style= in a public page — move it to the page's CSS island (public pages style themselves through classes)`)
     }
   })
 }
