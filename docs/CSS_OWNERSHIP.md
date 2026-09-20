@@ -92,6 +92,86 @@ grep -rn "\.<new-prefix>" client/src --include=*.css
 
 It must return nothing. Prefixes in use include `.landing-v2__`, `.omoss-page__`, `.kontakt-page__`, `.bargning-page__`, `.biltjanster-hub__`, `.bilartillsalu-page__`, `.galleri-page__`, `.bilservice__`, `.service-guide__`, `.public-header`, `.bb-footer__`, `.bb-*` (shared) and `.modal-*` (booking).
 
+## How a conflict is actually resolved (verified 2026-09-20)
+
+This project declares **no cascade layers** (`@layer` appears in no stylesheet) and uses
+**no CSS Modules**. A conflict between two author rules is therefore decided by
+specificity first, then source order. Source order is:
+
+1. The four global files, in `main.tsx` order: `tailwind.css` → `design-tokens.css` →
+   `base.css` → `shared-elements.css`.
+2. Then every component and page island, because each is imported by its own `.tsx`.
+
+So an island rule beats a `.bb-*` shared rule of equal specificity, and beats a Tailwind
+utility of equal specificity. Confirmed in the dev server's `document.styleSheets` order
+and in the production build, where `index-*.css` is linked in `index.html` and each
+route's chunk is appended when the lazy route loads.
+
+Two worked examples:
+
+- `base.css` sets `h1..h6 { font-family: 'Archivo', sans-serif }` (specificity 0,0,1) and
+  `shared-elements.css` sets `.bb-h1 { font-family: var(--bb-font-display) }` (0,1,0).
+  **Specificity** decides: the class wins, and the element rule only reaches headings that
+  carry no `.bb-h*` class.
+- `shared-elements.css` sets `.bb-btn { ... }` and several islands restyle the same buttons
+  through their own prefixed selectors. Where specificity ties, **source order** decides in
+  the island's favour, because islands load after the global layer.
+
+`!important` appears 11 times. Nine are inside `prefers-reduced-motion` blocks and one is
+`.public-header__mobile-panel[hidden] { display: none !important }` — both idiomatic. Only
+`AboutPage.css` `.omoss-page__trust-item { border-right: none !important }` is avoidable
+debt. This is not a specificity-escalation problem; do not "clean it up".
+
+## Token sources — there are two, and both are load-bearing
+
+- `client/src/styles/design-tokens.css` owns the `--bb-*` custom properties. This is the
+  only token source for public pages. To add one, put it here and nowhere else.
+- `client/tailwind.config.js` `theme.extend` owns a `brynas` colour palette
+  (black/dark/dark-2/dark-3/gold/gold-light/gold-dark/red/red-dark/muted). **It is live, not
+  dead**: the admin panel consumes it through `dark:` variants — `dark:bg-brynas-dark`,
+  `dark:border-brynas-dark-3`, `dark:text-brynas-muted` and others, in
+  `components/admin/*` and `pages/admin/Dashboard.tsx`. Deleting the extend removes 12
+  rules from the built stylesheet and breaks `/admin` dark mode. A plain grep for
+  `bg-brynas-` misses these because of the `dark:` prefix — search for `brynas-` instead.
+
+Public pages must not use the `brynas` palette; it is the retired club palette and
+contradicts the approved teal/amber direction. It stays because `/admin` already depends
+on it.
+
+## Known fragile areas
+
+- **Undefined `--bb-*` tokens in both family parents.** 46 references to five names that
+  `design-tokens.css` does not define, none with a `var()` fallback, so the whole
+  declaration is invalid at computed-value time. Measured effects and the full list are in
+  the header comments of `styles/ServiceGuideTemplate.css` and
+  `pages/ServiceReparationerPage.css`. Do not define these tokens without Magnus — doing
+  so changes approved appearance on 14 pages at once.
+- **Structural selectors in the Guide family parent.** `ServiceGuideTemplate.css` styles
+  `.service-guide__importance > div > p` and `.service-guide__service-card > div > p`. A
+  sibling guide that wraps that paragraph differently silently loses the styling; there is
+  no shared TSX layout to keep the markup honest.
+- **`ServiceReparationerPage.tsx` builds `bilservice__level-card--0${index + 1}`** from an
+  array index, and the CSS defines `--01`, `--02`, `--03` only. `serviceLevels` currently
+  has exactly 3 entries; a fourth renders unstyled.
+- **`LandingPage.css` ships on every route**, because `main.tsx` imports `App.tsx`
+  statically and `App` mounts `LandingPage`. Its `.landing-v2__*` prefix contains it, but
+  it is not route-scoped.
+
+## Verification commands that exist in this repository
+
+`npm --prefix client run typecheck`, `npm --prefix client run build`,
+`npm --prefix client run test:browser` (Playwright, 16 specs at 1440/768/390 — currently
+67 passed / 2 skipped; the 2 are touch-only and skip off mobile). There is **no working
+lint**: `client/eslint.config.js` is ESM in a CommonJS package and imports five packages
+(`@eslint/js`, `globals`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`,
+`typescript-eslint`) that are not in `client/package.json`, so ESLint cannot run. Do not
+cite lint as a check.
+
+Playwright covers 17 of the 22 routes. **Not covered:** `/biltjanster`,
+`/service-reparationer`, `/oljebyte`, `/koppling`, `/bromssystem`, `/avgassystem` — which
+includes the Bilservice family's own parent page and two of the three guide pages
+`AGENTS.md` names as structural proofs.
+
 ## Required task contract
 
 Every CSS task must state exact write paths before editing:

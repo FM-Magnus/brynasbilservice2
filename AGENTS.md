@@ -15,7 +15,7 @@
 ## OPERATIONAL HIERARCHY & ARCHITECTURAL SAFETY
 
 1. **Document Precedence Hierarchy**: (1) `AGENTS.md` (Operational contract & highest authority) → (2) `docs/CSS_OWNERSHIP.md` (CSS islands & family mapping) → (3) `docs/DESIGN_SYSTEM.md` (Tokens `--bb-*` & patterns `.bb-*`) → (4) `docs/AGENT_HANDOFF.md` (session status).
-2. **Application Root & Manifest Safety (F-00, HIGH RISK)**: `client/` is the **SOLE** application directory (React 18.2.0, Tailwind CSS 3.4.17, Vite 4.5.3). Root configuration files are renamed to `*.disabled`. **NEVER** generate Tailwind v4 (`@theme`) or React 19 patterns. Run all commands prefixed to `client/` (`npm --prefix client ...`).
+2. **Application Root & Manifest Safety (F-00, HIGH RISK)**: `client/` is the **SOLE** application directory (React 18 / Tailwind CSS 3 / Vite 4; installed 2026-09-20: 18.3.1, 3.4.19, 4.5.14, TypeScript 7.0.2). Root configuration files are renamed to `*.disabled`. **NEVER** generate Tailwind v4 (`@theme`) or React 19 patterns. Run all commands prefixed to `client/` (`npm --prefix client ...`).
 3. **Tailwind Utility Policy**: Utilities (`flex`, `p-4`, etc.) are permitted **ONLY** in `/admin` (`client/src/components/admin/`). Strictly prohibited on all public-facing pages and components.
 4. **Guide Family Architecture**: Shared parent is `client/src/styles/ServiceGuideTemplate.css` (`.service-guide__*`), **NOT** a shared TSX layout component. Each guide is an independent TSX file. Verify markup structure against proof pages (`AvgassystemPage.tsx`, `BromssystemPage.tsx`) to prevent sibling drift.
 5. **TypeScript Baseline**: `"typecheck": "tsc -p tsconfig.app.json --noEmit"` in `client/package.json`. `vite build` does not perform full typechecks; agents must run typecheck and ensure 0 errors.
@@ -274,5 +274,5 @@ Do not append here. New entries belong in [`docs/SESSION_LOG_CURRENT.md`](docs/S
 
 - Replace stale Current state text concisely; do not append parallel versions.
 - Add new dated work notes to `docs/SESSION_LOG_CURRENT.md`, newest first.
-- `AGENTS.md` may not grow. The pre-commit hook also rejects every staged change to `client/src/css/index.css`.
+- `AGENTS.md` may not grow — a convention, not an enforced one: `.githooks/pre-commit` defines `check_no_growth` and `check_frozen` but calls neither (verified 2026-09-20). Its only active check blocks Tailwind utilities in public TSX.
 - Never bypass the hook without Magnus's explicit approval.

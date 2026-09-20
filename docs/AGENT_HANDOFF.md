@@ -60,6 +60,9 @@ Locked mockups (all are required references):
 
 The planning handover is `/Users/magnusolsson/AI Work Projects 2026/MOCKUPS FÖR BBIL/REDESIGN_HANDOVER.md`. The Vår Verkstad reference is `/Users/magnusolsson/Documents/varverkstad-2026-09-09`. Neither its files nor the locked mockups may be copied into this repository. A cloud-based agent must receive them as attachments because these local paths will not exist in its environment.
 
+> **Checked 2026-09-20: none of these three paths exist on this machine.** `~/AI Work Projects 2026/` is absent entirely (so all seven locked mockups and `REDESIGN_HANDOVER.md` are unreachable), and no `varverkstad-2026-09-09` directory exists anywhere under `~`. Until Magnus restores them, authority level 2 cannot be consulted and **the current rendering of the branch is the only usable visual authority** (level 3). An agent asked not to change approved appearance should verify that by diffing the rendered output before and after its change, not by comparing against a mockup it cannot open.
+
+
 ## Approved visual direction
 
 Use a warm-white page surround, dark photographic cards, rounded corners, strong open sans-serif headlines, and a restrained turquoise/blue accent family. Preserve the Brynäs character; do not substitute Vår Verkstad's electric blue or reproduce that product. The supplied hero photo is already in `client/src/assets/images/background_hero.jpg` and is connected. The hero marquee is intentionally removed.
