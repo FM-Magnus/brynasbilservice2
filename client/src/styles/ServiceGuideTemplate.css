@@ -5,33 +5,18 @@
   Depends ONLY on the canonical design tokens in client/src/styles/design-tokens.css
   (--bb-*) and shared elements — zero dependency on index.css.
 
-  KNOWN DEFECT, do not copy into a new sibling (verified 2026-09-20):
-  three --bb-* names used below are not defined in design-tokens.css, and
-  none of the references carry a var() fallback. An unresolved custom
-  property makes the whole declaration invalid at computed-value time, so
-  these do not fall back — they drop out:
-    --bb-color-border-subtle  7x  `border: 1px solid var(...)` — measured
-                                  border-top-style: none on /kamrem, i.e. the
-                                  card borders do not render on any of the
-                                  10 guide pages.
-    --bb-shadow-elevated      1x  box-shadow — measured `none`.
-    --bb-font-sans           35x  font-family — renders correctly today, but
-                                  do NOT simply delete these declarations.
-                                  Tried on 2026-09-20 and reverted: an invalid
-                                  var() still wins the cascade and only then
-                                  resolves to `unset`, so the element inherits
-                                  body's 'Manrope', sans-serif. Remove the
-                                  declaration and a lower-priority rule wins
-                                  instead, changing the stack to 'Manrope',
-                                  Arial, sans-serif. base.css explains why that
-                                  fallback difference matters: it changes how
-                                  text wraps before the web font arrives, and
-                                  enlarges the font-swap layout shift. These
-                                  35 declarations are accidentally pinning the
-                                  fallback; untangle them together with the
-                                  font-loading fix, not before.
-  Defining these tokens would make 43 declarations activate at once and
-  change the approved appearance, so it needs Magnus's decision first.
+  NOTE ON TOKENS (resolved 2026-09-20):
+  --bb-color-border-subtle (dark surfaces) and --bb-color-border-subtle-light
+  (light surfaces) and --bb-shadow-elevated are defined in design-tokens.css.
+  --bb-font-sans (35x) remains pending untangling with the font-loading fix:
+  do NOT simply delete these declarations. Tried on 2026-09-20 and reverted:
+  an invalid var() still wins the cascade and only then resolves to `unset`,
+  so the element inherits body's 'Manrope', sans-serif. Remove the declaration
+  and a lower-priority rule wins instead, changing the stack to 'Manrope',
+  Arial, sans-serif. base.css explains why that fallback difference matters:
+  it changes how text wraps before the web font arrives, and enlarges the
+  font-swap layout shift. These 35 declarations are accidentally pinning the
+  fallback; untangle them together with the font-loading fix, not before.
 */
 
 .service-guide {
@@ -372,7 +357,7 @@
   padding: 1.1rem 1.25rem;
   border-radius: 20px;
   background: var(--bb-color-surface);
-  border: 1px solid var(--bb-color-border-subtle);
+  border: 1px solid var(--bb-color-border-subtle-light);
   box-shadow: var(--bb-shadow-card);
 }
 .service-guide__symptom-row--featured {
@@ -463,7 +448,7 @@
   padding: 1.5rem;
   border-radius: var(--bb-radius-card);
   background: var(--bb-color-surface);
-  border: 1px solid var(--bb-color-border-subtle);
+  border: 1px solid var(--bb-color-border-subtle-light);
   box-shadow: var(--bb-shadow-card);
 }
 .service-guide__info-icon {
@@ -615,7 +600,7 @@
   padding: clamp(1.1rem, 2.2vw, 1.5rem);
   border-radius: var(--bb-radius-card);
   background: var(--bb-color-surface);
-  border: 1px solid var(--bb-color-border-subtle);
+  border: 1px solid var(--bb-color-border-subtle-light);
   box-shadow: var(--bb-shadow-card);
 }
 .service-guide__topic-block--alt .service-guide__topic-card { background: var(--bb-color-page); }

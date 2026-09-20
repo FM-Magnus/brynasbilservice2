@@ -26,6 +26,8 @@ Located in [`client/src/styles/design-tokens.css`](../client/src/styles/design-t
 | `--bb-color-amber-500`| `#f09505` | Canonical automotive amber: footer accents, signature, urgent alerts |
 | `--bb-color-amber-400`| `#fca311` | Light amber hover highlight |
 | `--bb-color-amber-600`| `#d48202` | Deep amber border / shadow |
+| `--bb-color-border-subtle` | `rgba(255, 255, 255, 0.08)` | Subtle border on dark ink surfaces (added 2026-09-20) |
+| `--bb-color-border-subtle-light` | `rgba(7, 20, 22, 0.08)` | Subtle border on light white/page surfaces (added 2026-09-20) |
 | `--bb-color-text` | `#122225` | Primary body text on light surfaces |
 | `--bb-color-text-muted`| `#5e6c70` | Secondary / supporting text on light surfaces |
 
@@ -54,6 +56,7 @@ Located in [`client/src/styles/design-tokens.css`](../client/src/styles/design-t
 | `--bb-radius-menu` | `24px` | Header dropdown menu & floating navigation panel radius |
 | `--bb-radius-control`| `999px` | Fully rounded pills (buttons, search bars, badges) |
 | `--bb-shadow-floating` | `0 18px 44px rgba(0,0,0,0.34)` | Floating header & elevated dark card shadow |
+| `--bb-shadow-elevated` | `0 18px 44px rgba(0,0,0,0.34)` | Elevated dark container / media shadow (added 2026-09-20) |
 | `--bb-shadow-button` | `0 10px 20px rgba(0,166,180,0.26)` | `.bb-btn--teal`'s glow (added 2026-09-18) |
 | `--bb-shadow-card` | `0 10px 26px rgba(7,20,22,0.08)` | Resting card elevation (added 2026-09-18; used by `.bb-card--trust` and `ServiceGuideTemplate.css`) |
 | `--bb-transition-fast` | `150ms cubic-bezier(0.4, 0, 0.2, 1)` | Standard fast hover/focus transition |

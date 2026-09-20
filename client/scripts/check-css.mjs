@@ -31,10 +31,6 @@ const SRC = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../src')
  * token, define the token in styles/design-tokens.css instead.
  */
 const PENDING_TOKENS = new Set([
-  '--bb-color-border-subtle',
-  '--bb-shadow-elevated',
-  '--bb-radius-lg',
-  '--bb-radius-pill',
   '--bb-font-sans',
 ])
 

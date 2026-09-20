@@ -5,12 +5,10 @@
    family. Only global --bb-* design tokens are shared; every rule below is
    scoped under .bilservice and has zero dependency on index.css.
 
-   KNOWN DEFECT, do not copy into a new sibling (verified 2026-09-20):
-   --bb-radius-lg (1x) and --bb-radius-pill (2x) are not defined in
-   design-tokens.css and carry no var() fallback, so those border-radius
-   declarations are invalid at computed-value time and compute to 0px
-   (measured on /service-reparationer). Defining them would change the
-   approved appearance, so it needs Magnus's decision first. */
+   NOTE ON TOKENS (resolved 2026-09-20):
+   --bb-radius-lg and --bb-radius-pill were misnamings of the canonical
+   tokens --bb-radius-card (20px) and --bb-radius-control (999px) and now
+   reference those canonical tokens directly. */
 
 .bilservice {
   --bilservice-page-bg: var(--bb-color-page);
@@ -83,7 +81,7 @@
   border-color: rgba(255, 255, 255, 0.22);
   color: rgba(255, 255, 255, 0.6);
 }
-.bilservice__image-slot--radius-lg { border-radius: var(--bb-radius-lg); }
+.bilservice__image-slot--radius-lg { border-radius: var(--bb-radius-card); }
 .bilservice__image-slot--radius-md { border-radius: var(--bb-radius-card); }
 .bilservice__image-slot--ar-16-9 { aspect-ratio: 16 / 9; }
 .bilservice__image-slot--ar-4-3 { aspect-ratio: 4 / 3; }
@@ -628,7 +626,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 0.85rem;
-  border-radius: var(--bb-radius-pill);
+  border-radius: var(--bb-radius-control);
   background: rgba(16, 166, 175, 0.16);
   border: 1px solid rgba(16, 166, 175, 0.45);
   color: #fff;
@@ -666,7 +664,7 @@
   flex: 1 1 auto;
   height: 48px;
   padding: 0 1.15rem;
-  border-radius: var(--bb-radius-pill);
+  border-radius: var(--bb-radius-control);
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: #ffffff;
   color: var(--bb-color-ink-950);
