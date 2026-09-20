@@ -9,6 +9,7 @@ import { WrenchIcon } from '../icons/WrenchIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
 import { ClockIcon } from '../icons/ClockIcon'
 import { MailIcon } from '../icons/MailIcon'
+import { MapPinIcon } from '../icons/MapPinIcon'
 import { SendIcon } from '../icons/SendIcon'
 import { CalendarIcon } from '../icons/CalendarIcon'
 import { BUSINESS, weekdayHours } from '../../data/business'
@@ -16,15 +17,6 @@ import './PublicFooter.css'
 
 export interface PublicFooterProps {
   onBookingClick?: () => void
-}
-
-function PinIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M20.5 10c0 6.5-8.5 12-8.5 12S3.5 16.5 3.5 10a8.5 8.5 0 1 1 17 0Z" />
-      <circle cx="12" cy="10" r="2.5" />
-    </svg>
-  )
 }
 
 const quickLinks = [
@@ -139,7 +131,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
 
               <div className="bb-footer__contact-card">
                 <div className="bb-footer__contact-badge bb-footer__contact-badge--light">
-                  <PinIcon />
+                  <MapPinIcon />
                 </div>
                 <div className="bb-footer__contact-info">
                   <span className="bb-footer__contact-label">Besöksadress</span>
