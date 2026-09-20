@@ -3,9 +3,10 @@
 ## Start here (updated 2026-09-20)
 
 - **Repo:** `/Users/magnusolsson/repos/brynasbilservice2` (remote `origin` = `FM-Magnus/brynasbilservice2`).
-- **Branch:** `redesign/blue-teal-v1`, clean tree, **16 commits ahead of origin. Never push without Magnus's explicit approval.**
-- **Last verified commit:** `cc22940c` (2026-09-20). typecheck 0 errors, `npm --prefix client run build` clean, Playwright **67 passed / 2 skipped** (the 2 are touch-only tests skipped off mobile) at 1440/768/390.
-- **Commands:** `npm --prefix client run dev | typecheck | build | test:browser`. The build needs **Node ≥18.17** (`vite-imagetools`/sharp); never build on the production server (Node 16).
+- **Branch:** `redesign/blue-teal-v1`, clean tree, **28 commits ahead of origin. Never push without Magnus's explicit approval.**
+- **Last verified commit:** `916b9173` (2026-09-20). typecheck 0 errors, `check:css` clean, `npm --prefix client run build` clean, Playwright **130 passed / 2 skipped** (the 2 are touch-only tests skipped off mobile) at 1440/768/390.
+- **Commands:** `npm --prefix client run dev | typecheck | check:css | build | test:browser`.
+- **Two guards added 2026-09-20 — read before any CSS work.** `client/scripts/check-css.mjs` (run by the pre-commit hook) fails if any `var(--bb-*)` is undefined and unfallbacked, or if `--redesign-*` / `index.css` reappear; four known-undefined tokens sit in its `PENDING_TOKENS` list, which may only shrink. `client/tests/browser/baseline.spec.ts` + `baseline-snapshots/` are now **the repository's visual authority**, because the seven locked mockups are absent from this machine — a visual change is approved by reviewing the snapshot diff and then running `test:browser -- --update-snapshots`. The hook also now enforces that `AGENTS.md` does not grow. The build needs **Node ≥18.17** (`vite-imagetools`/sharp); never build on the production server (Node 16).
 - **Read next:** [`AGENTS.md`](../AGENTS.md) (contract), [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) (route → CSS owner map, write rules), [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) (tokens and patterns), [`BACKEND_HANDOFF.md`](BACKEND_HANDOFF.md) (backend plan for Johnny), [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) (dated history, newest first).
 
 ## The rebuild is finished (2026-09-19)
