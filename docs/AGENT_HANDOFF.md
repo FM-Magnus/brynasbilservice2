@@ -1,13 +1,38 @@
 # Brynäs Bilservice redesign handoff
 
-## Start here (updated 2026-09-20)
+## Start here (updated 2026-09-20, end of a long session)
 
-- **Repo:** `/Users/magnusolsson/repos/brynasbilservice2` (remote `origin` = `FM-Magnus/brynasbilservice2`).
-- **Branch:** `redesign/blue-teal-v1`, clean tree, **pushed and in sync with `origin/redesign/blue-teal-v1`** (commit `915b12ad`).
-- **Last verified commit:** `915b12ad` (2026-09-20). Deep pre-push testing & verification completed: `typecheck` 0 errors, `check:css` clean, `build` clean, Playwright **130 passed / 2 skipped** at 1440/768/390.
-- **Commands:** `npm --prefix client run dev | typecheck | check:css | build | test:browser`.
-- **Two guards added 2026-09-20 — read before any CSS work.** `client/scripts/check-css.mjs` (run by the pre-commit hook) fails if any `var(--bb-*)` is undefined and unfallbacked, or if `--redesign-*` / `index.css` reappear; only `--bb-font-sans` sits in its `PENDING_TOKENS` list. `client/tests/browser/baseline.spec.ts` + `baseline-snapshots/` are now **the repository's visual authority**, because the seven locked mockups are absent from this machine — a visual change is approved by reviewing the snapshot diff and then running `test:browser -- --update-snapshots`. The hook also now enforces that `AGENTS.md` does not grow. The build needs **Node ≥18.17** (`vite-imagetools`/sharp); never build on the production server (Node 16).
-- **Read next:** [`AGENTS.md`](../AGENTS.md) (contract), [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) (route → CSS owner map, write rules), [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) (tokens and patterns), [`BACKEND_HANDOFF.md`](BACKEND_HANDOFF.md) (backend plan for Johnny), [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) (dated history, newest first).
+- **Repo / branch:** `/Users/magnusolsson/repos/brynasbilservice2`, branch `redesign/blue-teal-v1` (remote `origin` = `FM-Magnus/brynasbilservice2`). **Nothing from 2026-09-20 is pushed**: about 26 commits are ahead of origin (`git rev-list --count origin/redesign/blue-teal-v1..HEAD`). Never push without Magnus's explicit go-ahead.
+- **State of the checks at the last commit:** `typecheck` 0 errors, `check:css` clean (86 tokens, 1 pending), `build` ok, Playwright **155 passed / 4 skipped** (`npm --prefix client run test:browser`). If the machine is loaded, use `--workers=3`.
+- **Commands:** `npm --prefix client run dev | typecheck | check:css | build | test:browser`. The dev server normally already runs on :5173.
+- **Guards that will stop a bad commit:** the pre-commit hook runs `check:css`, which now fails on (1) an unresolved `var(--bb-*)`, (2) the deleted legacy layer (`--redesign-*`, `index.css`), (3) inline `style=` in public TSX; the hook also blocks Tailwind utilities in public TSX and any growth of `AGENTS.md`. `tests/browser/hero.spec.ts` guards hero/header clearance. Do not bypass the hook.
+- **How Magnus wants to work (learned this session):** ask when anything is ambiguous, do not guess; **measure first, propose at a gate, then implement**; never change Swedish copy, tokens or shared CSS without approval; show every visible change (before/after images) before committing; one logical change per commit; report honestly, including costs and where an earlier claim of yours turned out wrong. He is protective of the repo's externally rated canonical CSS/token structure and fears bloat and “AI slop”.
+- **Proving a change:** `docs/audit-harness/` has the read-only scripts (hero heights, all-element before/after invariants, icon pixel diffs, CSS-winner audit) and a list of measurement traps. Read its README before measuring anything.
+- **Read next:** [`AGENTS.md`](../AGENTS.md) (contract), [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md) (route → CSS owner map, write rules), [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) (tokens, patterns, §2b icons, §2c hero geometry), [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) (newest entries first), [`BACKEND_HANDOFF.md`](BACKEND_HANDOFF.md).
+
+## What the 2026-09-20 session finished (all committed)
+
+- **Booking form:** lifecycle (`hooks/useFormSubmission.ts`: in-flight lock, timeout, inline success/error, no `alert()`), local `yyyy-MM-dd` date (a UTC timestamp was storing Swedish bookings a day early), typed payload, `tests/browser/booking-form.spec.ts`. Server side still to do: `BACKEND_HANDOFF.md` §2.3.
+- **Icons (audit point 1):** 29 shared icons, all stroke 2; local duplicates removed (phone, pin, arrow, check, mail, send, calendar, wrench, monitor). Still local by decision: header icons (CSS-owned), Landing chat/shield/clock/car, ContactPage chevron, one-offs in Bärgning (4) and Om oss (6). Rules: `DESIGN_SYSTEM.md` §2b.
+- **Inline styles (audit point 2):** all 27 moved into `ServiceReparationerPage.css` (family owner), proved pixel-identical; guard added to `check:css`. Near-duplicate values kept on purpose: `--pad` 64 vs `--pad-lg` 72px, `--wide` 78 vs `--wide-sm` 75ch, `--intro` 0.5 vs `--intro-tight` 0.4rem (a design decision for Magnus).
+- **Hero (audit point 4), steps 1–2 of 3:** header-derived clearance, smaller H1 (max 48px), tighter gaps. Status per page in `DESIGN_SYSTEM.md` §2c.
+
+## Where to pick up (in this order unless Magnus says otherwise)
+
+1. **Hero step 3, the compact trust row in the guides** (`.service-guide__trust-row`: 148px stack, items `max-width: 220px`, three to six items). Approved as a lever but postponed. Without it most guides stay at 96–105% of a 1280×720 screen; the agreed target for the Standard hero type is about 85%. Show before/after images before committing. Then re-run `docs/audit-harness/hero/` and update §2c. Known outliers: AC-service (CTA row and lead wrap; 125%) and the image-driven heroes (Kamrem, Om oss, Bilar till salu) whose height comes from the image or side column, not the text. Mobile hero tokens are unchanged. The phone-button label has six copy variants (a copy decision for Magnus).
+2. **Audit points not started:** (3) 16 distinct media-query values, including near-duplicates 640/650, 1100/1120, 1320/1321 (the header changes size at 1321px); (5) hard-coded hex colours (about 25 in each family parent, 30 in the footer, 26 in `ContactFormCard.css`), audit which are legitimate one-offs; (6) there is no error-state token (the booking modal uses literal colours).
+3. **Contact form sends nothing** (`ContactFormCard.tsx` shows “Tack” with no request; no `/api/contact`). Plan: an `api/contact.ts` adapter following the `VITE_*_SOURCE` pattern, a proposed contract in `BACKEND_HANDOFF.md`, and an honest fallback (phone and e-mail) until the endpoint exists. Reuses `useFormSubmission`. Needs Magnus's decision.
+4. **Admin auth, client half** (P0, blocked on the backend for go-live): `api/adminClient.ts` (cookie-based, central 401 handling), an admin session hook, `AdminLogin.tsx`, the admin route lazy-loaded so credentials leave the entry chunk, no `localStorage` token. Build against `BACKEND_HANDOFF.md` §2.1; do not deploy before the server side exists. Also open: a 404 route and error boundary; ESLint config is broken.
+5. **Images:** `_incoming-assets/` is empty. A page-by-page read-and-assess pass (one page card per page: purpose, copy check, slot inventory with aspect ratios, findings) followed by one deduplicated shot list for Magnus was proposed but not started. Proposed source-file naming: `<route-slug>__<role>__<motiv>__<orientering>__vNN.<ext>` (role: hero, intro, detail, card, process or any; orientation: landskap, portratt, kvadrat), optional flat `MANIFEST.csv` with a one-line description and yes/no columns for people and number plates. Names do not prove content; look at every image.
+6. **Small leftovers:** round caps on the 22 shared icons that use butt caps; shared equivalents for Landing's four local icons; the six-way phone-label copy variants.
+7. **Push:** ask Magnus.
+
+## Traps that already cost time
+
+- Measure with transitions disabled and lazy images forced to load (`docs/audit-harness/README.md`).
+- Reading the CSS is not evidence. Twice this session a conclusion from reading CSS was wrong once measured (a single token would not shrink the heroes; “no size prop” was not universal across icons).
+- Moving styles into a class can lose to specificity or to a later media rule; mutation-check it.
+- Snapshots in `tests/browser/baseline-snapshots/` are computed-style fingerprints; a hero H1 change legitimately updates them, but read the diff first.
 
 ## The rebuild is finished (2026-09-19)
 
@@ -27,20 +52,19 @@ All 7 roadmap steps are done and the plan is archived at [`archive/HITL_Temporar
 - **Business facts:** phone, e-mail, address, Google Maps link, opening hours, legal name and org.nr all live in `client/src/data/business.ts`. Change a value there and it updates everywhere, including the Playwright assertions.
 - All of these need a build and deploy to reach the live site.
 
-## Upcoming finalizing stages (roadmap)
+## Longer-term stages (unchanged in intent)
 
-1. **Asset & media tranche (current stage):** Replace 25 placeholder slots (19 `MediaPlaceholder` across 7 guides, 6 `ImageSlot` on `/service-reparationer`) with optimized WebP/JPG `<picture>` elements; drop remaining unreferenced legacy raster assets.
-2. **Graphics & viewport micro-tuning:** Centralize remaining inline SVGs (`PublicHeader`, `PublicFooter`, `ContactFormCard`) into `components/icons/`; tune per-viewport aesthetics (1440/768/390 px) ensuring 0px horizontal overflow is maintained.
-3. **Backend wiring & handoff:** Johnny executes `docs/BACKEND_HANDOFF.md` (server-side session auth, `comment_customer` persistence, vehicle CRUD/upload endpoints). Frontend connects `BookingFormModalImpl` to `axiosInstance` and wires the contact form.
+1. **Asset and media tranche:** replace the remaining placeholder slots (19 `MediaPlaceholder` across seven guides, six `ImageSlot` on `/service-reparationer`) with optimized WebP/JPG `<picture>` elements; see “Images” above.
+2. **Backend wiring and handoff:** Johnny executes `docs/BACKEND_HANDOFF.md` (session auth, `comment_customer`, vehicle CRUD and uploads). The frontend halves are described above.
 
-## Open follow-ups
+## Other open follow-ups
 
-1. **P0 security — admin auth is client-side only.** Credentials ship in the public bundle and the server accepts a fixed token from anyone. Plan: `BACKEND_HANDOFF.md` §2.1. Johnny owns `server/`.
-2. **Font-swap layout shift** site-wide: add a metric-matched fallback `@font-face`, then move `styles/base.css` onto `--bb-font-*` (it deliberately uses the legacy stacks today; see the comment in that file).
-3. `GalleryTeaserCard` still has its own six-image list; it could read `assets/galleri/` instead (shared-component change).
+1. **P0 security:** admin auth is client-side only; credentials ship in the public bundle and the server accepts a fixed token. `admin123` is in pushed git history and must be rotated. Plan: `BACKEND_HANDOFF.md` §2.1. Johnny owns `server/`.
+2. **Font-swap layout shift** site-wide: add a metric-matched fallback `@font-face`, then move `styles/base.css` onto `--bb-font-*` (it deliberately uses the legacy stacks today). This is also what blocks resolving `--bb-font-sans`.
+3. `GalleryTeaserCard` still has its own six-image list; it could read `assets/galleri/` instead.
 4. Om oss gallery links could deep-link as `/galleri?bild={slug}`.
-5. Footer Instagram icon points at `instagram.com`, not the workshop profile — Magnus needs to supply the real URL or decide to drop the icon.
-6. Server-side, Johnny: `comment_customer` not saved on bookings, `schema.sql` out of sync, `.htaccess` port/RewriteBase mismatch.
+5. Footer Instagram icon points at `instagram.com`, not the workshop profile; Magnus must supply the URL or drop the icon.
+6. Server side (Johnny): `comment_customer` not saved, `schema.sql` out of sync, `.htaccess` port/RewriteBase mismatch.
 
 ## Authority and references
 
@@ -90,7 +114,7 @@ Phases 0 through 4 (baseline capture → header/hero/reviews → booking modal �
 ## Known limitations and unverified items
 
 - Google review data is real Brynäs Bilservice data confirmed by Magnus (4,3 / 50 recensioner and the linked Google Maps profile), but it is hardcoded and can become stale over time.
-- Local booking API availability and real booking submission remain unverified. `comment_customer` is not saved by the server; do not change payloads/endpoints without backend approval.
+- The booking client is correct against its documented contract but has only been tested against Playwright route doubles, never a real backend. `comment_customer` is not saved by the server; do not change payloads/endpoints without backend approval.
 - Backend/database behaviour, production deployment, production basename navigation, external business facts and opening hours remain unverified.
 - Deployment automation is intentionally absent from canonical history. `.htaccess` and deployment documentation disagree; do not resolve this without Magnus and Johnny.
 

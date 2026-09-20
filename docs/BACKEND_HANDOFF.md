@@ -27,7 +27,7 @@ When your endpoints respond as described in §3.4, the frontend switch is a sing
 | Base path | `client/vite.config.ts` | `/` in dev, `/brynasbilservice/` in production builds. |
 | HTTP client | `client/src/api/axiosConfig.ts` | `baseURL` is `http://localhost:3000` in dev and `/brynasbilservice` in prod, so the frontend calls `/brynasbilservice/api/...`, which Apache proxies to Express. |
 | Public pages | `client/src/pages/*.tsx` | Page content is **hardcoded in the TSX**, except for bookings. The site works with no backend apart from the booking form. |
-| Styling | Colocated `<Page>.css` files, plus `client/src/styles/design-tokens.css` and `shared-elements.css` | Not relevant to the backend. The legacy `client/src/css/index.css` is frozen and will be deleted. |
+| Styling | Colocated `<Page>.css` files, plus `client/src/styles/design-tokens.css` and `shared-elements.css` | Not relevant to the backend. `client/src/css/index.css` was deleted on 2026-09-19. |
 | Admin | `/admin` → `client/src/pages/admin/Dashboard.tsx`, `client/src/components/admin/*` | Tabs: Bookings, Services. We will add a **Vehicles** tab (§3.6). |
 | Booking | `client/src/components/BookingForm.tsx` | Calls `GET /api/services`, `GET /api/available-dates`, `POST /api/bookings`. |
 
@@ -41,7 +41,7 @@ These are read-only observations of `server/index.js` as of this date.
 
 ### 2.1 Security: admin auth is client-side only (P0)
 
-- The credentials `admin` / `admin123` are checked **in the browser** (`client/src/components/admin/ProtectedRoute.tsx:18`, `client/src/pages/admin/Login.tsx:18`). They ship inside the public JS bundle, so anyone can read them.
+- The credentials `admin` / `admin123` are checked **in the browser** (`client/src/components/admin/ProtectedRoute.tsx:19`; the separate admin `Login.tsx` no longer exists). They ship inside the public JS bundle, so anyone can read them.
 - On success the browser stores a fixed string, `admin-secret-token`, in `localStorage`. The server accepts that same fixed string from anyone (`server/index.js:115-131`).
 - **Consequence:** anyone who reads the bundle can list customers, change bookings and edit services. An image upload endpoint behind the same check would let anyone put files on the VPS.
 
@@ -54,6 +54,7 @@ These are read-only observations of `server/index.js` as of this date.
 - Rate-limit the login endpoint (for example `express-rate-limit`, 5 attempts per 15 minutes per IP).
 - Replace `authenticateAdmin` with a session check. Restrict `cors()` to the site origin, or remove it, since production is same-origin.
 - Frontend side (we do this): remove the hardcoded credentials and `localStorage` token, call `/login` and `/me`, and send requests with `withCredentials`.
+- **Client plan (reviewed 2026-09-20, not started):** `api/adminClient.ts` (a separate axios instance with `withCredentials: true` and a central 401 interceptor; the public instance stays untouched), an admin session hook (`checking | authenticated | anonymous` from `/me`), `AdminLogin.tsx`, and the whole admin route lazy-loaded so no credentials sit in the entry chunk (today `ProtectedRoute` is imported statically in `main.tsx`, which is why `admin123` is in the entry bundle). It replaces the seven hand-built `Authorization` headers in `BookingManagement`/`ServiceManagement`. Verify with a grep of `dist` for `admin123` and `admin-secret-token`, and test with `page.route` doubles. Deploy order: server first. In dev a same-origin Vite `/api` proxy (§6.3.6) avoids cookie/CORS trouble.
 
 ### 2.2 Other loose ends (P1/P2)
 
@@ -444,7 +445,7 @@ Every `/api/admin/*` response sends `Cache-Control: no-store` so Cloudflare neve
 
 | Phase | Backend | Frontend | Done when |
 |---|---|---|---|
-| **1. Real login** | Migration 001 (and 003 if needed); `adminAuth.js`; `requireAdmin`; session setup; rate limit; `create-admin.js`; `authenticateAdmin` checks the session; `comment_customer` fix | `ProtectedRoute.tsx` and `Login.tsx` call `/login` and `/me`; hardcoded credentials and `localStorage` token removed; logout button | Tests in §6.6 group A pass; Bookings and Services admin still work locally |
+| **1. Real login** | Migration 001 (and 003 if needed); `adminAuth.js`; `requireAdmin`; session setup; rate limit; `create-admin.js`; `authenticateAdmin` checks the session; `comment_customer` fix | `ProtectedRoute.tsx` calls `/login` and `/me`; hardcoded credentials and `localStorage` token removed; logout button | Tests in §6.6 group A pass; Bookings and Services admin still work locally |
 | **2. Read-only vehicles** | Migration 002; `routes/vehicles.js`; seed the Peugeot locally | `getPublicVehicles()` with `VITE_VEHICLES_SOURCE=api` works against the local server | Group B passes; the page looks identical in static and api mode (Playwright, 3 widths) |
 | **3. Admin edits** | `adminVehicles.js` (all non-image routes) | Vehicles tab: list, create, edit, sold, delete | Group C passes |
 | **4. Photos** | Image routes, multer (memory storage, 2 MB limit, 4 files), magic-byte check, write files to `UPLOADS_DIR`, delete files on image delete | Browser resize to 1600/640 at 16:10 in WebP and JPG; picker; reorder; alt text | Group D passes; a real 8 MB phone photo uploads and shows correctly |

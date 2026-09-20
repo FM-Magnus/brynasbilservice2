@@ -143,12 +143,7 @@ on it.
 
 ## Known fragile areas
 
-- **Undefined `--bb-*` tokens in both family parents.** 46 references to five names that
-  `design-tokens.css` does not define, none with a `var()` fallback, so the whole
-  declaration is invalid at computed-value time. Measured effects and the full list are in
-  the header comments of `styles/ServiceGuideTemplate.css` and
-  `pages/ServiceReparationerPage.css`. Do not define these tokens without Magnus — doing
-  so changes approved appearance on 14 pages at once.
+- **One undefined token remains: `--bb-font-sans`** (35 references in `ServiceGuideTemplate.css`, no fallback), on the pending list in `scripts/check-css.mjs`. The declarations are accidentally pinning the font fallback stack; untangle them together with the font-loading fix, not before (the header comment in that file explains why deleting them changes text wrapping). The other tokens once listed here are resolved. Do not add to the pending list.
 - **Structural selectors in the Guide family parent.** `ServiceGuideTemplate.css` styles
   `.service-guide__importance > div > p` and `.service-guide__service-card > div > p`. A
   sibling guide that wraps that paragraph differently silently loses the styling; there is
@@ -163,18 +158,13 @@ on it.
 
 ## Verification commands that exist in this repository
 
-`npm --prefix client run typecheck`, `npm --prefix client run build`,
-`npm --prefix client run test:browser` (Playwright, 16 specs at 1440/768/390 — currently
-67 passed / 2 skipped; the 2 are touch-only and skip off mobile). There is **no working
-lint**: `client/eslint.config.js` is ESM in a CommonJS package and imports five packages
-(`@eslint/js`, `globals`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`,
-`typescript-eslint`) that are not in `client/package.json`, so ESLint cannot run. Do not
-cite lint as a check.
-
-Playwright covers 17 of the 22 routes. **Not covered:** `/biltjanster`,
-`/service-reparationer`, `/oljebyte`, `/koppling`, `/bromssystem`, `/avgassystem` — which
-includes the Bilservice family's own parent page and two of the three guide pages
-`AGENTS.md` names as structural proofs.
+`npm --prefix client run typecheck`, `npm --prefix client run build`, `npm --prefix client run check:css`,
+`npm --prefix client run test:browser` (Playwright, 19 spec files at 1440/768/390 — currently 155 passed / 4 skipped;
+the skips are the touch-only tests off mobile and the desktop-only width matrix in `hero.spec.ts`). `baseline.spec.ts` and
+`hero.spec.ts` loop over all 21 public routes. Baseline snapshots record computed styles of the shell and shared primitives
+(including the hero H1); update one only after reading the diff line by line. There is **no working lint**:
+`client/eslint.config.js` is ESM in a CommonJS package and imports five packages that are not in `client/package.json`. Do not
+cite lint as a check. The Playwright browser may not be installed; see `docs/audit-harness/README.md` for the system-Chrome config.
 
 ## Required task contract
 

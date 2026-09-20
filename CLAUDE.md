@@ -82,7 +82,7 @@ All routes return JSON. No request validation, no error middleware — keep payl
 |---|---|---|---|
 | GET | `/api/services` | public | — |
 | GET | `/api/available-dates` | public | — (queries `bookings WHERE available=1`) |
-| POST | `/api/bookings` | public | `{ customerName, customerEmail, customerPhone, serviceId, date, time, comment_customer? }` |
+| POST | `/api/bookings` | public | `{ customerName, customerEmail, customerPhone, serviceId (number), date ('yyyy-MM-dd'), time ('HH:mm'), comment_customer? }` (contract: `docs/BACKEND_HANDOFF.md` §2.3) |
 | GET | `/api/admin/bookings` | admin | — |
 | PUT | `/api/admin/bookings/:id` | admin | `{ status }` (enum: `pending`, `confirmed`, `completed`, `cancelled`, `erased`) |
 | DELETE | `/api/admin/bookings/:id` | admin | soft-delete via status=`erased` |
@@ -146,10 +146,11 @@ Owned by `client/src/pages/landing/LandingPage.tsx`: Hero (with Google-review fi
 Nav link order (`data/publicNavigation.ts`): Start → Om oss → Biltjänster → Felsökning → Däck → AC → Bärgning → Till salu → Kontakt
 
 ## Known issues / open TODOs
-The maintained list is "What is broken / incomplete" in `AGENTS.md`. Highlights: client-side-only admin auth (P0), `comment_customer` not saved, `schema.sql` out of sync, hardcoded Google-review data, and the Step 7 blockers in `HITL_Temporary_roadmap.md`.
+The maintained list is "What is broken / incomplete" in `AGENTS.md`. Highlights: client-side-only admin auth (P0), `comment_customer` not saved, `schema.sql` out of sync, hardcoded Google-review data, the contact form that sends nothing, and open hero/audit work — see `docs/AGENT_HANDOFF.md`. (The old roadmap is archived at `docs/archive/HITL_Temporary_roadmap.md`, history only.)
 
 ## Agent handoff rules
-- **Read `AGENTS.md` first** — it is the bounded startup contract; read `docs/CSS_OWNERSHIP.md` before CSS work
+- **Read `AGENTS.md` first** — it is the bounded startup contract; then `docs/AGENT_HANDOFF.md` “Start here” (status, next steps, working rules); read `docs/CSS_OWNERSHIP.md` before CSS work
+- **Working rules Magnus set:** ask when anything is ambiguous; measure first, then propose at a gate, then implement; never change copy, tokens or shared CSS without approval; show visible changes before committing; one logical change per commit; never push without an explicit go-ahead
 - Read recent logs in `_magnus/` before making design changes
 - Check existing component structure before adding new files
 - Never rewrite large files unnecessarily — prefer targeted edits

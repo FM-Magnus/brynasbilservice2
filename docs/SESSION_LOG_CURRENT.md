@@ -2,6 +2,15 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-20 — Claude (handover: docs brought in line with the repo)
+
+- **Why:** the session ended after a long run of changes; the startup docs still described an earlier state (Step 6/7, 67 tests, 46 undefined tokens, `Login.tsx`, the frozen 2026-09-15/16 log inside `AGENTS.md`).
+- **AGENTS.md** 278 to 156 lines: the frozen legacy log moved verbatim to `docs/SESSION_LOG_ARCHIVE.md`; current-state header and 2026-09-20 summary added; “what is broken” updated (comment_customer is a server-side gap now, contact form sends nothing, no 404/error boundary, ESLint); `POST /api/bookings` body corrected (numeric `serviceId`, local `yyyy-MM-dd`, comment omitted when empty).
+- **AGENT_HANDOFF.md:** “Start here” rewritten (branch state, 155/4 checks, the three guards, how Magnus wants to work, where the proof scripts are); new “what the session finished” and an ordered “where to pick up” (hero step 3, audit points 3/5/6, contact form, admin client half, images with the proposed file-naming convention, small leftovers, push); traps that already cost time.
+- **CSS_OWNERSHIP.md:** the undefined-token warning replaced by the one real pending token (`--bb-font-sans`); test counts, coverage and the lint note corrected. **BACKEND_HANDOFF.md:** stale `index.css`/`Login.tsx` references fixed; the reviewed client plan for admin auth added. **CLAUDE.md:** API row, archived-roadmap path and the working rules added.
+- **`docs/audit-harness/`** (new): 22 read-only measurement scripts plus a README (prerequisites, the before/after-invariant method, and the traps: transitions, lazy images, `**/api/**` mocks, fixed elements, specificity). Copied from the session scratch folder with absolute paths made relocatable; syntax-checked and two scripts run from the new location. Not production code; nothing in `client/` imports it.
+- **Nothing pushed.**
+
 ### 2026-09-20 — Claude (audit point 4: hero size and uniformity, steps 1 and 2 of 3)
 
 - **Phase 0 (measured, read-only).** 21 routes at six viewports. At 1280x720, 18 of 21 heroes were taller than the screen (guides 106-120%, AC-service 136%); on 15 the next section did not peek in. H1, CTA and phone were already above the fold on 20 of 21 (AC-service's phone was cut off), so this is pacing, not missing content. My earlier claim that one token would fix the seven `.bb-hero` pages was wrong: for 19 of 21 the height is content and padding, not `min-height`. Where the height goes (guide, 1280): 180px above the content, 570px content, 65px below; H1 is about 58px on 3-4 lines (173-231px), the guide trust row 148px, top padding 141-173px against an 80px header.
