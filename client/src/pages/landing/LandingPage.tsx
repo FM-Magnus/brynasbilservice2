@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom'
 import { BookingFormModal } from '../../components/BookingForm'
 import { PublicHeader } from '../../components/layout/PublicHeader'
 import { PublicFooter } from '../../components/layout/PublicFooter'
+import { ArrowRightIcon } from '../../components/icons/ArrowRightIcon'
 import { CalendarIcon } from '../../components/icons/CalendarIcon'
+import { CheckIcon } from '../../components/icons/CheckIcon'
+import { MapPinIcon } from '../../components/icons/MapPinIcon'
 import { MonitorIcon } from '../../components/icons/MonitorIcon'
+import { PhoneIcon } from '../../components/icons/PhoneIcon'
 import { WrenchIcon } from '../../components/icons/WrenchIcon'
 import heroWebp from '../../assets/images/home/landing-v2/landing-sundown-hero.webp'
 import heroJpg from '../../assets/images/home/landing-v2/landing-sundown-hero.jpg'
@@ -20,19 +24,15 @@ import vehicleForSale from '../../assets/images/vehicles/peugeot-307-cc/peugeot-
 import { BUSINESS } from '../../data/business'
 import './LandingPage.css'
 
-type IconName = 'phone' | 'pin' | 'arrow' | 'chat' | 'shield' | 'clock' | 'car' | 'check'
+type IconName = 'chat' | 'shield' | 'clock' | 'car'
 
 function Icon({ name, className = '' }: { name: IconName; className?: string }) {
   const common = { className, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true }
   const paths: Record<IconName, ReactNode> = {
-    phone: <path d="M21 16.8v3a2 2 0 0 1-2.2 2 19.5 19.5 0 0 1-8.5-3.1A19 19 0 0 1 4.3 12a19.5 19.5 0 0 1-3.1-8.5A2 2 0 0 1 3.2 1.3h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1l-.9.9a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.8a2 2 0 0 1 1.7 2.1Z" />,
-    pin: <><path d="M20.5 10c0 6.5-8.5 12-8.5 12S3.5 16.5 3.5 10a8.5 8.5 0 1 1 17 0Z" /><circle cx="12" cy="10" r="2.5" /></>,
-    arrow: <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
     chat: <><path d="M20 11.5a7.8 7.8 0 0 1-8 7.5 8.6 8.6 0 0 1-3.5-.7L4 20l1.3-3.6A7.3 7.3 0 0 1 4 12a7.8 7.8 0 0 1 8-7.5 7.8 7.8 0 0 1 8 7Z" /><path d="M8 12h.01M12 12h.01M16 12h.01" /></>,
     shield: <><path d="M12 3 20 6v5c0 5-3.5 8.4-8 10-4.5-1.6-8-5-8-10V6l8-3Z" /><path d="m8.5 12 2.2 2.2 4.8-5" /></>,
     clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
     car: <><path d="m5 17-1 3M19 17l1 3M3 13l2.4-6.1A2 2 0 0 1 7.2 5.5h9.6a2 2 0 0 1 1.8 1.4L21 13v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5Z" /><path d="M3 13h18M7 16h.01M17 16h.01" /></>,
-    check: <path d="m5 12 4.2 4.2L19 6.5" />,
   }
   return <svg {...common}>{paths[name]}</svg>
 }
@@ -50,7 +50,7 @@ const processIcons: Record<string, ReactNode> = {
   '02': <MonitorIcon />,
   '03': <WrenchIcon />,
   '04': <Icon name="car" />,
-  '05': <Icon name="check" />,
+  '05': <CheckIcon />,
 }
 
 export default function LandingPage() {
@@ -81,7 +81,7 @@ export default function LandingPage() {
                 Boka tid
               </button>
               <a className="bb-btn bb-btn--ember" href={BUSINESS.phone.href}>
-                <Icon name="phone" />
+                <PhoneIcon />
                 Ring oss nu
               </a>
             </div>
@@ -121,7 +121,7 @@ export default function LandingPage() {
               Vi kombinerar erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.
             </p>
             <Link className="bb-btn bb-btn--teal" to="/om-oss">
-              Läs mer om oss <Icon name="arrow" />
+              Läs mer om oss <ArrowRightIcon />
             </Link>
           </div>
           <ul className="bb-card--glass">
@@ -138,7 +138,7 @@ export default function LandingPage() {
               <span><b>Personlig service</b><small>Du och din bil är alltid i fokus.</small></span>
             </li>
             <li>
-              <i className="bb-icon-badge"><Icon name="pin" /></i>
+              <i className="bb-icon-badge"><MapPinIcon /></i>
               <span><b>Lokal verkstad</b><small>Nära dig i Brynäs, Gävle.</small></span>
             </li>
           </ul>
@@ -156,7 +156,7 @@ export default function LandingPage() {
               Vi utför allt från regelbunden service och mekaniska reparationer till avancerad diagnostik, däckservice och AC-service för alla bilmärken.
             </p>
             <Link className="bb-btn bb-btn--ember-solid" to="/biltjanster">
-              Se alla tjänster <Icon name="arrow" />
+              Se alla tjänster <ArrowRightIcon />
             </Link>
           </header>
           <div className="landing-v2__service-grid">
@@ -166,7 +166,7 @@ export default function LandingPage() {
                 <div className="landing-v2__service-card-content">
                   <h3>{service.title}</h3>
                   <p>{service.desc}</p>
-                  <span className="bb-card-arrow"><Icon name="arrow" /></span>
+                  <span className="bb-card-arrow"><ArrowRightIcon /></span>
                 </div>
               </Link>
             ))}
@@ -187,7 +187,7 @@ export default function LandingPage() {
               Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.
             </p>
             <a className="bb-btn bb-btn--teal" href={BUSINESS.phone.href}>
-              <Icon name="phone" />
+              <PhoneIcon />
               Ring oss: 070–553 33 95
             </a>
           </div>
@@ -221,7 +221,7 @@ export default function LandingPage() {
               Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
             </p>
             <Link className="bb-btn bb-btn--ember-solid" to="/om-oss">
-              Läs mer om oss <Icon name="arrow" />
+              Läs mer om oss <ArrowRightIcon />
             </Link>
           </div>
         </div>
@@ -240,7 +240,7 @@ export default function LandingPage() {
               Vi säljer även noggrant genomgångna och besiktigade begagnade bilar i Gävle. Varje bil kontrolleras av våra mekaniker innan försäljning.
             </p>
             <Link className="bb-btn bb-btn--teal" to="/bilar-till-salu">
-              Se bilar till salu <Icon name="arrow" />
+              Se bilar till salu <ArrowRightIcon />
             </Link>
           </div>
         </div>
