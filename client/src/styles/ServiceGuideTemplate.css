@@ -7,7 +7,10 @@
 
   NOTE ON TOKENS (resolved 2026-09-20):
   --bb-color-border-subtle (dark surfaces) and --bb-color-border-subtle-light
-  (light surfaces) and --bb-shadow-elevated are defined in design-tokens.css.
+  (light surfaces) are defined in design-tokens.css. The hero's box-shadow uses
+  the existing --bb-shadow-floating; a --bb-shadow-elevated was briefly added
+  with a byte-identical value and removed again — two names for one value is a
+  second token source by another route.
   --bb-font-sans (35x) remains pending untangling with the font-loading fix:
   do NOT simply delete these declarations. Tried on 2026-09-20 and reverted:
   an invalid var() still wins the cascade and only then resolves to `unset`,
@@ -150,7 +153,7 @@
   min-height: clamp(320px, 34vw, 460px);
   border-radius: var(--bb-radius-card);
   overflow: hidden;
-  box-shadow: var(--bb-shadow-elevated);
+  box-shadow: var(--bb-shadow-floating);
 }
 .service-guide__hero-media picture,
 .service-guide__hero-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
