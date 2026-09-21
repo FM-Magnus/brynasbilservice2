@@ -18,6 +18,9 @@ test('--bb-header-height matches the real header edge at every width', async ({ 
 
   for (const width of HEADER_WIDTHS) {
     await page.setViewportSize({ width, height: 900 })
+    // Layout catches up with the new width a frame or two later; measuring straight away
+    // can read the previous width's header (seen as a flake, e.g. 121.6px at 1600 wide).
+    await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))))
     const { token, edge } = await page.evaluate(() => {
       // Resolve the custom property to pixels by measuring an element that uses it.
       const probe = document.createElement('div')
