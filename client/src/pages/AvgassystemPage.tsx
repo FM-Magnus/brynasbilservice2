@@ -23,6 +23,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
+import heroJpg from '../assets/images/services/exhaust/exhaust-system-repair-underbody.jpg'
+import heroWebp from '../assets/images/services/exhaust/exhaust-system-repair-underbody.webp'
 import '../styles/ServiceGuideTemplate.css'
 
 const trustBadges = [
@@ -153,7 +155,10 @@ export default function AvgassystemPage() {
               </div>
 
               <div className="service-guide__hero-media">
-                <MediaPlaceholder label="Hero: avgasarbete i verkstaden" note="Bild kommer" />
+                <picture>
+                  <source srcSet={heroWebp} type="image/webp" />
+                  <img src={heroJpg} alt="Mekaniker som utför reparation och kontroll av avgassystem" />
+                </picture>
                 <div className="service-guide__hero-badge">
                   <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
                   <div><h3>Avgasreparation i vår verkstad i Gävle</h3><p>Kvalitet, erfarenhet och rätt utrustning.</p></div>

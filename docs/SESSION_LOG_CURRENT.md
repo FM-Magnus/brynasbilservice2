@@ -2,6 +2,15 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-22 — Antigravity / Gemini (Landing hero, brand logo vectorization, exhaust guide hero)
+
+- **Landing hero image update**: Replaced `landing-sundown-hero.{jpg,webp}` with new production asset `landing-cockpit-steering-hero.{jpg,webp}` (2200x1500px) in `client/src/assets/images/home/landing-v2/`. Updated `LandingPage.tsx` imports and alt text (`"Förarmiljö med händer på ratten"`), and updated `BargningPage.tsx` reference.
+- **Landing hero & process scrims**: Added subtle ink/teal gradients to `.bb-hero__shade` and `.landing-v2__process-shade` in `LandingPage.css` for improved text readability and brand alignment without overpowering the car interior and tools.
+- **Brand logo SVG update**: Upgraded `client/src/assets/images/brand/brynas-bilservice-logo.svg` with clean vector artwork from `_incoming-assets/NY LOGOTYP BBIL.svg`, removing the solid black artboard background so the logo renders with transparent cutout across `PublicHeader` and `PublicFooter`.
+- **Exhaust guide hero (`/avgassystem`)**: Connected new production asset `exhaust-system-repair-underbody.{jpg,webp}` (2200x1563px) in `client/src/assets/images/services/exhaust/`, replacing `MediaPlaceholder` in `AvgassystemPage.tsx` with `<picture>` element.
+- **Verification**: `npm --prefix client run typecheck` (0 errors), `npm --prefix client run check:css` (clean, 86 tokens, 1 pending), `npm --prefix client run build` (clean in 9.5s), Playwright screenshots verified at 1440, 768, and 390px with zero horizontal overflow.
+
+
 ### 2026-09-21 — Antigravity / Gemini (Landing why-reassurance handshake image & slot inventory)
 
 - **Handshake image integration**: Added `landing-why-reassurance-handshake.{jpg,webp}` to `client/src/assets/images/home/landing-v2/` from `_incoming-assets/IMPLEMENT/` (derived from Magnus's asset `A.webp` / `A.jpg`, 1586x438px). Updated `LandingPage.tsx` to reference the WebP asset as background in `.landing-v2__why-section`. Tested alignment across 1440, 768, 390 viewports with Playwright.

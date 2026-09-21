@@ -19,8 +19,8 @@ import imgWorkshopLiftJpg from '../assets/images/gallery/workshop/workshop-car-o
 import imgWorkshopLiftWebp from '../assets/images/gallery/workshop/workshop-car-on-lift.webp'
 import imgPeugeotFrontWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
 import imgPeugeotFrontJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.jpg'
-import imgSunsetRoadWebp from '../assets/images/home/landing-v2/landing-sundown-hero.webp'
-import imgSunsetRoadJpg from '../assets/images/home/landing-v2/landing-sundown-hero.jpg'
+import imgSunsetRoadWebp from '../assets/images/home/landing-v2/landing-cockpit-steering-hero.webp'
+import imgSunsetRoadJpg from '../assets/images/home/landing-v2/landing-cockpit-steering-hero.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
 import '../styles/design-tokens.css'

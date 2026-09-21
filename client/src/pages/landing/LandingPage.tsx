@@ -11,8 +11,8 @@ import { MapPinIcon } from '../../components/icons/MapPinIcon'
 import { MonitorIcon } from '../../components/icons/MonitorIcon'
 import { PhoneIcon } from '../../components/icons/PhoneIcon'
 import { WrenchIcon } from '../../components/icons/WrenchIcon'
-import heroWebp from '../../assets/images/home/landing-v2/landing-sundown-hero.webp'
-import heroJpg from '../../assets/images/home/landing-v2/landing-sundown-hero.jpg'
+import heroWebp from '../../assets/images/home/landing-v2/landing-cockpit-steering-hero.webp'
+import heroJpg from '../../assets/images/home/landing-v2/landing-cockpit-steering-hero.jpg'
 import { GalleryTeaserCard } from '../../components/ui/GalleryTeaserCard'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
@@ -61,7 +61,7 @@ export default function LandingPage() {
       <section className="bb-hero" aria-labelledby="landing-v2-hero-title">
         <picture className="bb-hero__media">
           <source srcSet={heroWebp} type="image/webp" />
-          <img src={heroJpg} alt="Honda CR-V i verkstaden vid solnedgång" />
+          <img src={heroJpg} alt="Förarmiljö med händer på ratten" />
         </picture>
         <div className="bb-hero__shade" aria-hidden="true" />
         <PublicHeader onBookingClick={() => setBookingOpen(true)} variant="overlay" />

@@ -29,13 +29,20 @@
 .landing-v2 :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
 .landing-v2 h1, .landing-v2 h2, .landing-v2 h3, .landing-v2 p { margin-top: 0; }
 
+/* Hero shade: subtle ink scrim for text contrast + atmospheric teal */
+.landing-v2 .bb-hero__shade {
+  background:
+    linear-gradient(90deg, rgba(7, 20, 22, 0.65) 0%, rgba(10, 157, 172, 0.15) 55%, rgba(7, 20, 22, 0.3) 100%),
+    linear-gradient(0deg, rgba(7, 20, 22, 0.5) 0%, transparent 60%);
+}
+
 
 /* Photo-backed reassurance */
 .landing-v2__why-section, .landing-v2__process-section, .landing-v2__cars-section { color: #fff; isolation: isolate; overflow: hidden; position: relative; }
 .landing-v2__why-section { border-radius: var(--bb-radius-card); margin: 0 auto clamp(3rem, 5vw, 5rem); max-width: 1520px; min-height: 330px; }
 .landing-v2__why-section > img, .landing-v2__process-section > img, .landing-v2__cars-section > img { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; z-index: -2; }
 .landing-v2__why-section > img { object-position: center 55%; }
-.landing-v2__why-shade, .landing-v2__process-shade, .landing-v2__cars-shade { background: linear-gradient(90deg, rgba(2, 25, 29, .96), rgba(2, 26, 30, .82) 48%, rgba(2, 21, 24, .4)); inset: 0; position: absolute; z-index: -1; }
+.landing-v2__why-shade, .landing-v2__process-shade, .landing-v2__cars-shade { background: none; inset: 0; position: absolute; z-index: -1; }
 .landing-v2__why-content { align-items: center; display: grid; gap: clamp(2rem, 4vw, 4.8rem); grid-template-columns: minmax(300px, .82fr) minmax(320px, .74fr); min-height: 330px; padding: clamp(1.8rem, 3vw, 3rem) 0; }
 .landing-v2__why-content > div > p:not(.bb-eyebrow) { color: rgba(255, 255, 255, .8); font-size: var(--landing-type-body); line-height: var(--landing-leading-body); margin: 1rem 0 1.25rem; max-width: 500px; }
 .landing-v2__why-content ul { list-style: none; margin: 0; padding: .25rem 1.1rem; }
@@ -60,7 +67,11 @@
 /* Five-step process */
 .landing-v2__process-section { margin-bottom: clamp(3.2rem, 5vw, 5rem); min-height: 335px; }
 .landing-v2__process-section > img { object-position: center 53%; }
-.landing-v2__process-shade { background: linear-gradient(90deg, rgba(1, 23, 27, .96), rgba(1, 26, 30, .87) 58%, rgba(1, 21, 24, .55)); }
+.landing-v2__process-shade {
+  background:
+    linear-gradient(90deg, rgba(7, 20, 22, 0.82) 0%, rgba(10, 157, 172, 0.15) 55%, rgba(7, 20, 22, 0.7) 100%),
+    linear-gradient(0deg, rgba(7, 20, 22, 0.4) 0%, transparent 60%);
+}
 .landing-v2__process-content { align-items: center; display: grid; gap: clamp(1.75rem, 3.5vw, 4rem); grid-template-columns: minmax(255px, .65fr) minmax(0, 1.4fr); min-height: 335px; padding: clamp(1.8rem, 3vw, 3rem) 0; }
 .landing-v2__process-content > div > p:not(.bb-eyebrow) { color: rgba(255, 255, 255, .78); font-size: var(--landing-type-support); line-height: var(--landing-leading-body); margin: 1rem 0 1.2rem; }
 
@@ -71,7 +82,7 @@
 .landing-v2__about-copy .bb-btn { margin-top: .6rem; }
 .landing-v2__cars-section { border-radius: var(--bb-radius-card); margin: 0 auto clamp(3.2rem, 5vw, 5rem); max-width: 1520px; min-height: 230px; }
 .landing-v2__cars-section > img { object-position: center 51%; }
-.landing-v2__cars-shade { background: linear-gradient(90deg, rgba(2, 25, 29, .95), rgba(2, 25, 29, .78) 48%, rgba(2, 25, 29, .18)); }
+.landing-v2__cars-shade { background: none; }
 .landing-v2__cars-content { align-items: center; display: flex; min-height: 230px; padding: 2rem 0; }
 .landing-v2__cars-content > div { max-width: 560px; }
 .landing-v2__cars-content h2 .bb-accent { display: inline; }
