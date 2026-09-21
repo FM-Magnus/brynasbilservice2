@@ -1,6 +1,6 @@
 # Audit harness
 
-Small, read-only scripts that measure the live site so a visual or structural change can be **proved** instead of eyeballed. They were built during the 2026-09-20 icon, inline-style and hero work and are kept here because the same proofs are needed again (hero step 3, breakpoints, hex colours). They are documentation tooling, not production code: nothing here is imported by `client/`, and none of it edits the repo.
+Small, read-only scripts that measure the live site so a visual or structural change can be **proved** instead of eyeballed. They were built during the 2026-09-20 icon, inline-style and hero work and are kept here because the same proofs are needed again (hero outliers, breakpoints, hex colours). They are documentation tooling, not production code: nothing here is imported by `client/`, and none of it edits the repo.
 
 ## Prerequisites
 
@@ -34,8 +34,10 @@ Small, read-only scripts that measure the live site so a visual or structural ch
 - **Element screenshots wait for visibility** and time out on hidden or overlapped elements; take a clipped `page.screenshot` from the bounding box instead.
 - **Absolutely positioned or fixed elements do not move with the page** (the public header sits after the hero in the DOM but is pinned at the top). Exclude them from "shifts by exactly N" checks.
 - **Specificity beats intent when moving inline styles to classes.** `.bilservice__intro p` (0,1,1) beats a bare modifier class, and a later media rule of equal specificity beats an earlier modifier. Nest the selector or double the class, then mutation-check it.
+- **`herodiff.cjs` compares by element index, so a change that adds or removes elements makes it report `element count A -> B` and compare nothing else on that page.** The guide trust-row change (2026-09-21) added one wrapper span per item, so the ten guides were proved with a throwaway variant: cut the changed subtree out of both snapshots (found by rect containment), require everything else to align 1:1 by tag, then apply the same invariants. It was mutation-checked (a 5px shift below the hero, a wider hero text block and an overflow flag were each caught). It is not kept in the repo; write a variant the same way, and mutation-check it.
 - **Pass `S` to inline Python** (`S=$S python3 - <<'EOF'`); a bare `python3` will not see the shell variable.
 - **macOS has no `timeout`.** Wrap long runs some other way.
+- **Check `git status` for ` D` lines before trusting a test run.** On 2026-09-21 seven tracked images disappeared from an iCloud-synced checkout (`~/Documents`) in one second; Vite then failed with "Failed to resolve import" and 28 tests failed on pages nobody had touched. `git restore -- <paths>` brings them back byte-identical.
 - The Mac used for this work was memory-starved (load average over 130, swap in use) and one gallery spec timed out once under load. Use `--workers=3` or fewer for the full suite when that happens.
 
 ## Not in here on purpose

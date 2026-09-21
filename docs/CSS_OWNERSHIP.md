@@ -55,6 +55,7 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 
 4. **"Guide" family (shared template)** — technical repair-guide pages, all structurally the same kind of page. There is only one guide template; the remaining six guides join the same one already proven on the first four, not a second template.
    - *Owner*: `ServiceGuideTemplate.css` (`.service-guide__*`).
+   - *Hero trust row (2026-09-21)*: the three trust items in every guide hero use the shared `.bb-trust-row` pattern from `shared-elements.css`, with the same markup as the Bilservice-family heroes. `ServiceGuideTemplate.css` holds no trust-row rules; do not add a local one.
    - *Pages on this template*: `Koppling` (`/koppling`), `Avgassystem` (`/avgassystem`), `Oljebyte` (`/oljebyte`), `Bromssystem` (`/bromssystem`), `Kamrem` (`/kamrem`), `Bilbatteri` (`/bilbatteri`), `Stötdämpare & fjädrar` (`/stodampare-fjadrar`), `Hjullagerbyte` (`/hjullagerbyte`), `Styrning & kulleder` (`/styrning-kulleder`), `Drivaxel & drivknutar` (`/drivaxel-drivknutar`).
 
 ## Active Status of Routes During Rebuilding
@@ -143,7 +144,7 @@ on it.
 
 ## Known fragile areas
 
-- **One undefined token remains: `--bb-font-sans`** (35 references in `ServiceGuideTemplate.css`, no fallback), on the pending list in `scripts/check-css.mjs`. The declarations are accidentally pinning the font fallback stack; untangle them together with the font-loading fix, not before (the header comment in that file explains why deleting them changes text wrapping). The other tokens once listed here are resolved. Do not add to the pending list.
+- **One undefined token remains: `--bb-font-sans`** (33 references in `ServiceGuideTemplate.css`, no fallback), on the pending list in `scripts/check-css.mjs`. The declarations are accidentally pinning the font fallback stack; untangle them together with the font-loading fix, not before (the header comment in that file explains why deleting them changes text wrapping). The other tokens once listed here are resolved. Do not add to the pending list.
 - **Structural selectors in the Guide family parent.** `ServiceGuideTemplate.css` styles
   `.service-guide__importance > div > p` and `.service-guide__service-card > div > p`. A
   sibling guide that wraps that paragraph differently silently loses the styling; there is
