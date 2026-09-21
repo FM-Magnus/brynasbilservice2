@@ -17,6 +17,7 @@ import { GalleryTeaserCard } from '../../components/ui/GalleryTeaserCard'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
 import mechanicDiagnostic from '../../assets/images/services/diagnostics/diagnostics-mechanic-laptop-workshop.webp'
+import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake.webp'
 import wrenchWorkbench from '../../assets/images/services/general/wrench-and-bolt-workbench.webp'
 import tireStorage from '../../assets/images/services/tires/tire-storage-rack.webp'
 import acManometers from '../../assets/images/services/ac/ac-manometers-on-engine.jpg'
@@ -109,7 +110,7 @@ export default function LandingPage() {
       <ContactFormCard variant="full-section" />
 
       <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
-        <img src={mechanicDiagnostic} alt="Mekaniker som arbetar med diagnostik i verkstaden" />
+        <img src={whyReassuranceWebp} alt="Mekaniker som arbetar med diagnostik i verkstaden" loading="lazy" />
         <div className="landing-v2__why-shade" aria-hidden="true" />
         <div className="bb-wrap landing-v2__why-content">
           <div>

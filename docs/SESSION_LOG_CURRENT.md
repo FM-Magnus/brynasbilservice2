@@ -2,6 +2,13 @@
 
 This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
 
+### 2026-09-21 — Antigravity / Gemini (Landing why-reassurance handshake image & slot inventory)
+
+- **Handshake image integration**: Added `landing-why-reassurance-handshake.{jpg,webp}` to `client/src/assets/images/home/landing-v2/` from `_incoming-assets/IMPLEMENT/` (derived from Magnus's asset `A.webp` / `A.jpg`, 1586x438px). Updated `LandingPage.tsx` to reference the WebP asset as background in `.landing-v2__why-section`. Tested alignment across 1440, 768, 390 viewports with Playwright.
+- **Slot Inventory**: Completed inventory of all 19 `MediaPlaceholder` slots across the 7 guide pages and 6 `ImageSlot` placeholders on `/service-reparationer`, documenting recommended export dimensions and aspect ratios in `_incoming-assets/ASSET_INVENTORY.md`.
+- **Validation**: `npm --prefix client run typecheck` (0 errors), `npm --prefix client run check:css` (clean, 86 tokens, 1 pending), `npm --prefix client run build` (clean in 2.6s).
+- **Branch status**: Committed and pushed to `origin/redesign/blue-teal-v1` for continuation on MacBook Pro.
+
 ### 2026-09-21 — Claude (audit point 4: hero step 3, the guides adopt the shared trust row)
 
 - **Setup:** pulled 61 commits from the MacBook session (a stray ref `redesign/blue-teal-v1 2` and a stale `base.lock` under `.git/refs/codex` had to be removed first; the ref pointed at a commit already in history). `client/node_modules` lacked 4 packages, so `npm ci` was run (Magnus approved). Baseline on this machine: typecheck 0 errors, `check:css` clean (86 tokens, 1 pending), build ok, Playwright 155 passed / 4 skipped. `herosnap` was deterministic (two captures, 0 differences in 126 page-states) and the hero numbers in §2c were still correct.
