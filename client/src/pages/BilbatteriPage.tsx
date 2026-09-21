@@ -132,11 +132,14 @@ export default function BilbatteriPage() {
                   <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                   <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
-                <div className="service-guide__trust-row">
+                <div className="bb-trust-row">
                   {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="service-guide__trust-item" key={title}>
-                      <Icon className="bb-icon-bare service-guide__trust-icon" aria-hidden="true" />
-                      <div><h3>{title}</h3><p>{text}</p></div>
+                    <div className="bb-trust-row__item" key={title}>
+                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
+                      <span className="bb-trust-row__text">
+                        <b>{title}</b>
+                        <small>{text}</small>
+                      </span>
                     </div>
                   ))}
                 </div>
