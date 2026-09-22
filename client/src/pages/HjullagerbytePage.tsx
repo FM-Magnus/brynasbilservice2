@@ -170,11 +170,12 @@ export default function HjullagerbytePage() {
                   </div>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Orolig för ett brummande eller malande missljud?</strong>
-                  <span>Vi hissar upp bilen och kontrollerar mekaniskt vilket lager som orsakar ljudet.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Orolig för ett brummande eller malande missljud?</strong>
+                  <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar mekaniskt vilket lager som orsakar ljudet.</span>
                 </div>
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
               </div>
@@ -217,11 +218,12 @@ export default function HjullagerbytePage() {
                   </article>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Bra att veta om missljud:</strong>
-                  <span>Ett hjullager som precis börjat ge missljud går ofta att köra en kortare sträcka med, men slitaget ökar snabbt. Eftersom det inte går att förutse exakt när lagret havererar helt rekommenderar vi att boka kontroll så snart missljudet uppstår.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Bra att veta om missljud:</strong>
+                  <span className="bb-tip__text">Ett hjullager som precis börjat ge missljud går ofta att köra en kortare sträcka med, men slitaget ökar snabbt. Eftersom det inte går att förutse exakt när lagret havererar helt rekommenderar vi att boka kontroll så snart missljudet uppstår.</span>
                 </div>
               </div>
             </div>

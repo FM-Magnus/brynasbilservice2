@@ -178,11 +178,12 @@ export default function DrivaxelDrivknutarPage() {
                   </div>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Misstänker du knäppande ljud eller trasig damask?</strong>
-                  <span>Vi hissar upp bilen och kontrollerar damasker, fett och mekaniskt glapp.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Misstänker du knäppande ljud eller trasig damask?</strong>
+                  <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar damasker, fett och mekaniskt glapp.</span>
                 </div>
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
               </div>
@@ -225,11 +226,12 @@ export default function DrivaxelDrivknutarPage() {
                   </article>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Viktigt om sprucken damask:</strong>
-                  <span>Upptäcker du fettstänk eller en spräckt damask innan knuten börjat låta är det goda nyheter. Då räcker det i regel med att rengöra och byta enbart damasken med nytt specialfett, vilket sparar tusentals kronor jämfört med ett fullständigt knutbyte.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Viktigt om sprucken damask:</strong>
+                  <span className="bb-tip__text">Upptäcker du fettstänk eller en spräckt damask innan knuten börjat låta är det goda nyheter. Då räcker det i regel med att rengöra och byta enbart damasken med nytt specialfett, vilket sparar tusentals kronor jämfört med ett fullständigt knutbyte.</span>
                 </div>
               </div>
             </div>

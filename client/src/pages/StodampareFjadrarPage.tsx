@@ -168,11 +168,12 @@ export default function StodampareFjadrarPage() {
                   </div>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Misstänker du slitage eller missljud från chassit?</strong>
-                  <span>Vi hissar upp bilen och kontrollerar dämpare, fjädrar, bussningar och topplager – snabbt och noggrant.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Misstänker du slitage eller missljud från chassit?</strong>
+                  <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar dämpare, fjädrar, bussningar och topplager – snabbt och noggrant.</span>
                 </div>
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
               </div>
@@ -215,11 +216,12 @@ export default function StodampareFjadrarPage() {
                   </article>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Enkelt eget gungtest:</strong>
-                  <span>Tryck bestämt ner ett hörn av bilen med kroppsvikten och släpp snabbt. Reser sig bilen och stabiliseras direkt är dämparna troligen i bra skick — fortsätter bilen gunga eller studsa är dämparen slut.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Enkelt eget gungtest:</strong>
+                  <span className="bb-tip__text">Tryck bestämt ner ett hörn av bilen med kroppsvikten och släpp snabbt. Reser sig bilen och stabiliseras direkt är dämparna troligen i bra skick — fortsätter bilen gunga eller studsa är dämparen slut.</span>
                 </div>
               </div>
             </div>

@@ -181,11 +181,12 @@ export default function AvgassystemPage() {
                   </div>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Osäker på vad som gäller för din bil?</strong>
-                  <span>Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Osäker på vad som gäller för din bil?</strong>
+                  <span className="bb-tip__text">Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar.</span>
                 </div>
                 <a href="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
               </div>

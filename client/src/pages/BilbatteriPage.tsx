@@ -175,11 +175,12 @@ export default function BilbatteriPage() {
                   </div>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Osäker på vilken batterityp din bil behöver?</strong>
-                  <span>Vi kontrollerar alltid biltillverkarens krav för AGM, EFB eller blysyrabatteri utifrån ditt registreringsnummer.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Osäker på vilken batterityp din bil behöver?</strong>
+                  <span className="bb-tip__text">Vi kontrollerar alltid biltillverkarens krav för AGM, EFB eller blysyrabatteri utifrån ditt registreringsnummer.</span>
                 </div>
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>
               </div>

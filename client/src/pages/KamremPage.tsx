@@ -174,11 +174,12 @@ export default function KamremPage() {
                   </div>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Osäker på om din bil har rem eller kedja?</strong>
-                  <span>Vi slår upp exakta uppgifter i biltillverkarens databas utifrån ditt registreringsnummer.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Osäker på om din bil har rem eller kedja?</strong>
+                  <span className="bb-tip__text">Vi slår upp exakta uppgifter i biltillverkarens databas utifrån ditt registreringsnummer.</span>
                 </div>
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>
               </div>

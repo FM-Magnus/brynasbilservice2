@@ -19,6 +19,7 @@ import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
+import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import heroBgJpg from '../assets/images/services/ac/ac-hero-bg.jpg'
 import heroBgWebp from '../assets/images/services/ac/ac-hero-bg.webp'
 import manometersJpg from '../assets/images/services/ac/ac-manometers-on-engine.jpg'
@@ -320,9 +321,14 @@ export default function AcServicePage() {
               </article>
             </div>
 
-            <aside className="bilservice__repair-note">
-              <strong>Service eller reparation?</strong> En AC-service är en proaktiv kontroll och påfyllning. Misstänker du istället en läcka, en trasig kompressor eller ett annat fel är det en AC-reparation — då gör vi alltid en felsökning och lämnar ett prisförslag innan vi går vidare.
-            </aside>
+            <div className="bb-tip">
+              <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+              <div className="bb-tip__body">
+                <span className="bb-eyebrow">Tips</span>
+                <strong className="bb-tip__title">Service eller reparation?</strong>
+                <span className="bb-tip__text">En AC-service är en proaktiv kontroll och påfyllning. Misstänker du istället en läcka, en trasig kompressor eller ett annat fel är det en AC-reparation — då gör vi alltid en felsökning och lämnar ett prisförslag innan vi går vidare.</span>
+              </div>
+            </div>
 
             {/* FACT TO CONFIRM: Om Brynäs har utrustning för båda köldmedietyperna (R134a och R1234yf) – den befintliga texten hänvisar redan till kontakt för R1234yf. */}
             <p className="bilservice__refrigerant-note">

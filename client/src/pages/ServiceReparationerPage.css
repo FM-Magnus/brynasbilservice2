@@ -764,21 +764,12 @@
   margin-top: auto;
 }
 
-/* Repair note callout */
-.bilservice__repair-note {
-  margin-top: clamp(2rem, 3.5vw, 3rem);
-  padding: 1.25rem 1.6rem;
-  border-radius: var(--bb-radius-card);
-  background: var(--bb-color-surface);
-  border-left: 4px solid var(--bb-color-amber-500);
-  box-shadow: var(--bb-shadow-card);
-  color: var(--bb-color-text);
-  font: 400 0.95rem / 1.6 var(--bb-font-body);
-}
-.bilservice__repair-note strong {
-  color: var(--bb-color-ink-950);
-  font-weight: 700;
-}
+/* .bilservice__repair-note retired 2026-09-22 — replaced by the canonical
+   .bb-tip component in shared-elements.css (see AcServicePage.tsx, the only
+   page that used this). The spacing it used to provide now lives on the
+   .bb-tip instance directly below. */
+.bilservice__price-grid + .bb-tip { margin-top: clamp(2rem, 3.5vw, 3rem); }
+
 .bilservice__refrigerant-note {
   margin: 1.25rem 0 0;
   color: var(--bb-color-text-muted);

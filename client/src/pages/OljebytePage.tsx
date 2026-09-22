@@ -164,11 +164,12 @@ export default function OljebytePage() {
                 <p>En motor som går på ren, fräsch olja arbetar dessutom mer effektivt, vilket märks direkt på bränsleförbrukningen jämfört med en motor som får gå på gammal eller smutsig olja.</p>
               </div>
 
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Osäker på vilken olja din bil behöver?</strong>
-                  <span>Vi läser av tillverkarens specifikation och väljer rätt viskositet och ACEA-klass åt dig.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Osäker på vilken olja din bil behöver?</strong>
+                  <span className="bb-tip__text">Vi läser av tillverkarens specifikation och väljer rätt viskositet och ACEA-klass åt dig.</span>
                 </div>
                 <a href="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
               </div>

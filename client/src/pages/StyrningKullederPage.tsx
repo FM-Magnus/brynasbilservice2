@@ -170,11 +170,12 @@ export default function StyrningKullederPage() {
                   </div>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Upplever du glapp, klapper eller tung styrning?</strong>
-                  <span>Vi hissar upp bilen och kontrollerar leder, stag och servoverkan – snabbt och säkert.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Upplever du glapp, klapper eller tung styrning?</strong>
+                  <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar leder, stag och servoverkan – snabbt och säkert.</span>
                 </div>
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
               </div>
@@ -217,11 +218,12 @@ export default function StyrningKullederPage() {
                   </article>
                 ))}
               </div>
-              <div className="service-guide__tip-strip">
-                <span className="service-guide__tip-icon"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="service-guide__tip-text">
-                  <strong>Viktigt om bilens dragning:</strong>
-                  <span>Att bilen drar åt ena hållet beror i regel inte på servostyrningen, utan på felaktig hjulinställning, ojämnt däcktryck eller glappande länkarmar och kulleder i hjulupphängningen.</span>
+              <div className="bb-tip">
+                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
+                <div className="bb-tip__body">
+                  <span className="bb-eyebrow">Tips</span>
+                  <strong className="bb-tip__title">Viktigt om bilens dragning:</strong>
+                  <span className="bb-tip__text">Att bilen drar åt ena hållet beror i regel inte på servostyrningen, utan på felaktig hjulinställning, ojämnt däcktryck eller glappande länkarmar och kulleder i hjulupphängningen.</span>
                 </div>
               </div>
             </div>

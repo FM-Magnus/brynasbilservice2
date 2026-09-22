@@ -19,6 +19,14 @@
   --bb-color-border-subtle: rgba(255, 255, 255, 0.08);
   --bb-color-border-subtle-light: rgba(7, 20, 22, 0.08);
   --bb-color-ink-soft: #0c2327;
+  /* Semantic gradient pairs for the Guide family's symptom-row states
+     (ServiceGuideTemplate.css) — named by role, not by scale step, since
+     they don't sit cleanly on the teal/amber ramps above. Added 2026-09-22
+     to replace hardcoded hex that check-css couldn't see. */
+  --bb-color-featured-gradient-start: #0b848e;
+  --bb-color-featured-gradient-end: #066973;
+  --bb-color-urgent-gradient-start: #e2711d;
+  --bb-color-urgent-gradient-end: #c25a10;
   --bb-font-display: 'Archivo', Arial, sans-serif;
   --bb-font-body: 'Manrope', Arial, sans-serif;
   --bb-font-size-body: 1rem;

@@ -228,6 +228,37 @@
 }
 .bb-icon-bare svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)); }
 
+/* ---------- Tip callout ("TIPS") ---------- */
+/* Canonical site-wide replacement for what used to be two separate,
+   inconsistent patterns: the Guide family's .service-guide__tip-strip and
+   the Bilservice family's .bilservice__repair-note — only actually used on
+   AC-service despite existing generically for the whole family. Promoted
+   here 2026-09-22 at Magnus's request so any page/family can reuse the same
+   look. position: relative + a generous top offset on the icon leave
+   headroom for a future mascot ("Schomaher") to visually peek over the top
+   edge — see docs/SESSION_LOG_CURRENT.md 2026-09-22 for that deferred plan;
+   don't add overflow: hidden here or it'll clip the mascot later. */
+.bb-tip {
+  align-items: center;
+  background: var(--bb-color-teal-100);
+  border-left: 4px solid var(--bb-color-teal-500);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  display: flex;
+  gap: 1rem;
+  padding: 1.1rem 1.35rem;
+  position: relative;
+}
+.bb-tip__body { flex: 1 1 auto; min-width: 0; }
+.bb-tip .bb-eyebrow { font-size: 0.72rem; margin: 0 0 0.3rem; }
+.bb-tip__title { color: var(--bb-color-ink-950); display: block; font-family: var(--bb-font-sans); font-size: 0.95rem; font-weight: 700; }
+.bb-tip__text { color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.85rem; font-weight: 400; line-height: 1.5; }
+.bb-tip .bb-btn { flex: 0 0 auto; padding: 0.7rem 1.2rem; font-size: 0.85rem; }
+@media (max-width: 640px) {
+  .bb-tip { flex-direction: column; align-items: flex-start; }
+  .bb-tip .bb-btn { width: 100%; justify-content: center; }
+}
+
 /* ---------- 3-Pillar Trust Row (Hero / Footer Anchor) ---------- */
 .bb-trust-row {
   display: grid;
