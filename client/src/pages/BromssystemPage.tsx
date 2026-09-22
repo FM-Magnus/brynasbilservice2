@@ -150,14 +150,6 @@ export default function BromssystemPage() {
                   ))}
                 </div>
               </div>
-
-              <div className="service-guide__hero-media">
-                <MediaPlaceholder label="Hero: bromsarbete i verkstaden" note="Bild kommer" />
-                <div className="service-guide__hero-badge">
-                  <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
-                  <div><h3>Bromsservice i vår verkstad i Gävle</h3><p>Kvalitet, erfarenhet och rätt utrustning.</p></div>
-                </div>
-              </div>
             </div>
           </div>
         </section>

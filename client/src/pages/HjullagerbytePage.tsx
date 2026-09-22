@@ -148,14 +148,6 @@ export default function HjullagerbytePage() {
                   ))}
                 </div>
               </div>
-
-              <div className="service-guide__hero-media">
-                <MediaPlaceholder label="Hjullagerarbete i verkstaden" note="Bild kommer" />
-                <div className="service-guide__hero-badge">
-                  <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
-                  <div><h3>Hjullagerbyte i vår verkstad i Gävle</h3><p>Kvalitetsdelar, modellanpassade verktyg och noggrannhet.</p></div>
-                </div>
-              </div>
             </div>
           </div>
         </section>

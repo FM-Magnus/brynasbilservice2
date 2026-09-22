@@ -148,14 +148,6 @@ export default function StyrningKullederPage() {
                   ))}
                 </div>
               </div>
-
-              <div className="service-guide__hero-media">
-                <MediaPlaceholder label="Styrningsarbete i verkstaden" note="Bild kommer" />
-                <div className="service-guide__hero-badge">
-                  <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
-                  <div><h3>Styrningsarbete i vår verkstad i Gävle</h3><p>Kvalitetsdelar, modellanpassade verktyg och noggrannhet.</p></div>
-                </div>
-              </div>
             </div>
           </div>
         </section>

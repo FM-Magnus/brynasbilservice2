@@ -118,6 +118,12 @@ export default function BilbatteriPage() {
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="battery-title">
+          <div className="service-guide__hero-bg">
+            <picture data-image-slot="battery-hero">
+              <source srcSet={heroWebp} type="image/webp" />
+              <img src={heroJpg} alt="Mekaniker som drar åt polbult på bilbatteri" />
+            </picture>
+          </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
@@ -142,17 +148,6 @@ export default function BilbatteriPage() {
                       </span>
                     </div>
                   ))}
-                </div>
-              </div>
-
-              <div className="service-guide__hero-media">
-                <picture data-image-slot="battery-hero">
-                  <source srcSet={heroWebp} type="image/webp" />
-                  <img src={heroJpg} alt="Mekaniker som drar åt polbult på bilbatteri" />
-                </picture>
-                <div className="service-guide__hero-badge">
-                  <span className="service-guide__hero-badge-icon"><BoltIcon aria-hidden="true" /></span>
-                  <div><h3>Batteribyte i vår verkstad i Gävle</h3><p>Rätt batterityp, professionell testning och BMS-kodning.</p></div>
                 </div>
               </div>
             </div>

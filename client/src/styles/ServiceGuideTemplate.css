@@ -132,56 +132,59 @@
 .service-guide__btn svg { width: 18px; height: 18px; }
 
 /* ---------- Hero ---------- */
+/* Full-bleed hero with a dark gradient overlay, matching .bargning-page__hero.
+   The photo is a real <picture>/<img> absolutely positioned behind the
+   gradient (.service-guide__hero-bg), not a CSS background-image, so alt
+   text stays meaningful and no inline style= is needed (banned in public
+   TSX by check:css). Pages without a hero photo yet just get the ink-950
+   fallback background — still fully readable. */
 .service-guide__hero {
-  background: var(--bb-color-ink-950);
+  background-color: var(--bb-color-ink-950);
   padding-block: var(--bb-hero-clearance) clamp(3rem, 5vw, 4.5rem);
   min-height: var(--bb-hero-min-height);
+  overflow: hidden;
+  position: relative;
+}
+.service-guide__hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.service-guide__hero-bg picture,
+.service-guide__hero-bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+}
+/* Alignment is per-photo, not universal: some hero shots are composed with
+   the subject on the right (default), others — like this one — have the
+   subject left-of-center with the dark/ember area meant to sit under the
+   text. Opt in per page with this modifier on .service-guide__hero-bg. */
+.service-guide__hero-bg--pos-left picture,
+.service-guide__hero-bg--pos-left img {
+  object-position: center left;
+}
+.service-guide__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 20, 22, 0.96) 0%,
+    rgba(7, 20, 22, 0.90) 38%,
+    rgba(7, 20, 22, 0.72) 65%,
+    rgba(7, 20, 22, 0.45) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 .service-guide__hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  align-items: center;
-  gap: clamp(2rem, 5vw, 4rem);
-}
-
-.service-guide__hero-media {
   position: relative;
-  min-height: clamp(320px, 34vw, 460px);
-  border-radius: var(--bb-radius-card);
-  overflow: hidden;
-  box-shadow: var(--bb-shadow-floating);
+  z-index: 2;
+  max-width: 680px;
 }
-.service-guide__hero-media picture,
-.service-guide__hero-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.service-guide__hero-badge {
-  position: absolute;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  max-width: 260px;
-  padding: 0.9rem 1.1rem;
-  border-radius: var(--bb-radius-card);
-  background: rgba(12, 18, 20, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-.service-guide__hero-badge-icon {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: var(--bb-radius-sm);
-  background: rgba(240, 149, 5, 0.15);
-  color: var(--bb-color-amber-500);
-}
-.service-guide__hero-badge-icon svg { width: 18px; height: 18px; }
-.service-guide__hero-badge h3 { margin: 0; color: #fff; font-family: var(--bb-font-sans); font-size: 0.85rem; font-weight: 700; line-height: 1.25; }
-.service-guide__hero-badge p { margin: 0.15rem 0 0; color: rgba(255, 255, 255, 0.6); font-family: var(--bb-font-sans); font-size: 0.75rem; font-weight: 400; line-height: 1.3; }
 
 /* ---------- Generic placeholder for images not yet supplied ---------- */
 .service-guide__placeholder {
@@ -355,7 +358,7 @@
   align-items: flex-start;
   padding: 1.1rem 1.25rem;
   border-radius: 20px;
-  background: var(--bb-color-surface);
+  background: var(--bb-color-teal-100);
   border: 1px solid var(--bb-color-border-subtle-light);
   box-shadow: var(--bb-shadow-card);
 }
@@ -363,9 +366,14 @@
   background: linear-gradient(145deg, #0b848e 0%, #066973 100%);
   border-color: transparent;
 }
-.service-guide__symptom-row--featured h3,
-.service-guide__symptom-row--featured p { color: #fff; }
-.service-guide__symptom-row--featured p { color: rgba(255, 255, 255, 0.88); }
+/* Two classes on the selector (not one) so these definitely outrank the
+   plain-card .service-guide__symptom-row h3/p rules below, which share the
+   same one-class-plus-tag specificity and would otherwise win on source
+   order alone — that silent tie is what caused the featured/urgent text to
+   render in the muted grey/ink colors meant for the plain white cards. */
+.service-guide__symptom-row.service-guide__symptom-row--featured h3,
+.service-guide__symptom-row.service-guide__symptom-row--featured p { color: #fff; }
+.service-guide__symptom-row.service-guide__symptom-row--featured p { color: rgba(255, 255, 255, 0.88); }
 .service-guide__symptom-icon {
   flex: 0 0 auto;
   display: flex;
@@ -382,9 +390,9 @@
   background: linear-gradient(145deg, #e2711d 0%, #c25a10 100%);
   border-color: transparent;
 }
-.service-guide__symptom-row--urgent h3,
-.service-guide__symptom-row--urgent p { color: #fff; }
-.service-guide__symptom-row--urgent p { color: rgba(255, 255, 255, 0.9); }
+.service-guide__symptom-row.service-guide__symptom-row--urgent h3,
+.service-guide__symptom-row.service-guide__symptom-row--urgent p { color: #fff; }
+.service-guide__symptom-row.service-guide__symptom-row--urgent p { color: rgba(255, 255, 255, 0.9); }
 .service-guide__symptom-row--urgent .service-guide__symptom-icon { background: rgba(255, 255, 255, 0.2); color: #fff; }
 .service-guide__symptom-icon svg { width: 18px; height: 18px; }
 .service-guide__symptom-row h3 { margin: 0 0 0.25rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 0.98rem; font-weight: 800; line-height: 1.25; }
@@ -549,8 +557,6 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
-  .service-guide__hero-inner { grid-template-columns: 1fr; }
-  .service-guide__hero-media { order: -1; min-height: 320px; }
   .service-guide__intro-layout { grid-template-columns: 1fr; }
   .service-guide__importance { grid-template-columns: 1fr; }
   .service-guide__importance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

@@ -23,6 +23,12 @@ import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
+import heroJpg from '../assets/images/services/suspension/suspension-mechanic-wrench-workshop-hero.jpg'
+import heroWebp from '../assets/images/services/suspension/suspension-mechanic-wrench-workshop-hero.webp'
+import inspectionJpg from '../assets/images/services/suspension/suspension-mechanic-strut-inspection-portrait.jpg'
+import inspectionWebp from '../assets/images/services/suspension/suspension-mechanic-strut-inspection-portrait.webp'
+import comparisonJpg from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.jpg'
+import comparisonWebp from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.webp'
 
 const trustBadges = [
   { icon: ShieldIcon, title: 'Stabil väghållning', text: 'Vi säkerställer optimal kontakt mellan däck och väg.' },
@@ -37,7 +43,7 @@ const parts = [
 ] as const
 
 const benefits = [
-  { icon: AlertTriangleIcon, title: 'Kortare bromssträcka', text: 'Slitna stötdämpare kan förlänga bromssträckan med upp till 20 procent på ojämnt underlag då hjulen tappar kontakten med vägen.' },
+  { icon: AlertTriangleIcon, title: 'Kortare bromssträcka', text: 'Slitna stötdämpare kan förlänga bromssträckan med upp till 20 procent på ojämnt underlag då hjulen tappar kontakten med vägen. Detta är ett branschmässigt riktvärde, inte en Brynäs-specifik mätning.' },
   { icon: GaugeIcon, title: 'Bättre väggrepp', text: 'Minskar risken för vattenplaning och ger stabilare kontakt mellan däck och vägbana i kurvor och vid undanmanövrar.' },
   { icon: SlidersIcon, title: 'Jämnare däckslitage', text: 'En korrekt dämpad fjädring förhindrar att däcken nöts vågigt eller trappstegsformat, vilket sparar pengar över tid.' },
   { icon: ThumbsUpIcon, title: 'Helhetsbedömning', text: 'Vi ser över dämparfästen, krängningshämmarlänkar och länkarmar samtidigt för att slippa framtida onödiga verkstadsbesök.' },
@@ -97,18 +103,8 @@ const faqs = [
   { question: 'Varför måste fjädrar bytas i par?', answer: 'Ett ensidigt fjäderbyte ger olika fjäderkonstanter mellan höger och vänster sida. Det leder till att bilen står snett och uppträder instabilt i kurvor och vid panikinbromsningar, även om den andra fjädern fortfarande är hel.' },
   { question: 'Kan jag köra med en trasig fjäder tills jag hinner boka tid?', answer: 'Vi avråder starkt från det. En bruten fjäder gör bilen instabil, förlänger bromssträckan och den vassa brottytan riskerar att skära sönder däck eller bromsslangar under färd.' },
   { question: 'Behöver jag göra en hjulinställning efter bytet?', answer: 'Ja, i de allra flesta fall. All demontering och montering i fram- och bakvagn påverkar hjulens vinklar och geometri. Utan hjulinställning riskerar däcken att snedslitas på nolltid.' },
-  { question: 'Hur lång tid tar ett byte av stötdämpare eller fjädrar?', answer: 'Vanligtvis 1–3 timmar per axel, beroende på bilmodell, om det är enkla dämpare eller kompletta fjäderben, och om ytterligare stag eller bussningar behöver bytas samtidigt.' },
+  { question: 'Hur lång tid tar ett byte av stötdämpare eller fjädrar?', answer: 'Vanligtvis 1–3 timmar per axel, beroende på bilmodell, om det är enkla dämpare eller kompletta fjäderben, och om ytterligare stag eller bussningar behöver bytas samtidigt. Detta är ett branschmässigt riktvärde, inte en fast Brynäs-policy eller -pris.' },
 ]
-
-function MediaPlaceholder({ label, note, light }: { label: string; note: string; light?: boolean }) {
-  return (
-    <div className={`service-guide__placeholder${light ? ' service-guide__placeholder--light' : ''}`} role="img" aria-label={`Platshållare för framtida bild: ${label}`}>
-      <WrenchIcon aria-hidden="true" />
-      <span>{label}</span>
-      <small>{note}</small>
-    </div>
-  )
-}
 
 export default function StodampareFjadrarPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -121,6 +117,9 @@ export default function StodampareFjadrarPage() {
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="suspension-title">
+          <div className="service-guide__hero-bg service-guide__hero-bg--pos-left">
+            <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Mekaniker arbetar med fjäderben och stötdämpare på en lyft bil i verkstaden" loading="lazy" /></picture>
+          </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
@@ -147,14 +146,6 @@ export default function StodampareFjadrarPage() {
                   ))}
                 </div>
               </div>
-
-              <div className="service-guide__hero-media">
-                <MediaPlaceholder label="Fjädringsarbete i verkstaden" note="Bild kommer" />
-                <div className="service-guide__hero-badge">
-                  <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
-                  <div><h3>Chassi &amp; fjädring i vår verkstad i Gävle</h3><p>Kvalitetsdelar, modellanpassade verktyg och noggrannhet.</p></div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -163,7 +154,7 @@ export default function StodampareFjadrarPage() {
         <section className="service-guide__section" aria-labelledby="suspension-intro-title">
           <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
-              <MediaPlaceholder label="Hjulupphängningens delar" note="Bild kommer" light />
+              <picture><source srcSet={comparisonWebp} type="image/webp" /><img src={comparisonJpg} alt="Ny stötdämpare med fjäderben jämfört med en sliten, rostig stötdämpare" loading="lazy" /></picture>
               <p className="service-guide__intro-caption">Stabilitet, komfort och säkerhet.</p>
             </div>
             <div className="service-guide__intro-content">
@@ -233,7 +224,7 @@ export default function StodampareFjadrarPage() {
               </div>
             </div>
             <div className="service-guide__symptoms-media">
-              <MediaPlaceholder label="Inspektion av stötdämpare och fjädrar" note="Bild kommer" light />
+              <picture><source srcSet={inspectionWebp} type="image/webp" /><img src={inspectionJpg} alt="Mekaniker inspekterar stötdämpare och fjäder på en lyft bil" loading="lazy" /></picture>
               <p className="service-guide__symptoms-caption">Säker väghållning börjar under bilen.</p>
             </div>
           </div>

@@ -109,6 +109,9 @@ export default function KopplingPage() {
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="koppling-title">
+          <div className="service-guide__hero-bg">
+            <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Mekaniker arbetar med kopplingen under en lyft bil i verkstaden" loading="lazy" /></picture>
+          </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
@@ -135,14 +138,6 @@ export default function KopplingPage() {
                       </span>
                     </div>
                   ))}
-                </div>
-              </div>
-
-              <div className="service-guide__hero-media">
-                <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Mekaniker arbetar med kopplingen under en lyft bil i verkstaden" loading="lazy" /></picture>
-                <div className="service-guide__hero-badge">
-                  <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
-                  <div><h3>Kopplingsbyte i vår verkstad i Gävle</h3><p>Kvalitet, erfarenhet och rätt utrustning.</p></div>
                 </div>
               </div>
             </div>

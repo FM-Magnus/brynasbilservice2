@@ -120,6 +120,12 @@ export default function KamremPage() {
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="kamrem-title">
+          <div className="service-guide__hero-bg">
+            <picture data-image-slot="timing-belt-hero">
+              <source srcSet={timingBeltWebp} type="image/webp" />
+              <img src={timingBeltJpg} alt="Kamrem som hålls upp vid ett motorarbete" />
+            </picture>
+          </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
@@ -144,17 +150,6 @@ export default function KamremPage() {
                       </span>
                     </div>
                   ))}
-                </div>
-              </div>
-
-              <div className="service-guide__hero-media">
-                <picture data-image-slot="timing-belt-hero">
-                  <source srcSet={timingBeltWebp} type="image/webp" />
-                  <img src={timingBeltJpg} alt="Kamrem som hålls upp vid ett motorarbete" />
-                </picture>
-                <div className="service-guide__hero-badge">
-                  <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
-                  <div><h3>Kamremsbyte i vår verkstad i Gävle</h3><p>Kvalitetsdelar, modellanpassade verktyg och noggrannhet.</p></div>
                 </div>
               </div>
             </div>

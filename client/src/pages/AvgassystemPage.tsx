@@ -125,6 +125,12 @@ export default function AvgassystemPage() {
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="exhaust-title">
+          <div className="service-guide__hero-bg">
+            <picture>
+              <source srcSet={heroWebp} type="image/webp" />
+              <img src={heroJpg} alt="Mekaniker som utför reparation och kontroll av avgassystem" />
+            </picture>
+          </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
@@ -151,17 +157,6 @@ export default function AvgassystemPage() {
                       </span>
                     </div>
                   ))}
-                </div>
-              </div>
-
-              <div className="service-guide__hero-media">
-                <picture>
-                  <source srcSet={heroWebp} type="image/webp" />
-                  <img src={heroJpg} alt="Mekaniker som utför reparation och kontroll av avgassystem" />
-                </picture>
-                <div className="service-guide__hero-badge">
-                  <span className="service-guide__hero-badge-icon"><WrenchIcon aria-hidden="true" /></span>
-                  <div><h3>Avgasreparation i vår verkstad i Gävle</h3><p>Kvalitet, erfarenhet och rätt utrustning.</p></div>
                 </div>
               </div>
             </div>
