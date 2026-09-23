@@ -29,6 +29,25 @@ check_no_growth () {
   fi
 }
 
+check_max_lines () {
+  local file="$1"
+  local max="$2"
+  local reason="$3"
+  echo "$STAGED" | grep -qx "$file" || return 0
+  git cat-file -e :"$file" 2>/dev/null || return 0
+
+  local lines
+  lines=$(git show :"$file" | wc -l | tr -d ' ')
+  if [ "$lines" -gt "$max" ]; then
+    echo ""
+    echo "BLOCKED: $file has $lines lines (limit $max)."
+    echo ""
+    echo "$reason"
+    echo ""
+    BLOCKED=1
+  fi
+}
+
 check_css_layer () {
   echo "$STAGED" | grep -qE '^client/(src/|scripts/check-css\.mjs|package\.json)' || return 0
   command -v node >/dev/null 2>&1 || return 0
@@ -64,7 +83,10 @@ check_no_tailwind_in_public () {
   fi
 }
 
-check_no_growth "AGENTS.md" "AGENTS.md is a bounded startup contract. New work notes belong in docs/SESSION_LOG_CURRENT.md."
+check_no_growth "AGENTS.md" "AGENTS.md is the bounded contract for every AI tool. Replace wording instead of adding; work notes belong in docs/LOG.md, current state in docs/STATUS.md."
+check_no_growth "CLAUDE.md" "CLAUDE.md only imports AGENTS.md. Put project rules in AGENTS.md, not here."
+check_no_growth "GEMINI.md" "GEMINI.md only points to AGENTS.md. Put project rules in AGENTS.md, not here."
+check_max_lines "docs/STATUS.md" 120 "STATUS.md is the current state only. Replace outdated lines instead of adding; history belongs in docs/LOG.md."
 check_css_layer
 check_no_tailwind_in_public
 
