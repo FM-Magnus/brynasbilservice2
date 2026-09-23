@@ -3,7 +3,7 @@
  *
  * The seven locked mockups this project was designed against live outside the
  * repository and are not present on any machine that has checked it out (see
- * docs/AGENT_HANDOFF.md). Without them there is nothing to compare a change
+ * docs/archive/AGENT_HANDOFF.md). Without them there is nothing to compare a change
  * against, so this file makes the repository its own reference: it records
  * what every public route actually renders, as committed snapshots.
  *

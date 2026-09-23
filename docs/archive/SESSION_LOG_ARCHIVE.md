@@ -1,8 +1,8 @@
 # Session Log Archive — Brynäs Bilservice
 
-Older session entries live here so the mandatory `AGENTS.md` startup contract stays bounded. New entries go to [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md). This file is historical record only — nothing here should be treated as more current than `AGENTS.md`'s Current state.
+Older session entries live here so the mandatory `AGENTS.md` startup contract stays bounded. New entries go to [`LOG.md`](LOG.md). This file is historical record only — nothing here should be treated as more current than `AGENTS.md`'s Current state.
 
-When rotating `SESSION_LOG_CURRENT.md`, move its oldest entries to the top of this file in newest-first order. Do not append session entries to `AGENTS.md`.
+When rotating `LOG.md`, move its oldest entries to the top of this file in newest-first order. Do not append session entries to `AGENTS.md`.
 
 ---
 
@@ -377,7 +377,7 @@ These were the "frozen legacy recent session log" (2026-09-15 and 2026-09-16 ent
 
 ### Legacy recent session log (frozen)
 
-Do not append here. New entries belong in [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md); older history remains in this file.
+Do not append here. New entries belong in [`docs/LOG.md`](docs/LOG.md); older history remains in this file.
 
 ### 2026-09-16 — Claude (Bilservice rebuilt from scratch — third page identity)
 - Magnus supplied a final mockup + a very detailed implementation brief for `/service-reparationer` (Bilservice): "clean automotive advertising / ownership confidence" — a third visual identity, explicitly distinct from both `index.css`'s `.services-page__*` system and the teal-technical `ServiceGuideTemplate.css` used by Koppling/Avgassystem/Oljebyte/Bromssystem. Priority was visual fidelity to the mockup's macro geometry (section heights, column ratios, colour proportions, card hierarchy) over creative reinterpretation.

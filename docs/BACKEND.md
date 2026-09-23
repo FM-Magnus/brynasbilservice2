@@ -35,8 +35,8 @@ These are facts about the live setup, not proposals. This is the only place they
 | Database | MySQL `fenrirm_brynasbilservice` on the same VPS |
 | Database from a laptop | SSH tunnel: `ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224` |
 | `server/.env` | Lives only on the server; never committed |
-| Automatic deploy | None active. The old workflow is kept on branch `legacy/pre-live-site-2026-09-09`; see `docs/deployment.md`. Don't re-enable it without agreeing on the `.htaccess` question below. |
-| Open conflict | `server/.htaccess` says port 3000 plus a `RewriteBase`; `docs/deployment.md` says 3001 with no `RewriteBase`. One of them is wrong — yours to settle. |
+| Automatic deploy | None active. An old workflow file sits at `client/.github/workflows/deploy.yml`, where GitHub never runs it (only root `.github/workflows/` counts); a copy is also on branch `legacy/pre-live-site-2026-09-09`. See `docs/ops/deployment.md`. Don't move or re-enable it without agreeing on the `.htaccess` question below. |
+| Open conflict | `server/.htaccess` says port 3000 plus a `RewriteBase`; `docs/ops/deployment.md` says 3001 with no `RewriteBase`. One of them is wrong — yours to settle. |
 
 ### Current API (`server/index.js`)
 
@@ -116,7 +116,7 @@ These are read-only observations of `server/index.js` as of this date.
 | b | `bookings.customer_name` is inserted but not in `schema.sql`; `schema.sql` is stale compared with the live DB. Please dump the live schema into the repo as the source of truth. | `server/database/schema.sql` |
 | c | A single `mysql.createConnection` with no reconnect. A pool (`mysql2.createPool`) would survive MySQL idle timeouts. | `server/index.js:21` |
 | d | No input validation or error middleware. | throughout |
-| e | Port / `RewriteBase` mismatch: `server/.htaccess` (3000 + RewriteBase) vs `docs/deployment.md` (3001, no RewriteBase). | yours to resolve |
+| e | Port / `RewriteBase` mismatch: `server/.htaccess` (3000 + RewriteBase) vs `docs/ops/deployment.md` (3001, no RewriteBase). | yours to resolve |
 | f | `comment_admin` is shown in the admin UI but there is no endpoint to save it. | admin bookings |
 
 ### 2.3 Booking request contract and the `comment_customer` fix
@@ -338,7 +338,7 @@ The public page needs, for each photo:
 
 **Storage:**
 
-- Deploy step 8 (`docs/deployment.md`) replaces `$DEPLOY_PATH/public/`, so uploads **must live outside `public/`**, for example `$DEPLOY_PATH/../brynas-uploads/vehicles/<vehicleId>/<imageId>-{main,thumb}.{webp,jpg}`.
+- Deploy step 8 (`docs/ops/deployment.md`) replaces `$DEPLOY_PATH/public/`, so uploads **must live outside `public/`**, for example `$DEPLOY_PATH/../brynas-uploads/vehicles/<vehicleId>/<imageId>-{main,thumb}.{webp,jpg}`.
 - Serve them at `/brynasbilservice/uploads/` through an Apache `Alias`, or `express.static`, with long cache headers. Filenames change when an image is replaced, so caching is safe.
 - Please include that folder in the backup, along with the DB.
 
@@ -420,7 +420,7 @@ These replace the open questions in §5.
 | Session store | `express-session` + `express-mysql-session` | A session can be revoked on logout and survives PM2 restarts; no extra services |
 | Image resizing | In the browser (§3.5) | No native image library on CentOS 7 |
 | Uploads location | `$DEPLOY_PATH/../brynas-uploads/` | Deploy step 6 wipes the whole `$DEPLOY_PATH`, so uploads must live outside it |
-| Uploads URL | `/brynasbilservice/api/uploads/...`, served by `express.static` | Apache already proxies `/api/*` to Express (`docs/deployment.md:31`), so **no Apache or `.htaccess` change is needed**. The contract is unaffected because the API returns full URLs. |
+| Uploads URL | `/brynasbilservice/api/uploads/...`, served by `express.static` | Apache already proxies `/api/*` to Express (`docs/ops/deployment.md:31`), so **no Apache or `.htaccess` change is needed**. The contract is unaffected because the API returns full URLs. |
 | Sold cars visible | 60 days | Proposal from §3.4 |
 | Schema changes | Numbered SQL files in `server/database/migrations/` (`001_…sql`), written with `IF NOT EXISTS`, run by hand, logged in a README there | Matches how the DB is managed today; no new tooling |
 
@@ -550,7 +550,7 @@ The test database is emptied and reseeded before each run.
 **Deploy:**
 
 1. Run the new migration files in order.
-2. Follow the existing steps in `docs/deployment.md`, which already preserve `.env`.
+2. Follow the existing steps in `docs/ops/deployment.md`, which already preserve `.env`.
 3. On the server, run `npm ci --omit=dev` under Node 16.
 4. Restart PM2.
 5. Run `node scripts/create-admin.js` twice: once for the owner, once for Magnus. Each person types their own password.

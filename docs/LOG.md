@@ -1,6 +1,6 @@
-# Current session log — Brynäs Bilservice
+# Work log — Brynäs Bilservice
 
-This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `archive/SESSION_LOG_ARCHIVE.md`.
+Dated entries, newest first — one per session, a few bullets each. **History, never instructions:** rules live in `AGENTS.md`, the current state in [`STATUS.md`](STATUS.md). When the oldest entries here are more than about two weeks old, move them to the top of [`archive/SESSION_LOG_ARCHIVE.md`](archive/SESSION_LOG_ARCHIVE.md). (Renamed from `SESSION_LOG_CURRENT.md` on 2026-09-23; entries below keep their original file names.)
 
 ### 2026-09-22 — Claude (Guide-family hero migration, Stötdämpare & fjädrar imagery, shared symptom-card CSS bugfix)
 

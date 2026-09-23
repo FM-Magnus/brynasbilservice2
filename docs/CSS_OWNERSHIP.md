@@ -207,4 +207,4 @@ For a page or shared-island change:
 2. Run `git diff --check`.
 3. Run `npm --prefix client run typecheck` and `npm --prefix client run build`.
 4. Use Playwright for every real-browser UI evaluation. Check 1440, 768 and 390 CSS pixels when UI changed; capture screenshots, verify zero horizontal overflow and exercise the affected interactions.
-5. Write the dated work note to `docs/SESSION_LOG_CURRENT.md`, not `AGENTS.md`.
+5. Write the dated work note to `docs/LOG.md`, not `AGENTS.md`.

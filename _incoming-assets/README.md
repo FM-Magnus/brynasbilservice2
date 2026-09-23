@@ -6,8 +6,10 @@ Den här mappen (`_incoming-assets/`) är den **lokala, Git-ignorerade källbild
 
 ## Grundregler för kodagenter
 
-1. **Platt struktur — inga undermappar:**
-   Alla källbilder ligger direkt i `_incoming-assets/`. Skapa inga interna underkategorier eller tillfälliga mappar.
+> **Hela bildflödet (mått per slot, namngivning, promptbibliotek, markup) står i [`docs/IMAGES.md`](../docs/IMAGES.md).** Den här filen gäller bara själva inkorgen.
+
+1. **Mappar är Magnus sak:**
+   Färdiga exporter att implementera läggs i `IMPLEMENT/`. Övriga undermappar (t.ex. `__UNDER CONSTRUCTION__/`) är Magnus arbetsyta — agenter skapar, flyttar eller sorterar inga mappar här och hämtar bara filer som Magnus pekar ut.
 
 2. **Bilder flyttas ENDAST vid aktiv kodimplementation:**
    Bilder i `_incoming-assets/` ska ligga kvar här tills en specifik kodprompt (en prompt som faktiskt implementerar en sida eller komponent) begär att bilden ska användas i koden.

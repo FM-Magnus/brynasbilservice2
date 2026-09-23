@@ -1,151 +1,96 @@
 # Brynäs Bilservice
 
-Website and booking system for Brynäs Bilservice — a local car repair shop in Gävle, Sweden.
+Website and booking system for Brynäs Bilservice — a car repair workshop in Gävle, Sweden.
 
 **Live:** <https://labb.fenrirmedia.se/brynasbilservice/>
 
-## Tech Stack
+This README is for people (Magnus, Johnny, any developer). AI tools read [`AGENTS.md`](AGENTS.md) instead.
+
+## Tech stack
 
 | Layer | Technology |
-| ------ | ----------- |
-| Frontend | React 18, TypeScript, Tailwind CSS 3, Vite 4 |
-| Backend | Node.js 16 (server), Express 4, JavaScript |
-| Database | MySQL / MariaDB |
-| Deployment | Production workflow unresolved; see [project status](docs/archive/PROJECT_STATUS.md) |
-| Process manager | PM2 (via fnm) |
-| Hosting | VPS at `194.14.207.224` behind Cloudflare |
+|---|---|
+| Frontend | React 18, TypeScript, Vite 4. Plain CSS with shared design tokens; Tailwind 3 only in `/admin` |
+| Backend | Node.js 16 on the server, Express 4, JavaScript |
+| Database | MySQL |
+| Hosting | VPS behind Cloudflare, PM2 via fnm — details in [`docs/BACKEND.md`](docs/BACKEND.md) |
 
-## Monorepo Structure
+## Folder structure
 
-```bash
-brynasbilservice/
-├── client/              # React frontend (Vite)
-│   ├── src/
-│   │   ├── api/         # Axios config
-│   │   ├── components/
-│   │   │   ├── admin/   # Admin components (BookingManagement, ServiceManagement, ProtectedRoute)
-│   │   │   ├── icons/   # SVG icon components
-│   │   │   ├── layout/  # Header, Footer
-│   │   │   ├── sections/# Page sections (Hero, Services, About, etc.)
-│   │   │   └── ui/      # Reusable UI (Button, SectionHeader)
-│   │   ├── context/     # React context (LanguageContext)
-│   │   ├── css/         # Stylesheets
-│   │   ├── pages/       # Public subpages and admin dashboard
-│   │   ├── translations/# sv.ts, en.ts
-│   │   ├── App.tsx
-│   │   └── main.tsx     # Router setup
-│   ├── vite.config.ts   # base: '/brynasbilservice/'
-│   └── package.json
-├── server/              # Express API (JavaScript, not TypeScript)
-│   ├── index.js         # All routes and middleware
-│   ├── database/        # Schema SQL
-│   └── package.json
-├── docs/                # Documentation
-│   ├── admin-panel.md
-│   ├── AGENT_HANDOFF.md
-│   ├── CSS_OWNERSHIP.md
-│   ├── PROJECT_STATUS.md
-│   ├── SESSION_LOG_CURRENT.md
-│   ├── deployment.md
-│   └── ssh-setup.md
-├── _incoming-assets/     # Git-ignored local image/graphics inbox; see its README
-├── AGENTS.md            # Bounded agent startup contract and current constraints
-├── CLAUDE.md            # Agent-specific working notes
-└── README.md
+```
+client/                   Frontend (React + Vite)
+  src/
+    main.tsx              App entry: routes and the four global stylesheets
+    pages/                One file (+ its own CSS) per public page; admin/ and landing/
+    components/           layout/ (header, footer), ui/ (shared cards), icons/, admin/, BookingForm
+    styles/               Design tokens, shared patterns, the Guide-family stylesheet
+    data/                 business.ts (phone, address, hours), vehicles.ts, gallery, navigation
+    api/  types/  hooks/  Data loaders, contracts, shared hooks
+    assets/images/        Finished web images · assets/galleri/ = gallery photos
+server/                   Express API — Johnny's (index.js, database/schema.sql)
+docs/                     Status, image workflow, CSS rules, design system, backend, ops
+_incoming-assets/         Git-ignored inbox for raw images
+_magnus/                  Magnus's personal notes
 ```
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 20+ (for local development)
-- npm
-- SSH access only when working with the remote database or server
-
-### Local Development
+## Running it locally
 
 ```bash
-# Start DB tunnel (if working with real data)
-ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224
-
-# Terminal 1 — backend
-cd server
-npm install
-npm run dev            # runs on localhost:3000
+# Terminal 1 — backend (only needed for booking and admin)
+cd server && npm install && npm run dev     # http://localhost:3000
 
 # Terminal 2 — frontend
-cd client
-npm install
-npm run dev            # runs on localhost:5173
+cd client && npm install && npm run dev     # http://localhost:5173
 ```
 
-The development frontend runs at `http://localhost:5173/` by default; Vite may select another port if 5173 is occupied. The client API configuration addresses the local Express server at `http://localhost:3000`.
+The public pages work without the backend; only booking and admin need it. The backend needs a database connection from `server/.env`; to use the live database from a laptop, open the SSH tunnel first (the command is in [`docs/BACKEND.md`](docs/BACKEND.md)). Without MySQL the API calls fail but the site still loads.
 
-### Build
+`server/.env` (never commit it):
+```
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+PORT=3000
+```
+
+## Building
 
 ```bash
-cd client && npm run build    # outputs to client/dist/
+cd client && npm run build      # outputs client/dist/
 ```
 
-## Database
+Building needs Node 18.17 or newer (it generates the gallery image sizes), so build on a laptop, never on the production server (Node 16). A build or a git push does **not** deploy anything — there is no automatic deploy. Deployment is Johnny's; see [`docs/BACKEND.md`](docs/BACKEND.md) and [`docs/ops/deployment.md`](docs/ops/deployment.md).
 
-| Field | Value |
-| ------ | ----------- |
-| Host | `localhost` (via SSH tunnel) |
-| Port | `3306` |
-| Database | `fenrirm_brynasbilservice` |
-| Username | `fenrirm_brynasbilservice` |
+## Everyday content changes
 
-The checked-in [`server/database/schema.sql`](server/database/schema.sql) is not a verified representation of the live database; Johnny owns reconciliation.
-Tables: **customers**, **bookings**, **services**.
+| To change… | Edit |
+|---|---|
+| Phone, e-mail, address, opening hours | `client/src/data/business.ts` — the only place; every page reads from it |
+| Cars for sale | `client/src/data/vehicles.ts`: add an entry and import its photos; mark sold with `status: 'sold'` + `soldAt`. The page layout adapts to the number of cars |
+| Gallery photos | Drop files into `client/src/assets/galleri/` (see `LÄSMIG.md` there). No people in gallery photos |
+| Page images | Follow [`docs/IMAGES.md`](docs/IMAGES.md) |
+| Page text | The page's own file in `client/src/pages/` (Swedish, hard-coded) |
 
-## Deployment
+## Admin panel
 
-There is no active repository-root GitHub Actions deployment workflow. The older [deployment notes](docs/deployment.md) describe an intended setup and conflict with `server/.htaccess` on port and rewrite behaviour. Magnus and Johnny must verify the production configuration before deployment work. A push alone does not deploy this branch.
+At `/admin`: view, filter and update bookings; add, edit and delete services. **The login (`admin` / `admin123`) is checked only in the browser and is not safe for production** — see [`docs/BACKEND.md`](docs/BACKEND.md) §2.1 and [`docs/ops/admin-panel.md`](docs/ops/admin-panel.md).
 
 ## Documentation
 
-- [Admin Panel](docs/admin-panel.md) — features, auth flow, API endpoints
-- [Project status](docs/archive/PROJECT_STATUS.md) — current routes, content, images, responsibilities and open decisions
-- [Image inbox](_incoming-assets/README.md) — local staging, naming and selection flow for raw photography and layout graphics
-- [Agent handoff](docs/AGENT_HANDOFF.md) — approved redesign baseline and preservation rules
-- [Session log](AGENTS.md) — recent work and known gaps
-- [Deployment](docs/deployment.md) — historical/intended architecture; verify before use
-- [SSH Setup](docs/ssh-setup.md) — key generation and server access
-
-## Working with AI assistants
-
-Magnus develops the frontend with help from AI coding assistants. Johnny owns the backend and deployment. The [project status](docs/archive/PROJECT_STATUS.md) describes the current division of work.
-
-### Documentation files — at a glance
-
-| File | Who it's for | What's in it |
+| File | For | What's in it |
 |---|---|---|
-| [`README.md`](README.md) | Anyone opening the repo | This file. High-level overview, tech stack, how to run it, links to deeper docs. |
-| [`instructions.md`](instructions.md) | Magnus (and any human dev) | Practical day-to-day reference: how to run locally, change content, build, deploy. No AI-specific stuff. |
-| [`CLAUDE.md`](CLAUDE.md) | AI assistants | Rules, ownership boundaries, architecture, the design system, API contract, known traps. AI tools read this once at session start. |
-| [`AGENTS.md`](AGENTS.md) | AI assistants (all of them) | Bounded startup contract and current constraints. Read first; do not append session logs. |
-| [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) | AI assistants | Approved redesign baseline and preservation rules. |
-| [`docs/archive/PROJECT_STATUS.md`](docs/archive/PROJECT_STATUS.md) | Everyone | Current page, copy, image and responsibility dashboard. |
-| [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) | AI assistants | Frozen legacy-CSS rule and route-to-stylesheet ownership map. |
-| [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md) | Everyone | New dated work notes; older history is archived separately. |
-| [`_incoming-assets/README.md`](_incoming-assets/README.md) | Magnus and frontend agents | Temporary, Git-ignored image/graphics intake and selection workflow. |
+| [`AGENTS.md`](AGENTS.md) | AI tools | The rules every AI assistant follows (`CLAUDE.md` / `GEMINI.md` just point to it) |
+| [`docs/STATUS.md`](docs/STATUS.md) | everyone | What's done, what's next, what's broken |
+| [`docs/IMAGES.md`](docs/IMAGES.md) | image work | How a page gets its pictures, per-page status |
+| [`docs/BACKEND.md`](docs/BACKEND.md) | Johnny | Production setup, current API, live database, backend proposals |
+| [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md), [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) | frontend | Which CSS file owns what; colours, fonts, shared patterns |
+| [`docs/ops/`](docs/ops/) | server work | Deployment, SSH setup, admin panel, git recovery |
+| [`docs/LOG.md`](docs/LOG.md) | anyone | Dated work notes, newest first |
+| [`docs/archive/`](docs/archive/) | history | Old handovers and logs — not instructions |
 
-### What this means in practice
+## Who owns what
 
-**For Johnny (backend):**
-- You don't need to use the AI tools — keep working in `server/` like you always have.
-- `AGENTS.md` lists `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, and `server/.env` as **"do not touch"** for AI assistants. They will not edit your files unless Magnus explicitly tells them to.
-- If you want to see what changed recently, read `docs/SESSION_LOG_CURRENT.md`; older history is in `docs/archive/SESSION_LOG_ARCHIVE.md`.
-- You're welcome to add backend entries to `docs/SESSION_LOG_CURRENT.md` using the same dated format.
-
-**For Magnus (frontend):**
-- Whichever AI tool you're using, it reads `AGENTS.md` first and `docs/CSS_OWNERSHIP.md` before CSS work. It writes the dated result to `docs/SESSION_LOG_CURRENT.md`, not back into `AGENTS.md`.
-- If a tool reminder still says to update `AGENTS.md`, interpret that as: refresh stale current-state wording without growing the file, then log the session in `docs/SESSION_LOG_CURRENT.md`.
-- If you switch tools mid-feature, the current session log gives the next tool the factual continuation context.
-
-### Ownership boundaries (also documented in CLAUDE.md)
-
-- **Magnus** — `client/src/`, frontend assets, CSS islands, components, the public site and admin UI; `client/src/css/index.css` remains frozen despite frontend ownership
-- **Johnny** — `server/index.js`, `server/database/`, `server/.htaccess`, `server/.env`, anything PM2/MySQL/Apache-related
-- AI assistants do not modify Johnny's files without explicit instruction from Magnus
+- **Magnus** — the frontend: `client/`, design, content, images.
+- **Johnny** — the backend: `server/index.js`, `server/database/`, `server/.htaccess`, `server/.env`, PM2/MySQL/Apache. AI assistants never edit these files unless Magnus explicitly asks.
+- Johnny doesn't need the AI tools. To see recent changes, read [`docs/LOG.md`](docs/LOG.md); backend entries in the same dated format are welcome there.
