@@ -18,6 +18,58 @@ When your endpoints respond as described in §3.4, the frontend switch is a sing
 
 ---
 
+## Reference: how it runs today
+
+These are facts about the live setup, not proposals. This is the only place they are written down. `AGENTS.md` and `CLAUDE.md` link here instead of copying them, so fix them here if something changes.
+
+### Production
+
+| Item | Value |
+|---|---|
+| Live URL | https://labb.fenrirmedia.se/brynasbilservice/ |
+| Server | VPS `194.14.207.224`. Traffic path: Cloudflare → nginx → Apache → Express |
+| Operating system | CentOS 7 (glibc 2.17), so the server **cannot run Node 18+**; it stays on **Node 16** |
+| Building the site | Needs Node ≥ 18.17 (image processing), so build on a laptop or in CI, never on the server |
+| Express port | **3001** in production (3000 is taken by another site), 3000 locally |
+| Process manager | PM2, installed via fnm |
+| Database | MySQL `fenrirm_brynasbilservice` on the same VPS |
+| Database from a laptop | SSH tunnel: `ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224` |
+| `server/.env` | Lives only on the server; never committed |
+| Automatic deploy | None active. The old workflow is kept on branch `legacy/pre-live-site-2026-09-09`; see `docs/deployment.md`. Don't re-enable it without agreeing on the `.htaccess` question below. |
+| Open conflict | `server/.htaccess` says port 3000 plus a `RewriteBase`; `docs/deployment.md` says 3001 with no `RewriteBase`. One of them is wrong — yours to settle. |
+
+### Current API (`server/index.js`)
+
+All routes return JSON. There is no request validation and no error middleware, so keep payloads tight.
+
+| Method | Route | Who can call it | Notes |
+|---|---|---|---|
+| GET | `/api/services` | anyone | — |
+| GET | `/api/available-dates` | anyone | reads `bookings WHERE available=1` |
+| POST | `/api/bookings` | anyone | body: `customerName, customerEmail, customerPhone, serviceId` (a number), `date` (`yyyy-MM-dd`, the local day — not a UTC timestamp), `time` (`HH:mm`), `comment_customer` (left out when empty; the server doesn't save it yet, see §2.3) |
+| GET | `/api/admin/bookings` | admin | — |
+| PUT | `/api/admin/bookings/:id` | admin | body `{ status }`: `pending`, `confirmed`, `completed`, `cancelled` or `erased` |
+| DELETE | `/api/admin/bookings/:id` | admin | soft delete: sets `status='erased'` |
+| GET / POST | `/api/admin/services` | admin | list / create |
+| PUT / DELETE | `/api/admin/services/:id` | admin | update / delete |
+| GET | `/api/admin/customers` | admin | — |
+
+- "Admin" today means the header `Authorization: Bearer admin-secret-token`, a fixed string anyone can send (§2.1).
+- `POST /api/bookings` reuses an existing customer when the **email** matches.
+- The frontend talks to the API through `client/src/api/axiosConfig.ts`: `http://localhost:3000` in development, `/brynasbilservice` in production.
+
+### The live database is not what `schema.sql` says
+
+The live `bookings` table differs from `server/database/schema.sql`:
+- `service` is an **INT** (points at `services.id`); the schema says VARCHAR.
+- `available` (BOOLEAN) and `time` (TIME) exist; the schema is missing them.
+- `customer_name`, `comment_customer` and `comment_admin` exist; the schema is missing them.
+- The `status` ENUM includes `'erased'`; the schema is missing it.
+
+The live database is the truth. Nobody but Johnny edits `schema.sql`; §6.3 proposes dumping the live schema into the repo as `live-schema.sql`.
+
+---
+
 ## 1. How the frontend is built
 
 | Area | Where | Notes |

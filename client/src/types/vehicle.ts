@@ -1,4 +1,4 @@
-// Vehicle listing contract — mirrors docs/BACKEND_HANDOFF.md §3.4 exactly.
+// Vehicle listing contract — mirrors docs/BACKEND.md §3.4 exactly.
 // The static seed (data/vehicles.ts) and GET /api/vehicles both return this
 // shape, so the page never knows which source it is reading from.
 

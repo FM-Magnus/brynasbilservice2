@@ -1,4 +1,4 @@
-// Gallery image contract — mirrors docs/BACKEND_HANDOFF.md §7. The folder source
+// Gallery image contract — mirrors docs/BACKEND.md §7. The folder source
 // (data/gallery.ts) and GET /api/gallery both return this shape.
 
 export interface GalleryImageVariant {

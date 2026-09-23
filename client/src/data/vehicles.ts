@@ -13,7 +13,7 @@ import wheelThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-
 import wheelThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup-thumb.webp'
 
 // Static stock list, used while VITE_VEHICLES_SOURCE is 'static' (the default).
-// Same shape as GET /api/vehicles — see docs/BACKEND_HANDOFF.md §3.4.
+// Same shape as GET /api/vehicles — see docs/BACKEND.md §3.4.
 //
 // To add a car: import its photos above and add an entry below.
 // To mark a car sold: set status: 'sold' and soldAt to an ISO date.

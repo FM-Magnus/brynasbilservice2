@@ -53,7 +53,7 @@ src/
     BookingForm.tsx     — BookingFormModal (react-datepicker + react-time-picker)
   api/                  — axiosConfig.ts, vehicles.ts, gallery.ts (loaders; static source or API)
   data/                 — publicNavigation.ts, vehicles.ts (car stock), gallery.ts + galleryHelpers.ts
-  types/                — vehicle.ts, gallery.ts (contracts; see docs/BACKEND_HANDOFF.md)
+  types/                — vehicle.ts, gallery.ts (contracts; see docs/BACKEND.md)
   assets/galleri/       — gallery photos: drop in / delete a file (see LÄSMIG.md there)
   assets/images/        — final web-optimized image assets
   context/, translations/ — LanguageContext (sv/en)
@@ -82,7 +82,7 @@ All routes return JSON. No request validation, no error middleware — keep payl
 |---|---|---|---|
 | GET | `/api/services` | public | — |
 | GET | `/api/available-dates` | public | — (queries `bookings WHERE available=1`) |
-| POST | `/api/bookings` | public | `{ customerName, customerEmail, customerPhone, serviceId (number), date ('yyyy-MM-dd'), time ('HH:mm'), comment_customer? }` (contract: `docs/BACKEND_HANDOFF.md` §2.3) |
+| POST | `/api/bookings` | public | `{ customerName, customerEmail, customerPhone, serviceId (number), date ('yyyy-MM-dd'), time ('HH:mm'), comment_customer? }` (contract: `docs/BACKEND.md` §2.3) |
 | GET | `/api/admin/bookings` | admin | — |
 | PUT | `/api/admin/bookings/:id` | admin | `{ status }` (enum: `pending`, `confirmed`, `completed`, `cancelled`, `erased`) |
 | DELETE | `/api/admin/bookings/:id` | admin | soft-delete via status=`erased` |
@@ -90,7 +90,7 @@ All routes return JSON. No request validation, no error middleware — keep payl
 | PUT / DELETE | `/api/admin/services/:id` | admin | update / delete |
 | GET | `/api/admin/customers` | admin | — |
 
-Admin auth header: `Authorization: Bearer admin-secret-token` (hardcoded). **Security:** the admin login is checked only in the browser and the server accepts that fixed token from anyone — see `docs/BACKEND_HANDOFF.md` §2.1.
+Admin auth header: `Authorization: Bearer admin-secret-token` (hardcoded). **Security:** the admin login is checked only in the browser and the server accepts that fixed token from anyone — see `docs/BACKEND.md` §2.1.
 Customers are deduplicated by **email** in `POST /api/bookings`.
 
 ### Database reality (live DB ≠ schema.sql)

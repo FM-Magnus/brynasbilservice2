@@ -1,7 +1,7 @@
 /**
  * Booking contract — the body of `POST /api/bookings`.
  *
- * Source of truth for the server side is `docs/BACKEND_HANDOFF.md` §2.2 and the
+ * Source of truth for the server side is `docs/BACKEND.md` §2.2 and the
  * API table in `AGENTS.md`. Change this file and those two together.
  */
 export interface BookingRequest {
