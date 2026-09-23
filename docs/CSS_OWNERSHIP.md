@@ -56,6 +56,9 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 4. **"Guide" family (shared template)** — technical repair-guide pages, all structurally the same kind of page. There is only one guide template; the remaining six guides join the same one already proven on the first four, not a second template.
    - *Owner*: `ServiceGuideTemplate.css` (`.service-guide__*`).
    - *Hero trust row (2026-09-21)*: the three trust items in every guide hero use the shared `.bb-trust-row` pattern from `shared-elements.css`, with the same markup as the Bilservice-family heroes. `ServiceGuideTemplate.css` holds no trust-row rules; do not add a local one.
+   - *Full-bleed hero (2026-09-22)*: all ten guides use `.service-guide__hero-bg` (real `<picture>` behind a gradient), not the old split grid; `.service-guide__hero-media` / `.service-guide__hero-badge` are deleted. Per-photo crop via `.service-guide__hero-bg--pos-left`. Details in `DESIGN_SYSTEM.md` §2c.
+   - *Tips (2026-09-22)*: tip callouts use the global `.bb-tip` from `shared-elements.css`; `.service-guide__tip-strip` is deleted. The family owns only the spacing rule `.service-guide__intro-content > .bb-tip`. The Bilservice family's `.bilservice__repair-note` was folded into the same component (`.bilservice__price-grid + .bb-tip` owns its spacing).
+   - *Symptom rows*: `--featured` / `--urgent` colour rules use a doubled class (`.service-guide__symptom-row.service-guide__symptom-row--featured p`) because the plain `.service-guide__symptom-row p` rule is declared later with the same specificity — without the doubling it silently wins and greys out the text on coloured cards (live bug, fixed 2026-09-22). Keep the doubling. Their gradients come from the `--bb-color-featured-gradient-*` / `--bb-color-urgent-gradient-*` tokens, not hex.
    - *Pages on this template*: `Koppling` (`/koppling`), `Avgassystem` (`/avgassystem`), `Oljebyte` (`/oljebyte`), `Bromssystem` (`/bromssystem`), `Kamrem` (`/kamrem`), `Bilbatteri` (`/bilbatteri`), `Stötdämpare & fjädrar` (`/stodampare-fjadrar`), `Hjullagerbyte` (`/hjullagerbyte`), `Styrning & kulleder` (`/styrning-kulleder`), `Drivaxel & drivknutar` (`/drivaxel-drivknutar`).
 
 ## Active Status of Routes During Rebuilding
@@ -120,6 +123,16 @@ Two worked examples:
 - `shared-elements.css` sets `.bb-btn { ... }` and several islands restyle the same buttons
   through their own prefixed selectors. Where specificity ties, **source order** decides in
   the island's favour, because islands load after the global layer.
+
+**Rule for modifiers (added 2026-09-22 after a live bug):** a modifier that restyles a
+child — `.x--variant p` — has the *same* specificity (0,1,1) as the base `.x p`. If the
+base rule sits later in the file it silently wins, and nothing errors: this greyed out the
+text on every coloured Guide symptom card. Write the modifier with the base class doubled
+(`.x.x--variant p`, 0,2,1) or as parent-modifier + child-class (`.x--variant .x__title`,
+0,2,0) so it wins regardless of order. Existing correct examples:
+`.bilservice__symptom-grid.bilservice__symptom-grid--auto`, the Guide symptom rows,
+`.bargning-page__scenario-card--light .bargning-page__scenario-heading`,
+`.bb-tip .bb-eyebrow`. `check:css` does not detect this class of bug.
 
 `!important` appears 11 times. Nine are inside `prefers-reduced-motion` blocks and one is
 `.public-header__mobile-panel[hidden] { display: none !important }` — both idiomatic. Only
