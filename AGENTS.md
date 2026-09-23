@@ -90,7 +90,7 @@ Magnus asked for a structural review of the site against the research documents,
 Magnus wants the site's content deepened by drawing on two outside sources — a competitor reference pack (`/Users/magnusolsson/Documents/varverkstad-2026-09-09/`, a scrape of varverkstad.com) and a commissioned copywriting file (`> RESEARCH OUTPUTS/BBilservice/Copywriting för Brynäs Bilservice.txt` in his Drive). **Do not paste sentences from either source verbatim, including the commissioned file.** Borrow themes, structure and facts, then write original Swedish wording. This matters most for the varverkstad pack — reusing an actual competitor's marketing copy is a copyright and duplicate-content risk, and `varverkstad-2026-09-09/08-target-translation.md` already documents this as a hard rule from an earlier session ("Do not copy their copy, Swedish text strings"). Magnus confirmed this approach ("Skriv om varje text litegrann") after it was raised.
 
 ### Session history reference
-Full dated work logs and historical session notes are preserved in [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md) and [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md).
+Full dated work logs and historical session notes are preserved in [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md) and [`docs/archive/SESSION_LOG_ARCHIVE.md`](docs/archive/SESSION_LOG_ARCHIVE.md).
 
 ### Files agents should NOT touch
 - `server/index.js` — owned by Johnny (Magnus's brother), backend developer
@@ -146,7 +146,7 @@ All routes return JSON. No request validation, no error middleware, raw mysql2 c
 
 ## Legacy session log — moved
 
-The frozen 2026-09-15/16 entries that lived here were moved verbatim to [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md) on 2026-09-20. They mostly describe the deleted `index.css`; treat them as history.
+The frozen 2026-09-15/16 entries that lived here were moved verbatim to [`docs/archive/SESSION_LOG_ARCHIVE.md`](docs/archive/SESSION_LOG_ARCHIVE.md) on 2026-09-20. They mostly describe the deleted `index.css`; treat them as history.
 
 ## Documentation updates
 

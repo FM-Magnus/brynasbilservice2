@@ -102,7 +102,7 @@ Use a warm-white page surround, dark photographic cards, rounded corners, strong
 
 ## Completed work
 
-Phases 0 through 4 (baseline capture → header/hero/reviews → booking modal → About section → Services/ServiceList/WhyUs/EV → the full Biltjänster guide set) are done and approved. Session-by-session records live in [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) and [`SESSION_LOG_ARCHIVE.md`](SESSION_LOG_ARCHIVE.md); `AGENTS.md` is now a bounded startup contract and its embedded legacy log is frozen. `docs/redesign-phase-0/README.md` still holds the original Phase 0 mockup-to-component mapping.
+Phases 0 through 4 (baseline capture → header/hero/reviews → booking modal → About section → Services/ServiceList/WhyUs/EV → the full Biltjänster guide set) are done and approved. Session-by-session records live in [`SESSION_LOG_CURRENT.md`](SESSION_LOG_CURRENT.md) and [`archive/SESSION_LOG_ARCHIVE.md`](archive/SESSION_LOG_ARCHIVE.md); `AGENTS.md` is now a bounded startup contract and its embedded legacy log is frozen. `docs/archive/redesign-phase-0/README.md` still holds the original Phase 0 mockup-to-component mapping.
 
 ## Architecture and preservation rules
 

@@ -15,7 +15,7 @@ documentation evidence so a thumbnail can never be mistaken for a main image.
   viewer, hero or other main-image slot.
 - `client/src/assets/images/archive/` preserves old tracked exports. Nothing in
   that tree is a live production import or an approved image choice.
-- `_magnus/` and `docs/redesign-phase-0/captures/` are evidence/reference
+- `_magnus/` and `docs/archive/redesign-phase-0/captures/` are evidence/reference
   images, not website assets; they intentionally remain outside the production
   tree.
 
@@ -89,7 +89,7 @@ against the corresponding source file by checksum.
   the current website does not reference it.
 - `_magnus/REVIEWS/` contains the real Google-review screenshot evidence noted
   in `AGENTS.md`; other `_magnus/` images are Magnus's design/reference files.
-- `docs/redesign-phase-0/captures/` contains historical desktop, tablet and
+- `docs/archive/redesign-phase-0/captures/` contains historical desktop, tablet and
   mobile review captures. These are documentation, not runtime assets.
 
 ## Verification contract

@@ -377,7 +377,7 @@ These were the "frozen legacy recent session log" (2026-09-15 and 2026-09-16 ent
 
 ### Legacy recent session log (frozen)
 
-Do not append here. New entries belong in [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md); older history remains in [`docs/SESSION_LOG_ARCHIVE.md`](docs/SESSION_LOG_ARCHIVE.md).
+Do not append here. New entries belong in [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md); older history remains in this file.
 
 ### 2026-09-16 — Claude (Bilservice rebuilt from scratch — third page identity)
 - Magnus supplied a final mockup + a very detailed implementation brief for `/service-reparationer` (Bilservice): "clean automotive advertising / ownership confidence" — a third visual identity, explicitly distinct from both `index.css`'s `.services-page__*` system and the teal-technical `ServiceGuideTemplate.css` used by Koppling/Avgassystem/Oljebyte/Bromssystem. Priority was visual fidelity to the mockup's macro geometry (section heights, column ratios, colour proportions, card hierarchy) over creative reinterpretation.

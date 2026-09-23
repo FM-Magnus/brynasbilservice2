@@ -11,7 +11,7 @@ Website and booking system for Brynäs Bilservice — a local car repair shop in
 | Frontend | React 18, TypeScript, Tailwind CSS 3, Vite 4 |
 | Backend | Node.js 16 (server), Express 4, JavaScript |
 | Database | MySQL / MariaDB |
-| Deployment | Production workflow unresolved; see [project status](docs/PROJECT_STATUS.md) |
+| Deployment | Production workflow unresolved; see [project status](docs/archive/PROJECT_STATUS.md) |
 | Process manager | PM2 (via fnm) |
 | Hosting | VPS at `194.14.207.224` behind Cloudflare |
 
@@ -106,7 +106,7 @@ There is no active repository-root GitHub Actions deployment workflow. The older
 ## Documentation
 
 - [Admin Panel](docs/admin-panel.md) — features, auth flow, API endpoints
-- [Project status](docs/PROJECT_STATUS.md) — current routes, content, images, responsibilities and open decisions
+- [Project status](docs/archive/PROJECT_STATUS.md) — current routes, content, images, responsibilities and open decisions
 - [Image inbox](_incoming-assets/README.md) — local staging, naming and selection flow for raw photography and layout graphics
 - [Agent handoff](docs/AGENT_HANDOFF.md) — approved redesign baseline and preservation rules
 - [Session log](AGENTS.md) — recent work and known gaps
@@ -115,7 +115,7 @@ There is no active repository-root GitHub Actions deployment workflow. The older
 
 ## Working with AI assistants
 
-Magnus develops the frontend with help from AI coding assistants. Johnny owns the backend and deployment. The [project status](docs/PROJECT_STATUS.md) describes the current division of work.
+Magnus develops the frontend with help from AI coding assistants. Johnny owns the backend and deployment. The [project status](docs/archive/PROJECT_STATUS.md) describes the current division of work.
 
 ### Documentation files — at a glance
 
@@ -126,7 +126,7 @@ Magnus develops the frontend with help from AI coding assistants. Johnny owns th
 | [`CLAUDE.md`](CLAUDE.md) | AI assistants | Rules, ownership boundaries, architecture, the design system, API contract, known traps. AI tools read this once at session start. |
 | [`AGENTS.md`](AGENTS.md) | AI assistants (all of them) | Bounded startup contract and current constraints. Read first; do not append session logs. |
 | [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) | AI assistants | Approved redesign baseline and preservation rules. |
-| [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) | Everyone | Current page, copy, image and responsibility dashboard. |
+| [`docs/archive/PROJECT_STATUS.md`](docs/archive/PROJECT_STATUS.md) | Everyone | Current page, copy, image and responsibility dashboard. |
 | [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) | AI assistants | Frozen legacy-CSS rule and route-to-stylesheet ownership map. |
 | [`docs/SESSION_LOG_CURRENT.md`](docs/SESSION_LOG_CURRENT.md) | Everyone | New dated work notes; older history is archived separately. |
 | [`_incoming-assets/README.md`](_incoming-assets/README.md) | Magnus and frontend agents | Temporary, Git-ignored image/graphics intake and selection workflow. |
@@ -136,7 +136,7 @@ Magnus develops the frontend with help from AI coding assistants. Johnny owns th
 **For Johnny (backend):**
 - You don't need to use the AI tools — keep working in `server/` like you always have.
 - `AGENTS.md` lists `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, and `server/.env` as **"do not touch"** for AI assistants. They will not edit your files unless Magnus explicitly tells them to.
-- If you want to see what changed recently, read `docs/SESSION_LOG_CURRENT.md`; older history is in `docs/SESSION_LOG_ARCHIVE.md`.
+- If you want to see what changed recently, read `docs/SESSION_LOG_CURRENT.md`; older history is in `docs/archive/SESSION_LOG_ARCHIVE.md`.
 - You're welcome to add backend entries to `docs/SESSION_LOG_CURRENT.md` using the same dated format.
 
 **For Magnus (frontend):**

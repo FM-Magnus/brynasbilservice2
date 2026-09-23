@@ -35,7 +35,7 @@ Starts Vite at `http://localhost:5173/` by default; it may choose another port i
 cd client
 npm run build
 ```
-This produces a local `client/dist/` build. Production deployment is a separate Johnny-owned task. The former automatic workflow is not active, and the checked-in deployment notes conflict with `server/.htaccess`; see [project status](docs/PROJECT_STATUS.md) before planning a release.
+This produces a local `client/dist/` build. Production deployment is a separate Johnny-owned task. The former automatic workflow is not active, and the checked-in deployment notes conflict with `server/.htaccess`; see [project status](docs/archive/PROJECT_STATUS.md) before planning a release.
 
 ---
 

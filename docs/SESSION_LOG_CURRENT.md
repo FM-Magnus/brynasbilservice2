@@ -1,6 +1,6 @@
 # Current session log — Brynäs Bilservice
 
-This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `SESSION_LOG_ARCHIVE.md`.
+This file receives new dated session entries, newest first. It is not a mandatory startup read. Stable rules and current constraints belong in `AGENTS.md`; older history belongs in `archive/SESSION_LOG_ARCHIVE.md`.
 
 ### 2026-09-22 — Claude (Guide-family hero migration, Stötdämpare & fjädrar imagery, shared symptom-card CSS bugfix)
 

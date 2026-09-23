@@ -18,7 +18,7 @@ Two developers:
 - **Local dev port:** Express runs on **3000**
 - **Process manager:** PM2 via fnm
 - **Checked-in `server/.htaccess`:** contains an API proxy and SPA fallback, but its port/rewrite rules conflict with `docs/deployment.md`; live behaviour is unverified
-- **Auto-deploy:** No active repository-root workflow; see [current project status](docs/PROJECT_STATUS.md). Deployment needs Magnus and Johnny's review.
+- **Auto-deploy:** No active repository-root workflow; see [current project status](docs/archive/PROJECT_STATUS.md). Deployment needs Magnus and Johnny's review.
 - **Database access for local dev:** SSH tunnel required —
   `ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224`
 
