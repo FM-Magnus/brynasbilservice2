@@ -49,7 +49,7 @@ Read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) before any CSS task.
 
 `npm --prefix client run dev | typecheck | check:css | build | test:browser` — dev server on :5173, API on :3000 (`cd server && npm run dev`). Building needs Node ≥ 18.17; never build on the production server. `vite build` does not typecheck — run `typecheck` too (0 errors). The stack is React 18 / Tailwind 3 / Vite 4: never generate React 19 or Tailwind v4 (`@theme`) code.
 
-The pre-commit hook (`.githooks/pre-commit`) blocks: growth of `AGENTS.md`, `CLAUDE.md` and `GEMINI.md`; a failing `check:css` (unresolved `var(--bb-*)`, legacy tokens, inline `style=`); Tailwind utilities in public TSX. `tests/browser/hero.spec.ts` guards the header/hero clearance.
+The pre-commit hook (`.githooks/pre-commit`) blocks: growth of `AGENTS.md`; `CLAUDE.md`/`GEMINI.md` that stop routing here (must start with the import line, max 12 lines, no `##` sections); a failing `check:css` (unresolved `var(--bb-*)`, legacy tokens, inline `style=`); Tailwind utilities in public TSX. `tests/browser/hero.spec.ts` guards the header/hero clearance.
 
 Verify every visible change in the browser at 1440, 768 and 390 px with zero horizontal overflow. Measurement scripts and traps: [`docs/audit-harness/README.md`](docs/audit-harness/README.md).
 

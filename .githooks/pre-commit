@@ -48,6 +48,59 @@ check_max_lines () {
   fi
 }
 
+# CLAUDE.md and GEMINI.md must stay pure routers to AGENTS.md, the one
+# contract for every AI tool. Checked on every commit (not only when the file
+# is staged), against the staged version, so deleting or renaming AGENTS.md
+# is caught too. Limits are absolute, not "no growth", so they can't ratchet.
+check_router () {
+  local file="$1"
+  local import_line="$2"
+  local max="$3"
+
+  if ! git cat-file -e :AGENTS.md 2>/dev/null; then
+    echo ""
+    echo "BLOCKED: AGENTS.md is missing from the commit. It is the canonical contract that $file routes to."
+    echo ""
+    BLOCKED=1
+    return
+  fi
+
+  if ! git cat-file -e :"$file" 2>/dev/null; then
+    echo ""
+    echo "BLOCKED: $file is missing. It must exist and route to AGENTS.md (first line: $import_line)."
+    echo ""
+    BLOCKED=1
+    return
+  fi
+
+  local content first lines
+  content=$(git show :"$file")
+  first=$(printf '%s\n' "$content" | grep -v '^[[:space:]]*$' | head -n 1)
+  lines=$(printf '%s\n' "$content" | wc -l | tr -d ' ')
+
+  if [ "$first" != "$import_line" ]; then
+    echo ""
+    echo "BLOCKED: $file must start with the line: $import_line"
+    echo "(found: $first). That import is what makes the tool load AGENTS.md."
+    echo ""
+    BLOCKED=1
+  fi
+  if [ "$lines" -gt "$max" ]; then
+    echo ""
+    echo "BLOCKED: $file has $lines lines (limit $max). It is a router only —"
+    echo "put project rules and facts in AGENTS.md, not here."
+    echo ""
+    BLOCKED=1
+  fi
+  if printf '%s\n' "$content" | grep -qE '^##[[:space:]]'; then
+    echo ""
+    echo "BLOCKED: $file contains a '## ' section. Routers hold no project content;"
+    echo "sections belong in AGENTS.md or a docs/ file."
+    echo ""
+    BLOCKED=1
+  fi
+}
+
 check_css_layer () {
   echo "$STAGED" | grep -qE '^client/(src/|scripts/check-css\.mjs|package\.json)' || return 0
   command -v node >/dev/null 2>&1 || return 0
@@ -84,8 +137,8 @@ check_no_tailwind_in_public () {
 }
 
 check_no_growth "AGENTS.md" "AGENTS.md is the bounded contract for every AI tool. Replace wording instead of adding; work notes belong in docs/LOG.md, current state in docs/STATUS.md."
-check_no_growth "CLAUDE.md" "CLAUDE.md only imports AGENTS.md. Put project rules in AGENTS.md, not here."
-check_no_growth "GEMINI.md" "GEMINI.md only points to AGENTS.md. Put project rules in AGENTS.md, not here."
+check_router "CLAUDE.md" "@AGENTS.md" 12
+check_router "GEMINI.md" "@./AGENTS.md" 12
 check_max_lines "docs/STATUS.md" 120 "STATUS.md is the current state only. Replace outdated lines instead of adding; history belongs in docs/LOG.md."
 check_css_layer
 check_no_tailwind_in_public

@@ -1,3 +1,5 @@
-# Gemini / Antigravity — read AGENTS.md
+@./AGENTS.md
 
-Every project rule, fact and boundary for this repository is in [`AGENTS.md`](AGENTS.md). Read it first, then [`docs/STATUS.md`](docs/STATUS.md). Don't add project content here; this file may not grow.
+# Gemini / Antigravity — router only
+
+Every project rule, fact and boundary is in [`AGENTS.md`](AGENTS.md) (imported above); then read [`docs/STATUS.md`](docs/STATUS.md). Don't add project content here — the pre-commit hook blocks it.
