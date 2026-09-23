@@ -41,6 +41,8 @@
 
 ## Open decisions and cautions
 
+- **Pending from 2026-09-23 (awaiting Magnus):** (1) add a "Gemini / Antigravity scope" section to `AGENTS.md` — one page and its own files only, never shared CSS/tokens/`business.ts`/docs rules/server, no git commands, no deleting or installing, leave changes uncommitted for Claude or Codex to review (must replace wording: `AGENTS.md` can't grow); (2) trial Codex for image generation on Bromssystem, only if Codex can call the GPT image model in-session; (3) optionally soft-reset and redo the last unpushed commits — `512e7b6d` is labelled "hooks" but also carries the doc moves and the `instructions.md` deletion; (4) push the 10 local commits.
+
 - **Research documents** (Magnus's Drive, `> RESEARCH OUTPUTS/BBilservice/`): an IA/trust spec written for Astro (its IA and trust chapters transfer, the tech doesn't) and a Gävle competitor analysis. Their facts about Brynäs are wrong in places (owner name, opening hours) — verify with Magnus before using any.
 - **Paused design review** against that spec: the headline gap (company-presenting nav vs. symptom-based `/problem/*` entry points) is not addressed. The repeated 3-step "Så fungerar det" block is still an open observation. Next suggestion not presented yet.
 - **Hygiene backlog (needs Magnus first):** the 2.1 MB unused `client/src/assets/images/archive/home-heros/`; root `*.disabled` files and orphan root `package-lock.json`; unused deps `classnames`, `@types/axios`; two `console.log`s printing bookings in `components/admin/BookingManagement.tsx`; ~18 exports unused outside their file; page boilerplate (`isModalOpen` in 18 pages).
