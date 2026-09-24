@@ -45,7 +45,7 @@ All routes return JSON. There is no request validation and no error middleware, 
 | Method | Route | Who can call it | Notes |
 |---|---|---|---|
 | GET | `/api/services` | anyone | — |
-| GET | `/api/available-dates` | anyone | reads `bookings WHERE available=1` |
+| GET | `/api/available-dates` | anyone | reads `bookings WHERE available=1`; not called by the current frontend |
 | POST | `/api/bookings` | anyone | body: `customerName, customerEmail, customerPhone, serviceId` (a number), `date` (`yyyy-MM-dd`, the local day — not a UTC timestamp), `time` (`HH:mm`), `comment_customer` (left out when empty; the server doesn't save it yet, see §2.3) |
 | GET | `/api/admin/bookings` | admin | — |
 | PUT | `/api/admin/bookings/:id` | admin | body `{ status }`: `pending`, `confirmed`, `completed`, `cancelled` or `erased` |
@@ -81,7 +81,7 @@ The live database is the truth. Nobody but Johnny edits `schema.sql`; §6.3 prop
 | Public pages | `client/src/pages/*.tsx` | Page content is **hardcoded in the TSX**, except for bookings. The site works with no backend apart from the booking form. |
 | Styling | Colocated `<Page>.css` files, plus `client/src/styles/design-tokens.css` and `shared-elements.css` | Not relevant to the backend. `client/src/css/index.css` was deleted on 2026-09-19. |
 | Admin | `/admin` → `client/src/pages/admin/Dashboard.tsx`, `client/src/components/admin/*` | Tabs: Bookings, Services. We will add a **Vehicles** tab (§3.6). |
-| Booking | `client/src/components/BookingForm.tsx` | Calls `GET /api/services`, `GET /api/available-dates`, `POST /api/bookings`. |
+| Booking | `client/src/components/BookingForm.tsx` → `BookingFormModalImpl.tsx` | Calls `GET /api/services` and `POST /api/bookings`. If services fail to load or come back empty, the modal shows a notice with the phone number. |
 
 Commands: `npm --prefix client run dev | typecheck | build | test:browser`.
 
@@ -118,6 +118,7 @@ These are read-only observations of `server/index.js` as of this date.
 | d | No input validation or error middleware. | throughout |
 | e | Port / `RewriteBase` mismatch: `server/.htaccess` (3000 + RewriteBase) vs `docs/ops/deployment.md` (3001, no RewriteBase). | yours to resolve |
 | f | `comment_admin` is shown in the admin UI but there is no endpoint to save it. | admin bookings |
+| g | No contact endpoint. The contact forms open a pre-filled e-mail to `info@brynasbilservice.se` (`client/src/api/contact.ts`); a `POST /api/contact` would replace that one module. | contact forms |
 
 ### 2.3 Booking request contract and the `comment_customer` fix
 

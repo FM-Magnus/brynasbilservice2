@@ -41,8 +41,8 @@ Exempel:
 
 ## Befordrade produktionsbilder (Historik)
 
-Följande källmaterial har tidigare optimerats och satts i produktion:
-- **Maher-porträtt**: `client/src/assets/images/people/maher-basher-portrait.webp` + `.jpg` (används på `/om-oss`).
+Följande källmaterial har tidigare optimerats och satts i produktion. Listan är historik: vissa filer har sedan bytts ut eller tagits bort, och aktuell status finns i [`docs/IMAGES.md`](../docs/IMAGES.md).
+- **Maher-porträtt**: `client/src/assets/images/people/maher-basher-portrait.webp` + `.jpg` (användes tidigare på `/om-oss`).
 - **Verkstadsbilder för galleri och teaser**: Elva källbilder i `client/src/assets/images/gallery/workshop/` (1920px huvudvy, 640px `-thumb`, 1280px `-card` för teaser).
 - **Startsideshero**: Komprimerat WebP/JPG-par i `client/src/assets/images/home/landing-v2/landing-sundown-hero.{webp,jpg}`.
 - **Peugeot 307 CC**: Optimerade WebP/JPG-versioner och `-thumb`-par i `client/src/assets/images/vehicles/peugeot-307-cc/`.

@@ -18,7 +18,7 @@ successful authentication, the dashboard replaces the form without a URL change.
 - Username: `admin`
 - Password: `admin123`
 
-*In production, implement proper server-side authentication with hashed passwords.*
+**Security (P0):** these credentials are checked only in the browser, and the server accepts the fixed token `admin-secret-token` from anyone. See [`docs/BACKEND.md`](../BACKEND.md) §2.1 and the "Broken" list in [`docs/STATUS.md`](../STATUS.md). Since 2026-09-24 the check loads only when `/admin` is opened, not in the public entry bundle.
 
 ## Features
 
@@ -28,7 +28,7 @@ successful authentication, the dashboard replaces the form without a URL change.
 - Search bookings by customer name or service
 - Filter bookings by status (Pending, Confirmed, Completed, Cancelled)
 - Update booking status via dropdown
-- Delete bookings
+- Delete bookings (a soft delete: the server sets `status='erased'`, and erased bookings are hidden from the list)
 
 Each booking shows: customer name, service, date, time, status, and actions.
 

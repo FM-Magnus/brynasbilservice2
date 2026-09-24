@@ -1,36 +1,25 @@
-# Brynäs Bilservice Client
+# Brynäs Bilservice — client
 
-React frontend for Brynäs Bilservice, built with TypeScript, Tailwind CSS, and Vite.
-
-## Getting Started
+React 18 + Vite 4 + TypeScript frontend. Project overview, running and building: the root [`README.md`](../README.md). Rules for AI tools: [`AGENTS.md`](../AGENTS.md).
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173/brynasbilservice/
-npm run build    # outputs to dist/
+npm run dev           # http://localhost:5173/
+npm run typecheck     # vite build does not typecheck
+npm run check:css
+npm run build         # outputs dist/; needs Node 18.17 or newer
+npm run test:browser  # Playwright at 1440/768/390
 ```
 
-## Vite Configuration
+## Base path
 
-The Vite `base` is set to `/brynasbilservice/` in `vite.config.ts`. This means
-all built asset paths are prefixed with `/brynasbilservice/assets/...`, matching
-the production URL structure.
+`vite.config.ts` serves the app at `/` in dev and builds it for `/brynasbilservice/`; `main.tsx` sets the router `basename` to match. Internal links must therefore be `<Link to="/…">`: a plain `<a href="/…">` works in dev but leaves the app on the live site. `tests/browser/internal-links.spec.ts` guards this.
 
-## Routing
+## Where things live
 
-React Router uses `basename="/brynasbilservice"` (set in `main.tsx`). Routes:
-
-- `/` — public landing page
-- `/admin` — admin panel (login form if unauthenticated, dashboard if authenticated)
-
-## API Calls
-
-Axios is configured in `src/api/axiosConfig.ts`:
-
-- **Development:** `http://localhost:3000` (direct to Express)
-- **Production:** `/brynasbilservice` (proxied by Apache `.htaccess` to Express on port 3001)
-
-## Translations
-
-Bilingual support (Swedish/English) via `src/translations/sv.ts` and `en.ts`,
-managed through `LanguageContext`.
+- **Routes:** `src/main.tsx`. Every route is lazy, wrapped in `RouteErrorBoundary`, with a `*` route to `NotFoundPage`.
+- **Navigation:** `src/data/publicNavigation.ts` (header and footer). **Business facts:** `src/data/business.ts` only.
+- **CSS:** plain CSS islands on `--bb-*` tokens; Tailwind only under `/admin`. Ownership: [`docs/CSS_OWNERSHIP.md`](../docs/CSS_OWNERSHIP.md).
+- **API client:** `src/api/axiosConfig.ts`. Development calls `http://localhost:3000`; production calls `/brynasbilservice/api/…`, which Apache proxies to Express ([`docs/BACKEND.md`](../docs/BACKEND.md)).
+- **Contact forms:** `src/api/contact.ts` opens a pre-filled e-mail until a backend endpoint exists.
+- **Translations** (`src/translations/`, `LanguageContext`): used by the admin panel only. Public pages are Swedish and hard-coded.

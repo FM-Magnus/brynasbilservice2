@@ -5,7 +5,7 @@ Small, read-only scripts that measure the live site so a visual or structural ch
 ## Prerequisites
 
 - Dev server running: `npm --prefix client run dev` (port 5173).
-- Google Chrome installed. Playwright's own browser may not be (it was not on this machine); every script launches `channel: 'chrome'`. For the repo's Playwright suite use `npx playwright test -c ../docs/audit-harness/pw.config.ts` from `client/`. Do not edit `client/playwright.config.ts` for this.
+- Google Chrome installed. Playwright's own browser may not be installed (`npx playwright install chromium`, installed on this machine 2026-09-24); every script launches `channel: 'chrome'`. For the repo's Playwright suite use `npx playwright test -c ../docs/audit-harness/pw.config.ts` from `client/`. Do not edit `client/playwright.config.ts` for this.
 - Run scripts from the **repo root** (or set `REPO`). Set `S` to a scratch output folder outside the repo, e.g. `S=/tmp/audit`, and create the subfolders a script writes to:
   `mkdir -p $S/hero-phase0/snap $S/hero-phase0/shots2 $S/icons-phase0/snap $S/inline-phase0/dom`
 - The scripts mock `/api/*` with empty JSON and parse the route list from `client/src/main.tsx`, so they cover every public route.

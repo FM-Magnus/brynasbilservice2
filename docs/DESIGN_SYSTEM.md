@@ -77,12 +77,12 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
    - Renders at document root via React Portal (`z-index: 100`) so it clears all hero and stacking contexts.
    - Fixed floating layout with desktop navigation bar, Biltjänster dropdown (driven by [`publicNavigation.ts`](../client/src/data/publicNavigation.ts)), compact desktop navigation from 1001–1320px, and an accessible mobile slide-down panel at 1000px and below.
 2. **`PublicFooter`** ([`client/src/components/layout/PublicFooter.tsx`](../client/src/components/layout/PublicFooter.tsx) + [`PublicFooter.css`](../client/src/components/layout/PublicFooter.css)):
-   - 4-column automotive footer matching Magnus's approved mockup (`media_1789659344071.png`).
+   - 4-column automotive footer matching Magnus's approved mockup (the image is not in the repo).
    - Column 1: Centered brand logo (`66px`), white subheader `— DIN LOKALA BILVERKSTAD I BRYNÄS, GÄVLE`, 3 trust badges (*Tryggt och enkelt*, *Personlig service*, *Erfarna mekaniker*), centered amber script signature *"Vi håller din bil i rullning!"*.
-   - Column 2: 9 Snabba länkar with right-pointing interactive chevrons (`›`).
+   - Column 2: Snabba länkar, the top-level items of `publicNavigation` (same as the header), with chevrons (`›`).
    - Column 3: 4 dark-teal contact badge cards (Telefon, E-post, Besöksadress, Google Maps link).
    - Column 4: Vertically centered amber clock with verified hours (Mån–Fre 08:00–17:00), cyan `BOKA TID →` button, and direct phone link `RING OSS: 070-553 33 95`.
-   - Sub-footer: Dynamic copyright, workshop tagline, Facebook + Instagram links, legal notice.
+   - Sub-footer: dynamic copyright with the legal name and org.nr (from `business.ts`), workshop tagline, Facebook + Instagram links and the site credit. The Integritetspolicy and Cookies links were removed on 2026-09-24 until a real page exists; the Instagram button still points at instagram.com's front page (needs an account or removal).
    - Background: Atmospheric automotive wheel asset (`footer-wheel-bg.webp`, 116 KB) on deep `#061518` background.
 3. **`GalleryTeaserCard`** ([`client/src/components/ui/GalleryTeaserCard.tsx`](../client/src/components/ui/GalleryTeaserCard.tsx) + [`GalleryTeaserCard.css`](../client/src/components/ui/GalleryTeaserCard.css)):
    - Standalone Ken Burns workshop slideshow card with single-source `defaultWorkshopSlides` array.
@@ -96,7 +96,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
      - `variant="card"`: Elevated dark-ink card (`#0d1f22`) with border and floating shadow for standard page body or sidebar placement.
    - The hero-overlay variant appears in the heroes on Landing, Om oss, Bilservice, Felsökning, Däckservice and Kontakt. The card variant remains in the page flow on AC-service. Page-level link resets require the owning page CSS to preserve light text on the overlay or card.
 5. **`ContactFormCard`** ([`client/src/components/ui/ContactFormCard.tsx`](../client/src/components/ui/ContactFormCard.tsx) + [`ContactFormCard.css`](../client/src/components/ui/ContactFormCard.css)):
-   - Centralized Single Source of Truth for contact topics/subjects (`defaultContactSubjects = ['Bilservice & oljebyte', 'Reparation & felsökning', 'Däckservice & hjulinställning', 'AC-service', 'Bärgning & transport', 'Övrigt']`), direct phone/email/address details, and submission states.
+   - Centralized Single Source of Truth for contact topics/subjects (`defaultContactSubjects = ['Bilservice & oljebyte', 'Reparation & felsökning', 'Däckservice & hjulinställning', 'AC-service', 'Bärgning & transport', 'Övrigt']`), direct phone/email/address details, and submission states. Until a `/api/contact` endpoint exists, submitting opens a pre-filled e-mail through `client/src/api/contact.ts` (the Kontakt page's own form uses the same helper).
    - Dual variants:
      - `variant="full-section"`: Two-column conversion section with background decorative brand art, left contact info column, and right form card.
      - `variant="card-only"`: Standalone teal-gradient contact form card, perfectly suited for embedding in subpages, service guides, or modal flows.
@@ -111,7 +111,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
   - **`.bb-btn--ember`** ("ember_button") — dark surfaces only. Transparent-to-amber horizontal gradient (faint), amber border; hover intensifies the fill.
   - **`.bb-btn--ember-solid`** — light surfaces only (warm-white page, white card). Solid two-tone diagonal amber gradient, neutral drop shadow, slight inset bevel — a different treatment from `--ember`, not a lighter version of it, since there's no dark backdrop for a transparent gradient to blend into.
 - **`.bb-eyebrow`, `.bb-eyebrow--dark`** — bakes in the dark-surface rule: dash stays amber, text turns white. `--dark` is for dark surfaces only, never on the light page background.
-- **`.bb-h1`, `.bb-h2`** — Archivo 800, **mixed case** (not uppercase — this is Landing's actual rule; Kontakt/Biltjänster/Bilservice currently uppercase their H1s and are the ones that need to change, not Landing).
+- **`.bb-h1`, `.bb-h2`** — Archivo 800, **mixed case** (not uppercase — this is Landing's actual rule; Kontakt and Bilservice follow it, Biltjänster's `.biltjanster-hub__title` still uppercases its H1).
 - **`.bb-accent`** — teal inline word-highlight inside a heading; same color on light or dark surfaces.
 - **`.bb-lead`, `.bb-lead--dark`** — muted body-text color for light/dark surfaces; font-size/line-height stay contextual per page.
 - **`.bb-card--photo`** — dark image card shell (photo + bottom gradient scrim), caller supplies the `<img>`/content.
@@ -144,7 +144,7 @@ Both Landing (`/`) and Bilservice (`/service-reparationer`) now actively consume
 - **Size and colour are never in the icon.** Colour is `currentColor`. Size comes from the consumer's own island (`.bargning-page__hero-trust-icon svg`) or a shared pattern (`.bb-btn svg`, `.bb-card-arrow svg`, `.bb-icon-badge svg`, `.bb-icon-bare svg`).
 - **CSS beats SVG attributes.** Where a rule sets `stroke`, `stroke-width`, `fill` or linecap on `svg`, that rule owns the value. Today that is only `PublicHeader.css`, so the header's five icons stay local and attribute-free; a shared icon with its own attributes would state the same value twice.
 - **Adding or swapping an icon:** search the CSS for rules that touch `svg` in that context, then render the old and new drawing at the size actually used and compare before committing.
-- **Still local, by decision (2026-09-20):** the header's five icons (`PublicHeader.css` owns their paint); Landing's chat, shield, clock and car (the shared shield has no check mark and `CarSaleIcon` is a different glyph); ContactPage's chevron; and one-offs in Bärgning (4) and Om oss (6). Phone, pin, arrow and check are deduplicated: the shared drawings won for phone, arrow and check, and `MapPinIcon` carries the footer pin's shape.
+- **Still local, by decision (2026-09-20):** the header's five icons (`PublicHeader.css` owns their paint); Landing's chat, shield, clock and car (the shared shield has no check mark and `CarSaleIcon` is a different glyph), plus its service-graphic `TireIcon` and `EngineIcon` (2026-09-24; stroke 1.7/1.8, the only icons off the stroke-2 standard); ContactPage's chevron; and one-offs in Bärgning (4) and Om oss (6). Phone, pin, arrow and check are deduplicated: the shared drawings won for phone, arrow and check, and `MapPinIcon` carries the footer pin's shape.
 - **Open:** round caps on the 22 butt-cap icons, and whether Landing's four local icons should get shared equivalents.
 
 ### 2c. Hero geometry (steps 1-3 done; step 3 on 2026-09-21)
@@ -154,9 +154,9 @@ Both Landing (`/`) and Bilservice (`/service-reparationer`) now actively consume
 - **Why:** the old top padding (141-173px) was sized for the 122px header at 1440 wide; below 1321px the header is 80px. Measured before the change: at 1280x720, 18 of 21 heroes were taller than the screen, and for 19 of 21 the height came from content and padding, not `min-height`.
 - **Guard:** `tests/browser/hero.spec.ts` checks `--bb-header-height` against the real header edge at eight widths and that every H1 starts at least 24px below the header. If `PublicHeader.css` changes its padding or logo height, update the token.
 - **Guide trust row (step 3):** the ten guides use the shared `.bb-trust-row` (§2a) in place of their own `.service-guide__trust-*` rules, which were deleted: three equal columns above 650px, hidden below (since 2026-09-24), items vertically centred, title `<b>` and text `<small>` (were `<h3>` and `<p>`). At 1280x720 the row went from 148-167px to 82-98px; tablet heroes moved by -10 to +8px and phone heroes are 53-85px shorter. The copy is unchanged; the guides' `.text.txt` baseline snapshots lost 6 blank lines each.
-- **Status at 1280x720 after steps 1-3 (hero as % of screen height):** Kontakt 72, Bärgning 78, Bilservice 82, Bilbatteri 84, Hjullager 84, Stötdämpare 84, Styrning 85, Drivaxel 87, Home 89, Bilar till salu 90, Däckservice 91, Koppling 92, Bromssystem 92, Felsökning 94, Avgassystem 94, Om oss 98, Kamrem 105, Oljebyte 105, AC-service 125. Target for the Standard type is 85%: five guides are at 84-87%.
+- **Superseded (2026-09-24):** the hero-height percentages measured at 1280x720 on 2026-09-21 no longer apply. Landing, Om oss, Felsökning, Däckservice, AC-service, Bärgning and Kontakt now share `--bb-hero-matched-height` (see the `.bb-hero` system in §2a); re-measure the other heroes before acting on their heights.
 - **Guide hero is now full-bleed (2026-09-22, supersedes the column measurements below):** the ten guides no longer have a split grid with an image column (`.service-guide__hero-media` and the floating `.service-guide__hero-badge` card were deleted). The photo is a real `<picture>`/`<img>` in `.service-guide__hero-bg`, absolutely positioned behind a `90deg` ink gradient (`.service-guide__hero::before`, same ramp as `.bargning-page__hero`); copy sits in `.service-guide__hero-inner` (max 680px). A real image rather than CSS `background-image` keeps the alt text and avoids inline `style=` (banned in public TSX). Crop defaults to `object-position: center right`; add `.service-guide__hero-bg--pos-left` when the photo's subject sits left of centre (Stötdämpare) — alignment is per photo, so decide it by looking at the image, not by default. A guide with no hero photo omits `.service-guide__hero-bg` and gets the plain ink-950 background. **Photo brief for future guide heroes:** subject in the right ~60%, left ~40% dark and soft for the text; object close-ups (a part on a bench) integrate better than mechanic shots — Drivaxel is the reference.
-- **Open (measured before the full-bleed change — re-measure before acting):** Koppling, Bromssystem and Avgassystem (92-94%: the H1 wraps to three lines and the lead is long; the "84% floor from a 435px media column" no longer applies now the column is gone); Oljebyte and Kamrem (105%, previously set by a 587px image column — likely lower now); Om oss and Bilar till salu are set by their image or side column, not the text. Mobile hero tokens are unchanged. The phone-button label has six copy variants (copy decision).
+- **Open:** the guide heroes (Koppling, Bromssystem, Avgassystem, Oljebyte, Kamrem) were last measured before the full-bleed change — re-measure before acting. Hero phone buttons read "Ring oss nu" on the seven matched heroes; elsewhere the label still varies (a copy decision).
 
 ## 3. Legacy system — removed in Step 7 (2026-09-19)
 
@@ -216,15 +216,16 @@ The route-to-stylesheet map lives in [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md). The
 
 ## JS code splitting
 
-**New rule, established 2026-09-16 — every route imports lazily, no exceptions.**
+**Rule since 2026-09-16 — every route imports lazily, no exceptions** (`/` joined on 2026-09-20, the admin gate on 2026-09-24).
 
 `client/src/main.tsx` had the same shape of problem as the CSS file, for the same reason: every new page got a plain top-level `import PageName from './pages/PageName.tsx'`, which forces the bundler to include every single page's code in one JS file that ships on every visit — 850KB (228KB gzip) for what was, on any given visit, one page. Fixed 2026-09-16 by converting every route except `/` to `React.lazy()` + a shared `<Suspense>` boundary around `<Routes>`. Result: main bundle 850KB → 495KB, and every other page is now its own 5-18KB chunk fetched only when a visitor actually navigates there. `/admin`'s 81KB no longer ships to public visitors at all.
 
 **The rule going forward:**
 
 - **Any new route added to `client/src/main.tsx` must use `lazy(() => import('./pages/PageName.tsx'))`**, not a static top-level import. Copy the existing pattern in that file.
-- The homepage route (`/`, `App.tsx`) stays a static/eager import — it's the most common entry point, and lazy-loading it would just add a loading flash for the majority of first visits with no real benefit.
-- `/admin` must stay lazy — it's a protected, low-traffic route; there's no reason its code should ever reach a public visitor's browser.
+- The homepage route (`/`, `App.tsx`) is lazy too; the comment above the imports in `main.tsx` records the trade-off.
+- `/admin` and its `ProtectedRoute` gate must stay lazy — until server-side auth exists the gate holds the admin credentials, and they must not ship in the entry chunk.
+- Lazy routes need the `RouteErrorBoundary` around them in `main.tsx`: without it, a chunk that fails to load (typically right after a deploy) unmounts the whole app to an empty page. Unknown addresses go to the `*` route (`NotFoundPage`).
 - If you add a route and skip this, the bundle silently grows back toward one big file again — that's exactly how it happened the first time, one reasonable-looking `import` line at a time.
 
 ## Open decisions
@@ -236,4 +237,4 @@ The route-to-stylesheet map lives in [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md). The
 3. **Hover direction.** V2 sheets imply lighter-on-hover. Implemented `.bb-btn--*` hovers fill in or deepen the gradient (see `shared-elements.css`); the old legacy `.btn--primary` (deleted) went darker. Not reconciled.
 4. **V2 sheet accuracy.** The two V2 sheets have at least one confirmed labeling error (Amber Dark shown as `#845309`/`#84530B` vs. its own written spec of `#B45309`) and one fabricated price (`595 kr` for hjulskifte — the real prices on `/dackservice` are 350/500 kr). A regeneration prompt was drafted to fix both issues and test real Lato instead of the rendered approximation. **Check with Magnus whether that regeneration happened** before using the sheets as a reliable source for anything beyond general direction.
 
-Until these are resolved, treat this document as the IMPLEMENTED baseline only. When a TARGET is confirmed, add it alongside the IMPLEMENTED value in the relevant table rather than overwriting — that's what makes the three-state model useful going forward.
+Until these are resolved, treat this document as the IMPLEMENTED baseline only. When a TARGET is confirmed, add it alongside the IMPLEMENTED value in the relevant table rather than overwriting, so each row shows both the implemented value and the confirmed target.

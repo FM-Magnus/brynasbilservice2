@@ -22,7 +22,8 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 - `client/src/components/ui/GoogleReviewsCard.tsx` / `.css`: Google reviews (`defaultGoogleReviews`, `.bb-reviews-card*`).
 - `client/src/components/ui/ContactFormCard.tsx` / `.css`: contact module (`defaultContactSubjects`, `.bb-contact-section*`, `.bb-contact-form*`).
 - `client/src/components/ui/BiltjansterFaq.tsx` / `.css`: FAQ accordion (`.bb-faq__*`).
-- `client/src/components/BookingForm.tsx` / `.css`: booking modal (`.modal-*`). Pages open it through callbacks; vehicle inquiries pass `initialComment`.
+- `client/src/components/BookingForm.tsx` / `.css`: booking modal (`.modal-*`, `.booking-form__*`; the stylesheet is imported by `BookingFormModalImpl.tsx`). Pages open it through callbacks; vehicle inquiries pass `initialComment`.
+- `client/src/components/RouteErrorBoundary.tsx`: fallback around the lazy routes in `main.tsx` when a page fails to load or render. Uses only shared `.bb-hero` classes and no lazy code, so it still works when the failure is a missing chunk.
 
 ## The Rebuild Architecture (Master Blueprint)
 
@@ -63,7 +64,7 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
    - *Wide symptom photo*: Kamrem alone uses `.service-guide__symptoms-media--landscape` to center a shorter image box beside the symptom list, preserving the hand and remhjul in its landscape source. Other guides retain the full-height portrait slot. The modifier stays in the Guide-family stylesheet and adds no global token or shared pattern.
    - *Pages on this template*: `Koppling` (`/koppling`), `Avgassystem` (`/avgassystem`), `Oljebyte` (`/oljebyte`), `Bromssystem` (`/bromssystem`), `Kamrem` (`/kamrem`), `Bilbatteri` (`/bilbatteri`), `Stötdämpare & fjädrar` (`/stodampare-fjadrar`), `Hjullagerbyte` (`/hjullagerbyte`), `Styrning & kulleder` (`/styrning-kulleder`), `Drivaxel & drivknutar` (`/drivaxel-drivknutar`).
 
-## Active Status of Routes During Rebuilding
+## Route → CSS owner
 
 | Route | Architecture Group | Status | CSS Owner |
 | --- | --- | --- | --- |
@@ -89,7 +90,8 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 | `/bilar-till-salu` | Unique | Complete | `BilarTillSalu.css` (`.bilartillsalu-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter` |
 | `/tjanster` | Redirect | Retired in Step 7 — `<Navigate to="/biltjanster" replace />` in `main.tsx` | — |
-| `/admin` | Admin | Internal utility | Tailwind utilities (`styles/tailwind.css`) |
+| `/admin` | Admin | Internal utility; the `ProtectedRoute` gate is lazy too | Tailwind utilities (`styles/tailwind.css`) |
+| `*` (unknown address) | Fallback | `NotFoundPage.tsx`, built only from the shared `.bb-hero` pattern | none of its own |
 
 ## Class-prefix collision check (mandatory before naming a new CSS island)
 
@@ -136,7 +138,7 @@ text on every coloured Guide symptom card. Write the modifier with the base clas
 `.bargning-page__scenario-card--light .bargning-page__scenario-heading`,
 `.bb-tip .bb-eyebrow`. `check:css` does not detect this class of bug.
 
-`!important` appears 11 times. Nine are inside `prefers-reduced-motion` blocks and one is
+`!important` appears 13 times. All but two are inside `prefers-reduced-motion` blocks; one is
 `.public-header__mobile-panel[hidden] { display: none !important }` — both idiomatic. Only
 `AboutPage.css` `.omoss-page__trust-item { border-right: none !important }` is avoidable
 debt. This is not a specificity-escalation problem; do not "clean it up".
@@ -159,7 +161,7 @@ on it.
 
 ## Known fragile areas
 
-- **One undefined token remains: `--bb-font-sans`** (33 references in `ServiceGuideTemplate.css`, no fallback), on the pending list in `scripts/check-css.mjs`. The declarations are accidentally pinning the font fallback stack; untangle them together with the font-loading fix, not before (the header comment in that file explains why deleting them changes text wrapping). The other tokens once listed here are resolved. Do not add to the pending list.
+- **One undefined token remains: `--bb-font-sans`** (29 references in `ServiceGuideTemplate.css` and 2 in `shared-elements.css` on `.bb-tip__title` / `.bb-tip__text`, no fallback), on the pending list in `scripts/check-css.mjs`. The declarations are accidentally pinning the font fallback stack; untangle them together with the font-loading fix, not before (the header comment in that file explains why deleting them changes text wrapping). The other tokens once listed here are resolved. Do not add to the pending list.
 - **Structural selectors in the Guide family parent.** `ServiceGuideTemplate.css` styles
   `.service-guide__importance > div > p` and `.service-guide__service-card > div > p`. A
   sibling guide that wraps that paragraph differently silently loses the styling; there is
@@ -168,15 +170,18 @@ on it.
   array index, and the CSS defines `--01`, `--02`, `--03` only. `serviceLevels` currently
   has exactly 3 entries; a fourth renders unstyled.
 - **`--bb-header-height` mirrors `PublicHeader.css`.** Hero clearance is derived from it (`design-tokens.css`). If the header's padding or logo height changes, update the token; `tests/browser/hero.spec.ts` fails until you do.
-- **`LandingPage.css` ships on every route**, because `main.tsx` imports `App.tsx`
-  statically and `App` mounts `LandingPage`. Its `.landing-v2__*` prefix contains it, but
-  it is not route-scoped.
+- **Islands stay loaded once visited.** Every route is lazy (including `/` since 2026-09-20), so a
+  page's CSS arrives with its chunk and then stays in the document for the rest of the visit.
+  Unique prefixes are what keep that safe: a check on 2026-09-24 found no page that renders
+  differently after visiting other pages first. Never write an unprefixed selector in an island.
 
 ## Verification commands that exist in this repository
 
 `npm --prefix client run typecheck`, `npm --prefix client run build`, `npm --prefix client run check:css`,
-`npm --prefix client run test:browser` (Playwright, 19 spec files at 1440/768/390 — currently 155 passed / 4 skipped;
-the skips are the touch-only tests off mobile and the desktop-only width matrix in `hero.spec.ts`). `baseline.spec.ts` and
+`npm --prefix client run test:browser` (Playwright at 1440/768/390; current counts are in `docs/STATUS.md`. Skips are
+viewport-limited tests, such as the source scans and width sweeps that run in one project only). Source scans in the suite:
+`internal-links.spec.ts` (no `href="/…"` that bypasses the router basename) and `business-facts.spec.ts` (no business fact
+outside `business.ts`). `baseline.spec.ts` and
 `hero.spec.ts` loop over all 21 public routes. Baseline snapshots record computed styles of the shell and shared primitives
 (including the hero H1); update one only after reading the diff line by line. There is **no working lint**:
 `client/eslint.config.js` is ESM in a CommonJS package and imports five packages that are not in `client/package.json`. Do not

@@ -1,5 +1,7 @@
 # Deployment
 
+> **Not the current deploy process — read before acting.** Nothing deploys automatically. The GitHub Actions workflow described below lives in `client/.github/workflows/`, where GitHub never runs it. The `.htaccess` shown here (port 3001, no `RewriteBase`) also differs from the repo's `server/.htaccess` (port 3000, `RewriteBase /labb/brynasbilservice/`); which one is right is Johnny's decision. Current production facts are in [`docs/BACKEND.md`](../BACKEND.md) → "Production".
+
 ## Architecture
 
 The production environment uses a layered request stack:

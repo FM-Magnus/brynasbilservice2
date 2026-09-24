@@ -1,5 +1,7 @@
 # Git history recovery and everyday workflow
 
+> **Historical record (2026-09-09).** This explains how the repository's history was recovered. The everyday workflow below is superseded: work happens on the branch named in [`docs/STATUS.md`](../STATUS.md), and the commit and push rules are in [`AGENTS.md`](../../AGENTS.md) — never push without Magnus's go-ahead, and stage files by name.
+
 ## The simple answer
 
 The repository to use from now on is:
@@ -46,18 +48,9 @@ FM-Magnus/brynasbilservice2
 
 Nothing was deployed to the live server during this recovery. This change only made GitHub accurately represent the current website source code.
 
-## Daily workflow from now on
+## Daily workflow (superseded)
 
-Always work from `main`:
-
-```bash
-git switch main
-git pull
-# make and test website changes
-git add <files>
-git commit -m "Describe the change"
-git push
-```
+This section originally said to always work from `main` and push after each commit. That no longer applies: follow [`AGENTS.md`](../../AGENTS.md) ("Hard rules — ownership and git") and the branch in [`docs/STATUS.md`](../STATUS.md).
 
 Use the actual frontend project, not the orphaned root scaffold:
 

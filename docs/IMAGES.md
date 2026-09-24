@@ -66,6 +66,13 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Felsökning | ✓ new diagnostics hero | ✓ engine-bay tablet + ✓ OBD detail | — |
 | Biltjänster | CSS-only | ✓ all 11 guide cards have photos | — |
 | Bilar till salu | ✓ | conditional placeholders when a car lacks photos | — |
+| Landing | ✓ `home/landing-v2/landing-cockpit-steering-hero` | ✓ why (`landing-why-reassurance-handshake-v2`), process (`landing-customer-interaction-background`), car for sale; the service area is vector icons, no photo | — |
+| Om oss | ✓ | ✓ workshop and tyre photos; one pair still imported from `images/archive/gallery-legacy/` (move it before any archive clean-up) | — |
+| Däckservice | ✓ `services/tires/tires-hero-bg` | ✓ six tyre cards (colour grade in page CSS, files unchanged), storage | — |
+| AC-service | ✓ `services/ac/ac-hero-bg` | ✓ `ac-manometers-on-engine` (JPG only, no WebP) | — |
+| Bärgning | ✓ | ✓ tow truck, workshop, car for sale | — |
+| Kontakt | ✓ `about/about-hero-bg` | — | — |
+| Galleri | folder-driven | every photo in `client/src/assets/galleri/` (see `LÄSMIG.md`) | — |
 
 ## Photo brief (what works on this site)
 
@@ -87,7 +94,7 @@ The camera presets and grade presets live on **Google Drive, `My Drive/## FOR AG
 
 ## Files and markup
 
-- **Location:** `client/src/assets/images/services/<topic>/<topic>-<subject>-<role>.{webp,jpg}` — e.g. `services/suspension/suspension-mechanic-wrench-workshop-hero`. Always both formats.
+- **Location:** `client/src/assets/images/services/<topic>/<topic>-<subject>-<role>.{webp,jpg}` for service and guide pages; Landing uses `home/landing-v2/landing-<subject>.{webp,jpg}` — e.g. `services/suspension/suspension-mechanic-wrench-workshop-hero`. Always both formats.
 - **WebP:** `sips` cannot write WebP here; use `cwebp -q 90 in.jpg -o out.webp`. `sips -r -90` rotates counter-clockwise.
 - **Markup:** `<picture><source srcSet={webp} type="image/webp" /><img src={jpg} alt="…" loading="lazy" /></picture>` inside the slot. Swedish alt text that says what is in the picture. No inline `style=`.
 - **Intake:** finished exports come from `_incoming-assets/IMPLEMENT/`. Don't pull from the other intake subfolders unless Magnus points at a file ([`_incoming-assets/README.md`](../_incoming-assets/README.md)).

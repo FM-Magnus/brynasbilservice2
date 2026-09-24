@@ -1,7 +1,11 @@
 # Complete image inventory — 2026-09-15
 
-This is the authoritative map for every image family in the Brynäs Bilservice
-workspace. It separates sources, production assets, preserved legacy files and
+> **Historical snapshot (2026-09-15), not authoritative.** Paths and owners below have changed since:
+> the legacy `index.css` is deleted, and `/galleri` now reads `client/src/assets/galleri/`. The current
+> image workflow and per-page status are in [`docs/IMAGES.md`](../docs/IMAGES.md).
+
+This was the map of every image family in the Brynäs Bilservice workspace on
+2026-09-15. It separates sources, production assets, preserved legacy files and
 documentation evidence so a thumbnail can never be mistaken for a main image.
 
 ## Rules that apply to every image
