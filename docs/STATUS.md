@@ -2,7 +2,7 @@
 
 > **Replace, don't append.** This file is the current state and nothing else. Update the parts that changed at the end of a session; history goes in [`LOG.md`](LOG.md). If this file and the code disagree, the code is right — fix this file.
 
-**Last updated:** 2026-09-24 (Claude Code — audits, Phases 1–5 of the optimization plan).
+**Last updated:** 2026-09-24 (Claude Code — audits, Phases 1–6 of the optimization plan).
 
 ## Where things stand
 
@@ -14,20 +14,20 @@
 - **Business facts:** org.nr, legal name and address come only from `client/src/data/business.ts` (org.nr 559343-5307, confirmed against the company registers); `business-facts.spec.ts` guards this. The footer menu is `publicNavigation`.
 - **Contact forms** (Kontakt and the Landing card) open a pre-filled e-mail to info@brynasbilservice.se via `client/src/api/contact.ts` until a `/api/contact` endpoint exists.
 - **Booking modal:** shows a notice with the phone number if services can't be loaded.
+- **CSS and types:** every dark-surface eyebrow is white with an amber dash (guides and Biltjänster included), every H1 is mixed case, no unused selectors remain (except `.bb-footer__dot`, kept for the legal links), pages no longer re-import the global stylesheets, and TypeScript runs with `strict`.
 - **Performance (lab, 2026-09-24, phone on slow 4G with 4× CPU, production build):** FCP about 2.3 s everywhere; guide LCP 3.5–3.9 s, set by the hero image arriving (47–81 KB WebP). The hero request starts about 2.2–2.3 s in whether or not the image has `loading="lazy"` (7 of 10 guides do): the page is rendered by JavaScript, so the image can't be requested before its code runs. Removing `lazy` would not help. CLS is 0 to 0.016 except Hjullagerbyte (see Next up).
 - **Repo:** the app is `client/` (no root package); `_magnus/` is local only (git-ignored). Branch `redesign/blue-teal-v1`, remote `origin` = `FM-Magnus/brynasbilservice2`. Local commits ahead of `origin` are normal; push only on Magnus's go-ahead. Run `git status -sb` rather than trusting this line.
-- **Checks (2026-09-24):** `check:css` clean (91 tokens, 1 pending: `--bb-font-sans`), typecheck and production build pass. Playwright: 200 passed, 10 skipped at 1440/768/390. `booking-form.spec.ts` is intermittently flaky (about 3 failures in 105 runs, one different test each time, predating today's changes); a separate session is fixing it.
+- **Checks (2026-09-24):** `check:css` clean (1 pending token: `--bb-font-sans`), typecheck (`strict`) and production build pass. Playwright: 200 passed, 10 skipped at 1440/768/390. `booking-form.spec.ts` is intermittently flaky (about 3 failures in 105 runs, one different test each time, predating today's changes); a separate session is fixing it.
 
 ## Next up — optimization plan (in this order unless Magnus says otherwise)
 
-Phases 1–5 are done (production fixes, facts and data, documentation, assets and repo hygiene, performance baseline). Remaining:
+Phases 1–6 are done (production fixes, facts and data, documentation, assets and repo hygiene, performance baseline, CSS consistency). Remaining:
 
 1. **Phase 4 leftover — the inert deploy workflow** in `client/.github/workflows/` (GitHub never runs it from there): label or remove it — Johnny's call.
 2. **Performance follow-up (from Phase 5):** Hjullagerbyte shifts its hero lead and buttons by CLS 0.12 on phones at about 2.9 s (Google's "good" limit is 0.1), most likely when the Google web font swaps in; the other guides stay at or below 0.016. The durable fix is self-hosting Archivo and Manrope with matched fallback metrics — a separate change.
-3. **Phase 6 — CSS consistency (shared CSS; needs approval).** Guide hero eyebrow is teal while the rule says white on dark (decision D3). Unused shared classes (`.bb-card--photo`, `.bb-card-arrow`, `.bb-process-grid__num`, footer `.bb-footer__dot`). 15 redundant global CSS imports in pages. Local copies of shared patterns (Biltjänster eyebrow, Bärgning and Om oss trust rows). Add `"strict": true` (the code already passes).
-4. **Phase 7 — structure (separate review).** A `useBookingModal` hook or page shell (booking wiring repeated in 18 pages), a shared guide layout, one contact form component, route lists in tests derived from `main.tsx`.
-5. **Content gaps:** Bromssystem, Felsökning, Däckservice and Service-reparationer have no `.bb-tip`.
-6. **Deferred idea:** the "Schomaher" mascot on `.bb-tip` — waiting for the mascot art and Maher's sign-off (plan in the 2026-09-22 entry of [`LOG.md`](LOG.md)).
+3. **Phase 7 — structure (separate review).** A `useBookingModal` hook or page shell (booking wiring repeated in 18 pages), a shared guide layout, one contact form component, route lists in tests derived from `main.tsx`.
+4. **Content gaps:** Bromssystem, Felsökning, Däckservice and Service-reparationer have no `.bb-tip`.
+5. **Deferred idea:** the "Schomaher" mascot on `.bb-tip` — waiting for the mascot art and Maher's sign-off (plan in the 2026-09-22 entry of [`LOG.md`](LOG.md)).
 
 ## Broken or incomplete
 
@@ -50,7 +50,7 @@ Phases 1–5 are done (production fixes, facts and data, documentation, assets a
 
 ## Open decisions and cautions
 
-- **Waiting on Magnus:** D3 guide eyebrow colour; the Instagram account.
+- **Waiting on Magnus:** the Instagram account.
 - **Waiting on Johnny:** server-side admin auth, saving `comment_customer`, a `/api/contact` endpoint, the `.htaccess` conflict and the deploy method.
 - **Research documents** (Magnus's Drive, `> RESEARCH OUTPUTS/BBilservice/`): an IA/trust spec written for Astro (its IA and trust chapters transfer, the tech doesn't) and a Gävle competitor analysis. Their facts about Brynäs are wrong in places (owner name, opening hours) — verify with Magnus before using any.
 - **Paused design review** against that spec: the headline gap (company-presenting nav vs. symptom-based `/problem/*` entry points) is not addressed. The repeated 3-step "Så fungerar det" block is still an open observation.

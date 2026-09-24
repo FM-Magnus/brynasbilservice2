@@ -161,7 +161,8 @@ on it.
 
 ## Known fragile areas
 
-- **One undefined token remains: `--bb-font-sans`** (29 references in `ServiceGuideTemplate.css` and 2 in `shared-elements.css` on `.bb-tip__title` / `.bb-tip__text`, no fallback), on the pending list in `scripts/check-css.mjs`. The declarations are accidentally pinning the font fallback stack; untangle them together with the font-loading fix, not before (the header comment in that file explains why deleting them changes text wrapping). The other tokens once listed here are resolved. Do not add to the pending list.
+- **One undefined token remains: `--bb-font-sans`** (27 references in `ServiceGuideTemplate.css` and 2 in `shared-elements.css` on `.bb-tip__title` / `.bb-tip__text`, no fallback), on the pending list in `scripts/check-css.mjs`. The declarations are accidentally pinning the font fallback stack; untangle them together with the font-loading fix, not before (the header comment in that file explains why deleting them changes text wrapping). The other tokens once listed here are resolved. Do not add to the pending list.
+- **`check:css`'s token count is approximate.** It counts every `--name:` in the CSS as a definition, so a selector like `.x--variant::after` counts as a token. Only its unresolved-`var()` and legacy checks are exact.
 - **Structural selectors in the Guide family parent.** `ServiceGuideTemplate.css` styles
   `.service-guide__importance > div > p` and `.service-guide__service-card > div > p`. A
   sibling guide that wraps that paragraph differently silently loses the styling; there is
