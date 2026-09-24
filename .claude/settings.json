@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '{\"systemMessage\": \"Session reminder: if this session changed anything, update docs/STATUS.md (replace, do not append) and add one short bullet to today's dated entry at the top of docs/LOG.md (one entry per day). Never append to AGENTS.md, CLAUDE.md or GEMINI.md.\"}'",
+            "command": "echo '{\"systemMessage\": \"Session reminder: if this session changed anything, update docs/STATUS.md (replace, do not append) and add one short bullet to the dated entry for today at the top of docs/LOG.md (one entry per day). Never append to AGENTS.md, CLAUDE.md or GEMINI.md.\"}'",
             "statusMessage": "Checking end-of-session docs reminder..."
           }
         ]
