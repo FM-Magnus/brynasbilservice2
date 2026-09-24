@@ -2,111 +2,13 @@
 
 One dated entry per day, newest first — one short bullet per session, naming the tool and topic first. **History, never instructions:** rules live in `AGENTS.md`, the current state in [`STATUS.md`](STATUS.md). When the oldest entries here are more than about two weeks old, move them to the top of [`archive/SESSION_LOG_ARCHIVE.md`](archive/SESSION_LOG_ARCHIVE.md). (Renamed from `SESSION_LOG_CURRENT.md` on 2026-09-23; entries below keep their original file names.)
 
-### 2026-09-24 — Claude Code (review and cleanup of Codex's uncommitted work)
+### 2026-09-24
 
-- Reviewed the 18 modified and 9 untracked paths. Removed the dead `.bilservice__hero-reg-input` rule and AC's overridden `min-height` duplicates, deleted the unused `landing-why-reassurance-handshake.{jpg,webp}`, corrected DESIGN_SYSTEM §2c (AC hero is full-bleed), and gitignored root and audit-harness `test-results/`.
-- Refreshed the desktop `start` and `dackservice` text baselines (heading removed; dates banner moved). Full Playwright suite 173 passed / 4 skipped; typecheck, check:css, build and `git diff --check` pass. Nothing committed. Open for Magnus: Landing copy/CTA changes, unused `brynas-bilservice-logo-black.svg`.
-- Replaced Codex's fixed 717/693/921px hero heights (repeated in five page CSS files) with one token, `--bb-hero-matched-height`, sized from the tallest natural content of the seven heroes at 17 widths (Magnus approved the shared rule). Heights before → after: desktop 717–729 → 730, 768px 693 → 701, 1024px 693–752 → 757, 1120px 693–770 → 778; mobile unchanged at 921. Spread is now 0 at every width from 651 to 1920; on phones Felsökning (up to 990) and Däckservice (933 at 360) still exceed 921 because of their content. Added a viewport sweep to `hero-size-consistency.spec.ts`.
-- Magnus chose to shorten Felsökning's hero instead of raising the mobile height: H1 is now "Felsökning & Diagnostik i Gävle" (was "… när bilen behöver ett tydligt svar"), and the Felsökning and Däckservice hero phone buttons read "Ring oss nu" like Landing, so they stay on one row. All seven heroes now match from 360 to 1920px; the sweep covers 360–1680. Desktop felsokning/dackservice text baselines refreshed (copy only). Suite 173 passed / 6 skipped.
-- Correction: the earlier "natural height" measurements were wrong for Landing (and inflated elsewhere) because a `min-height` transition was still running when measured. Re-measured with transitions off: the tallest phone hero is Däckservice at 875px, so the mobile token dropped from 921 to 876px; AC's mobile copy padding moved up by the same 2.8rem (14.3→11.5, 11.9→9.1, 12.6→9.8rem) to stay level with Landing's text.
-- Magnus chose a compact phone version of the hero review card over hiding it (trust rows alone would have saved ~13px: Kontakt and Om oss have none). On ≤650px the hero-overlay card shows the rating/Google row and one line of the rotating quote: 94px, was 172. Mobile token 876 → 798px; all seven equal at 360–650px, card height stable across all four reviews, Landing/AC text alignment unchanged. Suite 174 passed / 6 skipped; one booking-form test was intermittently flaky earlier (untouched modal, not investigated).
-- Magnus: no trust points on phones. `.bb-trust-row` and `.bargning-page__hero-trust-row` are hidden at ≤650px on every page. Kontakt and Om oss then set the phone height (791/753px), so with Magnus's approval the Kontakt, Om oss and AC hero phone buttons read "Ring oss nu" and Kontakt's second hero paragraph is hidden on phones. Mobile token 798 → 686px; all seven equal at 360–650px. AC's phone copy is now bottom-anchored (its old padding offsets removed) because starting level with Landing would push AC past 686px. Desktop om-oss/ac-service/kontakt text baselines refreshed (button label only). Suite 173 passed / 6 skipped plus one intermittent booking-form failure: the dialog opens but the success heading sometimes never appears, on tablet too — the date/time picker, not the heroes.
-
-### 2026-09-24 — Codex (Landing service logo removed)
-
-- Removed the black logo signature above the Landing service icons and its page-owned CSS. The five icon links remain.
-
-### 2026-09-24 — Codex (Landing service icons aligned with logo)
-
-- Replaced the generated 3D art direction with five enlarged vector icons in dark ink and restrained teal, connected by a fine line to match the logo’s automotive outline. Kept service labels and links in HTML.
-
-### 2026-09-24 — Codex (Landing service illustration)
-
-- Generated and integrated a wide five-station workshop illustration above the five HTML service links. Added WebP and JPEG exports; removed duplicate icon markers while retaining readable service labels and descriptions.
-
-### 2026-09-24 — Codex (Landing services heading removed)
-
-- Removed the large “Bilens alla behov” heading from the services area and retained the logo signature and five service markers. Updated the section label for assistive technology.
-
-### 2026-09-24 — Codex (stable Google review hero card)
-
-- Fixed the hero-overlay Google review card at 100px on desktop/tablet and 172px on mobile. Review excerpts clamp to three lines so changing or rotating review text no longer changes hero height.
-
-### 2026-09-24 — Codex (AC hero content position)
-
-- Moved the complete AC hero copy block, including eyebrow, heading, lead and actions, upward to Landing’s content start at desktop, tablet and mobile widths. Measured matching copy starts at 1440/768/390 and 650px with no horizontal overflow. Focused Playwright tests, CSS check, typecheck, production build and `git diff --check` pass.
-
-### 2026-09-24 — Codex (Felsökning hero overlay)
-
-- Added a subtle ember tint to the Felsökning hero image, fading toward the right and preserving the existing dark overlay, including on mobile. Focused Playwright checks, computed-style checks at 1440/390, CSS check, typecheck, production build and `git diff --check` pass.
-
-### 2026-09-24 — Codex (Bärgning hero overlay)
-
-- Halved each alpha value in the Bärgning hero gradient. The focused Playwright checks passed at 1440/768/390; CSS check, typecheck, production build and `git diff --check` passed.
-
-### 2026-09-24 — Codex (Däckservice card photo grading)
-
-- Applied a strong, individually tuned mid-ember grade to all six tire-service card photos through page-owned CSS. Reduced overlay opacity slightly at Magnus’s request changed the tint from teal to mid-ember, and lifted photo exposure after feedback that the images were too dark. Original assets and composition remain intact; the gradient transition is intentionally a later step. Däckservice browser and CSS checks pass.
-
-### 2026-09-24 — Codex (Däckservice dates placement)
-
-- Moved “Viktiga datum & lagkrav för vinterdäck” below the full six-card tire-services section. Playwright order and overflow checks pass at 1440/768/390; typecheck, CSS check and build pass.
-
-### 2026-09-24 — Codex (unified hero sizing)
-
-- Corrected the AC page change after Magnus clarified that the requested pages all need a hero the same size as Däckservice. Restored AC's full-bleed photo hero. The registration form was removed from the hero; the standard booking modal and phone actions remain.
-- Matched Landing, Om oss, Felsökning, Däckservice, AC-service, Bärgning and Kontakt to Däckservice's measured hero heights at 1440/768/390. Added a Playwright consistency check; focused hero and AC tests pass. No commit or push.
-
-### 2026-09-24 — Codex (Landing service graphic)
-
-- Replaced four dark service photo cards with a full-width graphic showing five linked service areas, teal line icons and a small Brynäs logo signature. Moved the heading above the markers and the supporting copy below; added responsive 5/3/2-column layouts and preserved each service link.
-- CSS check and production build pass. Typecheck and responsive browser review remain pending. No commit or push.
-
-### 2026-09-24 — Codex (black logo variant)
-
-- Duplicated the active NEW3 SVG as a solid black production variant and used it beside the Landing slogan on the light background. Kept the white logo in the dark header and preserved the source.
-- No build or browser checks run.
-
-### 2026-09-24 — Codex (corrected header logo)
-
-- Replaced the first, incorrect header SVG with `NEW3_brynas-bilservice-logo.svg` from `_incoming-assets/IMPLEMENT/`. The shared PublicHeader logo link uses this version for desktop and mobile navigation. Both intake files remain preserved; footer and Landing signature imports are unchanged.
-- No build or browser checks run.
-
-### 2026-09-24 — Codex (Bilservice-family spacing)
-
-- Tightened the shared vertical rhythm on Bilservice, Felsökning, Däckservice and AC-service, using Landing's section spacing as the reference. Reduced base, tight, flow-bottom, intro and padded-container rules without changing section content or imagery.
-- Before, family section top padding was 100.8/72/72px at 1440/768/390px; Landing's next section uses 64.8/48/52.8px. After: family is 64/48/48px. Browser checks at all three widths showed no horizontal overflow. The Däckservice legal-dates banner remains the first object after its hero, 40/24/24px below it.
-- CSS ownership notes updated; no typecheck or build run.
-
-### 2026-09-24 — Codex (local commits and Antigravity handover)
-
-- Committed the shared visual polish, refreshed five previously stale desktop text baselines, and committed the five additional hero review placements with Felsökning hero cleanup. No push. The Däck screenshot supplied during the review placement work was a crop of its existing hero photo; no image was replaced.
-- Final `check:css`, typecheck and build pass. The complete Playwright rerun passes (170 passed, 4 skipped) at 1440/768/390. One mobile booking-time assertion failed once in the first run, then passed three focused repeats and the full rerun; details are in `STATUS.md`.
-
-### 2026-09-24 — Codex (Google reviews in five heroes)
-
-- Added the existing `GoogleReviewsCard` to Om oss, Bilservice, Felsökning and Kontakt. At Magnus's correction, moved each from the lower page into its hero with `hero-overlay`, matching Landing's placement pattern. Däckservice was added to the same hero placement afterward.
-- Preserved legible light text against page-level link resets in page-owned CSS. Focused Playwright checks and hero screenshots passed at 1440/768/390. CSS check, typecheck and build passed. Left uncommitted.
-
-### 2026-09-24 — Codex (Felsökning hero cleanup)
-
-- Removed the decorative P0128/P0171 code panel from the `/felsokning` hero and deleted its unused family CSS. Kept the hero photo, copy, actions and trust row.
-- Updated the Felsökning visual test and desktop text baseline. CSS check, typecheck, build, focused visual/hero tests and Felsökning baselines passed at 1440/768/390. Left uncommitted.
-
-### 2026-09-24 — Codex (landing review bar spacing)
-
-- Corrected overlapping rating and Google labels by sizing their columns and letting review text use the remaining width. Increased the hero bar height and lifted it slightly while keeping the desktop trust row on one line.
-- Added a browser check for spacing, clipping and hero placement. CSS check, typecheck, build, landing visual and hero tests passed at 1440/768/390. Left the change uncommitted.
-
-### 2026-09-24 — Codex (reduced public corner radii)
-
-- At Magnus’s direction, changed the five canonical radius tokens to subtle corners and aligned larger local rectangles in the public header, guide family, shared cards, FAQ, and booking dialog. Circular icons and status dots remain round.
-- Updated the design-system and status docs plus 60 reviewed style snapshots. CSS check, typecheck, build and hero tests pass. All style baselines pass; six existing desktop text baselines still differ. Left uncommitted for visual review.
-
-### 2026-09-24 — Codex (reviewed local commits)
-
-- Committed the existing guide/hub imagery, Bilservice imagery, Felsökning imagery, Oljebyte layout, Om oss hero simplification, and desktop-header breakpoint as separate changes. Documentation was updated afterward. No push.
-- `git diff --check`, `check:css`, typecheck, production build, and Playwright hero tests passed. Om oss and Oljebyte browser spot checks passed at 1440/768/390. Six unrelated desktop text baselines remain different from their stored snapshots; `test-results/` was excluded from commits.
+- **Codex — daytime, committed through `b165217c`:** subtle radius tokens site-wide (60 style snapshots); Landing review-bar spacing; Google reviews moved into the Om oss, Bilservice, Felsökning, Däckservice and Kontakt heroes; Felsökning hero code panel removed; the guide/hub, Bilservice and Felsökning imagery, Oljebyte layout, Om oss hero and desktop-header breakpoint committed separately; five stale desktop text baselines refreshed.
+- **Codex — evening, left uncommitted:** Bilservice-family spacing (section top 64/48/48px); NEW3 header logo plus a black variant; Landing services as five linked vector-icon points, new why/process photos; stable hero review card; AC hero without the registration form; Felsökning ember tint and lighter Bärgning overlay; Däckservice dates banner below the tyre cards and ember-graded card photos; a first, fixed-pixel (717/693/921) equal-hero-height attempt.
+- **Claude Code — review of that work:** removed dead AC CSS and the unused v1 handshake images, corrected DESIGN_SYSTEM §2c, gitignored test output. Replaced the fixed hero heights with `--bb-hero-matched-height`, sized from the tallest natural content at 17 widths (an earlier measurement was inflated by a running `min-height` transition). With Magnus: Felsökning H1 "Felsökning & Diagnostik i Gävle", "Ring oss nu" on the seven matched heroes, no trust points on phones anywhere, a compact phone review card, Kontakt's second hero paragraph hidden on phones — phone heroes 686px (was 921). Split into 12 commits (`706a7278`–`3e3dc6ec`).
+- **Claude Code — three read-only audits** (documentation, structure, code; reported in chat). Main findings: plain `<a href="/…">` links broken under the production basename; blank page for unknown URLs and failed chunk loads; admin credentials in the public entry bundle; two different org.nr values; contact forms that sent nothing; stale ops and reference docs.
+- **Claude Code — fixes, Phases 1–3 of the resulting plan:** links to `<Link>` plus a source-scan guard (`4702d0f1`); lazy admin gate (`41c0e933`); 404 page and error boundary (`11969e38`); booking notice when services fail (`f991bd4f`); business facts only from `business.ts`, org.nr 559343-5307 confirmed in the company registers (`c828ff3b`); footer menu from `publicNavigation`, placeholder legal links removed (`feed7968`); contact forms open a pre-filled e-mail (`01272dc4`); audit-harness skips the 404 route (`2b7269c8`); reference-doc corrections (`719208bf`); AGENTS.md stage, shared roles and this one-entry-per-day rule (`5ea56058`); STATUS rewritten as current state. Every new test was mutation-checked against the old code. Suite 199 passed / 10 skipped; `booking-form.spec.ts` stays intermittently flaky (≈3 in 105 runs, same before and after the modal change) and a separate session is fixing it. Nothing pushed.
 
 ### 2026-09-23 — Codex (desktop navigation breakpoint)
 
