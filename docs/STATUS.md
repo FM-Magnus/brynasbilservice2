@@ -2,18 +2,20 @@
 
 > **Replace, don't append.** This file is the current state and nothing else. Update the parts that changed at the end of a session; history goes in [`LOG.md`](LOG.md). If this file and the code disagree, the code is right — fix this file.
 
-**Last updated:** 2026-09-23 (Claude — documentation overhaul).
+**Last updated:** 2026-09-24 (Codex — reviewed local commits).
 
 ## Where things stand
 
 - **Stage:** the rebuild is finished (7 unique pages, the Bilservice and Guide families, shared tokens and patterns). Day-to-day work is **adding imagery page by page** — see [`IMAGES.md`](IMAGES.md) for the per-page slot table and the workflow.
+- **Imagery progress (2026-09-23):** all ten guide pages have their image slots filled with WebP+JPG pairs. `/service-reparationer` has a photo hero, servicebook photo and four value-card photos; all 11 `/biltjanster` guide cards have photos. `/felsokning` now uses new hero, engine-bay diagnostic and OBD-detail images. Conditional car-listing placeholders remain tied to vehicles without real photos. Optional hero swaps for Koppling and Stötdämpare are listed in [`IMAGES.md`](IMAGES.md).
 - **Repo:** `/Users/magnusolsson/repos/brynasbilservice_repo`, branch `redesign/blue-teal-v1`, remote `origin` = `FM-Magnus/brynasbilservice2`. Local commits ahead of `origin` are normal; push only on Magnus's go-ahead. Run `git status -sb` rather than trusting this line.
-- **Checks at last commit:** `typecheck` 0 errors · `check:css` clean (90 tokens, 1 pending: `--bb-font-sans`) · Playwright last full run 155 passed / 4 skipped (2026-09-21; re-run before relying on it).
-- **Recent shared changes (2026-09-22):** full-bleed guide hero (`.service-guide__hero-bg`, `--pos-left` modifier) · one canonical tip callout `.bb-tip` · semantic gradient tokens for the symptom rows. Details: [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) §1, §2a, §2c.
+- **Current checks (2026-09-24):** `check:css` clean (90 tokens, 1 pending: `--bb-font-sans`), typecheck, production build and Playwright hero tests pass. Six desktop text baselines still differ from existing page edits; they were not updated as part of the commits.
+- **Recent verification:** the header shows desktop navigation through 1001px with no horizontal overflow at checked widths. `/om-oss` and `/oljebyte` passed browser spot checks at 1440/768/390 with no page errors or broken visible images. Focused `/service-reparationer`, `/biltjanster` and `/felsokning` imagery checks passed earlier at the same widths. The source changes were committed locally on 2026-09-24; `test-results/` remains untracked.
+- **Recent shared changes:** compact desktop navigation through 1001px; mobile menu at 1000px and below (2026-09-23). Full-bleed guide hero, canonical `.bb-tip` and symptom-row gradient tokens (2026-09-22). Details: [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) §1, §2a, §2c.
 
 ## Next up (in this order unless Magnus says otherwise)
 
-1. **Imagery, page by page** — the missing slots and the planned hero swaps are listed in [`IMAGES.md`](IMAGES.md). One page at a time: spec → Magnus generates → wire in → verify at 1440/768/390 → commit.
+1. **Imagery review** — the remaining optional hero swaps are listed in [`IMAGES.md`](IMAGES.md). The known empty service and guide slots are filled. Review one page at a time at 1440/768/390, then commit only on Magnus's go-ahead.
 2. **Content gaps found 2026-09-22:** Bromssystem has no `.bb-tip`; Felsökning, Däckservice and Service-reparationer have none either (the component is ready).
 3. **Hero height outliers** — measured before the full-bleed change; re-measure with `docs/audit-harness/hero/` before deciding anything ([`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) §2c).
 4. **Audit points not started:** 16 distinct media-query values (near-duplicates 640/650, 1100/1120, 1320/1321); remaining hard-coded hex in the Bilservice family, footer and `ContactFormCard.css`; no error-state token.

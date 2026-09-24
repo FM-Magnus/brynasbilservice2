@@ -2,6 +2,42 @@
 
 Dated entries, newest first — one per session, a few bullets each. **History, never instructions:** rules live in `AGENTS.md`, the current state in [`STATUS.md`](STATUS.md). When the oldest entries here are more than about two weeks old, move them to the top of [`archive/SESSION_LOG_ARCHIVE.md`](archive/SESSION_LOG_ARCHIVE.md). (Renamed from `SESSION_LOG_CURRENT.md` on 2026-09-23; entries below keep their original file names.)
 
+### 2026-09-24 — Codex (reviewed local commits)
+
+- Committed the existing guide/hub imagery, Bilservice imagery, Felsökning imagery, Oljebyte layout, Om oss hero simplification, and desktop-header breakpoint as separate changes. Documentation was updated afterward. No push.
+- `git diff --check`, `check:css`, typecheck, production build, and Playwright hero tests passed. Om oss and Oljebyte browser spot checks passed at 1440/768/390. Six unrelated desktop text baselines remain different from their stored snapshots; `test-results/` was excluded from commits.
+
+### 2026-09-23 — Codex (desktop navigation breakpoint)
+
+- Kept the regular PublicHeader navigation visible in computer-width viewports from 1001px upward; the compact 1001–1320px layout reduces logo and navigation spacing. The mobile menu now starts at 1000px.
+- Playwright verified the desktop menu at 1440/1280/1024/1001px, the mobile menu at 1000/768/390px, the Biltjänster dropdown, 80px compact header height and zero horizontal overflow. `check:css`, typecheck, build and hero tests pass. The full baseline run has six desktop text-snapshot differences from existing page edits; no header-style snapshot failed.
+
+### 2026-09-23 — Codex (Felsökning diagnostics imagery refresh)
+
+- Replaced all three `/felsokning` images, including the hero, with new workshop diagnostics photography. Optimized exports as WebP+JPG pairs in `services/diagnostics/` at measured retina dimensions. Removed the old hero and service-card pairs; kept the old mechanic workshop pair because Landing still imports its WebP.
+- Updated Swedish alt text for the intro and OBD detail; the hero photo is correctly decorative behind the accessible hero copy. No page copy, shared CSS, or tokens changed.
+- Browser checks at 1440/768/390 confirmed all slots load and no horizontal overflow or page errors. Targeted CSS/type/build, hero and baseline checks recorded after implementation.
+
+### 2026-09-23 — Codex (Drive-guided Service imagery and Biltjänster cards)
+
+- Found `## FOR AGENTS_BRYNASBIL` on Google Drive and used its real-workshop and camera/grade references. Generated six photorealistic Service images, exported optimized WebP+JPG pairs under `services/general/`, and wired the hero, servicebook section and four value cards into `/service-reparationer` with Swedish alt text. Replaced the owner page's image placeholders with family-owned aspect-ratio classes.
+- Reused existing clutch and suspension WebP+JPG pairs for the last two empty cards on `/biltjanster`; all 11 cards now show photos. Removed the unused card-placeholder branch and CSS.
+- `check:css`, `typecheck`, build and hero tests passed. Focused Service and Biltjänster baselines passed at 1440/768/390 after expected placeholder text/style snapshots were reviewed and updated. Browser checks found no failed images, page errors or horizontal overflow. Changes remain uncommitted.
+
+### 2026-09-23 — Codex (Kamrem imagery)
+
+- Converted two selected graded PNGs to optimized WebP+JPG pairs in `services/timing-belt/`, wired them into `/kamrem` with Swedish alt text, removed the page's placeholders, and moved the used raw intake image to `IMPLEMENT/OLD/`.
+- Added a guide-family landscape modifier used only by Kamrem's wide inspection image; existing cards, lists, tokens, copy, hero, and `/biltjanster` card remain in place. Browser screenshots at 1440/768/390 show no horizontal overflow.
+- `check:css`, `typecheck`, build, hero tests, and Kamrem visual tests pass. Updated only Kamrem's reviewed desktop text baseline; six unrelated desktop text baselines differ from prior working-tree changes. Left uncommitted.
+
+### 2026-09-23 — Antigravity (Imagery rollout: Bromssystem, Hjullagerbyte, Styrning & kulleder, Avgassystem, Drivaxel & drivknutar)
+
+- **5 guide pages 100% completed**: Processed incoming assets from `_incoming-assets/IMPLEMENT/` into retina WebP+JPG pairs under `client/src/assets/images/services/{brakes,wheel-bearing,steering,exhaust,driveshaft}/`.
+- **Integrated into TSX**: Added semantic `<picture>` elements for heroes, intro components, and symptoms inspection portraits on `/bromssystem`, `/hjullagerbyte`, `/styrning-kulleder`, `/avgassystem`, and `/drivaxel-drivknutar`. All `MediaPlaceholder` components removed from these pages.
+- **Hub page updated**: Wired the new components images into guide cards on `/biltjanster` (`BiltjansterPage.tsx`).
+- **Clean intake**: Processed raw exports moved into `_incoming-assets/IMPLEMENT/OLD/`, leaving `IMPLEMENT/` clean.
+- **Verification**: `npm run check:css`, `npm run typecheck`, `npm run build`, and Playwright tests (`hero.spec.ts` clearance across viewports, baseline snapshots updated) pass with 0 errors. Left uncommitted for Codex/Claude review.
+
 ### 2026-09-23 — Claude (documentation overhaul for the imagery stage)
 
 - **Why:** 30 `.md` files (~5,300 lines) with two competing contracts (`AGENTS.md` and a 159-line `CLAUDE.md`), no `GEMINI.md`, status spread over four files, and a Stop hook pointing at a wrong path. Magnus approved a "one fact, one home" restructure.

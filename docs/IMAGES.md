@@ -5,11 +5,11 @@ This is the working guide for the current stage: filling image slots one page at
 ## The loop (one page at a time)
 
 1. **Inventory the page.** List its image slots and measure each one in the browser (snippet below) — never guess the size from the CSS.
-2. **Spec each slot.** Choose a camera preset and a grade from the Drive library (below), write the scene brief, give the exact export size. Put a finished prompt in chat for Magnus.
-3. **Magnus generates and grades** (GPT Imagegen + Pixelmator) and drops the finished `.jpg` + `.webp` in `_incoming-assets/IMPLEMENT/`.
+2. **Spec each slot.** Choose a camera preset and a grade from the Drive library (below), write the scene brief, and give the exact export size.
+3. **Create or select the image.** Magnus can supply Pixelmator exports in `_incoming-assets/IMPLEMENT/`; when authorized, Codex can generate and optimize the image directly. Reuse a suitable production asset before generating another one.
 4. **Look at the file before using it** — filenames lie (two intake files once had each other's content). Check dimensions with `sips -g pixelWidth -g pixelHeight`.
 5. **Wire it in** (naming and markup below), then verify at 1440 / 768 / 390: no console errors, no horizontal overflow, text readable over the image.
-6. **Commit** one page per commit. Update the slot table below and [`STATUS.md`](STATUS.md).
+6. **Update** the slot table below and [`STATUS.md`](STATUS.md). Commit and push only on Magnus's go-ahead.
 
 Measure a slot (run in the browser console, or through the preview tool, at 1440 wide; containers stop growing at ~1440):
 ```js
@@ -26,7 +26,25 @@ Export at **2× the measured size** for sharp retina rendering.
 | Intro / components | `.service-guide__intro-media` | 525 × 374 | 1100 × 800 | ~1.4 landscape |
 | Symptoms / inspection | `.service-guide__symptoms-media` | 526 × 984 | 1100 × 2050 | ~0.53 tall portrait |
 
-Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 260 px), so no wide crop is needed. Bilservice-family slots (`.bilservice__image-slot`) are not measured yet — measure before specifying.
+Kamrem uses a scoped landscape modifier for its wide belt-inspection photo: `.service-guide__symptoms-media--landscape`. At 1440 px the image box is about 526 × 420; its 1672 × 941 export has sufficient pixels for the cropped view. Other guide pages retain the portrait slot above.
+
+Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 260 px), so no wide crop is needed.
+
+## Service-reparationer slot sizes (measured 2026-09-23)
+
+| Slot | Rendered at 1440 / 768 / 390 | Production export | Shape |
+|---|---|---|---|
+| Hero | 1440 × 647 / 768 × 630 / 390 × 780 | 2560 × 1440 | Wide landscape; overlays crop it at narrow widths |
+| Servicebook and keys | 566 × 319 / 660 × 372 / 310 × 174 | 1400 × 788 | 16:9 landscape |
+| Four value cards | 284 × 213 / 322 × 242 / 310 × 233 | 800 × 600 each | 4:3 landscape |
+
+## Felsökning slot sizes (measured 2026-09-23)
+
+| Slot | Rendered at 1440 / 768 / 390 | Production export | Shape |
+|---|---|---|---|
+| Hero | 1440 × 735 / 768 × 633 / 390 × 836 | 2880 × 1470 | Wide landscape with text area on the left |
+| Intro / engine bay | 566 × 425 / 660 × 495 / 310 × 233 | 1320 × 990 | 4:3 landscape |
+| Service card / OBD | 451 × 338 / 607 × 455 / 259 × 194 | 1214 × 910 | 4:3 landscape |
 
 ## Per-page status
 
@@ -35,17 +53,18 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Page | Hero | Other slots | Planned |
 |---|---|---|---|
 | Koppling | ✓ | ✓ ✓ | swap hero to object close-up |
-| Oljebyte | ✓ | ✓ | swap hero to fresh oil-filter close-up |
+| Oljebyte | ✓ | ✓ ✓ | — |
 | Stötdämpare & fjädrar | ✓ (mechanic, `--pos-left`) | ✓ ✓ | optional swap to object close-up |
 | Bilbatteri | ✓ | ✓ ✓ | — |
-| Drivaxel & drivknutar | ✓ (the reference image) | 2 placeholders | — |
-| Kamrem | ✓ | 2 placeholders | — |
-| Avgassystem | ✓ | 2 placeholders | swap hero to new-exhaust close-up |
-| Bromssystem | none (dark fallback) | 2 placeholders | new disc/caliper close-up |
-| Hjullagerbyte | none | 2 placeholders | new hub-unit close-up |
-| Styrning & kulleder | none | 2 placeholders | new ball-joint close-up |
-| Service-reparationer | `ImageSlot` placeholder | servicebook/keys slot + one 4:3 slot per value card (all placeholders) | whole page open — measure first |
-| Biltjänster | CSS-only | guide cards without a photo show a placeholder | — |
+| Drivaxel & drivknutar | ✓ (the reference image) | ✓ ✓ | — |
+| Kamrem | ✓ | ✓ ✓ (landscape inspection crop) | — |
+| Avgassystem | ✓ | ✓ ✓ | — |
+| Bromssystem | ✓ | ✓ ✓ | — |
+| Hjullagerbyte | ✓ | ✓ ✓ | — |
+| Styrning & kulleder | ✓ | ✓ ✓ | — |
+| Service-reparationer | ✓ | ✓ servicebook/keys + ✓ four value cards | — |
+| Felsökning | ✓ new diagnostics hero | ✓ engine-bay tablet + ✓ OBD detail | — |
+| Biltjänster | CSS-only | ✓ all 11 guide cards have photos | — |
 | Bilar till salu | ✓ | conditional placeholders when a car lacks photos | — |
 
 ## Photo brief (what works on this site)
@@ -61,7 +80,7 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 The camera presets and grade presets live on **Google Drive, `My Drive/## FOR AGENTS_BRYNASBIL/`** (canonical; the old repo copy is in `archive/`). A prompt = reference handling + scene brief + one camera preset + one grade + output size.
 
 - **Grade by role:** *Hard* for heroes/backgrounds under an overlay; *Medium* for people; *Small* for factual detail and object close-ups.
-- **Reference files** Magnus attaches, recognised by filename prefix:
+- **Reference files** in the Drive folder, recognised by filename prefix:
   - `env_ref_*` — the real workshop: locality, light, ambience. Not composition.
   - `char_ref_*` — identity of a person (Maher's portrait: `char_ref_maher-portrait.jpg` on the Drive).
   - `env_subject_*` — what a real part looks like (downloaded catalog photo). Form and material only; not angle, lighting or colour of aftermarket parts. Skip it for simple shapes (a coil spring) and avoid watermarked or branded images.
