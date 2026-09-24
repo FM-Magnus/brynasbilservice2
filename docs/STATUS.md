@@ -2,11 +2,23 @@
 
 > **Replace, don't append.** This file is the current state and nothing else. Update the parts that changed at the end of a session; history goes in [`LOG.md`](LOG.md). If this file and the code disagree, the code is right — fix this file.
 
-**Last updated:** 2026-09-24 (Codex — Antigravity handover).
+**Last updated:** 2026-09-24 (Claude Code — review and cleanup of Codex's uncommitted work).
 
 ## Where things stand
 
-- **Google reviews (2026-09-24):** the shared hero-overlay card appears inside the heroes on `/om-oss`, `/service-reparationer`, `/felsokning`, `/dackservice`, and `/kontakt`, as on Landing. The lower-page placements were removed. Page-owned CSS keeps review text readable against the dark overlay. The image Magnus sent was a crop of Däckservice's existing hero, not a new asset to integrate.
+- **AC hero content position (2026-09-24):** moved the complete AC hero copy block upward to match Landing’s starting position at desktop, tablet and mobile widths. Verification is recorded in the work log.
+- **Felsökning hero overlay (2026-09-24):** added a low-opacity ember tint, fading toward the right, while retaining the existing dark readability gradients at all breakpoints. Verification is recorded in the work log.
+- **Bärgning hero overlay (2026-09-24):** halved the darkness of the hero gradient at each stop; browser, CSS, typecheck and build verification recorded in the work log.
+- **Däckservice card photo grading (2026-09-24):** applied a strong, individually tuned mid-ember grade to all six tire-service card photos using page-owned CSS. Original photo assets and their composition remain unchanged; the image-to-card gradient is still pending. Playwright, CSS check, typecheck and build pass.
+- **Däckservice dates placement (2026-09-24):** moved “Viktiga datum & lagkrav för vinterdäck” below the complete six-card tire-services section. Playwright confirms the banner follows all cards and the page has no horizontal overflow at 1440/768/390. Typecheck, CSS check and build pass.
+- **Unified hero sizing (2026-09-24):** Landing, Om oss, Felsökning, Däckservice, AC-service, Bärgning and Kontakt share one token, `--bb-hero-matched-height` (730px desktop, 701–778px tablet, 686px mobile), and are equal at every width from 360 to 1920px (at 320px Om oss, Däckservice and Kontakt outgrow it: 779/730/711px). AC retains its full-bleed photo hero with standard booking and phone actions; the registration form was removed from the hero.
+- **Bilservice-family spacing (2026-09-24):** reduced shared section, tight, flow-bottom and padded-container spacing in `ServiceReparationerPage.css` to align hero-to-content rhythm more closely with Landing across Bilservice, Felsökning, Däckservice and AC-service. Browser measurements at 1440/768/390 show 64/48/48px section top padding versus Landing’s 64.8/48/52.8px; no horizontal overflow.
+
+- **Header logo (2026-09-24):** the corrected `NEW3_brynas-bilservice-logo.svg` from `_incoming-assets/IMPLEMENT/` is active in `PublicHeader` for desktop and mobile navigation. The dark-header SVG remains in the header; the black NEW3 variant asset is retained but is no longer used in the Landing service graphic. The footer keeps its existing logo.
+
+- **Landing services area (2026-09-24):** the five linked service areas use enlarged, dark-ink vector icons with restrained teal details, aligned on a fine teal connector. This line-art style follows the black automotive outline in the logo. The large “Bilens alla behov” heading is removed; service labels and links remain in HTML.
+
+- **Google reviews (2026-09-24):** the shared hero-overlay card appears inside the heroes on `/om-oss`, `/service-reparationer`, `/felsokning`, `/dackservice`, and `/kontakt`, as on Landing. Its height is fixed at 100px on desktop/tablet (three-line excerpt); on phones it is a compact 94px card with the rating row and one quote line, so rotating or updating review text cannot resize a hero. The image Magnus sent was a crop of Däckservice's existing hero, not a new asset to integrate.
 
 - **Felsökning hero (2026-09-24):** removed the decorative P0128/P0171 code panel, leaving the photo and trust row visible. CSS check, typecheck, build, focused visual/hero tests and route baselines pass at 1440/768/390.
 
@@ -24,7 +36,7 @@
 
 1. **Antigravity handover:** continue with Magnus's next small layout or imagery instruction. Start from `AGENTS.md`, this file, `CSS_OWNERSHIP.md` and, for image work, [`IMAGES.md`](IMAGES.md). The known empty service and guide slots are filled; optional hero swaps are listed in `IMAGES.md`. Measure and review one page at a time at 1440/768/390. Keep existing booking, contact and review behavior intact. No push is authorized.
 2. **Content gaps found 2026-09-22:** Bromssystem has no `.bb-tip`; Felsökning, Däckservice and Service-reparationer have none either (the component is ready).
-3. **Hero height outliers** — measured before the full-bleed change; re-measure with `docs/audit-harness/hero/` before deciding anything ([`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) §2c).
+3. **Hero heights:** resolved 2026-09-24 — see "Unified hero sizing" above. Mobile heroes are 686px (was 921) and fit a 390×844 screen: no trust points on phones (all pages), a compact phone review card, "Ring oss nu" on all seven hero phone buttons, and Kontakt's second hero paragraph hidden on phones. On phones AC's copy is bottom-anchored like the others, so it no longer starts level with Landing's (7–62px apart).
 4. **Audit points not started:** 16 distinct media-query values (near-duplicates 640/650, 1100/1120, 1320/1321); remaining hard-coded hex in the Bilservice family, footer and `ContactFormCard.css`; no error-state token.
 5. **Contact form sends nothing** (see "Broken" below) — needs a Magnus decision.
 6. **Admin auth, client half** — build against [`BACKEND.md`](BACKEND.md) §2.1; don't deploy before the server side exists.

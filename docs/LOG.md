@@ -2,6 +2,82 @@
 
 Dated entries, newest first — one per session, a few bullets each. **History, never instructions:** rules live in `AGENTS.md`, the current state in [`STATUS.md`](STATUS.md). When the oldest entries here are more than about two weeks old, move them to the top of [`archive/SESSION_LOG_ARCHIVE.md`](archive/SESSION_LOG_ARCHIVE.md). (Renamed from `SESSION_LOG_CURRENT.md` on 2026-09-23; entries below keep their original file names.)
 
+### 2026-09-24 — Claude Code (review and cleanup of Codex's uncommitted work)
+
+- Reviewed the 18 modified and 9 untracked paths. Removed the dead `.bilservice__hero-reg-input` rule and AC's overridden `min-height` duplicates, deleted the unused `landing-why-reassurance-handshake.{jpg,webp}`, corrected DESIGN_SYSTEM §2c (AC hero is full-bleed), and gitignored root and audit-harness `test-results/`.
+- Refreshed the desktop `start` and `dackservice` text baselines (heading removed; dates banner moved). Full Playwright suite 173 passed / 4 skipped; typecheck, check:css, build and `git diff --check` pass. Nothing committed. Open for Magnus: Landing copy/CTA changes, unused `brynas-bilservice-logo-black.svg`.
+- Replaced Codex's fixed 717/693/921px hero heights (repeated in five page CSS files) with one token, `--bb-hero-matched-height`, sized from the tallest natural content of the seven heroes at 17 widths (Magnus approved the shared rule). Heights before → after: desktop 717–729 → 730, 768px 693 → 701, 1024px 693–752 → 757, 1120px 693–770 → 778; mobile unchanged at 921. Spread is now 0 at every width from 651 to 1920; on phones Felsökning (up to 990) and Däckservice (933 at 360) still exceed 921 because of their content. Added a viewport sweep to `hero-size-consistency.spec.ts`.
+- Magnus chose to shorten Felsökning's hero instead of raising the mobile height: H1 is now "Felsökning & Diagnostik i Gävle" (was "… när bilen behöver ett tydligt svar"), and the Felsökning and Däckservice hero phone buttons read "Ring oss nu" like Landing, so they stay on one row. All seven heroes now match from 360 to 1920px; the sweep covers 360–1680. Desktop felsokning/dackservice text baselines refreshed (copy only). Suite 173 passed / 6 skipped.
+- Correction: the earlier "natural height" measurements were wrong for Landing (and inflated elsewhere) because a `min-height` transition was still running when measured. Re-measured with transitions off: the tallest phone hero is Däckservice at 875px, so the mobile token dropped from 921 to 876px; AC's mobile copy padding moved up by the same 2.8rem (14.3→11.5, 11.9→9.1, 12.6→9.8rem) to stay level with Landing's text.
+- Magnus chose a compact phone version of the hero review card over hiding it (trust rows alone would have saved ~13px: Kontakt and Om oss have none). On ≤650px the hero-overlay card shows the rating/Google row and one line of the rotating quote: 94px, was 172. Mobile token 876 → 798px; all seven equal at 360–650px, card height stable across all four reviews, Landing/AC text alignment unchanged. Suite 174 passed / 6 skipped; one booking-form test was intermittently flaky earlier (untouched modal, not investigated).
+- Magnus: no trust points on phones. `.bb-trust-row` and `.bargning-page__hero-trust-row` are hidden at ≤650px on every page. Kontakt and Om oss then set the phone height (791/753px), so with Magnus's approval the Kontakt, Om oss and AC hero phone buttons read "Ring oss nu" and Kontakt's second hero paragraph is hidden on phones. Mobile token 798 → 686px; all seven equal at 360–650px. AC's phone copy is now bottom-anchored (its old padding offsets removed) because starting level with Landing would push AC past 686px. Desktop om-oss/ac-service/kontakt text baselines refreshed (button label only). Suite 173 passed / 6 skipped plus one intermittent booking-form failure: the dialog opens but the success heading sometimes never appears, on tablet too — the date/time picker, not the heroes.
+
+### 2026-09-24 — Codex (Landing service logo removed)
+
+- Removed the black logo signature above the Landing service icons and its page-owned CSS. The five icon links remain.
+
+### 2026-09-24 — Codex (Landing service icons aligned with logo)
+
+- Replaced the generated 3D art direction with five enlarged vector icons in dark ink and restrained teal, connected by a fine line to match the logo’s automotive outline. Kept service labels and links in HTML.
+
+### 2026-09-24 — Codex (Landing service illustration)
+
+- Generated and integrated a wide five-station workshop illustration above the five HTML service links. Added WebP and JPEG exports; removed duplicate icon markers while retaining readable service labels and descriptions.
+
+### 2026-09-24 — Codex (Landing services heading removed)
+
+- Removed the large “Bilens alla behov” heading from the services area and retained the logo signature and five service markers. Updated the section label for assistive technology.
+
+### 2026-09-24 — Codex (stable Google review hero card)
+
+- Fixed the hero-overlay Google review card at 100px on desktop/tablet and 172px on mobile. Review excerpts clamp to three lines so changing or rotating review text no longer changes hero height.
+
+### 2026-09-24 — Codex (AC hero content position)
+
+- Moved the complete AC hero copy block, including eyebrow, heading, lead and actions, upward to Landing’s content start at desktop, tablet and mobile widths. Measured matching copy starts at 1440/768/390 and 650px with no horizontal overflow. Focused Playwright tests, CSS check, typecheck, production build and `git diff --check` pass.
+
+### 2026-09-24 — Codex (Felsökning hero overlay)
+
+- Added a subtle ember tint to the Felsökning hero image, fading toward the right and preserving the existing dark overlay, including on mobile. Focused Playwright checks, computed-style checks at 1440/390, CSS check, typecheck, production build and `git diff --check` pass.
+
+### 2026-09-24 — Codex (Bärgning hero overlay)
+
+- Halved each alpha value in the Bärgning hero gradient. The focused Playwright checks passed at 1440/768/390; CSS check, typecheck, production build and `git diff --check` passed.
+
+### 2026-09-24 — Codex (Däckservice card photo grading)
+
+- Applied a strong, individually tuned mid-ember grade to all six tire-service card photos through page-owned CSS. Reduced overlay opacity slightly at Magnus’s request changed the tint from teal to mid-ember, and lifted photo exposure after feedback that the images were too dark. Original assets and composition remain intact; the gradient transition is intentionally a later step. Däckservice browser and CSS checks pass.
+
+### 2026-09-24 — Codex (Däckservice dates placement)
+
+- Moved “Viktiga datum & lagkrav för vinterdäck” below the full six-card tire-services section. Playwright order and overflow checks pass at 1440/768/390; typecheck, CSS check and build pass.
+
+### 2026-09-24 — Codex (unified hero sizing)
+
+- Corrected the AC page change after Magnus clarified that the requested pages all need a hero the same size as Däckservice. Restored AC's full-bleed photo hero. The registration form was removed from the hero; the standard booking modal and phone actions remain.
+- Matched Landing, Om oss, Felsökning, Däckservice, AC-service, Bärgning and Kontakt to Däckservice's measured hero heights at 1440/768/390. Added a Playwright consistency check; focused hero and AC tests pass. No commit or push.
+
+### 2026-09-24 — Codex (Landing service graphic)
+
+- Replaced four dark service photo cards with a full-width graphic showing five linked service areas, teal line icons and a small Brynäs logo signature. Moved the heading above the markers and the supporting copy below; added responsive 5/3/2-column layouts and preserved each service link.
+- CSS check and production build pass. Typecheck and responsive browser review remain pending. No commit or push.
+
+### 2026-09-24 — Codex (black logo variant)
+
+- Duplicated the active NEW3 SVG as a solid black production variant and used it beside the Landing slogan on the light background. Kept the white logo in the dark header and preserved the source.
+- No build or browser checks run.
+
+### 2026-09-24 — Codex (corrected header logo)
+
+- Replaced the first, incorrect header SVG with `NEW3_brynas-bilservice-logo.svg` from `_incoming-assets/IMPLEMENT/`. The shared PublicHeader logo link uses this version for desktop and mobile navigation. Both intake files remain preserved; footer and Landing signature imports are unchanged.
+- No build or browser checks run.
+
+### 2026-09-24 — Codex (Bilservice-family spacing)
+
+- Tightened the shared vertical rhythm on Bilservice, Felsökning, Däckservice and AC-service, using Landing's section spacing as the reference. Reduced base, tight, flow-bottom, intro and padded-container rules without changing section content or imagery.
+- Before, family section top padding was 100.8/72/72px at 1440/768/390px; Landing's next section uses 64.8/48/52.8px. After: family is 64/48/48px. Browser checks at all three widths showed no horizontal overflow. The Däckservice legal-dates banner remains the first object after its hero, 40/24/24px below it.
+- CSS ownership notes updated; no typecheck or build run.
+
 ### 2026-09-24 — Codex (local commits and Antigravity handover)
 
 - Committed the shared visual polish, refreshed five previously stale desktop text baselines, and committed the five additional hero review placements with Felsökning hero cleanup. No push. The Däck screenshot supplied during the review placement work was a crop of its existing hero photo; no image was replaced.
