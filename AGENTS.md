@@ -21,7 +21,7 @@ Read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) before any CSS task.
 - Global CSS is exactly four files, loaded in `main.tsx`: `styles/tailwind.css`, `design-tokens.css`, `base.css`, `shared-elements.css`. Never add a fifth, never recreate `index.css`, never use `--redesign-*`/`--color-*` or legacy class prefixes.
 - Tokens are `--bb-*` only, from `design-tokens.css`. Shared patterns are `.bb-*` in `shared-elements.css`. Everything else lives in the page's own CSS island (unique prefix) or its family file (`ServiceReparationerPage.css`, `ServiceGuideTemplate.css`).
 - **No Tailwind utilities and no inline `style=` in public TSX** (Tailwind only under `/admin`).
-- One pattern per job: tips are `.bb-tip`, hero trust items `.bb-trust-row`. Never build a page-local copy of a shared pattern.
+- One pattern per job: tips are `<Tip>` (`.bb-tip`), hero trust items `.bb-trust-row`, guide sections `components/guide/`, booking `useBookingModal`. Never build a page-local copy of a shared pattern.
 - A modifier that restyles a child must out-rank the base rule: write `.x.x--variant p`, not `.x--variant p` — an equal-specificity tie is decided silently by source order.
 - New global tokens, shared patterns or changes to shared CSS need Magnus's approval first.
 - Business facts (phone, address, hours, org.nr) come only from `client/src/data/business.ts`.

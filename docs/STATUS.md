@@ -2,7 +2,7 @@
 
 > **Replace, don't append.** This file is the current state and nothing else. Update the parts that changed at the end of a session; history goes in [`LOG.md`](LOG.md). If this file and the code disagree, the code is right — fix this file.
 
-**Last updated:** 2026-09-24 (Claude Code — audits, Phases 1–6 of the optimization plan).
+**Last updated:** 2026-09-24 (Claude Code — audits, Phases 1–7 of the optimization plan).
 
 ## Where things stand
 
@@ -12,27 +12,22 @@
 - **Google reviews:** the hero-overlay card sits in the heroes of Landing, Om oss, Bilservice, Felsökning, Däckservice and Kontakt; AC-service shows the card lower on the page. Fixed height, so rotating reviews never resize a hero.
 - **Routing:** every route is lazy, wrapped in `RouteErrorBoundary` (a reload prompt instead of a blank page when a chunk fails), with a `*` route to a 404 page. Internal links all use `<Link>`, so they work under the production basename; `internal-links.spec.ts` guards this.
 - **Business facts:** org.nr, legal name and address come only from `client/src/data/business.ts` (org.nr 559343-5307, confirmed against the company registers); `business-facts.spec.ts` guards this. The footer menu is `publicNavigation`.
-- **Contact forms** (Kontakt and the Landing card) open a pre-filled e-mail to info@brynasbilservice.se via `client/src/api/contact.ts` until a `/api/contact` endpoint exists.
-- **Booking modal:** shows a notice with the phone number if services can't be loaded.
+- **Contact forms** (Kontakt and the Landing card) open a pre-filled e-mail to info@brynasbilservice.se via `client/src/api/contact.ts` until a `/api/contact` endpoint exists. Both submit through `useContactForm`; each keeps its own markup and copy.
+- **Booking modal:** every page opens it through `useBookingModal` (page default comment, or a trigger-specific one via `openBookingWith`); shows a notice with the phone number if services can't be loaded.
+- **Guide pages** are composed from `components/guide/ServiceGuideSections.tsx` (hero, intro, importance, symptoms, service card, info, process, closing, topic); pages hold only copy and data. Tips everywhere render through `components/ui/Tip.tsx`.
 - **CSS and types:** every dark-surface eyebrow is white with an amber dash (guides and Biltjänster included), every H1 is mixed case, no unused selectors remain (except `.bb-footer__dot`, kept for the legal links), pages no longer re-import the global stylesheets, and TypeScript runs with `strict`.
 - **Performance (lab, 2026-09-24, phone on slow 4G with 4× CPU, production build):** FCP about 2.3 s everywhere; guide LCP 3.5–3.9 s, set by the hero image arriving (47–81 KB WebP). The hero request starts about 2.2–2.3 s in whether or not the image has `loading="lazy"` (7 of 10 guides do): the page is rendered by JavaScript, so the image can't be requested before its code runs. Removing `lazy` would not help. CLS is 0 to 0.016 except Hjullagerbyte (see Next up).
 - **Repo:** the app is `client/` (no root package); `_magnus/` is local only (git-ignored). Branch `redesign/blue-teal-v1`, remote `origin` = `FM-Magnus/brynasbilservice2`. Local commits ahead of `origin` are normal; push only on Magnus's go-ahead. Run `git status -sb` rather than trusting this line.
-- **Checks (2026-09-24):** `check:css` clean (1 pending token: `--bb-font-sans`), typecheck (`strict`) and production build pass. Playwright: 200 passed, 10 skipped at 1440/768/390. `booking-form.spec.ts` is intermittently flaky (about 3 failures in 105 runs, one different test each time, predating today's changes).
+- **Checks (2026-09-24):** `check:css` clean (1 pending token: `--bb-font-sans`), typecheck (`strict`) and production build pass. Playwright: 206 passed, 10 skipped at 1440/768/390. The booking-form flake is fixed (`openClockOnFocus={false}`; 210/210 with `--repeat-each=10`). `baseline.spec` and `hero.spec` read the route list from `main.tsx`.
 
 ## Next up — optimization plan (in this order unless Magnus says otherwise)
 
-**Before anything else (open from 2026-09-24):**
-- **Re-run the full suite.** The last full run (200 passed) was before `703c2cde` and `ebfdf9b8`. Those two are verified by other means: the built CSS is byte-identical, and typecheck passes with `strict`. The final run couldn't happen because the long-running dev server on :5173 broke ("Invalid hook call": two copies of React after Vite re-bundled its dependencies). Restart it with `npm --prefix client run dev -- --force`, then run `npm --prefix client run test:browser`.
-- **Merge the booking-form flake fix.** A separate Claude session in worktree `.claude/worktrees/hopeful-ramanujan-df378a` (branch `claude/hopeful-ramanujan-df378a`, based on `b165217c`) has an uncommitted fix: `openClockOnFocus={false}` on the TimePicker in `BookingFormModalImpl.tsx`. It is not committed or merged yet. Take only that change into this branch, not its STATUS/LOG edits, and confirm with `--repeat-each=10` on `booking-form.spec.ts`.
-- The three audits of 2026-09-24 (docs, structure, code) were reported in chat only. Their findings are in today's [`LOG.md`](LOG.md) entry and have been worked into this file.
-
-Phases 1–6 are done (production fixes, facts and data, documentation, assets and repo hygiene, performance baseline, CSS consistency). Remaining:
+Phases 1–7 are done (production fixes, facts and data, documentation, assets and repo hygiene, performance baseline, CSS consistency, structure). Phase 8 is Johnny's (see Waiting on Johnny). Remaining:
 
 1. **Phase 4 leftover — the inert deploy workflow** in `client/.github/workflows/` (GitHub never runs it from there): label or remove it — Johnny's call.
 2. **Performance follow-up (from Phase 5):** Hjullagerbyte shifts its hero lead and buttons by CLS 0.12 on phones at about 2.9 s (Google's "good" limit is 0.1), most likely when the Google web font swaps in; the other guides stay at or below 0.016. The durable fix is self-hosting Archivo and Manrope with matched fallback metrics — a separate change.
-3. **Phase 7 — structure (separate review).** A `useBookingModal` hook or page shell (booking wiring repeated in 18 pages), a shared guide layout, one contact form component, route lists in tests derived from `main.tsx`.
-4. **Content gaps:** Bromssystem, Felsökning, Däckservice and Service-reparationer have no `.bb-tip`.
-5. **Deferred idea:** the "Schomaher" mascot on `.bb-tip` — waiting for the mascot art and Maher's sign-off (plan in the 2026-09-22 entry of [`LOG.md`](LOG.md)).
+3. **Content gaps:** Bromssystem, Felsökning, Däckservice and Service-reparationer have no `.bb-tip`.
+4. **Deferred idea:** the "Schomaher" mascot on `.bb-tip` (one edit in `Tip.tsx`) — waiting for the mascot art and Maher's sign-off (plan in the 2026-09-22 entry of [`LOG.md`](LOG.md)).
 
 ## Broken or incomplete
 
