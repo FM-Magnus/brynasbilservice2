@@ -467,6 +467,32 @@
   object-fit: cover;
   display: block;
 }
+.bilservice__tire-media { isolation: isolate; }
+.bilservice__tire-media::after {
+  background: color-mix(
+    in srgb,
+    var(--bb-color-urgent-gradient-start) 50%,
+    var(--bb-color-urgent-gradient-end)
+  );
+  content: '';
+  inset: 0;
+  mix-blend-mode: color;
+  opacity: 0.46;
+  pointer-events: none;
+  position: absolute;
+}
+.bilservice__tire-card:nth-child(1) .bilservice__tire-media::after { opacity: 0.48; }
+.bilservice__tire-card:nth-child(2) .bilservice__tire-media::after { opacity: 0.58; }
+.bilservice__tire-card:nth-child(3) .bilservice__tire-media::after { opacity: 0.52; }
+.bilservice__tire-card:nth-child(4) .bilservice__tire-media::after { opacity: 0.42; }
+.bilservice__tire-card:nth-child(5) .bilservice__tire-media::after { opacity: 0.54; }
+.bilservice__tire-card:nth-child(6) .bilservice__tire-media::after { opacity: 0.48; }
+.bilservice__tire-card:nth-child(1) .bilservice__tire-media img { filter: brightness(0.95) contrast(1.14) saturate(0.66); }
+.bilservice__tire-card:nth-child(2) .bilservice__tire-media img { filter: brightness(0.90) contrast(1.16) saturate(0.62); }
+.bilservice__tire-card:nth-child(3) .bilservice__tire-media img { filter: brightness(0.94) contrast(1.15) saturate(0.64); }
+.bilservice__tire-card:nth-child(4) .bilservice__tire-media img { filter: brightness(0.96) contrast(1.13) saturate(0.60); }
+.bilservice__tire-card:nth-child(5) .bilservice__tire-media img { filter: brightness(0.91) contrast(1.16) saturate(0.62); }
+.bilservice__tire-card:nth-child(6) .bilservice__tire-media img { filter: brightness(0.94) contrast(1.15) saturate(0.61); }
 .bilservice__tire-body {
   display: flex;
   flex: 1;
