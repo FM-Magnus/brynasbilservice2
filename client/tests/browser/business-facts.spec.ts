@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { expect, test } from '@playwright/test'
 import { BUSINESS } from '../../src/data/business'
+import { publicNavigation } from '../../src/data/publicNavigation'
 
 // Business facts live only in src/data/business.ts (AGENTS.md). On 2026-09-24
 // they had drifted: Om oss showed org.nr 559343-9307 while the registers and the
@@ -37,6 +38,15 @@ test('business facts are not hard-coded outside business.ts', async ({}, testInf
     )
 
   expect(offenders, 'Read these from BUSINESS in src/data/business.ts').toEqual([])
+})
+
+test('the footer shows the registered org.nr and the header menu, without placeholder legal links', async ({ page }) => {
+  await page.goto('/')
+  const footer = page.locator('.bb-footer')
+
+  await expect(footer).toContainText(`Org.nr ${BUSINESS.orgNumber}`)
+  await expect(footer.locator('.bb-footer__nav-link')).toHaveText(publicNavigation.map((item) => new RegExp(`^${item.label}`)))
+  await expect(footer.getByRole('link', { name: /Integritetspolicy|Cookies/ })).toHaveCount(0)
 })
 
 test('Om oss shows the registered org.nr', async ({ page }) => {

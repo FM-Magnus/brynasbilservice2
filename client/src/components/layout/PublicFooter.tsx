@@ -13,23 +13,12 @@ import { MapPinIcon } from '../icons/MapPinIcon'
 import { SendIcon } from '../icons/SendIcon'
 import { CalendarIcon } from '../icons/CalendarIcon'
 import { BUSINESS, weekdayHours } from '../../data/business'
+import { publicNavigation } from '../../data/publicNavigation'
 import './PublicFooter.css'
 
 export interface PublicFooterProps {
   onBookingClick?: () => void
 }
-
-const quickLinks = [
-  { label: 'Start', to: '/' },
-  { label: 'Om oss', to: '/om-oss' },
-  { label: 'Biltjänster', to: '/biltjanster' },
-  { label: 'Felsökning', to: '/felsokning' },
-  { label: 'Däck', to: '/dackservice' },
-  { label: 'AC', to: '/ac-service' },
-  { label: 'Bärgning', to: '/bargning' },
-  { label: 'Till salu', to: '/bilar-till-salu' },
-  { label: 'Kontakt', to: '/kontakt' },
-]
 
 export function PublicFooter({ onBookingClick }: PublicFooterProps) {
   const currentYear = new Date().getFullYear()
@@ -94,7 +83,8 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
           <div className="bb-footer__col bb-footer__col--links">
             <h2 className="bb-footer__heading">Snabba länkar</h2>
             <ul className="bb-footer__nav-list">
-              {quickLinks.map(link => (
+              {/* Same top-level items as the header menu (its sub-menu is left out). */}
+              {publicNavigation.map(link => (
                 <li key={link.to}>
                   <Link to={link.to} className="bb-footer__nav-link">
                     <span>{link.label}</span>
@@ -243,10 +233,8 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
           </div>
 
           <div className="bb-footer__bottom-right">
-            <Link to="/kontakt">Integritetspolicy</Link>
-            <span aria-hidden="true" className="bb-footer__dot">•</span>
-            <Link to="/kontakt">Cookies</Link>
-            <span aria-hidden="true" className="bb-footer__dot">•</span>
+            {/* Integritetspolicy and Cookies links removed 2026-09-24: both pointed at
+                /kontakt and no such page exists yet. Restore them with a real page. */}
             <span>Skapad och förvaltas av Fenrir Media AB</span>
           </div>
         </div>
