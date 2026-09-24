@@ -8,13 +8,13 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { Tip } from '../components/ui/Tip'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
-import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
@@ -50,21 +50,7 @@ const importance = [
   { icon: ThumbsUpIcon, title: 'Rätt åtgärd före dyrbyte', text: 'Vi provtrycker och felsöker innan vi byter dyra komponenter som katalysatorn, då grundorsaken ofta är ett flexrör eller en lambdasond.' },
 ] as const
 
-interface SymptomItem {
-  icon: (props: { className?: string }) => React.ReactElement | null
-  title: string
-  text: string
-  featured?: boolean
-}
-
-interface InfoCardItem {
-  icon: (props: { className?: string }) => React.ReactElement | null
-  title: string
-  text: string
-  flag?: string
-}
-
-const symptoms: readonly SymptomItem[] = [
+const symptoms: readonly GuideSymptom[] = [
   { icon: Volume2Icon, title: 'Högt, dånande eller brummande ljud', text: 'Ett plötsligt dovt eller smattrande avgasljud som tilltar vid gaspådrag tyder på hål eller sprucken ljuddämpare.', featured: true },
   { icon: WavesIcon, title: 'Skrammel och rasslande missljud', text: 'Metalliskt skrammel under bilen vid tomgång eller gupp kan tyda på lös värmesköld eller trasig keramik i katalysatorn.' },
   { icon: AlertTriangleIcon, title: 'Lukt av avgaser i kupén', text: 'Stickande avgaslukt i bilens kupé ska tas på största allvar då det tyder på ett allvarligt läckage i främre systemet.' },
@@ -82,7 +68,7 @@ const serviceItems = [
   'Åtgärd och släckning av besiktningsanmärkningar och för höga emissionsvärden.',
 ]
 
-const infoCards: readonly InfoCardItem[] = [
+const infoCards: readonly GuideInfoCard[] = [
   { icon: ClockIcon, title: 'Rost börjar oftast bakifrån', text: 'Den bakre ljuddämparen slits i regel först eftersom kondensvatten och fukt samlas där vid korta körningar. Främre delar klarar sig oftast längre.' },
   { icon: ThumbsUpIcon, title: 'Spara pengar genom sektionsbyte', text: 'Nästan aldrig behöver hela avgassystemet bytas samtidigt. Det vanligaste och mest prisvärda är att byta enbart den skadade ljuddämparen eller rörbiten.' },
   { icon: AlertTriangleIcon, title: 'Varning för katalysatorstöld', text: 'Katalysatorer innehåller ädelmetaller och är stöldbegärliga. Om bilen plötsligt dånar extremt högt utan förvarning kan katalysatorn ha stulits.', flag: 'OBS' },
@@ -115,216 +101,76 @@ export default function AvgassystemPage() {
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
-        {/* Hero */}
-        <section className="service-guide__hero" aria-labelledby="exhaust-title">
-          <div className="service-guide__hero-bg">
-            <picture>
-              <source srcSet={heroWebp} type="image/webp" />
-              <img
-                src={heroJpg}
-                alt="Underrede på bil på lyft med avgassystem, ljuddämpare och ändrör i verkstadsmiljö"
-                loading="lazy"
-              />
-            </picture>
-          </div>
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__hero-inner">
-              <div>
-                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Avgasrening &amp; ljuddämpning</div>
-                <h1 className="bb-h1 service-guide__title" id="exhaust-title">
-                  Avgassystem<br />
-                  för tyst gång<br />
-                  och <span className="bb-accent">ren</span> motor
-                </h1>
-                <p className="bb-lead bb-lead--dark service-guide__lead">
-                  Avgassystemet renar utsläpp, dämpar motorljudet och säkerställer att motorns sensorer styr förbränningen optimalt. Vi lokaliserar läckage, byter ljuddämpare och felsöker lambdasonder och katalysatorer.
-                </p>
-                <div className="service-guide__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-                </div>
-                <div className="bb-trust-row">
-                  {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="bb-trust-row__item" key={title}>
-                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                      <span className="bb-trust-row__text">
-                        <b>{title}</b>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideHero
+          id="exhaust-title"
+          eyebrow="Avgasrening & ljuddämpning"
+          title={<>Avgassystem<br />för tyst gång<br />och <span className="bb-accent">ren</span> motor</>}
+          lead="Avgassystemet renar utsläpp, dämpar motorljudet och säkerställer att motorns sensorer styr förbränningen optimalt. Vi lokaliserar läckage, byter ljuddämpare och felsöker lambdasonder och katalysatorer."
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Underrede på bil på lyft med avgassystem, ljuddämpare och ändrör i verkstadsmiljö', lazy: true }}
+          trustBadges={trustBadges}
+          onBooking={openBooking}
+        />
 
-        {/* Vad gör avgassystemet? */}
-        <section className="service-guide__section" aria-labelledby="exhaust-intro-title">
-          <div className="bb-wrap service-guide__container service-guide__intro-layout">
-            <div className="service-guide__intro-media">
-              <picture>
-                <source srcSet={componentsWebp} type="image/webp" />
-                <img
-                  src={componentsJpg}
-                  alt="Komplett avgassystem under bil med katalysator, flexrör, ljuddämpare och värmesköldar"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__intro-caption">Rent, tyst och lagligt.</p>
-            </div>
-            <div className="service-guide__intro-content">
-              <h2 id="exhaust-intro-title">Vad gör avgassystemet?</h2>
-              <p>Avgassystemet gör mer än att bara leda bort avgaser från motorn — det renar utsläppen, dämpar ljudet ner till godkända nivåer och övervakas av sensorer som styr motorns bränsleblandning. Eftersom systemet sitter oskyddat under bilen utsätts det för fukt och vägsalt, vilket gör att det oftast rostar bakifrån och inåt.</p>
-              <div className="service-guide__component-grid">
-                {components.map((item, index) => (
-                  <div className="service-guide__component-item" key={item.title}>
-                    <span className="service-guide__component-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
-                  </div>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Osäker på vad som gäller för din bil?</strong>
-                  <span className="bb-tip__text">Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar.</span>
-                </div>
-                <Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideIntro
+          id="exhaust-intro-title"
+          heading="Vad gör avgassystemet?"
+          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Komplett avgassystem under bil med katalysator, flexrör, ljuddämpare och värmesköldar' }}
+          caption="Rent, tyst och lagligt."
+        >
+          <p>Avgassystemet gör mer än att bara leda bort avgaser från motorn — det renar utsläppen, dämpar ljudet ner till godkända nivåer och övervakas av sensorer som styr motorns bränsleblandning. Eftersom systemet sitter oskyddat under bilen utsätts det för fukt och vägsalt, vilket gör att det oftast rostar bakifrån och inåt.</p>
+          <GuideParts items={components} />
+          <Tip
+            title="Osäker på vad som gäller för din bil?"
+            text="Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar."
+            action={<Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
+          />
+        </GuideIntro>
 
-        {/* Varför är det viktigt att åtgärda i tid? */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="exhaust-importance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__importance">
-              <div>
-                <h2 id="exhaust-importance-title">Varför är det viktigt att åtgärda i tid?</h2>
-                <p>Ett skadat avgassystem påverkar mer än bara ljudnivån — det kan påverka besiktning, hälsa och bränsleförbrukning.</p>
-              </div>
-              <div className="service-guide__importance-grid">
-                {importance.map(({ icon: Icon, title, text }) => (
-                  <div className="service-guide__importance-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideImportance
+          id="exhaust-importance-title"
+          heading="Varför är det viktigt att åtgärda i tid?"
+          text="Ett skadat avgassystem påverkar mer än bara ljudnivån — det kan påverka besiktning, hälsa och bränsleförbrukning."
+          items={importance}
+        />
 
-        {/* Tecken på fel i avgassystemet */}
-        <section className="service-guide__section" aria-labelledby="exhaust-symptoms-title">
-          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
-            <div className="service-guide__symptoms-content">
-              <h2 id="exhaust-symptoms-title">Tecken på fel i avgassystemet</h2>
-              <p>Ett skadat eller läckande avgassystem märks oftast tydligt på ljudnivån, lukten eller via bilens varningslampor. Här är de vanligaste tecknen du bör vara uppmärksam på.</p>
-              <div className="service-guide__symptom-list">
-                {symptoms.map(({ icon: Icon, title, text, featured }) => (
-                  <article className={`service-guide__symptom-row${featured ? ' service-guide__symptom-row--featured' : ''}`} key={title}>
-                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className="service-guide__symptoms-media">
-              <picture>
-                <source srcSet={inspectionWebp} type="image/webp" />
-                <img
-                  src={inspectionJpg}
-                  alt="Mekaniker som kontrollerar och drar åt klämma på avgassystem under bil på tvåpelarlyft"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__symptoms-caption">Vi hittar problemet – innan det blir större.</p>
-            </div>
-          </div>
-        </section>
+        <GuideSymptoms
+          id="exhaust-symptoms-title"
+          heading="Tecken på fel i avgassystemet"
+          text="Ett skadat eller läckande avgassystem märks oftast tydligt på ljudnivån, lukten eller via bilens varningslampor. Här är de vanligaste tecknen du bör vara uppmärksam på."
+          items={symptoms}
+          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker som kontrollerar och drar åt klämma på avgassystem under bil på tvåpelarlyft' }}
+          caption="Vi hittar problemet – innan det blir större."
+        />
 
-        {/* Det här kan vi hjälpa dig med */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="exhaust-service-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__service-card">
-              <div>
-                <h2 id="exhaust-service-title">Det här kan vi hjälpa dig med</h2>
-                <p>Vi undersöker hela avgassystemet och byter slitna ljuddämpare, rörsektioner eller lambdasonder med kvalitetsdelar anpassade för din bil.</p>
-              </div>
-              <ul className="service-guide__service-checklist">
-                {serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <GuideServiceCard
+          id="exhaust-service-title"
+          text="Vi undersöker hela avgassystemet och byter slitna ljuddämpare, rörsektioner eller lambdasonder med kvalitetsdelar anpassade för din bil."
+          items={serviceItems}
+        />
 
-        {/* Mer info */}
-        <section className="service-guide__section" aria-labelledby="exhaust-info-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__info-heading">
-              <h2 id="exhaust-info-title">Viktig information om avgassystem</h2>
-              <p>Här är praktiska riktlinjer och fakta kring avgassystemets funktion och åtgärder. Vi undersöker alltid bilens faktiska skick innan vi föreslår reservdelsbyten.</p>
-            </div>
-            <div className="service-guide__info-grid">
-              {infoCards.map(({ icon: Icon, title, text, flag }) => (
-                <div className="service-guide__info-card" key={title}>
-                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-                  <div>
-                    {flag && <span className="service-guide__info-flag" aria-hidden="true">{flag}</span>}
-                    <h3>{title}</h3><p>{text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="service-guide__safety-strip">
-              <InfoIcon aria-hidden="true" />
-              <p><strong>Säkerhetsnotis:</strong> Lukt av avgaser i kupén ska aldrig ignoreras. Bilavgaser innehåller luktfri och giftig koloxid (kolmonoxid) som snabbt kan orsaka huvudvärk, illamående och nedsatt reaktionsförmåga under körning. Boka tid direkt om du känner avgasdoft i bilen.</p>
-            </div>
-          </div>
-        </section>
+        <GuideInfo
+          id="exhaust-info-title"
+          heading="Viktig information om avgassystem"
+          text="Här är praktiska riktlinjer och fakta kring avgassystemets funktion och åtgärder. Vi undersöker alltid bilens faktiska skick innan vi föreslår reservdelsbyten."
+          cards={infoCards}
+          safetyIcon={InfoIcon}
+          safety={<><strong>Säkerhetsnotis:</strong> Lukt av avgaser i kupén ska aldrig ignoreras. Bilavgaser innehåller luktfri och giftig koloxid (kolmonoxid) som snabbt kan orsaka huvudvärk, illamående och nedsatt reaktionsförmåga under körning. Boka tid direkt om du känner avgasdoft i bilen.</>}
+        />
 
-        {/* Så går det till hos oss */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="exhaust-process-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__process">
-              <div className="service-guide__process-text">
-                <h2 id="exhaust-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-                <p>Att laga eller byta delar i avgassystemet kräver noggrann täthetskontroll och rätt upphängningar. Så här ser vår process ut.</p>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-              </div>
-              <div className="service-guide__process-steps">
-                {processSteps.map(([num, title, text]) => (
-                  <div className="service-guide__process-step" key={num}>
-                    <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideProcess
+          id="exhaust-process-title"
+          text="Att laga eller byta delar i avgassystemet kräver noggrann täthetskontroll och rätt upphängningar. Så här ser vår process ut."
+          steps={processSteps}
+        />
 
         <BiltjansterFaq id="exhaust-faq" heading="Vanliga frågor om avgassystem" items={faqs} />
 
-        {/* Closing CTA */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="exhaust-booking-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__closing">
-              <div>
-                <h2 id="exhaust-booking-title">Boka reparation av avgassystem</h2>
-                <p>Priset beror helt på vilken del av avgassystemet som behöver åtgärdas — ett byte av en bakre ljuddämpare skiljer sig från byte av lambdasond eller katalysator. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag innan vi sätter igång.</p>
-              </div>
-              <div className="service-guide__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideClosing
+          id="exhaust-booking-title"
+          heading="Boka reparation av avgassystem"
+          text={<>Priset beror helt på vilken del av avgassystemet som behöver åtgärdas — ett byte av en bakre ljuddämpare skiljer sig från byte av lambdasond eller katalysator. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag innan vi sätter igång.</>}
+          onBooking={openBooking}
+        />
       </main>
       {bookingModal}
       <PublicFooter onBookingClick={openBooking} />

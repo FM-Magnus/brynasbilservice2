@@ -8,8 +8,9 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { Tip } from '../components/ui/Tip'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -17,7 +18,6 @@ import { ClockIcon } from '../components/icons/ClockIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
-import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
@@ -48,15 +48,7 @@ const benefits = [
   { icon: ThumbsUpIcon, title: 'Rätt åtgärd för bilen', text: 'Vi bedömer fackmannamässigt om det räcker med ny damask, separat yttre knut eller komplett drivaxel utan onödiga extrakostnader.' },
 ] as const
 
-interface SymptomItem {
-  icon: (props: { className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }) => React.ReactElement | null
-  title: string
-  text: string
-  featured?: boolean
-  urgent?: boolean
-}
-
-const symptoms: readonly SymptomItem[] = [
+const symptoms: readonly GuideSymptom[] = [
   { icon: Volume2Icon, title: 'Knäppande eller knackande ljud vid sväng', text: 'Ett rytmiskt klickande eller knackande missljud i skarpa kurvor i låg fart, särskilt vid kraftigt rattutslag, pekar på sliten yttre knut.', featured: true },
   { icon: WavesIcon, title: 'Vibrationer vid acceleration', text: 'Skakningar i ratten eller bilens golv vid gaspådrag rakt fram indikerar ofta slitage eller glapp i en inre drivknut.' },
   { icon: SlidersIcon, title: 'Klonkande ljud vid gas eller motorbroms', text: 'Ett mekaniskt klonkljud när du trycker ner eller släpper gaspedalen kan tyda på rotationsglapp i drivlinan.' },
@@ -74,14 +66,7 @@ const serviceItems = [
   'Funktionskontroll, föreskriven momentdragning av navmutter och provkörning innan leverans.',
 ]
 
-interface InfoCardItem {
-  icon: (props: { className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }) => React.ReactElement | null
-  title: string
-  text: string
-  flag?: string
-}
-
-const infoCards: readonly InfoCardItem[] = [
+const infoCards: readonly GuideInfoCard[] = [
   { icon: AlertTriangleIcon, title: 'Fettet måste stanna inuti knuten', text: 'Smörjfettet är specialanpassat för knutens höga belastning. Fett som läckt ut kan aldrig "fyllas på" utifrån — en läckande damask måste alltid bytas och åtgärdas.', flag: 'VIKTIGT' },
   { icon: ClockIcon, title: 'Knackande skada är permanent', text: 'Har knuten väl börjat knacka eller klicka vid sväng är slitaget på kulor och banor permanent. Det går inte att rädda med nytt fett, utan knuten måste bytas.' },
   { icon: WrenchIcon, title: 'Yttre kontra inre knut', text: 'Yttre drivknutar slits oftast först och går på många bilar att byta separat. Inre knutar säljs däremot sällan lösa utan kräver oftast byte av komplett drivaxel.' },
@@ -113,218 +98,80 @@ export default function DrivaxelDrivknutarPage() {
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
-        {/* Hero */}
-        <section className="service-guide__hero" aria-labelledby="driveshaft-title">
-          <div className="service-guide__hero-bg">
-            <picture data-image-slot="driveshaft-hero">
-              <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="Drivaxel med CV-knut på arbetsbänk i verkstaden" />
-            </picture>
-          </div>
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__hero-inner">
-              <div>
-                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Drivlina &amp; kraftöverföring</div>
-                <h1 className="bb-h1 service-guide__title" id="driveshaft-title">
-                  Drivaxel &amp; drivknutar i <span className="bb-accent">Gävle</span>
-                </h1>
-                <p className="bb-lead bb-lead--dark service-guide__lead">
-                  Drivaxeln överför motorkraften från växellådan till drivhjulen via rörliga drivknutar (CV-knutar). Vi inspekterar damasker, åtgärdar fettläckage och byter slitna knutar eller kompletta drivaxlar.
-                </p>
-                <div className="service-guide__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-                </div>
-                <div className="bb-trust-row">
-                  {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="bb-trust-row__item" key={title}>
-                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                      <span className="bb-trust-row__text">
-                        <b>{title}</b>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideHero
+          id="driveshaft-title"
+          eyebrow="Drivlina & kraftöverföring"
+          title={<>Drivaxel &amp; drivknutar i <span className="bb-accent">Gävle</span></>}
+          lead="Drivaxeln överför motorkraften från växellådan till drivhjulen via rörliga drivknutar (CV-knutar). Vi inspekterar damasker, åtgärdar fettläckage och byter slitna knutar eller kompletta drivaxlar."
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Drivaxel med CV-knut på arbetsbänk i verkstaden', slot: 'driveshaft-hero' }}
+          trustBadges={trustBadges}
+          onBooking={openBooking}
+        />
 
-        {/* Vad gör drivaxeln och drivknutarna? */}
-        <section className="service-guide__section" aria-labelledby="driveshaft-intro-title">
-          <div className="bb-wrap service-guide__container service-guide__intro-layout">
-            <div className="service-guide__intro-media">
-              <picture>
-                <source srcSet={componentsWebp} type="image/webp" />
-                <img
-                  src={componentsJpg}
-                  alt="Komplett drivaxel med drivknutar, gummidamasker och metallklämmor på verkstadsbänk"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__intro-caption">Kraftöverföring med konstant hastighet.</p>
-            </div>
-            <div className="service-guide__intro-content">
-              <h2 id="driveshaft-intro-title">Vad gör drivaxeln och drivknutarna?</h2>
-              <p>Drivaxeln för kraften från växellådan ut till hjulen, och i varje ände sitter en drivknut som klarar av att vinklas när hjulen styrs eller fjädrar. Runt varje knut sitter en gummidamask som håller kvar smörjfettet och stänger ute smuts och väta — damasken är systemets svagaste länk, och upptäcks en spricka i tid räcker det oftast med att byta enbart den.</p>
-              <div className="service-guide__component-grid">
-                {parts.map((item, index) => (
-                  <div className="service-guide__component-item" key={item.title}>
-                    <span className="service-guide__component-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
-                  </div>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Misstänker du knäppande ljud eller trasig damask?</strong>
-                  <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar damasker, fett och mekaniskt glapp.</span>
-                </div>
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideIntro
+          id="driveshaft-intro-title"
+          heading="Vad gör drivaxeln och drivknutarna?"
+          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Komplett drivaxel med drivknutar, gummidamasker och metallklämmor på verkstadsbänk' }}
+          caption="Kraftöverföring med konstant hastighet."
+        >
+          <p>Drivaxeln för kraften från växellådan ut till hjulen, och i varje ände sitter en drivknut som klarar av att vinklas när hjulen styrs eller fjädrar. Runt varje knut sitter en gummidamask som håller kvar smörjfettet och stänger ute smuts och väta — damasken är systemets svagaste länk, och upptäcks en spricka i tid räcker det oftast med att byta enbart den.</p>
+          <GuideParts items={parts} />
+          <Tip
+            title="Misstänker du knäppande ljud eller trasig damask?"
+            text="Vi hissar upp bilen och kontrollerar damasker, fett och mekaniskt glapp."
+            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
+          />
+        </GuideIntro>
 
-        {/* Varför är det viktigt att åtgärda i tid? */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="driveshaft-importance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__importance">
-              <div>
-                <h2 id="driveshaft-importance-title">Varför är det viktigt att åtgärda i tid?</h2>
-                <p>Ett snabbt ingrepp vid en sprucken damask sparar tusenlappar och förhindrar plötsligt stillestånd.</p>
-              </div>
-              <div className="service-guide__importance-grid">
-                {benefits.map(({ icon: Icon, title, text }) => (
-                  <div className="service-guide__importance-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideImportance
+          id="driveshaft-importance-title"
+          heading="Varför är det viktigt att åtgärda i tid?"
+          text="Ett snabbt ingrepp vid en sprucken damask sparar tusenlappar och förhindrar plötsligt stillestånd."
+          items={benefits}
+        />
 
-        {/* Tecken på sliten drivknut eller trasig damask */}
-        <section className="service-guide__section" aria-labelledby="driveshaft-symptoms-title">
-          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
-            <div className="service-guide__symptoms-content">
-              <h2 id="driveshaft-symptoms-title">Tecken på sliten drivknut eller trasig damask</h2>
-              <p>Slitna drivknutar och spruckna damasker ger tydliga varningssignaler vid kurvtagning och acceleration. Här är de vanligaste signalerna du bör vara vaksam på.</p>
-              <div className="service-guide__symptom-list">
-                {symptoms.map(({ icon: Icon, title, text, featured, urgent }) => (
-                  <article className={`service-guide__symptom-row${urgent ? ' service-guide__symptom-row--urgent' : featured ? ' service-guide__symptom-row--featured' : ''}`} key={title}>
-                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </article>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Viktigt om sprucken damask:</strong>
-                  <span className="bb-tip__text">Upptäcker du fettstänk eller en spräckt damask innan knuten börjat låta är det goda nyheter. Då räcker det i regel med att rengöra och byta enbart damasken med nytt specialfett, vilket sparar tusentals kronor jämfört med ett fullständigt knutbyte.</span>
-                </div>
-              </div>
-            </div>
-            <div className="service-guide__symptoms-media">
-              <picture>
-                <source srcSet={inspectionWebp} type="image/webp" />
-                <img
-                  src={inspectionJpg}
-                  alt="Närbild på mekaniker som inspekterar sprucken drivaxeldamask och fettläckage under bil"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__symptoms-caption">Tidigt damaskbyte skyddar knuten.</p>
-            </div>
-          </div>
-        </section>
+        <GuideSymptoms
+          id="driveshaft-symptoms-title"
+          heading="Tecken på sliten drivknut eller trasig damask"
+          text="Slitna drivknutar och spruckna damasker ger tydliga varningssignaler vid kurvtagning och acceleration. Här är de vanligaste signalerna du bör vara vaksam på."
+          items={symptoms}
+          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Närbild på mekaniker som inspekterar sprucken drivaxeldamask och fettläckage under bil' }}
+          caption="Tidigt damaskbyte skyddar knuten."
+        >
+          <Tip
+            title="Viktigt om sprucken damask:"
+            text="Upptäcker du fettstänk eller en spräckt damask innan knuten börjat låta är det goda nyheter. Då räcker det i regel med att rengöra och byta enbart damasken med nytt specialfett, vilket sparar tusentals kronor jämfört med ett fullständigt knutbyte."
+          />
+        </GuideSymptoms>
 
-        {/* Det här kan vi hjälpa dig med */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="driveshaft-service-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__service-card">
-              <div>
-                <h2 id="driveshaft-service-title">Det här kan vi hjälpa dig med</h2>
-                <p>Vi undersöker drivlinan och byter skadade damasker, yttre drivknutar eller kompletta drivaxlar med kvalitetskomponenter anpassade för din bil.</p>
-              </div>
-              <ul className="service-guide__service-checklist">
-                {serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <GuideServiceCard
+          id="driveshaft-service-title"
+          text="Vi undersöker drivlinan och byter skadade damasker, yttre drivknutar eller kompletta drivaxlar med kvalitetskomponenter anpassade för din bil."
+          items={serviceItems}
+        />
 
-        {/* Viktig information om drivaxlar */}
-        <section className="service-guide__section" aria-labelledby="driveshaft-guidance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__info-heading">
-              <h2 id="driveshaft-guidance-title">Viktig information om drivaxlar</h2>
-              <p>Här är praktiska fakta och råd kring drivaxlar och knutar. Vi gör alltid en fackmannamässig bedömning av komponenternas skick innan vi föreslår åtgärd.</p>
-            </div>
-            <div className="service-guide__info-grid">
-              {infoCards.map(({ icon: Icon, title, text, flag }) => (
-                <div className="service-guide__info-card" key={title}>
-                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-                  <div>
-                    {flag && <span className="service-guide__info-flag" aria-hidden="true">{flag}</span>}
-                    <h3>{title}</h3><p>{text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="service-guide__safety-strip">
-              <AlertTriangleIcon aria-hidden="true" />
-              <p><strong>Säkerhetsnotis:</strong> En drivknut med hörbart glapp ska inte köras med längre än nödvändigt. Det självläker aldrig och risken för följdskador på växellådan ökar. Om knuten havererar helt tappar bilen omedelbart all drivning.</p>
-            </div>
-          </div>
-        </section>
+        <GuideInfo
+          id="driveshaft-guidance-title"
+          heading="Viktig information om drivaxlar"
+          text="Här är praktiska fakta och råd kring drivaxlar och knutar. Vi gör alltid en fackmannamässig bedömning av komponenternas skick innan vi föreslår åtgärd."
+          cards={infoCards}
+          safety={<><strong>Säkerhetsnotis:</strong> En drivknut med hörbart glapp ska inte köras med längre än nödvändigt. Det självläker aldrig och risken för följdskador på växellådan ökar. Om knuten havererar helt tappar bilen omedelbart all drivning.</>}
+        />
 
-        {/* Så går det till hos oss */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="driveshaft-process-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__process">
-              <div className="service-guide__process-text">
-                <h2 id="driveshaft-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-                <p>Att byta damasker eller drivaxlar kräver noggrannhet, rätt fettmängd och föreskrivna åtdragningsmoment. Så här ser vår process ut.</p>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-              </div>
-              <div className="service-guide__process-steps">
-                {processSteps.map(([num, title, text]) => (
-                  <div className="service-guide__process-step" key={num}>
-                    <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideProcess
+          id="driveshaft-process-title"
+          text="Att byta damasker eller drivaxlar kräver noggrannhet, rätt fettmängd och föreskrivna åtdragningsmoment. Så här ser vår process ut."
+          steps={processSteps}
+        />
 
         <BiltjansterFaq id="drivaxel-faq" heading="Vanliga frågor om drivaxel och drivknutar" items={faqs} />
 
-        {/* Closing CTA */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="driveshaft-booking-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__closing">
-              <div>
-                <h2 id="driveshaft-booking-title">Boka kontroll eller byte av drivaxel</h2>
-                <p>Priset beror på om det räcker med ett damaskbyte, om det är en yttre drivknut som byts separat eller om en hel drivaxel behöver ersättas. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag anpassat för din bilmodell.</p>
-              </div>
-              <div className="service-guide__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideClosing
+          id="driveshaft-booking-title"
+          heading="Boka kontroll eller byte av drivaxel"
+          text={<>Priset beror på om det räcker med ett damaskbyte, om det är en yttre drivknut som byts separat eller om en hel drivaxel behöver ersättas. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag anpassat för din bilmodell.</>}
+          onBooking={openBooking}
+        />
       </main>
       {bookingModal}
       <PublicFooter onBookingClick={openBooking} />

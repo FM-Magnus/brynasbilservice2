@@ -6,18 +6,16 @@
 // material, since nothing in Koppling or Avgassystem needed that shape.
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { BUSINESS } from '../data/business'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { Tip } from '../components/ui/Tip'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideProcess, GuideServiceCard, GuideSymptoms, GuideTopic } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
-import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { DollarIcon } from '../components/icons/DollarIcon'
@@ -118,156 +116,71 @@ export default function OljebytePage() {
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
-        {/* Hero */}
-        <section className="service-guide__hero" aria-labelledby="oljebyte-title">
-          <div className="service-guide__hero-bg">
-            <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="" loading="lazy" /></picture>
-          </div>
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__hero-inner">
-              <div>
-                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Motorolja &amp; motorunderhåll</div>
-                <h1 className="bb-h1 service-guide__title" id="oljebyte-title">
-                  Oljebyte<br />
-                  för en motor<br />
-                  som <span className="bb-accent">mår bra</span>
-                </h1>
-                <p className="bb-lead bb-lead--dark service-guide__lead">
-                  Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage.
-                </p>
-                <div className="service-guide__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka oljebyte</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-                </div>
-                <div className="bb-trust-row">
-                  {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="bb-trust-row__item" key={title}>
-                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                      <span className="bb-trust-row__text">
-                        <b>{title}</b>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideHero
+          id="oljebyte-title"
+          eyebrow="Motorolja & motorunderhåll"
+          title={<>Oljebyte<br />för en motor<br />som <span className="bb-accent">mår bra</span></>}
+          lead="Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage."
+          image={{ webp: heroWebp, jpg: heroJpg, alt: '', lazy: true }}
+          trustBadges={trustBadges}
+          onBooking={openBooking}
+          bookLabel="Boka oljebyte"
+        />
 
-        {/* Vad är ett oljebyte? */}
-        <section className="service-guide__section" aria-labelledby="oljebyte-intro-title">
-          <div className="bb-wrap service-guide__container service-guide__intro-layout">
-            <div className="service-guide__intro-media">
-              <picture><source srcSet={funnelWebp} type="image/webp" /><img src={funnelJpg} alt="Ny motorolja hälls i en tratt i motorrummet" loading="lazy" /></picture>
-              <p className="service-guide__intro-caption">Rätt olja. Rätt mängd. Varje gång.</p>
-            </div>
-            <div className="service-guide__intro-content">
-              <h2 id="oljebyte-intro-title">Vad är ett oljebyte?</h2>
-              <p>Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage.</p>
-              <p>Med tiden bryts oljan ner, tappar sina smörjande egenskaper och samlar på sig sot och förbränningsrester. Ett oljebyte innebär att den gamla, uttjänta oljan dräneras ur motorn, oljefiltret byts ut, ny olja fylls på och nivån kontrolleras innan bilen lämnas tillbaka till dig.</p>
+        <GuideIntro
+          id="oljebyte-intro-title"
+          heading="Vad är ett oljebyte?"
+          image={{ webp: funnelWebp, jpg: funnelJpg, alt: 'Ny motorolja hälls i en tratt i motorrummet' }}
+          caption="Rätt olja. Rätt mängd. Varje gång."
+        >
+          <p>Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage.</p>
+          <p>Med tiden bryts oljan ner, tappar sina smörjande egenskaper och samlar på sig sot och förbränningsrester. Ett oljebyte innebär att den gamla, uttjänta oljan dräneras ur motorn, oljefiltret byts ut, ny olja fylls på och nivån kontrolleras innan bilen lämnas tillbaka till dig.</p>
 
-              <div className="service-guide__prose-card">
-                <h3>Varför är oljebyte viktigt?</h3>
-                <p>Olja som inte byts i tid tappar sin förmåga att smörja och kyla motorns delar effektivt. Det leder till ökad friktion mellan rörliga komponenter, vilket över tid sliter ner motorn snabbare än den annars skulle göra.</p>
-                <p>En motor som går på ren, fräsch olja arbetar dessutom mer effektivt, vilket märks direkt på bränsleförbrukningen jämfört med en motor som får gå på gammal eller smutsig olja.</p>
-              </div>
-
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Osäker på vilken olja din bil behöver?</strong>
-                  <span className="bb-tip__text">Vi läser av tillverkarens specifikation och väljer rätt viskositet och ACEA-klass åt dig.</span>
-                </div>
-                <Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>
-              </div>
-            </div>
+          <div className="service-guide__prose-card">
+            <h3>Varför är oljebyte viktigt?</h3>
+            <p>Olja som inte byts i tid tappar sin förmåga att smörja och kyla motorns delar effektivt. Det leder till ökad friktion mellan rörliga komponenter, vilket över tid sliter ner motorn snabbare än den annars skulle göra.</p>
+            <p>En motor som går på ren, fräsch olja arbetar dessutom mer effektivt, vilket märks direkt på bränsleförbrukningen jämfört med en motor som får gå på gammal eller smutsig olja.</p>
           </div>
-        </section>
 
-        {/* Varför är det viktigt att åtgärda i tid? */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-importance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__importance">
-              <div>
-                <h2 id="oljebyte-importance-title">Fördelar med regelbundna oljebyten</h2>
-                <p>Ett regelbundet oljebyte är en liten kostnad jämfört med vad ett försummat sådant kan leda till.</p>
-              </div>
-              <div className="service-guide__importance-grid">
-                {importance.map(({ icon: Icon, title, text }) => (
-                  <div className="service-guide__importance-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+          <Tip
+            title="Osäker på vilken olja din bil behöver?"
+            text="Vi läser av tillverkarens specifikation och väljer rätt viskositet och ACEA-klass åt dig."
+            action={<Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
+          />
+        </GuideIntro>
 
-        {/* Det här kan vi hjälpa dig med (Vad ingår) */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-service-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__service-card">
-              <div>
-                <h2 id="oljebyte-service-title">Vad ingår i ett oljebyte hos oss?</h2>
-                <p>Ett oljebyte hos Brynäs Bilservice omfattar:</p>
-              </div>
-              <ul className="service-guide__service-checklist">
-                {includedItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <GuideImportance
+          id="oljebyte-importance-title"
+          heading="Fördelar med regelbundna oljebyten"
+          text="Ett regelbundet oljebyte är en liten kostnad jämfört med vad ett försummat sådant kan leda till."
+          items={importance}
+        />
 
-        {/* Mer info */}
-        <section className="service-guide__section" aria-labelledby="oljebyte-info-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__info-heading">
-              <h2 id="oljebyte-info-title">Mer info</h2>
-              <p>Här har vi samlat riktvärden och viktig information om motorolja, intervall och vanliga frågor kring oljebyten.</p>
-            </div>
-            <div className="service-guide__info-grid">
-              {infoCards.map(({ icon: Icon, title, text }) => (
-                <div className="service-guide__info-card" key={title}>
-                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-                  <div><h3>{title}</h3><p>{text}</p></div>
-                </div>
-              ))}
-            </div>
-            <div className="service-guide__safety-strip">
-              <InfoIcon aria-hidden="true" />
-              <p><strong>Viktigt om oljekvalitet:</strong> Att enbart fylla på olja när nivån sjunker ersätter aldrig ett fullständigt byte av olja och filter. Gammal olja tappar sina smörjande tillsatser och binder sot och förbränningsrester som sliter på motorns rörliga delar.</p>
-            </div>
-          </div>
-        </section>
+        <GuideServiceCard
+          id="oljebyte-service-title"
+          heading="Vad ingår i ett oljebyte hos oss?"
+          text="Ett oljebyte hos Brynäs Bilservice omfattar:"
+          items={includedItems}
+        />
 
-        {/* Oljans åldrande och nedbrytning */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-ageing-title">
-          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
-            <div className="service-guide__symptoms-content">
-              <h2 id="oljebyte-ageing-title">Hur oljan blir sämre med tiden – även om bilen knappt körs</h2>
-              <p>Olja som står oöppnad i en dunk åldras i praktiken inte. Det är först när den börjar arbeta i motorn som nedbrytningen startar, och det sker på flera sätt samtidigt:</p>
-              <div className="service-guide__symptom-list">
-                {oilAgeing.map(({ icon: Icon, title, text }) => (
-                  <article className="service-guide__symptom-row" key={title}>
-                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className="service-guide__symptoms-media">
-              <picture>
-                <source srcSet={drainWebp} type="image/webp" />
-                <img src={drainJpg} alt="Mekaniker skruvar loss oljefiltret under en lyft bil och låter gammal motorolja dräneras" loading="lazy" />
-              </picture>
-              <p className="service-guide__symptoms-caption">Gammal olja och föroreningar dräneras ut.</p>
-            </div>
-          </div>
-        </section>
+        <GuideInfo
+          id="oljebyte-info-title"
+          heading="Mer info"
+          text="Här har vi samlat riktvärden och viktig information om motorolja, intervall och vanliga frågor kring oljebyten."
+          cards={infoCards}
+          safetyIcon={InfoIcon}
+          safety={<><strong>Viktigt om oljekvalitet:</strong> Att enbart fylla på olja när nivån sjunker ersätter aldrig ett fullständigt byte av olja och filter. Gammal olja tappar sina smörjande tillsatser och binder sot och förbränningsrester som sliter på motorns rörliga delar.</>}
+        />
+
+        <GuideSymptoms
+          id="oljebyte-ageing-title"
+          heading="Hur oljan blir sämre med tiden – även om bilen knappt körs"
+          text="Olja som står oöppnad i en dunk åldras i praktiken inte. Det är först när den börjar arbeta i motorn som nedbrytningen startar, och det sker på flera sätt samtidigt:"
+          items={oilAgeing}
+          image={{ webp: drainWebp, jpg: drainJpg, alt: 'Mekaniker skruvar loss oljefiltret under en lyft bil och låter gammal motorolja dräneras' }}
+          caption="Gammal olja och föroreningar dräneras ut."
+          tight
+        />
 
         {/* Intervall kontra verkligheten */}
         <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-interval-title">
@@ -281,106 +194,55 @@ export default function OljebytePage() {
           </div>
         </section>
 
-        {/* Topic block 2: viscosity */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-viscosity-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__topic-header">
-              <h2 id="oljebyte-viscosity-title">Vad betyder egentligen siffrorna på oljedunken?</h2>
-              <p>De flesta har sett beteckningar som 5W-30 eller 0W-20 utan att egentligen veta vad de betyder. Det är oljans viskositetsklass enligt SAE-systemet (Society of Automotive Engineers), och den beskriver hur trögflytande oljan är – inte hur bra kvalitet den håller.</p>
-            </div>
-            <div className="service-guide__topic-grid service-guide__topic-grid--cols-2">
-              {viscosityDetails.map(({ title, text }) => (
-                <article className="service-guide__topic-card" key={title}><h3>{title}</h3><p>{text}</p></article>
-              ))}
-            </div>
-            <p className="service-guide__topic-note">Viskositeten är alltså bara en flödesegenskap, inte ett kvalitetsmått. Två oljor med exakt samma viskositetsbeteckning kan skilja sig kraftigt åt i hur väl de faktiskt skyddar motorn.</p>
-          </div>
-        </section>
+        <GuideTopic
+          id="oljebyte-viscosity-title"
+          heading="Vad betyder egentligen siffrorna på oljedunken?"
+          text="De flesta har sett beteckningar som 5W-30 eller 0W-20 utan att egentligen veta vad de betyder. Det är oljans viskositetsklass enligt SAE-systemet (Society of Automotive Engineers), och den beskriver hur trögflytande oljan är – inte hur bra kvalitet den håller."
+          items={viscosityDetails}
+          columns={2}
+          note="Viskositeten är alltså bara en flödesegenskap, inte ett kvalitetsmått. Två oljor med exakt samma viskositetsbeteckning kan skilja sig kraftigt åt i hur väl de faktiskt skyddar motorn."
+        />
 
-        {/* Topic block 3: API/ACEA standards */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-standards-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__topic-header">
-              <h2 id="oljebyte-standards-title">API och ACEA – standarderna som faktiskt styr kvaliteten</h2>
-              <p>Det som avgör om en olja verkligen passar din motor är inte viskositeten utan godkännandena bredvid den – API (amerikansk standard) och ACEA (europeisk standard). ACEA-klasserna är särskilt viktiga att förstå:</p>
-            </div>
-            <div className="service-guide__topic-grid service-guide__topic-grid--cols-3">
-              {oilStandards.map(({ title, text }) => (
-                <article className="service-guide__topic-card" key={title}><h3>{title}</h3><p>{text}</p></article>
-              ))}
-            </div>
-            <p className="service-guide__topic-note">Rätt ordning att välja olja i är: tillverkarens egen specifikation först, sedan ACEA-klass, och viskositet sist. En "rätt" viskositet med fel specifikation kan göra mer skada än nytta.</p>
-          </div>
-        </section>
+        <GuideTopic
+          id="oljebyte-standards-title"
+          heading="API och ACEA – standarderna som faktiskt styr kvaliteten"
+          text="Det som avgör om en olja verkligen passar din motor är inte viskositeten utan godkännandena bredvid den – API (amerikansk standard) och ACEA (europeisk standard). ACEA-klasserna är särskilt viktiga att förstå:"
+          items={oilStandards}
+          columns={3}
+          note={<>Rätt ordning att välja olja i är: tillverkarens egen specifikation först, sedan ACEA-klass, och viskositet sist. En "rätt" viskositet med fel specifikation kan göra mer skada än nytta.</>}
+        />
 
-        {/* Topic block 4: oil types */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-types-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__topic-header">
-              <h2 id="oljebyte-types-title">Mineral-, halvsyntet- och helsyntetolja – vad är egentligen skillnaden?</h2>
-              <p>Basoljan – den vätska additiven blandas i – delas in i grupper, och det är här den verkliga skillnaden mellan oljor ligger:</p>
-            </div>
-            <div className="service-guide__topic-grid service-guide__topic-grid--cols-4">
-              {oilTypes.map(({ title, text }) => (
-                <article className="service-guide__topic-card" key={title}><h3>{title}</h3><p>{text}</p></article>
-              ))}
-            </div>
-            <p className="service-guide__topic-note">Den praktiska slutsatsen: beteckningen "fullsyntetisk" på flaskan garanterar inte att två oljor är likvärdiga. Additivpaketet – rengörande, korrosionsskyddande och viskositetsstabiliserande tillsatser – väger minst lika tungt som basoljan, och det är just kombinationen av basolja och additivpaket som gör att pris och prestanda kan skilja sig kraftigt mellan oljor som ser identiska ut på pappret.</p>
-          </div>
-        </section>
+        <GuideTopic
+          id="oljebyte-types-title"
+          heading="Mineral-, halvsyntet- och helsyntetolja – vad är egentligen skillnaden?"
+          text="Basoljan – den vätska additiven blandas i – delas in i grupper, och det är här den verkliga skillnaden mellan oljor ligger:"
+          items={oilTypes}
+          columns={4}
+          note={<>Den praktiska slutsatsen: beteckningen "fullsyntetisk" på flaskan garanterar inte att två oljor är likvärdiga. Additivpaketet – rengörande, korrosionsskyddande och viskositetsstabiliserande tillsatser – väger minst lika tungt som basoljan, och det är just kombinationen av basolja och additivpaket som gör att pris och prestanda kan skilja sig kraftigt mellan oljor som ser identiska ut på pappret.</>}
+        />
 
-        {/* Topic block 5: misconceptions */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-misconceptions-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__topic-header">
-              <h2 id="oljebyte-misconceptions-title">Vanliga missförstånd om motorolja</h2>
-            </div>
-            <div className="service-guide__topic-grid service-guide__topic-grid--cols-3">
-              {misconceptions.map(({ title, text }) => (
-                <article className="service-guide__topic-card" key={title}><h3>{title}</h3><p>{text}</p></article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <GuideTopic
+          id="oljebyte-misconceptions-title"
+          heading="Vanliga missförstånd om motorolja"
+          items={misconceptions}
+          columns={3}
+        />
 
-        {/* Så går det till hos oss */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-process-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__process">
-              <div className="service-guide__process-text">
-                <h2 id="oljebyte-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-                <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-              </div>
-              <div className="service-guide__process-steps">
-                {processSteps.map(([num, title, text]) => (
-                  <div className="service-guide__process-step" key={num}>
-                    <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideProcess
+          id="oljebyte-process-title"
+          text="Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid."
+          steps={processSteps}
+        />
 
         <BiltjansterFaq id="oljebyte-faq" heading="Vanliga frågor om oljebyte" items={faqs} />
 
-        {/* Closing CTA */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-booking-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__closing">
-              <div>
-                <h2 id="oljebyte-booking-title">Boka oljebyte</h2>
-                <p>Ring oss så hjälper vi dig att hitta en tid som passar och ger en tydlig prisuppgift innan vi sätter igång.</p>
-              </div>
-              <div className="service-guide__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka oljebyte</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideClosing
+          id="oljebyte-booking-title"
+          heading="Boka oljebyte"
+          text="Ring oss så hjälper vi dig att hitta en tid som passar och ger en tydlig prisuppgift innan vi sätter igång."
+          onBooking={openBooking}
+          bookLabel="Boka oljebyte"
+        />
       </main>
       {bookingModal}
       <PublicFooter onBookingClick={openBooking} />

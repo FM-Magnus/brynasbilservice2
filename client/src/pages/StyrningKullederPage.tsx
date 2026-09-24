@@ -8,8 +8,9 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { Tip } from '../components/ui/Tip'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -17,7 +18,6 @@ import { ClockIcon } from '../components/icons/ClockIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
-import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
@@ -48,15 +48,7 @@ const benefits = [
   { icon: ThumbsUpIcon, title: 'Rätt diagnos från början', text: 'Vi avgör fackmannamässigt om missljudet härstammar från kulleder, styrleder eller servostyrningen, vilket förhindrar felaktiga reparationer.' },
 ] as const
 
-interface SymptomItem {
-  icon: (props: { className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }) => React.ReactElement | null
-  title: string
-  text: string
-  featured?: boolean
-  urgent?: boolean
-}
-
-const symptoms: readonly SymptomItem[] = [
+const symptoms: readonly GuideSymptom[] = [
   { icon: Volume2Icon, title: 'Klapper eller skrammel över gupp', text: 'Mekaniskt klapper eller slag från framvagnen vid körning på ojämnt underlag tyder ofta på glappande kulled eller styrled.', featured: true },
   { icon: SlidersIcon, title: 'Knarrande ljud vid rattutslag', text: 'Knarrande eller gnällande missljud vid stillastående eller låg fart (t.ex. vid parkering) avslöjar torr eller sliten led.' },
   { icon: WavesIcon, title: 'Svampig och oprecis rattkänsla', text: 'Bilen känns orolig och spårkänslig på vägen, med fördröjd respons och dödgång när du vrider på ratten.' },
@@ -74,14 +66,7 @@ const serviceItems = [
   'Professionell fyrhjulsmätning och hjulinställning efter utfört arbete för att garantera perfekt hjulgeometri.',
 ]
 
-interface InfoCardItem {
-  icon: (props: { className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }) => React.ReactElement | null
-  title: string
-  text: string
-  flag?: string
-}
-
-const infoCards: readonly InfoCardItem[] = [
+const infoCards: readonly GuideInfoCard[] = [
   { icon: AlertTriangleIcon, title: 'Kulleder är säkerhetskritiska', text: 'Spindelleden bär upp hjulet under körning. Ett kraftigt glapp riskerar att få kulleden att hoppa ur sin skål vid kraftig påfrestning eller ett gupp.', flag: 'VIKTIGT' },
   { icon: ShieldIcon, title: 'Går servon sönder går bilen att styra', text: 'Slutar servostyrningen att fungera behåller bilen mekanisk styrning. Ratten blir dock extremt tung i låg fart — håll stadigt och stanna kontrollerat.' },
   { icon: GaugeIcon, title: 'Hjulinställning är ett krav', text: 'Vid byte av styrled eller kulled förändras framhjulens hjulvinklar (toe-in). En hjulinställning är nödvändig för att inte slita ut däcken på nolltid.' },
@@ -113,222 +98,80 @@ export default function StyrningKullederPage() {
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
-        {/* Hero */}
-        <section className="service-guide__hero" aria-labelledby="steering-title">
-          <div className="service-guide__hero-bg">
-            <picture>
-              <source srcSet={heroWebp} type="image/webp" />
-              <img
-                src={heroJpg}
-                alt="Ny kuggstång och styrväxel med damasker och styrleder på en arbetsbänk i verkstaden"
-                loading="lazy"
-              />
-            </picture>
-          </div>
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__hero-inner">
-              <div>
-                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Framvagn &amp; styrprecision</div>
-                <h1 className="bb-h1 service-guide__title" id="steering-title">
-                  Styrning &amp; kulleder i <span className="bb-accent">Gävle</span>
-                </h1>
-                <p className="bb-lead bb-lead--dark service-guide__lead">
-                  Styrleder, spindelleder och servostyrning ser till att bilen lyder ratten direkt och rullar stabilt. Vi felsöker missljud och glapp, byter slitna leder och utför professionell hjulinställning.
-                </p>
-                <div className="service-guide__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-                </div>
-                <div className="bb-trust-row">
-                  {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="bb-trust-row__item" key={title}>
-                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                      <span className="bb-trust-row__text">
-                        <b>{title}</b>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideHero
+          id="steering-title"
+          eyebrow="Framvagn & styrprecision"
+          title={<>Styrning &amp; kulleder i <span className="bb-accent">Gävle</span></>}
+          lead="Styrleder, spindelleder och servostyrning ser till att bilen lyder ratten direkt och rullar stabilt. Vi felsöker missljud och glapp, byter slitna leder och utför professionell hjulinställning."
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ny kuggstång och styrväxel med damasker och styrleder på en arbetsbänk i verkstaden', lazy: true }}
+          trustBadges={trustBadges}
+          onBooking={openBooking}
+        />
 
-        {/* Vad gör styrning och kulleder? */}
-        <section className="service-guide__section" aria-labelledby="steering-intro-title">
-          <div className="bb-wrap service-guide__container service-guide__intro-layout">
-            <div className="service-guide__intro-media">
-              <picture>
-                <source srcSet={componentsWebp} type="image/webp" />
-                <img
-                  src={componentsJpg}
-                  alt="Framvagnskomponenter på verkstadsbänk med länkarm, bussningar, spindelled, inre styrstag och styrled"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__intro-caption">Exakt geometri, maximal kontroll.</p>
-            </div>
-            <div className="service-guide__intro-content">
-              <h2 id="steering-intro-title">Vad gör styrning och kulleder?</h2>
-              <p>Under styrning och kulleder samlar vi de komponenter som gör att bilen lyder rattrörelserna exakt och att hjulen rör sig kontrollerat med fjädringen. Kulleder och styrleder skyddas av gummidamasker — spricker en damask tränger fukt och smuts in, vilket snabbt nöter ner leden och skapar farligt glapp.</p>
-              <div className="service-guide__component-grid">
-                {parts.map((item, index) => (
-                  <div className="service-guide__component-item" key={item.title}>
-                    <span className="service-guide__component-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
-                  </div>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Upplever du glapp, klapper eller tung styrning?</strong>
-                  <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar leder, stag och servoverkan – snabbt och säkert.</span>
-                </div>
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideIntro
+          id="steering-intro-title"
+          heading="Vad gör styrning och kulleder?"
+          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Framvagnskomponenter på verkstadsbänk med länkarm, bussningar, spindelled, inre styrstag och styrled' }}
+          caption="Exakt geometri, maximal kontroll."
+        >
+          <p>Under styrning och kulleder samlar vi de komponenter som gör att bilen lyder rattrörelserna exakt och att hjulen rör sig kontrollerat med fjädringen. Kulleder och styrleder skyddas av gummidamasker — spricker en damask tränger fukt och smuts in, vilket snabbt nöter ner leden och skapar farligt glapp.</p>
+          <GuideParts items={parts} />
+          <Tip
+            title="Upplever du glapp, klapper eller tung styrning?"
+            text="Vi hissar upp bilen och kontrollerar leder, stag och servoverkan – snabbt och säkert."
+            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
+          />
+        </GuideIntro>
 
-        {/* Varför är det viktigt att åtgärda i tid? */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="steering-importance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__importance">
-              <div>
-                <h2 id="steering-importance-title">Varför är det viktigt att åtgärda i tid?</h2>
-                <p>En sliten styrled eller kulled äventyrar trafiksäkerheten och leder snabbt till snedslitna däck och sämre körkänsla.</p>
-              </div>
-              <div className="service-guide__importance-grid">
-                {benefits.map(({ icon: Icon, title, text }) => (
-                  <div className="service-guide__importance-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideImportance
+          id="steering-importance-title"
+          heading="Varför är det viktigt att åtgärda i tid?"
+          text="En sliten styrled eller kulled äventyrar trafiksäkerheten och leder snabbt till snedslitna däck och sämre körkänsla."
+          items={benefits}
+        />
 
-        {/* Tecken på sliten styrning eller trasiga leder */}
-        <section className="service-guide__section" aria-labelledby="steering-symptoms-title">
-          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
-            <div className="service-guide__symptoms-content">
-              <h2 id="steering-symptoms-title">Tecken på sliten styrning eller trasiga leder</h2>
-              <p>Glapp i framvagnen och fel på servostyrningen ger tydliga signaler i ratten och vid körning över gupp. Här är de vanligaste tecknen du bör vara uppmärksam på.</p>
-              <div className="service-guide__symptom-list">
-                {symptoms.map(({ icon: Icon, title, text, featured, urgent }) => (
-                  <article className={`service-guide__symptom-row${urgent ? ' service-guide__symptom-row--urgent' : featured ? ' service-guide__symptom-row--featured' : ''}`} key={title}>
-                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </article>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Viktigt om bilens dragning:</strong>
-                  <span className="bb-tip__text">Att bilen drar åt ena hållet beror i regel inte på servostyrningen, utan på felaktig hjulinställning, ojämnt däcktryck eller glappande länkarmar och kulleder i hjulupphängningen.</span>
-                </div>
-              </div>
-            </div>
-            <div className="service-guide__symptoms-media">
-              <picture>
-                <source srcSet={inspectionWebp} type="image/webp" />
-                <img
-                  src={inspectionJpg}
-                  alt="Närbild på mekaniker som inspekterar glapp och sprucken damask på styrled under bilen"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__symptoms-caption">Säker väghållning kräver intakta leder.</p>
-            </div>
-          </div>
-        </section>
+        <GuideSymptoms
+          id="steering-symptoms-title"
+          heading="Tecken på sliten styrning eller trasiga leder"
+          text="Glapp i framvagnen och fel på servostyrningen ger tydliga signaler i ratten och vid körning över gupp. Här är de vanligaste tecknen du bör vara uppmärksam på."
+          items={symptoms}
+          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Närbild på mekaniker som inspekterar glapp och sprucken damask på styrled under bilen' }}
+          caption="Säker väghållning kräver intakta leder."
+        >
+          <Tip
+            title="Viktigt om bilens dragning:"
+            text="Att bilen drar åt ena hållet beror i regel inte på servostyrningen, utan på felaktig hjulinställning, ojämnt däcktryck eller glappande länkarmar och kulleder i hjulupphängningen."
+          />
+        </GuideSymptoms>
 
-        {/* Det här kan vi hjälpa dig med */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="steering-service-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__service-card">
-              <div>
-                <h2 id="steering-service-title">Det här kan vi hjälpa dig med</h2>
-                <p>Vi felsöker, reparerar och byter slitna styrkomponenter och servodetaljer med kvalitetsdelar anpassade för din bilmodell.</p>
-              </div>
-              <ul className="service-guide__service-checklist">
-                {serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <GuideServiceCard
+          id="steering-service-title"
+          text="Vi felsöker, reparerar och byter slitna styrkomponenter och servodetaljer med kvalitetsdelar anpassade för din bilmodell."
+          items={serviceItems}
+        />
 
-        {/* Viktig information om styrning och kulleder */}
-        <section className="service-guide__section" aria-labelledby="steering-guidance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__info-heading">
-              <h2 id="steering-guidance-title">Viktig information om styrning och kulleder</h2>
-              <p>Här är praktiska riktlinjer och fakta kring styrningens mekanik och säkerhet. Vi undersöker alltid framvagnens faktiska skick innan vi föreslår reservdelsbyten.</p>
-            </div>
-            <div className="service-guide__info-grid">
-              {infoCards.map(({ icon: Icon, title, text, flag }) => (
-                <div className="service-guide__info-card" key={title}>
-                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-                  <div>
-                    {flag && <span className="service-guide__info-flag" aria-hidden="true">{flag}</span>}
-                    <h3>{title}</h3><p>{text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="service-guide__safety-strip">
-              <AlertTriangleIcon aria-hidden="true" />
-              <p><strong>Säkerhetsnotis:</strong> En glappande kulled eller styrled är en allvarlig säkerhetsrisk som inte ska ignoreras. Skulle leden brista under färd förlorar föraren styrkontrollen över hjulet med omedelbar olycksrisk som följd. Boka kontroll så snart du märker klapper eller glapp.</p>
-            </div>
-          </div>
-        </section>
+        <GuideInfo
+          id="steering-guidance-title"
+          heading="Viktig information om styrning och kulleder"
+          text="Här är praktiska riktlinjer och fakta kring styrningens mekanik och säkerhet. Vi undersöker alltid framvagnens faktiska skick innan vi föreslår reservdelsbyten."
+          cards={infoCards}
+          safety={<><strong>Säkerhetsnotis:</strong> En glappande kulled eller styrled är en allvarlig säkerhetsrisk som inte ska ignoreras. Skulle leden brista under färd förlorar föraren styrkontrollen över hjulet med omedelbar olycksrisk som följd. Boka kontroll så snart du märker klapper eller glapp.</>}
+        />
 
-        {/* Så går det till hos oss */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="steering-process-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__process">
-              <div className="service-guide__process-text">
-                <h2 id="steering-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-                <p>Att byta styrleder och kulleder kräver fackmannamässig glappkontroll och efterföljande hjulinställning. Så här ser vår process ut.</p>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-              </div>
-              <div className="service-guide__process-steps">
-                {processSteps.map(([num, title, text]) => (
-                  <div className="service-guide__process-step" key={num}>
-                    <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideProcess
+          id="steering-process-title"
+          text="Att byta styrleder och kulleder kräver fackmannamässig glappkontroll och efterföljande hjulinställning. Så här ser vår process ut."
+          steps={processSteps}
+        />
 
         <BiltjansterFaq id="steering-faq" heading="Vanliga frågor om styrning och kulleder" items={faqs} />
 
-        {/* Closing CTA */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="steering-booking-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__closing">
-              <div>
-                <h2 id="steering-booking-title">Boka kontroll av styrning &amp; kulleder</h2>
-                <p>Priset beror helt på vad som behöver åtgärdas — ett byte av en yttre styrled är ett prisvärt ingrepp, medan reparation av servopump eller kuggstång är mer omfattande. Ring oss på {BUSINESS.phone.display} så felsöker vi och ger dig ett tydligt kostnadsförslag innan vi sätter igång.</p>
-              </div>
-              <div className="service-guide__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideClosing
+          id="steering-booking-title"
+          heading="Boka kontroll av styrning & kulleder"
+          text={<>Priset beror helt på vad som behöver åtgärdas — ett byte av en yttre styrled är ett prisvärt ingrepp, medan reparation av servopump eller kuggstång är mer omfattande. Ring oss på {BUSINESS.phone.display} så felsöker vi och ger dig ett tydligt kostnadsförslag innan vi sätter igång.</>}
+          onBooking={openBooking}
+        />
       </main>
       {bookingModal}
       <PublicFooter onBookingClick={openBooking} />

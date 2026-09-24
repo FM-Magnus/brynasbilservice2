@@ -7,8 +7,9 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { Tip } from '../components/ui/Tip'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -17,7 +18,6 @@ import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
-import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { BoltIcon } from '../components/icons/BoltIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import { WavesIcon } from '../components/icons/WavesIcon'
@@ -47,15 +47,7 @@ const benefits = [
   { icon: ThumbsUpIcon, title: 'Skyddar generatorn', text: 'Ett kraftigt försvagat batteri belastar generatorn onödigt hårt, vilket i värsta fall kan leda till följdskador i laddsystemet.' },
 ] as const
 
-interface SymptomItem {
-  icon: (props: { className?: string }) => React.ReactElement | null
-  title: string
-  text: string
-  featured?: boolean
-  urgent?: boolean
-}
-
-const symptoms: readonly SymptomItem[] = [
+const symptoms: readonly GuideSymptom[] = [
   { icon: GaugeIcon, title: 'Motorn går runt trögt eller startar inte', text: 'Ofta det första och tydligaste tecknet, särskilt märkbart på morgonen eller i minusgrader.', featured: true },
   { icon: Volume2Icon, title: 'Klickljud vid startförsök', text: 'Startmotorn klickar men orkar inte dra runt motorn på grund av för låg spänning.' },
   { icon: BoltIcon, title: 'Svaga strålkastare eller instrumentpanel', text: 'Belysningen tappar styrka eller flimrar när motorn startas eller går på tomgång.' },
@@ -74,18 +66,11 @@ const serviceItems = [
   'Kontrollmätning av generatorns laddspänning under belastning.',
 ]
 
-interface InfoCardItem {
-  icon: (props: { className?: string }) => React.ReactElement | null
-  title: string
-  value: string
-  text: string
-}
-
-const guidance: readonly InfoCardItem[] = [
-  { icon: ClockIcon, title: 'Batteriers livslängd', value: '3–6 år', text: 'Bilbatterier håller normalt 3–6 år beroende på typ (konventionella 3–4 år, EFB 4–6 år, AGM 5–7 år). Riktvärden kan variera med körmönster.' },
-  { icon: AlertTriangleIcon, title: 'Kyla halverar kapaciteten', value: '−50%', text: 'Vid minusgrader kan batteriets effektiva startkraft minska med upp till 50 % samtidigt som motorn kräver mer kraft att dra igång.' },
-  { icon: GaugeIcon, title: 'Kortkörning sliter', value: '<15 min', text: 'Körsträckor under 15 minuter hinner sällan återställa den ström som gick åt vid startögonblicket.' },
-  { icon: InfoIcon, title: 'Djupurladdning ger permanenta skador', value: 'Permanent', text: 'Ett helt urladdat batteri kan drabbas av sulfatering som gör att det aldrig återfår sin ursprungliga kapacitet.' },
+const guidance: readonly GuideInfoCard[] = [
+  { icon: ClockIcon, title: 'Batteriers livslängd', flag: '3–6 år', text: 'Bilbatterier håller normalt 3–6 år beroende på typ (konventionella 3–4 år, EFB 4–6 år, AGM 5–7 år). Riktvärden kan variera med körmönster.' },
+  { icon: AlertTriangleIcon, title: 'Kyla halverar kapaciteten', flag: '−50%', text: 'Vid minusgrader kan batteriets effektiva startkraft minska med upp till 50 % samtidigt som motorn kräver mer kraft att dra igång.' },
+  { icon: GaugeIcon, title: 'Kortkörning sliter', flag: '<15 min', text: 'Körsträckor under 15 minuter hinner sällan återställa den ström som gick åt vid startögonblicket.' },
+  { icon: InfoIcon, title: 'Djupurladdning ger permanenta skador', flag: 'Permanent', text: 'Ett helt urladdat batteri kan drabbas av sulfatering som gör att det aldrig återfår sin ursprungliga kapacitet.' },
 ]
 
 const processSteps = [
@@ -113,202 +98,76 @@ export default function BilbatteriPage() {
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
-        {/* Hero */}
-        <section className="service-guide__hero" aria-labelledby="battery-title">
-          <div className="service-guide__hero-bg">
-            <picture data-image-slot="battery-hero">
-              <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="Mekaniker som drar åt polbult på bilbatteri" />
-            </picture>
-          </div>
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__hero-inner">
-              <div>
-                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Elsystem &amp; startkraft</div>
-                <h1 className="bb-h1 service-guide__title" id="battery-title">
-                  Bilbatteri &amp; <span className="bb-accent">Batteribyte</span> i Gävle
-                </h1>
-                <p className="bb-lead bb-lead--dark service-guide__lead">
-                  Bilbatteriet driver startmotorn och håller igång bilens elsystem — från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil.
-                </p>
-                <div className="service-guide__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-                </div>
-                <div className="bb-trust-row">
-                  {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="bb-trust-row__item" key={title}>
-                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                      <span className="bb-trust-row__text">
-                        <b>{title}</b>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideHero
+          id="battery-title"
+          eyebrow="Elsystem & startkraft"
+          title={<>Bilbatteri &amp; <span className="bb-accent">Batteribyte</span> i Gävle</>}
+          lead="Bilbatteriet driver startmotorn och håller igång bilens elsystem — från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil."
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Mekaniker som drar åt polbult på bilbatteri', slot: 'battery-hero' }}
+          trustBadges={trustBadges}
+          onBooking={openBooking}
+        />
 
-        {/* Vad gör bilbatteriet? */}
-        <section className="service-guide__section" aria-labelledby="battery-intro-title">
-          <div className="bb-wrap service-guide__container service-guide__intro-layout">
-            <div className="service-guide__intro-media">
-              <picture>
-                <source srcSet={introWebp} type="image/webp" />
-                <img src={introJpg} alt="Mekaniker testar batteriets spänning med en multimeter i verkstaden" loading="lazy" />
-              </picture>
-              <p className="service-guide__intro-caption">Noggrann mätning och konditionstest.</p>
-            </div>
-            <div className="service-guide__intro-content">
-              <h2 id="battery-intro-title">Vad gör bilbatteriet?</h2>
-              <p>Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ — till exempel ett standardbatteri i en bil som kräver AGM — ger kortare livslängd och sämre funktion.</p>
-              <div className="service-guide__component-grid">
-                {parts.map((item, index) => (
-                  <div className="service-guide__component-item" key={item.title}>
-                    <span className="service-guide__component-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
-                  </div>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Osäker på vilken batterityp din bil behöver?</strong>
-                  <span className="bb-tip__text">Vi kontrollerar alltid biltillverkarens krav för AGM, EFB eller blysyrabatteri utifrån ditt registreringsnummer.</span>
-                </div>
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideIntro
+          id="battery-intro-title"
+          heading="Vad gör bilbatteriet?"
+          image={{ webp: introWebp, jpg: introJpg, alt: 'Mekaniker testar batteriets spänning med en multimeter i verkstaden' }}
+          caption="Noggrann mätning och konditionstest."
+        >
+          <p>Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ — till exempel ett standardbatteri i en bil som kräver AGM — ger kortare livslängd och sämre funktion.</p>
+          <GuideParts items={parts} />
+          <Tip
+            title="Osäker på vilken batterityp din bil behöver?"
+            text="Vi kontrollerar alltid biltillverkarens krav för AGM, EFB eller blysyrabatteri utifrån ditt registreringsnummer."
+            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>}
+          />
+        </GuideIntro>
 
-        {/* Varför är det viktigt att byta i tid? */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="battery-importance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__importance">
-              <div>
-                <h2 id="battery-importance-title">Varför är det viktigt att byta i tid?</h2>
-                <p>Ett svagt batteri riskerar inte bara att lämna dig strandsatt, utan kan även skada generator och känslig elektronik.</p>
-              </div>
-              <div className="service-guide__importance-grid">
-                {benefits.map(({ icon: Icon, title, text }) => (
-                  <div className="service-guide__importance-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideImportance
+          id="battery-importance-title"
+          heading="Varför är det viktigt att byta i tid?"
+          text="Ett svagt batteri riskerar inte bara att lämna dig strandsatt, utan kan även skada generator och känslig elektronik."
+          items={benefits}
+        />
 
-        {/* Varningstecken på svagt eller dåligt batteri */}
-        <section className="service-guide__section" aria-labelledby="battery-symptoms-title">
-          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
-            <div className="service-guide__symptoms-content">
-              <h2 id="battery-symptoms-title">Varningstecken på svagt eller dåligt batteri</h2>
-              <p>Batteriet ger ofta subtila ledtrådar innan det lägger av helt. Känner du igen något av följande symptom är det klokt att låta oss testa batteriets hälsa innan kylan slår till.</p>
-              <div className="service-guide__symptom-list">
-                {symptoms.map(({ icon: Icon, title, text, featured, urgent }) => (
-                  <article className={`service-guide__symptom-row${urgent ? ' service-guide__symptom-row--urgent' : featured ? ' service-guide__symptom-row--featured' : ''}`} key={title}>
-                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className="service-guide__symptoms-media">
-              <picture>
-                <source srcSet={serviceWebp} type="image/webp" />
-                <img src={serviceJpg} alt="Mekaniker mäter batterispänningen med en multimeter, 12,6 volt" loading="lazy" />
-              </picture>
-              <p className="service-guide__symptoms-caption">Konditionstest före byte – inga onödiga kostnader.</p>
-            </div>
-          </div>
-        </section>
+        <GuideSymptoms
+          id="battery-symptoms-title"
+          heading="Varningstecken på svagt eller dåligt batteri"
+          text="Batteriet ger ofta subtila ledtrådar innan det lägger av helt. Känner du igen något av följande symptom är det klokt att låta oss testa batteriets hälsa innan kylan slår till."
+          items={symptoms}
+          image={{ webp: serviceWebp, jpg: serviceJpg, alt: 'Mekaniker mäter batterispänningen med en multimeter, 12,6 volt' }}
+          caption="Konditionstest före byte – inga onödiga kostnader."
+        />
 
-        {/* Det här kan vi hjälpa dig med */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="battery-service-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__service-card">
-              <div>
-                <h2 id="battery-service-title">Det här kan vi hjälpa dig med</h2>
-                <p>Vi testar bilens laddsystem och monterar ett kvalitetsbatteri med exakt rätt specifikation och teknik för just din bil.</p>
-              </div>
-              <ul className="service-guide__service-checklist">
-                {serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <GuideServiceCard
+          id="battery-service-title"
+          text="Vi testar bilens laddsystem och monterar ett kvalitetsbatteri med exakt rätt specifikation och teknik för just din bil."
+          items={serviceItems}
+        />
 
-        {/* Mer info om batterier och underhåll */}
-        <section className="service-guide__section" aria-labelledby="battery-guidance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__info-heading">
-              <h2 id="battery-guidance-title">Mer info om batterier och underhåll</h2>
-              <p>Här är branschmässiga riktlinjer och fakta kring batterityper, temperaturpåverkan och körmönster. Vi kontrollerar alltid vad som passar din bil bäst.</p>
-            </div>
-            <div className="service-guide__info-grid">
-              {guidance.map(({ icon: Icon, title, value, text }) => (
-                <div className="service-guide__info-card" key={title}>
-                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-                  <div>
-                    <span className="service-guide__info-flag" aria-hidden="true">{value}</span>
-                    <h3>{title}</h3><p>{text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="service-guide__safety-strip">
-              <InfoIcon aria-hidden="true" />
-              <p><strong>Underhållsråd:</strong> Kör du mestadels korta sträckor rekommenderar vi att ansluta en modern underhållsladdare några gånger under vinterhalvåret för att maximera batteriets livslängd.</p>
-            </div>
-          </div>
-        </section>
+        <GuideInfo
+          id="battery-guidance-title"
+          heading="Mer info om batterier och underhåll"
+          text="Här är branschmässiga riktlinjer och fakta kring batterityper, temperaturpåverkan och körmönster. Vi kontrollerar alltid vad som passar din bil bäst."
+          cards={guidance}
+          safetyIcon={InfoIcon}
+          safety={<><strong>Underhållsråd:</strong> Kör du mestadels korta sträckor rekommenderar vi att ansluta en modern underhållsladdare några gånger under vinterhalvåret för att maximera batteriets livslängd.</>}
+        />
 
-        {/* Så går det till hos oss */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="battery-process-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__process">
-              <div className="service-guide__process-text">
-                <h2 id="battery-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-                <p>Att byta batteri hos oss går snabbt och smidigt, med noggrann diagnostik så att du vet att hela laddsystemet mår bra.</p>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-              </div>
-              <div className="service-guide__process-steps">
-                {processSteps.map(([num, title, text]) => (
-                  <div className="service-guide__process-step" key={num}>
-                    <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideProcess
+          id="battery-process-title"
+          text="Att byta batteri hos oss går snabbt och smidigt, med noggrann diagnostik så att du vet att hela laddsystemet mår bra."
+          steps={processSteps}
+        />
 
         <BiltjansterFaq id="bilbatteri-faq" heading="Vanliga frågor om bilbatteri" items={faqs} />
 
-        {/* Closing CTA */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="battery-booking-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__closing">
-              <div>
-                <h2 id="battery-booking-title">Boka batteribyte</h2>
-                <p>Priset beror på vilken batterityp och kapacitet din bil kräver — AGM kostar mer än ett konventionellt batteri, men är nödvändigt för moderna elsystem. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</p>
-              </div>
-              <div className="service-guide__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideClosing
+          id="battery-booking-title"
+          heading="Boka batteribyte"
+          text={<>Priset beror på vilken batterityp och kapacitet din bil kräver — AGM kostar mer än ett konventionellt batteri, men är nödvändigt för moderna elsystem. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</>}
+          onBooking={openBooking}
+        />
       </main>
       {bookingModal}
       <PublicFooter onBookingClick={openBooking} />

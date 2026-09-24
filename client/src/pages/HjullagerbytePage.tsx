@@ -8,8 +8,9 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { Tip } from '../components/ui/Tip'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -17,7 +18,6 @@ import { ClockIcon } from '../components/icons/ClockIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
-import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
@@ -47,15 +47,7 @@ const benefits = [
   { icon: ThumbsUpIcon, title: 'Rätt del för rätt bil', text: 'Vi säkerställer att ersättningslagret matchar bilens specifikationer exakt, särskilt för bilar med ABS-integrerade magnetiska givarringar.' },
 ] as const
 
-interface SymptomItem {
-  icon: (props: { className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }) => React.ReactElement | null
-  title: string
-  text: string
-  featured?: boolean
-  urgent?: boolean
-}
-
-const symptoms: readonly SymptomItem[] = [
+const symptoms: readonly GuideSymptom[] = [
   { icon: Volume2Icon, title: 'Mullrande eller brummande ljud', text: 'Ett dovt, malande eller brummande ljud som ökar med hastigheten är det vanligaste och tydligaste tecknet på ett slitet lager.', featured: true },
   { icon: SlidersIcon, title: 'Ljudet ändras vid kurvtagning', text: 'Brummar det mer när du svänger åt ena hållet och tystnar åt det andra pekar det oftast ut vilken sida lagret sitter på.' },
   { icon: WavesIcon, title: 'Vibrationer i ratt eller golv', text: 'Skakningar och vibrationer som tilltar i högre hastigheter och följer samma mönster och frekvens som missljudet.' },
@@ -74,14 +66,7 @@ const serviceItems = [
   'Slutkontroll, föreskriven momentdragning och provkörning innan bilen lämnas ut.',
 ]
 
-interface InfoCardItem {
-  icon: (props: { className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }) => React.ReactElement | null
-  title: string
-  text: string
-  flag?: string
-}
-
-const infoCards: readonly InfoCardItem[] = [
+const infoCards: readonly GuideInfoCard[] = [
   { icon: ClockIcon, title: 'Livslängd och intervall', text: 'Hjullager håller normalt 80 000–200 000 km beroende på körstil, fukt, salt och väglag. Framhjulslager slits ofta snabbare då de bär mer tyngd och styrkrafter.' },
   { icon: ThumbsUpIcon, title: 'Behöver inte bytas i par', text: 'Till skillnad från stötdämpare och bromsar behöver hjullager inte bytas parvis. Det är fullt tillräckligt och tryggt att enbart byta det lager som är slitet.' },
   { icon: GaugeIcon, title: 'Känsliga ABS-sensorer', text: 'Moderna lager har ofta magnetiska givarringar. Felaktig del eller ovarsam montering gör att ABS- och antisladdsystem slutar fungera och varnar.', flag: 'VIKTIGT' },
@@ -113,222 +98,80 @@ export default function HjullagerbytePage() {
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
-        {/* Hero */}
-        <section className="service-guide__hero" aria-labelledby="wheel-bearing-title">
-          <div className="service-guide__hero-bg">
-            <picture>
-              <source srcSet={heroWebp} type="image/webp" />
-              <img
-                src={heroJpg}
-                alt="Ny navenhet med integrerat hjullager och hjulbultar på en arbetsbänk i verkstaden"
-                loading="lazy"
-              />
-            </picture>
-          </div>
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__hero-inner">
-              <div>
-                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Chassi &amp; hjulupphängning</div>
-                <h1 className="bb-h1 service-guide__title" id="wheel-bearing-title">
-                  Hjullagerbyte i <span className="bb-accent">Gävle</span>
-                </h1>
-                <p className="bb-lead bb-lead--dark service-guide__lead">
-                  Hjullagret bär upp bilens vikt och ser till att hjulen rullar mjukt och friktionsfritt. Upplever du ett brummande missljud eller vibrationer? Vi lokaliserar det slitna lagret och byter till kvalitetsdelar med rätt specifikation.
-                </p>
-                <div className="service-guide__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-                </div>
-                <div className="bb-trust-row">
-                  {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="bb-trust-row__item" key={title}>
-                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                      <span className="bb-trust-row__text">
-                        <b>{title}</b>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideHero
+          id="wheel-bearing-title"
+          eyebrow="Chassi & hjulupphängning"
+          title={<>Hjullagerbyte i <span className="bb-accent">Gävle</span></>}
+          lead="Hjullagret bär upp bilens vikt och ser till att hjulen rullar mjukt och friktionsfritt. Upplever du ett brummande missljud eller vibrationer? Vi lokaliserar det slitna lagret och byter till kvalitetsdelar med rätt specifikation."
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ny navenhet med integrerat hjullager och hjulbultar på en arbetsbänk i verkstaden', lazy: true }}
+          trustBadges={trustBadges}
+          onBooking={openBooking}
+        />
 
-        {/* Vad gör ett hjullager? */}
-        <section className="service-guide__section" aria-labelledby="wheel-bearing-intro-title">
-          <div className="bb-wrap service-guide__container service-guide__intro-layout">
-            <div className="service-guide__intro-media">
-              <picture>
-                <source srcSet={componentsWebp} type="image/webp" />
-                <img
-                  src={componentsJpg}
-                  alt="Hjullager, hjulnav, monteringsbultar och ABS-kontakt på arbetsbänk i verkstaden"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__intro-caption">Minimal friktion, maximal driftsäkerhet.</p>
-            </div>
-            <div className="service-guide__intro-content">
-              <h2 id="wheel-bearing-intro-title">Vad gör ett hjullager?</h2>
-              <p>Hjullagret gör att hjulet kan snurra fritt med minimal friktion samtidigt som det bär upp bilens vikt. På moderna bilar är lagret en förseglad, underhållsfri enhet som roterar miljontals varv under hård belastning.</p>
-              <div className="service-guide__component-grid">
-                {parts.map((item, index) => (
-                  <div className="service-guide__component-item" key={item.title}>
-                    <span className="service-guide__component-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
-                  </div>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Orolig för ett brummande eller malande missljud?</strong>
-                  <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar mekaniskt vilket lager som orsakar ljudet.</span>
-                </div>
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideIntro
+          id="wheel-bearing-intro-title"
+          heading="Vad gör ett hjullager?"
+          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Hjullager, hjulnav, monteringsbultar och ABS-kontakt på arbetsbänk i verkstaden' }}
+          caption="Minimal friktion, maximal driftsäkerhet."
+        >
+          <p>Hjullagret gör att hjulet kan snurra fritt med minimal friktion samtidigt som det bär upp bilens vikt. På moderna bilar är lagret en förseglad, underhållsfri enhet som roterar miljontals varv under hård belastning.</p>
+          <GuideParts items={parts} />
+          <Tip
+            title="Orolig för ett brummande eller malande missljud?"
+            text="Vi hissar upp bilen och kontrollerar mekaniskt vilket lager som orsakar ljudet."
+            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
+          />
+        </GuideIntro>
 
-        {/* Varför är det viktigt att åtgärda i tid? */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="wheel-bearing-importance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__importance">
-              <div>
-                <h2 id="wheel-bearing-importance-title">Varför är det viktigt att åtgärda i tid?</h2>
-                <p>Ett dåligt hjullager påverkar inte bara komforten – det riskerar säkerheten och kan orsaka dyra följdskador.</p>
-              </div>
-              <div className="service-guide__importance-grid">
-                {benefits.map(({ icon: Icon, title, text }) => (
-                  <div className="service-guide__importance-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideImportance
+          id="wheel-bearing-importance-title"
+          heading="Varför är det viktigt att åtgärda i tid?"
+          text="Ett dåligt hjullager påverkar inte bara komforten – det riskerar säkerheten och kan orsaka dyra följdskador."
+          items={benefits}
+        />
 
-        {/* Tecken på ett slitet eller trasigt hjullager */}
-        <section className="service-guide__section" aria-labelledby="wheel-bearing-symptoms-title">
-          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
-            <div className="service-guide__symptoms-content">
-              <h2 id="wheel-bearing-symptoms-title">Tecken på ett slitet eller trasigt hjullager</h2>
-              <p>Ett dåligt hjullager ger nästan alltid ifrån sig tydliga varningssignaler innan det havererar helt. Här är de vanligaste tecknen du bör vara uppmärksam på.</p>
-              <div className="service-guide__symptom-list">
-                {symptoms.map(({ icon: Icon, title, text, featured, urgent }) => (
-                  <article className={`service-guide__symptom-row${urgent ? ' service-guide__symptom-row--urgent' : featured ? ' service-guide__symptom-row--featured' : ''}`} key={title}>
-                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </article>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Bra att veta om missljud:</strong>
-                  <span className="bb-tip__text">Ett hjullager som precis börjat ge missljud går ofta att köra en kortare sträcka med, men slitaget ökar snabbt. Eftersom det inte går att förutse exakt när lagret havererar helt rekommenderar vi att boka kontroll så snart missljudet uppstår.</span>
-                </div>
-              </div>
-            </div>
-            <div className="service-guide__symptoms-media">
-              <picture>
-                <source srcSet={inspectionWebp} type="image/webp" />
-                <img
-                  src={inspectionJpg}
-                  alt="Mekaniker undersöker hjullager och glapp under lyft bil i verkstaden"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__symptoms-caption">Säker gång och kontroll av glapp.</p>
-            </div>
-          </div>
-        </section>
+        <GuideSymptoms
+          id="wheel-bearing-symptoms-title"
+          heading="Tecken på ett slitet eller trasigt hjullager"
+          text="Ett dåligt hjullager ger nästan alltid ifrån sig tydliga varningssignaler innan det havererar helt. Här är de vanligaste tecknen du bör vara uppmärksam på."
+          items={symptoms}
+          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker undersöker hjullager och glapp under lyft bil i verkstaden' }}
+          caption="Säker gång och kontroll av glapp."
+        >
+          <Tip
+            title="Bra att veta om missljud:"
+            text="Ett hjullager som precis börjat ge missljud går ofta att köra en kortare sträcka med, men slitaget ökar snabbt. Eftersom det inte går att förutse exakt när lagret havererar helt rekommenderar vi att boka kontroll så snart missljudet uppstår."
+          />
+        </GuideSymptoms>
 
-        {/* Det här kan vi hjälpa dig med */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="wheel-bearing-service-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__service-card">
-              <div>
-                <h2 id="wheel-bearing-service-title">Det här kan vi hjälpa dig med</h2>
-                <p>Vi felsöker, lokaliserar och byter slitna hjullager med rätt pressverktyg och kvalitetsdelar anpassade för din bils hjulupphängning och säkerhetssystem.</p>
-              </div>
-              <ul className="service-guide__service-checklist">
-                {serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <GuideServiceCard
+          id="wheel-bearing-service-title"
+          text="Vi felsöker, lokaliserar och byter slitna hjullager med rätt pressverktyg och kvalitetsdelar anpassade för din bils hjulupphängning och säkerhetssystem."
+          items={serviceItems}
+        />
 
-        {/* Viktig information om hjullager */}
-        <section className="service-guide__section" aria-labelledby="wheel-bearing-guidance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__info-heading">
-              <h2 id="wheel-bearing-guidance-title">Viktig information om hjullager</h2>
-              <p>Här är praktiska riktlinjer och fakta kring hjullagrets funktion och underhåll. Vi undersöker alltid bilens faktiska skick innan vi föreslår åtgärder.</p>
-            </div>
-            <div className="service-guide__info-grid">
-              {infoCards.map(({ icon: Icon, title, text, flag }) => (
-                <div className="service-guide__info-card" key={title}>
-                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-                  <div>
-                    {flag && <span className="service-guide__info-flag" aria-hidden="true">{flag}</span>}
-                    <h3>{title}</h3><p>{text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="service-guide__safety-strip">
-              <AlertTriangleIcon aria-hidden="true" />
-              <p><strong>Säkerhetsnotis:</strong> Ett slitet hjullager är inte något att skjuta upp i onödan. Även om missljudet kan pågå en tid finns det en överhängande risk för överhettning eller att lagret skär, vilket i värsta fall kan leda till att hjulet låser sig i hög hastighet.</p>
-            </div>
-          </div>
-        </section>
+        <GuideInfo
+          id="wheel-bearing-guidance-title"
+          heading="Viktig information om hjullager"
+          text="Här är praktiska riktlinjer och fakta kring hjullagrets funktion och underhåll. Vi undersöker alltid bilens faktiska skick innan vi föreslår åtgärder."
+          cards={infoCards}
+          safety={<><strong>Säkerhetsnotis:</strong> Ett slitet hjullager är inte något att skjuta upp i onödan. Även om missljudet kan pågå en tid finns det en överhängande risk för överhettning eller att lagret skär, vilket i värsta fall kan leda till att hjulet låser sig i hög hastighet.</>}
+        />
 
-        {/* Så går det till hos oss */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="wheel-bearing-process-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__process">
-              <div className="service-guide__process-text">
-                <h2 id="wheel-bearing-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-                <p>Att byta hjullager kräver fackmannamässiga verktyg, renhet och rätt åtdragningsmoment. Så här ser vår strukturerade process ut.</p>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-              </div>
-              <div className="service-guide__process-steps">
-                {processSteps.map(([num, title, text]) => (
-                  <div className="service-guide__process-step" key={num}>
-                    <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideProcess
+          id="wheel-bearing-process-title"
+          text="Att byta hjullager kräver fackmannamässiga verktyg, renhet och rätt åtdragningsmoment. Så här ser vår strukturerade process ut."
+          steps={processSteps}
+        />
 
         <BiltjansterFaq id="hjullager-faq" heading="Vanliga frågor om hjullagerbyte" items={faqs} />
 
-        {/* Closing CTA */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="wheel-bearing-booking-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__closing">
-              <div>
-                <h2 id="wheel-bearing-booking-title">Boka byte av hjullager</h2>
-                <p>Priset för att byta hjullager varierar beroende på om din bil har en bultad komplett navenhet eller ett pressat lager, samt om det gäller fram- eller bakhjul. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift anpassad för din bilmodell.</p>
-              </div>
-              <div className="service-guide__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideClosing
+          id="wheel-bearing-booking-title"
+          heading="Boka byte av hjullager"
+          text={<>Priset för att byta hjullager varierar beroende på om din bil har en bultad komplett navenhet eller ett pressat lager, samt om det gäller fram- eller bakhjul. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift anpassad för din bilmodell.</>}
+          onBooking={openBooking}
+        />
       </main>
       {bookingModal}
       <PublicFooter onBookingClick={openBooking} />

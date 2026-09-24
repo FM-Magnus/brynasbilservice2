@@ -9,8 +9,8 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import type { GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
@@ -53,14 +53,7 @@ const importance = [
   { icon: ClockIcon, title: 'Tidsbesparing', text: 'Ett bromsbyte är tekniskt krävande att göra själv, och hos oss är det klart samma dag i de flesta fall.' },
 ] as const
 
-interface SymptomItem {
-  icon: (props: { className?: string }) => React.ReactElement | null
-  title: string
-  text: string
-  urgent?: boolean
-}
-
-const symptoms: readonly SymptomItem[] = [
+const symptoms: readonly GuideSymptom[] = [
   { icon: Volume2Icon, title: 'Ljud vid inbromsning', text: 'Gnisslande, pipande eller skrapande ljud är vanliga första varningstecken. Ett lätt gnissel efter ett nytt beläggbyte är normal inkörning, ett kraftigt ihållande skrap är det aldrig.' },
   { icon: WavesIcon, title: 'Vibrationer', text: 'Vibrationer i pedalen eller ratten vid inbromsning kan tyda på skeva eller ojämnt slitna bromsskivor.' },
   { icon: SlidersIcon, title: 'Förändrad pedalkänsla', text: 'Längre bromssträcka, hårdare tryck, mjuk eller svampig pedalkänsla kan tyda på slitage eller luft i systemet.' },
@@ -113,204 +106,73 @@ export default function BromssystemPage() {
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
-        {/* Hero */}
-        <section className="service-guide__hero" aria-labelledby="brake-title">
-          <div className="service-guide__hero-bg">
-            <picture>
-              <source srcSet={heroWebp} type="image/webp" />
-              <img
-                src={heroJpg}
-                alt="Ventilerad bromsskiva och bromsok monterat på lyft fordon i verkstaden"
-                loading="lazy"
-              />
-            </picture>
-          </div>
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__hero-inner">
-              <div>
-                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Bromsservice &amp; säkerhet</div>
-                <h1 className="bb-h1 service-guide__title" id="brake-title">
-                  Bromssystem<br />
-                  när <span className="bb-accent">säkerheten</span><br />
-                  måste fungera
-                </h1>
-                <p className="bb-lead bb-lead--dark service-guide__lead">
-                  Bromsarna är bilens viktigaste säkerhetssystem – helt enkelt det som avgör om du stannar i tid eller inte. Slitna bromsar brukar varna i god tid, men bara om du vet vad du ska lyssna och känna efter.
-                </p>
-                <div className="service-guide__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-                </div>
-                <div className="bb-trust-row">
-                  {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="bb-trust-row__item" key={title}>
-                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                      <span className="bb-trust-row__text">
-                        <b>{title}</b>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideHero
+          id="brake-title"
+          eyebrow="Bromsservice & säkerhet"
+          title={<>Bromssystem<br />när <span className="bb-accent">säkerheten</span><br />måste fungera</>}
+          lead="Bromsarna är bilens viktigaste säkerhetssystem – helt enkelt det som avgör om du stannar i tid eller inte. Slitna bromsar brukar varna i god tid, men bara om du vet vad du ska lyssna och känna efter."
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ventilerad bromsskiva och bromsok monterat på lyft fordon i verkstaden', lazy: true }}
+          trustBadges={trustBadges}
+          onBooking={openBooking}
+          bookLabel="Boka bromsservice"
+        />
 
-        {/* Vad ingår i bromssystemet? */}
-        <section className="service-guide__section" aria-labelledby="brake-intro-title">
-          <div className="bb-wrap service-guide__container service-guide__intro-layout">
-            <div className="service-guide__intro-media">
-              <picture>
-                <source srcSet={componentsWebp} type="image/webp" />
-                <img
-                  src={componentsJpg}
-                  alt="Bromsok, bromsbelägg, monteringsfjädrar och slitagesensor uppradade på verkstadsbänk"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__intro-caption">Säkra stopp, varje mil räknas.</p>
-            </div>
-            <div className="service-guide__intro-content">
-              <h2 id="brake-intro-title">Vad ingår i bromssystemet?</h2>
-              <p>Bromssystemet består av flera delar som slits i olika takt. En kontroll handlar därför om mer än att bara titta på belägg och skivor.</p>
-              <div className="service-guide__component-grid">
-                {brakeParts.map((item, index) => (
-                  <div className="service-guide__component-item" key={item.title}>
-                    <span className="service-guide__component-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideIntro
+          id="brake-intro-title"
+          heading="Vad ingår i bromssystemet?"
+          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Bromsok, bromsbelägg, monteringsfjädrar och slitagesensor uppradade på verkstadsbänk' }}
+          caption="Säkra stopp, varje mil räknas."
+        >
+          <p>Bromssystemet består av flera delar som slits i olika takt. En kontroll handlar därför om mer än att bara titta på belägg och skivor.</p>
+          <GuideParts items={brakeParts} />
+        </GuideIntro>
 
-        {/* Varför är bromsservice viktigt? */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="brake-importance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__importance">
-              <div>
-                <h2 id="brake-importance-title">Varför är bromsservice viktigt?</h2>
-                <p>Bromsarna är inte en del du ska chansa med. Så här tänker vi kring varje bromsjobb.</p>
-              </div>
-              <div className="service-guide__importance-grid">
-                {importance.map(({ icon: Icon, title, text }) => (
-                  <div className="service-guide__importance-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideImportance
+          id="brake-importance-title"
+          heading="Varför är bromsservice viktigt?"
+          text="Bromsarna är inte en del du ska chansa med. Så här tänker vi kring varje bromsjobb."
+          items={importance}
+        />
 
-        {/* Tecken på att bromsarna behöver ses över */}
-        <section className="service-guide__section" aria-labelledby="brake-symptoms-title">
-          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
-            <div className="service-guide__symptoms-content">
-              <h2 id="brake-symptoms-title">Tecken på att bromsarna behöver ses över</h2>
-              <p>Du behöver inte själv avgöra exakt vad som är fel. De här signalerna är skäl att låta oss kontrollera systemet.</p>
-              <div className="service-guide__symptom-list">
-                {symptoms.map(({ icon: Icon, title, text, urgent }) => (
-                  <article className={`service-guide__symptom-row${urgent ? ' service-guide__symptom-row--urgent' : ''}`} key={title}>
-                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className="service-guide__symptoms-media">
-              <picture>
-                <source srcSet={inspectionWebp} type="image/webp" />
-                <img
-                  src={inspectionJpg}
-                  alt="Mekaniker mäter bromsskivans tjocklek med digitalt skjutmått under lyft bil i verkstaden"
-                  loading="lazy"
-                />
-              </picture>
-              <p className="service-guide__symptoms-caption">Vi hittar problemet – innan det blir större.</p>
-            </div>
-          </div>
-        </section>
+        <GuideSymptoms
+          id="brake-symptoms-title"
+          heading="Tecken på att bromsarna behöver ses över"
+          text="Du behöver inte själv avgöra exakt vad som är fel. De här signalerna är skäl att låta oss kontrollera systemet."
+          items={symptoms}
+          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker mäter bromsskivans tjocklek med digitalt skjutmått under lyft bil i verkstaden' }}
+          caption="Vi hittar problemet – innan det blir större."
+        />
 
-        {/* Det här kan vi hjälpa dig med */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="brake-service-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__service-card">
-              <div>
-                <h2 id="brake-service-title">Det här kan vi hjälpa dig med</h2>
-                <p>Vi börjar med att bedöma vad som faktiskt behöver göras och går inte vidare med extra arbete utan ditt godkännande.</p>
-              </div>
-              <ul className="service-guide__service-checklist">
-                {serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <GuideServiceCard
+          id="brake-service-title"
+          text="Vi börjar med att bedöma vad som faktiskt behöver göras och går inte vidare med extra arbete utan ditt godkännande."
+          items={serviceItems}
+        />
 
-        {/* Mer info */}
-        <section className="service-guide__section" aria-labelledby="brake-info-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__info-heading">
-              <h2 id="brake-info-title">Mer info</h2>
-              <p>Riktvärden kan skilja mellan bilmodeller, körstil och körmiljö. Vi bedömer alltid din bil utifrån dess faktiska skick.</p>
-            </div>
-            <div className="service-guide__info-grid">
-              {infoCards.map(({ icon: Icon, title, text }) => (
-                <div className="service-guide__info-card" key={title}>
-                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-                  <div><h3>{title}</h3><p>{text}</p></div>
-                </div>
-              ))}
-            </div>
-            <div className="service-guide__safety-strip">
-              <InfoIcon aria-hidden="true" />
-              <p><strong>Säkerhetsnot:</strong> Bromssystemet är en säkerhetskomponent. En felaktig montering kan få allvarliga konsekvenser, vilket är varför vi rekommenderar att inte utföra bromsbyten själv utan rätt kunskap och verktyg.</p>
-            </div>
-          </div>
-        </section>
+        <GuideInfo
+          id="brake-info-title"
+          heading="Mer info"
+          text="Riktvärden kan skilja mellan bilmodeller, körstil och körmiljö. Vi bedömer alltid din bil utifrån dess faktiska skick."
+          cards={infoCards}
+          safetyIcon={InfoIcon}
+          safety={<><strong>Säkerhetsnot:</strong> Bromssystemet är en säkerhetskomponent. En felaktig montering kan få allvarliga konsekvenser, vilket är varför vi rekommenderar att inte utföra bromsbyten själv utan rätt kunskap och verktyg.</>}
+        />
 
-        {/* Så går det till hos oss */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="brake-process-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__process">
-              <div className="service-guide__process-text">
-                <h2 id="brake-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-                <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför en bromskontroll ibland behöver ta lite tid.</p>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-              </div>
-              <div className="service-guide__process-steps">
-                {processSteps.map(([num, title, text]) => (
-                  <div className="service-guide__process-step" key={num}>
-                    <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideProcess
+          id="brake-process-title"
+          text="Att förstå processen gör det enklare att veta vad som händer med bilen och varför en bromskontroll ibland behöver ta lite tid."
+          steps={processSteps}
+        />
 
         <BiltjansterFaq id="bromssystem-faq" heading="Vanliga frågor om bromsar" items={faqs} />
 
-        {/* Closing CTA */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="brake-booking-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__closing">
-              <div>
-                <h2 id="brake-booking-title">Boka bromskontroll</h2>
-                <p>Priset beror på vilka delar som behöver bytas. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</p>
-              </div>
-              <div className="service-guide__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideClosing
+          id="brake-booking-title"
+          heading="Boka bromskontroll"
+          text={<>Priset beror på vilka delar som behöver bytas. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</>}
+          onBooking={openBooking}
+          bookLabel="Boka bromsservice"
+        />
       </main>
       {bookingModal}
       <PublicFooter onBookingClick={openBooking} />

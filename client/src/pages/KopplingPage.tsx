@@ -3,21 +3,21 @@
 // page has NO dependency on any page-specific rule in client/src/css/index.css.
 // Reuse ServiceGuideTemplate.css for future rebuilds; do not fork its classes
 // into another colocated file, and do not add rules for this page to index.css.
-import { useEffect, type ReactElement } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BUSINESS } from '../data/business'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { CheckIcon } from '../components/icons/CheckIcon'
+import { Tip } from '../components/ui/Tip'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import type { GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { UsersIcon } from '../components/icons/UsersIcon'
-import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { HourglassIcon } from '../components/icons/HourglassIcon'
@@ -52,14 +52,7 @@ const importance = [
   { icon: UsersIcon, title: 'Trygghet vid större arbete', text: 'Kopplingsbyte kräver att växellådan demonteras och är inte ett jobb att chansa med utan rätt verktyg och erfarenhet.' },
 ] as const
 
-interface SymptomItem {
-  icon: (props: { className?: string; 'aria-hidden'?: string | boolean }) => ReactElement | null
-  title: string
-  text: string
-  featured?: boolean
-}
-
-const symptoms: readonly SymptomItem[] = [
+const symptoms: readonly GuideSymptom[] = [
   { icon: GaugeIcon, title: 'Kopplingen slirar', text: 'Motorvarvtalet stiger utan att farten hänger med. Det märks ofta först i uppförsbacke eller vid hård acceleration, och kan ibland lukta bränt.', featured: true },
   { icon: SlidersIcon, title: 'Greppunkten har flyttat sig', text: 'Om pedalen griper mycket högt upp, nära toppen av rörelsen, är friktionsbelägget ofta kraftigt nedslitet.' },
   { icon: WrenchIcon, title: 'Svårt att lägga i växlar', text: 'Knastrande eller knirrande ljud kan tyda på att kopplingen inte frikopplar ordentligt, ofta på grund av ett urtrampningsproblem.' },
@@ -105,192 +98,76 @@ export default function KopplingPage() {
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
-        {/* Hero */}
-        <section className="service-guide__hero" aria-labelledby="koppling-title">
-          <div className="service-guide__hero-bg">
-            <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Mekaniker arbetar med kopplingen under en lyft bil i verkstaden" loading="lazy" /></picture>
-          </div>
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__hero-inner">
-              <div>
-                <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">Kraftöverföring &amp; drivlina</div>
-                <h1 className="bb-h1 service-guide__title" id="koppling-title">
-                  Koppling <span className="bb-accent">när</span><br />
-                  kraften behöver<br />
-                  nå hjulen
-                </h1>
-                <p className="bb-lead bb-lead--dark service-guide__lead">
-                  Kopplingen överför kraften mellan motorn och växellådan och gör att du kan växla utan att motorn stannar eller rycker till. Den är en slitdel, och att den till slut behöver bytas är en förväntad del av bilens underhåll.
-                </p>
-                <div className="service-guide__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-                </div>
-                <div className="bb-trust-row">
-                  {trustBadges.map(({ icon: Icon, title, text }) => (
-                    <div className="bb-trust-row__item" key={title}>
-                      <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                      <span className="bb-trust-row__text">
-                        <b>{title}</b>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideHero
+          id="koppling-title"
+          eyebrow="Kraftöverföring & drivlina"
+          title={<>Koppling <span className="bb-accent">när</span><br />kraften behöver<br />nå hjulen</>}
+          lead="Kopplingen överför kraften mellan motorn och växellådan och gör att du kan växla utan att motorn stannar eller rycker till. Den är en slitdel, och att den till slut behöver bytas är en förväntad del av bilens underhåll."
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Mekaniker arbetar med kopplingen under en lyft bil i verkstaden', lazy: true }}
+          trustBadges={trustBadges}
+          onBooking={openBooking}
+        />
 
-        {/* Vad är en koppling? */}
-        <section className="service-guide__section" aria-labelledby="koppling-intro-title">
-          <div className="bb-wrap service-guide__container service-guide__intro-layout">
-            <div className="service-guide__intro-media">
-              <picture><source srcSet={componentsWebp} type="image/webp" /><img src={componentsJpg} alt="Kopplingssats med lamell, tryckplatta och svänghjul på en arbetsbänk" loading="lazy" /></picture>
-              <p className="service-guide__intro-caption">Samma kraft. En mjukare resa.</p>
-            </div>
-            <div className="service-guide__intro-content">
-              <h2 id="koppling-intro-title">Vad är en koppling?</h2>
-              <p>Varje gång du släpper upp kopplingspedalen sliter friktionsmaterialet på kopplingsskivan lite grann. Därför är ett framtida byte inte i sig ett fel, utan en del av bilens normala underhåll.</p>
-              <div className="service-guide__component-grid">
-                {components.map((item, index) => (
-                  <div className="service-guide__component-item" key={item.title}>
-                    <span className="service-guide__component-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div><h3>{item.title}</h3><p>{item.text}</p></div>
-                  </div>
-                ))}
-              </div>
-              <div className="bb-tip">
-                <span className="bb-icon-badge"><LightbulbIcon aria-hidden="true" /></span>
-                <div className="bb-tip__body">
-                  <span className="bb-eyebrow">Tips</span>
-                  <strong className="bb-tip__title">Osäker på vad som gäller för din bil?</strong>
-                  <span className="bb-tip__text">Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar.</span>
-                </div>
-                <Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideIntro
+          id="koppling-intro-title"
+          heading="Vad är en koppling?"
+          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Kopplingssats med lamell, tryckplatta och svänghjul på en arbetsbänk' }}
+          caption="Samma kraft. En mjukare resa."
+        >
+          <p>Varje gång du släpper upp kopplingspedalen sliter friktionsmaterialet på kopplingsskivan lite grann. Därför är ett framtida byte inte i sig ett fel, utan en del av bilens normala underhåll.</p>
+          <GuideParts items={components} />
+          <Tip
+            title="Osäker på vad som gäller för din bil?"
+            text="Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar."
+            action={<Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
+          />
+        </GuideIntro>
 
-        {/* Varför är det viktigt att åtgärda i tid? */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="koppling-importance-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__importance">
-              <div>
-                <h2 id="koppling-importance-title">Varför är det viktigt att åtgärda i tid?</h2>
-                <p>En sliten koppling påverkar inte bara körkomforten. Om den inte byts i tid kan det leda till följdskador och högre reparationskostnader.</p>
-              </div>
-              <div className="service-guide__importance-grid">
-                {importance.map(({ icon: Icon, title, text }) => (
-                  <div className="service-guide__importance-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideImportance
+          id="koppling-importance-title"
+          heading="Varför är det viktigt att åtgärda i tid?"
+          text="En sliten koppling påverkar inte bara körkomforten. Om den inte byts i tid kan det leda till följdskador och högre reparationskostnader."
+          items={importance}
+        />
 
-        {/* Tecken på att kopplingen behöver ses över */}
-        <section className="service-guide__section" aria-labelledby="koppling-symptoms-title">
-          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
-            <div className="service-guide__symptoms-content">
-              <h2 id="koppling-symptoms-title">Tecken på att kopplingen behöver ses över</h2>
-              <p>Du behöver inte själv avgöra exakt vilken del som är problemet. De här signalerna är skäl att låta oss bedöma bilen.</p>
-              <div className="service-guide__symptom-list">
-                {symptoms.map(({ icon: Icon, title, text, featured }) => (
-                  <article className={`service-guide__symptom-row${featured ? ' service-guide__symptom-row--featured' : ''}`} key={title}>
-                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className="service-guide__symptoms-media">
-              <picture><source srcSet={symptomsWebp} type="image/webp" /><img src={symptomsJpg} alt="Mekaniker från Brynäs Bilservice arbetar under en lyft bil" loading="lazy" /></picture>
-              <p className="service-guide__symptoms-caption">Vi hittar problemet – innan det blir större.</p>
-            </div>
-          </div>
-        </section>
+        <GuideSymptoms
+          id="koppling-symptoms-title"
+          heading="Tecken på att kopplingen behöver ses över"
+          text="Du behöver inte själv avgöra exakt vilken del som är problemet. De här signalerna är skäl att låta oss bedöma bilen."
+          items={symptoms}
+          image={{ webp: symptomsWebp, jpg: symptomsJpg, alt: 'Mekaniker från Brynäs Bilservice arbetar under en lyft bil' }}
+          caption="Vi hittar problemet – innan det blir större."
+        />
 
-        {/* Det här kan vi hjälpa dig med */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="koppling-service-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__service-card">
-              <div>
-                <h2 id="koppling-service-title">Det här kan vi hjälpa dig med</h2>
-                <p>Vi börjar med att bedöma vad som faktiskt behöver göras och kontaktar dig innan vi går vidare med arbete utöver den första bedömningen.</p>
-              </div>
-              <ul className="service-guide__service-checklist">
-                {serviceItems.map(item => <li key={item}><CheckIcon aria-hidden="true" /><span>{item}</span></li>)}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <GuideServiceCard
+          id="koppling-service-title"
+          text="Vi börjar med att bedöma vad som faktiskt behöver göras och kontaktar dig innan vi går vidare med arbete utöver den första bedömningen."
+          items={serviceItems}
+        />
 
-        {/* Mer info */}
-        <section className="service-guide__section" aria-labelledby="koppling-info-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__info-heading">
-              <h2 id="koppling-info-title">Mer info</h2>
-              <p>Här finns generella riktvärden som kan hjälpa dig att förstå omfattningen. Vi bedömer alltid din bil utifrån dess faktiska skick.</p>
-            </div>
-            <div className="service-guide__info-grid">
-              {infoCards.map(({ icon: Icon, title, text }) => (
-                <div className="service-guide__info-card" key={title}>
-                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-                  <div><h3>{title}</h3><p>{text}</p></div>
-                </div>
-              ))}
-            </div>
-            <div className="service-guide__safety-strip">
-              <InfoIcon aria-hidden="true" />
-              <p><strong>Säkerhetsnot:</strong> Ett kopplingsbyte är ett omfattande ingrepp i drivlinan. Vi rekommenderar inte att göra det själv utan rätt specialverktyg och erfarenhet av just den här typen av arbete.</p>
-            </div>
-          </div>
-        </section>
+        <GuideInfo
+          id="koppling-info-title"
+          heading="Mer info"
+          text="Här finns generella riktvärden som kan hjälpa dig att förstå omfattningen. Vi bedömer alltid din bil utifrån dess faktiska skick."
+          cards={infoCards}
+          safetyIcon={InfoIcon}
+          safety={<><strong>Säkerhetsnot:</strong> Ett kopplingsbyte är ett omfattande ingrepp i drivlinan. Vi rekommenderar inte att göra det själv utan rätt specialverktyg och erfarenhet av just den här typen av arbete.</>}
+        />
 
-        {/* Så går det till hos oss */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="koppling-process-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__process">
-              <div className="service-guide__process-text">
-                <h2 id="koppling-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-                <p>Att förstå processen gör det enklare att veta vad som händer med bilen och varför ett större drivlinearbete ibland behöver ta lite tid.</p>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-              </div>
-              <div className="service-guide__process-steps">
-                {processSteps.map(([num, title, text]) => (
-                  <div className="service-guide__process-step" key={num}>
-                    <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                    <div><h3>{title}</h3><p>{text}</p></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideProcess
+          id="koppling-process-title"
+          text="Att förstå processen gör det enklare att veta vad som händer med bilen och varför ett större drivlinearbete ibland behöver ta lite tid."
+          steps={processSteps}
+        />
 
         <BiltjansterFaq id="koppling-faq" heading="Vanliga frågor om koppling" items={faqs} />
 
-        {/* Closing CTA */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="koppling-booking-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__closing">
-              <div>
-                <h2 id="koppling-booking-title">Boka kopplingskontroll</h2>
-                <p>Priset beror på bilmodell, vilket typ av kopplingssats som krävs och om svänghjulet behöver bytas samtidigt. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</p>
-              </div>
-              <div className="service-guide__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <GuideClosing
+          id="koppling-booking-title"
+          heading="Boka kopplingskontroll"
+          text={<>Priset beror på bilmodell, vilket typ av kopplingssats som krävs och om svänghjulet behöver bytas samtidigt. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</>}
+          onBooking={openBooking}
+        />
       </main>
       {bookingModal}
       <PublicFooter onBookingClick={openBooking} />
