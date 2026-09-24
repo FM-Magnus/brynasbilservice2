@@ -298,11 +298,9 @@
   font-size: var(--bb-font-size-label, 0.78rem);
   font-weight: 400;
 }
+/* Phones leave the trust points out of the hero (Magnus, 2026-09-24). */
 @media (max-width: 650px) {
-  .bb-trust-row {
-    gap: 0.5rem;
-    grid-template-columns: 1fr;
-  }
+  .bb-trust-row { display: none; }
 }
 
 /* ---------- 5-Step Process Grid (Workshop Protocol) ---------- */

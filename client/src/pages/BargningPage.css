@@ -110,6 +110,10 @@
   gap: clamp(1rem, 2.5vw, 2rem);
   padding-top: 1.75rem;
 }
+/* Phones leave the trust points out of the hero, like .bb-trust-row. */
+@media (max-width: 650px) {
+  .bargning-page__hero-trust-row { display: none; }
+}
 
 .bargning-page__hero-trust-item {
   align-items: center;
