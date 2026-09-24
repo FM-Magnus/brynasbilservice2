@@ -120,12 +120,8 @@
 .bb-eyebrow--dark::before { background: var(--bb-color-amber-500); }
 
 /* ---------- Headings ---------- */
-/* Archivo 800, MIXED CASE — this is Landing's actual rule, not the older
-   "every hero heading is uppercase" rule documented elsewhere in this file
-   under the legacy hero-rule section. Kontakt, Biltjänster and Bilservice
-   currently uppercase their H1s; per Magnus (2026-09-18) Landing is the one
-   that's right, so this is the canonical spec those three pages will be
-   brought into line with during the implementation round — not yet done. */
+/* Archivo 800, MIXED CASE — Landing's rule, confirmed by Magnus (2026-09-18).
+   Every page follows it; Biltjänster was the last uppercase H1 (2026-09-24). */
 .bb-h1 {
   color: inherit;
   font-family: var(--bb-font-display);

@@ -19,20 +19,6 @@
   width: min(100% - clamp(2rem, 6vw, 7rem), var(--bb-wrap-max, 1320px));
 }
 
-.biltjanster-hub__eyebrow {
-  align-items: center;
-  color: var(--bb-color-teal-500);
-  display: flex;
-  font-size: var(--bb-font-size-label);
-  font-weight: 700;
-  gap: 0.7rem;
-  letter-spacing: 0.14em;
-  margin-bottom: 0.9rem;
-  text-transform: uppercase;
-}
-.biltjanster-hub__eyebrow::before { background: var(--bb-color-teal-500); content: ''; height: 2px; width: 23px; }
-.biltjanster-hub__eyebrow--dark { color: #fff; }
-.biltjanster-hub__eyebrow--dark::before { background: var(--bb-color-amber-500); }
 
 /* Buttons */
 .biltjanster-hub__btn {
@@ -86,7 +72,6 @@
   letter-spacing: -0.03em;
   line-height: 1.05;
   margin: 0 0 1.1rem;
-  text-transform: uppercase;
 }
 .biltjanster-hub__accent { color: var(--bb-color-teal-500); }
 .biltjanster-hub__lead {

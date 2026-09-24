@@ -162,7 +162,7 @@ export default function BiltjansterPage() {
       <main className="biltjanster-hub" id="main-content">
         <section className="biltjanster-hub__hero" aria-labelledby="biltjanster-hero-title">
           <div className="biltjanster-hub__wrap biltjanster-hub__hero-inner">
-            <p className="biltjanster-hub__eyebrow">Hela vårt tjänsteutbud</p>
+            <p className="bb-eyebrow bb-eyebrow--dark">Hela vårt tjänsteutbud</p>
             <h1 className="biltjanster-hub__title" id="biltjanster-hero-title">
               Våra <span className="biltjanster-hub__accent">biltjänster</span>
             </h1>
@@ -232,7 +232,7 @@ export default function BiltjansterPage() {
         <section className="biltjanster-hub__cta" aria-labelledby="biltjanster-cta-title">
           <div className="biltjanster-hub__wrap biltjanster-hub__cta-inner">
             <div>
-              <p className="biltjanster-hub__eyebrow biltjanster-hub__eyebrow--dark">Redo att boka?</p>
+              <p className="bb-eyebrow bb-eyebrow--dark">Redo att boka?</p>
               <h2 className="biltjanster-hub__cta-title" id="biltjanster-cta-title">
                 Hittar du inte det du söker?
               </h2>
