@@ -4,7 +4,7 @@ const { chromium } = require(REPO + '/client/node_modules/@playwright/test');
 const fs = require('fs');
 const S = process.env.S + '/icons-phase0';
 const main = fs.readFileSync(REPO + '/client/src/main.tsx', 'utf8');
-const routes = [...main.matchAll(/<Route path="([^"]+)" element=\{<(?!Navigate)/g)].map(m => m[1]).filter(r => r !== '/admin');
+const routes = [...main.matchAll(/<Route path="([^"]+)" element=\{<(?!Navigate)/g)].map(m => m[1]).filter(r => r !== '/admin' && r !== '*'); // '*' is the 404 fallback, not a page
 console.log('routes:', routes.length, routes.join(' '));
 
 const inPage = () => {

@@ -3,7 +3,7 @@ const REPO = process.env.REPO || process.cwd()
 const { chromium } = require(REPO + '/client/node_modules/@playwright/test');
 const fs = require('fs'); const S = process.env.S + '/hero-phase0/';
 const main = fs.readFileSync(REPO + '/client/src/main.tsx', 'utf8');
-const routes = [...main.matchAll(/<Route path="([^"]+)" element=\{<(?!Navigate)/g)].map(m => m[1]).filter(r => r !== '/admin');
+const routes = [...main.matchAll(/<Route path="([^"]+)" element=\{<(?!Navigate)/g)].map(m => m[1]).filter(r => r !== '/admin' && r !== '*'); // '*' is the 404 fallback, not a page
 const VPS = [['l1280x720', 1280, 720], ['l1366x768', 1366, 768], ['l1440x800', 1440, 800], ['t768x1024', 768, 1024], ['m390x844', 390, 844], ['m360x740', 360, 740]];
 const inPage = () => {
   const flat = []; let order = 0;
