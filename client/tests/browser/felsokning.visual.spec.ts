@@ -21,7 +21,7 @@ test('felsökning & diagnostik page renders without horizontal overflow across b
 
   // Verify key Bilservice family sections exist
   await expect(page.locator('.bb-hero')).toBeVisible()
-  await expect(page.locator('.bilservice__code-readout')).toBeVisible()
+  await expect(page.locator('.bilservice__code-readout')).toHaveCount(0)
   await expect(page.locator('.bilservice__card-grid-3')).toBeVisible()
   await expect(page.locator('.bilservice__symptom-grid')).toBeVisible()
   await expect(page.locator('.bilservice__stat-grid')).toBeVisible()

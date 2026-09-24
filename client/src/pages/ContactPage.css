@@ -29,6 +29,12 @@
   opacity: 0.85;
 }
 
+.kontakt-page__hero .bb-reviews-card--hero-overlay {
+  align-self: flex-end;
+  color: var(--bb-color-text-inverse);
+  margin-top: clamp(2rem, 5vw, 4.5rem);
+}
+
 /* Two-column info + form section */
 .kontakt-page__main {
   padding: clamp(3rem, 5vw, 4.5rem) 0;

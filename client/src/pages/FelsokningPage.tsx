@@ -8,6 +8,7 @@
 import { useState, useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
+import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -154,18 +155,7 @@ export default function FelsokningPage() {
                   </div>
                 ))}
               </div>
-              <div className="bilservice__code-readout" aria-hidden="true">
-                <div className="bilservice__code-row">
-                  <span className="bilservice__code-dot" />
-                  <code>P0128</code>
-                  <span>Kylvätsketemperatur</span>
-                </div>
-                <div className="bilservice__code-row">
-                  <span className="bilservice__code-dot bilservice__code-dot--warn" />
-                  <code>P0171</code>
-                  <span>Bränslesystem för magert</span>
-                </div>
-              </div>
+              <GoogleReviewsCard variant="hero-overlay" />
             </div>
           </div>
         </section>

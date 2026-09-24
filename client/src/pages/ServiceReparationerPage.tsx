@@ -9,6 +9,7 @@
 import { useState, useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
+import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -131,6 +132,7 @@ export default function ServiceReparationerPage() {
                   </div>
                 ))}
               </div>
+              <GoogleReviewsCard variant="hero-overlay" />
             </div>
           </div>
         </section>

@@ -29,6 +29,7 @@
 
 .bilservice *, .bilservice *::before, .bilservice *::after { box-sizing: border-box; }
 .bilservice :where(a) { color: inherit; text-decoration: none; }
+.bilservice .bb-reviews-card { color: var(--bb-color-text-inverse); }
 .bilservice :where(button, input, textarea, select) { font: inherit; }
 .bilservice button { cursor: pointer; }
 .bilservice :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
@@ -168,24 +169,6 @@
 .bilservice__process { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
 .bilservice__process-heading { margin: 0 0 0.9rem; color: #fff; }
 .bilservice__process-text > p { margin: 0 0 1.5rem; max-width: 34ch; font: 400 0.95rem/1.6 var(--bb-font-body); }
-/* ---------- Diagnostics / OBD readout card ---------- */
-.bilservice__code-readout {
-  display: grid;
-  gap: 0.55rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: var(--bb-radius-md);
-  background: rgba(13, 31, 34, 0.88);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.32);
-  backdrop-filter: blur(12px);
-  max-width: 340px;
-}
-.bilservice__code-row { display: flex; align-items: center; gap: 0.65rem; }
-.bilservice__code-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bb-color-amber-500); flex: 0 0 auto; }
-.bilservice__code-dot--warn { background: #e05252; }
-.bilservice__code-row code { color: var(--bb-color-focus); font: 700 0.88rem / 1 'SFMono-Regular', Menlo, monospace; letter-spacing: 0.03em; }
-.bilservice__code-row span { color: rgba(255, 255, 255, 0.85); font: 400 0.82rem / 1.2 var(--bb-font-body); }
-
 /* ---------- 3-Column Card Grid (Categories, Features) ---------- */
 .bilservice__card-grid-3 {
   display: grid;

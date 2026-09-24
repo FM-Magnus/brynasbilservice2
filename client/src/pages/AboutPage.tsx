@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
+import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
@@ -136,6 +137,9 @@ export default function AboutPage() {
                   </a>
                 </div>
               </div>
+            </div>
+            <div className="omoss-page__hero-bottom">
+              <GoogleReviewsCard variant="hero-overlay" />
             </div>
           </div>
         </section>

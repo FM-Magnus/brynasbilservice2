@@ -5,6 +5,7 @@ import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
+import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BookingFormModal } from '../components/BookingForm'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
@@ -78,6 +79,7 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
+            <GoogleReviewsCard variant="hero-overlay" />
           </div>
         </section>
 

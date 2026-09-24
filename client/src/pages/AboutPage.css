@@ -117,6 +117,18 @@
   transform: translateY(-2px);
 }
 
+.omoss-page__hero-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: clamp(2rem, 5vw, 4.5rem);
+  position: relative;
+  z-index: 2;
+}
+
+.omoss-page .bb-reviews-card--hero-overlay {
+  color: var(--bb-color-text-inverse);
+}
+
 /* -------------------------------------------------------------
    2. TRUST BADGES STRIP
    ------------------------------------------------------------- */
@@ -150,7 +162,7 @@
 .omoss-page__trust-icon {
   align-items: center;
   background: var(--bb-color-teal-100);
-  border-radius: 12px;
+  border-radius: var(--bb-radius-md);
   color: var(--bb-color-teal-700);
   display: flex;
   flex-shrink: 0;
@@ -453,7 +465,7 @@
 .omoss-page__principle-icon {
   align-items: center;
   background: var(--bb-color-teal-100);
-  border-radius: 14px;
+  border-radius: var(--bb-radius-md);
   color: var(--bb-color-teal-700);
   display: flex;
   height: 48px;

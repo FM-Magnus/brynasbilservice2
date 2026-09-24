@@ -2,6 +2,31 @@
 
 Dated entries, newest first — one per session, a few bullets each. **History, never instructions:** rules live in `AGENTS.md`, the current state in [`STATUS.md`](STATUS.md). When the oldest entries here are more than about two weeks old, move them to the top of [`archive/SESSION_LOG_ARCHIVE.md`](archive/SESSION_LOG_ARCHIVE.md). (Renamed from `SESSION_LOG_CURRENT.md` on 2026-09-23; entries below keep their original file names.)
 
+### 2026-09-24 — Codex (local commits and Antigravity handover)
+
+- Committed the shared visual polish, refreshed five previously stale desktop text baselines, and committed the five additional hero review placements with Felsökning hero cleanup. No push. The Däck screenshot supplied during the review placement work was a crop of its existing hero photo; no image was replaced.
+- Final `check:css`, typecheck and build pass. The complete Playwright rerun passes (170 passed, 4 skipped) at 1440/768/390. One mobile booking-time assertion failed once in the first run, then passed three focused repeats and the full rerun; details are in `STATUS.md`.
+
+### 2026-09-24 — Codex (Google reviews in five heroes)
+
+- Added the existing `GoogleReviewsCard` to Om oss, Bilservice, Felsökning and Kontakt. At Magnus's correction, moved each from the lower page into its hero with `hero-overlay`, matching Landing's placement pattern. Däckservice was added to the same hero placement afterward.
+- Preserved legible light text against page-level link resets in page-owned CSS. Focused Playwright checks and hero screenshots passed at 1440/768/390. CSS check, typecheck and build passed. Left uncommitted.
+
+### 2026-09-24 — Codex (Felsökning hero cleanup)
+
+- Removed the decorative P0128/P0171 code panel from the `/felsokning` hero and deleted its unused family CSS. Kept the hero photo, copy, actions and trust row.
+- Updated the Felsökning visual test and desktop text baseline. CSS check, typecheck, build, focused visual/hero tests and Felsökning baselines passed at 1440/768/390. Left uncommitted.
+
+### 2026-09-24 — Codex (landing review bar spacing)
+
+- Corrected overlapping rating and Google labels by sizing their columns and letting review text use the remaining width. Increased the hero bar height and lifted it slightly while keeping the desktop trust row on one line.
+- Added a browser check for spacing, clipping and hero placement. CSS check, typecheck, build, landing visual and hero tests passed at 1440/768/390. Left the change uncommitted.
+
+### 2026-09-24 — Codex (reduced public corner radii)
+
+- At Magnus’s direction, changed the five canonical radius tokens to subtle corners and aligned larger local rectangles in the public header, guide family, shared cards, FAQ, and booking dialog. Circular icons and status dots remain round.
+- Updated the design-system and status docs plus 60 reviewed style snapshots. CSS check, typecheck, build and hero tests pass. All style baselines pass; six existing desktop text baselines still differ. Left uncommitted for visual review.
+
 ### 2026-09-24 — Codex (reviewed local commits)
 
 - Committed the existing guide/hub imagery, Bilservice imagery, Felsökning imagery, Oljebyte layout, Om oss hero simplification, and desktop-header breakpoint as separate changes. Documentation was updated afterward. No push.

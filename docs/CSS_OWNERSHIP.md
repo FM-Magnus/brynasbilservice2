@@ -68,11 +68,11 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 | Route | Architecture Group | Status | CSS Owner |
 | --- | --- | --- | --- |
 | `/` | Unique | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` |
-| `/om-oss` | Unique | Complete | `AboutPage.css` (`.omoss-page__*`), mounts `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` |
-| `/kontakt` | Unique | Complete | `ContactPage.css` (`.kontakt-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
-| `/service-reparationer` | Bilservice family (owner) | Complete — on `--bb-*` tokens & `shared-elements.css` (`.bb-*`), mounts `PublicHeader`/`PublicFooter` | `ServiceReparationerPage.css` (`.bilservice__*`) |
-| `/felsokning` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceReparationerPage.css` |
-| `/dackservice` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceReparationerPage.css` |
+| `/om-oss` | Unique | Complete | `AboutPage.css` (`.omoss-page__*`), mounts `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` + `GoogleReviewsCard` |
+| `/kontakt` | Unique | Complete | `ContactPage.css` (`.kontakt-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` + `GoogleReviewsCard` |
+| `/service-reparationer` | Bilservice family (owner) | Complete — on `--bb-*` tokens & `shared-elements.css` (`.bb-*`), mounts `PublicHeader`/`PublicFooter` + `GoogleReviewsCard` | `ServiceReparationerPage.css` (`.bilservice__*`) |
+| `/felsokning` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` + `GoogleReviewsCard` | `ServiceReparationerPage.css` |
+| `/dackservice` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` + `GoogleReviewsCard` | `ServiceReparationerPage.css` |
 | `/ac-service` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` | `ServiceReparationerPage.css` |
 | `/koppling` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |
 | `/avgassystem` | Guide family | Complete — on `--bb-*` tokens & `.bb-*` shared elements, mounts `PublicHeader` (overlay) + `PublicFooter` (Second Pass verified) | `ServiceGuideTemplate.css` |

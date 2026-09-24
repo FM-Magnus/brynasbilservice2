@@ -196,6 +196,7 @@ export default function DackservicePage() {
                   </div>
                 ))}
               </div>
+              <GoogleReviewsCard variant="hero-overlay" />
             </div>
           </div>
         </section>
@@ -386,17 +387,6 @@ export default function DackservicePage() {
                 </li>
               ))}
             </ol>
-          </div>
-        </section>
-
-        {/* Vad våra kunder säger (Google reviews) */}
-        <section className="bilservice__section bilservice__section--tight" aria-labelledby="dackservice-reviews-title">
-          <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro bilservice__intro--tight">
-              <p className="bb-eyebrow">Kundomdömen</p>
-              <h2 className="bb-h2" id="dackservice-reviews-title">Vad våra kunder säger</h2>
-            </div>
-            <GoogleReviewsCard variant="card" />
           </div>
         </section>
 
