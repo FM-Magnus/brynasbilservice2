@@ -11,9 +11,6 @@ Kodning & diagnostik
 Korrekt registrering i bilens BMS-system för optimal livslängd.
 Snabbt & smidigt
 Konditionstest och byte utförs normalt inom 30–60 minuter.
-Batteribyte i vår verkstad i Gävle
-
-Rätt batterityp, professionell testning och BMS-kodning.
 
 Noggrann mätning och konditionstest.
 
@@ -36,6 +33,7 @@ AGM (Absorbent Glass Mat)
 
 För bilar med avancerad start-stopp och kraftig elektrisk belastning, t.ex. bromsenergiåtervinning.
 
+TIPS
 Osäker på vilken batterityp din bil behöver?
 Vi kontrollerar alltid biltillverkarens krav för AGM, EFB eller blysyrabatteri utifrån ditt registreringsnummer.
 FRÅGA OSS

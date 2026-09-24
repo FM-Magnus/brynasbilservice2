@@ -13,9 +13,6 @@ Snabb service
 Klart inom en timme i de flesta fall.
 Tydlig rådgivning
 Du får en ärlig bedömning och tydligt prisuppgift.
-Oljebyte i vår verkstad i Gävle
-
-Kvalitet, erfarenhet och rätt utrustning.
 
 Rätt olja. Rätt mängd. Varje gång.
 
@@ -31,6 +28,7 @@ Olja som inte byts i tid tappar sin förmåga att smörja och kyla motorns delar
 
 En motor som går på ren, fräsch olja arbetar dessutom mer effektivt, vilket märks direkt på bränsleförbrukningen jämfört med en motor som får gå på gammal eller smutsig olja.
 
+TIPS
 Osäker på vilken olja din bil behöver?
 Vi läser av tillverkarens specifikation och väljer rätt viskositet och ACEA-klass åt dig.
 BOKA EN FELSÖKNING
@@ -65,31 +63,51 @@ Kontroll av oljenivån efter påfyllning
 En snabb koll av bilens övriga vätskenivåer samtidigt som vi ändå är där
 Mer info
 
-Här har vi samlat fördjupande information om motorolja, intervall och vanliga frågor kring oljebyten.
+Här har vi samlat riktvärden och viktig information om motorolja, intervall och vanliga frågor kring oljebyten.
+
+Bytesintervall
+
+Vanligtvis var 10 000–15 000 km eller minst en gång per år – vad som än inträffar först. Mycket kortkörning eller tuff belastning motiverar tätare byten. Detta är ett branschmässigt riktvärde.
+
+Viskositet (SAE)
+
+Anger oljans flytförmåga vid kyla (före W) och arbetstemperatur (efter W). Rätt viskositet säkerställer snabb smörjning vid kallstart och stabil oljefilm under belastning.
+
+Godkännanden (ACEA & API)
+
+Tillverkarens specifika specifikation och ACEA-klass styr oljans faktiska skyddsnivå. Bilar med partikelfilter kräver särskilda lågaskoljor (Low SAPS).
+
+Tidsåtgång
+
+Ett oljebyte med dränering, filterbyte och nivåkontroll tar vanligtvis mellan 30 minuter och en timme i vår verkstad.
+
+Viktigt om oljekvalitet: Att enbart fylla på olja när nivån sjunker ersätter aldrig ett fullständigt byte av olja och filter. Gammal olja tappar sina smörjande tillsatser och binder sot och förbränningsrester som sliter på motorns rörliga delar.
 
 Hur oljan blir sämre med tiden – även om bilen knappt körs
 
 Olja som står oöppnad i en dunk åldras i praktiken inte. Det är först när den börjar arbeta i motorn som nedbrytningen startar, och det sker på flera sätt samtidigt:
 
-Tillsatserna förbrukas.
+Tillsatserna förbrukas
 
 Additiven som håller nere korrosion, renar motorn och stabiliserar viskositeten bryts ner successivt och tappar effekt, oavsett hur få mil bilen gått.
 
-Föroreningar byggs upp.
+Föroreningar byggs upp
 
 Sotpartiklar från förbränningen och små mängder obrända bränsleångor blandas in i oljan och späder ut dess skyddande egenskaper.
 
-Kondens och fukt.
+Kondens och fukt
 
 Särskilt vid mycket korta körsträckor hinner motorn aldrig bli riktigt varm, vilket gör att kondensvatten byggs upp i oljan istället för att kokas bort. Det är en av de vanligaste anledningarna till att kortkörningsbilar behöver tätare oljebyten än vad miltalet ensamt antyder.
 
-Det är alltså inte antalet körda mil som ensamt avgör oljans skick – tiden och körmönstret spelar minst lika stor roll.
+Gammal olja och föroreningar dräneras ut.
 
 Tillverkarens intervall kontra verkligheten
 
 Många nyare bilar har långa rekommenderade serviceintervall – ibland 3 000 mil eller mer, så kallade "long life"-intervall. De är inte felaktiga, men de gäller under förutsättningar som sällan stämmer med hur bilen faktiskt används i vardagen: jämn landsvägskörning, motorvärmare vid kyla under +5 grader, och inga korta stadsturer. Kör bilen istället mycket kortkörning, mycket stillastående i kö, eller drar den ofta släp, bryts oljan ner snabbare än vad intervallet i boken räknar med – utan att bilens egen serviceindikator nödvändigtvis märker det i tid.
 
 Vår rekommendation är därför att se tillverkarens intervall som ett tak, inte ett golv. Är körmönstret tufft mot oljan – mycket kortkörning, tät stadstrafik, kyla utan motorvärmare, turboladdad eller direktinsprutad motor – lönar det sig att byta tätare än boken säger snarare än att vänta tills serviceindikatorn tvingar fram det.
+
+Det är alltså inte antalet körda mil som ensamt avgör oljans skick – tiden och körmönstret spelar minst lika stor roll.
 
 Vad betyder egentligen siffrorna på oljedunken?
 

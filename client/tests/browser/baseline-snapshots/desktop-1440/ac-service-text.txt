@@ -91,7 +91,9 @@ OBD-diagnostik & felsökning
 Avläsning av felkoder
 Kontroll av relevanta tryckgivare vid elfel eller utebliven funktion
 BOKA TID
-Service eller reparation? En AC-service är en proaktiv kontroll och påfyllning. Misstänker du istället en läcka, en trasig kompressor eller ett annat fel är det en AC-reparation — då gör vi alltid en felsökning och lämnar ett prisförslag innan vi går vidare.
+TIPS
+Service eller reparation?
+En AC-service är en proaktiv kontroll och påfyllning. Misstänker du istället en läcka, en trasig kompressor eller ett annat fel är det en AC-reparation — då gör vi alltid en felsökning och lämnar ett prisförslag innan vi går vidare.
 
 Priset 1 495 kr gäller bilar med köldmedium R134a. För nyare bilar med R1234yf, vanligt efter cirka 2017, kontakta oss för prisuppgift.
 
