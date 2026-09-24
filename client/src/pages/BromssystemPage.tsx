@@ -24,6 +24,12 @@ import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import { HourglassIcon } from '../components/icons/HourglassIcon'
+import heroWebp from '../assets/images/services/brakes/brakes-disc-caliper-workshop-hero.webp'
+import heroJpg from '../assets/images/services/brakes/brakes-disc-caliper-workshop-hero.jpg'
+import componentsWebp from '../assets/images/services/brakes/brakes-components-caliper-pads.webp'
+import componentsJpg from '../assets/images/services/brakes/brakes-components-caliper-pads.jpg'
+import inspectionWebp from '../assets/images/services/brakes/brakes-mechanic-caliper-inspection-portrait.webp'
+import inspectionJpg from '../assets/images/services/brakes/brakes-mechanic-caliper-inspection-portrait.jpg'
 import '../styles/ServiceGuideTemplate.css'
 
 const trustBadges = [
@@ -101,16 +107,6 @@ const faqs = [
   { question: 'Vad händer om jag väntar för länge med att byta bromsar?', answer: 'Utslitna belägg som får gå för länge sliter i sin tur ner bromsskivorna, och i värsta fall skadas även bromsoket. Det som hade varit ett enkelt beläggbyte kan då bli ett betydligt dyrare, mer omfattande jobb.' },
 ]
 
-function MediaPlaceholder({ label, note, light }: { label: string; note: string; light?: boolean }) {
-  return (
-    <div className={`service-guide__placeholder${light ? ' service-guide__placeholder--light' : ''}`} role="img" aria-label={`Platshållare för framtida bild: ${label}`}>
-      <WrenchIcon aria-hidden="true" />
-      <span>{label}</span>
-      <small>{note}</small>
-    </div>
-  )
-}
-
 export default function BromssystemPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -122,6 +118,16 @@ export default function BromssystemPage() {
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="brake-title">
+          <div className="service-guide__hero-bg">
+            <picture>
+              <source srcSet={heroWebp} type="image/webp" />
+              <img
+                src={heroJpg}
+                alt="Ventilerad bromsskiva och bromsok monterat på lyft fordon i verkstaden"
+                loading="lazy"
+              />
+            </picture>
+          </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
@@ -158,7 +164,14 @@ export default function BromssystemPage() {
         <section className="service-guide__section" aria-labelledby="brake-intro-title">
           <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
-              <MediaPlaceholder label="Bromssystemets komponenter" note="Bild kommer" light />
+              <picture>
+                <source srcSet={componentsWebp} type="image/webp" />
+                <img
+                  src={componentsJpg}
+                  alt="Bromsok, bromsbelägg, monteringsfjädrar och slitagesensor uppradade på verkstadsbänk"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__intro-caption">Säkra stopp, varje mil räknas.</p>
             </div>
             <div className="service-guide__intro-content">
@@ -213,7 +226,14 @@ export default function BromssystemPage() {
               </div>
             </div>
             <div className="service-guide__symptoms-media">
-              <MediaPlaceholder label="Mekaniker under bil, diagnos" note="Bild kommer" light />
+              <picture>
+                <source srcSet={inspectionWebp} type="image/webp" />
+                <img
+                  src={inspectionJpg}
+                  alt="Mekaniker mäter bromsskivans tjocklek med digitalt skjutmått under lyft bil i verkstaden"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__symptoms-caption">Vi hittar problemet – innan det blir större.</p>
             </div>
           </div>

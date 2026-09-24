@@ -374,6 +374,10 @@
 }
 .service-guide__symptoms-media picture,
 .service-guide__symptoms-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.service-guide__symptoms-media--landscape {
+  align-self: center;
+  height: clamp(320px, 34vw, 420px);
+}
 .service-guide__symptoms-media::after {
   content: '';
   position: absolute;
@@ -529,6 +533,7 @@
   .service-guide__importance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .service-guide__symptoms-layout { grid-template-columns: 1fr; }
   .service-guide__symptoms-media { order: 2; min-height: 260px; }
+  .service-guide__symptoms-media--landscape { height: clamp(260px, 48vw, 420px); }
   .service-guide__service-card { grid-template-columns: 1fr; }
   .service-guide__process { grid-template-columns: 1fr; }
 }

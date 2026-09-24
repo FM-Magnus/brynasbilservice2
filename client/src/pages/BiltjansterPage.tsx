@@ -14,10 +14,22 @@ import oljebyteThumbJpg from '../assets/images/services/oil/oil-drain-under-car-
 import oljebyteThumbWebp from '../assets/images/services/oil/oil-drain-under-car-thumb.webp'
 import kamremThumbJpg from '../assets/images/services/timing-belt/timing-belt-in-hand-thumb-card.jpg'
 import kamremThumbWebp from '../assets/images/services/timing-belt/timing-belt-in-hand-thumb-card.webp'
+import clutchThumbJpg from '../assets/images/services/clutch/clutch-components-on-bench.jpg'
+import clutchThumbWebp from '../assets/images/services/clutch/clutch-components-on-bench.webp'
 import bilbatteriThumbJpg from '../assets/images/services/battery/battery-terminal-bolt-tightening-thumb-card.jpg'
 import bilbatteriThumbWebp from '../assets/images/services/battery/battery-terminal-bolt-tightening-thumb-card.webp'
-import drivaxelThumbJpg from '../assets/images/services/driveshaft/cv-joint-workbench-thumb.jpg'
-import drivaxelThumbWebp from '../assets/images/services/driveshaft/cv-joint-workbench-thumb.webp'
+import drivaxelThumbJpg from '../assets/images/services/driveshaft/driveshaft-components-workbench.jpg'
+import drivaxelThumbWebp from '../assets/images/services/driveshaft/driveshaft-components-workbench.webp'
+import brakesThumbJpg from '../assets/images/services/brakes/brakes-components-caliper-pads.jpg'
+import brakesThumbWebp from '../assets/images/services/brakes/brakes-components-caliper-pads.webp'
+import hjullagerThumbJpg from '../assets/images/services/wheel-bearing/wheel-bearing-hub-assembly-closeup.jpg'
+import hjullagerThumbWebp from '../assets/images/services/wheel-bearing/wheel-bearing-hub-assembly-closeup.webp'
+import steeringThumbJpg from '../assets/images/services/steering/steering-linkage-components-workbench.jpg'
+import steeringThumbWebp from '../assets/images/services/steering/steering-linkage-components-workbench.webp'
+import exhaustThumbJpg from '../assets/images/services/exhaust/exhaust-system-components-underbody.jpg'
+import exhaustThumbWebp from '../assets/images/services/exhaust/exhaust-system-components-underbody.webp'
+import suspensionThumbJpg from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.jpg'
+import suspensionThumbWebp from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.webp'
 import { BUSINESS } from '../data/business'
 import './BiltjansterPage.css'
 
@@ -27,8 +39,8 @@ interface ServiceGuide {
   summary: string
   href: string
   imageLabel: string
-  imageJpg?: string
-  imageWebp?: string
+  imageJpg: string
+  imageWebp: string
   icon?: typeof WrenchIcon
 }
 
@@ -66,7 +78,9 @@ const serviceGuides: ServiceGuide[] = [
     title: 'Koppling',
     summary: 'Kopplingen överför kraften mellan motor och växellåda och är en slitdel som kan behöva bytas.',
     href: '/koppling',
-    imageLabel: 'Kopplingsarbete i verkstaden',
+    imageLabel: 'Kopplingsdelar på en verkstadsbänk',
+    imageJpg: clutchThumbJpg,
+    imageWebp: clutchThumbWebp,
   },
   {
     id: 'bromssystem',
@@ -74,6 +88,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Bromsarna är avgörande för säkerheten, och tidiga tecken kan hjälpa dig att få rätt åtgärd i tid.',
     href: '/bromssystem',
     imageLabel: 'Bromsarbete i verkstaden',
+    imageJpg: brakesThumbJpg,
+    imageWebp: brakesThumbWebp,
     icon: ShieldIcon,
   },
   {
@@ -91,7 +107,9 @@ const serviceGuides: ServiceGuide[] = [
     title: 'Stötdämpare & fjädrar',
     summary: 'Stötdämpare och fjädrar hjälper hjulen att hålla kontakt med vägen för stabil och kontrollerad körning.',
     href: '/stodampare-fjadrar',
-    imageLabel: 'Arbete med stötdämpare och fjädrar',
+    imageLabel: 'Ny och sliten stötdämpare bredvid varandra',
+    imageJpg: suspensionThumbJpg,
+    imageWebp: suspensionThumbWebp,
   },
   {
     id: 'hjullagerbyte',
@@ -99,6 +117,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Ett hjullager ska ge mjuk och friktionsfri gång; brummande ljud eller vibrationer kan vara tecken på slitage.',
     href: '/hjullagerbyte',
     imageLabel: 'Hjullagerbyte i verkstaden',
+    imageJpg: hjullagerThumbJpg,
+    imageWebp: hjullagerThumbWebp,
   },
   {
     id: 'avgassystem',
@@ -106,6 +126,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Avgassystemet dämpar motorljud och samverkar med bilens avgasrening och sensorer.',
     href: '/avgassystem',
     imageLabel: 'Avgassystem i verkstaden',
+    imageJpg: exhaustThumbJpg,
+    imageWebp: exhaustThumbWebp,
   },
   {
     id: 'drivaxel-drivknutar',
@@ -122,6 +144,8 @@ const serviceGuides: ServiceGuide[] = [
     summary: 'Styrning och kulleder hjälper bilen att svara stabilt på ratten och hålla rätt väghållning.',
     href: '/styrning-kulleder',
     imageLabel: 'Styrningsarbete i verkstaden',
+    imageJpg: steeringThumbJpg,
+    imageWebp: steeringThumbWebp,
   },
 ]
 
@@ -169,28 +193,17 @@ export default function BiltjansterPage() {
                     key={guide.id}
                     aria-labelledby={`${guide.id}-title`}
                   >
-                    <div
-                      className="biltjanster-hub__guide-media"
-                      role={guide.imageJpg ? undefined : 'img'}
-                      aria-label={guide.imageJpg ? undefined : `Platshållare för framtida bild: ${guide.imageLabel}`}
-                    >
+                    <div className="biltjanster-hub__guide-media">
                       <span className="biltjanster-hub__guide-badge" aria-hidden="true">
                         <GuideIcon />
                       </span>
                       <span className="biltjanster-hub__guide-num" aria-hidden="true">
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      {guide.imageJpg && guide.imageWebp ? (
-                        <picture>
-                          <source srcSet={guide.imageWebp} type="image/webp" />
-                          <img className="biltjanster-hub__guide-img" src={guide.imageJpg} alt={guide.imageLabel} loading="lazy" />
-                        </picture>
-                      ) : (
-                        <div className="biltjanster-hub__guide-placeholder" aria-hidden="true">
-                          <span>{guide.imageLabel}</span>
-                          <small>Bild kommer</small>
-                        </div>
-                      )}
+                      <picture>
+                        <source srcSet={guide.imageWebp} type="image/webp" />
+                        <img className="biltjanster-hub__guide-img" src={guide.imageJpg} alt={guide.imageLabel} loading="lazy" />
+                      </picture>
                     </div>
 
                     <div className="biltjanster-hub__guide-content">

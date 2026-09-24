@@ -23,8 +23,12 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
-import heroJpg from '../assets/images/services/exhaust/exhaust-system-repair-underbody.jpg'
-import heroWebp from '../assets/images/services/exhaust/exhaust-system-repair-underbody.webp'
+import heroJpg from '../assets/images/services/exhaust/exhaust-system-underbody-muffler-hero.jpg'
+import heroWebp from '../assets/images/services/exhaust/exhaust-system-underbody-muffler-hero.webp'
+import componentsJpg from '../assets/images/services/exhaust/exhaust-system-components-underbody.jpg'
+import componentsWebp from '../assets/images/services/exhaust/exhaust-system-components-underbody.webp'
+import inspectionJpg from '../assets/images/services/exhaust/exhaust-clamp-inspection-mechanic-portrait.jpg'
+import inspectionWebp from '../assets/images/services/exhaust/exhaust-clamp-inspection-mechanic-portrait.webp'
 import '../styles/ServiceGuideTemplate.css'
 
 const trustBadges = [
@@ -104,16 +108,6 @@ const faqs = [
   { question: 'Hur lång tid tar en reparation av avgassystemet?', answer: 'Ett byte av en bakre eller mellersta ljuddämpare går ofta snabbt (under 1 timme), medan felsökning av en lambdasond eller katalysatorproblem kan ta något längre tid.' },
 ]
 
-function MediaPlaceholder({ label, note, light }: { label: string; note: string; light?: boolean }) {
-  return (
-    <div className={`service-guide__placeholder${light ? ' service-guide__placeholder--light' : ''}`} role="img" aria-label={`Platshållare för framtida bild: ${label}`}>
-      <WrenchIcon aria-hidden="true" />
-      <span>{label}</span>
-      <small>{note}</small>
-    </div>
-  )
-}
-
 export default function AvgassystemPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -128,7 +122,11 @@ export default function AvgassystemPage() {
           <div className="service-guide__hero-bg">
             <picture>
               <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="Mekaniker som utför reparation och kontroll av avgassystem" />
+              <img
+                src={heroJpg}
+                alt="Underrede på bil på lyft med avgassystem, ljuddämpare och ändrör i verkstadsmiljö"
+                loading="lazy"
+              />
             </picture>
           </div>
           <div className="bb-wrap service-guide__container">
@@ -167,7 +165,14 @@ export default function AvgassystemPage() {
         <section className="service-guide__section" aria-labelledby="exhaust-intro-title">
           <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
-              <MediaPlaceholder label="Avgassystemets komponenter" note="Bild kommer" light />
+              <picture>
+                <source srcSet={componentsWebp} type="image/webp" />
+                <img
+                  src={componentsJpg}
+                  alt="Komplett avgassystem under bil med katalysator, flexrör, ljuddämpare och värmesköldar"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__intro-caption">Rent, tyst och lagligt.</p>
             </div>
             <div className="service-guide__intro-content">
@@ -231,7 +236,14 @@ export default function AvgassystemPage() {
               </div>
             </div>
             <div className="service-guide__symptoms-media">
-              <MediaPlaceholder label="Avgasdiagnostik under bil" note="Bild kommer" light />
+              <picture>
+                <source srcSet={inspectionWebp} type="image/webp" />
+                <img
+                  src={inspectionJpg}
+                  alt="Mekaniker som kontrollerar och drar åt klämma på avgassystem under bil på tvåpelarlyft"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__symptoms-caption">Vi hittar problemet – innan det blir större.</p>
             </div>
           </div>

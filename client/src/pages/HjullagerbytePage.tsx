@@ -23,6 +23,12 @@ import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
+import heroWebp from '../assets/images/services/wheel-bearing/wheel-bearing-hub-unit-workbench-hero.webp'
+import heroJpg from '../assets/images/services/wheel-bearing/wheel-bearing-hub-unit-workbench-hero.jpg'
+import componentsWebp from '../assets/images/services/wheel-bearing/wheel-bearing-hub-assembly-closeup.webp'
+import componentsJpg from '../assets/images/services/wheel-bearing/wheel-bearing-hub-assembly-closeup.jpg'
+import inspectionWebp from '../assets/images/services/wheel-bearing/wheel-bearing-play-inspection-portrait.webp'
+import inspectionJpg from '../assets/images/services/wheel-bearing/wheel-bearing-play-inspection-portrait.jpg'
 
 const trustBadges = [
   { icon: ShieldIcon, title: 'Tyst & säker gång', text: 'Vi åtgärdar missljud och vibrationer i tid.' },
@@ -101,16 +107,6 @@ const faqs = [
   { question: 'Hur lång tid tar det att byta ett hjullager?', answer: 'Ett byte tar vanligtvis mellan 1 till 2 timmar per hjul, beroende på bilmodell och om lagret är en bultad enhet eller kräver demontering av spindel och pressning.' },
 ]
 
-function MediaPlaceholder({ label, note, light }: { label: string; note: string; light?: boolean }) {
-  return (
-    <div className={`service-guide__placeholder${light ? ' service-guide__placeholder--light' : ''}`} role="img" aria-label={`Platshållare för framtida bild: ${label}`}>
-      <WrenchIcon aria-hidden="true" />
-      <span>{label}</span>
-      <small>{note}</small>
-    </div>
-  )
-}
-
 export default function HjullagerbytePage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -122,6 +118,16 @@ export default function HjullagerbytePage() {
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="wheel-bearing-title">
+          <div className="service-guide__hero-bg">
+            <picture>
+              <source srcSet={heroWebp} type="image/webp" />
+              <img
+                src={heroJpg}
+                alt="Ny navenhet med integrerat hjullager och hjulbultar på en arbetsbänk i verkstaden"
+                loading="lazy"
+              />
+            </picture>
+          </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
@@ -156,7 +162,14 @@ export default function HjullagerbytePage() {
         <section className="service-guide__section" aria-labelledby="wheel-bearing-intro-title">
           <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
-              <MediaPlaceholder label="Hjullagrets komponenter &amp; nav" note="Bild kommer" light />
+              <picture>
+                <source srcSet={componentsWebp} type="image/webp" />
+                <img
+                  src={componentsJpg}
+                  alt="Hjullager, hjulnav, monteringsbultar och ABS-kontakt på arbetsbänk i verkstaden"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__intro-caption">Minimal friktion, maximal driftsäkerhet.</p>
             </div>
             <div className="service-guide__intro-content">
@@ -228,7 +241,14 @@ export default function HjullagerbytePage() {
               </div>
             </div>
             <div className="service-guide__symptoms-media">
-              <MediaPlaceholder label="Inspektion och kontroll av hjullager" note="Bild kommer" light />
+              <picture>
+                <source srcSet={inspectionWebp} type="image/webp" />
+                <img
+                  src={inspectionJpg}
+                  alt="Mekaniker undersöker hjullager och glapp under lyft bil i verkstaden"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__symptoms-caption">Säker gång och kontroll av glapp.</p>
             </div>
           </div>

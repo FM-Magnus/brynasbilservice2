@@ -25,6 +25,10 @@ import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import heroJpg from '../assets/images/services/driveshaft/cv-joint-workbench.jpg'
 import heroWebp from '../assets/images/services/driveshaft/cv-joint-workbench.webp'
+import componentsJpg from '../assets/images/services/driveshaft/driveshaft-components-workbench.jpg'
+import componentsWebp from '../assets/images/services/driveshaft/driveshaft-components-workbench.webp'
+import inspectionJpg from '../assets/images/services/driveshaft/driveshaft-torn-boot-inspection-portrait.jpg'
+import inspectionWebp from '../assets/images/services/driveshaft/driveshaft-torn-boot-inspection-portrait.webp'
 
 const trustBadges = [
   { icon: ShieldIcon, title: 'Vibrationsfri gång', text: 'Vi åtgärdar obalans och glapp i drivlinan.' },
@@ -103,16 +107,6 @@ const faqs = [
   { question: 'Hur lång tid tar ett byte av drivknut eller drivaxel?', answer: 'Ett damaskbyte eller byte av en komplett drivaxel tar vanligtvis mellan 1 till 2 timmar per sida, beroende på bilmodell och hur lätt axeln lossnar från hjulnavet och växellådan.' },
 ]
 
-function MediaPlaceholder({ label, note, light }: { label: string; note: string; light?: boolean }) {
-  return (
-    <div className={`service-guide__placeholder${light ? ' service-guide__placeholder--light' : ''}`} role="img" aria-label={`Platshållare för framtida bild: ${label}`}>
-      <WrenchIcon aria-hidden="true" />
-      <span>{label}</span>
-      <small>{note}</small>
-    </div>
-  )
-}
-
 export default function DrivaxelDrivknutarPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -164,7 +158,14 @@ export default function DrivaxelDrivknutarPage() {
         <section className="service-guide__section" aria-labelledby="driveshaft-intro-title">
           <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
-              <MediaPlaceholder label="Drivaxlar, knutar och damasker" note="Bild kommer" light />
+              <picture>
+                <source srcSet={componentsWebp} type="image/webp" />
+                <img
+                  src={componentsJpg}
+                  alt="Komplett drivaxel med drivknutar, gummidamasker och metallklämmor på verkstadsbänk"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__intro-caption">Kraftöverföring med konstant hastighet.</p>
             </div>
             <div className="service-guide__intro-content">
@@ -236,7 +237,14 @@ export default function DrivaxelDrivknutarPage() {
               </div>
             </div>
             <div className="service-guide__symptoms-media">
-              <MediaPlaceholder label="Inspektion av drivknut och damask" note="Bild kommer" light />
+              <picture>
+                <source srcSet={inspectionWebp} type="image/webp" />
+                <img
+                  src={inspectionJpg}
+                  alt="Närbild på mekaniker som inspekterar sprucken drivaxeldamask och fettläckage under bil"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__symptoms-caption">Tidigt damaskbyte skyddar knuten.</p>
             </div>
           </div>

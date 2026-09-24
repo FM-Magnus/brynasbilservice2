@@ -11,14 +11,6 @@ Erfarna mekaniker
 Korrekt ledbyte och professionell fyrhjulsmätning.
 Tydlig rådgivning
 Ärlig felsökning och tydlig kostnadsuppgift.
-Styrningsarbete i verkstaden
-BILD KOMMER
-Styrningsarbete i vår verkstad i Gävle
-
-Kvalitetsdelar, modellanpassade verktyg och noggrannhet.
-
-Framvagnens leder & servokomponenter
-BILD KOMMER
 
 Exakt geometri, maximal kontroll.
 
@@ -46,6 +38,7 @@ Elektrisk servo (EPS)
 
 Modern elektroniskt styrd elmotor integrerad i styrväxel eller rattstång som anpassar motståndet efter fordonets hastighet.
 
+TIPS
 Upplever du glapp, klapper eller tung styrning?
 Vi hissar upp bilen och kontrollerar leder, stag och servoverkan – snabbt och säkert.
 BOKA KONTROLL
@@ -97,10 +90,9 @@ Tänd EPS-varningslampa & snedslitna däck
 
 Gul rattsymbol på instrumentpanelen eller ojämnt slitna däckkanter indikerar att styrgeometrin behöver ses över.
 
+TIPS
 Viktigt om bilens dragning:
 Att bilen drar åt ena hållet beror i regel inte på servostyrningen, utan på felaktig hjulinställning, ojämnt däcktryck eller glappande länkarmar och kulleder i hjulupphängningen.
-Inspektion av framvagn och styrleder
-BILD KOMMER
 
 Säker väghållning kräver intakta leder.
 

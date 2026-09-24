@@ -23,6 +23,12 @@ import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
+import heroWebp from '../assets/images/services/steering/steering-gear-rack-tie-rod-hero.webp'
+import heroJpg from '../assets/images/services/steering/steering-gear-rack-tie-rod-hero.jpg'
+import componentsWebp from '../assets/images/services/steering/steering-linkage-components-workbench.webp'
+import componentsJpg from '../assets/images/services/steering/steering-linkage-components-workbench.jpg'
+import inspectionWebp from '../assets/images/services/steering/steering-ball-joint-inspection-portrait.webp'
+import inspectionJpg from '../assets/images/services/steering/steering-ball-joint-inspection-portrait.jpg'
 
 const trustBadges = [
   { icon: ShieldIcon, title: 'Säker väghållning', text: 'Vi åtgärdar glapp i framvagnen innan det blir farligt.' },
@@ -101,16 +107,6 @@ const faqs = [
   { question: 'Hur lång tid tar det att byta styrleder eller kulleder?', answer: 'Ett byte av en enskild kulled eller yttre styrled tar vanligen cirka 1 timme inklusive hjulinställning. Mer avancerade servosystemreparationer eller byte av kuggstång kan ta 2–4 timmar.' },
 ]
 
-function MediaPlaceholder({ label, note, light }: { label: string; note: string; light?: boolean }) {
-  return (
-    <div className={`service-guide__placeholder${light ? ' service-guide__placeholder--light' : ''}`} role="img" aria-label={`Platshållare för framtida bild: ${label}`}>
-      <WrenchIcon aria-hidden="true" />
-      <span>{label}</span>
-      <small>{note}</small>
-    </div>
-  )
-}
-
 export default function StyrningKullederPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -122,6 +118,16 @@ export default function StyrningKullederPage() {
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="steering-title">
+          <div className="service-guide__hero-bg">
+            <picture>
+              <source srcSet={heroWebp} type="image/webp" />
+              <img
+                src={heroJpg}
+                alt="Ny kuggstång och styrväxel med damasker och styrleder på en arbetsbänk i verkstaden"
+                loading="lazy"
+              />
+            </picture>
+          </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
               <div>
@@ -156,7 +162,14 @@ export default function StyrningKullederPage() {
         <section className="service-guide__section" aria-labelledby="steering-intro-title">
           <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
-              <MediaPlaceholder label="Framvagnens leder &amp; servokomponenter" note="Bild kommer" light />
+              <picture>
+                <source srcSet={componentsWebp} type="image/webp" />
+                <img
+                  src={componentsJpg}
+                  alt="Framvagnskomponenter på verkstadsbänk med länkarm, bussningar, spindelled, inre styrstag och styrled"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__intro-caption">Exakt geometri, maximal kontroll.</p>
             </div>
             <div className="service-guide__intro-content">
@@ -228,7 +241,14 @@ export default function StyrningKullederPage() {
               </div>
             </div>
             <div className="service-guide__symptoms-media">
-              <MediaPlaceholder label="Inspektion av framvagn och styrleder" note="Bild kommer" light />
+              <picture>
+                <source srcSet={inspectionWebp} type="image/webp" />
+                <img
+                  src={inspectionJpg}
+                  alt="Närbild på mekaniker som inspekterar glapp och sprucken damask på styrled under bilen"
+                  loading="lazy"
+                />
+              </picture>
               <p className="service-guide__symptoms-caption">Säker väghållning kräver intakta leder.</p>
             </div>
           </div>

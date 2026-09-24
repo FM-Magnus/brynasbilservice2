@@ -25,16 +25,12 @@ Kamremmen håller motorns rörliga delar i rätt takt och byts enligt rätt inte
 
 LÄS MER
 04
-KOPPLINGSARBETE I VERKSTADEN
-BILD KOMMER
 Koppling
 
 Kopplingen överför kraften mellan motor och växellåda och är en slitdel som kan behöva bytas.
 
 LÄS MER
 05
-BROMSARBETE I VERKSTADEN
-BILD KOMMER
 Bromssystem
 
 Bromsarna är avgörande för säkerheten, och tidiga tecken kan hjälpa dig att få rätt åtgärd i tid.
@@ -47,24 +43,18 @@ Bilbatteriet ger startkraft och försörjer elsystemet – rätt batterityp beh�
 
 LÄS MER
 07
-ARBETE MED STÖTDÄMPARE OCH FJÄDRAR
-BILD KOMMER
 Stötdämpare & fjädrar
 
 Stötdämpare och fjädrar hjälper hjulen att hålla kontakt med vägen för stabil och kontrollerad körning.
 
 LÄS MER
 08
-HJULLAGERBYTE I VERKSTADEN
-BILD KOMMER
 Hjullagerbyte
 
 Ett hjullager ska ge mjuk och friktionsfri gång; brummande ljud eller vibrationer kan vara tecken på slitage.
 
 LÄS MER
 09
-AVGASSYSTEM I VERKSTADEN
-BILD KOMMER
 Avgassystem
 
 Avgassystemet dämpar motorljud och samverkar med bilens avgasrening och sensorer.
@@ -77,8 +67,6 @@ Drivaxlar och drivknutar för motorkraften till hjulen och behöver fungera utan
 
 LÄS MER
 11
-STYRNINGSARBETE I VERKSTADEN
-BILD KOMMER
 Styrning & kulleder
 
 Styrning och kulleder hjälper bilen att svara stabilt på ratten och hålla rätt väghållning.

@@ -25,6 +25,10 @@ import { Volume2Icon } from '../components/icons/Volume2Icon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import timingBeltJpg from '../assets/images/services/timing-belt/timing-belt-in-hand.jpg'
 import timingBeltWebp from '../assets/images/services/timing-belt/timing-belt-in-hand.webp'
+import timingBeltKitJpg from '../assets/images/services/timing-belt/timing-belt-kit-workbench.jpg'
+import timingBeltKitWebp from '../assets/images/services/timing-belt/timing-belt-kit-workbench.webp'
+import timingBeltInspectionJpg from '../assets/images/services/timing-belt/timing-belt-worn-belt-inspection.jpg'
+import timingBeltInspectionWebp from '../assets/images/services/timing-belt/timing-belt-worn-belt-inspection.webp'
 
 const trustBadges = [
   { icon: ShieldIcon, title: 'Förebygg motorhaveri', text: 'Ett kamremsbyte i tid skyddar motorn mot totalhaveri.' },
@@ -99,16 +103,6 @@ const faqs = [
   { question: 'Hur lång tid tar ett kamremsbyte?', answer: 'Normalt tar arbetet 2–6 timmar beroende på bilmodell och hur trångt motorutrymmet är. Ring oss så ger vi en specifik tidsuppskattning för din bil.' },
 ]
 
-function MediaPlaceholder({ label, note, light }: { label: string; note: string; light?: boolean }) {
-  return (
-    <div className={`service-guide__placeholder${light ? ' service-guide__placeholder--light' : ''}`} role="img" aria-label={`Platshållare för framtida bild: ${label}`}>
-      <WrenchIcon aria-hidden="true" />
-      <span>{label}</span>
-      <small>{note}</small>
-    </div>
-  )
-}
-
 export default function KamremPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -160,7 +154,10 @@ export default function KamremPage() {
         <section className="service-guide__section" aria-labelledby="kamrem-intro-title">
           <div className="bb-wrap service-guide__container service-guide__intro-layout">
             <div className="service-guide__intro-media">
-              <MediaPlaceholder label="Kamremmens komponenter" note="Bild kommer" light />
+              <picture>
+                <source srcSet={timingBeltKitWebp} type="image/webp" />
+                <img src={timingBeltKitJpg} alt="Ny kamrem, spännrullar och vattenpump på en verkstadsbänk" loading="lazy" />
+              </picture>
               <p className="service-guide__intro-caption">Precision, synk och driftsäkerhet.</p>
             </div>
             <div className="service-guide__intro-content">
@@ -223,8 +220,11 @@ export default function KamremPage() {
                 ))}
               </div>
             </div>
-            <div className="service-guide__symptoms-media">
-              <MediaPlaceholder label="Motorarbete och nollställning" note="Bild kommer" light />
+            <div className="service-guide__symptoms-media service-guide__symptoms-media--landscape">
+              <picture>
+                <source srcSet={timingBeltInspectionWebp} type="image/webp" />
+                <img src={timingBeltInspectionJpg} alt="Hand som inspekterar en kamrem intill motorns remhjul" loading="lazy" />
+              </picture>
               <p className="service-guide__symptoms-caption">Rätt intervall och åtgärd i tid.</p>
             </div>
           </div>
