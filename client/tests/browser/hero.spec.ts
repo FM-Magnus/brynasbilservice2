@@ -1,13 +1,9 @@
 import { expect, test } from '@playwright/test'
+import { PUBLIC_ROUTES } from './routes'
 
 // Every public route with a hero. Galleri and Biltjänster have compact heroes but
 // still sit under the fixed header, so they are part of the clearance check.
-const ROUTES = [
-  '/', '/om-oss', '/galleri', '/service-reparationer', '/biltjanster', '/felsokning',
-  '/oljebyte', '/kamrem', '/koppling', '/bromssystem', '/bilbatteri', '/stodampare-fjadrar',
-  '/hjullagerbyte', '/avgassystem', '/drivaxel-drivknutar', '/styrning-kulleder',
-  '/dackservice', '/ac-service', '/bargning', '/kontakt', '/bilar-till-salu',
-]
+const ROUTES = PUBLIC_ROUTES
 
 const HEADER_WIDTHS = [1024, 1280, 1320, 1321, 1366, 1440, 1600, 1920]
 

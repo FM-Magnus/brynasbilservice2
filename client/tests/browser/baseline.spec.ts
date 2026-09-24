@@ -22,13 +22,9 @@
  * A diff you did not intend is a regression. Read it before you update it.
  */
 import { expect, test } from '@playwright/test'
+import { PUBLIC_ROUTES } from './routes'
 
-const ROUTES = [
-  '/', '/om-oss', '/galleri', '/service-reparationer', '/biltjanster', '/felsokning',
-  '/oljebyte', '/kamrem', '/koppling', '/bromssystem', '/bilbatteri', '/stodampare-fjadrar',
-  '/hjullagerbyte', '/avgassystem', '/drivaxel-drivknutar', '/styrning-kulleder',
-  '/dackservice', '/ac-service', '/bargning', '/kontakt', '/bilar-till-salu',
-]
+const ROUTES = PUBLIC_ROUTES
 
 /**
  * Where the canonical tokens are supposed to surface. The first group is the
