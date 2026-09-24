@@ -30,7 +30,8 @@
 .landing-v2 h1, .landing-v2 h2, .landing-v2 h3, .landing-v2 p { margin-top: 0; }
 
 /* The landing review bar sits slightly above the trust row's baseline. */
-.landing-v2 .bb-reviews-card--hero-overlay { margin-bottom: 1rem; }
+.landing-v2 .bb-reviews-card--hero-overlay { margin-bottom: 0; }
+.landing-v2 .bb-hero { min-height: var(--bb-hero-matched-height); }
 
 @media (max-width: 1360px) {
   .landing-v2 .bb-hero__bottom { grid-template-columns: 1fr; }

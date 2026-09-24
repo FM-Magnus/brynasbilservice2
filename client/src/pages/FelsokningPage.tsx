@@ -130,7 +130,7 @@ export default function FelsokningPage() {
               <p className="bb-eyebrow bb-eyebrow--dark">Elektronik &amp; diagnostik</p>
               <h1 className="bb-h1" id="felsokning-hero-title">
                 <span>Felsökning &amp; <span className="bb-accent">Diagnostik</span></span>
-                <span>när bilen behöver ett tydligt svar</span>
+                <span>i Gävle</span>
               </h1>
               <p>
                 Lyser en varningslampa eller låter bilen konstigt? Vi läser av felkoder och mäter oss fram till den verkliga orsaken med modern diagnostikutrustning — för alla märken och modeller.
@@ -139,7 +139,7 @@ export default function FelsokningPage() {
                 <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">Boka tid</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
-                  <span>Ring {BUSINESS.phone.display}</span>
+                  <span>Ring oss nu</span>
                 </a>
               </div>
             </div>

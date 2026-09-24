@@ -743,6 +743,15 @@
 }
 
 
+/* Shared matched hero height (design-tokens.css). */
+.bilservice > #felsokning,
+.bilservice > #dackservice,
+.bilservice > .bilservice__ac-hero { min-height: var(--bb-hero-matched-height); }
+.bilservice > #felsokning .bb-hero__bottom { margin-top: clamp(2rem, 2.7vw, 2.5rem); }
+@media (max-width: 650px) {
+  .bilservice > #felsokning .bb-hero__bottom { margin-top: 1rem; }
+}
+
 /* Give only the Felsökning hero photo a subtle ember warmth. */
 .bilservice > #felsokning .bb-hero__shade {
   background:

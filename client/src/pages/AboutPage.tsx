@@ -133,7 +133,7 @@ export default function AboutPage() {
                     className="bb-btn bb-btn--ember omoss-page__hero-phone-btn"
                   >
                     <PhoneIcon />
-                    <span>Ring {BUSINESS.phone.display}</span>
+                    <span>Ring oss nu</span>
                   </a>
                 </div>
               </div>

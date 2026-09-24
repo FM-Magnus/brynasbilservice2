@@ -28,11 +28,17 @@
   max-width: 56ch;
   opacity: 0.85;
 }
+/* Phones skip the second paragraph to keep the hero short; the lead takes
+   over its space above the buttons. */
+@media (max-width: 650px) {
+  .kontakt-page__sub { display: none; }
+  .kontakt-page__hero .kontakt-page__lead { margin-bottom: 1.6rem; }
+}
 
 .kontakt-page__hero .bb-reviews-card--hero-overlay {
   align-self: flex-end;
   color: var(--bb-color-text-inverse);
-  margin-top: clamp(2rem, 5vw, 4.5rem);
+  margin-top: clamp(2rem, 4.6vw, 4.5rem);
 }
 
 /* Two-column info + form section */
@@ -535,3 +541,7 @@
 @media (prefers-reduced-motion: reduce) {
   .kontakt-page *, .kontakt-page *::before, .kontakt-page *::after { transition-duration: 0.01ms !important; }
 }
+
+
+/* Shared matched hero height (design-tokens.css). */
+.kontakt-page__hero { min-height: var(--bb-hero-matched-height); }

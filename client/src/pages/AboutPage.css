@@ -46,7 +46,7 @@
   background-size: cover;
   color: var(--bb-color-text-inverse);
   overflow: hidden;
-  padding-bottom: clamp(4rem, 6vw, 6.5rem);
+  padding-bottom: clamp(3.5rem, 4vw, 3.5rem);
   padding-top: var(--bb-hero-clearance);
   position: relative;
 }
@@ -852,3 +852,7 @@
     animation: none !important;
   }
 }
+
+
+/* Shared matched hero height (design-tokens.css). */
+.omoss-page__hero { min-height: var(--bb-hero-matched-height); }

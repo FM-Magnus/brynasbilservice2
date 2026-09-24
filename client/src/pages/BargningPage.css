@@ -1018,3 +1018,7 @@
   }
 }
 
+
+
+/* Shared matched hero height (design-tokens.css). */
+.bargning-page__hero { min-height: var(--bb-hero-matched-height); }

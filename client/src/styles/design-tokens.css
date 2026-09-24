@@ -54,6 +54,12 @@
   /* Hero geometry (canonical standard from Landing) */
   --bb-hero-min-height: clamp(520px, 70svh, 640px);
   --bb-hero-min-height-mobile: 780px;
+  /* One shared height for the Landing, Om oss, Felsökning, Däckservice,
+     AC-service, Bärgning and Kontakt heroes. Each value is at least the
+     tallest of those heroes' content at that width (measured 2026-09-24),
+     so all seven come out equal. Tablet and mobile values are set in the
+     media queries below. */
+  --bb-hero-matched-height: 730px;
   --bb-hero-copy-max-width: 540px;
   --bb-hero-h1-size: clamp(2.25rem, 3.4vw + 0.6rem, 3rem);
   --bb-hero-padding-top: var(--bb-hero-clearance);
@@ -65,4 +71,14 @@
 /* Same formula as .public-header: 2 x its clamp() padding plus the 64px logo. */
 @media (min-width: 1321px) {
   :root { --bb-header-height: calc(2 * clamp(1rem, 2vw, 1.9rem) + 64px); }
+}
+
+/* Matched hero height: tablet tracks Däckservice's content as it grows with
+   width; mobile is Om oss's content height (685px at 360px wide) with the
+   compact phone review card and no trust points on phones. */
+@media (max-width: 1120px) {
+  :root { --bb-hero-matched-height: clamp(701px, calc(532px + 22vw), 780px); }
+}
+@media (max-width: 650px) {
+  :root { --bb-hero-matched-height: 686px; }
 }

@@ -180,7 +180,7 @@ export default function DackservicePage() {
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
-                  <span>Ring oss: {BUSINESS.phone.display}</span>
+                  <span>Ring oss nu</span>
                 </a>
               </div>
             </div>
