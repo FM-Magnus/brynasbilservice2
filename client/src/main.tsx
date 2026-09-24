@@ -6,7 +6,6 @@ import './styles/tailwind.css'
 import './styles/design-tokens.css'
 import './styles/base.css'
 import './styles/shared-elements.css'
-import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
 
 // Every route is code-split, including `/`: each page's JS and CSS only
 // download when a visitor actually navigates there, instead of every page
@@ -18,6 +17,9 @@ import { ProtectedRoute } from './components/admin/ProtectedRoute.tsx'
 // by 4 bytes, while a guide page's first-load CSS dropped from 92 KB to 72 KB.
 // The trade is that `/` now resolves one lazy chunk after the entry parses.
 const App = lazy(() => import('./App.tsx'))
+// The admin gate is lazy too: imported eagerly, its client-side login check
+// (credentials included) shipped in the entry chunk every visitor downloads.
+const ProtectedRoute = lazy(() => import('./components/admin/ProtectedRoute.tsx').then((m) => ({ default: m.ProtectedRoute })))
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard.tsx'))
 const BilarTillSalu = lazy(() => import('./pages/BilarTillSalu.tsx'))
 const ServiceReparationerPage = lazy(() => import('./pages/ServiceReparationerPage.tsx'))
