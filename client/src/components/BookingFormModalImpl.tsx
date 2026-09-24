@@ -245,6 +245,10 @@ const BookingFormModalImpl: React.FC<BookingFormModalProps> = ({ isOpen, onClose
                   value={selectedTime}
                   clockIcon={null}
                   disableClock={true}
+                  // The clock is hidden, but by default focus still "opens" it, and
+                  // TimeInput resets hour/minute whenever the open state toggles —
+                  // a render or two after focus, wiping digits typed right away.
+                  openClockOnFocus={false}
                   format="HH:mm"
                   className="modal-input"
                   required
