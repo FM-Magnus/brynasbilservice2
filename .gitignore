@@ -33,6 +33,8 @@ npm-debug.log*
 client/test-results/
 client/playwright-report/
 client/blob-report/
+test-results/
+docs/audit-harness/test-results/
 
 # Claude local settings (personal overrides, not team-wide)
 .claude/settings.local.json
