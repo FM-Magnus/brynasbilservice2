@@ -4,12 +4,12 @@
 // it adds a new reusable "topic block" pattern to ServiceGuideTemplate.css
 // for the deep-dive viscosity/standards/oil-type/ageing/misconception
 // material, since nothing in Koppling or Avgassystem needed that shape.
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BUSINESS } from '../data/business'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -111,13 +111,12 @@ const infoCards = [
 ] as const
 
 export default function OljebytePage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const openModal = () => setIsModalOpen(true)
+  const { openBooking, bookingModal } = useBookingModal()
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="overlay" />
+      <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="oljebyte-title">
@@ -137,7 +136,7 @@ export default function OljebytePage() {
                   Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka oljebyte</button>
+                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka oljebyte</button>
                   <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="bb-trust-row">
@@ -376,15 +375,15 @@ export default function OljebytePage() {
                 <p>Ring oss så hjälper vi dig att hitta en tid som passar och ger en tydlig prisuppgift innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka oljebyte</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka oljebyte</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

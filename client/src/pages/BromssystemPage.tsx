@@ -3,11 +3,11 @@
 // The one addition here is a single --urgent (amber) symptom-row modifier
 // for the most safety-critical warning sign, alongside the existing teal
 // --featured modifier. No dependency on any page-specific rule in index.css.
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { BUSINESS } from '../data/business'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -106,13 +106,12 @@ const faqs = [
 ]
 
 export default function BromssystemPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const openModal = () => setIsModalOpen(true)
+  const { openBooking, bookingModal } = useBookingModal()
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="overlay" />
+      <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="brake-title">
@@ -139,7 +138,7 @@ export default function BromssystemPage() {
                   Bromsarna är bilens viktigaste säkerhetssystem – helt enkelt det som avgör om du stannar i tid eller inte. Slitna bromsar brukar varna i god tid, men bara om du vet vad du ska lyssna och känna efter.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
+                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
                   <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="bb-trust-row">
@@ -306,15 +305,15 @@ export default function BromssystemPage() {
                 <p>Priset beror på vilka delar som behöver bytas. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka bromsservice</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
@@ -150,14 +149,11 @@ const serviceGuides: ServiceGuide[] = [
 ]
 
 export default function BiltjansterPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
+  const { openBooking, bookingModal } = useBookingModal()
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="solid" />
+      <PublicHeader onBookingClick={openBooking} variant="solid" />
 
       <main className="biltjanster-hub" id="main-content">
         <section className="biltjanster-hub__hero" aria-labelledby="biltjanster-hero-title">
@@ -170,7 +166,7 @@ export default function BiltjansterPage() {
               Här hittar du fördjupad information om mekaniska reparationer, vanliga symptom och riktad felsökning – ett samlat ställe för hela vårt tjänsteutbud.
             </p>
             <div className="biltjanster-hub__hero-actions">
-              <button type="button" onClick={openModal} className="biltjanster-hub__btn biltjanster-hub__btn--primary">
+              <button type="button" onClick={openBooking} className="biltjanster-hub__btn biltjanster-hub__btn--primary">
                 <span>Boka tid</span>
               </button>
               <a href={BUSINESS.phone.href} className="biltjanster-hub__btn biltjanster-hub__btn--outline">
@@ -241,7 +237,7 @@ export default function BiltjansterPage() {
               </p>
             </div>
             <div className="biltjanster-hub__cta-actions">
-              <button type="button" onClick={openModal} className="biltjanster-hub__btn biltjanster-hub__btn--primary">
+              <button type="button" onClick={openBooking} className="biltjanster-hub__btn biltjanster-hub__btn--primary">
                 <span>Boka tid</span>
               </button>
               <a href={BUSINESS.phone.href} className="biltjanster-hub__btn biltjanster-hub__btn--outline">
@@ -253,8 +249,8 @@ export default function BiltjansterPage() {
         </section>
       </main>
 
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

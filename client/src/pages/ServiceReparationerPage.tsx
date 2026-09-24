@@ -6,12 +6,12 @@
 // prefix .bilservice__) — zero dependency on index.css or its --redesign-*
 // tokens; consumes --bb-* tokens only.
 // Service photography uses WebP with JPG fallbacks in the measured image slots.
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -87,9 +87,7 @@ function ServiceImage({ id, jpg, webp, alt, className = '' }: { id: string; jpg:
 }
 
 export default function ServiceReparationerPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
+  const { openBooking, bookingModal } = useBookingModal()
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
@@ -104,7 +102,7 @@ export default function ServiceReparationerPage() {
             </picture>
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
-          <PublicHeader onBookingClick={openModal} variant="overlay" />
+          <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
               <p className="bb-eyebrow bb-eyebrow--dark">Din bilverkstad i Brynäs, Gävle</p>
@@ -117,7 +115,7 @@ export default function ServiceReparationerPage() {
                 Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation — för alla bilmärken, till konkurrenskraftiga priser.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">Boka tid</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring oss nu</span></a>
               </div>
             </div>
@@ -145,7 +143,7 @@ export default function ServiceReparationerPage() {
               <h2 className="bilservice__price-heading bb-h2" id="bilservice-price-title">Vad kostar en <span className="bb-accent">bilservice</span>?</h2>
               <p className="bilservice__price-text bb-lead">Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
               <div className="bilservice__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka tid för bilservice</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid för bilservice</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
@@ -254,15 +252,15 @@ export default function ServiceReparationerPage() {
                 <p className="bb-lead">Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring: {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

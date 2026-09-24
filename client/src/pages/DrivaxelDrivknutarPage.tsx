@@ -1,12 +1,12 @@
 // Rebuilt 2026-09-19 on the shared ServiceGuideTemplate (Step 5, Final Guide Sibling: 10 of 10).
 // Achieves 100% completion of the Guide Family on ServiceGuideTemplate.css without inventing a new CSS file.
 // Zero dependency on index.css; inherits Level 0 tokens and shared-elements.
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { BUSINESS } from '../data/business'
 import '../styles/ServiceGuideTemplate.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -106,13 +106,12 @@ const faqs = [
 ]
 
 export default function DrivaxelDrivknutarPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const openModal = () => setIsModalOpen(true)
+  const { openBooking, bookingModal } = useBookingModal('Gäller drivaxel och drivknutar')
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="overlay" />
+      <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="driveshaft-title">
@@ -133,7 +132,7 @@ export default function DrivaxelDrivknutarPage() {
                   Drivaxeln överför motorkraften från växellådan till drivhjulen via rörliga drivknutar (CV-knutar). Vi inspekterar damasker, åtgärdar fettläckage och byter slitna knutar eller kompletta drivaxlar.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                   <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="bb-trust-row">
@@ -184,7 +183,7 @@ export default function DrivaxelDrivknutarPage() {
                   <strong className="bb-tip__title">Misstänker du knäppande ljud eller trasig damask?</strong>
                   <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar damasker, fett och mekaniskt glapp.</span>
                 </div>
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
               </div>
             </div>
           </div>
@@ -320,15 +319,15 @@ export default function DrivaxelDrivknutarPage() {
                 <p>Priset beror på om det räcker med ett damaskbyte, om det är en yttre drivknut som byts separat eller om en hel drivaxel behöver ersättas. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag anpassat för din bilmodell.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller drivaxel och drivknutar" />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

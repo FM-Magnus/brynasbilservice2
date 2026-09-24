@@ -96,6 +96,27 @@ test('a page-supplied inquiry comment is prefilled and reaches the request', asy
   expect(bookings[0].body.comment_customer).toBe('Gäller kamremsbyte')
 })
 
+test('a trigger-specific comment wins, and the next plain open is back to the page default', async ({ page }) => {
+  await mockApi(page, (route) => created(route))
+  const dialog = await openBookingOn(page, '/dackservice', '.bilservice__tire-cta')
+  await expect(dialog.locator('#booking-comment')).toHaveValue(/^Gäller \S/)
+  await expect(dialog.locator('#booking-comment')).not.toHaveValue('Gäller däckservice & hjulskifte')
+  await dialog.getByRole('button', { name: 'Stäng bokningsformuläret' }).click()
+
+  await page.locator('.bb-hero button').first().click()
+  await expect(page.getByRole('dialog').locator('#booking-comment')).toHaveValue('Gäller däckservice & hjulskifte')
+})
+
+test('a chosen symptom follows into the booking comment', async ({ page }) => {
+  await mockApi(page, (route) => created(route))
+  await page.goto('/felsokning')
+  const card = page.locator('.bilservice__symptom-card').first()
+  const advice = await card.locator('.bilservice__symptom-advice').innerText()
+  await card.click()
+  await page.locator('.bilservice__recommendation button').click()
+  await expect(page.getByRole('dialog').locator('#booking-comment')).toHaveValue(`Önskad hjälp: ${advice}`)
+})
+
 test('locks the form while sending and a double click creates one booking', async ({ page }) => {
   let release!: () => void
   const gate = new Promise<void>((resolve) => { release = resolve })

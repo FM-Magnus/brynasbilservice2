@@ -1,12 +1,12 @@
 // Rebuilt 2026-09-19 on the shared ServiceGuideTemplate (Step 5, Guide Family Rebuild).
 // Proves template reusability for /hjullagerbyte without inventing a new CSS file.
 // Zero dependency on index.css; inherits Level 0 tokens and shared-elements.
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { BUSINESS } from '../data/business'
 import '../styles/ServiceGuideTemplate.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -106,13 +106,12 @@ const faqs = [
 ]
 
 export default function HjullagerbytePage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const openModal = () => setIsModalOpen(true)
+  const { openBooking, bookingModal } = useBookingModal('Gäller hjullagerbyte')
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="overlay" />
+      <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="wheel-bearing-title">
@@ -137,7 +136,7 @@ export default function HjullagerbytePage() {
                   Hjullagret bär upp bilens vikt och ser till att hjulen rullar mjukt och friktionsfritt. Upplever du ett brummande missljud eller vibrationer? Vi lokaliserar det slitna lagret och byter till kvalitetsdelar med rätt specifikation.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                   <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="bb-trust-row">
@@ -188,7 +187,7 @@ export default function HjullagerbytePage() {
                   <strong className="bb-tip__title">Orolig för ett brummande eller malande missljud?</strong>
                   <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar mekaniskt vilket lager som orsakar ljudet.</span>
                 </div>
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
               </div>
             </div>
           </div>
@@ -324,15 +323,15 @@ export default function HjullagerbytePage() {
                 <p>Priset för att byta hjullager varierar beroende på om din bil har en bultad komplett navenhet eller ett pressat lager, samt om det gäller fram- eller bakhjul. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift anpassad för din bilmodell.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller hjullagerbyte" />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

@@ -3,7 +3,7 @@ import type { KeyboardEvent, PointerEvent } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
@@ -185,7 +185,7 @@ function ThumbnailStrip({ images, activeIndex, onSelect }: StripProps) {
 
 export default function GalleryPage() {
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
-  const [modalOpen, setModalOpen] = useState(false)
+  const { openBooking, bookingModal } = useBookingModal()
   const [searchParams, setSearchParams] = useSearchParams()
   const preloadedFor = useRef<string | null>(null)
   const firstPaint = useRef(true)
@@ -237,7 +237,6 @@ export default function GalleryPage() {
     if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1) }
   }
 
-  const openBooking = () => setModalOpen(true)
 
   return (
     <>
@@ -343,7 +342,7 @@ export default function GalleryPage() {
         </section>
       </main>
 
-      <BookingFormModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      {bookingModal}
       <PublicFooter onBookingClick={openBooking} />
     </>
   )

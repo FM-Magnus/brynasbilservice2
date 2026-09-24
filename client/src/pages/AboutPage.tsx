@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -87,10 +87,8 @@ function ApprovalCheckIcon({ className }: { className?: string }) {
 }
 
 export default function AboutPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { openBooking, bookingModal } = useBookingModal()
 
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -98,7 +96,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openBooking} />
 
       <main className="omoss-page" id="main-content">
         {/* =========================================================
@@ -120,7 +118,7 @@ export default function AboutPage() {
                 <div className="omoss-page__hero-actions">
                   <button
                     type="button"
-                    onClick={openModal}
+                    onClick={openBooking}
                     className="bb-btn bb-btn--teal"
                   >
                     <span>Boka tid</span>
@@ -533,7 +531,7 @@ export default function AboutPage() {
               <div className="omoss-page__cta-actions">
                 <button
                   type="button"
-                  onClick={openModal}
+                  onClick={openBooking}
                   className="bb-btn bb-btn--teal"
                 >
                   <span>Boka tid nu</span>
@@ -558,8 +556,8 @@ export default function AboutPage() {
         </section>
       </main>
 
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

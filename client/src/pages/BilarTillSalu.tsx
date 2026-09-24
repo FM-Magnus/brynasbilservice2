@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
@@ -309,7 +309,7 @@ function VehicleGrid({ vehicles, initial, expandedId, onExpand, onInquiry }: Veh
 
 export default function BilarTillSalu() {
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
-  const [modal, setModal] = useState({ open: false, comment: '' })
+  const { openBooking, openBookingWith, bookingModal } = useBookingModal()
   const [expandedId, setExpandedId] = useState<number | null>(null)
 
   useEffect(() => {
@@ -321,9 +321,7 @@ export default function BilarTillSalu() {
     return () => { cancelled = true }
   }, [])
 
-  const openBooking = () => setModal({ open: true, comment: '' })
-  const openInquiry = (vehicle: Vehicle) => setModal({ open: true, comment: inquiryComment(vehicle) })
-  const closeModal = () => setModal((current) => ({ ...current, open: false }))
+  const openInquiry = (vehicle: Vehicle) => openBookingWith(inquiryComment(vehicle))
 
   const vehicles = load.status === 'ready' ? load.vehicles : []
   const available = vehicles.filter((vehicle) => vehicle.status === 'available')
@@ -505,9 +503,7 @@ export default function BilarTillSalu() {
         </section>
       </main>
 
-      {/* key remounts the modal when its context changes, so a vehicle
-          inquiry always starts from that vehicle's prefilled comment. */}
-      <BookingFormModal key={modal.comment} isOpen={modal.open} onClose={closeModal} initialComment={modal.comment} />
+      {bookingModal}
       <PublicFooter onBookingClick={openBooking} />
     </>
   )

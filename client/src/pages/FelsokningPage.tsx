@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -103,10 +103,10 @@ const faqs = [
 ]
 
 export default function FelsokningPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [recommendation, setRecommendation] = useState('')
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
+  const { openBooking, bookingModal } = useBookingModal(
+    recommendation ? `Önskad hjälp: ${recommendation}` : 'Gäller felsökning & diagnostik',
+  )
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -124,7 +124,7 @@ export default function FelsokningPage() {
             </picture>
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
-          <PublicHeader onBookingClick={openModal} variant="overlay" />
+          <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
               <p className="bb-eyebrow bb-eyebrow--dark">Elektronik &amp; diagnostik</p>
@@ -136,7 +136,7 @@ export default function FelsokningPage() {
                 Lyser en varningslampa eller låter bilen konstigt? Vi läser av felkoder och mäter oss fram till den verkliga orsaken med modern diagnostikutrustning — för alla märken och modeller.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">Boka tid</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
                   <span>Ring oss nu</span>
@@ -170,7 +170,7 @@ export default function FelsokningPage() {
                   Moderna bilar styrs av ett nätverk av datorer som ständigt övervakar motor, elsystem och avgasrening. När något avviker sparas en felkod i felminnet och en varningslampa kan tändas. Vi kopplar in diagnostikutrustning, läser av koderna och avgör vad de faktiskt betyder för just din bil — istället för att bara byta delar på måfå.
                 </p>
                 <div className="bilservice__actions">
-                  <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka felsökning</button>
+                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka felsökning</button>
                   <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export default function FelsokningPage() {
               <div className="bilservice__recommendation" role="status">
                 <span className="bb-icon-badge"><CheckIcon aria-hidden="true" /></span>
                 <p>Vi föreslår: <strong>{recommendation}</strong>. Det följer med till bokningsformulärets kommentar.</p>
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">Boka tid</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
               </div>
             )}
           </div>
@@ -310,15 +310,15 @@ export default function FelsokningPage() {
                 <p className="bb-lead">Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring: {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} initialComment={recommendation ? `Önskad hjälp: ${recommendation}` : 'Gäller felsökning & diagnostik'} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

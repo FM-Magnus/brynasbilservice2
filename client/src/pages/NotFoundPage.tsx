@@ -1,8 +1,7 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { BUSINESS } from '../data/business'
@@ -11,16 +10,13 @@ import { BUSINESS } from '../data/business'
 // empty page with no header. Built only from the shared hero pattern, so it has
 // no stylesheet of its own.
 export default function NotFoundPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
+  const { openBooking, bookingModal } = useBookingModal()
 
   return (
     <>
       <main id="main-content">
         <section className="bb-hero" aria-labelledby="not-found-title">
-          <PublicHeader onBookingClick={openModal} variant="overlay" />
+          <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
               <p className="bb-eyebrow bb-eyebrow--dark">Sidan hittades inte</p>
@@ -46,8 +42,8 @@ export default function NotFoundPage() {
         </section>
       </main>
 
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

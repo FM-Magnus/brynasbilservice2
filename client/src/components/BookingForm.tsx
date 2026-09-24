@@ -2,13 +2,13 @@
  * Booking modal — lazy boundary.
  *
  * The implementation pulls in react-datepicker, react-time-picker, react-clock
- * and a date-fns locale, plus ~150 rules of third-party CSS. Twenty-two pages
- * import this modal, so before this split all of that shipped in the main
- * chunk and downloaded on every first page load — including for the majority
- * of visitors who never open the booking form.
+ * and a date-fns locale, plus ~150 rules of third-party CSS. Every public page
+ * renders this modal (through `useBookingModal`), so before this split all of
+ * that shipped in the main chunk and downloaded on every first page load —
+ * including for the majority of visitors who never open the booking form.
  *
- * The boundary lives here rather than at the call sites so that none of the
- * twenty-two pages had to change. Nothing is fetched until `isOpen` first
+ * The boundary lives here rather than at the call sites, so pages never deal
+ * with the lazy import. Nothing is fetched until `isOpen` first
  * becomes true; after that the chunk is cached by the browser and reopening is
  * instant. The fallback is deliberately null: the trigger is a user click on a
  * button that stays visible, and a spinner flashing behind an opening dialog is

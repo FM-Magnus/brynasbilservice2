@@ -1,12 +1,12 @@
 // Rebuilt 2026-09-19 on the shared ServiceGuideTemplate (Step 5, Guide Family Rebuild).
 // Proves template reusability for /styrning-kulleder without inventing a new CSS file.
 // Zero dependency on index.css; inherits Level 0 tokens and shared-elements.
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { BUSINESS } from '../data/business'
 import '../styles/ServiceGuideTemplate.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -106,13 +106,12 @@ const faqs = [
 ]
 
 export default function StyrningKullederPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const openModal = () => setIsModalOpen(true)
+  const { openBooking, bookingModal } = useBookingModal('Gäller styrning & kulleder')
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="overlay" />
+      <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="steering-title">
@@ -137,7 +136,7 @@ export default function StyrningKullederPage() {
                   Styrleder, spindelleder och servostyrning ser till att bilen lyder ratten direkt och rullar stabilt. Vi felsöker missljud och glapp, byter slitna leder och utför professionell hjulinställning.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                   <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="bb-trust-row">
@@ -188,7 +187,7 @@ export default function StyrningKullederPage() {
                   <strong className="bb-tip__title">Upplever du glapp, klapper eller tung styrning?</strong>
                   <span className="bb-tip__text">Vi hissar upp bilen och kontrollerar leder, stag och servoverkan – snabbt och säkert.</span>
                 </div>
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>
               </div>
             </div>
           </div>
@@ -324,15 +323,15 @@ export default function StyrningKullederPage() {
                 <p>Priset beror helt på vad som behöver åtgärdas — ett byte av en yttre styrled är ett prisvärt ingrepp, medan reparation av servopump eller kuggstång är mer omfattande. Ring oss på {BUSINESS.phone.display} så felsöker vi och ger dig ett tydligt kostnadsförslag innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller styrning & kulleder" />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

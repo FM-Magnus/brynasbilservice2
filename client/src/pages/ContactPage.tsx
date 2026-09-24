@@ -5,7 +5,7 @@ import { BUSINESS, weekdayHours } from '../data/business'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { FacebookIcon } from '../components/icons/FacebookIcon'
@@ -32,12 +32,9 @@ const GOOGLE_MAPS_URL = 'https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A
 const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?q=Utmarksv%C3%A4gen+21B,+802+91+G%C3%A4vle&output=embed'
 
 export default function ContactPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { openBooking, bookingModal } = useBookingModal()
   // Set once the message has been handed to the visitor's e-mail program.
   const [mailtoHref, setMailtoHref] = useState<string | null>(null)
-
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -63,7 +60,7 @@ export default function ContactPage() {
             </picture>
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
-          <PublicHeader onBookingClick={openModal} variant="overlay" />
+          <PublicHeader onBookingClick={openBooking} variant="overlay" />
 
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
@@ -78,7 +75,7 @@ export default function ContactPage() {
                 Välj det sätt som passar dig bäst: skicka ett meddelande via formuläret, ring oss direkt eller boka tid via vårt bokningssystem.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
                   <span>Boka tid</span>
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
@@ -294,7 +291,7 @@ export default function ContactPage() {
                 Oavsett om det gäller regelbunden service, felsökning eller däckskifte är du varmt välkommen att kontakta oss.
               </p>
               <div className="kontakt-page__closing-actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal">
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
                   <span>Boka tid nu</span>
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
@@ -311,8 +308,8 @@ export default function ContactPage() {
         </section>
       </main>
 
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

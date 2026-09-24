@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { BookingFormModal } from '../../components/BookingForm'
+import { useBookingModal } from '../../hooks/useBookingModal'
 import { PublicHeader } from '../../components/layout/PublicHeader'
 import { PublicFooter } from '../../components/layout/PublicFooter'
 import { ArrowRightIcon } from '../../components/icons/ArrowRightIcon'
@@ -79,7 +78,7 @@ const processIcons: Record<string, ReactNode> = {
 }
 
 export default function LandingPage() {
-  const [bookingOpen, setBookingOpen] = useState(false)
+  const { openBooking, bookingModal } = useBookingModal()
   return (
     <main className="landing-v2">
       <section className="bb-hero" aria-labelledby="landing-v2-hero-title">
@@ -88,7 +87,7 @@ export default function LandingPage() {
           <img src={heroJpg} alt="Förarmiljö med händer på ratten" />
         </picture>
         <div className="bb-hero__shade" aria-hidden="true" />
-        <PublicHeader onBookingClick={() => setBookingOpen(true)} variant="overlay" />
+        <PublicHeader onBookingClick={openBooking} variant="overlay" />
         <div className="bb-wrap bb-hero__content">
           <div className="bb-hero__copy">
             <p className="bb-eyebrow bb-eyebrow--dark">Din lokala bilverkstad i Gävle</p>
@@ -101,7 +100,7 @@ export default function LandingPage() {
               Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation – för alla bilmärken, till konkurrenskraftiga priser.
             </p>
             <div className="bb-hero__actions">
-              <button className="bb-btn bb-btn--teal" type="button" onClick={() => setBookingOpen(true)}>
+              <button className="bb-btn bb-btn--teal" type="button" onClick={openBooking}>
                 <CalendarIcon />
                 Boka tid
               </button>
@@ -263,8 +262,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <PublicFooter onBookingClick={() => setBookingOpen(true)} />
-      <BookingFormModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <PublicFooter onBookingClick={openBooking} />
+      {bookingModal}
     </main>
   )
 }

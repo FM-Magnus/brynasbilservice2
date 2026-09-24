@@ -5,10 +5,10 @@
 // Guide family. Styled entirely by ./ServiceReparationerPage.css (class
 // prefix .bilservice__) — zero dependency on index.css or its --redesign-*
 // tokens; consumes --bb-* tokens only.
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -137,14 +137,7 @@ const faqs = [
 ]
 
 export default function DackservicePage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [bookingComment, setBookingComment] = useState('Gäller däckservice & hjulskifte')
-
-  const openModal = (comment = 'Gäller däckservice & hjulskifte') => {
-    setBookingComment(comment)
-    setIsModalOpen(true)
-  }
-  const closeModal = () => setIsModalOpen(false)
+  const { openBooking, openBookingWith, bookingModal } = useBookingModal('Gäller däckservice & hjulskifte')
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -162,7 +155,7 @@ export default function DackservicePage() {
             </picture>
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
-          <PublicHeader onBookingClick={() => openModal()} variant="overlay" />
+          <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
               <p className="bb-eyebrow bb-eyebrow--dark">Däckverkstad i Brynäs, Gävle</p>
@@ -175,7 +168,7 @@ export default function DackservicePage() {
                 Vi hjälper dig med hjulskifte, montering, balansering, hjulinställning, punkteringslagning och däckhotell — med omtanke om säkerhet, körkomfort och dina hjul.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={() => openModal('Gäller däckservice & hjulskifte')} className="bb-btn bb-btn--teal">
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
                   Boka tid
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
@@ -248,7 +241,7 @@ export default function DackservicePage() {
                       <button
                         type="button"
                         className="bb-btn bb-btn--teal bilservice__tire-cta"
-                        onClick={() => openModal(`Gäller ${service.title.toLowerCase()}`)}
+                        onClick={() => openBookingWith(`Gäller ${service.title.toLowerCase()}`)}
                       >
                         <span>{isContactPrice ? 'Kontakta oss' : 'Boka tid'}</span>
                         <ArrowRightIcon aria-hidden="true" />
@@ -299,7 +292,7 @@ export default function DackservicePage() {
                 <button
                   type="button"
                   className="bb-btn bb-btn--ember-solid"
-                  onClick={() => openModal('Gäller däckhotell & förvaring')}
+                  onClick={() => openBookingWith('Gäller däckhotell & förvaring')}
                 >
                   Boka däckhotellplats
                 </button>
@@ -403,7 +396,7 @@ export default function DackservicePage() {
                 <p className="bb-lead">Vi hjälper dig att upptäcka skador, felaktigt lufttryck och slitage i tid.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={() => openModal('Gäller genomgång av hjul & däck')} className="bb-btn bb-btn--ember-solid">
+                <button type="button" onClick={() => openBookingWith('Gäller genomgång av hjul & däck')} className="bb-btn bb-btn--ember-solid">
                   Boka tid
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
@@ -414,8 +407,8 @@ export default function DackservicePage() {
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} initialComment={bookingComment} />
-      <PublicFooter onBookingClick={() => openModal()} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

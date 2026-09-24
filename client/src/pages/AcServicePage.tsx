@@ -8,7 +8,7 @@
 import { useState, useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -72,24 +72,10 @@ const faqs = [
 ]
 
 export default function AcServicePage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [recommendation, setRecommendation] = useState('')
-
-  const openModal = (customNote?: string) => {
-    if (customNote) {
-      setBookingComment(customNote)
-    } else {
-      const parts = [
-        recommendation && `Önskad hjälp: ${recommendation}`,
-      ].filter(Boolean)
-      setBookingComment(parts.length > 0 ? parts.join('\n') : 'Gäller AC-service & klimatrengöring')
-    }
-    setIsModalOpen(true)
-  }
-
-  const [bookingComment, setBookingComment] = useState('Gäller AC-service & klimatrengöring')
-
-  const closeModal = () => setIsModalOpen(false)
+  const { openBooking, openBookingWith, bookingModal } = useBookingModal(
+    recommendation ? `Önskad hjälp: ${recommendation}` : 'Gäller AC-service & klimatrengöring',
+  )
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -106,7 +92,7 @@ export default function AcServicePage() {
             </picture>
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
-          <PublicHeader onBookingClick={() => openModal()} variant="overlay" />
+          <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy bilservice__ac-intro-copy">
               <p className="bb-eyebrow bb-eyebrow--dark">AC &amp; klimatanläggning</p>
@@ -119,7 +105,7 @@ export default function AcServicePage() {
                 En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer. Ett system med för lite köldmedium smörjs sämre – att ignorera det kan förvandla en enkel påfyllning till en betydligt dyrare kompressorreparation.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={() => openModal()} className="bb-btn bb-btn--teal">
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
                   Boka tid
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
@@ -190,7 +176,7 @@ export default function AcServicePage() {
                 <button
                   type="button"
                   className="bb-btn bb-btn--teal"
-                  onClick={() => openModal()}
+                  onClick={openBooking}
                 >
                   Boka rekommenderad åtgärd
                 </button>
@@ -228,7 +214,7 @@ export default function AcServicePage() {
                 </ul>
                 <button
                   type="button"
-                  onClick={() => openModal('Gäller AC-service (1 495 kr)')}
+                  onClick={() => openBookingWith('Gäller AC-service (1 495 kr)')}
                   className="bb-btn bb-btn--teal bilservice__price-cta"
                 >
                   Boka tid
@@ -253,7 +239,7 @@ export default function AcServicePage() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => openModal('Gäller AC-rengöring (800 kr arbetskostnad)')}
+                  onClick={() => openBookingWith('Gäller AC-rengöring (800 kr arbetskostnad)')}
                   className="bb-btn bb-btn--teal bilservice__price-cta"
                 >
                   Boka tid
@@ -273,7 +259,7 @@ export default function AcServicePage() {
                 </ul>
                 <button
                   type="button"
-                  onClick={() => openModal('Gäller OBD-diagnostik & felsökning för AC (500 kr)')}
+                  onClick={() => openBookingWith('Gäller OBD-diagnostik & felsökning för AC (500 kr)')}
                   className="bb-btn bb-btn--teal bilservice__price-cta"
                 >
                   Boka tid
@@ -414,7 +400,7 @@ export default function AcServicePage() {
                 </p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={() => openModal()} className="bb-btn bb-btn--ember-solid">
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">
                   Öppna bokning
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
@@ -425,8 +411,8 @@ export default function AcServicePage() {
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} initialComment={bookingComment} />
-      <PublicFooter onBookingClick={() => openModal()} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

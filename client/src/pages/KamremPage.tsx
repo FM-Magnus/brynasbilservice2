@@ -1,12 +1,12 @@
 // Rebuilt 2026-09-19 on the shared ServiceGuideTemplate (Step 5, First Sibling Proof).
 // Proves template reusability for /kamrem without inventing a new CSS file.
 // Zero dependency on index.css; inherits Level 0 tokens and shared-elements.
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { BUSINESS } from '../data/business'
 import '../styles/ServiceGuideTemplate.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
@@ -102,13 +102,12 @@ const faqs = [
 ]
 
 export default function KamremPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const openModal = () => setIsModalOpen(true)
+  const { openBooking, bookingModal } = useBookingModal('Gäller kamremsbyte')
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} variant="overlay" />
+      <PublicHeader onBookingClick={openBooking} variant="overlay" />
       <main className="service-guide">
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="kamrem-title">
@@ -129,7 +128,7 @@ export default function KamremPage() {
                   Kamremmen synkroniserar motorns vevaxel och kamaxel så att kolvar och ventiler rör sig i exakt rätt takt. Det är en av bilens mest kritiska delar där ett missat byte kan leda till totalt motorhaveri.
                 </p>
                 <div className="service-guide__actions">
-                  <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                   <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
                 </div>
                 <div className="bb-trust-row">
@@ -176,7 +175,7 @@ export default function KamremPage() {
                   <strong className="bb-tip__title">Osäker på om din bil har rem eller kedja?</strong>
                   <span className="bb-tip__text">Vi slår upp exakta uppgifter i biltillverkarens databas utifrån ditt registreringsnummer.</span>
                 </div>
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>
               </div>
             </div>
           </div>
@@ -300,15 +299,15 @@ export default function KamremPage() {
                 <p>Priset beror på bilmodell, motortyp och om vattenpump samt spännrullar ingår i bytet. Ring oss på {BUSINESS.phone.display} för en tydlig och fast prisuppgift innan vi sätter igång.</p>
               </div>
               <div className="service-guide__actions">
-                <button type="button" onClick={openModal} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka tid</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <BookingFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialComment="Gäller kamremsbyte" />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }

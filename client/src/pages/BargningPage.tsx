@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
-import { BookingFormModal } from '../components/BookingForm'
+import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -67,10 +67,8 @@ function RoadWayIcon({ className }: { className?: string }) {
 }
 
 export default function BargningPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { openBooking, bookingModal } = useBookingModal()
 
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -78,7 +76,7 @@ export default function BargningPage() {
 
   return (
     <>
-      <PublicHeader onBookingClick={openModal} />
+      <PublicHeader onBookingClick={openBooking} />
 
       <main className="bargning-page" id="main-content">
         {/* =========================================================
@@ -106,7 +104,7 @@ export default function BargningPage() {
                 </a>
                 <button
                   type="button"
-                  onClick={openModal}
+                  onClick={openBooking}
                   className="bb-btn bb-btn--ember bargning-page__hero-book-btn"
                 >
                   <span>Boka verkstadstid</span>
@@ -295,7 +293,7 @@ export default function BargningPage() {
                   </a>
                   <button
                     type="button"
-                    onClick={openModal}
+                    onClick={openBooking}
                     className="bargning-page__showcase-book-link"
                   >
                     <span>Boka tid direkt i verkstaden</span>
@@ -604,7 +602,7 @@ export default function BargningPage() {
                 </a>
                 <button
                   type="button"
-                  onClick={openModal}
+                  onClick={openBooking}
                   className="bb-btn bb-btn--ember bargning-page__cta-book-btn"
                 >
                   <span>Boka verkstadstid</span>
@@ -615,8 +613,8 @@ export default function BargningPage() {
         </section>
       </main>
 
-      <BookingFormModal isOpen={isModalOpen} onClose={closeModal} />
-      <PublicFooter onBookingClick={openModal} />
+      {bookingModal}
+      <PublicFooter onBookingClick={openBooking} />
     </>
   )
 }
