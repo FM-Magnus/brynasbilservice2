@@ -4,12 +4,12 @@ import { ArrowRightIcon } from '../icons/ArrowRightIcon'
 import './GalleryTeaserCard.css'
 
 // Default workshop slideshow images (Central single source of truth!)
-import workshopOpenHood from '../../assets/images/gallery/workshop/workshop-car-open-hood-card.webp'
-import workshopEmptyLifts from '../../assets/images/gallery/workshop/workshop-empty-lifts-card.webp'
-import workshopOverheadBay from '../../assets/images/gallery/workshop/workshop-overhead-car-bay-card.webp'
-import workshopServiceAisle from '../../assets/images/gallery/workshop/workshop-service-aisle-card.webp'
-import workshopCarLift from '../../assets/images/gallery/workshop/workshop-car-on-lift-card.webp'
-import workshopLifts from '../../assets/images/gallery/workshop/workshop-lifts-and-tire-racks-card.webp'
+import workshopOpenHood from '../../assets/images/workshop/workshop-car-open-hood-card.webp'
+import workshopEmptyLifts from '../../assets/images/workshop/workshop-empty-lifts-card.webp'
+import workshopOverheadBay from '../../assets/images/workshop/workshop-overhead-car-bay-card.webp'
+import workshopServiceAisle from '../../assets/images/workshop/workshop-service-aisle-card.webp'
+import workshopCarLift from '../../assets/images/workshop/workshop-car-on-lift-card.webp'
+import workshopLifts from '../../assets/images/workshop/workshop-lifts-and-tire-racks-card.webp'
 
 export interface WorkshopSlide {
   image: string

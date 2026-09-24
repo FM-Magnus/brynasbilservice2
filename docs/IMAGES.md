@@ -67,7 +67,7 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Biltjänster | CSS-only | ✓ all 11 guide cards have photos | — |
 | Bilar till salu | ✓ | conditional placeholders when a car lacks photos | — |
 | Landing | ✓ `home/landing-v2/landing-cockpit-steering-hero` | ✓ why (`landing-why-reassurance-handshake-v2`), process (`landing-customer-interaction-background`), car for sale; the service area is vector icons, no photo | — |
-| Om oss | ✓ | ✓ workshop and tyre photos (`about/`, `gallery/workshop/`, `services/tires/`) | — |
+| Om oss | ✓ | ✓ workshop and tyre photos (`about/`, `workshop/`, `services/tires/`) | — |
 | Däckservice | ✓ `services/tires/tires-hero-bg` | ✓ six tyre cards (colour grade in page CSS, files unchanged), storage | — |
 | AC-service | ✓ `services/ac/ac-hero-bg` | ✓ `ac-manometers-on-engine` (JPG only, no WebP) | — |
 | Bärgning | ✓ | ✓ tow truck, workshop, car for sale | — |
@@ -98,4 +98,4 @@ The camera presets and grade presets live on **Google Drive, `My Drive/## FOR AG
 - **WebP:** `sips` cannot write WebP here; use `cwebp -q 90 in.jpg -o out.webp`. `sips -r -90` rotates counter-clockwise.
 - **Markup:** `<picture><source srcSet={webp} type="image/webp" /><img src={jpg} alt="…" loading="lazy" /></picture>` inside the slot. Swedish alt text that says what is in the picture. No inline `style=`.
 - **Intake:** finished exports come from `_incoming-assets/IMPLEMENT/`. Don't pull from the other intake subfolders unless Magnus points at a file ([`_incoming-assets/README.md`](../_incoming-assets/README.md)).
-- **Gallery** photos go straight into `client/src/assets/galleri/` (see `LÄSMIG.md` there); **car photos** are wired in `client/src/data/vehicles.ts`.
+- **Gallery** photos go straight into `client/src/assets/galleri/` (see `LÄSMIG.md` there); that folder drives `/galleri` and nothing else. `client/src/assets/images/workshop/` holds fixed exports of some of the same workshop photos for other pages (the Landing gallery teaser's `-card.webp` files, Om oss, Bärgning, Bilar till salu); renaming or removing a `/galleri` photo never affects them. **Car photos** are wired in `client/src/data/vehicles.ts`.
