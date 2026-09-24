@@ -201,25 +201,6 @@ export default function DackservicePage() {
           </div>
         </section>
 
-        {/* Legal Dates Bar */}
-        <section aria-labelledby="dackservice-dates-title">
-          <div className="bb-wrap bilservice__container">
-            <div className="bilservice__dates-banner">
-              <h3 className="bilservice__dates-title" id="dackservice-dates-title">
-                Viktiga datum &amp; lagkrav för vinterdäck
-              </h3>
-              <ul className="bilservice__dates-pills">
-                {winterDates.map(({ dates, desc }) => (
-                  <li key={dates}>
-                    <strong>{dates}</strong>
-                    <span>{desc}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
         {/* 6-Card Tire Service Grid */}
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="dackservice-services-title">
           <div className="bb-wrap bilservice__container">
@@ -276,6 +257,25 @@ export default function DackservicePage() {
                   </article>
                 )
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Legal Dates Bar */}
+        <section aria-labelledby="dackservice-dates-title">
+          <div className="bb-wrap bilservice__container">
+            <div className="bilservice__dates-banner">
+              <h3 className="bilservice__dates-title" id="dackservice-dates-title">
+                Viktiga datum &amp; lagkrav för vinterdäck
+              </h3>
+              <ul className="bilservice__dates-pills">
+                {winterDates.map(({ dates, desc }) => (
+                  <li key={dates}>
+                    <strong>{dates}</strong>
+                    <span>{desc}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
