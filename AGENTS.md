@@ -4,7 +4,7 @@ The one contract for every AI tool on this repo (Claude Code, Antigravity, Codex
 
 ## Stage
 
-Website for Brynäs Bilservice, a car workshop in Gävle. React 18 + Vite 4 + TypeScript in `client/`; Express + MySQL in `server/` (Johnny's). The rebuild is finished: design tokens, shared patterns, 7 unique pages and two page families are in place. **Current work is adding imagery page by page** — start with [`docs/IMAGES.md`](docs/IMAGES.md) and [`docs/STATUS.md`](docs/STATUS.md).
+Website for Brynäs Bilservice, a car workshop in Gävle. React 18 + Vite 4 + TypeScript in `client/`; Express + MySQL in `server/` (Johnny's). The rebuild and imagery are done: design tokens, shared patterns, 7 unique pages and two page families are in place. **Current work is final polish and launch fixes** — start with [`docs/STATUS.md`](docs/STATUS.md); image work follows [`docs/IMAGES.md`](docs/IMAGES.md).
 
 ## Which file wins
 
@@ -29,7 +29,7 @@ Read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) before any CSS task.
 ## Hard rules — ownership and git
 
 - **Don't touch without explicit instruction:** `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, `server/.env` (Johnny's), `server/package.json`. Root `*.disabled` files and the root `package-lock.json` are orphan leftovers; the real frontend is `client/`.
-- Never push without Magnus's go-ahead. Never `git add -A` (the checkout sits in an iCloud-synced folder; files have gone missing before) — stage files by name. One logical change per commit. Never bypass the pre-commit hook.
+- Never push without Magnus's go-ahead. Never `git add -A` (files have gone missing from an iCloud-synced checkout before) — stage files by name. One logical change per commit. Never bypass the pre-commit hook.
 - Don't copy text verbatim from competitor material or the commissioned copy file; write original Swedish.
 
 ## How Magnus works
@@ -41,22 +41,22 @@ Read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) before any CSS task.
 
 ## Roles
 
-- **Claude Code and Antigravity** implement, one bounded task at a time.
-- **Codex** reviews intermittently: read-only unless told otherwise. It checks changes against `CSS_OWNERSHIP.md`, `check:css`, `typecheck` and Playwright, and reports findings with file:line.
+- **Claude Code, Antigravity and Codex** implement or review, one bounded task at a time, as the task brief says.
+- A **review** is read-only unless the brief allows edits. It checks changes against `CSS_OWNERSHIP.md`, `check:css`, `typecheck` and Playwright, and reports findings with file:line.
 - **Magnus** decides design, copy and scope. **Johnny** owns the server, database and deploy.
 
 ## Commands and guards
 
 `npm --prefix client run dev | typecheck | check:css | build | test:browser` — dev server on :5173, API on :3000 (`cd server && npm run dev`). Building needs Node ≥ 18.17; never build on the production server. `vite build` does not typecheck — run `typecheck` too (0 errors). The stack is React 18 / Tailwind 3 / Vite 4: never generate React 19 or Tailwind v4 (`@theme`) code.
 
-The pre-commit hook (`.githooks/pre-commit`) blocks: growth of `AGENTS.md`; `CLAUDE.md`/`GEMINI.md` that stop routing here (must start with the import line, max 12 lines, no `##` sections); a failing `check:css` (unresolved `var(--bb-*)`, legacy tokens, inline `style=`); Tailwind utilities in public TSX. `tests/browser/hero.spec.ts` guards the header/hero clearance.
+The pre-commit hook (`.githooks/pre-commit`) blocks: growth of `AGENTS.md`; `CLAUDE.md`/`GEMINI.md` that stop routing here (must start with the import line, max 12 lines, no `##` sections); a `docs/STATUS.md` over 120 lines; a failing `check:css` (unresolved `var(--bb-*)`, legacy tokens, inline `style=`); Tailwind utilities in public TSX. Playwright guards the header/hero clearance (`hero.spec.ts`), router-safe links (`internal-links.spec.ts`) and business facts (`business-facts.spec.ts`).
 
 Verify every visible change in the browser at 1440, 768 and 390 px with zero horizontal overflow. Measurement scripts and traps: [`docs/audit-harness/README.md`](docs/audit-harness/README.md).
 
 ## End of a session
 
 1. Update the parts of [`docs/STATUS.md`](docs/STATUS.md) that changed (replace, don't append).
-2. Add one short dated entry at the top of [`docs/LOG.md`](docs/LOG.md).
+2. Add one short bullet to today's dated entry at the top of [`docs/LOG.md`](docs/LOG.md) (one entry per day; start it if you are first).
 3. If you changed a shared pattern, token or rule, update `DESIGN_SYSTEM.md` / `CSS_OWNERSHIP.md` in the same commit.
 
 ## Doc map
