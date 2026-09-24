@@ -16,6 +16,29 @@ test('landing page renders without horizontal overflow', async ({ page }, testIn
     })
   }
 
+  const reviewLayout = await page.evaluate(() => {
+    const rect = (selector: string) => {
+      const element = document.querySelector(selector)
+      if (!element) throw new Error(`Missing review element: ${selector}`)
+      const box = element.getBoundingClientRect()
+      return { left: box.left, right: box.right, top: box.top, bottom: box.bottom }
+    }
+    return {
+      count: rect('.bb-reviews-card__count'),
+      google: rect('.bb-reviews-card__google'),
+      review: rect('.bb-reviews-card__review'),
+      text: rect('.bb-reviews-card__text'),
+      card: rect('.bb-reviews-card--hero-overlay'),
+      hero: rect('.bb-hero'),
+    }
+  })
+  expect(reviewLayout.count.right).toBeLessThan(reviewLayout.google.left)
+  if (testInfo.project.name !== 'mobile-390') {
+    expect(reviewLayout.google.right).toBeLessThan(reviewLayout.review.left)
+  }
+  expect(reviewLayout.text.right).toBeLessThanOrEqual(reviewLayout.card.right)
+  expect(reviewLayout.card.bottom).toBeLessThan(reviewLayout.hero.bottom - 20)
+
   const contactSection = page.locator('.bb-contact-section, .landing-v2__contact-section').first()
   if (await contactSection.isVisible()) {
     await contactSection.screenshot({

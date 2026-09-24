@@ -22,7 +22,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   border: 1px solid rgba(36, 150, 160, 0.22);
-  border-radius: 24px;
+  border-radius: var(--bb-radius-card);
   background: var(--bb-color-page);
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
   color: var(--bb-color-text);
@@ -109,7 +109,7 @@
   width: 100%;
   min-height: 48px;
   border: 1px solid rgba(16, 22, 24, 0.2);
-  border-radius: 10px;
+  border-radius: var(--bb-radius-md);
   background: var(--bb-color-surface);
   color: var(--bb-color-text);
   font: inherit;
@@ -205,7 +205,7 @@
   min-height: 48px;
   flex: 0 0 auto;
   border: 1px solid var(--bb-color-teal-700);
-  border-radius: 999px;
+  border-radius: var(--bb-radius-control);
   background: var(--bb-color-teal-700);
   color: #ffffff;
   cursor: pointer;
@@ -270,7 +270,7 @@
   padding: 0.85rem 1rem;
   border: 1px solid #fda29b;
   border-left: 4px solid #d92d20;
-  border-radius: 10px;
+  border-radius: var(--bb-radius-md);
   background: #fef3f2;
   color: #7a271a;
   font-size: 0.92rem;
@@ -333,7 +333,7 @@
   margin: 0;
   padding: 0.9rem 1rem;
   border: 1px solid rgba(16, 22, 24, 0.12);
-  border-radius: 10px;
+  border-radius: var(--bb-radius-md);
 }
 
 .modal-success__summary dt {
@@ -361,7 +361,7 @@
 
   .modal-container {
     max-height: calc(100dvh - max(1.5rem, env(safe-area-inset-top)) - max(1.5rem, env(safe-area-inset-bottom)));
-    border-radius: 20px;
+    border-radius: var(--bb-radius-card);
   }
 
   .booking-form__schedule {

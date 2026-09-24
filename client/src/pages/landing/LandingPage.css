@@ -29,6 +29,13 @@
 .landing-v2 :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
 .landing-v2 h1, .landing-v2 h2, .landing-v2 h3, .landing-v2 p { margin-top: 0; }
 
+/* The landing review bar sits slightly above the trust row's baseline. */
+.landing-v2 .bb-reviews-card--hero-overlay { margin-bottom: 1rem; }
+
+@media (max-width: 1360px) {
+  .landing-v2 .bb-hero__bottom { grid-template-columns: 1fr; }
+}
+
 /* Hero shade: subtle ink scrim for text contrast + atmospheric teal */
 .landing-v2 .bb-hero__shade {
   background:

@@ -20,8 +20,8 @@ Located in [`client/src/styles/design-tokens.css`](../client/src/styles/design-t
 | `--bb-color-teal-800` | `#007a86` | Deep teal base, badge borders, hover accents |
 | `--bb-color-teal-700` | `#047784` | Dark teal buttons, active navigation state |
 | `--bb-color-teal-600` | `#0a9dac` | Primary brand teal, standard button fills, link hover |
-| `--bb-color-teal-500` | `#0ab2c1` | Vibrant cyan/teal accent, pill CTA highlights |
-| `--bb-color-teal-100` | `#def7f8` | Pale teal tint for tag pills, light badges |
+| `--bb-color-teal-500` | `#0ab2c1` | Vibrant cyan/teal accent for CTA highlights |
+| `--bb-color-teal-100` | `#def7f8` | Pale teal tint for tags and light badges |
 | `--bb-color-focus` | `#9ce8ed` | Accessible focus ring outline |
 | `--bb-color-amber-500`| `#f09505` | Canonical automotive amber: footer accents, signature, urgent alerts |
 | `--bb-color-amber-400`| `#fca311` | Light amber hover highlight |
@@ -53,26 +53,19 @@ Located in [`client/src/styles/design-tokens.css`](../client/src/styles/design-t
 |---|---|---|
 | `--bb-wrap-max` | `1320px` | Outer maximum wrapper for public navigation & footer |
 | `--bb-layout-max` | `1280px` | Standard page content container maximum width |
-| `--bb-radius-sm` | `8px` | Small tags, subtle card corners, icon badges |
-| `--bb-radius-md` | `14px` | Compact cards (service/image cards, glass panels) — smaller than `--bb-radius-card`, added 2026-09-18 when Landing's own service-card (13px) and why-section list panel (15px) were found to be two near-duplicate literals with no token |
-| `--bb-radius-card` | `20px` | Standard automotive card radius (cards, teaser panels) |
-| `--bb-radius-menu` | `24px` | Header dropdown menu & floating navigation panel radius |
-| `--bb-radius-control`| `999px` | Fully rounded pills (buttons, search bars, badges) |
+| `--bb-radius-sm` | `4px` | Small tags and subtle corners |
+| `--bb-radius-md` | `6px` | Compact cards, image panels and form fields |
+| `--bb-radius-card` | `8px` | Standard card and panel corner |
+| `--bb-radius-menu` | `8px` | Header dropdown and mobile navigation panel corner |
+| `--bb-radius-control`| `6px` | Buttons, navigation and other controls |
 | `--bb-shadow-floating` | `0 18px 44px rgba(0,0,0,0.34)` | Floating header & elevated dark card shadow |
 | `--bb-shadow-button` | `0 10px 20px rgba(0,166,180,0.26)` | `.bb-btn--teal`'s glow (added 2026-09-18) |
 | `--bb-shadow-card` | `0 10px 26px rgba(7,20,22,0.08)` | Resting card elevation (added 2026-09-18; used by `.bb-card--trust` and `ServiceGuideTemplate.css`) |
 | `--bb-transition-fast` | `150ms cubic-bezier(0.4, 0, 0.2, 1)` | Standard fast hover/focus transition |
 
-### Radius tokens: what's safe to tune vs. already live (checked 2026-09-18)
+### Radius tokens: site-wide decision (2026-09-24)
 
-`PublicHeader`/`PublicFooter` are shipped, live, shared components — not a document waiting for an implementation round. Before changing any `--bb-*` value to "fix" how something looks, check whether it's consumed there first; if it is, the change lands site-wide immediately, not just on whatever you're previewing against.
-
-Checked by grepping both files' `var(--bb-*)` usage directly (not assumed):
-
-- **Safe to tune against Landing alone** (not used by either file): `--bb-radius-card`, `--bb-radius-md`, `--bb-shadow-button`, `--bb-shadow-card`, `--bb-color-ink-900`, `--bb-color-page`, `--bb-color-teal-800`, `--bb-color-amber-400`, `--bb-color-amber-600`, `--bb-color-text`, `--bb-color-text-muted`, `--bb-color-text-inverse`, `--bb-color-ink-soft`, `--bb-font-display`, `--bb-font-size-body`, `--bb-font-size-control`, `--bb-line-height-body`.
-- **Not safe — live on `PublicHeader` and/or `PublicFooter` today**: `--bb-radius-control` (the pill shape — used by both: header's nav pill/booking button, footer's book button), `--bb-radius-sm` (footer), `--bb-radius-menu` (header dropdown), `--bb-color-focus`, `--bb-color-ink-950`, `--bb-color-ink-800`, `--bb-color-surface`, `--bb-color-teal-700/600/500/100`, `--bb-color-amber-500`, `--bb-font-body`, `--bb-font-size-label`/`-support`, `--bb-line-height-support`, `--bb-layout-max`, `--bb-wrap-max`, `--bb-shadow-floating`, `--bb-transition-fast`.
-
-Practical consequence for the open "too rounded" question: card roundness (`--bb-radius-card`/`-md`) can be previewed against Landing in isolation. Button *shape* (pill vs. rounded-rectangle) means `--bb-radius-control`, which is not isolated — changing it changes the header and footer immediately.
+Magnus chose slightly rounded, almost square corners across the public site. The radius tokens above are canonical and affect the header, footer, cards, buttons and page families. Larger local rectangular corners were aligned with these tokens. True circles (icons, avatars and tiny status dots) remain circular.
 
 ---
 
@@ -82,13 +75,13 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
 
 1. **`PublicHeader`** ([`client/src/components/layout/PublicHeader.tsx`](../client/src/components/layout/PublicHeader.tsx) + [`PublicHeader.css`](../client/src/components/layout/PublicHeader.css)):
    - Renders at document root via React Portal (`z-index: 100`) so it clears all hero and stacking contexts.
-   - Fixed floating layout with desktop navigation pill, Biltjänster dropdown (driven by [`publicNavigation.ts`](../client/src/data/publicNavigation.ts)), compact desktop navigation from 1001–1320px, and an accessible mobile slide-down panel at 1000px and below.
+   - Fixed floating layout with desktop navigation bar, Biltjänster dropdown (driven by [`publicNavigation.ts`](../client/src/data/publicNavigation.ts)), compact desktop navigation from 1001–1320px, and an accessible mobile slide-down panel at 1000px and below.
 2. **`PublicFooter`** ([`client/src/components/layout/PublicFooter.tsx`](../client/src/components/layout/PublicFooter.tsx) + [`PublicFooter.css`](../client/src/components/layout/PublicFooter.css)):
    - 4-column automotive footer matching Magnus's approved mockup (`media_1789659344071.png`).
    - Column 1: Centered brand logo (`66px`), white subheader `— DIN LOKALA BILVERKSTAD I BRYNÄS, GÄVLE`, 3 trust badges (*Tryggt och enkelt*, *Personlig service*, *Erfarna mekaniker*), centered amber script signature *"Vi håller din bil i rullning!"*.
    - Column 2: 9 Snabba länkar with right-pointing interactive chevrons (`›`).
    - Column 3: 4 dark-teal contact badge cards (Telefon, E-post, Besöksadress, Google Maps link).
-   - Column 4: Vertically centered amber clock with verified hours (Mån–Fre 08:00–17:00), cyan pill `BOKA TID →` button, and direct phone link `RING OSS: 070-553 33 95`.
+   - Column 4: Vertically centered amber clock with verified hours (Mån–Fre 08:00–17:00), cyan `BOKA TID →` button, and direct phone link `RING OSS: 070-553 33 95`.
    - Sub-footer: Dynamic copyright, workshop tagline, Facebook + Instagram links, legal notice.
    - Background: Atmospheric automotive wheel asset (`footer-wheel-bg.webp`, 116 KB) on deep `#061518` background.
 3. **`GalleryTeaserCard`** ([`client/src/components/ui/GalleryTeaserCard.tsx`](../client/src/components/ui/GalleryTeaserCard.tsx) + [`GalleryTeaserCard.css`](../client/src/components/ui/GalleryTeaserCard.css)):
@@ -99,7 +92,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
    - Encapsulates 8s cyclic rotation, 220ms cross-fade, cleans up interval on unmount, and respects `prefers-reduced-motion`.
    - Single accessible `<a>` tag with visible focus ring.
    - Dual variants:
-     - `variant="hero-overlay"`: Frosted-glass transparent bounding field (`background: rgba(3, 22, 26, 0.42); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; backdrop-filter: blur(8px)`) with locked author track width (`96px`/`88px`) and reserved min-heights (`84.6px` desktop/tablet, `158px` mobile) guaranteeing 0.0px layout shift (CLS = 0) during review cycling.
+     - `variant="hero-overlay"`: Frosted-glass transparent bounding field (`background: rgba(3, 22, 26, 0.42); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--bb-radius-card); backdrop-filter: blur(8px)`) with a 660px maximum width, separate 96px rating and 155px Google columns, a 110px reviewer-name track, and minimum heights of 100px on desktop/tablet and 172px on mobile. The landing page gives it 16px extra bottom space so it sits slightly higher in the hero. The columns and flexible text track prevent labels from overlapping as reviews rotate.
      - `variant="card"`: Elevated dark-ink card (`#0d1f22`) with border and floating shadow for standard page body or sidebar placement.
 5. **`ContactFormCard`** ([`client/src/components/ui/ContactFormCard.tsx`](../client/src/components/ui/ContactFormCard.tsx) + [`ContactFormCard.css`](../client/src/components/ui/ContactFormCard.css)):
    - Centralized Single Source of Truth for contact topics/subjects (`defaultContactSubjects = ['Bilservice & oljebyte', 'Reparation & felsökning', 'Däckservice & hjulinställning', 'AC-service', 'Bärgning & transport', 'Övrigt']`), direct phone/email/address details, and submission states.
@@ -112,7 +105,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
 [`client/src/styles/shared-elements.css`](../client/src/styles/shared-elements.css), imported once globally in `main.tsx` alongside `design-tokens.css`. Global classes, no page prefix — use these directly instead of writing a page-local equivalent. Extracted from `LandingPage.css`, re-synced 2026-09-18 against Landing's fully-finished, live-verified state (not just re-read from source — checked with `getComputedStyle()`). Used by every rebuilt page (7 unique pages + both families). Some islands still carry page-local variants of a pattern; prefer the shared class when touching them.
 
 - **`.bb-wrap`** — the `1320px` (`--bb-wrap-max`) content container, identical everywhere already.
-- **`.bb-btn` + three variants** — pill button, every state (hover, `:focus-visible`) defined once per variant:
+- **`.bb-btn` + three variants** — slightly rounded button, every state (hover, `:focus-visible`) defined once per variant:
   - **`.bb-btn--teal`** ("teal_button") — dark surfaces only. Transparent-to-teal horizontal gradient, white border; hover fills in to a solid two-tone gradient.
   - **`.bb-btn--ember`** ("ember_button") — dark surfaces only. Transparent-to-amber horizontal gradient (faint), amber border; hover intensifies the fill.
   - **`.bb-btn--ember-solid`** — light surfaces only (warm-white page, white card). Solid two-tone diagonal amber gradient, neutral drop shadow, slight inset bevel — a different treatment from `--ember`, not a lighter version of it, since there's no dark backdrop for a transparent gradient to blend into.
@@ -138,7 +131,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
 4. *Hero System*: Landing's hero geometry, dual scrim overlay, typography, and bottom anchor layout are the canonical standard for all full-bleed heroes on independent pages.
 Both Landing (`/`) and Bilservice (`/service-reparationer`) now actively consume these shared patterns and tokens, with redundant local rules pruned.
 
-**Open, deliberately paused (2026-09-18)**: Magnus flagged that cards and possibly buttons read "too rounded." Not yet resolved — see "Radius tokens: what's safe to tune vs. already live" below before touching any radius token.
+**Radius decision (2026-09-24):** Magnus chose slightly rounded, almost square corners for cards, menus and controls. See the radius token table above.
 
 ---
 
@@ -189,7 +182,7 @@ Every `--bb-*` unique page opens with a small reset block, including a line like
 
 This silently wins over `.page-prefix__btn--primary { font-weight: 700; font-size: ...; }` on any actual `<button>` element, because `.page-prefix button` (class + type selector) is *more specific* than a single class — even though the reset line comes first in the file. Source order only breaks ties between rules of *equal* specificity; it doesn't matter here. The bug is invisible unless you compare a `<button>`-based CTA against an `<a>`-based one styled with the exact same class, since anchors don't match the `button` selector and render correctly.
 
-**Found live** (2026-09-18) on Landing, Kontakt, and Biltjänster: every `<button>` "Boka tid"/submit button was rendering at the browser's inherited font-weight/size instead of the intended bold pill-button text, while `<a>`-based buttons (like the "Ring" call links) right next to them rendered correctly. Bilservice was unaffected only because its older stylesheet (written 2026-09-16, before this reset pattern existed) never had the conflicting line.
+**Found live** (2026-09-18) on Landing, Kontakt, and Biltjänster: every `<button>` "Boka tid"/submit button was rendering at the browser's inherited font-weight/size instead of the intended bold button text, while `<a>`-based buttons (like the "Ring" call links) right next to them rendered correctly. Bilservice was unaffected only because its older stylesheet (written 2026-09-16, before this reset pattern existed) never had the conflicting line.
 
 **The fix, and the rule going forward**: wrap the reset's element list in `:where()`, which contributes zero specificity so it can never outrank a real component class:
 

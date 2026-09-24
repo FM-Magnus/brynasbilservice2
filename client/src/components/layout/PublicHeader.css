@@ -75,7 +75,7 @@
 .public-header__services-menu {
   background: #0d1214;
   border: 1px solid rgba(126, 215, 221, 0.18);
-  border-radius: 22px;
+  border-radius: var(--bb-radius-menu);
   box-shadow: var(--bb-shadow-floating);
   display: grid;
   left: 50%;
@@ -91,7 +91,7 @@
 }
 
 .public-header__services-menu.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-.public-header .public-header__service-link { border-radius: 12px; color: var(--bb-color-surface); display: block; font-size: 1rem; font-weight: 700; padding: 0.7rem 0.85rem; text-transform: uppercase; }
+.public-header .public-header__service-link { border-radius: var(--bb-radius-md); color: var(--bb-color-surface); display: block; font-size: 1rem; font-weight: 700; padding: 0.7rem 0.85rem; text-transform: uppercase; }
 .public-header .public-header__service-link:hover, .public-header .public-header__service-link:focus-visible { background: var(--bb-color-ink-800); color: var(--bb-color-focus); outline: 0; }
 
 .public-header__booking, .public-header__mobile-booking, .public-header__mobile-call {
@@ -162,7 +162,7 @@
   .public-header__mobile-link {
     align-items: center;
     border: 1px solid transparent;
-    border-radius: 14px;
+    border-radius: var(--bb-radius-md);
     color: var(--bb-color-surface);
     display: flex;
     font-size: 1rem;

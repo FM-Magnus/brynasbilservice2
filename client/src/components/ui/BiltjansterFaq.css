@@ -37,7 +37,7 @@
 .bb-faq__item {
   background: var(--bb-color-surface);
   border: 1px solid rgba(18, 34, 37, 0.1); /* rgba of --bb-color-text */
-  border-radius: 18px;
+  border-radius: var(--bb-radius-card);
   transition: border-color var(--bb-transition-fast), box-shadow var(--bb-transition-fast);
 }
 .bb-faq__item.is-open {

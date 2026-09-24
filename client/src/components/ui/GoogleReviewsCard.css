@@ -4,8 +4,8 @@
   align-items: center;
   color: #ffffff;
   display: grid;
-  gap: 0.85rem;
-  grid-template-columns: auto auto minmax(200px, 1fr);
+  gap: 0.75rem;
+  grid-template-columns: 96px 155px minmax(0, 1fr);
   text-decoration: none;
   transition: opacity var(--bb-transition-fast, 150ms ease), transform var(--bb-transition-fast, 150ms ease);
 }
@@ -26,8 +26,8 @@
   box-sizing: border-box;
   justify-self: end;
   max-width: 660px;
-  min-height: 84px;
-  padding: 0.55rem 0.95rem;
+  min-height: 100px;
+  padding: 0.8rem 1rem;
   text-shadow: 0 2px 7px rgba(0, 0, 0, 0.78);
   width: 100%;
 }
@@ -61,8 +61,8 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  min-width: 68px;
-  width: 68px;
+  min-width: 96px;
+  width: 96px;
 }
 
 .bb-reviews-card__score {
@@ -94,8 +94,8 @@
   flex-direction: column;
   flex-shrink: 0;
   justify-content: center;
-  min-width: 120px;
-  width: 120px;
+  min-width: 155px;
+  width: 155px;
 }
 
 .bb-reviews-card__google-title {
@@ -121,8 +121,9 @@
   border-left: 1px solid rgba(255, 255, 255, 0.28);
   display: grid;
   gap: 0.65rem;
-  grid-template-columns: 32px 96px 1fr;
-  min-height: 56px;
+  grid-template-columns: 32px 110px minmax(0, 1fr);
+  min-height: 64px;
+  min-width: 0;
   padding-left: 0.85rem;
   transition: opacity 220ms ease;
 }
@@ -151,8 +152,8 @@
   flex-direction: column;
   flex-shrink: 0;
   gap: 2px;
-  min-width: 96px;
-  width: 96px;
+  min-width: 110px;
+  width: 110px;
 }
 
 .bb-reviews-card__author-name {
@@ -170,10 +171,11 @@
   align-items: center;
   display: flex;
   font-family: var(--bb-font-body, 'Manrope', Arial, sans-serif);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   line-height: 1.4;
   margin: 0;
   min-height: 52px;
+  min-width: 0;
 }
 
 /* Responsive */
@@ -196,15 +198,16 @@
   }
 
   .bb-reviews-card--hero-overlay {
-    min-height: 158px;
-    padding: 0.7rem 0.95rem;
+    min-height: 172px;
+    padding: 0.85rem 0.95rem;
   }
 
   .bb-reviews-card__rating {
-    align-items: baseline;
-    flex-direction: row;
-    gap: 0.4rem;
+    align-items: center;
+    display: grid;
+    gap: 0.1rem 0.4rem;
     grid-area: rating;
+    grid-template-columns: auto 1fr;
     min-width: 0;
     width: auto;
   }
@@ -216,6 +219,7 @@
 
   .bb-reviews-card__count {
     font-size: 0.7rem;
+    grid-column: 1 / -1;
   }
 
   .bb-reviews-card__google {
@@ -243,7 +247,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.18);
     gap: 0.55rem;
     grid-area: review;
-    grid-template-columns: 26px 88px 1fr;
+    grid-template-columns: 26px 100px minmax(0, 1fr);
     min-height: 68px;
     padding-left: 0;
     padding-top: 0.5rem;
@@ -258,8 +262,8 @@
   .bb-reviews-card__author {
     display: flex;
     gap: 1px;
-    min-width: 88px;
-    width: 88px;
+    min-width: 100px;
+    width: 100px;
   }
 
   .bb-reviews-card__author-name {

@@ -2,7 +2,7 @@
 
 .bb-gallery-card {
   background: #dce5e4;
-  border-radius: 21px;
+  border-radius: var(--bb-radius-card);
   display: block;
   min-height: 442px;
   overflow: hidden;
@@ -54,7 +54,7 @@
 .bb-gallery-card__cutout {
   align-items: center;
   background: var(--bb-color-page, #f8f7f3);
-  border-radius: 16px 0 0 0;
+  border-radius: var(--bb-radius-card) 0 0 0;
   bottom: 0;
   color: var(--bb-color-ink-950, #122225);
   display: flex;
@@ -73,7 +73,7 @@
 
 .bb-gallery-card__cutout::before {
   background: var(--bb-color-page, #f8f7f3);
-  border-radius: 0 0 15px 0;
+  border-radius: 0 0 var(--bb-radius-card) 0;
   content: '';
   height: 17px;
   position: absolute;

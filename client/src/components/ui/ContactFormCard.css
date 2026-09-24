@@ -124,7 +124,7 @@
 .bb-contact-form-card {
   background: linear-gradient(135deg, #099bab, #007987);
   border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 23px;
+  border-radius: var(--bb-radius-card);
   box-shadow: 0 17px 31px rgba(14, 49, 53, 0.15);
   box-sizing: border-box;
   color: #ffffff;
@@ -236,7 +236,7 @@
 .bb-contact-form__success {
   background: rgba(0, 45, 50, 0.22);
   border: 1px solid rgba(255, 255, 255, 0.36);
-  border-radius: 14px;
+  border-radius: var(--bb-radius-md);
   color: #ffffff;
   display: grid;
   gap: 0.5rem;
