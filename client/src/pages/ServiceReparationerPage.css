@@ -90,9 +90,7 @@
 .bilservice__image-frame--wide { aspect-ratio: 16 / 9; border-radius: var(--bb-radius-card); box-shadow: var(--bb-shadow-card); }
 .bilservice__image-frame--card { aspect-ratio: 4 / 3; }
 .bilservice__image-slot--radius-lg { border-radius: var(--bb-radius-card); }
-.bilservice__image-slot--radius-md { border-radius: var(--bb-radius-card); }
 .bilservice__image-slot--ar-16-9 { aspect-ratio: 16 / 9; }
-.bilservice__image-slot--ar-4-3 { aspect-ratio: 4 / 3; }
 
 /* ---------- Price / transparency ---------- */
 .bilservice__split {
@@ -741,7 +739,6 @@
   .bilservice__storage-grid { grid-template-columns: 1fr; }
   .bilservice__storage-footer { flex-direction: column; align-items: flex-start; }
 }
-
 
 /* Shared matched hero height (design-tokens.css). */
 .bilservice > #felsokning,

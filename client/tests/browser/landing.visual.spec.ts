@@ -9,7 +9,7 @@ test('landing page renders without horizontal overflow', async ({ page }, testIn
     path: testInfo.outputPath('landing-viewport-hero.png'),
   })
 
-  const heroBottom = page.locator('.landing-v2__hero-bottom')
+  const heroBottom = page.locator('.landing-v2 .bb-hero__bottom')
   if (await heroBottom.isVisible()) {
     await heroBottom.screenshot({
       path: testInfo.outputPath('landing-reviews.png'),

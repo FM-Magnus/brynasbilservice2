@@ -153,36 +153,6 @@
 .bb-lead--dark { color: rgba(255, 255, 255, 0.85); }
 
 /* ---------- Card motifs ---------- */
-/* Dark image card: photo + bottom gradient scrim + content overlaid at the
-   bottom. Caller supplies the <img> and content; this owns the shell. */
-.bb-card--photo {
-  background: var(--bb-color-ink-900);
-  border-radius: var(--bb-radius-md);
-  isolation: isolate;
-  overflow: hidden;
-  position: relative;
-}
-.bb-card--photo > img {
-  height: 100%;
-  inset: 0;
-  object-fit: cover;
-  position: absolute;
-  width: 100%;
-  z-index: -2;
-}
-.bb-card--photo::after {
-  background: linear-gradient(180deg, rgba(0, 20, 23, 0.05), rgba(0, 20, 23, 0.78) 68%);
-  content: '';
-  inset: 0;
-  position: absolute;
-  z-index: -1;
-}
-
-/* Bottom-right "go to" arrow inside a .bb-card--photo. Bare icon, no badge
-   background — ember, matching the site's "ember is the accent" call. */
-.bb-card-arrow { color: var(--bb-color-amber-500); display: flex; justify-content: flex-end; }
-.bb-card-arrow svg { height: 17px; width: 17px; }
-
 /* Translucent glass panel, for a list/detail block sitting on a dark photo
    band (Landing's "why" section reassurance list). */
 .bb-card--glass {
@@ -327,8 +297,7 @@
 .bb-process-grid > li:last-child::after {
   display: none;
 }
-.bb-process-grid > li > b,
-.bb-process-grid > li > .bb-process-grid__num {
+.bb-process-grid > li > b {
   color: var(--bb-color-text-inverse, #fff);
   display: block;
   font-family: var(--bb-font-body);

@@ -27,11 +27,6 @@
   max-width: 100%;
 }
 
-.omoss-page__wrap {
-  margin-inline: auto;
-  width: min(100% - clamp(2rem, 5vw, 6rem), var(--bb-wrap-max));
-}
-
 /* -------------------------------------------------------------
    1. HERO SECTION
    ------------------------------------------------------------- */
@@ -852,7 +847,6 @@
     animation: none !important;
   }
 }
-
 
 /* Shared matched hero height (design-tokens.css). */
 .omoss-page__hero { min-height: var(--bb-hero-matched-height); }

@@ -76,7 +76,6 @@
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
-.service-guide__title .title-accent,
 .service-guide__title .bb-accent { color: var(--bb-color-teal-500); }
 
 /* Hero-only: a smaller H1 and tighter gaps so the hero fits a laptop screen. Scoped,
@@ -113,24 +112,6 @@
   transition: transform var(--bb-transition-fast, 0.2s ease), background var(--bb-transition-fast, 0.2s ease), border-color var(--bb-transition-fast, 0.2s ease);
 }
 .service-guide__btn:hover { transform: translateY(-1px); }
-.service-guide__btn--primary {
-  background: linear-gradient(to right, transparent, #048a99);
-  border-color: rgba(255, 255, 255, 0.7);
-  box-shadow: var(--bb-shadow-button);
-  color: var(--bb-color-text-inverse, #ffffff);
-}
-.service-guide__btn--primary:hover {
-  background: linear-gradient(135deg, #12cbd8, #057784);
-}
-.service-guide__btn--outline {
-  background: linear-gradient(to right, transparent, rgba(240, 149, 5, 0.25));
-  border-color: var(--bb-color-amber-500);
-  color: var(--bb-color-text-inverse, #ffffff);
-}
-.service-guide__btn--outline:hover {
-  background: linear-gradient(to right, transparent, rgba(252, 163, 17, 0.45));
-  border-color: var(--bb-color-amber-400);
-}
 .service-guide__btn svg { width: 18px; height: 18px; }
 
 /* ---------- Hero ---------- */
@@ -187,29 +168,6 @@
   z-index: 2;
   max-width: 680px;
 }
-
-/* ---------- Generic placeholder for images not yet supplied ---------- */
-.service-guide__placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  height: 100%;
-  min-height: inherit;
-  padding: 1.5rem;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.7);
-  background:
-    radial-gradient(circle at 70% 20%, rgba(13, 148, 136, 0.15), transparent 42%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
-  border: 1px dashed rgba(13, 148, 136, 0.45);
-}
-.service-guide__placeholder svg { width: 32px; height: 32px; color: var(--bb-color-teal-500); }
-.service-guide__placeholder span { font-family: var(--bb-font-display); font-size: 0.95rem; font-weight: 800; }
-.service-guide__placeholder small { font-family: var(--bb-font-sans); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
-.service-guide__placeholder--light { color: var(--bb-color-text-muted); border-color: rgba(13, 148, 136, 0.3); background: rgba(13, 148, 136, 0.05); }
-.service-guide__placeholder--light small { color: var(--bb-color-text-muted); }
 
 /* ---------- "Vad är en koppling?" intro ---------- */
 .service-guide__intro-layout {
@@ -490,7 +448,6 @@
   font-weight: 800;
   line-height: 1.15;
 }
-.service-guide__process-text h2 .title-accent,
 .service-guide__process-text h2 .bb-accent { color: var(--bb-color-teal-500); }
 .service-guide__process-text > p { margin: 0 0 1.5rem; color: rgba(255, 255, 255, 0.68); font-family: var(--bb-font-sans); font-size: 0.95rem; font-weight: 400; line-height: 1.6; max-width: 40ch; }
 .service-guide__process-steps { display: flex; flex-direction: column; gap: 1.1rem; }
@@ -561,10 +518,6 @@
 .service-guide__prose-card h3 { margin: 0 0 0.6rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
 .service-guide__prose-card p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.94rem; font-weight: 400; line-height: 1.65; }
 .service-guide__prose-card p + p { margin-top: 0.85rem; }
-
-/* ---------- Topic block ---------- */
-.service-guide__topic-block { padding-block: clamp(2.5rem, 5vw, 3.75rem); }
-.service-guide__topic-block--alt { background: var(--bb-color-surface); }
 .service-guide__topic-header { margin-bottom: clamp(1.5rem, 3vw, 2rem); max-width: 68ch; }
 .service-guide__topic-header h2 { margin: 0 0 0.6rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; line-height: 1.2; }
 .service-guide__topic-header p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.96rem; font-weight: 400; line-height: 1.65; }
@@ -579,14 +532,8 @@
   border: 1px solid var(--bb-color-border-subtle-light);
   box-shadow: var(--bb-shadow-card);
 }
-.service-guide__topic-block--alt .service-guide__topic-card { background: var(--bb-color-page); }
 .service-guide__topic-card h3 { margin: 0 0 0.5rem; color: var(--bb-color-teal-700); font-family: var(--bb-font-display); font-size: 0.95rem; font-weight: 800; line-height: 1.3; }
 .service-guide__topic-card p { margin: 0; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.88rem; font-weight: 400; line-height: 1.55; }
-.service-guide__topic-prose { max-width: 72ch; }
-.service-guide__topic-prose--spaced { margin-top: 2rem; }
-.service-guide__topic-prose h3 { margin: 0 0 0.6rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 1.15rem; font-weight: 800; line-height: 1.3; }
-.service-guide__topic-prose p { margin: 0 0 0.9rem; color: var(--bb-color-text-muted); font-family: var(--bb-font-sans); font-size: 0.95rem; font-weight: 400; line-height: 1.65; }
-.service-guide__topic-prose p:last-child { margin-bottom: 0; }
 .service-guide__topic-note { max-width: 72ch; margin-top: 1rem; color: var(--bb-color-teal-800); font-family: var(--bb-font-sans); font-size: 0.9rem; font-weight: 700; line-height: 1.5; }
 @media (max-width: 1024px) {
   .service-guide__topic-grid--cols-3,

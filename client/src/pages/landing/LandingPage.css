@@ -44,7 +44,6 @@
     linear-gradient(0deg, rgba(7, 20, 22, 0.5) 0%, transparent 60%);
 }
 
-
 /* Photo-backed reassurance */
 .landing-v2__why-section, .landing-v2__process-section, .landing-v2__cars-section { color: #fff; isolation: isolate; overflow: hidden; position: relative; }
 .landing-v2__why-section { border-radius: var(--bb-radius-card); margin: 0 auto clamp(3rem, 5vw, 5rem); max-width: 1520px; min-height: 330px; }
@@ -104,10 +103,6 @@
 .landing-v2__cars-content > div { max-width: 560px; }
 .landing-v2__cars-content h2 .bb-accent { display: inline; }
 .landing-v2__cars-content p:not(.bb-eyebrow) { color: rgba(255, 255, 255, .8); font-size: var(--landing-type-support); line-height: var(--landing-leading-body); margin: .9rem 0 1.05rem; }
-
-@media (max-width: 1120px) {
-  .landing-v2__hero-bottom { grid-template-columns: 1fr; }
-}
 
 @media (max-width: 900px) {
   .landing-v2__why-content, .landing-v2__process-content { grid-template-columns: 1fr; }

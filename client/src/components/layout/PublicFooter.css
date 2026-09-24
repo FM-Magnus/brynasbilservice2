@@ -489,6 +489,8 @@ a.bb-footer__contact-val:hover {
   color: var(--bb-color-teal-500, #0ab2c1);
 }
 
+/* Separator for the Integritetspolicy / Cookies links, removed 2026-09-24 until a
+   real privacy page exists. Kept so the links can return unchanged. */
 .bb-footer__dot {
   color: rgba(255, 255, 255, 0.3);
 }
