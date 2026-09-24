@@ -741,3 +741,20 @@
   .bilservice__storage-grid { grid-template-columns: 1fr; }
   .bilservice__storage-footer { flex-direction: column; align-items: flex-start; }
 }
+
+
+/* Give only the Felsökning hero photo a subtle ember warmth. */
+.bilservice > #felsokning .bb-hero__shade {
+  background:
+    linear-gradient(105deg, rgba(240, 149, 5, 0.08) 0%, rgba(240, 149, 5, 0.04) 48%, rgba(240, 149, 5, 0.015) 100%),
+    linear-gradient(90deg, rgba(2, 17, 20, 0.96) 0%, rgba(2, 18, 21, 0.89) 27%, rgba(2, 19, 22, 0.48) 57%, rgba(2, 14, 16, 0.25) 100%),
+    linear-gradient(0deg, rgba(0, 19, 22, 0.63) 0%, transparent 42%);
+}
+@media (max-width: 650px) {
+  .bilservice > #felsokning .bb-hero__shade {
+    background:
+      linear-gradient(105deg, rgba(240, 149, 5, 0.08) 0%, rgba(240, 149, 5, 0.035) 58%, rgba(240, 149, 5, 0.015) 100%),
+      linear-gradient(90deg, rgba(2, 15, 18, 0.95), rgba(2, 16, 19, 0.72)),
+      linear-gradient(0deg, rgba(0, 18, 21, 0.83), transparent 58%);
+  }
+}
