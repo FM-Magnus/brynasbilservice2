@@ -17,12 +17,12 @@ import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { MonitorIcon } from '../components/icons/MonitorIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import heroJpg from '../assets/images/services/diagnostics/vehicle-diagnostics-laptop.jpg'
-import heroWebp from '../assets/images/services/diagnostics/vehicle-diagnostics-laptop.webp'
-import introJpg from '../assets/images/services/diagnostics/diagnostics-mechanic-laptop-workshop.jpg'
-import introWebp from '../assets/images/services/diagnostics/diagnostics-mechanic-laptop-workshop.webp'
-import serviceJpg from '../assets/images/services/diagnostics/diagnostics-obd-connector-closeup.jpg'
-import serviceWebp from '../assets/images/services/diagnostics/diagnostics-obd-connector-closeup.webp'
+import heroJpg from '../assets/images/services/diagnostics/diagnostics-workshop-hero.jpg'
+import heroWebp from '../assets/images/services/diagnostics/diagnostics-workshop-hero.webp'
+import introJpg from '../assets/images/services/diagnostics/diagnostics-engine-bay-tablet.jpg'
+import introWebp from '../assets/images/services/diagnostics/diagnostics-engine-bay-tablet.webp'
+import serviceJpg from '../assets/images/services/diagnostics/diagnostics-obd-connection-detail.jpg'
+import serviceWebp from '../assets/images/services/diagnostics/diagnostics-obd-connection-detail.webp'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 
@@ -119,7 +119,7 @@ export default function FelsokningPage() {
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="diagnostics-hero">
               <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="Diagnostikverktyg som visar lagrade felkoder i en bils styrsystem" />
+              <img src={heroJpg} alt="" />
             </picture>
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
@@ -187,7 +187,7 @@ export default function FelsokningPage() {
               <div className="bilservice__split-media--right">
                 <picture data-image-slot="diagnostics-intro" className="bilservice__image-slot--radius-lg bilservice__image-slot--ar-16-9">
                   <source srcSet={introWebp} type="image/webp" />
-                  <img src={introJpg} alt="Mekaniker analyserar diagnosdata på en bärbar dator i verkstaden" loading="lazy" />
+                  <img src={introJpg} alt="Mekaniker ansluter ett diagnosverktyg och kontrollerar motorrummets elsystem" loading="lazy" />
                 </picture>
               </div>
             </div>
@@ -265,7 +265,7 @@ export default function FelsokningPage() {
               <div className="bilservice__service-media">
                 <picture data-image-slot="diagnostics-service">
                   <source srcSet={serviceWebp} type="image/webp" />
-                  <img src={serviceJpg} alt="OBD-läsare ansluts i bilens diagnostikuttag" loading="lazy" />
+                  <img src={serviceJpg} alt="Diagnosverktyg anslutet till bilens OBD-uttag under instrumentpanelen" loading="lazy" />
                 </picture>
               </div>
               <div className="bilservice__service-content">
