@@ -82,7 +82,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
 
 1. **`PublicHeader`** ([`client/src/components/layout/PublicHeader.tsx`](../client/src/components/layout/PublicHeader.tsx) + [`PublicHeader.css`](../client/src/components/layout/PublicHeader.css)):
    - Renders at document root via React Portal (`z-index: 100`) so it clears all hero and stacking contexts.
-   - Fixed floating layout with desktop navigation pill, Biltjänster dropdown (driven by [`publicNavigation.ts`](../client/src/data/publicNavigation.ts)), compact breakpoint switch at 1320px, and accessible mobile slide-down panel.
+   - Fixed floating layout with desktop navigation pill, Biltjänster dropdown (driven by [`publicNavigation.ts`](../client/src/data/publicNavigation.ts)), compact desktop navigation from 1001–1320px, and an accessible mobile slide-down panel at 1000px and below.
 2. **`PublicFooter`** ([`client/src/components/layout/PublicFooter.tsx`](../client/src/components/layout/PublicFooter.tsx) + [`PublicFooter.css`](../client/src/components/layout/PublicFooter.css)):
    - 4-column automotive footer matching Magnus's approved mockup (`media_1789659344071.png`).
    - Column 1: Centered brand logo (`66px`), white subheader `— DIN LOKALA BILVERKSTAD I BRYNÄS, GÄVLE`, 3 trust badges (*Tryggt och enkelt*, *Personlig service*, *Erfarna mekaniker*), centered amber script signature *"Vi håller din bil i rullning!"*.

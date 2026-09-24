@@ -120,6 +120,14 @@
 .public-header__menu-toggle, .public-header__mobile-panel { display: none; }
 
 @media (max-width: 1320px) {
+  .public-header { padding: 0.75rem 1rem; }
+  .public-header__inner { grid-template-columns: 130px minmax(0, 1fr) auto; }
+  .public-header__brand { max-width: 130px; }
+  .public-header .public-header__nav-link { font-size: 0.875rem; padding: 0.4rem 0.25rem; }
+  .public-header__booking { padding-inline: 1rem; }
+}
+
+@media (max-width: 1000px) {
   .public-header { padding: 1rem; }
   .public-header__inner { grid-template-columns: minmax(128px, 150px) 1fr auto; }
   .public-header__brand { max-width: 150px; }
