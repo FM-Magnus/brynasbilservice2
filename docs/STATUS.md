@@ -17,9 +17,14 @@
 - **CSS and types:** every dark-surface eyebrow is white with an amber dash (guides and Biltjänster included), every H1 is mixed case, no unused selectors remain (except `.bb-footer__dot`, kept for the legal links), pages no longer re-import the global stylesheets, and TypeScript runs with `strict`.
 - **Performance (lab, 2026-09-24, phone on slow 4G with 4× CPU, production build):** FCP about 2.3 s everywhere; guide LCP 3.5–3.9 s, set by the hero image arriving (47–81 KB WebP). The hero request starts about 2.2–2.3 s in whether or not the image has `loading="lazy"` (7 of 10 guides do): the page is rendered by JavaScript, so the image can't be requested before its code runs. Removing `lazy` would not help. CLS is 0 to 0.016 except Hjullagerbyte (see Next up).
 - **Repo:** the app is `client/` (no root package); `_magnus/` is local only (git-ignored). Branch `redesign/blue-teal-v1`, remote `origin` = `FM-Magnus/brynasbilservice2`. Local commits ahead of `origin` are normal; push only on Magnus's go-ahead. Run `git status -sb` rather than trusting this line.
-- **Checks (2026-09-24):** `check:css` clean (1 pending token: `--bb-font-sans`), typecheck (`strict`) and production build pass. Playwright: 200 passed, 10 skipped at 1440/768/390. `booking-form.spec.ts` is intermittently flaky (about 3 failures in 105 runs, one different test each time, predating today's changes); a separate session is fixing it.
+- **Checks (2026-09-24):** `check:css` clean (1 pending token: `--bb-font-sans`), typecheck (`strict`) and production build pass. Playwright: 200 passed, 10 skipped at 1440/768/390. `booking-form.spec.ts` is intermittently flaky (about 3 failures in 105 runs, one different test each time, predating today's changes).
 
 ## Next up — optimization plan (in this order unless Magnus says otherwise)
+
+**Before anything else (open from 2026-09-24):**
+- **Re-run the full suite.** The last full run (200 passed) was before `703c2cde` and `ebfdf9b8`. Those two are verified by other means: the built CSS is byte-identical, and typecheck passes with `strict`. The final run couldn't happen because the long-running dev server on :5173 broke ("Invalid hook call": two copies of React after Vite re-bundled its dependencies). Restart it with `npm --prefix client run dev -- --force`, then run `npm --prefix client run test:browser`.
+- **Merge the booking-form flake fix.** A separate Claude session in worktree `.claude/worktrees/hopeful-ramanujan-df378a` (branch `claude/hopeful-ramanujan-df378a`, based on `b165217c`) has an uncommitted fix: `openClockOnFocus={false}` on the TimePicker in `BookingFormModalImpl.tsx`. It is not committed or merged yet. Take only that change into this branch, not its STATUS/LOG edits, and confirm with `--repeat-each=10` on `booking-form.spec.ts`.
+- The three audits of 2026-09-24 (docs, structure, code) were reported in chat only. Their findings are in today's [`LOG.md`](LOG.md) entry and have been worked into this file.
 
 Phases 1–6 are done (production fixes, facts and data, documentation, assets and repo hygiene, performance baseline, CSS consistency). Remaining:
 
