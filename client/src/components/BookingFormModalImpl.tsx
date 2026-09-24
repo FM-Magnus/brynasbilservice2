@@ -30,6 +30,7 @@ const submissionErrorMessages: Record<SubmissionErrorKind, string> = {
 
 const BookingFormModalImpl: React.FC<BookingFormModalProps> = ({ isOpen, onClose, initialComment = '' }) => {
   const [services, setServices] = useState<Array<{ id: string | number; name: string }>>([]);
+  const [servicesState, setServicesState] = useState<'loading' | 'ready' | 'failed'>('loading');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedService, setSelectedService] = useState('');
@@ -56,8 +57,14 @@ const BookingFormModalImpl: React.FC<BookingFormModalProps> = ({ isOpen, onClose
   useEffect(() => {
     if (isOpen) {
       axios.get('/api/services')
-        .then(response => setServices(response.data))
-        .catch(error => console.error('Error fetching services:', error));
+        .then(response => {
+          setServices(response.data);
+          setServicesState('ready');
+        })
+        .catch(error => {
+          console.error('Error fetching services:', error);
+          setServicesState('failed');
+        });
     }
   }, [isOpen]);
 
@@ -261,6 +268,16 @@ const BookingFormModalImpl: React.FC<BookingFormModalProps> = ({ isOpen, onClose
                   <option key={service.id} value={service.id}>{service.name}</option>
                 ))}
               </select>
+              {/* Without services the required select can never be filled, so the
+                  form cannot be sent; say so instead of leaving an empty list. */}
+              {(servicesState === 'failed' || (servicesState === 'ready' && services.length === 0)) && (
+                <div className="modal-error" role="alert">
+                  <p className="modal-error__title">Tjänsterna kunde inte hämtas just nu.</p>
+                  <p>
+                    Ring oss på <a href={BUSINESS.phone.href}>{BUSINESS.phone.display}</a> så bokar vi tiden åt dig.
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="booking-form__field">
