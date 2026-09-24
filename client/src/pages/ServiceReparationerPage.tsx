@@ -7,6 +7,7 @@
 // tokens; consumes --bb-* tokens only.
 // Service photography uses WebP with JPG fallbacks in the measured image slots.
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
@@ -203,7 +204,7 @@ export default function ServiceReparationerPage() {
             <div className="bilservice__bridge">
               <h2 className="bb-h2" id="bilservice-more-title">Mer än bara service</h2>
               <p className="bb-lead">
-                Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – <a href="/ac-service">AC-service</a>, <a href="/biltjanster#felsokning-diagnostik">diagnostik när en varningslampa lyser</a>, och <a href="/dackservice">däckhotell</a> om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med <a href="/bilar-till-salu">försäljning av begagnade bilar</a> och <a href="/bargning">transport av fordon</a>.
+                Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – <Link to="/ac-service">AC-service</Link>, <Link to="/felsokning">diagnostik när en varningslampa lyser</Link>, och <Link to="/dackservice">däckhotell</Link> om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med <Link to="/bilar-till-salu">försäljning av begagnade bilar</Link> och <Link to="/bargning">transport av fordon</Link>.
               </p>
             </div>
           </div>
@@ -238,7 +239,7 @@ export default function ServiceReparationerPage() {
                 <p className="bb-eyebrow bb-eyebrow--dark">Kvalitetskontrollerade fordon</p>
                 <h3 id="bilservice-cars-title">Letar du efter en begagnad bil?</h3>
               </div>
-              <a href="/bilar-till-salu" className="bb-btn bb-btn--teal"><span>Se bilar till salu</span><ArrowRightIcon aria-hidden="true" /></a>
+              <Link to="/bilar-till-salu" className="bb-btn bb-btn--teal"><span>Se bilar till salu</span><ArrowRightIcon aria-hidden="true" /></Link>
             </div>
           </div>
         </section>

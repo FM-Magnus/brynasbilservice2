@@ -5,6 +5,7 @@
 // for the deep-dive viscosity/standards/oil-type/ageing/misconception
 // material, since nothing in Koppling or Avgassystem needed that shape.
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
@@ -182,7 +183,7 @@ export default function OljebytePage() {
                   <strong className="bb-tip__title">Osäker på vilken olja din bil behöver?</strong>
                   <span className="bb-tip__text">Vi läser av tillverkarens specifikation och väljer rätt viskositet och ACEA-klass åt dig.</span>
                 </div>
-                <a href="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
+                <Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>
               </div>
             </div>
           </div>

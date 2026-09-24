@@ -2,6 +2,7 @@
 // /koppling — this is the second page proving the template is reusable, not
 // a second design. No dependency on any page-specific rule in index.css.
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { BUSINESS } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
@@ -193,7 +194,7 @@ export default function AvgassystemPage() {
                   <strong className="bb-tip__title">Osäker på vad som gäller för din bil?</strong>
                   <span className="bb-tip__text">Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar.</span>
                 </div>
-                <a href="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></a>
+                <Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>
               </div>
             </div>
           </div>
