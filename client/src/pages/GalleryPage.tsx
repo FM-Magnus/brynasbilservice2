@@ -292,7 +292,7 @@ export default function GalleryPage() {
 
             {load.status === 'ready' && total === 0 && (
               <div className="galleri-page__notice" role="status">
-                <p>Här kommer snart bilder från verkstaden. Välkommen förbi Utmarksvägen 21B så visar vi gärna runt.</p>
+                <p>Här kommer snart bilder från verkstaden. Välkommen förbi {BUSINESS.address.street} så visar vi gärna runt.</p>
               </div>
             )}
 

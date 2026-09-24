@@ -91,7 +91,7 @@ const infoCards: readonly InfoCardItem[] = [
 ]
 
 const processSteps = [
-  ['01', 'Bokning och inlämning', `Boka tid smidigt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.`],
+  ['01', 'Bokning och inlämning', `Boka tid smidigt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på ${BUSINESS.address.street} i ${BUSINESS.address.district}.`],
   ['02', 'Lyft & damaskkontroll', 'Vi hissar upp bilen och inspekterar alla fyra damasker efter sprickor och fettläckage samt känner mekaniskt efter glapp.'],
   ['03', 'Fastställande av åtgärd', 'Vi bedömer om det räcker med ett damaskbyte, byte av yttre drivknut eller om hela drivaxeln behöver bytas ut.'],
   ['04', 'Demontering & montering', 'Komponenterna demonteras fackmannamässigt och ersätts med nya kvalitetsdelar, specialfett och nya låsklämmor.'],

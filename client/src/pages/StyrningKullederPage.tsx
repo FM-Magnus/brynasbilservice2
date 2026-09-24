@@ -91,7 +91,7 @@ const infoCards: readonly InfoCardItem[] = [
 ]
 
 const processSteps = [
-  ['01', 'Bokning och inlämning', `Boka enkelt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.`],
+  ['01', 'Bokning och inlämning', `Boka enkelt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på ${BUSINESS.address.street} i ${BUSINESS.address.district}.`],
   ['02', 'Framvagnslyft & glapptest', 'Vi hissar upp bilen och känner mekaniskt efter minsta spel och glapp i alla leder, stag, bussningar och kuggstång.'],
   ['03', 'Servodiagnostik vid behov', 'Vi mäter hydrauliskt servotryck och oljekvalitet eller kopplar upp diagnosverktyg för att läsa av EPS-sensorer.'],
   ['04', 'Fackmannamässigt ledbyte', 'Slitna komponenter demonteras och ersätts med nya kvalitetsdelar och nya låsmuttrar med exakt åtdragningsmoment.'],

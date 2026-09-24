@@ -221,11 +221,11 @@ export default function AboutPage() {
                     <div className="omoss-page__facts-list">
                       <div className="omoss-page__fact-row">
                         <span className="omoss-page__fact-label">Juridiskt namn:</span>
-                        <span className="omoss-page__fact-val">Brynäs Bilservice AB</span>
+                        <span className="omoss-page__fact-val">{BUSINESS.legalName}</span>
                       </div>
                       <div className="omoss-page__fact-row">
                         <span className="omoss-page__fact-label">Organisationsnr:</span>
-                        <span className="omoss-page__fact-val">559343-9307</span>
+                        <span className="omoss-page__fact-val">{BUSINESS.orgNumber}</span>
                       </div>
                       <div className="omoss-page__fact-row">
                         <span className="omoss-page__fact-label">Verksamhetsstart:</span>

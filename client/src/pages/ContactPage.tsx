@@ -109,7 +109,7 @@ export default function ContactPage() {
                     <span className="kontakt-page__detail-icon" aria-hidden="true"><MapPinIcon /></span>
                     <span className="kontakt-page__detail-content">
                       <span className="kontakt-page__detail-label">Verkstadsadress</span>
-                      <span className="kontakt-page__detail-val">Utmarksvägen 21B<br />802 91 Gävle</span>
+                      <span className="kontakt-page__detail-val">{BUSINESS.address.street}<br />{BUSINESS.address.postalCode} {BUSINESS.address.city}</span>
                       <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="kontakt-page__map-link">
                         Öppna i Google Maps →
                       </a>
@@ -120,7 +120,7 @@ export default function ContactPage() {
                     <span className="kontakt-page__detail-content">
                       <span className="kontakt-page__detail-label">Facebook</span>
                       <a href="https://www.facebook.com/p/Brynäs-Bilservice-AB-100076623266130/" target="_blank" rel="noopener noreferrer" className="kontakt-page__detail-link">
-                        Brynäs Bilservice AB på Facebook →
+                        {BUSINESS.legalName} på Facebook →
                       </a>
                     </span>
                   </li>
@@ -247,7 +247,7 @@ export default function ContactPage() {
           <div className="bb-wrap kontakt-page__find-grid">
             <div className="kontakt-page__map-card">
               <iframe
-                title="Karta till Brynäs Bilservice, Utmarksvägen 21B, Gävle"
+                title={`Karta till ${BUSINESS.name}, ${BUSINESS.address.street}, ${BUSINESS.address.city}`}
                 src={GOOGLE_MAPS_EMBED_URL}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

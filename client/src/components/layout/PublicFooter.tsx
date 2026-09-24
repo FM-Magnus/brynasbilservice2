@@ -136,7 +136,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
                 <div className="bb-footer__contact-info">
                   <span className="bb-footer__contact-label">Besöksadress</span>
                   <span className="bb-footer__contact-val">
-                    Utmarksvägen 21B<br />802 91 Gävle
+                    {BUSINESS.address.street}<br />{BUSINESS.address.postalCode} {BUSINESS.address.city}
                   </span>
                 </div>
               </div>
@@ -217,7 +217,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
         {/* Sub-footer bottom bar */}
         <div className="bb-footer__bottom">
           <div className="bb-footer__bottom-left">
-            <p>© {currentYear} Brynäs Bilservice AB - Org.nr 559343-5307 - Gävle</p>
+            <p>© {currentYear} {BUSINESS.legalName} - Org.nr {BUSINESS.orgNumber} - {BUSINESS.address.city}</p>
             <p className="bb-footer__bottom-sub">Din lokala bilverkstad. För en tryggare vardag på vägen.</p>
           </div>
 
