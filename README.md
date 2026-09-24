@@ -30,7 +30,7 @@ client/                   Frontend (React + Vite)
 server/                   Express API — Johnny's (index.js, database/schema.sql)
 docs/                     Status, image workflow, CSS rules, design system, backend, ops
 _incoming-assets/         Git-ignored inbox for raw images
-_magnus/                  Magnus's personal notes
+_magnus/                  Magnus's personal notes (local only, git-ignored)
 ```
 
 ## Running it locally

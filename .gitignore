@@ -36,6 +36,9 @@ client/blob-report/
 test-results/
 docs/audit-harness/test-results/
 
+# Magnus's personal notes and screenshots stay local (untracked 2026-09-24)
+_magnus/
+
 # Claude local settings (personal overrides, not team-wide)
 .claude/settings.local.json
 .playwright-mcp/
