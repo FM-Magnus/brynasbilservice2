@@ -67,7 +67,7 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Biltjänster | CSS-only | ✓ all 11 guide cards have photos | — |
 | Bilar till salu | ✓ | conditional placeholders when a car lacks photos | — |
 | Landing | ✓ `home/landing-v2/landing-cockpit-steering-hero` | ✓ why (`landing-why-reassurance-handshake-v2`), process (`landing-customer-interaction-background`), car for sale; the service area is vector icons, no photo | — |
-| Om oss | ✓ | ✓ workshop and tyre photos; one pair still imported from `images/archive/gallery-legacy/` (move it before any archive clean-up) | — |
+| Om oss | ✓ | ✓ workshop and tyre photos (`about/`, `gallery/workshop/`, `services/tires/`) | — |
 | Däckservice | ✓ `services/tires/tires-hero-bg` | ✓ six tyre cards (colour grade in page CSS, files unchanged), storage | — |
 | AC-service | ✓ `services/ac/ac-hero-bg` | ✓ `ac-manometers-on-engine` (JPG only, no WebP) | — |
 | Bärgning | ✓ | ✓ tow truck, workshop, car for sale | — |
