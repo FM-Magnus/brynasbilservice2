@@ -25,8 +25,10 @@
   -webkit-backdrop-filter: blur(8px);
   box-sizing: border-box;
   justify-self: end;
+  height: 100px;
   max-width: 660px;
   min-height: 100px;
+  overflow: hidden;
   padding: 0.8rem 1rem;
   text-shadow: 0 2px 7px rgba(0, 0, 0, 0.78);
   width: 100%;
@@ -168,14 +170,18 @@
 }
 
 .bb-reviews-card__text {
-  align-items: center;
-  display: flex;
+  display: -webkit-box;
   font-family: var(--bb-font-body, 'Manrope', Arial, sans-serif);
   font-size: 0.84rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   line-height: 1.4;
   margin: 0;
-  min-height: 52px;
+  max-height: calc(3 * 1.4em);
+  min-height: 0;
   min-width: 0;
+  overflow: hidden;
 }
 
 /* Responsive */
@@ -197,10 +203,6 @@
     width: 100%;
   }
 
-  .bb-reviews-card--hero-overlay {
-    min-height: 172px;
-    padding: 0.85rem 0.95rem;
-  }
 
   .bb-reviews-card__rating {
     align-items: center;
@@ -271,11 +273,68 @@
   }
 
   .bb-reviews-card__text {
-    align-items: center;
-    display: flex;
+    display: -webkit-box;
     font-size: 0.75rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     line-height: 1.35;
-    min-height: 68px;
+    max-height: calc(3 * 1.35em);
+    min-height: 0;
+  }
+
+  /* Compact hero card for phones (2026-09-24): the rating row and one line of
+     the rotating quote, so the shared phone hero stays short. Every line is
+     single-line (nowrap or clamped), so rotating reviews cannot change its
+     height. The .bb-reviews-card--hero-overlay prefix out-ranks the phone
+     rules above. */
+  .bb-reviews-card--hero-overlay {
+    grid-template-areas:
+      "rating google"
+      "review review";
+    height: auto;
+    min-height: 0;
+    padding: 0.6rem 0.85rem;
+    row-gap: 0.45rem;
+  }
+
+  .bb-reviews-card--hero-overlay .bb-reviews-card__rating {
+    column-gap: 0.45rem;
+    grid-template-columns: auto auto;
+  }
+
+  .bb-reviews-card--hero-overlay .bb-reviews-card__google-sub {
+    white-space: nowrap;
+  }
+
+  .bb-reviews-card--hero-overlay .bb-reviews-card__review {
+    align-items: baseline;
+    display: flex;
+    gap: 0.4rem;
+    min-height: 0;
+    padding-top: 0.4rem;
+  }
+
+  .bb-reviews-card--hero-overlay .bb-reviews-card__avatar,
+  .bb-reviews-card--hero-overlay .bb-reviews-card__author .bb-reviews-card__stars {
+    display: none;
+  }
+
+  .bb-reviews-card--hero-overlay .bb-reviews-card__author {
+    flex: none;
+    min-width: 0;
+    width: auto;
+  }
+
+  .bb-reviews-card--hero-overlay .bb-reviews-card__author-name::after {
+    content: ':';
+  }
+
+  .bb-reviews-card--hero-overlay .bb-reviews-card__text {
+    flex: 1;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    max-height: 1.35em;
   }
 }
 
