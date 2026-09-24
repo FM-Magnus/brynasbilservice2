@@ -11,21 +11,44 @@ import { MapPinIcon } from '../../components/icons/MapPinIcon'
 import { MonitorIcon } from '../../components/icons/MonitorIcon'
 import { PhoneIcon } from '../../components/icons/PhoneIcon'
 import { WrenchIcon } from '../../components/icons/WrenchIcon'
+import { GaugeIcon } from '../../components/icons/GaugeIcon'
+import { WavesIcon } from '../../components/icons/WavesIcon'
 import heroWebp from '../../assets/images/home/landing-v2/landing-cockpit-steering-hero.webp'
 import heroJpg from '../../assets/images/home/landing-v2/landing-cockpit-steering-hero.jpg'
 import { GalleryTeaserCard } from '../../components/ui/GalleryTeaserCard'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
-import mechanicDiagnostic from '../../assets/images/services/diagnostics/diagnostics-mechanic-laptop-workshop.webp'
-import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake.webp'
-import wrenchWorkbench from '../../assets/images/services/general/wrench-and-bolt-workbench.webp'
-import tireStorage from '../../assets/images/services/tires/tire-storage-rack.webp'
-import acManometers from '../../assets/images/services/ac/ac-manometers-on-engine.jpg'
+import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake-v2.webp'
+import customerInteractionWebp from '../../assets/images/home/landing-v2/landing-customer-interaction-background.webp'
+import customerInteractionJpg from '../../assets/images/home/landing-v2/landing-customer-interaction-background.jpg'
 import vehicleForSale from '../../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
 import { BUSINESS } from '../../data/business'
 import './LandingPage.css'
 
 type IconName = 'chat' | 'shield' | 'clock' | 'car'
+
+function TireIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="3.3" />
+      <path d="M12 3v5.7m0 6.6V21M3 12h5.7m6.6 0H21M5.64 5.64l4.03 4.03m4.66 4.66 4.03 4.03m0-12.72-4.03 4.03m-4.66 4.66-4.03 4.03" />
+    </svg>
+  )
+}
+
+function EngineIcon() {
+  return (
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M9 18h7l3-5h12l3 5h5v18H9z" />
+      <path d="M16 18v-5m14 5v-5M9 24H5v9h4m30-9h4v9h-4M14 36v4m21-4v4" />
+      <path d="M17 23h14v8H17zM20 23v-3m8 3v-3" />
+      <path d="M19 15h13" />
+      <circle cx="20" cy="27" r="1" />
+      <circle cx="28" cy="27" r="1" />
+    </svg>
+  )
+}
 
 function Icon({ name, className = '' }: { name: IconName; className?: string }) {
   const common = { className, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true }
@@ -39,10 +62,11 @@ function Icon({ name, className = '' }: { name: IconName; className?: string }) 
 }
 
 const services = [
-  { title: 'Bilservice och reparationer', desc: 'Underhåll, oljebyte, bromsar, kamrem och mekaniska reparationer.', to: '/service-reparationer#bilservice', image: wrenchWorkbench },
-  { title: 'Felsökning och diagnostik', desc: 'Felkodsläsning och noggrann analys av modern fordonselektronik.', to: '/felsokning', image: mechanicDiagnostic },
-  { title: 'Däckservice och däckhotell', desc: 'Däckskifte, balansering, hjulinställning och förvaring.', to: '/dackservice', image: tireStorage },
-  { title: 'AC-service', desc: 'Felsökning, provtryckning och påfyllning för god kupékomfort.', to: '/ac-service', image: acManometers },
+  { number: '01', title: 'Bilservice & underhåll', desc: 'Regelbunden service, olja, filter och viktiga slitdelar i bilens serviceplan.', to: '/service-reparationer#bilservice', icon: <WrenchIcon /> },
+  { number: '02', title: 'Däckservice', desc: 'Däckskifte, balansering, hjulinställning och däckhotell.', to: '/dackservice', icon: <TireIcon /> },
+  { number: '03', title: 'AC-service', desc: 'Felsökning, provtryckning och påfyllning för god kupékomfort.', to: '/ac-service', icon: <WavesIcon /> },
+  { number: '04', title: 'Felsökning & diagnostik', desc: 'Felkodsläsning och analys av modern fordonselektronik.', to: '/felsokning', icon: <GaugeIcon /> },
+  { number: '05', title: 'Reparationer & större arbeten', desc: 'Större arbeten som motor- och topplocksbyten.', to: '/service-reparationer', icon: <EngineIcon /> },
 ]
 const process = [['01', 'Bokning och inlämning', 'Du bokar en tid som passar din bil.'], ['02', 'Initial kontroll', 'Vi gör en första bedömning av behovet.'], ['03', 'Service enligt checklista', 'Arbetet följer den servicenivå som är aktuell.'], ['04', 'Godkännande vid extraarbete', 'Vi kontaktar dig innan vi går vidare.'], ['05', 'Slutkontroll och rapport', 'Du får en genomgång när bilen är klar.']]
 
@@ -110,7 +134,7 @@ export default function LandingPage() {
       <ContactFormCard variant="full-section" />
 
       <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
-        <img src={whyReassuranceWebp} alt="Mekaniker som arbetar med diagnostik i verkstaden" loading="lazy" />
+        <img src={whyReassuranceWebp} alt="Två personer skakar hand i en bilverkstad" loading="lazy" />
         <div className="landing-v2__why-shade" aria-hidden="true" />
         <div className="bb-wrap landing-v2__why-content">
           <div>
@@ -146,37 +170,33 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="landing-v2__services-section" aria-labelledby="landing-v2-services-title">
-        <div className="bb-wrap landing-v2__services-layout">
-          <header>
-            <p className="bb-eyebrow">Vad vi hjälper dig med</p>
-            <h2 id="landing-v2-services-title" className="bb-h2">
-              Service för<br /><span className="bb-accent">hela bilen</span>
-            </h2>
-            <p className="bb-lead">
-              Vi utför allt från regelbunden service och mekaniska reparationer till avancerad diagnostik, däckservice och AC-service för alla bilmärken.
-            </p>
-            <Link className="bb-btn bb-btn--ember-solid" to="/biltjanster">
-              Se alla tjänster <ArrowRightIcon />
-            </Link>
-          </header>
-          <div className="landing-v2__service-grid">
-            {services.map(service => (
-              <Link key={service.to} to={service.to} className="landing-v2__service-card bb-card--photo">
-                <img src={service.image} alt="" />
-                <div className="landing-v2__service-card-content">
-                  <h3>{service.title}</h3>
-                  <p>{service.desc}</p>
-                  <span className="bb-card-arrow"><ArrowRightIcon /></span>
-                </div>
-              </Link>
-            ))}
+      <section className="landing-v2__services-section" aria-label="Våra tjänster">
+        <div className="landing-v2__services-layout">
+          <div className="landing-v2__service-graphic">
+            <ol className="landing-v2__service-grid">
+              {services.map(service => (
+                <li key={service.number}>
+                  <Link to={service.to} className="landing-v2__service-point">
+                    <span className="landing-v2__service-point-icon">{service.icon}</span>
+                    <span className="landing-v2__service-point-number">{service.number}</span>
+                    <h3>{service.title}</h3>
+                    <p>{service.desc}</p>
+                  </Link>
+                </li>
+              ))}
+            </ol>
           </div>
+          <p className="bb-wrap landing-v2__services-intro bb-lead">
+            Vi hjälper dig med regelbunden bilservice, däckservice, AC-service och reparationer. Vi utför även avancerad diagnostik och större arbeten som motor- och topplocksbyten. Vi arbetar med alla bilmärken.
+          </p>
         </div>
       </section>
 
       <section className="landing-v2__process-section" aria-labelledby="landing-v2-process-title">
-        <img src={wrenchWorkbench} alt="Arbetsbänk med verktyg i Brynäs Bilservice verkstad" />
+        <picture aria-hidden="true">
+          <source srcSet={customerInteractionWebp} type="image/webp" />
+          <img src={customerInteractionJpg} alt="" />
+        </picture>
         <div className="landing-v2__process-shade" aria-hidden="true" />
         <div className="bb-wrap landing-v2__process-content">
           <div>
@@ -187,10 +207,6 @@ export default function LandingPage() {
             <p className="bb-lead--dark">
               Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.
             </p>
-            <a className="bb-btn bb-btn--teal" href={BUSINESS.phone.href}>
-              <PhoneIcon />
-              Ring oss: 070–553 33 95
-            </a>
           </div>
           <ol className="bb-process-grid">
             {process.map(([number, title, text]) => (
