@@ -28,7 +28,7 @@ Read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) before any CSS task.
 
 ## Hard rules — ownership and git
 
-- **Don't touch without explicit instruction:** `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, `server/.env` (Johnny's), `server/package.json`. Root `*.disabled` files and the root `package-lock.json` are orphan leftovers; the real frontend is `client/`.
+- **Don't touch without explicit instruction:** `server/index.js`, `server/database/schema.sql`, `server/.htaccess`, `server/.env` (Johnny's), `server/package.json`. The frontend is `client/`; the repo root has no package of its own.
 - Never push without Magnus's go-ahead. Never `git add -A` (files have gone missing from an iCloud-synced checkout before) — stage files by name. One logical change per commit. Never bypass the pre-commit hook.
 - Don't copy text verbatim from competitor material or the commissioned copy file; write original Swedish.
 

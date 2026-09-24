@@ -74,7 +74,7 @@ The live database is the truth. Nobody but Johnny edits `schema.sql`; §6.3 prop
 
 | Area | Where | Notes |
 |---|---|---|
-| App root | `client/` | React 18.2, Vite 4.5, TypeScript. The root `package.json` / `vite.config.ts` are disabled leftovers; ignore them. |
+| App root | `client/` | React 18.2, Vite 4.5, TypeScript. The repo root has no package of its own. |
 | Routing | `client/src/main.tsx` | React Router. Pages are lazy-loaded. |
 | Base path | `client/vite.config.ts` | `/` in dev, `/brynasbilservice/` in production builds. |
 | HTTP client | `client/src/api/axiosConfig.ts` | `baseURL` is `http://localhost:3000` in dev and `/brynasbilservice` in prod, so the frontend calls `/brynasbilservice/api/...`, which Apache proxies to Express. |
