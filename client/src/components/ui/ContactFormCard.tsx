@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { BUSINESS } from '../../data/business'
+import { openContactEmail } from '../../api/contact'
 import { MailIcon } from '../icons/MailIcon'
 import { MapPinIcon } from '../icons/MapPinIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
@@ -60,7 +61,8 @@ export function ContactFormCard({
   className = '',
   onSubmitSuccess,
 }: ContactFormCardProps) {
-  const [submitted, setSubmitted] = useState(false)
+  // Set once the message has been handed to the visitor's e-mail program.
+  const [mailtoHref, setMailtoHref] = useState<string | null>(null)
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -73,7 +75,7 @@ export function ContactFormCard({
       subject: String(formData.get('subject') || ''),
       message: String(formData.get('message') || ''),
     }
-    setSubmitted(true)
+    setMailtoHref(openContactEmail(data, email))
     onSubmitSuccess?.(data)
   }
 
@@ -82,13 +84,16 @@ export function ContactFormCard({
       <h2>{title}</h2>
       <p>{description}</p>
 
-      {submitted ? (
+      {mailtoHref ? (
         <div className="bb-contact-form__success" role="status">
-          <span>✓</span>
-          <h3>Tack för ditt meddelande!</h3>
-          <p>Vi har tagit emot din förfrågan och återkommer så snart vi kan under våra öppettider.</p>
-          <button type="button" onClick={() => setSubmitted(false)}>
-            Skicka ett till meddelande
+          <span>✉</span>
+          <h3>Klart att skicka</h3>
+          <p>
+            Ditt e-postprogram öppnas med meddelandet ifyllt. Skicka det därifrån, så återkommer vi så snart vi kan. Öppnades inget? Mejla oss på{' '}
+            <a href={mailtoHref}>{email}</a> eller ring <a href={`tel:${phone}`}>{phoneDisplay}</a>.
+          </p>
+          <button type="button" onClick={() => setMailtoHref(null)}>
+            Skriv ett nytt meddelande
           </button>
         </div>
       ) : (

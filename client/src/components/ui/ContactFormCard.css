@@ -271,6 +271,14 @@
   margin-bottom: 0;
 }
 
+/* Page link resets strip underlines; the e-mail and phone must read as links. */
+.bb-contact-form__success p a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
 .bb-contact-form__success button {
   background: transparent;
   border: 1px solid #ffffff;

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import { openContactEmail } from '../api/contact'
 import { BUSINESS, weekdayHours } from '../data/business'
 import '../styles/design-tokens.css'
 import '../styles/shared-elements.css'
@@ -34,14 +35,23 @@ const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?q=Utmarksv%C3%A4gen+2
 
 export default function ContactPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  // Set once the message has been handed to the visitor's e-mail program.
+  const [mailtoHref, setMailtoHref] = useState<string | null>(null)
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setSubmitted(true)
+    const formData = new FormData(event.currentTarget)
+    const field = (name: string) => String(formData.get(name) || '').trim()
+    setMailtoHref(openContactEmail({
+      name: field('namn'),
+      email: field('epost'),
+      phone: field('telefon'),
+      subject: field('arende'),
+      message: field('meddelande'),
+    }))
   }
 
   return (
@@ -182,15 +192,16 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                {submitted ? (
+                {mailtoHref ? (
                   <div className="kontakt-page__form-success" role="status">
-                    <span className="kontakt-page__success-icon">✓</span>
-                    <h3 className="kontakt-page__success-title">Tack för ditt meddelande!</h3>
+                    <span className="kontakt-page__success-icon">✉</span>
+                    <h3 className="kontakt-page__success-title">Klart att skicka</h3>
                     <p className="kontakt-page__success-desc">
-                      Vi har tagit emot din förfrågan och återkommer till dig så snart vi kan under våra öppettider (Mån–Fre {weekdayHours()}).
+                      Ditt e-postprogram öppnas med meddelandet ifyllt. Skicka det därifrån, så återkommer vi så snart vi kan under våra öppettider (Mån–Fre {weekdayHours()}). Öppnades inget? Mejla oss på{' '}
+                      <a href={mailtoHref}>{BUSINESS.email.address}</a> eller ring <a href={BUSINESS.phone.href}>{BUSINESS.phone.display}</a>.
                     </p>
-                    <button type="button" className="bb-btn bb-btn--teal kontakt-page__reset-btn" onClick={() => setSubmitted(false)}>
-                      Skicka ett till meddelande
+                    <button type="button" className="bb-btn bb-btn--teal kontakt-page__reset-btn" onClick={() => setMailtoHref(null)}>
+                      Skriv ett nytt meddelande
                     </button>
                   </div>
                 ) : (

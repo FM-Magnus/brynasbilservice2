@@ -364,6 +364,12 @@
   line-height: 1.5;
   margin: 0;
 }
+/* The page's link reset strips underlines; these two must read as links. */
+.kontakt-page__success-desc a {
+  font-weight: 700;
+  text-decoration: underline;
+  white-space: nowrap;
+}
 .kontakt-page__reset-btn {
   font-size: 0.8rem;
   min-height: 42px;
