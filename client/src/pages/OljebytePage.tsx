@@ -22,10 +22,14 @@ import { LightbulbIcon } from '../components/icons/LightbulbIcon'
 import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { DollarIcon } from '../components/icons/DollarIcon'
-import heroJpg from '../assets/images/services/oil/oil-drain-under-car.jpg'
-import heroWebp from '../assets/images/services/oil/oil-drain-under-car.webp'
+import { InfoIcon } from '../components/icons/InfoIcon'
+import { HourglassIcon } from '../components/icons/HourglassIcon'
+import heroJpg from '../assets/images/services/oil/oil-filter-workbench-hero.jpg'
+import heroWebp from '../assets/images/services/oil/oil-filter-workbench-hero.webp'
 import funnelJpg from '../assets/images/services/oil/oil-poured-into-funnel.jpg'
 import funnelWebp from '../assets/images/services/oil/oil-poured-into-funnel.webp'
+import drainJpg from '../assets/images/services/oil/oil-drain-under-car.jpg'
+import drainWebp from '../assets/images/services/oil/oil-drain-under-car.webp'
 import '../styles/ServiceGuideTemplate.css'
 
 const trustBadges = [
@@ -50,10 +54,10 @@ const includedItems = [
 ]
 
 const oilAgeing = [
-  { title: 'Tillsatserna förbrukas.', text: 'Additiven som håller nere korrosion, renar motorn och stabiliserar viskositeten bryts ner successivt och tappar effekt, oavsett hur få mil bilen gått.' },
-  { title: 'Föroreningar byggs upp.', text: 'Sotpartiklar från förbränningen och små mängder obrända bränsleångor blandas in i oljan och späder ut dess skyddande egenskaper.' },
-  { title: 'Kondens och fukt.', text: 'Särskilt vid mycket korta körsträckor hinner motorn aldrig bli riktigt varm, vilket gör att kondensvatten byggs upp i oljan istället för att kokas bort. Det är en av de vanligaste anledningarna till att kortkörningsbilar behöver tätare oljebyten än vad miltalet ensamt antyder.' },
-]
+  { icon: HourglassIcon, title: 'Tillsatserna förbrukas', text: 'Additiven som håller nere korrosion, renar motorn och stabiliserar viskositeten bryts ner successivt och tappar effekt, oavsett hur få mil bilen gått.' },
+  { icon: ShieldIcon, title: 'Föroreningar byggs upp', text: 'Sotpartiklar från förbränningen och små mängder obrända bränsleångor blandas in i oljan och späder ut dess skyddande egenskaper.' },
+  { icon: GaugeIcon, title: 'Kondens och fukt', text: 'Särskilt vid mycket korta körsträckor hinner motorn aldrig bli riktigt varm, vilket gör att kondensvatten byggs upp i oljan istället för att kokas bort. Det är en av de vanligaste anledningarna till att kortkörningsbilar behöver tätare oljebyten än vad miltalet ensamt antyder.' },
+] as const
 
 const viscosityDetails = [
   { title: 'Siffran före W', text: 'anger flytförmågan vid kyla – ju lägre siffra, desto bättre kallstartsegenskaper. En 0W-olja flyter lättare vid minusgrader än en 10W-olja.' },
@@ -100,6 +104,13 @@ const faqs = [
   { question: 'Vad händer om jag skjuter upp oljebytet för länge?', answer: 'Gammal, uttjänt olja smörjer sämre och sämre ju längre den används. I värsta fall kan det leda till allvarliga motorskador och i förlängningen motorhaveri – en reparation som är betydligt dyrare än de oljebyten du skulle ha hunnit göra under tiden.' },
 ]
 
+const infoCards = [
+  { icon: ClockIcon, title: 'Bytesintervall', text: 'Vanligtvis var 10 000–15 000 km eller minst en gång per år – vad som än inträffar först. Mycket kortkörning eller tuff belastning motiverar tätare byten. Detta är ett branschmässigt riktvärde.' },
+  { icon: GaugeIcon, title: 'Viskositet (SAE)', text: 'Anger oljans flytförmåga vid kyla (före W) och arbetstemperatur (efter W). Rätt viskositet säkerställer snabb smörjning vid kallstart och stabil oljefilm under belastning.' },
+  { icon: ShieldIcon, title: 'Godkännanden (ACEA & API)', text: 'Tillverkarens specifika specifikation och ACEA-klass styr oljans faktiska skyddsnivå. Bilar med partikelfilter kräver särskilda lågaskoljor (Low SAPS).' },
+  { icon: HourglassIcon, title: 'Tidsåtgång', text: 'Ett oljebyte med dränering, filterbyte och nivåkontroll tar vanligtvis mellan 30 minuter och en timme i vår verkstad.' },
+] as const
+
 export default function OljebytePage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
@@ -112,7 +123,7 @@ export default function OljebytePage() {
         {/* Hero */}
         <section className="service-guide__hero" aria-labelledby="oljebyte-title">
           <div className="service-guide__hero-bg">
-            <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="Mekaniker dränerar gammal motorolja från en bil på lyft" loading="lazy" /></picture>
+            <picture><source srcSet={heroWebp} type="image/webp" /><img src={heroJpg} alt="" loading="lazy" /></picture>
           </div>
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__hero-inner">
@@ -213,37 +224,67 @@ export default function OljebytePage() {
           </div>
         </section>
 
-        {/* Mer info divider */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-more-info-title">
-          <div className="bb-wrap service-guide__container service-guide__info-heading">
-            <h2 id="oljebyte-more-info-title">Mer info</h2>
-            <p>Här har vi samlat fördjupande information om motorolja, intervall och vanliga frågor kring oljebyten.</p>
+        {/* Mer info */}
+        <section className="service-guide__section" aria-labelledby="oljebyte-info-title">
+          <div className="bb-wrap service-guide__container">
+            <div className="service-guide__info-heading">
+              <h2 id="oljebyte-info-title">Mer info</h2>
+              <p>Här har vi samlat riktvärden och viktig information om motorolja, intervall och vanliga frågor kring oljebyten.</p>
+            </div>
+            <div className="service-guide__info-grid">
+              {infoCards.map(({ icon: Icon, title, text }) => (
+                <div className="service-guide__info-card" key={title}>
+                  <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
+                  <div><h3>{title}</h3><p>{text}</p></div>
+                </div>
+              ))}
+            </div>
+            <div className="service-guide__safety-strip">
+              <InfoIcon aria-hidden="true" />
+              <p><strong>Viktigt om oljekvalitet:</strong> Att enbart fylla på olja när nivån sjunker ersätter aldrig ett fullständigt byte av olja och filter. Gammal olja tappar sina smörjande tillsatser och binder sot och förbränningsrester som sliter på motorns rörliga delar.</p>
+            </div>
           </div>
         </section>
 
-        {/* Topic block 1: ageing */}
-        <section className="service-guide__topic-block" aria-labelledby="oljebyte-ageing-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__topic-header">
+        {/* Oljans åldrande och nedbrytning */}
+        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-ageing-title">
+          <div className="bb-wrap service-guide__container service-guide__symptoms-layout">
+            <div className="service-guide__symptoms-content">
               <h2 id="oljebyte-ageing-title">Hur oljan blir sämre med tiden – även om bilen knappt körs</h2>
               <p>Olja som står oöppnad i en dunk åldras i praktiken inte. Det är först när den börjar arbeta i motorn som nedbrytningen startar, och det sker på flera sätt samtidigt:</p>
+              <div className="service-guide__symptom-list">
+                {oilAgeing.map(({ icon: Icon, title, text }) => (
+                  <article className="service-guide__symptom-row" key={title}>
+                    <span className="service-guide__symptom-icon"><Icon aria-hidden="true" /></span>
+                    <div><h3>{title}</h3><p>{text}</p></div>
+                  </article>
+                ))}
+              </div>
             </div>
-            <div className="service-guide__topic-grid service-guide__topic-grid--cols-3">
-              {oilAgeing.map(({ title, text }) => (
-                <article className="service-guide__topic-card" key={title}><h3>{title}</h3><p>{text}</p></article>
-              ))}
+            <div className="service-guide__symptoms-media">
+              <picture>
+                <source srcSet={drainWebp} type="image/webp" />
+                <img src={drainJpg} alt="Mekaniker skruvar loss oljefiltret under en lyft bil och låter gammal motorolja dräneras" loading="lazy" />
+              </picture>
+              <p className="service-guide__symptoms-caption">Gammal olja och föroreningar dräneras ut.</p>
             </div>
-            <p className="service-guide__topic-note">Det är alltså inte antalet körda mil som ensamt avgör oljans skick – tiden och körmönstret spelar minst lika stor roll.</p>
-            <div className="service-guide__topic-prose service-guide__topic-prose--spaced">
-              <h3>Tillverkarens intervall kontra verkligheten</h3>
+          </div>
+        </section>
+
+        {/* Intervall kontra verkligheten */}
+        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-interval-title">
+          <div className="bb-wrap service-guide__container">
+            <div className="service-guide__prose-card">
+              <h3 id="oljebyte-interval-title">Tillverkarens intervall kontra verkligheten</h3>
               <p>Många nyare bilar har långa rekommenderade serviceintervall – ibland 3 000 mil eller mer, så kallade "long life"-intervall. De är inte felaktiga, men de gäller under förutsättningar som sällan stämmer med hur bilen faktiskt används i vardagen: jämn landsvägskörning, motorvärmare vid kyla under +5 grader, och inga korta stadsturer. Kör bilen istället mycket kortkörning, mycket stillastående i kö, eller drar den ofta släp, bryts oljan ner snabbare än vad intervallet i boken räknar med – utan att bilens egen serviceindikator nödvändigtvis märker det i tid.</p>
               <p>Vår rekommendation är därför att se tillverkarens intervall som ett tak, inte ett golv. Är körmönstret tufft mot oljan – mycket kortkörning, tät stadstrafik, kyla utan motorvärmare, turboladdad eller direktinsprutad motor – lönar det sig att byta tätare än boken säger snarare än att vänta tills serviceindikatorn tvingar fram det.</p>
             </div>
+            <p className="service-guide__topic-note">Det är alltså inte antalet körda mil som ensamt avgör oljans skick – tiden och körmönstret spelar minst lika stor roll.</p>
           </div>
         </section>
 
         {/* Topic block 2: viscosity */}
-        <section className="service-guide__topic-block service-guide__topic-block--alt" aria-labelledby="oljebyte-viscosity-title">
+        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-viscosity-title">
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-viscosity-title">Vad betyder egentligen siffrorna på oljedunken?</h2>
@@ -259,7 +300,7 @@ export default function OljebytePage() {
         </section>
 
         {/* Topic block 3: API/ACEA standards */}
-        <section className="service-guide__topic-block" aria-labelledby="oljebyte-standards-title">
+        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-standards-title">
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-standards-title">API och ACEA – standarderna som faktiskt styr kvaliteten</h2>
@@ -275,7 +316,7 @@ export default function OljebytePage() {
         </section>
 
         {/* Topic block 4: oil types */}
-        <section className="service-guide__topic-block service-guide__topic-block--alt" aria-labelledby="oljebyte-types-title">
+        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-types-title">
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-types-title">Mineral-, halvsyntet- och helsyntetolja – vad är egentligen skillnaden?</h2>
@@ -291,7 +332,7 @@ export default function OljebytePage() {
         </section>
 
         {/* Topic block 5: misconceptions */}
-        <section className="service-guide__topic-block" aria-labelledby="oljebyte-misconceptions-title">
+        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-misconceptions-title">
           <div className="bb-wrap service-guide__container">
             <div className="service-guide__topic-header">
               <h2 id="oljebyte-misconceptions-title">Vanliga missförstånd om motorolja</h2>
