@@ -73,18 +73,13 @@ const faqs = [
 
 export default function AcServicePage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [registration, setRegistration] = useState('')
   const [recommendation, setRecommendation] = useState('')
 
   const openModal = (customNote?: string) => {
     if (customNote) {
-      // If a specific service button clicked, we can keep the custom note
-      // or combine it with registration if provided
-      const regLine = registration.trim() ? `Registreringsnummer: ${registration.trim().toUpperCase()}\n` : ''
-      setBookingComment(`${regLine}${customNote}`)
+      setBookingComment(customNote)
     } else {
       const parts = [
-        registration.trim() && `Registreringsnummer: ${registration.trim().toUpperCase()}`,
         recommendation && `Önskad hjälp: ${recommendation}`,
       ].filter(Boolean)
       setBookingComment(parts.length > 0 ? parts.join('\n') : 'Gäller AC-service & klimatrengöring')
@@ -103,69 +98,34 @@ export default function AcServicePage() {
   return (
     <>
       <main className="bilservice">
-        {/* Hero */}
-        <section className="bb-hero" id="ac-service" aria-labelledby="ac-hero-title">
+        <section className="bb-hero bilservice__ac-hero" id="ac-service" aria-labelledby="ac-service-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="ac-hero-bg">
               <source srcSet={heroBgWebp} type="image/webp" />
-              <img src={heroBgJpg} alt="AC-service och klimatanläggningsutrustning i verkstad" />
+              <img src={heroBgJpg} alt="" />
             </picture>
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
           <PublicHeader onBookingClick={() => openModal()} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
-            <div className="bb-hero__copy">
+            <div className="bb-hero__copy bilservice__ac-intro-copy">
               <p className="bb-eyebrow bb-eyebrow--dark">AC &amp; klimatanläggning</p>
-              <h1 className="bb-h1" id="ac-hero-title">
+              <h1 className="bb-h1 bilservice__ac-title" id="ac-service-title">
                 <span>AC-service &amp;</span>
                 <span className="bb-accent">Klimat{'\u00AD'}rengöring</span>
                 <span>i Gävle</span>
               </h1>
-              <p>
+              <p className="bilservice__ac-lead">
                 En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer. Ett system med för lite köldmedium smörjs sämre – att ignorera det kan förvandla en enkel påfyllning till en betydligt dyrare kompressorreparation.
               </p>
-              <ul className="bilservice__hero-badges" aria-label="Fördelar">
-                <li><CheckIcon aria-hidden="true" /><span>Bibehållen nybilsgaranti</span></li>
-                <li><CheckIcon aria-hidden="true" /><span>Certifierad kylkompetens</span></li>
-                <li><CheckIcon aria-hidden="true" /><span>Fasta priser</span></li>
-              </ul>
-              <div className="bilservice__hero-reg">
-                <label htmlFor="ac-registration" className="bilservice__hero-reg-label">
-                  Registreringsnummer <small>(valfritt)</small>
-                </label>
-                <div className="bilservice__hero-reg-form">
-                  <input
-                    id="ac-registration"
-                    type="text"
-                    value={registration}
-                    onChange={(event) => setRegistration(event.target.value)}
-                    placeholder="ABC 123"
-                    maxLength={10}
-                    autoCapitalize="characters"
-                    className="bilservice__hero-reg-input"
-                    aria-label="Registreringsnummer (valfritt)"
-                  />
-                  <button type="button" onClick={() => openModal()} className="bb-btn bb-btn--teal">
-                    Boka tid
-                  </button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
-                    <PhoneIcon aria-hidden="true" />
-                    <span>Ring oss: {BUSINESS.phone.display}</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="bb-hero__bottom">
-              <div className="bb-trust-row">
-                {valueProps.map(({ icon: Icon, title, text }) => (
-                  <div className="bb-trust-row__item" key={title}>
-                    <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                    <span className="bb-trust-row__text">
-                      <b>{title}</b>
-                      <small>{text}</small>
-                    </span>
-                  </div>
-                ))}
+              <div className="bb-hero__actions">
+                <button type="button" onClick={() => openModal()} className="bb-btn bb-btn--teal">
+                  Boka tid
+                </button>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                  <PhoneIcon aria-hidden="true" />
+                  <span>Ring oss: {BUSINESS.phone.display}</span>
+                </a>
               </div>
             </div>
           </div>
@@ -448,8 +408,8 @@ export default function AcServicePage() {
               <div className="bb-card--trust__text">
                 <h3 id="ac-closing-title">Boka AC-service hos Brynäs Bilservice</h3>
                 <p className="bb-lead">
-                  {registration.trim() || recommendation
-                    ? 'Ditt registreringsnummer och önskemål följer automatiskt med till kommentarsfältet i bokningsformuläret.'
+                  {recommendation
+                    ? 'Ditt önskemål följer automatiskt med till kommentarsfältet i bokningsformuläret.'
                     : 'Välj datum, tid och tjänst i vårt smidiga bokningsformulär.'}
                 </p>
               </div>

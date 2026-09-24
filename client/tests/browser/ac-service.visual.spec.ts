@@ -19,8 +19,13 @@ test('AC-service & klimatrengöring page renders without horizontal overflow acr
   })
   expect(hasHorizontalOverflow).toBe(false)
 
-  // Verify key Bilservice family sections exist
-  await expect(page.locator('.bb-hero')).toBeVisible()
+  // AC keeps the shared full-bleed hero without a registration form.
+  const hero = page.locator('.bilservice__ac-hero')
+  await expect(hero).toBeVisible()
+  await expect(hero.locator('.bb-hero__media img')).toBeVisible()
+  await expect(page.locator('.bilservice__ac-booking-card')).toHaveCount(0)
+  await expect(hero.locator('input')).toHaveCount(0)
+  await expect(hero.locator('.bb-hero__actions')).toBeVisible()
   await expect(page.locator('.bilservice__card-grid-3').first()).toBeVisible()
   await expect(page.locator('.bilservice__symptom-grid')).toBeVisible()
   await expect(page.locator('.bilservice__price-grid')).toBeVisible()
@@ -28,8 +33,8 @@ test('AC-service & klimatrengöring page renders without horizontal overflow acr
   await expect(page.locator('.bilservice__service-card')).toBeVisible()
   await expect(page.locator('.bb-card--trust').first()).toBeVisible()
 
-  // Verify call link exists with correct tel URI
-  const callBtn = page.locator(`.bb-hero a[href="${BUSINESS.phone.href}"]`).first()
+  // Verify the hero retains its phone action with the correct tel URI.
+  const callBtn = page.locator(`.bilservice__ac-hero a[href="${BUSINESS.phone.href}"]`)
   await expect(callBtn).toBeVisible()
 
   // Verify pricing cards exist (3 cards)
@@ -41,8 +46,8 @@ test('AC-service & klimatrengöring page renders without horizontal overflow acr
   await symptomBtn.click()
   await expect(page.locator('.bilservice__recommendation')).toBeVisible()
 
-  // Verify booking modal opens from hero button
-  const bookBtn = page.locator('.bilservice__hero-reg-form button').first()
+  // Verify booking modal opens from the hero CTA.
+  const bookBtn = page.locator('.bilservice__ac-hero .bb-hero__actions button').first()
   await bookBtn.click()
   const modal = page.getByRole('dialog').or(page.locator('[role="dialog"]'))
   await expect(modal).toBeVisible()
