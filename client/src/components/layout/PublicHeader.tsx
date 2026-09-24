@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
-import brandLogo from '../../assets/images/brand/brynas-bilservice-logo.svg'
+import brandLogo from '../../assets/images/brand/brynas-bilservice-header-logo.svg'
 import { publicNavigation, type PublicNavigationItem } from '../../data/publicNavigation'
 import { BUSINESS } from '../../data/business'
 import './PublicHeader.css'
