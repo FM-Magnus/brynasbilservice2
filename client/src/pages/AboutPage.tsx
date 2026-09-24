@@ -11,8 +11,6 @@ import { UsersIcon } from '../components/icons/UsersIcon'
 import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 
-import imgMaherPortraitWebp from '../assets/images/people/maher-basher-portrait.webp'
-import imgMaherPortraitJpg from '../assets/images/people/maher-basher-portrait.jpg'
 import imgMaherBenchWebp from '../assets/images/about/maher-workshop-bench.webp'
 import imgMaherBenchJpg from '../assets/images/about/maher-workshop-bench.jpg'
 
@@ -136,27 +134,6 @@ export default function AboutPage() {
                     <PhoneIcon />
                     <span>Ring {BUSINESS.phone.display}</span>
                   </a>
-                </div>
-              </div>
-
-              <div className="omoss-page__hero-media">
-                <div className="omoss-page__hero-portrait-wrapper">
-                  <picture>
-                    <source srcSet={imgMaherPortraitWebp} type="image/webp" />
-                    <img
-                      src={imgMaherPortraitJpg}
-                      alt="Maher Basher grundare och mekaniker på Brynäs Bilservice"
-                      className="omoss-page__hero-portrait"
-                      width={440}
-                      height={528}
-                    />
-                  </picture>
-                  <div className="omoss-page__hero-quote" aria-label="Citat från Maher">
-                    <p className="omoss-page__hero-quote-line">Raka besked.</p>
-                    <p className="omoss-page__hero-quote-line">Trygga bilägare.</p>
-                    <p className="omoss-page__hero-quote-line">Det är vår vardag.</p>
-                    <p className="omoss-page__hero-quote-author">/ Maher</p>
-                  </div>
                 </div>
               </div>
             </div>

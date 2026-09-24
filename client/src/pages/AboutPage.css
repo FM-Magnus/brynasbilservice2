@@ -1,8 +1,6 @@
 /* AboutPage.css — Isolated CSS island for /om-oss
    Zero dependency on index.css. Consumes canonical --bb-* tokens and shared-elements.css. */
 
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
-
 /* Scope root */
 .omoss-page {
   background-color: var(--bb-color-page);
@@ -117,56 +115,6 @@
   border-color: rgba(255, 255, 255, 0.5);
   color: var(--bb-color-text-inverse);
   transform: translateY(-2px);
-}
-
-.omoss-page__hero-media {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-
-.omoss-page__hero-portrait-wrapper {
-  max-width: 440px;
-  position: relative;
-  width: 100%;
-}
-
-.omoss-page__hero-portrait {
-  border-radius: var(--bb-radius-card);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
-  height: auto;
-  object-fit: cover;
-  position: relative;
-  width: 100%;
-  z-index: 1;
-}
-
-.omoss-page__hero-quote {
-  background: rgba(7, 20, 22, 0.88);
-  border: 1px solid rgba(240, 149, 5, 0.35);
-  border-radius: var(--bb-radius-md);
-  bottom: 1.5rem;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-  color: var(--bb-color-amber-500);
-  font-family: 'Caveat', cursive, sans-serif;
-  font-size: 1.45rem;
-  line-height: 1.25;
-  padding: 1.1rem 1.4rem;
-  position: absolute;
-  right: -1.5rem;
-  z-index: 2;
-}
-
-.omoss-page__hero-quote-line {
-  margin: 0;
-  white-space: nowrap;
-}
-
-.omoss-page__hero-quote-author {
-  font-weight: 700;
-  margin: 0.4rem 0 0;
-  text-align: right;
 }
 
 /* -------------------------------------------------------------
@@ -847,14 +795,6 @@
   .omoss-page__hero-inner {
     grid-template-columns: 1fr;
   }
-  .omoss-page__hero-portrait-wrapper {
-    margin: 0 auto;
-  }
-  .omoss-page__hero-quote {
-    bottom: -1rem;
-    font-size: 1.3rem;
-    right: 0;
-  }
   .omoss-page__facts-card {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -874,13 +814,6 @@
 }
 
 @media (max-width: 560px) {
-  .omoss-page__hero-quote {
-    font-size: 1.2rem;
-    position: static;
-    margin-top: 1rem;
-    right: auto;
-    bottom: auto;
-  }
   .omoss-page__trust-strip {
     grid-template-columns: 1fr;
   }
