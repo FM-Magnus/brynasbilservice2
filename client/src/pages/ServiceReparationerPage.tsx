@@ -5,9 +5,7 @@
 // Guide family. Styled entirely by ./ServiceReparationerPage.css (class
 // prefix .bilservice__) — zero dependency on index.css or its --redesign-*
 // tokens; consumes --bb-* tokens only.
-// Real photography is not supplied yet; every image position below is an
-// intentional, clearly-labelled placeholder (data-image-slot) sized to the
-// final photo's geometry so it can be dropped in later with no layout change.
+// Service photography uses WebP with JPG fallbacks in the measured image slots.
 import { useState, useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
@@ -24,6 +22,18 @@ import { CarSaleIcon } from '../components/icons/CarSaleIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { BUSINESS } from '../data/business'
+import heroJpg from '../assets/images/services/general/service-ready-car-workshop-hero.jpg'
+import heroWebp from '../assets/images/services/general/service-ready-car-workshop-hero.webp'
+import servicebookJpg from '../assets/images/services/general/servicebook-car-key-counter.jpg'
+import servicebookWebp from '../assets/images/services/general/servicebook-car-key-counter.webp'
+import safetyJpg from '../assets/images/services/general/service-safety-brake-inspection.jpg'
+import safetyWebp from '../assets/images/services/general/service-safety-brake-inspection.webp'
+import longevityJpg from '../assets/images/services/general/service-longevity-oil-filter.jpg'
+import longevityWebp from '../assets/images/services/general/service-longevity-oil-filter.webp'
+import performanceJpg from '../assets/images/services/general/service-performance-diagnostics.jpg'
+import performanceWebp from '../assets/images/services/general/service-performance-diagnostics.webp'
+import resaleJpg from '../assets/images/services/general/service-resale-maintained-car.jpg'
+import resaleWebp from '../assets/images/services/general/service-resale-maintained-car.webp'
 import './ServiceReparationerPage.css'
 
 const trustRow = [
@@ -33,10 +43,10 @@ const trustRow = [
 ] as const
 
 const serviceBenefits = [
-  { title: 'Säkerhet', description: 'Fel på bromsar, däck eller elektriska system kan leda till farliga situationer på vägen.', icon: ShieldIcon },
-  { title: 'Livslängd', description: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.', icon: ClockIcon },
-  { title: 'Prestation', description: 'En välunderhållen bil ger bättre bränsleekonomi och prestanda.', icon: BoltIcon },
-  { title: 'Återförsäljningsvärde', description: 'En bil med en fullständig servicehistorik är ofta mer attraktiv för potentiella köpare.', icon: DollarIcon },
+  { title: 'Säkerhet', description: 'Fel på bromsar, däck eller elektriska system kan leda till farliga situationer på vägen.', icon: ShieldIcon, imageJpg: safetyJpg, imageWebp: safetyWebp, imageAlt: 'Mekaniker kontrollerar bromsskiva och däck med inspektionslampa' },
+  { title: 'Livslängd', description: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.', icon: ClockIcon, imageJpg: longevityJpg, imageWebp: longevityWebp, imageAlt: 'Mekaniker byter oljefilter vid regelbunden bilservice' },
+  { title: 'Prestation', description: 'En välunderhållen bil ger bättre bränsleekonomi och prestanda.', icon: BoltIcon, imageJpg: performanceJpg, imageWebp: performanceWebp, imageAlt: 'Mekaniker kontrollerar motorn med diagnosverktyg' },
+  { title: 'Återförsäljningsvärde', description: 'En bil med en fullständig servicehistorik är ofta mer attraktiv för potentiella köpare.', icon: DollarIcon, imageJpg: resaleJpg, imageWebp: resaleWebp, imageAlt: 'Välskött bil i verkstaden med dokumentation av utförd service' },
 ] as const
 
 const serviceLevels = [
@@ -65,16 +75,12 @@ const processSteps = [
   { num: '05', icon: CheckIcon, title: 'Slutkontroll och rapport', desc: 'När bilen är klar får du en genomgång och råd inför nästa service.' },
 ] as const
 
-function ImageSlot({ id, label, tone = 'light', className = '' }: { id: string; label: string; tone?: 'light' | 'dark'; className?: string }) {
+function ServiceImage({ id, jpg, webp, alt, className = '' }: { id: string; jpg: string; webp: string; alt: string; className?: string }) {
   return (
-    <div
-      className={`bilservice__image-slot${tone === 'dark' ? ' bilservice__image-slot--dark' : ''}${className ? ` ${className}` : ''}`}
-      data-image-slot={id}
-      role="img"
-      aria-label={`Platshållare för bild: ${label}`}
-    >
-      <span>{label}</span>
-    </div>
+    <picture className={`bilservice__image-frame${className ? ` ${className}` : ''}`} data-image-slot={id}>
+      <source srcSet={webp} type="image/webp" />
+      <img src={jpg} alt={alt} loading="lazy" />
+    </picture>
   )
 }
 
@@ -90,7 +96,10 @@ export default function ServiceReparationerPage() {
         {/* Hero */}
         <section className="bb-hero" id="bilservice" aria-labelledby="bilservice-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
-            <ImageSlot id="bilservice-hero-car" label="Bild — Bilservice hero, färdig bil" tone="dark" className="bilservice__hero-slot" />
+            <picture data-image-slot="bilservice-hero-car">
+              <source srcSet={heroWebp} type="image/webp" />
+              <img src={heroJpg} alt="" />
+            </picture>
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
           <PublicHeader onBookingClick={openModal} variant="overlay" />
@@ -137,7 +146,7 @@ export default function ServiceReparationerPage() {
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
-            <ImageSlot id="bilservice-servicebook-keys" label="Bild — Servicebok och bilnyckel" className="bilservice__split-media--right bilservice__image-slot--ar-16-9 bilservice__image-slot--radius-lg" />
+            <ServiceImage id="bilservice-servicebook-keys" jpg={servicebookJpg} webp={servicebookWebp} alt="Öppen servicebok och bilnyckel på en verkstadsbänk" className="bilservice__split-media--right bilservice__image-frame--wide" />
           </div>
         </section>
 
@@ -151,7 +160,7 @@ export default function ServiceReparationerPage() {
             <div className="bilservice__value-grid">
               {serviceBenefits.map((benefit) => (
                 <article className="bilservice__value-card" key={benefit.title}>
-                  <ImageSlot id={`bilservice-value-${benefit.title.toLowerCase()}`} label={`Bild — ${benefit.title}`} className="bilservice__image-slot--ar-4-3" />
+                  <ServiceImage id={`bilservice-value-${benefit.title.toLowerCase()}`} jpg={benefit.imageJpg} webp={benefit.imageWebp} alt={benefit.imageAlt} className="bilservice__image-frame--card" />
                   <div className="bilservice__value-body">
                     <span className="bb-icon-badge"><benefit.icon aria-hidden="true" /></span>
                     <h3>{benefit.title}</h3>
