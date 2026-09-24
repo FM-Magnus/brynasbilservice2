@@ -2,6 +2,7 @@ import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
+import { RouteErrorBoundary } from './components/RouteErrorBoundary.tsx'
 import './styles/tailwind.css'
 import './styles/design-tokens.css'
 import './styles/base.css'
@@ -41,6 +42,7 @@ const BargningPage = lazy(() => import('./pages/BargningPage.tsx'))
 const AboutPage = lazy(() => import('./pages/AboutPage.tsx'))
 const ContactPage = lazy(() => import('./pages/ContactPage.tsx'))
 const GalleryPage = lazy(() => import('./pages/GalleryPage.tsx'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage.tsx'))
 
 function RouteFallback() {
   return (
@@ -69,37 +71,40 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter basename={basename}>
       <LanguageProvider>
-        <Suspense fallback={<RouteFallback />}>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/om-oss" element={<AboutPage />} />
-            <Route path="/galleri" element={<GalleryPage />} />
-            <Route path="/tjanster" element={<Navigate to="/biltjanster" replace />} />
-            <Route path="/service-reparationer" element={<ServiceReparationerPage />} />
-            <Route path="/biltjanster" element={<BiltjansterPage />} />
-            <Route path="/felsokning" element={<FelsokningPage />} />
-            <Route path="/oljebyte" element={<OljebytePage />} />
-            <Route path="/kamrem" element={<KamremPage />} />
-            <Route path="/koppling" element={<KopplingPage />} />
-            <Route path="/bromssystem" element={<BromssystemPage />} />
-            <Route path="/bilbatteri" element={<BilbatteriPage />} />
-            <Route path="/stodampare-fjadrar" element={<StodampareFjadrarPage />} />
-            <Route path="/hjullagerbyte" element={<HjullagerbytePage />} />
-            <Route path="/avgassystem" element={<AvgassystemPage />} />
-            <Route path="/drivaxel-drivknutar" element={<DrivaxelDrivknutarPage />} />
-            <Route path="/styrning-kulleder" element={<StyrningKullederPage />} />
-            <Route path="/dackservice" element={<DackservicePage />} />
-            <Route path="/ac-service" element={<AcServicePage />} />
-            <Route path="/bargning" element={<BargningPage />} />
-            <Route path="/kontakt" element={<ContactPage />} />
-            <Route path="/bilar-till-salu" element={<BilarTillSalu />} />
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } />
-          </Routes>
-        </Suspense>
+        <RouteErrorBoundary>
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<App />} />
+              <Route path="/om-oss" element={<AboutPage />} />
+              <Route path="/galleri" element={<GalleryPage />} />
+              <Route path="/tjanster" element={<Navigate to="/biltjanster" replace />} />
+              <Route path="/service-reparationer" element={<ServiceReparationerPage />} />
+              <Route path="/biltjanster" element={<BiltjansterPage />} />
+              <Route path="/felsokning" element={<FelsokningPage />} />
+              <Route path="/oljebyte" element={<OljebytePage />} />
+              <Route path="/kamrem" element={<KamremPage />} />
+              <Route path="/koppling" element={<KopplingPage />} />
+              <Route path="/bromssystem" element={<BromssystemPage />} />
+              <Route path="/bilbatteri" element={<BilbatteriPage />} />
+              <Route path="/stodampare-fjadrar" element={<StodampareFjadrarPage />} />
+              <Route path="/hjullagerbyte" element={<HjullagerbytePage />} />
+              <Route path="/avgassystem" element={<AvgassystemPage />} />
+              <Route path="/drivaxel-drivknutar" element={<DrivaxelDrivknutarPage />} />
+              <Route path="/styrning-kulleder" element={<StyrningKullederPage />} />
+              <Route path="/dackservice" element={<DackservicePage />} />
+              <Route path="/ac-service" element={<AcServicePage />} />
+              <Route path="/bargning" element={<BargningPage />} />
+              <Route path="/kontakt" element={<ContactPage />} />
+              <Route path="/bilar-till-salu" element={<BilarTillSalu />} />
+              <Route path="/admin" element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </RouteErrorBoundary>
       </LanguageProvider>
     </BrowserRouter>
   </StrictMode>,
