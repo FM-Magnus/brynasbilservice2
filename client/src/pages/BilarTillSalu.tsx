@@ -16,8 +16,6 @@ import heroWebp from '../assets/images/workshop/workshop-service-aisle.webp'
 import heroJpg from '../assets/images/workshop/workshop-service-aisle.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
-import '../styles/design-tokens.css'
-import '../styles/shared-elements.css'
 import './BilarTillSalu.css'
 
 // Stock is edited in data/vehicles.ts (or, once live, from /admin) — never here.

@@ -3,8 +3,6 @@
 // Zero dependency on index.css; inherits Level 0 tokens and shared-elements.
 import { useEffect, useState } from 'react'
 import { BUSINESS } from '../data/business'
-import '../styles/design-tokens.css'
-import '../styles/shared-elements.css'
 import '../styles/ServiceGuideTemplate.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'

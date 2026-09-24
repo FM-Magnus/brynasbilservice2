@@ -25,8 +25,6 @@ import gallery4Webp from '../assets/images/workshop/workshop-car-on-lift.webp'
 import gallery4Jpg from '../assets/images/workshop/workshop-car-on-lift.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
-import '../styles/design-tokens.css'
-import '../styles/shared-elements.css'
 import './AboutPage.css'
 
 function StarBadgeIcon({ className }: { className?: string }) {

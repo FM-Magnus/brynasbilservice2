@@ -11,8 +11,6 @@ import { getGalleryImages } from '../api/gallery'
 import type { GalleryImage } from '../types/gallery'
 
 import { BUSINESS } from '../data/business'
-import '../styles/design-tokens.css'
-import '../styles/shared-elements.css'
 import './GalleryPage.css'
 
 // Images come from src/assets/galleri/ (see LÄSMIG.md there) via api/gallery.ts —

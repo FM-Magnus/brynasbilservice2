@@ -23,8 +23,6 @@ import imgSunsetRoadWebp from '../assets/images/home/landing-v2/landing-cockpit-
 import imgSunsetRoadJpg from '../assets/images/home/landing-v2/landing-cockpit-steering-hero.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
-import '../styles/design-tokens.css'
-import '../styles/shared-elements.css'
 import './BargningPage.css'
 
 function SparkleDirectIcon({ className }: { className?: string }) {

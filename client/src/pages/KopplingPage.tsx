@@ -6,8 +6,6 @@
 import { useEffect, useState, type ReactElement } from 'react'
 import { Link } from 'react-router-dom'
 import { BUSINESS } from '../data/business'
-import '../styles/design-tokens.css'
-import '../styles/shared-elements.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { BookingFormModal } from '../components/BookingForm'
