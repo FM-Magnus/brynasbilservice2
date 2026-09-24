@@ -44,16 +44,16 @@
 /* The container has no block padding of its own; sections that carry no
    .bilservice__section class take their vertical rhythm from one of these. */
 .bilservice__container--pad-sm { padding-block: clamp(1.25rem, 2vw, 1.75rem); }
-.bilservice__container--pad { padding-block: clamp(3rem, 5vw, 4rem); }
-.bilservice__container--pad-lg { padding-block: clamp(3rem, 5vw, 4.5rem); }
-.bilservice__container--flow { padding-block: clamp(1rem, 2vw, 1.5rem) clamp(3rem, 5vw, 4rem); }
+.bilservice__container--pad { padding-block: clamp(2.5rem, 4vw, 3rem); }
+.bilservice__container--pad-lg { padding-block: clamp(2.5rem, 4vw, 3.5rem); }
+.bilservice__container--flow { padding-block: clamp(1rem, 2vw, 1.5rem) clamp(2rem, 4vw, 3rem); }
 
-.bilservice__section { padding-block: clamp(4.5rem, 7vw, 6.5rem); }
-.bilservice__section--tight { padding-block: clamp(2.5rem, 4vw, 3rem); }
+.bilservice__section { padding-block: clamp(3rem, 4.5vw, 4rem); }
+.bilservice__section--tight { padding-block: clamp(2rem, 3.5vw, 2.5rem); }
 /* Consecutive white-background sections should read as one continuous
-   canvas, not a series of chapter breaks — only the hero->content and
-   white->aqua/dark transitions keep the fuller padding above. */
-.bilservice__section--flow-bottom { padding-bottom: clamp(2.5rem, 4vw, 3rem); }
+   canvas, not a series of chapter breaks. The base rhythm now follows
+   Landing more closely; tight and flow-bottom variants shorten transitions. */
+.bilservice__section--flow-bottom { padding-bottom: clamp(2rem, 3vw, 2.5rem); }
 .bilservice__section--dark { background: linear-gradient(150deg, var(--bb-color-ink-950) 0%, var(--bb-color-ink-900) 100%); color: #fff; }
 .bilservice__section--aqua { background: var(--bilservice-aqua-100); }
 
@@ -84,7 +84,7 @@
 .bilservice__lead--split { margin: 0.9rem 0 1.9rem; max-width: 52ch; }
 
 /* ---------- Why service matters (4 value cards) ---------- */
-.bilservice__intro { max-width: 62ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.bilservice__intro { max-width: 62ch; margin-bottom: clamp(1.5rem, 3vw, 2rem); }
 .bilservice__intro h2 { margin: 0 0 0.6rem; color: var(--bilservice-ink); }
 .bilservice__intro p { margin: 0; font: 400 1rem/1.6 var(--bb-font-body); }
 .bilservice__intro--wide { max-width: 78ch; }
