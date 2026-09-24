@@ -46,12 +46,14 @@
 .service-guide__section { padding-block: clamp(2.5rem, 5vw, 3.75rem); }
 .service-guide__section--tight { padding-block: clamp(1.25rem, 2.5vw, 1.75rem); }
 
+/* No colour here: every use also carries .bb-eyebrow--dark (white text, amber
+   dash), the dark-surface rule. A colour on this equal-specificity class wins by
+   source order — until 2026-09-24 it turned the guide hero eyebrows teal. */
 .service-guide__eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
   margin-bottom: 1rem;
-  color: var(--bb-color-teal-500);
   font-family: var(--bb-font-sans);
   font-size: var(--bb-font-size-label, 0.78rem);
   font-weight: 800;
