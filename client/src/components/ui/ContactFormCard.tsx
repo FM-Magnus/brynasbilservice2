@@ -1,36 +1,18 @@
-import { useState } from 'react'
-import type { FormEvent } from 'react'
 import { BUSINESS } from '../../data/business'
-import { openContactEmail } from '../../api/contact'
+import { contactSubjects } from '../../api/contact'
+import type { ContactMessage } from '../../api/contact'
+import { useContactForm } from '../../hooks/useContactForm'
 import { MailIcon } from '../icons/MailIcon'
 import { MapPinIcon } from '../icons/MapPinIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
 import { SendIcon } from '../icons/SendIcon'
 import './ContactFormCard.css'
 
-export interface ContactFormData {
-  name: string
-  email: string
-  phone: string
-  subject: string
-  message: string
-}
-
-// Canonical central list of inquiry subjects for Brynäs Bilservice
-export const defaultContactSubjects: string[] = [
-  'Bilservice & oljebyte',
-  'Reparation & felsökning',
-  'Däckservice & hjulinställning',
-  'AC-service',
-  'Bärgning & transport',
-  'Övrigt',
-]
-
 export interface ContactFormCardProps {
   variant?: 'full-section' | 'card-only'
   title?: string
   description?: string
-  subjects?: string[]
+  subjects?: readonly string[]
   initialSubject?: string
   sectionTitle?: string
   sectionAccent?: string
@@ -41,14 +23,14 @@ export interface ContactFormCardProps {
   address?: string
   googleMapsUrl?: string
   className?: string
-  onSubmitSuccess?: (data: ContactFormData) => void
+  onSubmitSuccess?: (data: ContactMessage) => void
 }
 
 export function ContactFormCard({
   variant = 'full-section',
   title = 'Skicka ett meddelande',
   description = 'Berätta hur vi kan hjälpa dig. Obligatoriska fält är markerade med *.',
-  subjects = defaultContactSubjects,
+  subjects = contactSubjects,
   initialSubject = '',
   sectionTitle = 'Hör av dig',
   sectionAccent = 'till oss',
@@ -61,23 +43,7 @@ export function ContactFormCard({
   className = '',
   onSubmitSuccess,
 }: ContactFormCardProps) {
-  // Set once the message has been handed to the visitor's e-mail program.
-  const [mailtoHref, setMailtoHref] = useState<string | null>(null)
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const form = event.currentTarget
-    const formData = new FormData(form)
-    const data: ContactFormData = {
-      name: String(formData.get('name') || ''),
-      email: String(formData.get('email') || ''),
-      phone: String(formData.get('phone') || ''),
-      subject: String(formData.get('subject') || ''),
-      message: String(formData.get('message') || ''),
-    }
-    setMailtoHref(openContactEmail(data, email))
-    onSubmitSuccess?.(data)
-  }
+  const { mailtoHref, handleSubmit, reset } = useContactForm({ to: email, onSent: onSubmitSuccess })
 
   const formCardElement = (
     <div className={`bb-contact-form-card ${variant === 'card-only' ? className : ''}`.trim()}>
@@ -92,7 +58,7 @@ export function ContactFormCard({
             Ditt e-postprogram öppnas med meddelandet ifyllt. Skicka det därifrån, så återkommer vi så snart vi kan. Öppnades inget? Mejla oss på{' '}
             <a href={mailtoHref}>{email}</a> eller ring <a href={`tel:${phone}`}>{phoneDisplay}</a>.
           </p>
-          <button type="button" onClick={() => setMailtoHref(null)}>
+          <button type="button" onClick={reset}>
             Skriv ett nytt meddelande
           </button>
         </div>

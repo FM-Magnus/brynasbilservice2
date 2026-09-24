@@ -37,9 +37,10 @@ test('the Kontakt form hands a pre-filled message to the e-mail program', async 
 test('the Landing contact card hands a pre-filled message to the e-mail program', async ({ page }) => {
   await page.goto('/')
   const form = page.locator('.bb-contact-form')
-  await form.getByLabel(/Namn/).fill('Olle')
+  // Surrounding spaces are trimmed, as on Kontakt (both use useContactForm).
+  await form.getByLabel(/Namn/).fill('  Olle ')
   await form.getByLabel(/E-post/).fill('olle@example.se')
-  await form.getByLabel(/Meddelande/).fill('Hej!')
+  await form.getByLabel(/Meddelande/).fill('Hej!\n')
   await form.getByRole('button', { name: /Skicka meddelande/ }).click()
 
   const status = page.locator('.bb-contact-form__success')

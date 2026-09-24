@@ -13,6 +13,16 @@ export type ContactMessage = {
   message: string
 }
 
+/** Inquiry subjects offered by the contact forms. */
+export const contactSubjects: readonly string[] = [
+  'Bilservice & oljebyte',
+  'Reparation & felsökning',
+  'Däckservice & hjulinställning',
+  'AC-service',
+  'Bärgning & transport',
+  'Övrigt',
+]
+
 export function contactMailtoHref({ name, email, phone, subject, message }: ContactMessage, to: string = BUSINESS.email.address): string {
   const lines = [`Namn: ${name}`, `E-post: ${email}`]
   if (phone) lines.push(`Telefon: ${phone}`)
