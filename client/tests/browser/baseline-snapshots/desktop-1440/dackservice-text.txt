@@ -79,13 +79,13 @@ Kontakta oss för pris
 KONTAKTA OSS
 Viktiga datum & lagkrav för vinterdäck
 1 dec–31 mar
-Krav på vinterdäck
+Krav på vinterdäck vid vinterväglag
 1 okt–15 apr
 Dubbdäck tillåtet
 16 apr–30 sep
-Dubbdäck förbjudet
+Dubbdäck i regel inte tillåtet
 3PMSF-märkning
-krävs för godkänt vinterdäck
+krävs för dubbfria vinterdäck
 Trångt i garaget? Låt oss förvara dina däck.
 
 Slipp bära och lagra tunga hjul hemma — vi tar hand om dem tryggt mellan säsongerna.
@@ -105,11 +105,7 @@ Mer om vår däckservice
 
 Utöver skifte och balansering hjälper vi till med hjulinställning och säsongsförvaring. Vi ser över mönsterdjup, lufttryck och synliga bromskomponenter så att du får en bra överblick över hjulens skick.
 
-Däckbyte & montering
-Balansering av hjul
-Hjulinställning
-Däckhotell — förvaring & tvätt
-Däcktryckskontroll
+BOKA TID FÖR DÄCKSERVICE
 
 RÅD TILL BILÄGAREN
 
@@ -117,42 +113,13 @@ Så håller du koll på däcken
 
 Kontrollera lufttrycket när däcken är kalla och jämför med bilens instruktionsbok. Som riktmärke är en kontroll varje månad en bra vana, och en extra kontroll inför längre resor eller säsongsskifte är klok. Rätt lufttryck ger bättre väggrepp, kortare bromssträcka, lägre bränsleförbrukning och jämnare slitage.
 
+Balansering, hjulinställning och en skada på däcket är tre olika saker. Balansering gäller hjulet självt: däck och fälg ska väga jämnt runt om, och obalans märks oftast som vibrationer vid vissa hastigheter. Hjulinställning gäller bilens hjulvinklar; fel där märks snarare som att bilen drar åt ena hållet eller att däcken slits ojämnt, till exempel mer på ena kanten. En bula i däcksidan, ett snitt eller en spricka behöver bedömas för sig, eftersom den varken kan balanseras eller ställas bort.
+
 Lagen kräver ett minsta mönsterdjup på 1,6 mm för sommardäck och 3 mm vid vinterväglag. För verkligt säker körning rekommenderas dock byte i god tid innan gränsen nås — sommardäck bör bytas vid cirka 3 mm för att minimera risken för vattenplaning, och vinterdäck bör bytas vid cirka 3–5 mm (gärna minst 4 mm) för att behålla fästet på snö och modd.
 
 Kontrollera även däckens ålder via den fyrsiffriga DOT-koden på däcksidan. De sista fyra siffrorna visar tillverkningsvecka och tillverkningsår — till exempel anger 2421 vecka 24 år 2021. Gummi är en färskvara som åldras och hårdnar med tiden. Däck äldre än 6–10 år bör bytas ut oavsett kvarvarande mönsterdjup, eftersom åldrat gummi förlorar sin elasticitet och inte längre greppar vägbanan säkert.
 
 Gör det till en vana att regelbundet syna däcken efter sprickor, utbuktningar, ojämnt slitage och främmande föremål. Är du osäker på däckens skick eller ålder är du alltid välkommen in till oss på Brynäs Bilservice för en fackmässig bedömning.
-
-Så går det till
-hos oss
-
-Att förstå processen gör det enklare att veta vad som händer med bilen från bokning till klar service.
-
-RING OSS: 070-553 33 95
-01
-Bokning och inlämning
-
-Du bokar en tid med oss och lämnar in bilen när det passar.
-
-02
-Initial kontroll
-
-Vi gör en första bedömning av bilens skick och servicebehov.
-
-03
-Service enligt checklista
-
-Mekanikern följer checklistan för den servicenivå som är aktuell.
-
-04
-Godkännande vid extraarbete
-
-Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.
-
-05
-Slutkontroll och rapport
-
-När bilen är klar får du en genomgång och råd inför nästa service.
 
 Vanliga frågor om däckservice
 Hur lång tid tar ett hjulskifte?

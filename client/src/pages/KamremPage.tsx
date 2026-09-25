@@ -9,14 +9,13 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
-import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
@@ -36,15 +35,15 @@ const trustBadges = [
 
 const parts = [
   { title: 'Kamrem & spännrullar', text: 'Driver kamaxeln och ser till att motorns ventiler öppnas och stängs i exakt synk med kolvarnas rörelse.' },
-  { title: 'Kamkedja', text: 'Alternativ konstruktion i metall på vissa motorer som normalt håller bilens livslängd utan schemalagt byte.' },
+  { title: 'Kamkedja', text: 'Alternativ konstruktion i metall på vissa motorer. Den har ofta inget fast bytesintervall, men kan också slitas och ska bedömas om motorn låter eller visar fel.' },
   { title: 'Vattenpump', text: 'Drivs ofta av kamremmen och kontrolleras eller byts normalt samtidigt för att undvika framtida haveri och dubbel arbetskostnad.' },
 ] as const
 
 const benefits = [
-  { icon: AlertTriangleIcon, title: 'Förebygger katastrofal motorskada', text: 'Ett förebyggande kamremsbyte kostar en bråkdel av vad en motor kostar att reparera eller byta efter ett rembrott.' },
-  { icon: GaugeIcon, title: 'Rätt intervall för just din motor', text: 'Vi identifierar bytesintervallet utifrån bilens specifika motor, inte bara modellnamnet, eftersom det kan skilja mellan varianter.' },
-  { icon: WrenchIcon, title: 'Helhetsbedömning', text: 'Eftersom motorn ändå är demonterad kontrollerar vi relaterade delar som vattenpump och spännrullar som annars kräver ett eget, dyrare ingrepp.' },
-  { icon: ThumbsUpIcon, title: 'Trygghet & andrahandsvärde', text: 'Ett dokumenterat kamremsbyte i serviceboken är en av de viktigaste trygghetsfaktorerna vid bilägande och försäljning.' },
+  { title: 'Förebygger katastrofal motorskada', text: 'Ett förebyggande kamremsbyte kostar en bråkdel av vad en motor kostar att reparera eller byta efter ett rembrott.' },
+  { title: 'Rätt intervall för just din motor', text: 'Vi identifierar bytesintervallet utifrån bilens specifika motor, inte bara modellnamnet, eftersom det kan skilja mellan varianter.' },
+  { title: 'Helhetsbedömning', text: 'Eftersom motorn ändå är demonterad kontrollerar vi relaterade delar som vattenpump och spännrullar som annars kräver ett eget, dyrare ingrepp.' },
+  { title: 'Trygghet & andrahandsvärde', text: 'Ett dokumenterat kamremsbyte i serviceboken är en av de viktigaste trygghetsfaktorerna vid bilägande och försäljning.' },
 ] as const
 
 const symptoms: readonly GuideSymptom[] = [
@@ -64,18 +63,10 @@ const serviceItems = [
 ]
 
 const infoCards: readonly GuideInfoCard[] = [
-  { icon: ClockIcon, title: 'Bytesintervall i mil och år', text: 'Kamremmen bör normalt bytas efter 60 000–100 000 km eller vart 6:e år (vissa moderna bilar har längre intervall). Intervallet avgörs alltid av motorkod och tillverkarens data.' },
-  { icon: InfoIcon, title: 'Kontrollera alltid via registreringsnummer', text: 'Exakt intervall måste alltid kontrolleras mot bilens registreringsnummer eller chassinummer, inte gissas utifrån modellnamnet — samma modell kan ha olika motorer.', flag: 'VIKTIGT' },
+  { icon: InfoIcon, title: 'Fråga vad offerten omfattar', text: 'På många motorer driver kamremmen även vattenpumpen, och tillverkare av reservdelar rekommenderar då att pumpen, spännrullarna och styrrullarna byts samtidigt. Be därför om en offert som visar vilka delar som ingår, så att du kan jämföra priser på lika villkor.' },
+  { icon: InfoIcon, title: 'Kontrollera alltid via registreringsnummer', text: 'Bytesintervallet anges av biltillverkaren i tid och körsträcka för varje motor och kan skilja mycket, även inom samma modell. Det ska kontrolleras mot bilens registreringsnummer eller chassinummer, inte gissas utifrån modellnamnet eller en allmän tumregel.', flag: 'VIKTIGT' },
   { icon: GaugeIcon, title: 'Arbetstid i verkstaden', text: 'Ett kamremsbyte tar normalt 2–6 timmars arbetstid beroende på bilmodell och hur trångt motorutrymmet är. Detta är ett branschmässigt riktvärde.' },
 ]
-
-const processSteps = [
-  ['01', 'Bokning och inlämning', 'Du bokar en tid med oss och lämnar in bilen när det passar.'],
-  ['02', 'Initial kontroll', 'Vi gör en första bedömning av bilens skick och servicebehov.'],
-  ['03', 'Service enligt checklista', 'Mekanikern följer checklistan för den servicenivå som är aktuell.'],
-  ['04', 'Godkännande vid extraarbete', 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.'],
-  ['05', 'Slutkontroll och rapport', 'När bilen är klar får du en genomgång och råd inför nästa service.'],
-] as const
 
 const faqs = [
   { question: 'Hur vet jag om min bil har kamrem eller kamkedja?', answer: 'Det beror på motorn, inte bara bilmodellen – samma modell kan ha kamrem på en motorvariant och kamkedja på en annan. Vi slår gärna upp vad som gäller för just din bil via registreringsnumret.' },
@@ -110,7 +101,7 @@ export default function KamremPage() {
           image={{ webp: timingBeltKitWebp, jpg: timingBeltKitJpg, alt: 'Ny kamrem, spännrullar och vattenpump på en verkstadsbänk' }}
           caption="Precision, synk och driftsäkerhet."
         >
-          <p>Värt att veta innan man läser vidare: inte alla bilar har kamrem. Vissa motorer har istället kamkedja i metall som normalt håller bilens livslängd utan schemalagt byte. Eftersom samma bilmodell kan ha kamrem på en motorvariant och kamkedja på en annan räcker inte modellnamnet ensamt för att veta vad som gäller din bil.</p>
+          <p>Värt att veta innan man läser vidare: inte alla bilar har kamrem. Vissa motorer har istället kamkedja i metall, som ofta saknar fast bytesintervall. Eftersom samma bilmodell kan ha kamrem på en motorvariant och kamkedja på en annan räcker inte modellnamnet ensamt för att veta vad som gäller din bil.</p>
           <GuideParts items={parts} />
           <Tip
             title="Osäker på om din bil har rem eller kedja?"
@@ -138,22 +129,17 @@ export default function KamremPage() {
 
         <GuideServiceCard
           id="kamrem-service-title"
+          heading="Det här ingår i ett kamremsbyte"
           text="Vi utför kompletta kamremsbyten med kvalitetsdelar anpassade för just din motors specifikation och nollställer motorn med specialverktyg."
           items={serviceItems}
         />
 
         <GuideInfo
           id="kamrem-info-title"
-          heading="Mer info om intervall och säkerhet"
+          heading="Intervall och säkerhet"
           text="Här finns generella riktlinjer och fakta kring kamremsintervall och motorkonstruktion. Vi kontrollerar alltid vad som gäller specifikt för din bil."
           cards={infoCards}
           safety={<><strong>Säkerhetsnotis:</strong> De flesta moderna motorer är interferensmotorer, vilket innebär att kolvar och ventiler kolliderar om remmen brister med totalt motorhaveri som följd. Misstänker du att kamremmen har gått av under färd – gör inga försök att starta motorn igen.</>}
-        />
-
-        <GuideProcess
-          id="kamrem-process-title"
-          text="Att förstå processen gör det enklare och tryggare att lämna in bilen för ett avancerat motorarbete."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="kamrem-faq" heading="Vanliga frågor om kamrem" items={faqs} />

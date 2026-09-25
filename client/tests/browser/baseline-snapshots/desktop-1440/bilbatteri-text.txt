@@ -39,23 +39,13 @@ Vi kontrollerar alltid biltillverkarens krav för AGM, EFB eller blysyrabatteri 
 FRÅGA OSS
 Varför är det viktigt att byta i tid?
 
-Ett svagt batteri riskerar inte bara att lämna dig strandsatt, utan kan även skada generator och känslig elektronik.
+Ett svagt batteri ger ofta kort förvarning och sviker gärna en kall morgon, när startmotorn behöver som mest kraft.
 
-Undviker att bli stående
+Undviker att bli stående. Ett batteri som ger upp gör det ofta utan förvarning, särskilt en kall vintermorgon.
 
-Ett batteri som ger upp gör det ofta utan förvarning, särskilt en kall vintermorgon.
+Rätt typ för din bil. Vi matchar batteriet mot bilens faktiska utrustning, inte bara fysisk storlek och pris.
 
-Rätt typ för din bil
-
-Vi matchar batteriet mot bilens faktiska utrustning, inte bara fysisk storlek och pris.
-
-Korrekt kodning & registrering
-
-Många moderna bilar kräver att det nya batteriet registreras i bilens styrsystem för att laddas optimalt och hålla full livslängd.
-
-Skyddar generatorn
-
-Ett kraftigt försvagat batteri belastar generatorn onödigt hårt, vilket i värsta fall kan leda till följdskador i laddsystemet.
+Korrekt kodning & registrering. På bilar med batterisensor och batterihantering ska ett nytt batteri i regel registreras med diagnosutrustning. Om det behövs, och hur, beror på bilen.
 
 Varningstecken på svagt eller dåligt batteri
 
@@ -89,9 +79,11 @@ Korrosion runt batteripolerna
 
 Vita eller blåaktiga avlagringar som försämrar kontakten och laddningsförmågan.
 
+Ett batteri som inte orkar starta bilen är inte alltid slut. Samma symptom kan komma av att batteriet inte laddas, till exempel på grund av generatorn eller en dålig anslutning, eller av att något drar ström när bilen står parkerad. Därför behöver batteriets skick och laddsystemet kontrolleras var för sig innan batteriet byts.
+
 Konditionstest före byte – inga onödiga kostnader.
 
-Det här kan vi hjälpa dig med
+Batteribyte och kontroll av laddsystemet
 
 Vi testar bilens laddsystem och monterar ett kvalitetsbatteri med exakt rätt specifikation och teknik för just din bil.
 
@@ -101,62 +93,24 @@ Montering av rätt batterityp (konventionellt, EFB eller AGM) anpassat för bile
 Rengöring och infettning av poler och kabelskor för optimal kontakt.
 Kodning och registrering av det nya batteriet i bilens styrdon där det föreskrivs.
 Kontrollmätning av generatorns laddspänning under belastning.
-Mer info om batterier och underhåll
+Batterier och underhåll
 
 Här är branschmässiga riktlinjer och fakta kring batterityper, temperaturpåverkan och körmönster. Vi kontrollerar alltid vad som passar din bil bäst.
 
-3–6 år
 Batteriers livslängd
-
-Bilbatterier håller normalt 3–6 år beroende på typ (konventionella 3–4 år, EFB 4–6 år, AGM 5–7 år). Riktvärden kan variera med körmönster.
-
-−50%
+3–6 år
+Bilbatterier håller ofta 3–6 år, men livslängden varierar med batterityp, klimat och körmönster. Mycket korta resor och långa stillastånd sliter mer. Detta är ett branschmässigt riktvärde.
 Kyla halverar kapaciteten
-
+−50%
 Vid minusgrader kan batteriets effektiva startkraft minska med upp till 50 % samtidigt som motorn kräver mer kraft att dra igång.
-
-<15 min
 Kortkörning sliter
-
+<15 min
 Körsträckor under 15 minuter hinner sällan återställa den ström som gick åt vid startögonblicket.
-
-Permanent
 Djupurladdning ger permanenta skador
-
+Permanent
 Ett helt urladdat batteri kan drabbas av sulfatering som gör att det aldrig återfår sin ursprungliga kapacitet.
 
 Underhållsråd: Kör du mestadels korta sträckor rekommenderar vi att ansluta en modern underhållsladdare några gånger under vinterhalvåret för att maximera batteriets livslängd.
-
-Så går det till
-hos oss
-
-Att byta batteri hos oss går snabbt och smidigt, med noggrann diagnostik så att du vet att hela laddsystemet mår bra.
-
-RING OSS: 070-553 33 95
-01
-Bokning och inlämning
-
-Boka tid via webb eller telefon och lämna in bilen hos oss på Utmarksvägen.
-
-02
-Batteritest
-
-Vi mäter batteriets hälsa, kapacitet och bilens laddsystem innan vi dömer ut batteriet.
-
-03
-Byte och polvård
-
-Vi monterar ett batteri av exakt rätt specifikation och rengör polanslutningarna.
-
-04
-Registrering & kodning
-
-På bilar med batteriövervakning (BMS) nollställer vi laddcykeln i systemet.
-
-05
-Slutkontroll och rapport
-
-Vi bekräftar felfri laddning och provstart innan bilen lämnas tillbaka.
 
 Vanliga frågor om bilbatteri
 Hur länge håller ett bilbatteri?

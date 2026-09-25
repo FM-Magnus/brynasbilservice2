@@ -11,15 +11,12 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
-import { UsersIcon } from '../components/icons/UsersIcon'
-import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
-import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { HourglassIcon } from '../components/icons/HourglassIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
@@ -46,10 +43,10 @@ const components = [
 ] as const
 
 const importance = [
-  { icon: AlertTriangleIcon, title: 'Undviker följdskador', text: 'Väntar man för länge kan även svänghjul och urtrampningslager slitas, vilket gör reparationen större och dyrare.' },
-  { icon: WrenchIcon, title: 'Rätt diagnos', text: 'Ett missljud eller en förändrad pedalkänsla betyder inte alltid att hela kopplingen behöver bytas.' },
-  { icon: ThumbsUpIcon, title: 'Kvalitet', text: 'Vi använder kopplingssatser som håller måttet för din bilmodell och körning.' },
-  { icon: UsersIcon, title: 'Trygghet vid större arbete', text: 'Kopplingsbyte kräver att växellådan demonteras och är inte ett jobb att chansa med utan rätt verktyg och erfarenhet.' },
+  { title: 'Undviker följdskador', text: 'Väntar man för länge kan även svänghjul och urtrampningslager slitas, vilket gör reparationen större och dyrare.' },
+  { title: 'Rätt diagnos', text: 'Ett missljud eller en förändrad pedalkänsla betyder inte alltid att hela kopplingen behöver bytas.' },
+  { title: 'Kvalitet', text: 'Vi använder kopplingssatser som håller måttet för din bilmodell och körning.' },
+  { title: 'Trygghet vid större arbete', text: 'Kopplingsbyte kräver att växellådan demonteras och är inte ett jobb att chansa med utan rätt verktyg och erfarenhet.' },
 ] as const
 
 const symptoms: readonly GuideSymptom[] = [
@@ -69,23 +66,15 @@ const serviceItems = [
 ]
 
 const infoCards = [
-  { icon: HourglassIcon, title: 'Hur länge håller en koppling?', text: 'En koppling håller vanligtvis mellan 100 000 och 200 000 km beroende på körstil. Mycket stadskörning med start och stopp sliter mer än jämn landsvägskörning. Detta är ett branschmässigt riktvärde, inte en Brynäs-specifik mätning.' },
+  { icon: HourglassIcon, title: 'Hur länge håller en koppling?', text: 'Det finns inget allmängiltigt miltal. Livslängden beror på körstil, last, hur mycket bilen går i stadstrafik och på konstruktionen, så det är symptomen och en bedömning som avgör när kopplingen behöver bytas.' },
   { icon: ClockIcon, title: 'Arbetstid', text: 'Ett kopplingsbyte tar normalt 4–10 timmars arbetstid eftersom växellådan måste demonteras för att komma åt kopplingen. Tidsuppgiften är inte bekräftad mot Brynäs egna verkstadstider.' },
 ] as const
 
-const processSteps = [
-  ['01', 'Bokning och inlämning', 'Du bokar en tid med oss och lämnar in bilen när det passar.'],
-  ['02', 'Initial kontroll', 'Vi gör en första bedömning av bilens skick och servicebehov.'],
-  ['03', 'Service enligt checklista', 'Mekanikern följer checklistan för den servicenivå som är aktuell.'],
-  ['04', 'Godkännande vid extraarbete', 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.'],
-  ['05', 'Slutkontroll och rapport', 'När bilen är klar får du en genomgång och råd inför nästa service.'],
-] as const
-
 const faqs = [
-  { question: 'Hur länge håller en koppling?', answer: 'Vanligtvis mellan 100 000 och 200 000 km, men det varierar mycket med körstil. Mycket stadskörning med start och stopp sliter betydligt mer än jämn landsvägskörning.' },
+  { question: 'Hur länge håller en koppling?', answer: 'Det går inte att ange ett generellt miltal. Körstil, last och mycket start och stopp i stadstrafik påverkar slitaget kraftigt, så det är symptomen som avgör när kopplingen behöver bytas.' },
   { question: 'Måste hela kopplingssatsen bytas, eller räcker det med en del?', answer: 'Det beror på vad som faktiskt är fel. Ibland räcker det med att byta enbart urtrampningslagret, men eftersom arbetet för att komma åt kopplingen är detsamma oavsett görs oftast hela satsen samtidigt för att slippa göra om jobbet inom kort.' },
   { question: 'Varför är kopplingsbyte dyrt jämfört med andra reparationer?', answer: 'Det är främst en fråga om arbetstid. Växellådan måste demonteras för att komma åt kopplingen, vilket tar betydligt längre tid än de flesta andra reparationer.' },
-  { question: 'Vad är ett tvåmassesvänghjul, och behöver det bytas samtidigt?', answer: 'Det är en typ av svänghjul som dämpar vibrationer mellan motor och växellåda. Visar det tecken på slitage rekommenderar vi att byta det samtidigt som kopplingen, eftersom det annars kan gå sönder kort efter och tvinga fram ett nytt, lika omfattande ingrepp.' },
+  { question: 'Vad är ett tvåmassesvänghjul, och behöver det bytas samtidigt?', answer: 'Det är en typ av svänghjul som dämpar vibrationer mellan motor och växellåda. Det byts inte automatiskt, men när kopplingen ändå är isärtagen är det rätt tillfälle att bedöma det, bland annat hur mycket glapp det har och om det finns spår av värme eller läckande fett. Är det slitet kan det skada en ny koppling, och då är det klokt att byta det i samma ingrepp.' },
   { question: 'Kan jag köra bilen ett tag till om kopplingen börjat slira?', answer: 'Kortsiktigt, men det är inte att rekommendera. Slirning sliter snabbt ut det som är kvar av friktionsbelägget, och i värsta fall kan även svänghjul och urtrampningslager skadas.' },
   { question: 'Hur lång tid tar ett kopplingsbyte?', answer: 'Normalt 4–10 timmars arbetstid beroende på bilmodell, eftersom växellådan behöver demonteras. Ring oss så får du en tidsuppskattning anpassad efter din bil.' },
 ]
@@ -137,27 +126,24 @@ export default function KopplingPage() {
           items={symptoms}
           image={{ webp: symptomsWebp, jpg: symptomsJpg, alt: 'Mekaniker från Brynäs Bilservice arbetar under en lyft bil' }}
           caption="Vi hittar problemet – innan det blir större."
-        />
+        >
+          <p>Slirning, en pedal som känns annorlunda och missljud kan ha helt olika orsaker, och därför bedöms de var för sig. Slirning handlar oftast om lamellens friktionsbelägg, en tung eller svampig pedal om urtrampningen eller hydrauliken, och ljud kan komma från urtrampningslagret, svänghjulet eller växellådan. Berätta gärna om symptomet märks vid start, i en viss växel eller när pedalen är nedtryckt.</p>
+        </GuideSymptoms>
 
         <GuideServiceCard
           id="koppling-service-title"
+          heading="Så arbetar vi med kopplingen"
           text="Vi börjar med att bedöma vad som faktiskt behöver göras och kontaktar dig innan vi går vidare med arbete utöver den första bedömningen."
           items={serviceItems}
         />
 
         <GuideInfo
           id="koppling-info-title"
-          heading="Mer info"
+          heading="Livslängd och arbetstid"
           text="Här finns generella riktvärden som kan hjälpa dig att förstå omfattningen. Vi bedömer alltid din bil utifrån dess faktiska skick."
           cards={infoCards}
           safetyIcon={InfoIcon}
           safety={<><strong>Säkerhetsnot:</strong> Ett kopplingsbyte är ett omfattande ingrepp i drivlinan. Vi rekommenderar inte att göra det själv utan rätt specialverktyg och erfarenhet av just den här typen av arbete.</>}
-        />
-
-        <GuideProcess
-          id="koppling-process-title"
-          text="Att förstå processen gör det enklare att veta vad som händer med bilen och varför ett större drivlinearbete ibland behöver ta lite tid."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="koppling-faq" heading="Vanliga frågor om koppling" items={faqs} />

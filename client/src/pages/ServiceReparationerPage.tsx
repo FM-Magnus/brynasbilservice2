@@ -16,8 +16,6 @@ import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
-import { BoltIcon } from '../components/icons/BoltIcon'
-import { DollarIcon } from '../components/icons/DollarIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { CarSaleIcon } from '../components/icons/CarSaleIcon'
@@ -30,12 +28,6 @@ import servicebookJpg from '../assets/images/services/general/servicebook-car-ke
 import servicebookWebp from '../assets/images/services/general/servicebook-car-key-counter.webp'
 import safetyJpg from '../assets/images/services/general/service-safety-brake-inspection.jpg'
 import safetyWebp from '../assets/images/services/general/service-safety-brake-inspection.webp'
-import longevityJpg from '../assets/images/services/general/service-longevity-oil-filter.jpg'
-import longevityWebp from '../assets/images/services/general/service-longevity-oil-filter.webp'
-import performanceJpg from '../assets/images/services/general/service-performance-diagnostics.jpg'
-import performanceWebp from '../assets/images/services/general/service-performance-diagnostics.webp'
-import resaleJpg from '../assets/images/services/general/service-resale-maintained-car.jpg'
-import resaleWebp from '../assets/images/services/general/service-resale-maintained-car.webp'
 import './ServiceReparationerPage.css'
 
 const trustRow = [
@@ -45,10 +37,10 @@ const trustRow = [
 ] as const
 
 const serviceBenefits = [
-  { title: 'Säkerhet', description: 'Fel på bromsar, däck eller elektriska system kan leda till farliga situationer på vägen.', icon: ShieldIcon, imageJpg: safetyJpg, imageWebp: safetyWebp, imageAlt: 'Mekaniker kontrollerar bromsskiva och däck med inspektionslampa' },
-  { title: 'Livslängd', description: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.', icon: ClockIcon, imageJpg: longevityJpg, imageWebp: longevityWebp, imageAlt: 'Mekaniker byter oljefilter vid regelbunden bilservice' },
-  { title: 'Prestation', description: 'En välunderhållen bil ger bättre bränsleekonomi och prestanda.', icon: BoltIcon, imageJpg: performanceJpg, imageWebp: performanceWebp, imageAlt: 'Mekaniker kontrollerar motorn med diagnosverktyg' },
-  { title: 'Återförsäljningsvärde', description: 'En bil med en fullständig servicehistorik är ofta mer attraktiv för potentiella köpare.', icon: DollarIcon, imageJpg: resaleJpg, imageWebp: resaleWebp, imageAlt: 'Välskött bil i verkstaden med dokumentation av utförd service' },
+  { title: 'Säkerhet', description: 'Fel på bromsar, däck eller elektriska system kan leda till farliga situationer på vägen.' },
+  { title: 'Livslängd', description: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.' },
+  { title: 'Prestanda', description: 'En välunderhållen bil ger bättre bränsleekonomi och prestanda.' },
+  { title: 'Återförsäljningsvärde', description: 'En bil med en fullständig servicehistorik är ofta mer attraktiv för potentiella köpare.' },
 ] as const
 
 const serviceLevels = [
@@ -139,9 +131,10 @@ export default function ServiceReparationerPage() {
         {/* Vad kostar en bilservice? */}
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="bilservice-price-title">
           <div className="bb-wrap bilservice__container bilservice__split">
-            <div>
-              <h2 className="bilservice__price-heading bb-h2" id="bilservice-price-title">Vad kostar en <span className="bb-accent">bilservice</span>?</h2>
-              <p className="bilservice__price-text bb-lead">Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
+            <div className="bilservice__prose">
+              <h2 className="bb-h2" id="bilservice-price-title">Vad kostar en <span className="bb-accent">bilservice</span>?</h2>
+              <p>Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
+              <p>Be om ett kostnadsförslag som visar vad som ingår: arbete, delar och vätskor, och vad som ligger utanför. Är priset en ungefärlig uppgift får slutpriset enligt konsumentreglerna inte bli mer än 15 procent högre, och hittar verkstaden något mer som behöver åtgärdas ska du kontaktas innan det arbetet görs.</p>
               <div className="bilservice__actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid för bilservice</button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
@@ -153,21 +146,13 @@ export default function ServiceReparationerPage() {
 
         {/* Varför är bilservice viktigt? */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="bilservice-why-title">
-          <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro">
+          <div className="bb-wrap bilservice__container bilservice__split">
+            <ServiceImage id="bilservice-value-säkerhet" jpg={safetyJpg} webp={safetyWebp} alt="Mekaniker kontrollerar bromsskiva och däck med inspektionslampa" className="bilservice__image-frame--wide" />
+            <div className="bilservice__prose">
               <h2 className="bb-h2" id="bilservice-why-title">Varför är bilservice viktigt?</h2>
-              <p className="bb-lead">Ett regelbundet serviceprogram är avgörande för flera skäl.</p>
-            </div>
-            <div className="bilservice__value-grid">
+              <p>Regelbunden service påverkar hur säker bilen är, hur länge den håller, hur den går och vad den är värd den dag du säljer den.</p>
               {serviceBenefits.map((benefit) => (
-                <article className="bilservice__value-card" key={benefit.title}>
-                  <ServiceImage id={`bilservice-value-${benefit.title.toLowerCase()}`} jpg={benefit.imageJpg} webp={benefit.imageWebp} alt={benefit.imageAlt} className="bilservice__image-frame--card" />
-                  <div className="bilservice__value-body">
-                    <span className="bb-icon-badge"><benefit.icon aria-hidden="true" /></span>
-                    <h3>{benefit.title}</h3>
-                    <p className="bb-lead--dark">{benefit.description}</p>
-                  </div>
-                </article>
+                <p key={benefit.title}><strong>{benefit.title}.</strong> {benefit.description}</p>
               ))}
             </div>
           </div>
@@ -179,6 +164,7 @@ export default function ServiceReparationerPage() {
             <div className="bilservice__intro">
               <h2 className="bb-h2" id="bilservice-levels-title">Vilken service behöver din bil?</h2>
               <p className="bb-lead">Exakt vad som ingår styrs av tillverkarens rekommenderade intervall för just din bilmodell, men de flesta verkstäder – oss inkluderade – delar in service i tre nivåer.</p>
+              <p className="bb-lead bilservice__lead--intro">Det är bilens serviceprogram som avgör vad som ska göras och när. Tillverkaren anger intervall i både tid och körsträcka, och det som inträffar först gäller; intervallen kan skilja mellan modeller och drivlinor. Nivåerna nedan är en översikt över vanliga moment, inte en ersättning för din bils serviceplan. Ta gärna med serviceboken eller uppge registreringsnumret när du bokar.</p>
             </div>
             <div className="bilservice__levels-grid">
               {serviceLevels.map((level, index) => (

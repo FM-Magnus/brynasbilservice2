@@ -18,15 +18,7 @@ Rätt olja. Rätt mängd. Varje gång.
 
 Vad är ett oljebyte?
 
-Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage.
-
 Med tiden bryts oljan ner, tappar sina smörjande egenskaper och samlar på sig sot och förbränningsrester. Ett oljebyte innebär att den gamla, uttjänta oljan dräneras ur motorn, oljefiltret byts ut, ny olja fylls på och nivån kontrolleras innan bilen lämnas tillbaka till dig.
-
-Varför är oljebyte viktigt?
-
-Olja som inte byts i tid tappar sin förmåga att smörja och kyla motorns delar effektivt. Det leder till ökad friktion mellan rörliga komponenter, vilket över tid sliter ner motorn snabbare än den annars skulle göra.
-
-En motor som går på ren, fräsch olja arbetar dessutom mer effektivt, vilket märks direkt på bränsleförbrukningen jämfört med en motor som får gå på gammal eller smutsig olja.
 
 TIPS
 Osäker på vilken olja din bil behöver?
@@ -36,21 +28,11 @@ Fördelar med regelbundna oljebyten
 
 Ett regelbundet oljebyte är en liten kostnad jämfört med vad ett försummat sådant kan leda till.
 
-Förlänger motorns livslängd
+Skyddar motorns rörliga delar. Olja som inte byts i tid tappar sin förmåga att smörja och kyla, och ökad friktion sliter ner motorn snabbare än den annars skulle göra.
 
-Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.
+Minskar risken för dyra motorrelaterade reparationer. Ett oljebyte kostar lite jämfört med en reparation av en motor som har gått på uttjänt olja.
 
-Håller nere bränsleförbrukningen
-
-En motor som går på ren, fräsch olja arbetar mer effektivt, vilket märks direkt på bränsleförbrukningen.
-
-Minskar risken för dyra motorrelaterade reparationer
-
-Olja som inte byts i tid tappar sin förmåga att smörja och kyla motorns delar effektivt.
-
-Bidrar till att bilen presterar som den ska över tid
-
-Ökad friktion mellan rörliga komponenter sliter ner motorn snabbare än den annars skulle göra.
+Ger en chans att upptäcka annat i tid. När bilen står på lyften syns läckage, fuktiga packningar och låg nivå på andra vätskor lättare än i vardagen.
 
 Vad ingår i ett oljebyte hos oss?
 
@@ -61,24 +43,13 @@ Byte av oljefilter
 Påfyllning av ny olja anpassad efter din bilmodell – rätt viskositet, rätt ACEA-klass och rätt tillverkargodkännande, inte bara "rätt siffra"
 Kontroll av oljenivån efter påfyllning
 En snabb koll av bilens övriga vätskenivåer samtidigt som vi ändå är där
-Mer info
+Riktvärden för motorolja
 
 Här har vi samlat riktvärden och viktig information om motorolja, intervall och vanliga frågor kring oljebyten.
 
 Bytesintervall
-
 Vanligtvis var 10 000–15 000 km eller minst en gång per år – vad som än inträffar först. Mycket kortkörning eller tuff belastning motiverar tätare byten. Detta är ett branschmässigt riktvärde.
-
-Viskositet (SAE)
-
-Anger oljans flytförmåga vid kyla (före W) och arbetstemperatur (efter W). Rätt viskositet säkerställer snabb smörjning vid kallstart och stabil oljefilm under belastning.
-
-Godkännanden (ACEA & API)
-
-Tillverkarens specifika specifikation och ACEA-klass styr oljans faktiska skyddsnivå. Bilar med partikelfilter kräver särskilda lågaskoljor (Low SAPS).
-
 Tidsåtgång
-
 Ett oljebyte med dränering, filterbyte och nivåkontroll tar vanligtvis mellan 30 minuter och en timme i vår verkstad.
 
 Viktigt om oljekvalitet: Att enbart fylla på olja när nivån sjunker ersätter aldrig ett fullständigt byte av olja och filter. Gammal olja tappar sina smörjande tillsatser och binder sot och förbränningsrester som sliter på motorns rörliga delar.
@@ -113,13 +84,9 @@ Vad betyder egentligen siffrorna på oljedunken?
 
 De flesta har sett beteckningar som 5W-30 eller 0W-20 utan att egentligen veta vad de betyder. Det är oljans viskositetsklass enligt SAE-systemet (Society of Automotive Engineers), och den beskriver hur trögflytande oljan är – inte hur bra kvalitet den håller.
 
-Siffran före W
+Siffran före W anger flytförmågan vid kyla – ju lägre siffra, desto bättre kallstartsegenskaper. En 0W-olja flyter lättare vid minusgrader än en 10W-olja.
 
-anger flytförmågan vid kyla – ju lägre siffra, desto bättre kallstartsegenskaper. En 0W-olja flyter lättare vid minusgrader än en 10W-olja.
-
-Siffran efter W
-
-anger tjockleken vid motorns normala arbetstemperatur. En 5W-40 blir tjockare vid värme än en 5W-30, vilket ger tjockare oljefilm och något bättre skydd vid hög belastning – men bara om bilen faktiskt är konstruerad för det.
+Siffran efter W anger tjockleken vid motorns normala arbetstemperatur. En 5W-40 blir tjockare vid värme än en 5W-30, vilket ger tjockare oljefilm och något bättre skydd vid hög belastning – men bara om bilen faktiskt är konstruerad för det.
 
 Viskositeten är alltså bara en flödesegenskap, inte ett kvalitetsmått. Två oljor med exakt samma viskositetsbeteckning kan skilja sig kraftigt åt i hur väl de faktiskt skyddar motorn.
 
@@ -127,17 +94,11 @@ API och ACEA – standarderna som faktiskt styr kvaliteten
 
 Det som avgör om en olja verkligen passar din motor är inte viskositeten utan godkännandena bredvid den – API (amerikansk standard) och ACEA (europeisk standard). ACEA-klasserna är särskilt viktiga att förstå:
 
-ACEA A3/B4
+ACEA A3/B4 är en robust olja med högre askhalt, vanlig i äldre bilar utan partikelfilter.
 
-robust olja med högre askhalt, vanlig i äldre bilar utan partikelfilter.
+ACEA C1–C3 är lågaskoljor ("Low SAPS"), framtagna för bilar med partikelfilter (DPF/OPF) och katalysator. Fyller du en sådan bil med en vanlig A3/B4-olja byggs aska upp i partikelfiltret snabbare än det ska.
 
-ACEA C1–C3
-
-lågaskoljor ("Low SAPS"), framtagna för bilar med partikelfilter (DPF/OPF) och katalysator. Fyller du en sådan bil med en vanlig A3/B4-olja byggs aska upp i partikelfiltret snabbare än det ska.
-
-Tillverkarspecifika godkännanden
-
-som VW 504.00/507.00, BMW Longlife-04 eller MB 229.51 väger tyngst av allt – de är framtagna och testade specifikt för den motorfamiljen.
+Tillverkarspecifika godkännanden som VW 504.00/507.00, BMW Longlife-04 eller MB 229.51 väger tyngst av allt – de är framtagna och testade specifikt för den motorfamiljen.
 
 Rätt ordning att välja olja i är: tillverkarens egen specifikation först, sedan ACEA-klass, och viskositet sist. En "rätt" viskositet med fel specifikation kan göra mer skada än nytta.
 
@@ -145,21 +106,13 @@ Mineral-, halvsyntet- och helsyntetolja – vad är egentligen skillnaden?
 
 Basoljan – den vätska additiven blandas i – delas in i grupper, och det är här den verkliga skillnaden mellan oljor ligger:
 
-Mineralolja (grupp I–II)
+Mineralolja (grupp I–II) är rakt utvunnen och raffinerad från råolja, med störst molekylär ojämnhet. Billigast, men klarar sämre av temperatur- och belastningsvariationer.
 
-är rakt utvunnen och raffinerad från råolja, med störst molekylär ojämnhet. Billigast, men klarar sämre av temperatur- och belastningsvariationer.
+Grupp III är mineralolja som hydrocrackats – brutits ner kemiskt och byggts upp igen under högt tryck till en betydligt jämnare molekylstruktur. Här händer något som förvånar många: i Europa får grupp III-oljor marknadsföras och säljas som "helsyntetiska", trots att de i grunden är mineralbaserade. Det är inte marknadsföringsfusk – det är hur regelverket är utformat – men det förklarar varför två flaskor som båda säger "fullsyntetisk 5W-30" ändå kan prestera olika.
 
-Grupp III
+Grupp IV (PAO – poly-alfa-olefin) är den "riktiga" kemiskt syntetiserade oljan, med en molekylstruktur som är jämn redan från start snarare än ombyggd. Den ger generellt bättre smörjande egenskaper än grupp III, oavsett vad viskositetsetiketten säger.
 
-är mineralolja som hydrocrackats – brutits ner kemiskt och byggts upp igen under högt tryck till en betydligt jämnare molekylstruktur. Här händer något som förvånar många: i Europa får grupp III-oljor marknadsföras och säljas som "helsyntetiska", trots att de i grunden är mineralbaserade. Det är inte marknadsföringsfusk – det är hur regelverket är utformat – men det förklarar varför två flaskor som båda säger "fullsyntetisk 5W-30" ändå kan prestera olika.
-
-Grupp IV (PAO – poly-alfa-olefin)
-
-är den "riktiga" kemiskt syntetiserade oljan, med en molekylstruktur som är jämn redan från start snarare än ombyggd. Den ger generellt bättre smörjande egenskaper än grupp III, oavsett vad viskositetsetiketten säger.
-
-Halvsyntetisk olja
-
-är en blandning av mineral- och syntetbaserad olja, ofta 10–70 % syntetinnehåll, som positionerar sig prismässigt och prestandamässigt mellan mineral- och helsyntetolja.
+Halvsyntetisk olja är en blandning av mineral- och syntetbaserad olja, ofta 10–70 % syntetinnehåll, som positionerar sig prismässigt och prestandamässigt mellan mineral- och helsyntetolja.
 
 Den praktiska slutsatsen: beteckningen "fullsyntetisk" på flaskan garanterar inte att två oljor är likvärdiga. Additivpaketet – rengörande, korrosionsskyddande och viskositetsstabiliserande tillsatser – väger minst lika tungt som basoljan, och det är just kombinationen av basolja och additivpaket som gör att pris och prestanda kan skilja sig kraftigt mellan oljor som ser identiska ut på pappret.
 
@@ -183,37 +136,6 @@ Delvis sant, men överdrivet – syntetolja tål mer innan den bryts ner, men ad
 "Man kan inte blanda olika oljemärken eller typer."
 
 I praktiken går det oftast bra rent tekniskt – oljor är i grunden kompatibla med varandra – men det är ingen genväg till rätt olja. Följer man inte specifikationen som gäller för just din bil spelar det ingen roll vilket märke som står på flaskan.
-
-Så går det till
-hos oss
-
-Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.
-
-RING OSS: 070-553 33 95
-01
-Bokning och inlämning
-
-Du bokar en tid med oss och lämnar in bilen när det passar.
-
-02
-Initial kontroll
-
-Vi gör en första bedömning av bilens skick och servicebehov.
-
-03
-Service enligt checklista
-
-Mekanikern följer checklistan för den servicenivå som är aktuell.
-
-04
-Godkännande vid extraarbete
-
-Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.
-
-05
-Slutkontroll och rapport
-
-När bilen är klar får du en genomgång och råd inför nästa service.
 
 Vanliga frågor om oljebyte
 Hur ofta behöver jag byta olja?

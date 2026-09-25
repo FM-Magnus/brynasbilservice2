@@ -26,7 +26,7 @@ test('AC-service & klimatrengöring page renders without horizontal overflow acr
   await expect(page.locator('.bilservice__ac-booking-card')).toHaveCount(0)
   await expect(hero.locator('input')).toHaveCount(0)
   await expect(hero.locator('.bb-hero__actions')).toBeVisible()
-  await expect(page.locator('.bilservice__card-grid-3').first()).toBeVisible()
+  await expect(page.locator('.bilservice__editorial').first()).toBeVisible()
   await expect(page.locator('.bilservice__symptom-grid')).toBeVisible()
   await expect(page.locator('.bilservice__price-grid')).toBeVisible()
   await expect(page.locator('.bb-process-grid')).toBeVisible()

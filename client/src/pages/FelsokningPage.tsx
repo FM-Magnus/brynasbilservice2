@@ -14,7 +14,6 @@ import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
-import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { MonitorIcon } from '../components/icons/MonitorIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
@@ -70,10 +69,11 @@ const symptoms = [
 ] as const
 
 const guidance = [
-  { title: 'Tidsåtgång för en diagnostik', value: '1–2 tim', text: 'En standarddiagnostik med felkodsläsning och grundläggande kontroll tar normalt 1–2 timmar. Mer omfattande fel som kräver ytterligare mätning kan ta längre tid.' },
-  { title: 'En kod visar bara vilket system som larmar', value: 'Inte exakt del', text: 'En felkod pekar ut vilket system som reagerat, men avgör sällan ensam vilken specifik komponent som är trasig — därför krävs en verklig bedömning, inte bara en avläsning.' },
-  { title: 'Bäst att göra innan besiktningen', value: 'Före besiktning', text: 'Att felsöka och åtgärda orsaken till en varningslampa innan besiktningen kan spara en omkörning och en extra avgift om bilen annars hade blivit underkänd.' },
-  { title: 'Prisuppgift innan vi går vidare', value: 'Fast offert', text: 'Kostnaden beror på hur omfattande felsökningen blir. Vi lämnar alltid en tydlig prisuppgift innan vi går vidare med reparation.' },
+  { title: 'Tidsåtgång för en diagnostik', text: 'En standarddiagnostik med felkodsläsning och grundläggande kontroll tar normalt 1–2 timmar. Mer omfattande fel som kräver ytterligare mätning kan ta längre tid.' },
+  { title: 'Felkod är inte samma sak som orsak', text: 'En felkod visar vilken krets eller vilket system styrenheten har reagerat på, inte vilken del som är trasig. En kod för en givare kan bero på givaren själv, men också på ett kabelbrott, en dålig kontakt eller en skadad del som givaren läser av. Orsaken fastställs först när koden har följts upp med mätningar och kontroller.' },
+  { title: 'Berätta när felet visar sig', text: 'Notera om symptomet kommer vid kallstart eller varm motor, vid en viss hastighet, vid inbromsning, i kurvor eller i fuktigt väder, och om varningslampan lyser hela tiden eller bara ibland. Sådana detaljer gör det lättare att återskapa felet vid en provkörning och att koppla koden till rätt orsak.' },
+  { title: 'Bäst att göra innan besiktningen', text: 'Att felsöka och åtgärda orsaken till en varningslampa innan besiktningen kan spara en omkörning och en extra avgift om bilen annars hade blivit underkänd.' },
+  { title: 'Prisuppgift innan vi går vidare', text: 'Kostnaden beror på hur omfattande felsökningen blir. Vi lämnar alltid en tydlig prisuppgift innan vi går vidare med reparation.' },
 ] as const
 
 const serviceItems = [
@@ -84,14 +84,6 @@ const serviceItems = [
   'Fast prisuppgift innan vi går vidare med eventuell reparation.',
   'Dokumentation av resultatet, till nytta inför en kommande besiktning.',
 ]
-
-const processSteps = [
-  { num: '01', icon: PhoneIcon, title: 'Bokning och inlämning', desc: 'Du bokar en tid med oss och lämnar in bilen när det passar.' },
-  { num: '02', icon: MonitorIcon, title: 'Initial kontroll', desc: 'Vi gör en första bedömning av bilens skick och servicebehov.' },
-  { num: '03', icon: WrenchIcon, title: 'Service enligt checklista', desc: 'Mekanikern följer checklistan för den servicenivå som är aktuell.' },
-  { num: '04', icon: ShieldIcon, title: 'Godkännande vid extraarbete', desc: 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.' },
-  { num: '05', icon: CheckIcon, title: 'Slutkontroll och rapport', desc: 'När bilen är klar får du en genomgång och råd inför nästa service.' },
-] as const
 
 const faqs = [
   { question: 'Vad betyder det att motorlampan lyser?', answer: 'Det betyder att bilens styrsystem har upptäckt en avvikelse och sparat en felkod i felminnet. Koden visar vilket system som larmar, men avgör inte ensam vilken del som är trasig — därför läser vi av koden och gör en bedömning utifrån den.' },
@@ -182,14 +174,14 @@ export default function FelsokningPage() {
               </div>
             </div>
 
-            <div className="bilservice__card-grid-3">
+            <dl className="bilservice__ledger" aria-label="Det här omfattar en felsökning">
               {categories.map(([title, text]) => (
-                <article className="bilservice__card--teal" key={title}>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
+                <div key={title}>
+                  <dt>{title}</dt>
+                  <dd>{text}</dd>
+                </div>
               ))}
-            </div>
+            </dl>
           </div>
         </section>
 
@@ -210,11 +202,11 @@ export default function FelsokningPage() {
                   aria-pressed={recommendation === advice}
                 >
                   <strong className="bilservice__symptom-question">{question}</strong>
-                  <p className="bilservice__symptom-desc">{description}</p>
-                  <div className="bilservice__symptom-advice-block">
+                  <span className="bilservice__symptom-desc">{description}</span>
+                  <span className="bilservice__symptom-advice-block">
                     <span className="bilservice__symptom-advice">{advice}</span>
-                    <p className="bilservice__symptom-advice-detail">{adviceDetail}</p>
-                  </div>
+                    <span className="bilservice__symptom-advice-detail">{adviceDetail}</span>
+                  </span>
                 </button>
               ))}
             </div>
@@ -222,33 +214,32 @@ export default function FelsokningPage() {
               <div className="bilservice__recommendation" role="status">
                 <span className="bb-icon-badge"><CheckIcon aria-hidden="true" /></span>
                 <p>Vi föreslår: <strong>{recommendation}</strong>. Det följer med till bokningsformulärets kommentar.</p>
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
               </div>
             )}
           </div>
         </section>
 
-        {/* Bra att veta om felsökning och pris (Guidance stats) */}
+        {/* Bra att veta om felsökning och pris (heading + prose) */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="felsokning-guidance-title">
-          <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro">
+          <div className="bb-wrap bilservice__container bilservice__editorial">
+            <div className="bilservice__editorial-head">
               <h2 className="bb-h2" id="felsokning-guidance-title">Bra att veta om felsökning och pris</h2>
               <p className="bb-lead">Här är branschmässiga riktlinjer kring tidsåtgång och vad en diagnostik faktiskt kan säga dig. Vi kontrollerar alltid vad som gäller för din bil.</p>
+              <div className="bilservice__actions">
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember-solid"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
+              </div>
             </div>
-            <div className="bilservice__stat-grid">
-              {guidance.map(({ title, value, text }) => (
-                <article className="bilservice__stat-card" key={title}>
-                  <span className="bilservice__stat-value">{value}</span>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
+            <div className="bilservice__prose">
+              {guidance.map(({ title, text }) => (
+                <p key={title}><strong>{title}.</strong> {text}</p>
               ))}
             </div>
             {/* DRAFT GUIDANCE: Tidsåtgången 1–2 timmar är ett branschmässigt riktvärde utifrån marknadsjämförelse (bl.a. Sala Bilteknik, Vianor), ej en bekräftad fast Brynäs-policy eller -pris. */}
           </div>
         </section>
 
-        {/* Det här kan vi hjälpa dig med (Service card with checklist) */}
+        {/* Det här ingår i en felsökning (service card with checklist) */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="felsokning-service-title">
           <div className="bb-wrap bilservice__container">
             <div className="bilservice__service-card">
@@ -260,7 +251,7 @@ export default function FelsokningPage() {
               </div>
               <div className="bilservice__service-content">
                 <div>
-                  <h2 className="bb-h2" id="felsokning-service-title">Det här kan vi hjälpa dig med</h2>
+                  <h2 className="bb-h2" id="felsokning-service-title">Det här ingår i en felsökning</h2>
                   <p className="bb-lead--dark">Vi läser av bilens styrsystem och går igenom vad felkoderna faktiskt betyder innan något repareras.</p>
                 </div>
                 <ul className="bilservice__checklist">
@@ -273,27 +264,6 @@ export default function FelsokningPage() {
                 </ul>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Så går det till hos oss (5-step process) */}
-        <section className="bilservice__section bilservice__section--dark" aria-labelledby="felsokning-process-title">
-          <div className="bb-wrap bilservice__container bilservice__process">
-            <div className="bilservice__process-text">
-              <h2 className="bilservice__process-heading bb-h2" id="felsokning-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-              <p className="bb-lead--dark">Att förstå processen gör det enklare att veta vad som händer med bilen och varför en felsökning ibland behöver ta lite tid.</p>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring oss: {BUSINESS.phone.display}</span></a>
-            </div>
-            <ol className="bb-process-grid">
-              {processSteps.map((step) => (
-                <li key={step.num}>
-                  <b>{step.num}</b>
-                  <span className="bb-icon-bare"><step.icon aria-hidden="true" /></span>
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                </li>
-              ))}
-            </ol>
           </div>
         </section>
 

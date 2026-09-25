@@ -46,10 +46,10 @@ test('landing page renders without horizontal overflow', async ({ page }, testIn
     })
   }
 
-  const aboutSection = page.locator('.landing-v2__about-section')
+  const aboutSection = page.locator('.landing-v2__why-section')
   if (await aboutSection.isVisible()) {
     await aboutSection.screenshot({
-      path: testInfo.outputPath('landing-about-gallery.png'),
+      path: testInfo.outputPath('landing-about.png'),
     })
   }
 

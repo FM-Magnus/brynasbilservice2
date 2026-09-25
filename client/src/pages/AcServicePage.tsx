@@ -15,8 +15,6 @@ import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
-import { DollarIcon } from '../components/icons/DollarIcon'
-import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -26,17 +24,11 @@ import manometersJpg from '../assets/images/services/ac/ac-manometers-on-engine.
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 
-const valueProps = [
-  { icon: DollarIcon, title: 'Fasta priser', text: 'Du vet priset innan vi sätter igång — inga överraskningar på fakturan.' },
-  { icon: ShieldHeartIcon, title: 'Bibehållen nybilsgaranti', text: 'Vi följer tillverkarens föreskrifter, så nybilsgarantin påverkas inte av att vi utför servicen.' },
-  { icon: MapPinIcon, title: 'Din lokala verkstad', text: 'Vi finns på Utmarksvägen i Gävle och känner våra kunder och deras bilar.' },
-] as const
-
 const symptoms = [
   {
     question: 'Dålig kyla eller imma på rutorna?',
     advice: 'AC-service',
-    description: 'Tyder oftast på låg nivå av köldmedium, en igensatt kondensor eller en fläkt som inte kyler som den ska.',
+    description: 'Kan bero på för lite köldmedium – vilket i ett slutet system oftast betyder ett läckage – men också på en igensatt kondensor eller en fläkt som inte går som den ska.',
   },
   {
     question: 'Unken lukt ur fläktutblåsen?',
@@ -52,7 +44,8 @@ const symptoms = [
 
 const tips = [
   { title: 'R134a eller R1234yf?', text: 'Köldmediet står på en märkning i motorrummet. Bilar äldre än cirka 2017 har oftast R134a, nyare har vanligen R1234yf — vi kontrollerar alltid vilket som gäller för din bil.' },
-  { title: 'Hur ofta bör AC:n servas?', text: 'En enklare kontroll årligen räcker för de flesta bilar. En fullständig AC-service med läckagesökning och kompressorolja behövs normalt vartannat år.' },
+  { title: 'Hur ofta bör AC:n servas?', text: 'Det beror på bilen och hur den används. Utgå från tillverkarens serviceprogram och låt kontrollera systemet när kylan blir sämre, rutorna immar igen lättare eller det luktar från utblåsen.' },
+  { title: 'Kyla, lukt och läckage är olika fel', text: 'Sämre kyla kan bero på för lite köldmedium, men också på kondensorn, fläkten eller kompressorn. Unken lukt kommer oftast från fukt och beläggningar i förångaren och har inget med köldmediemängden att göra. Ett läckage betyder att köldmedium försvinner ur ett system som ska vara slutet. Då behöver läckan hittas och åtgärdas; en ny påfyllning ersätter bara det som redan har försvunnit.' },
   { title: 'Kör AC:n även på vintern', text: 'Att köra AC:n en stund varje månad, även när det är kallt, håller kompressorn smord och packningarna täta — annars torkar de och risken för läckage ökar.' },
 ] as const
 
@@ -102,7 +95,7 @@ export default function AcServicePage() {
                 <span>i Gävle</span>
               </h1>
               <p className="bilservice__ac-lead">
-                En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer. Ett system med för lite köldmedium smörjs sämre – att ignorera det kan förvandla en enkel påfyllning till en betydligt dyrare kompressorreparation.
+                En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer. Ett system med för lite köldmedium smörjs sämre, och att köra vidare så kan i värsta fall leda till en betydligt dyrare kompressorreparation.
               </p>
               <div className="bb-hero__actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
@@ -119,19 +112,18 @@ export default function AcServicePage() {
 
         {/* Varför boka AC-service hos oss? */}
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="ac-value-title">
-          <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro">
+          <div className="bb-wrap bilservice__container bilservice__editorial">
+            <div className="bilservice__editorial-head">
               <p className="bb-eyebrow">Varför välja oss</p>
-              <h2 className="bb-h2" id="ac-value-title">Varför boka AC-service hos oss?</h2>
+              <h2 className="bb-h2" id="ac-value-title">Varför boka <span className="bilservice__nowrap">AC-service</span> hos oss?</h2>
             </div>
-            <div className="bilservice__card-grid-3">
-              {valueProps.map(({ icon: Icon, title, text }) => (
-                <article className="bilservice__card--teal" key={title}>
-                  <div className="bb-icon-badge"><Icon aria-hidden="true" /></div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
-              ))}
+            <div className="bilservice__prose">
+              <p>Du vet priset innan vi sätter igång, så det blir inga överraskningar på fakturan. Vi följer tillverkarens föreskrifter, vilket betyder att nybilsgarantin inte påverkas av att vi utför servicen.</p>
+              <p>Och vi är din lokala verkstad: vi finns på Utmarksvägen i Gävle och känner våra kunder och deras bilar.</p>
+              <div className="bilservice__actions">
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka AC-service</button>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
+              </div>
             </div>
           </div>
         </section>
@@ -158,12 +150,12 @@ export default function AcServicePage() {
                     aria-pressed={isSelected}
                   >
                     <span className="bilservice__symptom-question">{question}</span>
-                    <p className="bilservice__symptom-desc">{description}</p>
-                    <div className="bilservice__symptom-advice-block">
+                    <span className="bilservice__symptom-desc">{description}</span>
+                    <span className="bilservice__symptom-advice-block">
                       <span className="bilservice__symptom-advice">
                         {isSelected ? `Rekommendation: ${advice}` : 'Välj för rekommendation'}
                       </span>
-                    </div>
+                    </span>
                   </button>
                 )
               })}
@@ -175,7 +167,7 @@ export default function AcServicePage() {
                 </p>
                 <button
                   type="button"
-                  className="bb-btn bb-btn--teal"
+                  className="bb-btn bb-btn--ember-solid"
                   onClick={openBooking}
                 >
                   Boka rekommenderad åtgärd
@@ -191,9 +183,8 @@ export default function AcServicePage() {
             <div className="bilservice__intro bilservice__intro--wide-sm">
               <p className="bb-eyebrow">Tydliga priser</p>
               <h2 className="bb-h2" id="ac-prices-title">Service för renare och svalare kupé</h2>
-              {/* DRAFT GUIDANCE: Branschmässigt riktvärde (enklare årlig kontroll, full service ca vartannat år), ej bekräftad fast Brynäs-policy. */}
               <p className="bb-lead bilservice__lead--intro-tight">
-                En enklare kontroll årligen räcker för de flesta bilar, medan en fullständig AC-service med läckagesökning och kompressorolja normalt behövs vartannat år.
+                Hur ofta AC:n behöver servas beror på bilen och på hur systemet fungerar. Märker du sämre kyla, imma eller lukt är det ett skäl att låta kontrollera det.
               </p>
               <small>
                 Samtliga priser är inklusive moms.
@@ -350,19 +341,19 @@ export default function AcServicePage() {
 
         {/* Så håller du koll på AC:n mellan servicarna (Tips) */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="ac-tips-title">
-          <div className="bb-wrap bilservice__container">
-            <div className="bilservice__intro">
+          <div className="bb-wrap bilservice__container bilservice__editorial">
+            <div className="bilservice__editorial-head">
               <p className="bb-eyebrow">Bra att veta</p>
               <h2 className="bb-h2" id="ac-tips-title">
                 Så håller du koll på <span className="bb-accent">AC:n</span> mellan servicarna
               </h2>
             </div>
-            <div className="bilservice__card-grid-3">
+            <div className="bilservice__prose">
               {tips.map(({ title, text }) => (
-                <article className="bilservice__card--teal" key={title}>
+                <div key={title}>
                   <h3>{title}</h3>
                   <p>{text}</p>
-                </article>
+                </div>
               ))}
             </div>
           </div>

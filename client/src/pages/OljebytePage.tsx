@@ -11,14 +11,12 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideProcess, GuideServiceCard, GuideSymptoms, GuideTopic } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideServiceCard, GuideSymptoms, GuideTopic } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
-import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
-import { DollarIcon } from '../components/icons/DollarIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
 import { HourglassIcon } from '../components/icons/HourglassIcon'
 import heroJpg from '../assets/images/services/oil/oil-filter-workbench-hero.jpg'
@@ -36,10 +34,9 @@ const trustBadges = [
 ] as const
 
 const importance = [
-  { icon: ClockIcon, title: 'Förlänger motorns livslängd', text: 'Genom att identifiera och åtgärda problem tidigt kan du undvika dyrare reparationer i framtiden.' },
-  { icon: GaugeIcon, title: 'Håller nere bränsleförbrukningen', text: 'En motor som går på ren, fräsch olja arbetar mer effektivt, vilket märks direkt på bränsleförbrukningen.' },
-  { icon: DollarIcon, title: 'Minskar risken för dyra motorrelaterade reparationer', text: 'Olja som inte byts i tid tappar sin förmåga att smörja och kyla motorns delar effektivt.' },
-  { icon: ThumbsUpIcon, title: 'Bidrar till att bilen presterar som den ska över tid', text: 'Ökad friktion mellan rörliga komponenter sliter ner motorn snabbare än den annars skulle göra.' },
+  { title: 'Skyddar motorns rörliga delar', text: 'Olja som inte byts i tid tappar sin förmåga att smörja och kyla, och ökad friktion sliter ner motorn snabbare än den annars skulle göra.' },
+  { title: 'Minskar risken för dyra motorrelaterade reparationer', text: 'Ett oljebyte kostar lite jämfört med en reparation av en motor som har gått på uttjänt olja.' },
+  { title: 'Ger en chans att upptäcka annat i tid', text: 'När bilen står på lyften syns läckage, fuktiga packningar och låg nivå på andra vätskor lättare än i vardagen.' },
 ] as const
 
 const includedItems = [
@@ -62,8 +59,8 @@ const viscosityDetails = [
 ]
 
 const oilStandards = [
-  { title: 'ACEA A3/B4', text: 'robust olja med högre askhalt, vanlig i äldre bilar utan partikelfilter.' },
-  { title: 'ACEA C1–C3', text: 'lågaskoljor ("Low SAPS"), framtagna för bilar med partikelfilter (DPF/OPF) och katalysator. Fyller du en sådan bil med en vanlig A3/B4-olja byggs aska upp i partikelfiltret snabbare än det ska.' },
+  { title: 'ACEA A3/B4', text: 'är en robust olja med högre askhalt, vanlig i äldre bilar utan partikelfilter.' },
+  { title: 'ACEA C1–C3', text: 'är lågaskoljor ("Low SAPS"), framtagna för bilar med partikelfilter (DPF/OPF) och katalysator. Fyller du en sådan bil med en vanlig A3/B4-olja byggs aska upp i partikelfiltret snabbare än det ska.' },
   { title: 'Tillverkarspecifika godkännanden', text: 'som VW 504.00/507.00, BMW Longlife-04 eller MB 229.51 väger tyngst av allt – de är framtagna och testade specifikt för den motorfamiljen.' },
 ]
 
@@ -82,14 +79,6 @@ const misconceptions = [
   { title: '"Man kan inte blanda olika oljemärken eller typer."', text: 'I praktiken går det oftast bra rent tekniskt – oljor är i grunden kompatibla med varandra – men det är ingen genväg till rätt olja. Följer man inte specifikationen som gäller för just din bil spelar det ingen roll vilket märke som står på flaskan.' },
 ]
 
-const processSteps = [
-  ['01', 'Bokning och inlämning', 'Du bokar en tid med oss och lämnar in bilen när det passar.'],
-  ['02', 'Initial kontroll', 'Vi gör en första bedömning av bilens skick och servicebehov.'],
-  ['03', 'Service enligt checklista', 'Mekanikern följer checklistan för den servicenivå som är aktuell.'],
-  ['04', 'Godkännande vid extraarbete', 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.'],
-  ['05', 'Slutkontroll och rapport', 'När bilen är klar får du en genomgång och råd inför nästa service.'],
-] as const
-
 const faqs = [
   { question: 'Hur ofta behöver jag byta olja?', answer: 'Det varierar mellan bilmärken och modeller, men som tumregel rekommenderas ett oljebyte var 10 000–15 000 km, eller minst en gång om året – vad som än inträffar först. Kör du mycket kortkörning eller drar släp bör du räkna med tätare byten än vad instruktionsboken säger.' },
   { question: 'Ska jag lita på bilens serviceindikator eller intervallet i instruktionsboken?', answer: 'Se dem som en utgångspunkt, inte ett facit. Indikatorn räknar oftast utifrån idealiska förhållanden. Är din körning tuffare mot oljan – mycket stadskörning, kyla, korta resor – lönar det sig att byta tätare.' },
@@ -103,8 +92,6 @@ const faqs = [
 
 const infoCards = [
   { icon: ClockIcon, title: 'Bytesintervall', text: 'Vanligtvis var 10 000–15 000 km eller minst en gång per år – vad som än inträffar först. Mycket kortkörning eller tuff belastning motiverar tätare byten. Detta är ett branschmässigt riktvärde.' },
-  { icon: GaugeIcon, title: 'Viskositet (SAE)', text: 'Anger oljans flytförmåga vid kyla (före W) och arbetstemperatur (efter W). Rätt viskositet säkerställer snabb smörjning vid kallstart och stabil oljefilm under belastning.' },
-  { icon: ShieldIcon, title: 'Godkännanden (ACEA & API)', text: 'Tillverkarens specifika specifikation och ACEA-klass styr oljans faktiska skyddsnivå. Bilar med partikelfilter kräver särskilda lågaskoljor (Low SAPS).' },
   { icon: HourglassIcon, title: 'Tidsåtgång', text: 'Ett oljebyte med dränering, filterbyte och nivåkontroll tar vanligtvis mellan 30 minuter och en timme i vår verkstad.' },
 ] as const
 
@@ -133,14 +120,7 @@ export default function OljebytePage() {
           image={{ webp: funnelWebp, jpg: funnelJpg, alt: 'Ny motorolja hälls i en tratt i motorrummet' }}
           caption="Rätt olja. Rätt mängd. Varje gång."
         >
-          <p>Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage.</p>
           <p>Med tiden bryts oljan ner, tappar sina smörjande egenskaper och samlar på sig sot och förbränningsrester. Ett oljebyte innebär att den gamla, uttjänta oljan dräneras ur motorn, oljefiltret byts ut, ny olja fylls på och nivån kontrolleras innan bilen lämnas tillbaka till dig.</p>
-
-          <div className="service-guide__prose-card">
-            <h3>Varför är oljebyte viktigt?</h3>
-            <p>Olja som inte byts i tid tappar sin förmåga att smörja och kyla motorns delar effektivt. Det leder till ökad friktion mellan rörliga komponenter, vilket över tid sliter ner motorn snabbare än den annars skulle göra.</p>
-            <p>En motor som går på ren, fräsch olja arbetar dessutom mer effektivt, vilket märks direkt på bränsleförbrukningen jämfört med en motor som får gå på gammal eller smutsig olja.</p>
-          </div>
 
           <Tip
             title="Osäker på vilken olja din bil behöver?"
@@ -165,7 +145,7 @@ export default function OljebytePage() {
 
         <GuideInfo
           id="oljebyte-info-title"
-          heading="Mer info"
+          heading="Riktvärden för motorolja"
           text="Här har vi samlat riktvärden och viktig information om motorolja, intervall och vanliga frågor kring oljebyten."
           cards={infoCards}
           safetyIcon={InfoIcon}
@@ -199,7 +179,7 @@ export default function OljebytePage() {
           heading="Vad betyder egentligen siffrorna på oljedunken?"
           text="De flesta har sett beteckningar som 5W-30 eller 0W-20 utan att egentligen veta vad de betyder. Det är oljans viskositetsklass enligt SAE-systemet (Society of Automotive Engineers), och den beskriver hur trögflytande oljan är – inte hur bra kvalitet den håller."
           items={viscosityDetails}
-          columns={2}
+          variant="prose"
           note="Viskositeten är alltså bara en flödesegenskap, inte ett kvalitetsmått. Två oljor med exakt samma viskositetsbeteckning kan skilja sig kraftigt åt i hur väl de faktiskt skyddar motorn."
         />
 
@@ -208,7 +188,7 @@ export default function OljebytePage() {
           heading="API och ACEA – standarderna som faktiskt styr kvaliteten"
           text="Det som avgör om en olja verkligen passar din motor är inte viskositeten utan godkännandena bredvid den – API (amerikansk standard) och ACEA (europeisk standard). ACEA-klasserna är särskilt viktiga att förstå:"
           items={oilStandards}
-          columns={3}
+          variant="prose"
           note={<>Rätt ordning att välja olja i är: tillverkarens egen specifikation först, sedan ACEA-klass, och viskositet sist. En "rätt" viskositet med fel specifikation kan göra mer skada än nytta.</>}
         />
 
@@ -217,7 +197,7 @@ export default function OljebytePage() {
           heading="Mineral-, halvsyntet- och helsyntetolja – vad är egentligen skillnaden?"
           text="Basoljan – den vätska additiven blandas i – delas in i grupper, och det är här den verkliga skillnaden mellan oljor ligger:"
           items={oilTypes}
-          columns={4}
+          variant="prose"
           note={<>Den praktiska slutsatsen: beteckningen "fullsyntetisk" på flaskan garanterar inte att två oljor är likvärdiga. Additivpaketet – rengörande, korrosionsskyddande och viskositetsstabiliserande tillsatser – väger minst lika tungt som basoljan, och det är just kombinationen av basolja och additivpaket som gör att pris och prestanda kan skilja sig kraftigt mellan oljor som ser identiska ut på pappret.</>}
         />
 
@@ -226,12 +206,6 @@ export default function OljebytePage() {
           heading="Vanliga missförstånd om motorolja"
           items={misconceptions}
           columns={3}
-        />
-
-        <GuideProcess
-          id="oljebyte-process-title"
-          text="Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="oljebyte-faq" heading="Vanliga frågor om oljebyte" items={faqs} />

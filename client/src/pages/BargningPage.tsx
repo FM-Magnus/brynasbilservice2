@@ -34,15 +34,6 @@ function SparkleDirectIcon({ className }: { className?: string }) {
   )
 }
 
-function GarageIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
-    </svg>
-  )
-}
-
 function CarBatteryIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -138,72 +129,7 @@ export default function BargningPage() {
         </section>
 
         {/* =========================================================
-            2. QUICK 3-STEP ACTION BAR
-            ========================================================= */}
-        <section className="bargning-page__quick-steps" aria-labelledby="quick-steps-title">
-          <div className="bb-wrap">
-            <div className="bargning-page__quick-steps-header">
-              <h2 className="bb-h2 bargning-page__quick-steps-title" id="quick-steps-title">
-                Snabb hjälp när du behöver det
-              </h2>
-              <p className="bb-lead bargning-page__quick-steps-subtitle">
-                Så enkelt är det att få bärgning eller transport till vår verkstad.
-              </p>
-            </div>
-
-            <div className="bargning-page__quick-steps-grid">
-              <div className="bargning-page__quick-step-card">
-                <div className="bargning-page__quick-step-icon-wrap">
-                  <span className="bargning-page__quick-step-badge">01</span>
-                  <div className="bargning-page__quick-step-icon" aria-hidden="true">
-                    <PhoneIcon />
-                  </div>
-                </div>
-                <h3 className="bargning-page__quick-step-heading">Ring oss</h3>
-                <p className="bargning-page__quick-step-desc">
-                  Berätta var bilen står och vad som har hänt.
-                </p>
-              </div>
-
-              <div className="bargning-page__quick-step-arrow" aria-hidden="true">
-                <ArrowRightIcon />
-              </div>
-
-              <div className="bargning-page__quick-step-card">
-                <div className="bargning-page__quick-step-icon-wrap">
-                  <span className="bargning-page__quick-step-badge">02</span>
-                  <div className="bargning-page__quick-step-icon" aria-hidden="true">
-                    <TruckIcon />
-                  </div>
-                </div>
-                <h3 className="bargning-page__quick-step-heading">Bärgning / Starthjälp</h3>
-                <p className="bargning-page__quick-step-desc">
-                  Vi kommer till dig och hjälper dig på plats.
-                </p>
-              </div>
-
-              <div className="bargning-page__quick-step-arrow" aria-hidden="true">
-                <ArrowRightIcon />
-              </div>
-
-              <div className="bargning-page__quick-step-card">
-                <div className="bargning-page__quick-step-icon-wrap">
-                  <span className="bargning-page__quick-step-badge">03</span>
-                  <div className="bargning-page__quick-step-icon" aria-hidden="true">
-                    <GarageIcon />
-                  </div>
-                </div>
-                <h3 className="bargning-page__quick-step-heading">Transport till verkstaden</h3>
-                <p className="bargning-page__quick-step-desc">
-                  Vi transporterar bilen säkert till vår verkstad i Gävle.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================
-            3. MAIN SHOWCASE SPLIT CARD
+            2. MAIN SHOWCASE SPLIT CARD
             ========================================================= */}
         <section className="bargning-page__showcase" aria-labelledby="showcase-title">
           <div className="bb-wrap">
@@ -306,7 +232,7 @@ export default function BargningPage() {
         </section>
 
         {/* =========================================================
-            4. TOWING SCENARIOS GRID
+            3. TOWING SCENARIOS GRID
             ========================================================= */}
         <section className="bargning-page__scenarios" aria-labelledby="scenarios-title">
           <div className="bb-wrap">
@@ -379,7 +305,7 @@ export default function BargningPage() {
         </section>
 
         {/* =========================================================
-            5. STEP-BY-STEP WORKSHOP PROTOCOL
+            4. STEP-BY-STEP WORKSHOP PROTOCOL
             ========================================================= */}
         <section className="bargning-page__process" aria-labelledby="process-title">
           <div className="bb-wrap">
@@ -447,7 +373,7 @@ export default function BargningPage() {
         </section>
 
         {/* =========================================================
-            6. WORKSHOP INTAKE & REASSURANCE SECTION
+            5. WORKSHOP INTAKE & REASSURANCE SECTION
             ========================================================= */}
         <section className="bargning-page__workshop-intake" aria-labelledby="intake-title">
           <div className="bb-wrap">
@@ -545,7 +471,7 @@ export default function BargningPage() {
         </section>
 
         {/* =========================================================
-            7. USED CARS CROSS-SELL BANNER
+            6. USED CARS CROSS-SELL BANNER
             ========================================================= */}
         <section className="bargning-page__cars-banner" aria-labelledby="used-cars-title">
           <div className="bb-wrap">
@@ -578,7 +504,7 @@ export default function BargningPage() {
         </section>
 
         {/* =========================================================
-            8. CLOSING EMERGENCY CTA BANNER
+            7. CLOSING EMERGENCY CTA BANNER
             ========================================================= */}
         <section className="bargning-page__cta" aria-labelledby="cta-title">
           <div className="bb-wrap">

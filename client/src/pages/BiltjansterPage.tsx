@@ -233,7 +233,7 @@ export default function BiltjansterPage() {
                 Hittar du inte det du söker?
               </h2>
               <p className="biltjanster-hub__cta-desc">
-                Ring oss eller boka en tid direkt så hjälper vi dig att hitta rätt åtgärd för din bil.
+                Märker du ett fel men vet inte vilken tjänst det gäller? Beskriv vad bilen gör – ljud, varningslampor eller hur den känns – när du ringer eller bokar, så hjälper vi dig att hitta rätt åtgärd.
               </p>
             </div>
             <div className="biltjanster-hub__cta-actions">

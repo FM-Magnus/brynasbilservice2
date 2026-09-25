@@ -29,90 +29,54 @@ Moderna bilar styrs av ett nätverk av datorer som ständigt övervakar motor, e
 BOKA FELSÖKNING
 RING 070-553 33 95
 Felkodsläsning (OBD)
-
 Vi läser av bilens styrsystem via OBD-uttaget och tolkar vilka felkoder som är lagrade eller pågående.
-
 Motordiagnostik
-
 Kontroll av tändning, bränsletillförsel och motorstyrning när motorn går ojämnt eller tappar effekt.
-
 Elektronik & sensorer
-
 Test av givare och styrsystem som annars ger felmeddelanden eller oregelbunden funktion.
-
 Bränsle- & avgassystem
-
 Felsökning av system som påverkar bränsleförbrukning, utsläpp och en godkänd besiktning.
-
 Kylsystem
-
 Kontroll av kylvätskenivå, termostat och temperaturövervakning så att motorn inte överhettas.
-
 Batteri & laddsystem
-
 Test av batteri och generator när elsystemet inte får den ström det behöver.
-
 Känner du igen något av detta?
 
 Välj det som stämmer bäst in på din bil, så följer rekommendationen med till bokningsformulärets kommentar.
 
 Motorlampan (Check Engine) eller andra varningslampor lyser
-
 En lysande lampa betyder att bilens system har upptäckt en avvikelse. Vi läser av felkoderna för att se vilket system som larmar.
-
 Felkodsläsning
-
 Vi kopplar in diagnostikutrustning och läser av lagrade koder. Tar normalt 30–60 minuter.
-
 Bilen är svårstartad eller stannar under körning
-
 Kan bero på allt från tändning och bränsletillförsel till sensorer eller batteri/laddsystem — vi mäter oss fram till orsaken.
-
 Motor- och elsystemdiagnostik
-
 Kontroll av tändning, bränsletillförsel och elsystem. Normalt 1–2 timmar beroende på orsak.
-
 Ojämn motorgång eller märkbart sämre effekt
-
 Ofta ett tecken på fel i tändning, insprutning eller givare som påverkar motorstyrningen.
-
 Motordiagnostik
-
 Mätning av tändläge, insprutning och relevanta givare. Normalt 1–2 timmar.
-
 Elektriska funktioner eller instrument fungerar konstigt
-
 Fönsterhissar, belysning eller instrumentpanel som beter sig oregelbundet pekar ofta på ett elfel snarare än en mekanisk komponent.
-
 Elektronik- och elsystemfelsökning
-
 Felsökning av kablage, säkringar och styrenheter. Tidsåtgången varierar med felets omfattning.
-
 Bra att veta om felsökning och pris
 
 Här är branschmässiga riktlinjer kring tidsåtgång och vad en diagnostik faktiskt kan säga dig. Vi kontrollerar alltid vad som gäller för din bil.
 
-1–2 tim
-Tidsåtgång för en diagnostik
+RING 070-553 33 95
 
-En standarddiagnostik med felkodsläsning och grundläggande kontroll tar normalt 1–2 timmar. Mer omfattande fel som kräver ytterligare mätning kan ta längre tid.
+Tidsåtgång för en diagnostik. En standarddiagnostik med felkodsläsning och grundläggande kontroll tar normalt 1–2 timmar. Mer omfattande fel som kräver ytterligare mätning kan ta längre tid.
 
-Inte exakt del
-En kod visar bara vilket system som larmar
+Felkod är inte samma sak som orsak. En felkod visar vilken krets eller vilket system styrenheten har reagerat på, inte vilken del som är trasig. En kod för en givare kan bero på givaren själv, men också på ett kabelbrott, en dålig kontakt eller en skadad del som givaren läser av. Orsaken fastställs först när koden har följts upp med mätningar och kontroller.
 
-En felkod pekar ut vilket system som reagerat, men avgör sällan ensam vilken specifik komponent som är trasig — därför krävs en verklig bedömning, inte bara en avläsning.
+Berätta när felet visar sig. Notera om symptomet kommer vid kallstart eller varm motor, vid en viss hastighet, vid inbromsning, i kurvor eller i fuktigt väder, och om varningslampan lyser hela tiden eller bara ibland. Sådana detaljer gör det lättare att återskapa felet vid en provkörning och att koppla koden till rätt orsak.
 
-Före besiktning
-Bäst att göra innan besiktningen
+Bäst att göra innan besiktningen. Att felsöka och åtgärda orsaken till en varningslampa innan besiktningen kan spara en omkörning och en extra avgift om bilen annars hade blivit underkänd.
 
-Att felsöka och åtgärda orsaken till en varningslampa innan besiktningen kan spara en omkörning och en extra avgift om bilen annars hade blivit underkänd.
+Prisuppgift innan vi går vidare. Kostnaden beror på hur omfattande felsökningen blir. Vi lämnar alltid en tydlig prisuppgift innan vi går vidare med reparation.
 
-Fast offert
-Prisuppgift innan vi går vidare
-
-Kostnaden beror på hur omfattande felsökningen blir. Vi lämnar alltid en tydlig prisuppgift innan vi går vidare med reparation.
-
-Det här kan vi hjälpa dig med
+Det här ingår i en felsökning
 
 Vi läser av bilens styrsystem och går igenom vad felkoderna faktiskt betyder innan något repareras.
 
@@ -122,37 +86,6 @@ Bedömning av om felet kräver ytterligare mätning för att fastställas exakt.
 Tydlig genomgång av vad koderna betyder och vad vi rekommenderar.
 Fast prisuppgift innan vi går vidare med eventuell reparation.
 Dokumentation av resultatet, till nytta inför en kommande besiktning.
-Så går det till
-hos oss
-
-Att förstå processen gör det enklare att veta vad som händer med bilen och varför en felsökning ibland behöver ta lite tid.
-
-RING OSS: 070-553 33 95
-01
-Bokning och inlämning
-
-Du bokar en tid med oss och lämnar in bilen när det passar.
-
-02
-Initial kontroll
-
-Vi gör en första bedömning av bilens skick och servicebehov.
-
-03
-Service enligt checklista
-
-Mekanikern följer checklistan för den servicenivå som är aktuell.
-
-04
-Godkännande vid extraarbete
-
-Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.
-
-05
-Slutkontroll och rapport
-
-När bilen är klar får du en genomgång och råd inför nästa service.
-
 Vanliga frågor om felsökning
 Vad betyder det att motorlampan lyser?
 +

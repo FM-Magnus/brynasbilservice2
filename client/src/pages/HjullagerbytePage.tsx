@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -41,10 +41,10 @@ const parts = [
 ] as const
 
 const benefits = [
-  { icon: AlertTriangleIcon, title: 'Säkerhet & trygghet', text: 'Ett dåligt hjullager kan i värsta fall skära eller överhettas, vilket riskerar att hjulet låser sig eller att styrförmågan försämras under körning.' },
-  { icon: ShieldIcon, title: 'Skyddar kringliggande delar', text: 'Ett glappt lager belastar bromsskivor, bromsok och hjulupphängning onormalt, vilket snabbt kan leda till onödiga följdskador och dyrare reparationer.' },
-  { icon: ClockIcon, title: 'Praktisk tidsbesparing', text: 'Eftersom bromsskivor och ok demonteras vid lagerbytet passar vi alltid på att kontrollera bromsarnas skick utan extra arbetskostnad.' },
-  { icon: ThumbsUpIcon, title: 'Rätt del för rätt bil', text: 'Vi säkerställer att ersättningslagret matchar bilens specifikationer exakt, särskilt för bilar med ABS-integrerade magnetiska givarringar.' },
+  { title: 'Säkerhet & trygghet', text: 'Ett dåligt hjullager kan i värsta fall skära eller överhettas, vilket riskerar att hjulet låser sig eller att styrförmågan försämras under körning.' },
+  { title: 'Skyddar kringliggande delar', text: 'Ett lager med glapp låter hjulet röra sig mer än det ska, vilket med tiden kan påverka även andra delar i hjulupphängningen och bromsarna.' },
+  { title: 'Praktisk tidsbesparing', text: 'Eftersom bromsskivor och ok demonteras vid lagerbytet passar vi alltid på att kontrollera bromsarnas skick utan extra arbetskostnad.' },
+  { title: 'Rätt del för rätt bil', text: 'Vi säkerställer att ersättningslagret matchar bilens specifikationer exakt, särskilt för bilar med ABS-integrerade magnetiska givarringar.' },
 ] as const
 
 const symptoms: readonly GuideSymptom[] = [
@@ -70,16 +70,8 @@ const infoCards: readonly GuideInfoCard[] = [
   { icon: ClockIcon, title: 'Livslängd och intervall', text: 'Hjullager håller normalt 80 000–200 000 km beroende på körstil, fukt, salt och väglag. Framhjulslager slits ofta snabbare då de bär mer tyngd och styrkrafter.' },
   { icon: ThumbsUpIcon, title: 'Behöver inte bytas i par', text: 'Till skillnad från stötdämpare och bromsar behöver hjullager inte bytas parvis. Det är fullt tillräckligt och tryggt att enbart byta det lager som är slitet.' },
   { icon: GaugeIcon, title: 'Känsliga ABS-sensorer', text: 'Moderna lager har ofta magnetiska givarringar. Felaktig del eller ovarsam montering gör att ABS- och antisladdsystem slutar fungera och varnar.', flag: 'VIKTIGT' },
-  { icon: AlertTriangleIcon, title: 'Undvik dyra följdskador', text: 'Att köra för länge med ett glappt lager riskerar att skada bromsskiva, bromsok eller hjulspindel på grund av kraftig värmeutveckling.' },
+  { icon: AlertTriangleIcon, title: 'Åtgärda i tid', text: 'Ett slitet lager blir sällan bättre. Att byta det när ljudet eller glappet har konstaterats är i regel enklare än att vänta tills det har blivit kraftigt.' },
 ]
-
-const processSteps = [
-  ['01', 'Bokning och inlämning', `Boka enkelt tid online eller ring oss och lämna in bilen hos oss på ${BUSINESS.address.street} i ${BUSINESS.address.district}.`],
-  ['02', 'Lokaliseringskontroll', 'Vi provkör, hissar upp bilen och känner mekaniskt efter glapp och missljud för att säkra vilket lager som felar.'],
-  ['03', 'Demontering av broms & nav', 'Bromsok och skiva demonteras varsamt och det slitna lagret pressas ur eller navenheten skruvas loss.'],
-  ['04', 'Montering med moment', 'Nytt kvalitetslager monteras med anpassade verktyg och dras åt till biltillverkarens exakta moment.'],
-  ['05', 'Slutkontroll och provkörning', 'Vi provkör bilen, kontrollerar att missljudet är borta och att ABS- och antisladdsystem fungerar felfritt.'],
-] as const
 
 const faqs = [
   { question: 'Hur vet jag vilket hjullager som är trasigt?', answer: 'Det tydligaste tecknet är ett dovt, malande eller brummande ljud som ökar i takt med bilens hastighet och ändrar karaktär när du svänger. Svänger du vänster belastas höger sidas lager mer — om ljudet ökar då sitter felet ofta på höger sida. På verkstaden hissar vi upp bilen och snurrar samt vickar på hjulen för att fastställa exakt vilket lager som felar.' },
@@ -126,7 +118,7 @@ export default function HjullagerbytePage() {
         <GuideImportance
           id="wheel-bearing-importance-title"
           heading="Varför är det viktigt att åtgärda i tid?"
-          text="Ett dåligt hjullager påverkar inte bara komforten – det riskerar säkerheten och kan orsaka dyra följdskador."
+          text="Ett slitet hjullager börjar ofta som ett svagt ljud, men det slits vidare och bör bytas innan glappet blir stort."
           items={benefits}
         />
 
@@ -138,6 +130,7 @@ export default function HjullagerbytePage() {
           image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker undersöker hjullager och glapp under lyft bil i verkstaden' }}
           caption="Säker gång och kontroll av glapp."
         >
+          <p>Ett brummande eller malande ljud behöver lokaliseras innan något lager byts. Samma ljud kan komma från däck med ojämnt slitage, en drivknut eller bromsarna, och ljudet från ett lager kan höras på fel sida av bilen. Därför kontrolleras hjulen för glapp och ljud med bilen upplyft, och ofta hjälper en provkörning där man lyssnar på hur ljudet ändras med hastighet och i kurvor.</p>
           <Tip
             title="Bra att veta om missljud:"
             text="Ett hjullager som precis börjat ge missljud går ofta att köra en kortare sträcka med, men slitaget ökar snabbt. Eftersom det inte går att förutse exakt när lagret havererar helt rekommenderar vi att boka kontroll så snart missljudet uppstår."
@@ -146,22 +139,17 @@ export default function HjullagerbytePage() {
 
         <GuideServiceCard
           id="wheel-bearing-service-title"
+          heading="Byte av hjullager"
           text="Vi felsöker, lokaliserar och byter slitna hjullager med rätt pressverktyg och kvalitetsdelar anpassade för din bils hjulupphängning och säkerhetssystem."
           items={serviceItems}
         />
 
         <GuideInfo
           id="wheel-bearing-guidance-title"
-          heading="Viktig information om hjullager"
+          heading="Bra att veta om hjullager"
           text="Här är praktiska riktlinjer och fakta kring hjullagrets funktion och underhåll. Vi undersöker alltid bilens faktiska skick innan vi föreslår åtgärder."
           cards={infoCards}
           safety={<><strong>Säkerhetsnotis:</strong> Ett slitet hjullager är inte något att skjuta upp i onödan. Även om missljudet kan pågå en tid finns det en överhängande risk för överhettning eller att lagret skär, vilket i värsta fall kan leda till att hjulet låser sig i hög hastighet.</>}
-        />
-
-        <GuideProcess
-          id="wheel-bearing-process-title"
-          text="Att byta hjullager kräver fackmannamässiga verktyg, renhet och rätt åtdragningsmoment. Så här ser vår strukturerade process ut."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="hjullager-faq" heading="Vanliga frågor om hjullagerbyte" items={faqs} />

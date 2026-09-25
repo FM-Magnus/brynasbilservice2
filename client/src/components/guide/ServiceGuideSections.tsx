@@ -46,8 +46,6 @@ export interface GuideInfoCard extends GuideIconItem {
   flag?: string
 }
 
-export type GuideProcessStep = readonly [num: string, title: string, text: string]
-
 /** Below-the-fold photo: always lazy. */
 function Picture({ image }: { image: GuideImage }) {
   return (
@@ -152,11 +150,17 @@ export function GuideParts({ items }: { items: readonly GuideTextItem[] }) {
   )
 }
 
+/** Adds a full stop after a lead-in title unless it already ends a sentence. */
+function leadIn(title: string) {
+  return /[.?!:]$/.test(title) ? title : `${title}.`
+}
+
 interface GuideImportanceProps {
   id: string
   heading: ReactNode
   text: ReactNode
-  items: readonly GuideIconItem[]
+  /** Reasons, rendered as running prose with a bold lead-in each. */
+  items: readonly GuideTextItem[]
 }
 
 export function GuideImportance({ id, heading, text, items }: GuideImportanceProps) {
@@ -168,13 +172,9 @@ export function GuideImportance({ id, heading, text, items }: GuideImportancePro
             <h2 id={id}>{heading}</h2>
             <p>{text}</p>
           </div>
-          <div className="service-guide__importance-grid">
-            {items.map(({ icon: Icon, title, text: itemText }) => (
-              <div className="service-guide__importance-card" key={title}>
-                <Icon aria-hidden="true" />
-                <h3>{title}</h3>
-                <p>{itemText}</p>
-              </div>
+          <div className="service-guide__importance-prose">
+            {items.map(({ title, text: itemText }) => (
+              <p key={title}><strong>{leadIn(title)}</strong> {itemText}</p>
             ))}
           </div>
         </div>
@@ -233,12 +233,12 @@ export function GuideSymptoms({ id, heading, text, items, image, caption, landsc
 
 interface GuideServiceCardProps {
   id: string
-  heading?: ReactNode
+  heading: ReactNode
   text: ReactNode
   items: readonly string[]
 }
 
-export function GuideServiceCard({ id, heading = 'Det här kan vi hjälpa dig med', text, items }: GuideServiceCardProps) {
+export function GuideServiceCard({ id, heading, text, items }: GuideServiceCardProps) {
   return (
     <section className="service-guide__section service-guide__section--tight" aria-labelledby={id}>
       <div className="bb-wrap service-guide__container">
@@ -275,17 +275,18 @@ export function GuideInfo({ id, heading, text, cards, safetyIcon: SafetyIcon = A
           <h2 id={id}>{heading}</h2>
           <p>{text}</p>
         </div>
-        <div className="service-guide__info-grid">
+        <dl className="service-guide__info-ledger">
           {cards.map(({ icon: Icon, title, text: cardText, flag }) => (
-            <div className="service-guide__info-card" key={title}>
-              <span className="service-guide__info-icon"><Icon aria-hidden="true" /></span>
-              <div>
-                {flag && <span className="service-guide__info-flag" aria-hidden="true">{flag}</span>}
-                <h3>{title}</h3><p>{cardText}</p>
-              </div>
+            <div className="service-guide__info-row" key={title}>
+              <dt>
+                <Icon aria-hidden="true" />
+                <span>{title}</span>
+                {flag && <span className="service-guide__info-flag">{flag}</span>}
+              </dt>
+              <dd>{cardText}</dd>
             </div>
           ))}
-        </div>
+        </dl>
         <div className="service-guide__safety-strip">
           <SafetyIcon aria-hidden="true" />
           <p>{safety}</p>
@@ -300,13 +301,31 @@ interface GuideTopicProps {
   heading: ReactNode
   text?: ReactNode
   items: readonly GuideTextItem[]
-  columns: 2 | 3 | 4
-  /** Closing remark under the cards. */
+  /** `prose`: heading beside running text, each item a paragraph opening with its title. */
+  variant?: 'cards' | 'prose'
+  columns?: 2 | 3 | 4
+  /** Closing remark under the cards or prose. */
   note?: ReactNode
 }
 
-/** A heading, a grid of text cards and an optional note (Oljebyte's deep-dive blocks). */
-export function GuideTopic({ id, heading, text, items, columns, note }: GuideTopicProps) {
+/** A heading with either a grid of text cards or running prose (Oljebyte's deep-dive blocks). */
+export function GuideTopic({ id, heading, text, items, variant = 'cards', columns = 3, note }: GuideTopicProps) {
+  if (variant === 'prose') {
+    return (
+      <section className="service-guide__section service-guide__section--tight" aria-labelledby={id}>
+        <div className="bb-wrap service-guide__container service-guide__topic-prose">
+          <h2 id={id}>{heading}</h2>
+          <div>
+            {text && <p>{text}</p>}
+            {items.map(({ title, text: itemText }) => (
+              <p key={title}><strong>{title}</strong> {itemText}</p>
+            ))}
+            {note && <p className="service-guide__topic-note">{note}</p>}
+          </div>
+        </div>
+      </section>
+    )
+  }
   return (
     <section className="service-guide__section service-guide__section--tight" aria-labelledby={id}>
       <div className="bb-wrap service-guide__container">
@@ -320,36 +339,6 @@ export function GuideTopic({ id, heading, text, items, columns, note }: GuideTop
           ))}
         </div>
         {note && <p className="service-guide__topic-note">{note}</p>}
-      </div>
-    </section>
-  )
-}
-
-interface GuideProcessProps {
-  id: string
-  text: ReactNode
-  steps: readonly GuideProcessStep[]
-}
-
-export function GuideProcess({ id, text, steps }: GuideProcessProps) {
-  return (
-    <section className="service-guide__section service-guide__section--tight" aria-labelledby={id}>
-      <div className="bb-wrap service-guide__container">
-        <div className="service-guide__process">
-          <div className="service-guide__process-text">
-            <h2 id={id}>Så går det till<br /><span className="bb-accent">hos oss</span></h2>
-            <p>{text}</p>
-            <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal service-guide__btn"><PhoneIcon aria-hidden="true" />Ring oss: {BUSINESS.phone.display}</a>
-          </div>
-          <div className="service-guide__process-steps">
-            {steps.map(([num, title, stepText]) => (
-              <div className="service-guide__process-step" key={num}>
-                <span className="service-guide__process-num" aria-hidden="true">{num}</span>
-                <div><h3>{title}</h3><p>{stepText}</p></div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )

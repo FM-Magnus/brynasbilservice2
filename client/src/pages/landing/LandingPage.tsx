@@ -19,7 +19,7 @@ import heroFamilyJpg from '../../assets/images/home/landing-v2/landing-family-wi
 import { GalleryDockStrip } from '../../components/ui/GalleryDockStrip'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
-import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake-v2.webp'
+import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.webp'
 import customerInteractionWebp from '../../assets/images/home/landing-v2/landing-customer-interaction-background.webp'
 import customerInteractionJpg from '../../assets/images/home/landing-v2/landing-customer-interaction-background.jpg'
 import vehicleForSale from '../../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
@@ -185,39 +185,39 @@ export default function LandingPage() {
         <div className="landing-v2__why-shade" aria-hidden="true" />
         <div className="bb-wrap landing-v2__why-content">
           <div>
-            <p className="bb-eyebrow bb-eyebrow--dark">Varför välja Brynäs Bilservice?</p>
+            <p className="bb-eyebrow">Om Brynäs Bilservice</p>
             <h2 id="landing-v2-why-title" className="bb-h2">
               Trygg bilservice<br />i <span className="bb-accent">lokala Gävle</span>
             </h2>
             <p className="bb-lead--dark">
-              Vi kombinerar erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.
+              Brynäs Bilservice grundades 2021 och är din lokala, oberoende verkstad i Brynäs, Gävle. Vi brinner för bilar och för människorna som kör dem. Hos oss möts du av erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.
             </p>
-            <Link className="bb-btn bb-btn--teal" to="/om-oss">
-              Läs mer om oss <ArrowRightIcon />
-            </Link>
+            <p className="bb-lead--dark">
+              Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
+            </p>
           </div>
-          <ul className="bb-card--glass">
-            <li>
-              <i className="bb-icon-badge"><Icon name="chat" /></i>
-              <span><b>Tydlig kommunikation</b><small>Vi håller dig uppdaterad genom hela processen.</small></span>
-            </li>
-            <li>
-              <i className="bb-icon-badge"><Icon name="shield" /></i>
-              <span><b>Omsorg om din bil</b><small>Vi arbetar noggrant och med rätt kunskap.</small></span>
-            </li>
-            <li>
-              <i className="bb-icon-badge"><WrenchIcon /></i>
-              <span><b>Personlig service</b><small>Du och din bil är alltid i fokus.</small></span>
-            </li>
-            <li>
-              <i className="bb-icon-badge"><MapPinIcon /></i>
-              <span><b>Lokal verkstad</b><small>Nära dig i Brynäs, Gävle.</small></span>
-            </li>
-          </ul>
         </div>
       </section>
 
       <section className="landing-v2__services-section" aria-label="Våra tjänster">
+        <ul className="bb-wrap landing-v2__trust-strip">
+          <li>
+            <i className="bb-icon-badge"><Icon name="chat" /></i>
+            <span><b>Tydlig kommunikation</b><small>Vi håller dig uppdaterad genom hela processen.</small></span>
+          </li>
+          <li>
+            <i className="bb-icon-badge"><Icon name="shield" /></i>
+            <span><b>Omsorg om din bil</b><small>Vi arbetar noggrant och med rätt kunskap.</small></span>
+          </li>
+          <li>
+            <i className="bb-icon-badge"><WrenchIcon /></i>
+            <span><b>Personlig service</b><small>Du och din bil är alltid i fokus.</small></span>
+          </li>
+          <li>
+            <i className="bb-icon-badge"><MapPinIcon /></i>
+            <span><b>Lokal verkstad</b><small>Nära dig i Brynäs, Gävle.</small></span>
+          </li>
+        </ul>
         <div className="landing-v2__services-layout">
           <div className="landing-v2__service-graphic">
             <ol className="landing-v2__service-grid">
@@ -235,6 +235,7 @@ export default function LandingPage() {
           </div>
           <p className="bb-wrap landing-v2__services-intro bb-lead">
             Vi hjälper dig med regelbunden bilservice, däckservice, AC-service och reparationer. Vi utför även avancerad diagnostik och större arbeten som motor- och topplocksbyten. Vi arbetar med alla bilmärken.
+            {' '}Märker du ett fel men vet inte vilken tjänst det gäller? Beskriv vad bilen gör – ljud, varningslampor eller hur den känns – så hjälper vi dig vidare, eller läs om hur en <Link to="/felsokning">felsökning</Link> går till.
           </p>
         </div>
       </section>
@@ -267,26 +268,6 @@ export default function LandingPage() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      <section className="landing-v2__about-section" aria-labelledby="landing-v2-about-title">
-        <div className="bb-wrap landing-v2__about-grid">
-          <div className="landing-v2__about-copy">
-            <p className="bb-eyebrow">Om Brynäs Bilservice</p>
-            <h2 id="landing-v2-about-title" className="bb-h2">
-              Lokal verkstad.<br /><span className="bb-accent">Personlig service.</span>
-            </h2>
-            <p className="bb-lead">
-              Brynäs Bilservice grundades 2021 och är din lokala, oberoende verkstad i Brynäs, Gävle. Vi brinner för bilar och för människorna som kör dem. Hos oss möts du av erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.
-            </p>
-            <p className="bb-lead">
-              Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
-            </p>
-            <Link className="bb-btn bb-btn--ember-solid" to="/om-oss">
-              Läs mer om oss <ArrowRightIcon />
-            </Link>
-          </div>
         </div>
       </section>
 

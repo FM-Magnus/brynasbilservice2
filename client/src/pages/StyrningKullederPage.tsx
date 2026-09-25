@@ -9,14 +9,13 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
-import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
@@ -42,10 +41,10 @@ const parts = [
 ] as const
 
 const benefits = [
-  { icon: AlertTriangleIcon, title: 'Säkerhet i första hand', text: 'En kraftigt sliten eller brusten kulled kan i värsta fall leda till att hjulet viker sig eller lossnar från hjulupphängningen under körning.' },
-  { icon: GaugeIcon, title: 'Knivskarp styrprecision', text: 'Friska leder och bussningar eliminerar dödgång i ratten och säkerställer att bilen reagerar direkt och förutsägbart på dina manövrar.' },
-  { icon: SlidersIcon, title: 'Jämnare däckslitage', text: 'Glapp i styrningen rubbar hjulvinklarna, vilket snabbt leder till att däcken snedslits på in- eller utsidan och måste kasseras i förtid.' },
-  { icon: ThumbsUpIcon, title: 'Rätt diagnos från början', text: 'Vi avgör fackmannamässigt om missljudet härstammar från kulleder, styrleder eller servostyrningen, vilket förhindrar felaktiga reparationer.' },
+  { title: 'Säkerhet i första hand', text: 'En kraftigt sliten eller brusten kulled kan i värsta fall leda till att hjulet viker sig eller lossnar från hjulupphängningen under körning.' },
+  { title: 'Knivskarp styrprecision', text: 'Friska leder och bussningar eliminerar dödgång i ratten och säkerställer att bilen reagerar direkt och förutsägbart på dina manövrar.' },
+  { title: 'Jämnare däckslitage', text: 'Glapp i styrningen rubbar hjulvinklarna, vilket snabbt leder till att däcken snedslits på in- eller utsidan och måste kasseras i förtid.' },
+  { title: 'Rätt diagnos från början', text: 'Vi avgör fackmannamässigt om missljudet härstammar från kulleder, styrleder eller servostyrningen, vilket förhindrar felaktiga reparationer.' },
 ] as const
 
 const symptoms: readonly GuideSymptom[] = [
@@ -69,17 +68,9 @@ const serviceItems = [
 const infoCards: readonly GuideInfoCard[] = [
   { icon: AlertTriangleIcon, title: 'Kulleder är säkerhetskritiska', text: 'Spindelleden bär upp hjulet under körning. Ett kraftigt glapp riskerar att få kulleden att hoppa ur sin skål vid kraftig påfrestning eller ett gupp.', flag: 'VIKTIGT' },
   { icon: ShieldIcon, title: 'Går servon sönder går bilen att styra', text: 'Slutar servostyrningen att fungera behåller bilen mekanisk styrning. Ratten blir dock extremt tung i låg fart — håll stadigt och stanna kontrollerat.' },
-  { icon: GaugeIcon, title: 'Hjulinställning är ett krav', text: 'Vid byte av styrled eller kulled förändras framhjulens hjulvinklar (toe-in). En hjulinställning är nödvändig för att inte slita ut däcken på nolltid.' },
+  { icon: GaugeIcon, title: 'Hjulinställning beror på arbetet', text: 'Byts en styrled ändras framhjulens spårning, och då behöver hjulinställningen justeras. Efter byte av andra delar i hjulupphängningen beror behovet på vilken del som bytts och hur den sitter, men hjulvinklarna bör kontrolleras efter arbetet.' },
   { icon: ClockIcon, title: 'Priset beror på felets art', text: 'Ett byte av en yttre styrstagsände är ett relativt snabbt ingrepp, medan byte av en kuggstång eller elektrisk servomotor är betydligt mer omfattande.' },
 ]
-
-const processSteps = [
-  ['01', 'Bokning och inlämning', `Boka enkelt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på ${BUSINESS.address.street} i ${BUSINESS.address.district}.`],
-  ['02', 'Framvagnslyft & glapptest', 'Vi hissar upp bilen och känner mekaniskt efter minsta spel och glapp i alla leder, stag, bussningar och kuggstång.'],
-  ['03', 'Servodiagnostik vid behov', 'Vi mäter hydrauliskt servotryck och oljekvalitet eller kopplar upp diagnosverktyg för att läsa av EPS-sensorer.'],
-  ['04', 'Fackmannamässigt ledbyte', 'Slitna komponenter demonteras och ersätts med nya kvalitetsdelar och nya låsmuttrar med exakt åtdragningsmoment.'],
-  ['05', 'Hjulinställning & provkörning', 'Vi justerar hjulvinklarna till tillverkarens originalspecifikationer och provkör bilen för perfekt stabilitet och styrkänsla.'],
-] as const
 
 const faqs = [
   { question: 'Hur vet jag om det är en kulled, styrled eller servostyrningen som är dålig?', answer: 'Klapprande missljud över gupp och knarr vid låg fart pekar i regel mot slitna kulleder eller styrstagsändar. Om ratten istället känns tung, ryckig, ger ifrån sig ett tjutande ljud eller om en gul varningslampa tänds i displayen sitter felet i servosystemet. Vi provkör och undersöker bilen för att ge dig ett säkert besked.' },
@@ -138,6 +129,7 @@ export default function StyrningKullederPage() {
           image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Närbild på mekaniker som inspekterar glapp och sprucken damask på styrled under bilen' }}
           caption="Säker väghållning kräver intakta leder."
         >
+          <p>Glapp känns ofta i ratten eller hörs som en smäll över gupp, men det säger inte i vilken led det sitter. Styrleder, kulleder, länkarmsbussningar och hjullager kan alla ge liknande symptom. Därför lokaliseras glappet genom att hjulet och de enskilda delarna belastas åt olika håll, med bilen både upplyft och stående på hjulen, innan det bestäms vad som ska bytas.</p>
           <Tip
             title="Viktigt om bilens dragning:"
             text="Att bilen drar åt ena hållet beror i regel inte på servostyrningen, utan på felaktig hjulinställning, ojämnt däcktryck eller glappande länkarmar och kulleder i hjulupphängningen."
@@ -146,22 +138,17 @@ export default function StyrningKullederPage() {
 
         <GuideServiceCard
           id="steering-service-title"
+          heading="Reparation av styrning och kulleder"
           text="Vi felsöker, reparerar och byter slitna styrkomponenter och servodetaljer med kvalitetsdelar anpassade för din bilmodell."
           items={serviceItems}
         />
 
         <GuideInfo
           id="steering-guidance-title"
-          heading="Viktig information om styrning och kulleder"
+          heading="Säkerhet, servo och hjulinställning"
           text="Här är praktiska riktlinjer och fakta kring styrningens mekanik och säkerhet. Vi undersöker alltid framvagnens faktiska skick innan vi föreslår reservdelsbyten."
           cards={infoCards}
           safety={<><strong>Säkerhetsnotis:</strong> En glappande kulled eller styrled är en allvarlig säkerhetsrisk som inte ska ignoreras. Skulle leden brista under färd förlorar föraren styrkontrollen över hjulet med omedelbar olycksrisk som följd. Boka kontroll så snart du märker klapper eller glapp.</>}
-        />
-
-        <GuideProcess
-          id="steering-process-title"
-          text="Att byta styrleder och kulleder kräver fackmannamässig glappkontroll och efterföljande hjulinställning. Så här ser vår process ut."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="steering-faq" heading="Vanliga frågor om styrning och kulleder" items={faqs} />

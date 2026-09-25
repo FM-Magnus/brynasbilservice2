@@ -48,21 +48,13 @@ Varför är det viktigt att åtgärda i tid?
 
 Ett skadat avgassystem påverkar mer än bara ljudnivån — det kan påverka besiktning, hälsa och bränsleförbrukning.
 
-Godkänd besiktning
+Godkänd besiktning. Läckage, för högt motorljud eller felaktiga avgasvärden från lambdasond eller katalysator är en vanlig orsak till anmärkningar vid besiktningen.
 
-Läckage, för högt motorljud eller felaktiga avgasvärden från lambdasond eller katalysator är en vanlig orsak till anmärkningar vid besiktningen.
+Säkerhet & hälsa. Ett tätt avgassystem förhindrar att giftig och luktfri koloxid från avgaserna tränger in i kupén via bilens friskluftsintag.
 
-Säkerhet & hälsa
+Lägre bränsleförbrukning. Fungerande lambdasonder och sensorer säkerställer att motorn förbränner optimal bränsleblandning utan onödig överförbrukning.
 
-Ett tätt avgassystem förhindrar att giftig och luktfri koloxid från avgaserna tränger in i kupén via bilens friskluftsintag.
-
-Lägre bränsleförbrukning
-
-Fungerande lambdasonder och sensorer säkerställer att motorn förbränner optimal bränsleblandning utan onödig överförbrukning.
-
-Rätt åtgärd före dyrbyte
-
-Vi provtrycker och felsöker innan vi byter dyra komponenter som katalysatorn, då grundorsaken ofta är ett flexrör eller en lambdasond.
+Rätt åtgärd före dyrbyte. Vi provtrycker och felsöker innan vi byter dyra komponenter som katalysatorn, då grundorsaken ofta är ett flexrör eller en lambdasond.
 
 Tecken på fel i avgassystemet
 
@@ -92,9 +84,11 @@ Tänd motorlampa & ojämn gång
 
 Felkoder kopplade till katalysator eller lambdasond åtföljs ofta av ojämn tomgång eller försämrad motoreffekt.
 
+Ett läckage, en felaktig givarsignal och en motor som går ojämnt kan ge liknande tecken, och de behöver skiljas åt innan någon del byts. Även ett litet läckage före lambdasonden kan släppa in luft och göra att givaren mäter fel, och en felkod för katalysatorn kan i själva verket bero på en givare eller på hur motorn går. Därför kontrolleras skarvar och svetsar för läckage och givarnas värden innan en dyr del som katalysatorn byts.
+
 Vi hittar problemet – innan det blir större.
 
-Det här kan vi hjälpa dig med
+Reparation av avgassystemet
 
 Vi undersöker hela avgassystemet och byter slitna ljuddämpare, rörsektioner eller lambdasonder med kvalitetsdelar anpassade för din bil.
 
@@ -104,63 +98,23 @@ Diagnostik och byte av lambdasond vid bekräftat givarfel eller avgasrelaterade 
 Kontroll och byte av katalysator när den bekräftat är defekt, alltid föregånget av grundlig analys.
 Svetsning, tätning och montering av nya upphängningsgummin, klämmor och packningar.
 Åtgärd och släckning av besiktningsanmärkningar och för höga emissionsvärden.
-Viktig information om avgassystem
+Rost, katalysator och motorlampa
 
 Här är praktiska riktlinjer och fakta kring avgassystemets funktion och åtgärder. Vi undersöker alltid bilens faktiska skick innan vi föreslår reservdelsbyten.
 
 Rost börjar oftast bakifrån
-
 Den bakre ljuddämparen slits i regel först eftersom kondensvatten och fukt samlas där vid korta körningar. Främre delar klarar sig oftast längre.
-
 Spara pengar genom sektionsbyte
-
 Nästan aldrig behöver hela avgassystemet bytas samtidigt. Det vanligaste och mest prisvärda är att byta enbart den skadade ljuddämparen eller rörbiten.
-
-OBS
 Varning för katalysatorstöld
-
+OBS
 Katalysatorer innehåller ädelmetaller och är stöldbegärliga. Om bilen plötsligt dånar extremt högt utan förvarning kan katalysatorn ha stulits.
-
 Katalysatorkod kan vara lambdasond
-
 En felkod som P0420 betyder inte automatiskt att katalysatorn är slut. En felaktig lambdasond ger ofta samma felkod och är betydligt billigare att byta.
-
 Viktigt om motorlampan
-
 En tänd motorlampa med en katalysator-relaterad felkod betyder inte automatiskt att själva katalysatorn är trasig. En felaktig lambdasond eller ett litet avgasläckage före sonden är minst lika vanligt och betydligt mer prisvärt att åtgärda.
 
 Säkerhetsnotis: Lukt av avgaser i kupén ska aldrig ignoreras. Bilavgaser innehåller luktfri och giftig koloxid (kolmonoxid) som snabbt kan orsaka huvudvärk, illamående och nedsatt reaktionsförmåga under körning. Boka tid direkt om du känner avgasdoft i bilen.
-
-Så går det till
-hos oss
-
-Att laga eller byta delar i avgassystemet kräver noggrann täthetskontroll och rätt upphängningar. Så här ser vår process ut.
-
-RING OSS: 070-553 33 95
-01
-Bokning och inlämning
-
-Boka enkelt online eller ring oss på 070-553 33 95 och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.
-
-02
-Lyft & läckagekontroll
-
-Vi hissar upp bilen och inspekterar hela avgassystemet från grenrör till slutrör för att lokalisera sprickor och rost.
-
-03
-Sensordiagnostik
-
-Vid tänd motorlampa läser vi av lambdasondernas signalvärden och felminnet i bilens motorstyrdon.
-
-04
-Montering & tätning
-
-Vi demonterar den trasiga delen och monterar nya kvalitetsdelar med nya packningar, klammor och upphängningar.
-
-05
-Täthetskontroll & slutprov
-
-Vi varmkör motorn och säkerställer att alla skarvar är 100 % täta och att ljudnivån är tyst och behaglig.
 
 Vanliga frågor om avgassystem
 Varför rostar avgassystemet sönder så ofta i Sverige?
