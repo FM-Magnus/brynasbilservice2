@@ -153,6 +153,36 @@
 .bb-lead--dark { color: rgba(255, 255, 255, 0.85); }
 
 /* ---------- Card motifs ---------- */
+/* Dark image card: photo + bottom gradient scrim + content overlaid at the
+   bottom. Caller supplies the <img> and content; this owns the shell. */
+.bb-card--photo {
+  background: var(--bb-color-ink-900);
+  border-radius: var(--bb-radius-md);
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+.bb-card--photo > img {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  z-index: -2;
+}
+.bb-card--photo::after {
+  background: none;
+  content: '';
+  inset: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+/* Bottom-right "go to" arrow inside a .bb-card--photo. Bare icon, no badge
+   background — ember, matching the site's "ember is the accent" call. */
+.bb-card-arrow { color: var(--bb-color-amber-500); display: flex; justify-content: flex-end; }
+.bb-card-arrow svg { height: 17px; width: 17px; }
+
 /* Translucent glass panel, for a list/detail block sitting on a dark photo
    band (Landing's "why" section reassurance list). */
 .bb-card--glass {
@@ -441,9 +471,7 @@
   width: 100%;
 }
 .bb-hero__shade {
-  background:
-    linear-gradient(90deg, rgba(2, 17, 20, 0.96) 0%, rgba(2, 18, 21, 0.89) 27%, rgba(2, 19, 22, 0.48) 57%, rgba(2, 14, 16, 0.25) 100%),
-    linear-gradient(0deg, rgba(0, 19, 22, 0.63) 0%, transparent 42%);
+  background: none;
   pointer-events: none;
   z-index: -1;
 }
@@ -498,9 +526,7 @@
     object-position: 61% 52%;
   }
   .bb-hero__shade {
-    background:
-      linear-gradient(90deg, rgba(2, 15, 18, 0.95), rgba(2, 16, 19, 0.72)),
-      linear-gradient(0deg, rgba(0, 18, 21, 0.83), transparent 58%);
+    background: none;
   }
   .bb-hero__content {
     justify-content: flex-end;

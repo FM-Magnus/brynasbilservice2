@@ -47,13 +47,7 @@
 }
 
 .omoss-page__hero::before {
-  background: linear-gradient(
-    90deg,
-    rgba(7, 20, 22, 0.94) 0%,
-    rgba(7, 20, 22, 0.88) 45%,
-    rgba(7, 20, 22, 0.72) 75%,
-    rgba(7, 20, 22, 0.85) 100%
-  );
+  background: none;
   content: '';
   inset: 0;
   pointer-events: none;
@@ -703,7 +697,6 @@
 .omoss-page__cta-card {
   background-color: var(--bb-color-ink-950);
   background-image: 
-    linear-gradient(rgba(7, 20, 22, 0.88), rgba(7, 20, 22, 0.94)),
     image-set(
       url('../assets/images/about/about-hero-bg.webp') type('image/webp') 1x,
       url('../assets/images/about/about-hero-bg.jpg') type('image/jpeg') 1x

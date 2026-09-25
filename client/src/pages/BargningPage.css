@@ -569,7 +569,7 @@
 }
 
 .bargning-page__scenario-photo::after {
-  background: linear-gradient(180deg, rgba(7, 20, 22, 0.6) 0%, rgba(7, 20, 22, 0.92) 80%);
+  background: none;
   content: '';
   inset: 0;
   position: absolute;
@@ -908,7 +908,6 @@
 .bargning-page__cta-card {
   background-color: var(--bb-color-ink-950);
   background-image: 
-    linear-gradient(rgba(7, 20, 22, 0.90), rgba(7, 20, 22, 0.94)),
     image-set(
       url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
       url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x

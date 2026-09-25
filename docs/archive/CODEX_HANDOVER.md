@@ -1,143 +1,180 @@
-# Codex Handoff — Brynäs Bilservice (historical, 2026-09-15)
+# Codex Handover — Brynäs Bilservice (Updated 2026-09-22)
 
-**Superseded — kept for historical record only.** `AGENTS.md` contains the bounded startup contract and current constraints; `docs/SESSION_LOG_CURRENT.md` contains new work notes; and `docs/PROJECT_STATUS.md` contains the route table. This file is a point-in-time session recap from 2026-09-15 by Antigravity. Don't treat it as a required read.
-
-Updated **2026-09-15** by Antigravity. This is a continuation guide and source of truth for Codex (or any incoming AI assistant) to seamlessly continue development on Brynäs Bilservice.
-
----
-
-## 1. Quick Start & Repo Reality
-
-- **Repository path:** `/Users/magnusolsson/Documents/REPOS/brynasbilservice_repo`
-- **Active working branch:** `redesign/blue-teal-v1`
-- **Branch status:** The last known pushed baseline is `05b9f34f`. The image-library cleanup and Kamrem visual work are local changes on this branch; always verify the live ahead count before acting.
-- **Push rule:** **STRICT RULE: Never run `git push` without Magnus's explicit prior approval.**
-- **Frontend location:** `client/` (React 18, Vite 4, TypeScript, Tailwind CSS 3).
-  - Build command: `npm --prefix client run build` (verified: 0 errors).
-  - Dev server: `npm --prefix client run dev` (runs on `http://localhost:5173/`).
-  - **Root files warning:** Root `package.json`, `vite.config.ts`, `tsconfig.json`, and `index.html` are orphaned legacy scaffolding. Never edit, install, or build from the root repository directory.
-- **Backend location:** `server/` (Node 16 CommonJS Express 4 + MySQL via `mysql2`).
-  - **Ownership boundary:** Backend files (`server/index.js`, `server/database/schema.sql`, `server/.htaccess`, `server/.env`) are owned by Johnny (Magnus's brother). **Do NOT touch or modify server files.**
-  - Local API returns 500 without the MySQL SSH tunnel (`ssh -i ~/.ssh/fenrirm -L 3306:localhost:3306 -N -f fenrirm@194.14.207.224`), which is expected during local UI work.
-- **Verification standard:** Strict **0 px horizontal overflow** across 1440px desktop, 768px tablet, and 390px mobile viewports.
+> **VÄLKOMMEN TILLBAKA CODEX!**  
+> Detta dokument är skrivet specifikt för dig. Du har varit borta ett tag medan projektet genomgick en total arkitektonisk ombyggnad (Steg 1–7 i redesign-färdplanen). Nu är basen helt stabil och fri från det gamla `index.css`.
+> 
+> Din styrka är att hitta buggar, regressioner, död kod, arkitektoniska glapp och specifika kantfall. Detta dokument ger dig **100 % kontext** om var repot står idag, hur Magnus arbetar, vilka hårda regler som gäller, samt en prioriterad lista över var du kan sätta tänderna i projektet.
 
 ---
 
-## 2. Work Completed in This Session (Antigravity)
+## 1. HÖGSTA AUKTORITET & AVTAL (MÅSTE FÖLJAS)
 
-### 1. Maher Basher Intro Copy, Consumer Law Proof & Portrait (`AboutPage.tsx` at `/om-oss`)
-- Committed as `6af5dc8b`.
-- Added introduction copy for the owner, **Maher Basher** (often referred to as Maher or Shomaher in customer reviews).
-- Added consumer law reassurance paragraph (följer konsumenttjänstlagen: arbetet påbörjas inte förrän fast pris/kostnadsförslag godkänts och priset får inte överskridas med mer än 15 %).
-- Integrated an authentic, optimized 1:1 portrait card beside the Maher copy and above the facts box:
-  - `client/src/assets/images/people/maher-basher-portrait.webp` (127 kB) with JPG fallback (157 kB).
-- Left clean JSX TODO comments for future staff presentation and gallery expansion.
+Dokumenthierarki i repot:
+1. **`AGENTS.md`** — Det operativa avtalet som trumfar ALLT. Läs alltid detta först.
+2. **`docs/CSS_OWNERSHIP.md`** — Kartan över vilken sida som äger vilken CSS och vilka klassprefix som är reserverade.
+3. **`docs/DESIGN_SYSTEM.md`** — Kanoniska design-tokens (`--bb-*`), delade mönster (`.bb-*`), ikonregler (§2b) och hero-geometri (§2c).
+4. **`docs/AGENT_HANDOFF.md`** — Löpande handoff och versionsstatus.
+5. **`docs/audit-harness/README.md`** — Mätverktyg och skript för att bevisa ändringar innan/efter.
 
-### 2. Dedicated Workshop Gallery Subpage (`GalleryPage.tsx` at `/galleri`)
-- Built dedicated gallery page at `client/src/pages/GalleryPage.tsx` registered as `/galleri` in `client/src/main.tsx`.
-- Features dark hero (`Bilder & Verkstadsmiljö`, `Bilder från Brynäs Bilservice`), dual `Boka tid` / `Ring` CTAs, an image-first viewer with a full-size selected asset, horizontal thumbnail carousel, previous/next controls, mouse-wheel/trackpad scrolling, track dragging and Arrow-key navigation, plus the closing dark CTA card and `BookingFormModal`.
-- The viewer deliberately excludes customer reception, portrait, handover and every people-containing image. It uses eleven visually reviewed no-people workshop views, each with a 1920px WebP/JPG main pair and a matching 640px thumbnail pair; see `_incoming-assets/ASSET_INVENTORY.md` for the exact mapping.
+### Hårda arbetsregler för Magnus
+- **Fråga alltid vid minsta oklarhet.** Gissa eller välj aldrig tolkning i tysthet.
+- **Mät först, föreslå vid en grind (gate), invänta godkännande, implementera sedan.** Inga kodändringar innan Magnus godkänt förslaget.
+- **Ändra ALDRIG svensk text.** Företagsfakta (telefon, öppettider, adress, org.nr) kommer ENBART från `client/src/data/business.ts`.
+- **Visa visuella före/efter-skärmdumpar från Playwright innan commit.**
+- **En logisk ändring per commit.** Kör aldrig bypass på pre-commit hooken.
+- **PUSHA ALDRIG** utan Magnus explicita instruktion ("git push då").
+- **Kör ALDRIG `git add -A` eller `git add .`** (stagea endast explicita filsökvägar).
+- **Spårade raderade bilder (`" D"`) i git status tillhör arkivet och får INTE röras eller återställas.**
 
-### 3. Gallery Teaser CTA Button on `/om-oss`
-- Committed as `97cb0817`.
-- Replaced the old 4-card gallery block on `AboutPage.tsx` with a stylish, centered teal pill CTA button:
-  `"Ta en titt bakom garageportarna – välkommen in i vårt bildgalleri"` linking directly to `/galleri`.
-- Cleaned up unused image imports and arrays from `AboutPage.tsx` (the photos live on the dedicated `/galleri` page).
-- Styled in `client/src/css/index.css` with hover lift, subtle arrow transition, and responsive text wrapping on mobile (390px).
-
-### 4. Reusable `GalleryTeaserCard.tsx` on Homepage
-- Committed as `eb6ccb1c`.
-- Built standalone, reusable component in `client/src/components/ui/GalleryTeaserCard.tsx`.
-- The entire card is an interactive link (`<a>` pointing to `/galleri`) with hover zoom (`scale(1.03)`), shadow deepening, and focus-visible ring.
-- Contains:
-  1. `KenBurnsSlideshow` cycling 4 sharp, lightweight workshop thumbnails.
-  2. Frosted glass badge in top-left: `"Grundat 2021"`.
-  3. Organic bottom-right corner cutout (`background: var(--redesign-page); border-top-left-radius: 20px;`) displaying active slide dots, uppercase `"TILL GALLERIET"` text, and circular arrow badge with slide hover animation (`translateX(3px)`).
-- Integrated into `client/src/components/sections/About.tsx` replacing inline slideshow markup.
-
-### 5. Complete image-library organization
-- Committed as `eb6ccb1c`.
-- Production assets are grouped by purpose, while source, legacy and documentation images stay visibly separate. The authoritative map is `_incoming-assets/ASSET_INVENTORY.md`.
-- The eleven production gallery images are in `client/src/assets/images/gallery/workshop/`: every basename has a 1920px WebP/JPG main pair and a 640px `-thumb` WebP/JPG pair.
-- `GalleryTeaserCard.tsx` imports six dedicated 1280px overview `-card.webp` exports strictly from `../../assets/images/gallery/workshop/`; tire-machine/workbench detail views are intentionally excluded. The 640px `-thumb` files are reserved for the compact carousel, while the large viewer and the `/om-oss` hero import only 1920px main files.
-- Historical image exports are grouped under `client/src/assets/images/archive/` by actual subject, including `gallery-legacy/` and `brand/`; no production code imports this tree.
-- **Zero dependencies or import references** to the temporary, Git-ignored `_incoming-assets/` folder in production code.
+### Tekniska säkerhetsregler
+- **`client/` är den ENDA applikationsmappen** (React 18.3.1, Tailwind 3.4.19, Vite 4.5.14, TypeScript 7.0.2). Root-filer (`package.json.disabled`, `vite.config.ts.disabled`) är döda orphans. Rör dem inte.
+- **Inga Tailwind-utilities i publik TSX.** Tailwind är ENDAST tillåtet under `/admin` (`client/src/components/admin/`). Pre-commit hooken blockerar utilities i publik TSX.
+- **Inga inline `style=` i publik TSX.** Alla stilar ska ligga i sidans CSS-ö. Pre-commit hooken blockerar inline-stilar.
+- **Global CSS är EXAKT 4 filer** (laddas i `client/src/main.tsx` i denna ordning):
+  1. `styles/tailwind.css` (Tailwind preflight och admin)
+  2. `styles/design-tokens.css` (alla `--bb-*` tokens)
+  3. `styles/base.css` (grundläggande HTML-elementdefaults)
+  4. `styles/shared-elements.css` (delade `.bb-*` mönster: knappar, kort, trust-rad, hjälte m.m.)
+- **Tokens är endast `--bb-*`.** Inga `--redesign-*` eller `--color-*`.
+- **Rör ALDRIG:**
+  - `server/**` (ägs av Johnny, Magnus bror)
+  - `AGENTS.md` (får inte växa, vaktas av pre-commit hook)
+  - `client/playwright.config.ts`
 
 ---
 
-## 3. Visual System & Code Conventions
+## 2. REPO-REALITET & NULÄGE (2026-09-22)
 
-- **Typography:** Centralized CSS tokens in `client/src/css/index.css`:
-  - Headings: `var(--font-heading)` (**Archivo 800**).
-  - Body & UI: `var(--font-body)` (**Manrope 400–500** body, **600–700** controls/badges/buttons).
-- **Color tokens:**
-  - Page surround: warm-white `#f8f7f3` (`var(--redesign-page)`).
-  - Dark cards: `#101618` (`var(--redesign-card)` or direct hex). Keep dark styling contained; never make the whole page dark.
-  - Teal accent: `var(--redesign-accent)` (`#2496a0`) and hover `var(--redesign-accent-dark)` (`#1b727a`).
-  - No arbitrary gold/red/orange accent colors (gold is strictly reserved for the Google review star block).
-- **Interactive UI components:**
-  - `BookingFormModal` (`client/src/components/BookingForm.tsx`): opens via local `isModalOpen` state.
-  - Shared phone link: `070-553 33 95` via `<a href="tel:0705533395">`.
-  - Section eyebrows (`.section-eyebrow`) remain hidden site-wide via `display: none !important;` in `index.css`.
-- **Accessibility & Motion:**
-  - Always respect `prefers-reduced-motion: reduce`.
-  - All interactive buttons and links must have visible focus rings (`:focus-visible`).
+- **Branch:** `redesign/blue-teal-v1`
+- **Senaste commit:** `5c75511f` (ny hero på landing, ren SVG-vektorlogo i header/footer, ny hero på Avgassystem).
+- **Rebuild Steg 7 är klar:** Det gamla 7 531 raders monstret `client/src/css/index.css` raderades 2026-09-19. Global CSS minskade från 287.8 KB till 100.0 KB (44.2 → 17.7 KB gzip).
+- **Alla sidor är oberoende CSS-öar:**
+  - **7 unika sidor:** Startsidan (`.landing-v2__*`), Om oss (`.omoss-page__*`), Kontakt (`.kontakt-page__*`), Bärgning (`.bargning-page__*`), Bilar till salu (`.bilartillsalu-page__*`), Galleri (`.galleri-page__*`), Biltjänster hub (`.biltjanster-hub__*`).
+  - **Bilservice-familjen (`ServiceReparationerPage.css`, `.bilservice__*`):** Bilservice (`/service-reparationer`, owner), Felsökning, Däckservice, AC-service.
+  - **Guide-familjen (`styles/ServiceGuideTemplate.css`, `.service-guide__*`):** 10 tekniska guider (Koppling, Avgassystem, Oljebyte, Bromssystem, Kamrem, Bilbatteri, Stötdämpare & fjädrar, Hjullagerbyte, Styrning & kulleder, Drivaxel & drivknutar). *Obs: Ingen delad TSX-layoutkomponent – varje guide är en fristående TSX som delar stylesheet.*
+- **Konsoliderade ikoner:** 29 delade SVG-ikoner i `client/src/components/icons/`, alla med `strokeWidth={2}` och `currentColor`.
+- **Bokningsformulär:** Komplett in-flight livscykel i `client/src/hooks/useFormSubmission.ts` (låsning vid inskickning, timeout, inline felmeddelanden, inga `alert()`, lokal `yyyy-MM-dd` datumhantering för att undvika UTC-dagskifte).
+- **Logotyp:** Ny ren vektoriserad SVG utan heltäckande bakgrund i `client/src/assets/images/brand/brynas-bilservice-logo.svg`, renderas perfekt i `PublicHeader` och `PublicFooter`.
+- **Hero-geometri (Steg 1–3 klara):** Header-derived clearance-tokens, H1-storlek begränsad till max 48px, och alla 10 guider använder nu den delade `.bb-trust-row` från `shared-elements.css`.
 
 ---
 
-## 4. Complete Route & Page Map
+## 3. VERIFIERINGSKOMMANDON (MÅSTE KÖRAS)
 
-| Route | Component | Purpose / Status | Key Features |
-| --- | --- | --- | --- |
-| `/` | `pages/landing/LandingPage.tsx` | Isolated landing page | Floating header → sunset hero with cyclic Google-review link → contact/form → reassurance → visual four-service preview → five-step process → gallery/about → used-car CTA → closing contact → footer |
-| `/om-oss` | `AboutPage.tsx` | About page | Hero → Local workshop section with Maher copy & portrait card → 3-step process → Gallery CTA button (*"Ta en titt bakom garageportarna..."*) → Closing CTA |
-| `/galleri` | `GalleryPage.tsx` | Dedicated Gallery | Dark hero → full-size image viewer with accessible thumbnail carousel → Closing dark CTA card → Booking modal |
-| `/biltjanster` | `BiltjansterPage.tsx` | Biltjänster hub | "Våra biltjänster": linked draft summary cards for 11 service guides with CSS placeholders |
-| `/felsokning` | `FelsokningPage.tsx` | Diagnostics | Standalone diagnostic service entry with symptom checklist & placeholder |
-| `/service-reparationer#bilservice` | `ServiceReparationerPage.tsx` | Bilservice guide | Long-form Bilservice content, service levels, process, pricing CTA |
-| `/oljebyte` | `OljebytePage.tsx` | Oil change guide | Oil standards, intervals, service checklist, expandable FAQ |
-| `/kamrem` | `KamremPage.tsx` | Timing belt guide | Image-led precision hero, belt vs chain, numbered system cards, warning signs, checklist, shared process & FAQ |
-| `/koppling` | `KopplingPage.tsx` | Clutch guide | Clutch components, symptoms, checklist, shared FAQ |
-| `/bromssystem` | `BromssystemPage.tsx` | Brake guide | Brake overview, warning signs, checklist, shared FAQ |
-| `/bilbatteri` | `BilbatteriPage.tsx` | Battery guide | Battery types (standard/EFB/AGM), advice, shared FAQ |
-| `/stodampare-fjadrar` | `StodampareFjadrarPage.tsx` | Shocks & springs | Shocks, springs, bounce test tip, broken spring note, FAQ |
-| `/hjullagerbyte` | `HjullagerbytePage.tsx` | Wheel bearing guide | Nav units, ABS sensors, warning signs, safety note, FAQ |
-| `/avgassystem` | `AvgassystemPage.tsx` | Exhaust guide | Silencers, catalytic converter, lambda sensors, FAQ |
-| `/drivaxel-drivknutar` | `DrivaxelDrivknutarPage.tsx` | Driveshaft guide | CV joints, rubber boots, warning signs, safety note, FAQ |
-| `/styrning-kulleder` | `StyrningKullederPage.tsx` | Steering guide | Ball joints, tie rods, EPS/hydraulic power steering, FAQ |
-| `/dackservice` | `DackservicePage.tsx` | Tire service | Statutory winter dates card (1 dec–31 mar, 3PMSF), 6 service cards with pricing, tread depth advice prose |
-| `/ac-service` | `AcServicePage.tsx` | AC service | Compressor damage warning, 3 interactive symptom cards with routing, 3 pricing cards, R134a/R1234yf note |
-| `/bargning` | `BargningPage.tsx` | Towing & transport | Towing service card, direct phone CTA `070-553 33 95`, 3-step transport protocol |
-| `/bilar-till-salu` | `BilarTillSalu.tsx` | Cars for sale | Peugeot 307 CC listing, 3-photo gallery, trust badges, closing CTA |
-| `/kontakt` | `ContactPage.tsx` | Contact page | Contact card, verified hours, inquiry form with request-only callout |
-| `/admin` | Protected | Admin panel | Booking CRUD, service management, soft-delete, filter |
+Innan du föreslår eller commitar något, kör alltid:
+```bash
+npm --prefix client run typecheck   # Skall ge 0 fel (tsc -p tsconfig.app.json --noEmit)
+npm --prefix client run check:css   # Skall vara rent (kontrollerar var(--bb-*), förbjuder inline styles, etc.)
+npm --prefix client run build       # Skall bygga felfritt (Vite production build)
+```
+För webbläsartester med Playwright:
+```bash
+# På denna Mac (Intel 2018): begränsa till 3 workers för att inte överbelasta minnet
+npm --prefix client run test:browser -- --workers=3
+```
+Nuvarande teststatus: **155 passed / 4 skipped** över 19 testfiler. (Skips är touch-tester utanför mobil och desktop-width matrix i `hero.spec.ts`).
 
 ---
 
-## 5. Asset Pipeline & Ingestion Guidelines
+## 4. AUDIT BACKLOG & VAR CODEX KAN HITTA FEL
 
-1. **Intake (`_incoming-assets/`)**:
-   - Temporary local inbox for raw photography and assets. Git-ignored by design.
-   - New files belong in `_incoming-assets/incoming/` and are sorted into subject folders (`03_verkstad_och_team/`, etc.).
-   - Read `_incoming-assets/README.md` and `_incoming-assets/ASSET_INVENTORY.md`.
-2. **Promotion to Production (`client/src/assets/images/`)**:
-   - Only when an image is explicitly chosen for a page/component is it exported into `client/src/assets/images/` (or dedicated subfolders like `gallery/`).
-   - Standard format: WebP primary (quality 82, compressed) with JPG compatibility fallback when the consuming component supports both.
-   - Thumbnails for cards: ~640px wide, < 70 kB.
-   - Hero/large images: ~1920px wide, compressed.
-   - Current promoted assets documented in `_incoming-assets/README.md`. The `/kamrem` page uses `services/timing-belt/timing-belt-in-hand.webp` with JPG fallback; its source remains in the Kamrem subject folder.
+Här är de öppna punkterna där din förmåga att hitta inkonsekvenser, buggar och förbättringsmöjligheter behövs som mest:
+
+### 1. Breakpoint-fragmentering (Audit punkt 3 — Ej påbörjad)
+* Det finns **16 olika media query-värden** spridda i CSS-öarna.
+* Särskilt problematiska är nästan-dubbletter:
+  * `640px` vs `650px` (används om vartannat för mobilstapling).
+  * `1100px` vs `1120px`.
+  * `1320px` vs `1321px` (`PublicHeader` byter storlek vid 1321px medan `--bb-wrap-max` är 1320px).
+* **Uppgift för Codex:** Granska dessa brytpunkter, identifiera var de orsakar layout-glapp eller hopp, och föreslå en harmonisering till de kanoniska tokens/standardbrytpunkterna.
+
+### 2. Hårdkodade färgkoder (Audit punkt 5 — Ej påbörjad)
+* Det finns fortfarande hårdkodade hex-färger som inte använder `--bb-*`-tokens:
+  * Ca 25 st i `ServiceReparationerPage.css`.
+  * Ca 25 st i `ServiceGuideTemplate.css`.
+  * Ca 30 st i `PublicFooter.css`.
+  * Ca 26 st i `ContactFormCard.css`.
+* **Uppgift för Codex:** Analysera vilka som är legitima engångsfall (t.ex. rgba-skuggor eller fotomasker) och vilka som är "färgläckage" som borde kopplas till `--bb-color-ink-*`, `--bb-color-teal-*` eller `--bb-color-amber-*`.
+
+### 3. Saknad Error-State Token (Audit punkt 6 — Ej påbörjad)
+* Det finns ingen token för felstatus i designsystemet (`--bb-color-error` saknas).
+* Bokningsformuläret och valideringsrutor använder hårdkodade röda/rosa färger.
+* **Uppgift för Codex:** Identifiera alla ställen där felmeddelanden renderas och föreslå en standardiserad `--bb-color-error-*` token-struktur.
+
+### 4. Den sista odefinierade token: `--bb-font-sans`
+* Det finns **33 deklarationer** i `ServiceGuideTemplate.css` som refererar till `var(--bb-font-sans)`.
+* Denna token finns inte i `design-tokens.css` och ligger på undantagslistan i `scripts/check-css.mjs`.
+* Den råkar "hålla upp" fallback-fonten, men är tekniskt sett en bugg.
+* **Uppgift för Codex:** Hjälp till att reda ut hur font-fallbacken ska harmoniseras med `--bb-font-body` (`Manrope`) och `--bb-font-display` (`Archivo`) utan att bryta textradbrytningar.
+
+### 5. Kontaktformuläret skickar ingenting (Logisk bugg)
+* `ContactFormCard.tsx` visar glatt "Tack för ditt meddelande!" men gör inget anrop, och det finns ingen `/api/contact` i backend.
+* **Uppgift för Codex:** Granska felhantering och formulärlivscykel. Se förslaget i `docs/BACKEND_HANDOFF.md` för hur ett `api/contact.ts`-adapterlager kan byggas med fallback till telefon/e-post.
+
+### 6. P0 Säkerhet i Admin (Klient-sidan)
+* Admin-inloggningen kontrolleras i webbläsaren via hårdkodade uppgifter (`admin`/`admin123` i `ProtectedRoute.tsx`).
+* Backend accepterar den fasta token `admin-secret-token` från vem som helst.
+* Uppgifterna läcker i den publika JS-bunten.
+* **Uppgift för Codex:** Se arkitekturförslaget i `docs/BACKEND_HANDOFF.md` §2.1 för att förbereda klienten med sessions-cookies och lazy loading av admin-rutten.
+
+### 7. Hero Outliers (Skärmhöjd vid 1280×720)
+* Målet för standardhjältar är ca 85 % av skärmhöjden vid 1280×720.
+* Flera sidor sticker fortfarande ut:
+  * **AC-service:** 125 % (CTA-rad och ingress radbryts kraftigt).
+  * **Kamrem & Oljebyte:** 105 % (deras bildkolumn är 587px hög).
+  * **Koppling, Bromssystem, Avgassystem:** 92–94 % (H1 radbryts till 3 rader).
+* **Uppgift för Codex:** Identifiera exakt vilka element som bygger höjd och föreslå kirurgiska justeringar med hjälp av `docs/audit-harness/hero/`.
+
+### 8. Ersättning av MediaPlaceholder-slots (Pågående bildtranche)
+* Alla 19 bildslots i de 7 guidesidorna och 6 slots på Bilservice är uppmätta och dokumenterade i `_incoming-assets/ASSET_INVENTORY.md`.
+* Avgassystem fick sin hero-bild idag (`exhaust-system-repair-underbody.{webp,jpg}`).
+* De återstående 18 bildplatserna har fortfarande `<MediaPlaceholder />` och väntar på bilder från Magnus.
 
 ---
 
-## 6. Priority Backlog for Codex
+## 5. DOKUMENT OCH KODSTRUKTUR ATT KÄNNA TILL
 
-When continuing from here, the following tasks are top priority:
+```text
+client/src/
+├── api/                   # API-klienter (axiosConfig, vehicles, gallery)
+├── assets/images/         # BILDTRÄD (brand, home, services, vehicles, gallery)
+├── components/
+│   ├── admin/             # Admin-panel (Tailwind TILLÅTET HÄR)
+│   ├── icons/             # 29 delade SVG-ikoner (stroke-width 2, named exports)
+│   ├── layout/            # PublicHeader, PublicFooter
+│   └── ui/                # BiltjansterFaq, ContactFormCard, GalleryTeaserCard, GoogleReviewsCard
+├── data/                  # business.ts (FÖRETAGSFAKTA), vehicles.ts, publicNavigation.ts
+├── hooks/                 # useFormSubmission.ts
+├── pages/                 # Alla 7 unika sidor + Bilservice-familjen + 10 guider
+└── styles/
+    ├── base.css           # Globala elementdefaults (h1-h6, body, p)
+    ├── design-tokens.css  # ALLA --bb-* tokens
+    ├── ServiceGuideTemplate.css # Delad CSS för Guide-familjen
+    ├── shared-elements.css# Delade .bb-* klasser (knappar, trust-row, m.m.)
+    └── tailwind.css       # Tailwind directives (endast admin)
+```
 
-1. **Gallery curation (when new material arrives)**:
-   - Keep the full viewer limited to no-people images and create a 1920px WebP/JPG main pair plus matching 640px thumbnail pair before adding a new item. Never use a teaser thumbnail as a full viewer source.
-2. **Hero GoogleReviews band height tuning**:
-   - If Magnus shortens/curates the long review texts, re-measure `.google-reviews__list` `min-height` and lower the desktop/tablet/mobile height constraints to eliminate dead whitespace.
-3. **Problem-solving symptom routes (`/problem/*`)**:
-   - Address the architectural research finding: transform company-presenting structure into customer-problem-solving entry points for common symptoms (missljud, vibrationer, varningslampor).
-4. **Copywriting & Fact-checking**:
-   - All guide text remains draft. Technical intervals and claims should be fact-checked with Maher before live deployment.
+---
+
+## 6. SÅ HÄR RAPPORTERAR DU TILL MAGNUS
+
+När du analyserar eller föreslår en ändring, använd alltid denna mall:
+
+1. **Identifierat problem / Mätning:** Beskriv exakt vad som är fel eller avviker, med filnamn och radnummer. Ange vad du har mätt (med Playwright eller audit-harness).
+2. **Förslag vid en grind (Gate):** Presentera förslaget tydligt.
+3. **Task Contract:**
+   ```text
+   ALLOWED WRITES:
+   - client/src/... (endast de filer som MÅSTE ändras)
+   
+   FORBIDDEN WRITES:
+   - client/src/styles/* (global layer — endast med explicit godkännande)
+   - AGENTS.md
+   - server/**
+   - alla andra sökvägar
+   ```
+4. **Vänta på Magnus godkännande:** Genomför inga ändringar förrän Magnus har svarat ja/kör.
+5. **Verifiering:** Kör `typecheck`, `check:css`, `build` och ta Playwright-skärmdumpar före/efter.
+6. **Loggbok:** Skriv alltid en daterad notis i `docs/SESSION_LOG_CURRENT.md` (nyast överst).
+
+Nu har du full koll på läget. Välkommen att hjälpa Magnus att göra Brynäs Bilservice ännu mer felfritt och stabilt!

@@ -3,7 +3,7 @@
 .bb-footer {
   background-color: var(--bb-color-ink-950, #061518);
   background-image:
-    linear-gradient(90deg, rgba(6, 21, 24, 0.98) 0%, rgba(6, 21, 24, 0.92) 42%, rgba(6, 21, 24, 0.62) 70%, rgba(6, 21, 24, 0.2) 100%),
+    none,
     url('../../assets/images/footer/footer-wheel-bg.webp');
   background-repeat: no-repeat;
   background-position: calc(100% + 40px) 25%;
