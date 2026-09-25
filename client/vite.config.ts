@@ -11,6 +11,9 @@ export default defineConfig(async ({ command }) => {
   return {
     plugins: [react(), guardDeletedImages(imagetools())],
     base: command === 'serve' ? '/' : '/brynasbilservice/',
+    resolve: {
+      dedupe: ['react', 'react-dom'],
+    },
   };
 });
 
