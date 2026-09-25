@@ -66,8 +66,8 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Felsökning | ✓ new diagnostics hero | ✓ engine-bay tablet + ✓ OBD detail | — |
 | Biltjänster | CSS-only | ✓ all 11 guide cards have photos | — |
 | Bilar till salu | ✓ | conditional placeholders when a car lacks photos | — |
-| Landing | ✓ `home/landing-v2/landing-cockpit-steering-hero` | ✓ why (`landing-why-reassurance-handshake-v2`), process (`landing-customer-interaction-background`), car for sale; the service area is vector icons, no photo | — |
-| Om oss | ✓ `about/about-hero-maher-customers` (Maher with customers outside; no overlay — Maher sits under the headline at desktop and is cropped out on phones, a left-extended version is wanted) | ✓ workshop and tyre photos (`about/`, `workshop/`, `services/tires/`) | extend hero left |
+| Landing | ✓ `home/landing-v2/landing-cockpit-steering-hero` | ✓ why (`landing-why-reassurance-handshake-light`, full-bleed, no overlay, edge-faded to page colour), process (`landing-customer-interaction-background`), car for sale; the service area is vector icons, no photo | — |
+| Om oss | ✓ `about/about-hero-maher-customers` (final crop, Maher extended left of frame, light 9% dark overlay restored) | ✓ workshop and tyre photos (`about/`, `workshop/`, `services/tires/`); ✓ `about/about-principles-maher-customer-bg` behind "Därför väljer kunder oss" | — |
 | Däckservice | ✓ `services/tires/tires-hero-bg` | ✓ six tyre cards (colour grade in page CSS, files unchanged), storage | — |
 | AC-service | ✓ `services/ac/ac-hero-bg` | ✓ `ac-manometers-on-engine` (JPG only, no WebP) | — |
 | Bärgning | ✓ | ✓ tow truck, workshop, car for sale | — |
