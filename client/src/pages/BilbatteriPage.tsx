@@ -21,8 +21,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { BoltIcon } from '../components/icons/BoltIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import { WavesIcon } from '../components/icons/WavesIcon'
-import heroJpg from '../assets/images/services/battery/battery-terminal-bolt-tightening.jpg'
-import heroWebp from '../assets/images/services/battery/battery-terminal-bolt-tightening.webp'
+import heroJpg from '../assets/images/services/battery/battery-jump-start-hero.jpg'
+import heroWebp from '../assets/images/services/battery/battery-jump-start-hero.webp'
 import introJpg from '../assets/images/services/battery/battery-multimeter-test-workshop.jpg'
 import introWebp from '../assets/images/services/battery/battery-multimeter-test-workshop.webp'
 import serviceJpg from '../assets/images/services/battery/battery-terminal-voltage-closeup.jpg'
@@ -103,7 +103,7 @@ export default function BilbatteriPage() {
           eyebrow="Elsystem & startkraft"
           title={<>Bilbatteri &amp; <span className="bb-accent">Batteribyte</span> i Gävle</>}
           lead="Bilbatteriet driver startmotorn och håller igång bilens elsystem — från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Mekaniker som drar åt polbult på bilbatteri', slot: 'battery-hero' }}
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Startkablar anslutna till ett bilbatteri i motorrummet', slot: 'battery-hero' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
