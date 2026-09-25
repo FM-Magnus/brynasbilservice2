@@ -81,6 +81,7 @@
 .landing-v2__services-layout { width: 100%; }
 .landing-v2__service-graphic { background: var(--landing-page); padding: clamp(1.8rem, 3vw, 3rem) clamp(1rem, 4vw, 4rem) 1rem; }
 .landing-v2__services-intro { color: var(--landing-muted); line-height: var(--landing-leading-body); margin: clamp(1.4rem, 2.5vw, 2.2rem) auto 0; max-width: 850px; text-align: center; }
+.landing-v2__services-intro a { color: var(--bb-color-teal-800); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .landing-v2__service-grid { display: grid; gap: .5rem; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; position: relative; }
 .landing-v2__service-grid::before { background: linear-gradient(90deg, transparent, var(--bb-color-teal-500) 12%, var(--bb-color-teal-600) 88%, transparent); content: ''; height: 1px; left: 9%; opacity: .48; position: absolute; right: 9%; top: 2.35rem; }
 .landing-v2__service-grid > li { min-width: 0; }
@@ -106,10 +107,6 @@
 .landing-v2__process-content .bb-process-grid .bb-icon-bare svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .5)); }
 
 /* About and vehicles */
-.landing-v2__about-section { padding-bottom: clamp(3.2rem, 5vw, 5rem); }
-.landing-v2__about-grid { max-width: 720px; }
-.landing-v2__about-copy > p:not(.bb-eyebrow) { color: var(--landing-muted); font-size: var(--landing-type-body); line-height: var(--landing-leading-body); margin: 1rem 0; max-width: 610px; }
-.landing-v2__about-copy .bb-btn { margin-top: .6rem; }
 .landing-v2__cars-section { border-radius: var(--bb-radius-card); margin: 0 auto clamp(3.2rem, 5vw, 5rem); max-width: 1520px; min-height: 230px; }
 .landing-v2__cars-section > img { object-position: center 51%; }
 .landing-v2__cars-shade { background: none; }
@@ -133,7 +130,6 @@
 @media (max-width: 650px) {
   .landing-v2 .bb-wrap { width: min(100% - 2rem, 540px); }
   .landing-v2 .bb-btn { font-size: .88rem; min-height: 46px; padding: .66rem .9rem; }
-  .landing-v2__about-copy h2 { font-size: clamp(2.45rem, 11vw, 3.45rem); }
   .landing-v2__why-section { border-radius: 0; margin-bottom: 4.2rem; }
   .landing-v2__why-content { min-height: 0; padding: 2.5rem 0; }
   .landing-v2__why-content h2 { font-size: clamp(2rem, 10vw, 3rem); }
