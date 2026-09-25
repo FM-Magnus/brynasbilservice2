@@ -19,7 +19,7 @@ import heroFamilyJpg from '../../assets/images/home/landing-v2/landing-family-wi
 import { GalleryDockStrip } from '../../components/ui/GalleryDockStrip'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
-import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake-v2.webp'
+import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.webp'
 import customerInteractionWebp from '../../assets/images/home/landing-v2/landing-customer-interaction-background.webp'
 import customerInteractionJpg from '../../assets/images/home/landing-v2/landing-customer-interaction-background.jpg'
 import vehicleForSale from '../../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
@@ -185,7 +185,7 @@ export default function LandingPage() {
         <div className="landing-v2__why-shade" aria-hidden="true" />
         <div className="bb-wrap landing-v2__why-content">
           <div>
-            <p className="bb-eyebrow bb-eyebrow--dark">Om Brynäs Bilservice</p>
+            <p className="bb-eyebrow">Om Brynäs Bilservice</p>
             <h2 id="landing-v2-why-title" className="bb-h2">
               Trygg bilservice<br />i <span className="bb-accent">lokala Gävle</span>
             </h2>
@@ -195,32 +195,29 @@ export default function LandingPage() {
             <p className="bb-lead--dark">
               Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
             </p>
-            <Link className="bb-btn bb-btn--teal" to="/om-oss">
-              Läs mer om oss <ArrowRightIcon />
-            </Link>
           </div>
-          <ul className="bb-card--glass">
-            <li>
-              <i className="bb-icon-badge"><Icon name="chat" /></i>
-              <span><b>Tydlig kommunikation</b><small>Vi håller dig uppdaterad genom hela processen.</small></span>
-            </li>
-            <li>
-              <i className="bb-icon-badge"><Icon name="shield" /></i>
-              <span><b>Omsorg om din bil</b><small>Vi arbetar noggrant och med rätt kunskap.</small></span>
-            </li>
-            <li>
-              <i className="bb-icon-badge"><WrenchIcon /></i>
-              <span><b>Personlig service</b><small>Du och din bil är alltid i fokus.</small></span>
-            </li>
-            <li>
-              <i className="bb-icon-badge"><MapPinIcon /></i>
-              <span><b>Lokal verkstad</b><small>Nära dig i Brynäs, Gävle.</small></span>
-            </li>
-          </ul>
         </div>
       </section>
 
       <section className="landing-v2__services-section" aria-label="Våra tjänster">
+        <ul className="bb-wrap landing-v2__trust-strip">
+          <li>
+            <i className="bb-icon-badge"><Icon name="chat" /></i>
+            <span><b>Tydlig kommunikation</b><small>Vi håller dig uppdaterad genom hela processen.</small></span>
+          </li>
+          <li>
+            <i className="bb-icon-badge"><Icon name="shield" /></i>
+            <span><b>Omsorg om din bil</b><small>Vi arbetar noggrant och med rätt kunskap.</small></span>
+          </li>
+          <li>
+            <i className="bb-icon-badge"><WrenchIcon /></i>
+            <span><b>Personlig service</b><small>Du och din bil är alltid i fokus.</small></span>
+          </li>
+          <li>
+            <i className="bb-icon-badge"><MapPinIcon /></i>
+            <span><b>Lokal verkstad</b><small>Nära dig i Brynäs, Gävle.</small></span>
+          </li>
+        </ul>
         <div className="landing-v2__services-layout">
           <div className="landing-v2__service-graphic">
             <ol className="landing-v2__service-grid">
