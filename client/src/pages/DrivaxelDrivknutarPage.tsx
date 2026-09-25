@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -42,10 +42,10 @@ const parts = [
 ] as const
 
 const benefits = [
-  { icon: AlertTriangleIcon, title: 'Billigare åtgärd i tid', text: 'Ett damaskbyte innan knuten tagit skada av smuts eller fettbrist kostar en bråkdel av vad ett byte av drivknut eller hel drivaxel gör.' },
-  { icon: ShieldIcon, title: 'Undviker följdskador', text: 'En drivknut med kraftigt glapp alstrar vibrationer som i förlängningen sliter på växellådans tätningar, differential och hjullager.' },
-  { icon: ClockIcon, title: 'Förhindrar stillestånd', text: 'Om en drivknut havererar helt förlorar bilen all drivning till hjulet omedelbart och blir stillastående längs vägen.' },
-  { icon: ThumbsUpIcon, title: 'Rätt åtgärd för bilen', text: 'Vi bedömer fackmannamässigt om det räcker med ny damask, separat yttre knut eller komplett drivaxel utan onödiga extrakostnader.' },
+  { title: 'Billigare åtgärd i tid', text: 'Ett damaskbyte innan knuten tagit skada av smuts eller fettbrist kostar en bråkdel av vad ett byte av drivknut eller hel drivaxel gör.' },
+  { title: 'Undviker följdskador', text: 'En drivknut med kraftigt glapp alstrar vibrationer som i förlängningen sliter på växellådans tätningar, differential och hjullager.' },
+  { title: 'Förhindrar stillestånd', text: 'Om en drivknut havererar helt förlorar bilen all drivning till hjulet omedelbart och blir stillastående längs vägen.' },
+  { title: 'Rätt åtgärd för bilen', text: 'Vi bedömer fackmannamässigt om det räcker med ny damask, separat yttre knut eller komplett drivaxel utan onödiga extrakostnader.' },
 ] as const
 
 const symptoms: readonly GuideSymptom[] = [
@@ -72,14 +72,6 @@ const infoCards: readonly GuideInfoCard[] = [
   { icon: WrenchIcon, title: 'Yttre kontra inre knut', text: 'Yttre drivknutar slits oftast först och går på många bilar att byta separat. Inre knutar säljs däremot sällan lösa utan kräver oftast byte av komplett drivaxel.' },
   { icon: ThumbsUpIcon, title: 'Fånga felet i tid och spara tusenlappar', text: 'Kostnadsskillnaden mellan att byta en sprucken damask i tid jämfört med att vänta tills knuten rasar kan vara flera tusen kronor.' },
 ]
-
-const processSteps = [
-  ['01', 'Bokning och inlämning', `Boka tid smidigt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på ${BUSINESS.address.street} i ${BUSINESS.address.district}.`],
-  ['02', 'Lyft & damaskkontroll', 'Vi hissar upp bilen och inspekterar alla fyra damasker efter sprickor och fettläckage samt känner mekaniskt efter glapp.'],
-  ['03', 'Fastställande av åtgärd', 'Vi bedömer om det räcker med ett damaskbyte, byte av yttre drivknut eller om hela drivaxeln behöver bytas ut.'],
-  ['04', 'Demontering & montering', 'Komponenterna demonteras fackmannamässigt och ersätts med nya kvalitetsdelar, specialfett och nya låsklämmor.'],
-  ['05', 'Momentdragning & provkörning', 'Navmuttrar dras med rätt moment och vi provkör bilen med fullt rattutslag för att verifiera tyst och vibrationsfri gång.'],
-] as const
 
 const faqs = [
   { question: 'Hur vet jag om det är den inre eller yttre drivknuten som är dålig?', answer: 'Ett knäppande eller knackande ljud vid skarpa svängar i låg fart pekar nästan alltid på den yttre drivknuten. Vibrationer och skakningar vid gaspådrag rakt fram tyder istället oftast på glapp i den inre knuten närmast växellådan. Är du osäker gör vi en snabb och noggrann bedömning.' },
@@ -138,6 +130,7 @@ export default function DrivaxelDrivknutarPage() {
           image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Närbild på mekaniker som inspekterar sprucken drivaxeldamask och fettläckage under bil' }}
           caption="Tidigt damaskbyte skyddar knuten."
         >
+          <p>En skadad damask och en sliten drivknut är två olika lägen. Damasken är gummiskyddet som håller kvar fettet i knuten och håller smuts och vatten ute. Är den bara sprucken kan knuten fortfarande vara hel. Har smuts och fukt redan kommit in, och knuten börjat knacka i kurvor, är själva knuten sliten och ett damaskbyte räcker inte längre.</p>
           <Tip
             title="Viktigt om sprucken damask:"
             text="Upptäcker du fettstänk eller en spräckt damask innan knuten börjat låta är det goda nyheter. Då räcker det i regel med att rengöra och byta enbart damasken med nytt specialfett, vilket sparar tusentals kronor jämfört med ett fullständigt knutbyte."
@@ -146,22 +139,17 @@ export default function DrivaxelDrivknutarPage() {
 
         <GuideServiceCard
           id="driveshaft-service-title"
+          heading="Byte av damask, drivknut och drivaxel"
           text="Vi undersöker drivlinan och byter skadade damasker, yttre drivknutar eller kompletta drivaxlar med kvalitetskomponenter anpassade för din bil."
           items={serviceItems}
         />
 
         <GuideInfo
           id="driveshaft-guidance-title"
-          heading="Viktig information om drivaxlar"
+          heading="Damask, knut och drivaxel"
           text="Här är praktiska fakta och råd kring drivaxlar och knutar. Vi gör alltid en fackmannamässig bedömning av komponenternas skick innan vi föreslår åtgärd."
           cards={infoCards}
           safety={<><strong>Säkerhetsnotis:</strong> En drivknut med hörbart glapp ska inte köras med längre än nödvändigt. Det självläker aldrig och risken för följdskador på växellådan ökar. Om knuten havererar helt tappar bilen omedelbart all drivning.</>}
-        />
-
-        <GuideProcess
-          id="driveshaft-process-title"
-          text="Att byta damasker eller drivaxlar kräver noggrannhet, rätt fettmängd och föreskrivna åtdragningsmoment. Så här ser vår process ut."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="drivaxel-faq" heading="Vanliga frågor om drivaxel och drivknutar" items={faqs} />

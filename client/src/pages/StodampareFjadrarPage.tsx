@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -41,10 +41,10 @@ const parts = [
 ] as const
 
 const benefits = [
-  { icon: AlertTriangleIcon, title: 'Kortare bromssträcka', text: 'Slitna stötdämpare kan förlänga bromssträckan med upp till 20 procent på ojämnt underlag då hjulen tappar kontakten med vägen. Detta är ett branschmässigt riktvärde, inte en Brynäs-specifik mätning.' },
-  { icon: GaugeIcon, title: 'Bättre väggrepp', text: 'Minskar risken för vattenplaning och ger stabilare kontakt mellan däck och vägbana i kurvor och vid undanmanövrar.' },
-  { icon: SlidersIcon, title: 'Jämnare däckslitage', text: 'En korrekt dämpad fjädring förhindrar att däcken nöts vågigt eller trappstegsformat, vilket sparar pengar över tid.' },
-  { icon: ThumbsUpIcon, title: 'Helhetsbedömning', text: 'Vi ser över dämparfästen, krängningshämmarlänkar och länkarmar samtidigt för att slippa framtida onödiga verkstadsbesök.' },
+  { title: 'Bättre väggrepp', text: 'Fungerande stötdämpare hjälper hjulen att hålla kontakten med vägen. Är de slitna tappar hjulen lättare greppet på ojämnt underlag, vilket kan påverka både styrning och inbromsning.' },
+  { title: 'Bättre väggrepp', text: 'Minskar risken för vattenplaning och ger stabilare kontakt mellan däck och vägbana i kurvor och vid undanmanövrar.' },
+  { title: 'Jämnare däckslitage', text: 'En korrekt dämpad fjädring förhindrar att däcken nöts vågigt eller trappstegsformat, vilket sparar pengar över tid.' },
+  { title: 'Helhetsbedömning', text: 'Vi ser över dämparfästen, krängningshämmarlänkar och länkarmar samtidigt för att slippa framtida onödiga verkstadsbesök.' },
 ] as const
 
 const symptoms: readonly GuideSymptom[] = [
@@ -66,19 +66,11 @@ const serviceItems = [
 ]
 
 const infoCards: readonly GuideInfoCard[] = [
-  { icon: ClockIcon, title: 'Gradvis slitage', text: 'Stötdämpare slits långsamt och smygande. Många förare vänjer sig vid en allt sämre väghållning utan att märka hur mycket bromssträckan förlängts.' },
+  { icon: ClockIcon, title: 'Gradvis slitage', text: 'Stötdämpare slits långsamt och smygande. Många förare vänjer sig vid en allt sämre väghållning utan att märka hur mycket den har förändrats.' },
   { icon: AlertTriangleIcon, title: 'Parvis utbyte är ett krav', text: 'Fjädrar och stötdämpare byts alltid parvis per axel. Ensidigt byte ger olika fjäderstyvhet, sned bil och obalanserade köregenskaper.', flag: 'VIKTIGT' },
   { icon: ThumbsUpIcon, title: 'Helhetslösning sparar pengar', text: 'Eftersom fjäderbenet ändå demonteras lönar det sig ofta att byta slitna topplager och genomslagsgummin i samma moment.' },
   { icon: GaugeIcon, title: 'Hjulinställning behövs oftast', text: 'Arbeten i hjulupphängningen rubbar nästan alltid hjulvinklarna. En efterföljande hjulinställning skyddar däcken och garanterar bra styrrespons.' },
 ]
-
-const processSteps = [
-  ['01', 'Bokning och inlämning', 'Boka tid online eller via telefon och lämna in bilen hos oss på Utmarksvägen i Brynäs.'],
-  ['02', 'Chassi- & fjädringskontroll', 'Vi hissar upp bilen och undersöker dämpare, fjädrar, bussningar och leder.'],
-  ['03', 'Demontering och komponentbyte', 'Slitna delar demonteras och nya kvalitetskomponenter monteras med rätt moment.'],
-  ['04', 'Hjulinställning', 'Vi kontrollerar och justerar hjulvinklarna med precisionsmätning.'],
-  ['05', 'Slutkontroll och provkörning', 'Vi provkör bilen och går igenom utfört arbete och protokoll med dig.'],
-] as const
 
 const faqs = [
   { question: 'Hur vet jag om det är dämparna eller fjädrarna som är trasiga?', answer: 'Slitna dämpare märks oftast som en gungig, ostabil körkänsla som kommer smygande över tid. En trasig fjäder ger istället ofta ett tydligt, metalliskt "klonk"-ljud över gupp och kan göra att bilen lutar synligt. Är du osäker gör vi en snabb och säker bedömning åt dig.' },
@@ -137,30 +129,26 @@ export default function StodampareFjadrarPage() {
           image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker inspekterar stötdämpare och fjäder på en lyft bil' }}
           caption="Säker väghållning börjar under bilen."
         >
+          <p>Fjädern och stötdämparen har olika uppgifter. Fjädern bär bilens vikt och tar upp gupp; en trött eller bruten fjäder märks därför ofta på att bilen står lägre eller lutar. Stötdämparen bromsar fjäderns rörelse så att bilen inte fortsätter gunga och hjulen håller kontakten med vägen. Slitna dämpare märks snarare som ett gungigt, flytande beteende och sämre väggrepp på ojämn väg.</p>
           <Tip
             title="Enkelt eget gungtest:"
-            text="Tryck bestämt ner ett hörn av bilen med kroppsvikten och släpp snabbt. Reser sig bilen och stabiliseras direkt är dämparna troligen i bra skick — fortsätter bilen gunga eller studsa är dämparen slut."
+            text="Tryck bestämt ner ett hörn av bilen med kroppsvikten och släpp snabbt. Reser sig bilen och stabiliseras direkt är dämparna troligen i bra skick — fortsätter bilen gunga eller studsa kan dämparen vara sliten. Testet ger en fingervisning, men en säker bedömning kräver en kontroll."
           />
         </GuideSymptoms>
 
         <GuideServiceCard
           id="suspension-service-title"
+          heading="Byte av stötdämpare och fjädrar"
           text="Vi gör en helhetsbedömning av hjulupphängningen och byter slitna fjädrar och dämpare med kvalitetsdelar anpassade för din bils chassiversion."
           items={serviceItems}
         />
 
         <GuideInfo
           id="suspension-guidance-title"
-          heading="Mer info om väghållning och chassi"
+          heading="Väghållning och chassi"
           text="Här är viktiga riktlinjer och fakta kring komponenternas samverkan i hjulupphängningen. Vi undersöker alltid bilens faktiska skick innan vi föreslår åtgärder."
           cards={infoCards}
           safety={<><strong>Säkerhetsnotis:</strong> En bruten fjäder är en allvarlig säkerhetsrisk som inte bör köras vidare på. Bilen blir instabil, bromssträckan ökar kraftigt och fjäderbrottet riskerar att skada däck eller bromsslangar med haveri som följd.</>}
-        />
-
-        <GuideProcess
-          id="suspension-process-title"
-          text="Att byta stötdämpare och fjädrar kräver precision och rätt chassiverktyg. Så här ser vårt strukturerade arbetssätt ut."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="stodampare-faq" heading="Vanliga frågor om stötdämpare och fjädrar" items={faqs} />

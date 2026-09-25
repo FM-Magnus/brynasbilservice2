@@ -18,8 +18,6 @@ import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { UsersIcon } from '../components/icons/UsersIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
-import { WrenchIcon } from '../components/icons/WrenchIcon'
-import { ShieldIcon } from '../components/icons/ShieldIcon'
 import heroBgJpg from '../assets/images/services/tires/tires-hero-bg.jpg'
 import heroBgWebp from '../assets/images/services/tires/tires-hero-bg.webp'
 import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
@@ -107,10 +105,10 @@ const localValueProps = [
 ] as const
 
 const winterDates = [
-  { dates: '1 dec–31 mar', desc: 'Krav på vinterdäck' },
+  { dates: '1 dec–31 mar', desc: 'Krav på vinterdäck vid vinterväglag' },
   { dates: '1 okt–15 apr', desc: 'Dubbdäck tillåtet' },
-  { dates: '16 apr–30 sep', desc: 'Dubbdäck förbjudet' },
-  { dates: '3PMSF-märkning', desc: 'krävs för godkänt vinterdäck' },
+  { dates: '16 apr–30 sep', desc: 'Dubbdäck i regel inte tillåtet' },
+  { dates: '3PMSF-märkning', desc: 'krävs för dubbfria vinterdäck' },
 ] as const
 
 const storageBenefits = [
@@ -120,17 +118,9 @@ const storageBenefits = [
   ['Tidig varning vid slitage', 'Börjar däcken bli slitna säger vi till i god tid innan nästa byte.'],
 ] as const
 
-const processSteps = [
-  { num: '01', icon: PhoneIcon, title: 'Bokning och inlämning', desc: 'Du bokar en tid med oss och lämnar in bilen när det passar.' },
-  { num: '02', icon: ClockIcon, title: 'Initial kontroll', desc: 'Vi gör en första bedömning av bilens skick och servicebehov.' },
-  { num: '03', icon: WrenchIcon, title: 'Service enligt checklista', desc: 'Mekanikern följer checklistan för den servicenivå som är aktuell.' },
-  { num: '04', icon: ShieldIcon, title: 'Godkännande vid extraarbete', desc: 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.' },
-  { num: '05', icon: CheckIcon, title: 'Slutkontroll och rapport', desc: 'När bilen är klar får du en genomgång och råd inför nästa service.' },
-] as const
-
 const faqs = [
   { question: 'Hur lång tid tar ett hjulskifte?', answer: 'Ett vanligt hjulskifte tar normalt 20–30 minuter. Vid högsäsong, när många byter samtidigt, kan väntetiden bli längre — boka gärna i god tid.' },
-  { question: 'Behövs hjulinställning efter ett däckbyte?', answer: 'Inte alltid, men om bilen drar snett, om ratten vibrerar eller om du nyligen märkt av en gupp eller trottoarkant är det klokt att kontrollera hjulinställningen samtidigt.' },
+  { question: 'Behövs hjulinställning efter ett däckbyte?', answer: 'Inte alltid. Drar bilen åt ena hållet, står ratten snett när du kör rakt fram, slits däcken ojämnt eller har hjulet tagit i en trottoarkant är det klokt att kontrollera hjulinställningen. Vibrerar ratten vid en viss hastighet är obalans i hjulen en vanligare orsak, men även en skadad fälg eller ett skadat däck kan ge vibrationer.' },
   { question: 'Vad är skillnaden mellan hjulskifte och omläggning av däck?', answer: 'Ett hjulskifte innebär att färdigmonterade hjul (däck + fälg) byts som en enhet, till exempel sommar- mot vinterhjul. En omläggning innebär att nya däck monteras på dina befintliga fälgar.' },
   { question: 'Behöver jag tänka på däcktrycksövervakningen (TPMS)?', answer: 'På bilar med TPMS varnar systemet när lufttrycket är för lågt. Efter ett hjulskifte kan systemet i vissa fall behöva kontrolleras eller återställas — fråga oss vid bokning så ser vi vad som gäller för din bil.' },
   { question: 'Kan jag boka däckhotell utan att göra ett hjulskifte samtidigt?', answer: 'Ja, du kan lämna in däcken för förvaring separat, men de flesta väljer att kombinera det med sitt hjulskifte för att slippa ett extra besök.' },
@@ -316,14 +306,9 @@ export default function DackservicePage() {
                     Utöver skifte och balansering hjälper vi till med hjulinställning och säsongsförvaring. Vi ser över mönsterdjup, lufttryck och synliga bromskomponenter så att du får en bra överblick över hjulens skick.
                   </p>
                 </div>
-                <ul className="bilservice__checklist">
-                  {['Däckbyte & montering', 'Balansering av hjul', 'Hjulinställning', 'Däckhotell — förvaring & tvätt', 'Däcktryckskontroll'].map((item) => (
-                    <li key={item}>
-                      <CheckIcon aria-hidden="true" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="bilservice__actions">
+                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid för däckservice</button>
+                </div>
               </div>
             </div>
           </div>
@@ -342,6 +327,9 @@ export default function DackservicePage() {
                   Kontrollera lufttrycket när däcken är kalla och jämför med bilens instruktionsbok. Som riktmärke är en kontroll varje månad en bra vana, och en extra kontroll inför längre resor eller säsongsskifte är klok. Rätt lufttryck ger bättre väggrepp, kortare bromssträcka, lägre bränsleförbrukning och jämnare slitage.
                 </p>
                 <p>
+                  Balansering, hjulinställning och en skada på däcket är tre olika saker. Balansering gäller hjulet självt: däck och fälg ska väga jämnt runt om, och obalans märks oftast som vibrationer vid vissa hastigheter. Hjulinställning gäller bilens hjulvinklar; fel där märks snarare som att bilen drar åt ena hållet eller att däcken slits ojämnt, till exempel mer på ena kanten. En bula i däcksidan, ett snitt eller en spricka behöver bedömas för sig, eftersom den varken kan balanseras eller ställas bort.
+                </p>
+                <p>
                   Lagen kräver ett minsta mönsterdjup på 1,6 mm för sommardäck och 3 mm vid vinterväglag. För verkligt säker körning rekommenderas dock byte i god tid innan gränsen nås — sommardäck bör bytas vid cirka 3 mm för att minimera risken för vattenplaning, och vinterdäck bör bytas vid cirka 3–5 mm (gärna minst 4 mm) för att behålla fästet på snö och modd.
                 </p>
                 <p>
@@ -352,34 +340,6 @@ export default function DackservicePage() {
                 </p>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Så går det till hos oss (5-step process) */}
-        <section className="bilservice__section bilservice__section--dark" aria-labelledby="dackservice-process-title">
-          <div className="bb-wrap bilservice__container bilservice__process">
-            <div className="bilservice__process-text">
-              <h2 className="bilservice__process-heading bb-h2" id="dackservice-process-title">
-                Så går det till<br /><span className="bb-accent">hos oss</span>
-              </h2>
-              <p className="bb-lead--dark">
-                Att förstå processen gör det enklare att veta vad som händer med bilen från bokning till klar service.
-              </p>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal">
-                <PhoneIcon aria-hidden="true" />
-                <span>Ring oss: {BUSINESS.phone.display}</span>
-              </a>
-            </div>
-            <ol className="bb-process-grid">
-              {processSteps.map((step) => (
-                <li key={step.num}>
-                  <b>{step.num}</b>
-                  <span className="bb-icon-bare"><step.icon aria-hidden="true" /></span>
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                </li>
-              ))}
-            </ol>
           </div>
         </section>
 

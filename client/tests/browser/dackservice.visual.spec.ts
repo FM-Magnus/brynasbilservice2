@@ -31,7 +31,7 @@ test('däckservice & hjulskifte page renders without horizontal overflow across 
   await expect(page.locator('.bilservice__storage-card')).toBeVisible()
   await expect(page.locator('.bilservice__service-card')).toBeVisible()
   await expect(page.locator('.bilservice__advice-grid')).toBeVisible()
-  await expect(page.locator('.bb-process-grid')).toBeVisible()
+  await expect(page.locator('.bb-process-grid')).toHaveCount(0)
   await expect(page.locator('.bb-card--trust').first()).toBeVisible()
 
   // Verify call link exists with correct tel URI

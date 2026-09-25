@@ -4,7 +4,7 @@ AC-service &
 Klimat­rengöring
 i Gävle
 
-En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer. Ett system med för lite köldmedium smörjs sämre – att ignorera det kan förvandla en enkel påfyllning till en betydligt dyrare kompressorreparation.
+En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer. Ett system med för lite köldmedium smörjs sämre, och att köra vidare så kan i värsta fall leda till en betydligt dyrare kompressorreparation.
 
 BOKA TID
 RING OSS NU
@@ -12,17 +12,13 @@ RING OSS NU
 VARFÖR VÄLJA OSS
 
 Varför boka AC-service hos oss?
-Fasta priser
 
-Du vet priset innan vi sätter igång — inga överraskningar på fakturan.
+Du vet priset innan vi sätter igång, så det blir inga överraskningar på fakturan. Vi följer tillverkarens föreskrifter, vilket betyder att nybilsgarantin inte påverkas av att vi utför servicen.
 
-Bibehållen nybilsgaranti
+Och vi är din lokala verkstad: vi finns på Utmarksvägen i Gävle och känner våra kunder och deras bilar.
 
-Vi följer tillverkarens föreskrifter, så nybilsgarantin påverkas inte av att vi utför servicen.
-
-Din lokala verkstad
-
-Vi finns på Utmarksvägen i Gävle och känner våra kunder och deras bilar.
+BOKA AC-SERVICE
+RING 070-553 33 95
 
 HITTA RÄTT HJÄLP
 
@@ -31,26 +27,20 @@ Känner du igen något av detta?
 Klicka på ett symptom för att få vår rekommendation på rätt åtgärd inför din bokning.
 
 Dålig kyla eller imma på rutorna?
-
-Tyder oftast på låg nivå av köldmedium, en igensatt kondensor eller en fläkt som inte kyler som den ska.
-
+Kan bero på för lite köldmedium – vilket i ett slutet system oftast betyder ett läckage – men också på en igensatt kondensor eller en fläkt som inte går som den ska.
 Välj för rekommendation
 Unken lukt ur fläktutblåsen?
-
 Beror på fukt och beläggningar i förångaren – det är därför separat AC-rengöring behövs för att få bort lukten.
-
 Välj för rekommendation
 Missljud när AC:n slås på?
-
 Kan orsakas av slitna lager, en kompressorkoppling som kärvar eller felaktigt tryck i systemet.
-
 Välj för rekommendation
 
 TYDLIGA PRISER
 
 Service för renare och svalare kupé
 
-En enklare kontroll årligen räcker för de flesta bilar, medan en fullständig AC-service med läckagesökning och kompressorolja normalt behövs vartannat år.
+Hur ofta AC:n behöver servas beror på bilen och på hur systemet fungerar. Märker du sämre kyla, imma eller lukt är det ett skäl att låta kontrollera det.
 
 Samtliga priser är inklusive moms.
 AC-service
@@ -135,7 +125,11 @@ Köldmediet står på en märkning i motorrummet. Bilar äldre än cirka 2017 ha
 
 Hur ofta bör AC:n servas?
 
-En enklare kontroll årligen räcker för de flesta bilar. En fullständig AC-service med läckagesökning och kompressorolja behövs normalt vartannat år.
+Det beror på bilen och hur den används. Utgå från tillverkarens serviceprogram och låt kontrollera systemet när kylan blir sämre, rutorna immar igen lättare eller det luktar från utblåsen.
+
+Kyla, lukt och läckage är olika fel
+
+Sämre kyla kan bero på för lite köldmedium, men också på kondensorn, fläkten eller kompressorn. Unken lukt kommer oftast från fukt och beläggningar i förångaren och har inget med köldmediemängden att göra. Ett läckage betyder att köldmedium försvinner ur ett system som ska vara slutet. Då behöver läckan hittas och åtgärdas; en ny påfyllning ersätter bara det som redan har försvunnit.
 
 Kör AC:n även på vintern
 

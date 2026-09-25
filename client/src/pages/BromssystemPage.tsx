@@ -9,13 +9,12 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
-import { ThumbsUpIcon } from '../components/icons/ThumbsUpIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
@@ -46,11 +45,11 @@ const brakeParts = [
 ] as const
 
 const importance = [
-  { icon: ShieldIcon, title: 'Säkerhet', text: 'Rätt monterade bromsar är inte något att chansa med, och en felmontering kan i värsta fall leda till bromssvikt.' },
-  { icon: GaugeIcon, title: 'Rätt diagnos', text: 'Vi avgör vilka delar som verkligen behöver bytas istället för att byta allt på måfå.' },
-  { icon: ThumbsUpIcon, title: 'Kvalitet', text: 'Vi använder komponenter som håller vad de lovar, inte de absolut billigaste alternativen på en säkerhetsdel.' },
-  { icon: InfoIcon, title: 'Helheten', text: 'Vi ser inte bara till beläggen, utan till hela systemet: vätska, slangar, ok och handbroms.' },
-  { icon: ClockIcon, title: 'Tidsbesparing', text: 'Ett bromsbyte är tekniskt krävande att göra själv, och hos oss är det klart samma dag i de flesta fall.' },
+  { title: 'Säkerhet', text: 'Rätt monterade bromsar är inte något att chansa med, och en felmontering kan i värsta fall leda till bromssvikt.' },
+  { title: 'Rätt diagnos', text: 'Vi avgör vilka delar som verkligen behöver bytas istället för att byta allt på måfå.' },
+  { title: 'Kvalitet', text: 'Vi använder komponenter som håller vad de lovar, inte de absolut billigaste alternativen på en säkerhetsdel.' },
+  { title: 'Helheten', text: 'Vi ser inte bara till beläggen, utan till hela systemet: vätska, slangar, ok och handbroms.' },
+  { title: 'Tidsbesparing', text: 'Ett bromsbyte är tekniskt krävande att göra själv, och hos oss är det klart samma dag i de flesta fall.' },
 ] as const
 
 const symptoms: readonly GuideSymptom[] = [
@@ -74,22 +73,14 @@ const serviceItems = [
 ]
 
 const infoCards = [
-  { icon: ClockIcon, title: 'Bromsbelägg', text: 'Håller normalt cirka 3 000–5 000 mil och anses uttjänta när tjockleken går under cirka 3 mm. Det är ett branschmässigt riktvärde som varierar med körstil, körmiljö och bilmodell.' },
-  { icon: GaugeIcon, title: 'Bromsskivor', text: 'Håller normalt cirka 6 000–8 000 mil, men slits ojämnt och i förtid om beläggen fått gå för länge. Även detta är ett branschriktvärde.' },
+  { icon: ClockIcon, title: 'Bromsbelägg', text: 'Hur länge beläggen räcker varierar så mycket med körstil, körmiljö och bilmodell att ett generellt miltal säger lite. De byts när de närmar sig tillverkarens slitagegräns, vilket syns vid en kontroll.' },
+  { icon: GaugeIcon, title: 'Bromsskivor', text: 'Skivorna mäts mot tillverkarens minsta tjocklek och bedöms efter repor, rost och ojämnt slitage. De slits i förtid om beläggen har fått gå för länge.' },
   { icon: HourglassIcon, title: 'Bromsvätska', text: 'Bör bytas ungefär vart 2–3 år, oavsett hur mycket bilen körts, eftersom vätskan drar åt sig fukt över tid även vid stillastående.' },
   { icon: ClockIcon, title: 'Tidsåtgång', text: 'Ett rent beläggbyte tar normalt omkring en timme. Ett mer omfattande byte med skivor, ok eller luftning tar normalt 1–3 timmar.' },
 ] as const
 
-const processSteps = [
-  ['01', 'Bokning och inlämning', 'Du bokar en tid med oss och lämnar in bilen när det passar.'],
-  ['02', 'Initial kontroll', 'Vi gör en första bedömning av bilens skick och servicebehov.'],
-  ['03', 'Service enligt checklista', 'Mekanikern följer checklistan för den servicenivå som är aktuell.'],
-  ['04', 'Godkännande vid extraarbete', 'Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.'],
-  ['05', 'Slutkontroll och rapport', 'När bilen är klar får du en genomgång och råd inför nästa service.'],
-] as const
-
 const faqs = [
-  { question: 'Hur ofta behöver jag byta bromsar?', answer: 'Det beror på körstil, körmiljö och bilmodell. Som riktvärde håller bromsbelägg 3 000–5 000 mil och bromsskivor 6 000–8 000 mil, men regelbundna kontroller är det som faktiskt avgör — inte ett fast intervall.' },
+  { question: 'Hur ofta behöver jag byta bromsar?', answer: 'Det beror på körstil, körmiljö och bilmodell, så det finns inget fast miltal. Det som avgör är hur mycket belägg och skivor har slitits, vilket syns vid en kontroll, till exempel i samband med hjulskifte eller service.' },
   { question: 'Hur ofta ska bromsvätskan bytas?', answer: 'Vanligtvis vart 2–3 år, oavsett hur mycket bilen körts. Vätskan drar åt sig fukt över tid även om bilen står stilla, vilket sänker bromsverkan gradvis utan att du märker det förrän vid en kontroll.' },
   { question: 'Behöver handbromsen service om jag ändå ska byta bromsarna?', answer: 'Inte alltid, men det är ett bra tillfälle att kontrollera den samtidigt eftersom bilen ändå är uppe — särskilt på bilar med mekanisk vajerhandbroms som kan behöva efterjusteras med tiden.' },
   { question: 'Hur mycket kostar det att byta bromsar?', answer: 'Kostnaden beror på vilka delar som behöver bytas. Ett byte av enbart belägg brukar kosta mindre än ett komplett byte som även innefattar skivor och eventuellt ok. Ring oss för en tydlig prisuppgift innan vi sätter igång.' },
@@ -141,27 +132,24 @@ export default function BromssystemPage() {
           items={symptoms}
           image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker mäter bromsskivans tjocklek med digitalt skjutmått under lyft bil i verkstaden' }}
           caption="Vi hittar problemet – innan det blir större."
-        />
+        >
+          <p>Belägg, skivor och bromsok arbetar som ett system och bedöms därför tillsammans. Ett ok eller en kolv som kärvar kan göra att ett belägg ligger an hela tiden, slits snett eller blir varmt, och då hjälper nya belägg och skivor bara en kort tid. Gnissel, vibrationer eller en bil som drar åt sidan vid inbromsning kan komma från vilken som helst av delarna.</p>
+        </GuideSymptoms>
 
         <GuideServiceCard
           id="brake-service-title"
+          heading="Bromsservice hos oss"
           text="Vi börjar med att bedöma vad som faktiskt behöver göras och går inte vidare med extra arbete utan ditt godkännande."
           items={serviceItems}
         />
 
         <GuideInfo
           id="brake-info-title"
-          heading="Mer info"
+          heading="Belägg, skivor och bromsvätska"
           text="Riktvärden kan skilja mellan bilmodeller, körstil och körmiljö. Vi bedömer alltid din bil utifrån dess faktiska skick."
           cards={infoCards}
           safetyIcon={InfoIcon}
           safety={<><strong>Säkerhetsnot:</strong> Bromssystemet är en säkerhetskomponent. En felaktig montering kan få allvarliga konsekvenser, vilket är varför vi rekommenderar att inte utföra bromsbyten själv utan rätt kunskap och verktyg.</>}
-        />
-
-        <GuideProcess
-          id="brake-process-title"
-          text="Att förstå processen gör det enklare att veta vad som händer med bilen och varför en bromskontroll ibland behöver ta lite tid."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="bromssystem-faq" heading="Vanliga frågor om bromsar" items={faqs} />

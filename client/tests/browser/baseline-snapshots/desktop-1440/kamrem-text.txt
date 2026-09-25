@@ -16,7 +16,7 @@ Precision, synk och driftsäkerhet.
 
 Vad är en kamrem?
 
-Värt att veta innan man läser vidare: inte alla bilar har kamrem. Vissa motorer har istället kamkedja i metall som normalt håller bilens livslängd utan schemalagt byte. Eftersom samma bilmodell kan ha kamrem på en motorvariant och kamkedja på en annan räcker inte modellnamnet ensamt för att veta vad som gäller din bil.
+Värt att veta innan man läser vidare: inte alla bilar har kamrem. Vissa motorer har istället kamkedja i metall, som ofta saknar fast bytesintervall. Eftersom samma bilmodell kan ha kamrem på en motorvariant och kamkedja på en annan räcker inte modellnamnet ensamt för att veta vad som gäller din bil.
 
 01
 Kamrem & spännrullar
@@ -26,7 +26,7 @@ Driver kamaxeln och ser till att motorns ventiler öppnas och stängs i exakt sy
 02
 Kamkedja
 
-Alternativ konstruktion i metall på vissa motorer som normalt håller bilens livslängd utan schemalagt byte.
+Alternativ konstruktion i metall på vissa motorer. Den har ofta inget fast bytesintervall, men kan också slitas och ska bedömas om motorn låter eller visar fel.
 
 03
 Vattenpump
@@ -41,21 +41,13 @@ Varför är det viktigt att byta i tid?
 
 Ett förebyggande kamremsbyte kostar en bråkdel av vad en motor kostar att reparera efter ett haveri.
 
-Förebygger katastrofal motorskada
+Förebygger katastrofal motorskada. Ett förebyggande kamremsbyte kostar en bråkdel av vad en motor kostar att reparera eller byta efter ett rembrott.
 
-Ett förebyggande kamremsbyte kostar en bråkdel av vad en motor kostar att reparera eller byta efter ett rembrott.
+Rätt intervall för just din motor. Vi identifierar bytesintervallet utifrån bilens specifika motor, inte bara modellnamnet, eftersom det kan skilja mellan varianter.
 
-Rätt intervall för just din motor
+Helhetsbedömning. Eftersom motorn ändå är demonterad kontrollerar vi relaterade delar som vattenpump och spännrullar som annars kräver ett eget, dyrare ingrepp.
 
-Vi identifierar bytesintervallet utifrån bilens specifika motor, inte bara modellnamnet, eftersom det kan skilja mellan varianter.
-
-Helhetsbedömning
-
-Eftersom motorn ändå är demonterad kontrollerar vi relaterade delar som vattenpump och spännrullar som annars kräver ett eget, dyrare ingrepp.
-
-Trygghet & andrahandsvärde
-
-Ett dokumenterat kamremsbyte i serviceboken är en av de viktigaste trygghetsfaktorerna vid bilägande och försäljning.
+Trygghet & andrahandsvärde. Ett dokumenterat kamremsbyte i serviceboken är en av de viktigaste trygghetsfaktorerna vid bilägande och försäljning.
 
 Varningstecken och när kamremmen ska bytas
 
@@ -79,7 +71,7 @@ Har bilen nått sitt intervall är risken för plötsligt rembrott verklig – �
 
 Rätt intervall och åtgärd i tid.
 
-Det här kan vi hjälpa dig med
+Det här ingår i ett kamremsbyte
 
 Vi utför kompletta kamremsbyten med kvalitetsdelar anpassade för just din motors specifikation och nollställer motorn med specialverktyg.
 
@@ -89,55 +81,19 @@ Nollställning och låsning av motorns axlar till exakta tajmingsmärken med spe
 Kontroll av aggregatrem / poly-v-rem och dess spännare om de demonteras under arbetet.
 Påfyllning och avluftning av kylsystemet om vattenpumpen bytts.
 Noggrann funktionskontroll och provstart innan bilen lämnas ut.
-Mer info om intervall och säkerhet
+Intervall och säkerhet
 
 Här finns generella riktlinjer och fakta kring kamremsintervall och motorkonstruktion. Vi kontrollerar alltid vad som gäller specifikt för din bil.
 
-Bytesintervall i mil och år
-
-Kamremmen bör normalt bytas efter 60 000–100 000 km eller vart 6:e år (vissa moderna bilar har längre intervall). Intervallet avgörs alltid av motorkod och tillverkarens data.
-
-VIKTIGT
+Fråga vad offerten omfattar
+På många motorer driver kamremmen även vattenpumpen, och tillverkare av reservdelar rekommenderar då att pumpen, spännrullarna och styrrullarna byts samtidigt. Be därför om en offert som visar vilka delar som ingår, så att du kan jämföra priser på lika villkor.
 Kontrollera alltid via registreringsnummer
-
-Exakt intervall måste alltid kontrolleras mot bilens registreringsnummer eller chassinummer, inte gissas utifrån modellnamnet — samma modell kan ha olika motorer.
-
+VIKTIGT
+Bytesintervallet anges av biltillverkaren i tid och körsträcka för varje motor och kan skilja mycket, även inom samma modell. Det ska kontrolleras mot bilens registreringsnummer eller chassinummer, inte gissas utifrån modellnamnet eller en allmän tumregel.
 Arbetstid i verkstaden
-
 Ett kamremsbyte tar normalt 2–6 timmars arbetstid beroende på bilmodell och hur trångt motorutrymmet är. Detta är ett branschmässigt riktvärde.
 
 Säkerhetsnotis: De flesta moderna motorer är interferensmotorer, vilket innebär att kolvar och ventiler kolliderar om remmen brister med totalt motorhaveri som följd. Misstänker du att kamremmen har gått av under färd – gör inga försök att starta motorn igen.
-
-Så går det till
-hos oss
-
-Att förstå processen gör det enklare och tryggare att lämna in bilen för ett avancerat motorarbete.
-
-RING OSS: 070-553 33 95
-01
-Bokning och inlämning
-
-Du bokar en tid med oss och lämnar in bilen när det passar.
-
-02
-Initial kontroll
-
-Vi gör en första bedömning av bilens skick och servicebehov.
-
-03
-Service enligt checklista
-
-Mekanikern följer checklistan för den servicenivå som är aktuell.
-
-04
-Godkännande vid extraarbete
-
-Hittar vi något utanför checklistan kontaktar vi dig innan vi går vidare.
-
-05
-Slutkontroll och rapport
-
-När bilen är klar får du en genomgång och råd inför nästa service.
 
 Vanliga frågor om kamrem
 Hur vet jag om min bil har kamrem eller kamkedja?

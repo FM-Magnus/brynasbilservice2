@@ -21,11 +21,11 @@ test('stodampare page renders without horizontal overflow across breakpoints', a
   // Verify key guide sections exist
   await expect(page.locator('.service-guide__hero')).toBeVisible()
   await expect(page.locator('.service-guide__component-grid')).toBeVisible()
-  await expect(page.locator('.service-guide__importance-grid')).toBeVisible()
+  await expect(page.locator('.service-guide__importance-prose')).toBeVisible()
   await expect(page.locator('.service-guide__symptom-list')).toBeVisible()
   await expect(page.locator('.service-guide__service-checklist')).toBeVisible()
-  await expect(page.locator('.service-guide__info-grid')).toBeVisible()
-  await expect(page.locator('.service-guide__process-steps')).toBeVisible()
+  await expect(page.locator('.service-guide__info-ledger')).toBeVisible()
+  await expect(page.locator('.service-guide__process-steps')).toHaveCount(0)
   await expect(page.locator('.service-guide__closing')).toBeVisible()
 
   // Verify call link exists with correct tel URI

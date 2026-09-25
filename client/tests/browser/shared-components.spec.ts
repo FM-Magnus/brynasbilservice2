@@ -47,7 +47,7 @@ const RULES = [
   },
   {
     what: 'Guide-family section markup',
-    pattern: /service-guide__(hero|intro-layout|importance|symptoms-layout|symptom-list|service-card|info-heading|info-grid|safety-strip|process|closing|topic-header|topic-grid|component-grid)\b/,
+    pattern: /service-guide__(hero|intro-layout|importance|symptoms-layout|symptom-list|service-card|info-heading|info-ledger|safety-strip|closing|topic-header|topic-grid|topic-prose|component-grid)\b/,
     owners: [GUIDE_SECTIONS],
     use: `the Guide* components in ${GUIDE_SECTIONS}`,
   },

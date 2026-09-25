@@ -22,11 +22,11 @@ test('felsökning & diagnostik page renders without horizontal overflow across b
   // Verify key Bilservice family sections exist
   await expect(page.locator('.bb-hero')).toBeVisible()
   await expect(page.locator('.bilservice__code-readout')).toHaveCount(0)
-  await expect(page.locator('.bilservice__card-grid-3')).toBeVisible()
+  await expect(page.locator('.bilservice__ledger')).toBeVisible()
   await expect(page.locator('.bilservice__symptom-grid')).toBeVisible()
-  await expect(page.locator('.bilservice__stat-grid')).toBeVisible()
+  await expect(page.locator('.bilservice__editorial')).toBeVisible()
   await expect(page.locator('.bilservice__service-card')).toBeVisible()
-  await expect(page.locator('.bb-process-grid')).toBeVisible()
+  await expect(page.locator('.bb-process-grid')).toHaveCount(0)
   await expect(page.locator('.bb-card--trust')).toBeVisible()
 
   // Verify call link exists with correct tel URI

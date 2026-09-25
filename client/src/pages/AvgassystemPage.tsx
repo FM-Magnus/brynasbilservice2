@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideProcess, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -44,10 +44,10 @@ const components = [
 ] as const
 
 const importance = [
-  { icon: ShieldIcon, title: 'Godkänd besiktning', text: 'Läckage, för högt motorljud eller felaktiga avgasvärden från lambdasond eller katalysator är en vanlig orsak till anmärkningar vid besiktningen.' },
-  { icon: AlertTriangleIcon, title: 'Säkerhet & hälsa', text: 'Ett tätt avgassystem förhindrar att giftig och luktfri koloxid från avgaserna tränger in i kupén via bilens friskluftsintag.' },
-  { icon: GaugeIcon, title: 'Lägre bränsleförbrukning', text: 'Fungerande lambdasonder och sensorer säkerställer att motorn förbränner optimal bränsleblandning utan onödig överförbrukning.' },
-  { icon: ThumbsUpIcon, title: 'Rätt åtgärd före dyrbyte', text: 'Vi provtrycker och felsöker innan vi byter dyra komponenter som katalysatorn, då grundorsaken ofta är ett flexrör eller en lambdasond.' },
+  { title: 'Godkänd besiktning', text: 'Läckage, för högt motorljud eller felaktiga avgasvärden från lambdasond eller katalysator är en vanlig orsak till anmärkningar vid besiktningen.' },
+  { title: 'Säkerhet & hälsa', text: 'Ett tätt avgassystem förhindrar att giftig och luktfri koloxid från avgaserna tränger in i kupén via bilens friskluftsintag.' },
+  { title: 'Lägre bränsleförbrukning', text: 'Fungerande lambdasonder och sensorer säkerställer att motorn förbränner optimal bränsleblandning utan onödig överförbrukning.' },
+  { title: 'Rätt åtgärd före dyrbyte', text: 'Vi provtrycker och felsöker innan vi byter dyra komponenter som katalysatorn, då grundorsaken ofta är ett flexrör eller en lambdasond.' },
 ] as const
 
 const symptoms: readonly GuideSymptom[] = [
@@ -75,14 +75,6 @@ const infoCards: readonly GuideInfoCard[] = [
   { icon: InfoIcon, title: 'Katalysatorkod kan vara lambdasond', text: 'En felkod som P0420 betyder inte automatiskt att katalysatorn är slut. En felaktig lambdasond ger ofta samma felkod och är betydligt billigare att byta.' },
   { icon: GaugeIcon, title: 'Viktigt om motorlampan', text: 'En tänd motorlampa med en katalysator-relaterad felkod betyder inte automatiskt att själva katalysatorn är trasig. En felaktig lambdasond eller ett litet avgasläckage före sonden är minst lika vanligt och betydligt mer prisvärt att åtgärda.' },
 ]
-
-const processSteps = [
-  ['01', 'Bokning och inlämning', `Boka enkelt online eller ring oss på ${BUSINESS.phone.display} och lämna in bilen hos oss på ${BUSINESS.address.street} i ${BUSINESS.address.district}.`],
-  ['02', 'Lyft & läckagekontroll', 'Vi hissar upp bilen och inspekterar hela avgassystemet från grenrör till slutrör för att lokalisera sprickor och rost.'],
-  ['03', 'Sensordiagnostik', 'Vid tänd motorlampa läser vi av lambdasondernas signalvärden och felminnet i bilens motorstyrdon.'],
-  ['04', 'Montering & tätning', 'Vi demonterar den trasiga delen och monterar nya kvalitetsdelar med nya packningar, klammor och upphängningar.'],
-  ['05', 'Täthetskontroll & slutprov', 'Vi varmkör motorn och säkerställer att alla skarvar är 100 % täta och att ljudnivån är tyst och behaglig.'],
-] as const
 
 const faqs = [
   { question: 'Varför rostar avgassystemet sönder så ofta i Sverige?', answer: 'Vägsalt och fukt under vinterhalvåret sliter hårt på metallen underifrån. Dessutom bildas kondensvatten inuti avgassystemet vid korta körsträckor, vilket gör att särskilt den bakre ljuddämparen rostar inifrån och ut.' },
@@ -140,27 +132,24 @@ export default function AvgassystemPage() {
           items={symptoms}
           image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker som kontrollerar och drar åt klämma på avgassystem under bil på tvåpelarlyft' }}
           caption="Vi hittar problemet – innan det blir större."
-        />
+        >
+          <p>Ett läckage, en felaktig givarsignal och en motor som går ojämnt kan ge liknande tecken, och de behöver skiljas åt innan någon del byts. Även ett litet läckage före lambdasonden kan släppa in luft och göra att givaren mäter fel, och en felkod för katalysatorn kan i själva verket bero på en givare eller på hur motorn går. Därför kontrolleras skarvar och svetsar för läckage och givarnas värden innan en dyr del som katalysatorn byts.</p>
+        </GuideSymptoms>
 
         <GuideServiceCard
           id="exhaust-service-title"
+          heading="Reparation av avgassystemet"
           text="Vi undersöker hela avgassystemet och byter slitna ljuddämpare, rörsektioner eller lambdasonder med kvalitetsdelar anpassade för din bil."
           items={serviceItems}
         />
 
         <GuideInfo
           id="exhaust-info-title"
-          heading="Viktig information om avgassystem"
+          heading="Rost, katalysator och motorlampa"
           text="Här är praktiska riktlinjer och fakta kring avgassystemets funktion och åtgärder. Vi undersöker alltid bilens faktiska skick innan vi föreslår reservdelsbyten."
           cards={infoCards}
           safetyIcon={InfoIcon}
           safety={<><strong>Säkerhetsnotis:</strong> Lukt av avgaser i kupén ska aldrig ignoreras. Bilavgaser innehåller luktfri och giftig koloxid (kolmonoxid) som snabbt kan orsaka huvudvärk, illamående och nedsatt reaktionsförmåga under körning. Boka tid direkt om du känner avgasdoft i bilen.</>}
-        />
-
-        <GuideProcess
-          id="exhaust-process-title"
-          text="Att laga eller byta delar i avgassystemet kräver noggrann täthetskontroll och rätt upphängningar. Så här ser vår process ut."
-          steps={processSteps}
         />
 
         <BiltjansterFaq id="exhaust-faq" heading="Vanliga frågor om avgassystem" items={faqs} />

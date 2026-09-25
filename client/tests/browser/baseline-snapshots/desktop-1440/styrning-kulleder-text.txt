@@ -46,21 +46,13 @@ Varför är det viktigt att åtgärda i tid?
 
 En sliten styrled eller kulled äventyrar trafiksäkerheten och leder snabbt till snedslitna däck och sämre körkänsla.
 
-Säkerhet i första hand
+Säkerhet i första hand. En kraftigt sliten eller brusten kulled kan i värsta fall leda till att hjulet viker sig eller lossnar från hjulupphängningen under körning.
 
-En kraftigt sliten eller brusten kulled kan i värsta fall leda till att hjulet viker sig eller lossnar från hjulupphängningen under körning.
+Knivskarp styrprecision. Friska leder och bussningar eliminerar dödgång i ratten och säkerställer att bilen reagerar direkt och förutsägbart på dina manövrar.
 
-Knivskarp styrprecision
+Jämnare däckslitage. Glapp i styrningen rubbar hjulvinklarna, vilket snabbt leder till att däcken snedslits på in- eller utsidan och måste kasseras i förtid.
 
-Friska leder och bussningar eliminerar dödgång i ratten och säkerställer att bilen reagerar direkt och förutsägbart på dina manövrar.
-
-Jämnare däckslitage
-
-Glapp i styrningen rubbar hjulvinklarna, vilket snabbt leder till att däcken snedslits på in- eller utsidan och måste kasseras i förtid.
-
-Rätt diagnos från början
-
-Vi avgör fackmannamässigt om missljudet härstammar från kulleder, styrleder eller servostyrningen, vilket förhindrar felaktiga reparationer.
+Rätt diagnos från början. Vi avgör fackmannamässigt om missljudet härstammar från kulleder, styrleder eller servostyrningen, vilket förhindrar felaktiga reparationer.
 
 Tecken på sliten styrning eller trasiga leder
 
@@ -90,13 +82,15 @@ Tänd EPS-varningslampa & snedslitna däck
 
 Gul rattsymbol på instrumentpanelen eller ojämnt slitna däckkanter indikerar att styrgeometrin behöver ses över.
 
+Glapp känns ofta i ratten eller hörs som en smäll över gupp, men det säger inte i vilken led det sitter. Styrleder, kulleder, länkarmsbussningar och hjullager kan alla ge liknande symptom. Därför lokaliseras glappet genom att hjulet och de enskilda delarna belastas åt olika håll, med bilen både upplyft och stående på hjulen, innan det bestäms vad som ska bytas.
+
 TIPS
 Viktigt om bilens dragning:
 Att bilen drar åt ena hållet beror i regel inte på servostyrningen, utan på felaktig hjulinställning, ojämnt däcktryck eller glappande länkarmar och kulleder i hjulupphängningen.
 
 Säker väghållning kräver intakta leder.
 
-Det här kan vi hjälpa dig med
+Reparation av styrning och kulleder
 
 Vi felsöker, reparerar och byter slitna styrkomponenter och servodetaljer med kvalitetsdelar anpassade för din bilmodell.
 
@@ -106,59 +100,21 @@ Felsökning och diagnostik av servostyrning (hydraulisk pump, ledningar, vätske
 Kontroll och byte av servoolja samt multirem och remspännare på bilar med hydraulisk servo.
 Översyn av dammskydd, bussningar och damasker för att skydda lederna mot framtida smuts- och fuktskador.
 Professionell fyrhjulsmätning och hjulinställning efter utfört arbete för att garantera perfekt hjulgeometri.
-Viktig information om styrning och kulleder
+Säkerhet, servo och hjulinställning
 
 Här är praktiska riktlinjer och fakta kring styrningens mekanik och säkerhet. Vi undersöker alltid framvagnens faktiska skick innan vi föreslår reservdelsbyten.
 
-VIKTIGT
 Kulleder är säkerhetskritiska
-
+VIKTIGT
 Spindelleden bär upp hjulet under körning. Ett kraftigt glapp riskerar att få kulleden att hoppa ur sin skål vid kraftig påfrestning eller ett gupp.
-
 Går servon sönder går bilen att styra
-
 Slutar servostyrningen att fungera behåller bilen mekanisk styrning. Ratten blir dock extremt tung i låg fart — håll stadigt och stanna kontrollerat.
-
-Hjulinställning är ett krav
-
-Vid byte av styrled eller kulled förändras framhjulens hjulvinklar (toe-in). En hjulinställning är nödvändig för att inte slita ut däcken på nolltid.
-
+Hjulinställning beror på arbetet
+Byts en styrled ändras framhjulens spårning, och då behöver hjulinställningen justeras. Efter byte av andra delar i hjulupphängningen beror behovet på vilken del som bytts och hur den sitter, men hjulvinklarna bör kontrolleras efter arbetet.
 Priset beror på felets art
-
 Ett byte av en yttre styrstagsände är ett relativt snabbt ingrepp, medan byte av en kuggstång eller elektrisk servomotor är betydligt mer omfattande.
 
 Säkerhetsnotis: En glappande kulled eller styrled är en allvarlig säkerhetsrisk som inte ska ignoreras. Skulle leden brista under färd förlorar föraren styrkontrollen över hjulet med omedelbar olycksrisk som följd. Boka kontroll så snart du märker klapper eller glapp.
-
-Så går det till
-hos oss
-
-Att byta styrleder och kulleder kräver fackmannamässig glappkontroll och efterföljande hjulinställning. Så här ser vår process ut.
-
-RING OSS: 070-553 33 95
-01
-Bokning och inlämning
-
-Boka enkelt online eller ring oss på 070-553 33 95 och lämna in bilen hos oss på Utmarksvägen 21B i Brynäs.
-
-02
-Framvagnslyft & glapptest
-
-Vi hissar upp bilen och känner mekaniskt efter minsta spel och glapp i alla leder, stag, bussningar och kuggstång.
-
-03
-Servodiagnostik vid behov
-
-Vi mäter hydrauliskt servotryck och oljekvalitet eller kopplar upp diagnosverktyg för att läsa av EPS-sensorer.
-
-04
-Fackmannamässigt ledbyte
-
-Slitna komponenter demonteras och ersätts med nya kvalitetsdelar och nya låsmuttrar med exakt åtdragningsmoment.
-
-05
-Hjulinställning & provkörning
-
-Vi justerar hjulvinklarna till tillverkarens originalspecifikationer och provkör bilen för perfekt stabilitet och styrkänsla.
 
 Vanliga frågor om styrning och kulleder
 Hur vet jag om det är en kulled, styrled eller servostyrningen som är dålig?
