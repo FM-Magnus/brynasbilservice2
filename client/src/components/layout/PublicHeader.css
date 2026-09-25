@@ -107,7 +107,7 @@
 }
 
 .public-header__booking {
-  background: linear-gradient(to bottom, var(--bb-color-amber-600), #b56c01);
+  background: linear-gradient(to bottom, #b56c01, #8a5301);
   border: 4px solid var(--bb-color-surface);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
   color: var(--bb-color-surface);
