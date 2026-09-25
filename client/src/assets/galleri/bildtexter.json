@@ -64,5 +64,17 @@
     "beskrivning": "En lång vy genom verkstadens arbetsyta och utrustning.",
     "kategori": "Verkstad",
     "alt": "Servicegång i verkstaden med utrustning och däckställ"
+  },
+  "gang-mellan-dackstall": {
+    "titel": "Gång mellan däckställen",
+    "beskrivning": "En gång mellan höga däckställ i verkstadens däckhotell.",
+    "kategori": "Däck & hjulservice",
+    "alt": "Gång mellan höga däckställ fyllda med däck"
+  },
+  "stall-med-falgar": {
+    "titel": "Däckställ med fälgar",
+    "beskrivning": "Väl ordnade däckställ med hjul och fälgar redo för säsong.",
+    "kategori": "Däck & hjulservice",
+    "alt": "Däckställ med monterade hjul och fälgar i förvaring"
   }
 }
