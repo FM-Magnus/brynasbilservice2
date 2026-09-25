@@ -32,10 +32,12 @@
    ------------------------------------------------------------- */
 .omoss-page__hero {
   background-color: #081619;
-  background-image: image-set(
-    url('../assets/images/about/about-hero-maher-customers.webp') type('image/webp') 1x,
-    url('../assets/images/about/about-hero-maher-customers.jpg') type('image/jpeg') 1x
-  );
+  background-image:
+    linear-gradient(rgba(8, 22, 25, 0.09), rgba(8, 22, 25, 0.09)),
+    image-set(
+      url('../assets/images/about/about-hero-maher-customers.webp') type('image/webp') 1x,
+      url('../assets/images/about/about-hero-maher-customers.jpg') type('image/jpeg') 1x
+    );
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -176,7 +178,7 @@
    3. WORKSHOP STORY & FACTS
    ------------------------------------------------------------- */
 .omoss-page__story {
-  padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+  padding-bottom: clamp(1.25rem, 2.5vw, 2rem);
   padding-top: clamp(4rem, 6vw, 6rem);
 }
 
@@ -346,8 +348,7 @@
 }
 
 .omoss-page__quote-card {
-  background: var(--bb-color-surface);
-  border: 1px solid rgba(7, 20, 22, 0.08);
+  background: linear-gradient(135deg, var(--bb-color-teal-500), var(--bb-color-teal-800));
   border-left: 4px solid var(--bb-color-amber-500);
   border-radius: var(--bb-radius-md);
   box-shadow: var(--bb-shadow-card);
@@ -365,7 +366,7 @@
 }
 
 .omoss-page__quote-text {
-  color: var(--bb-color-ink-900);
+  color: var(--bb-color-text-inverse);
   font-size: 1.02rem;
   font-style: italic;
   line-height: 1.55;
@@ -373,14 +374,14 @@
 }
 
 .omoss-page__quote-author {
-  color: var(--bb-color-ink-950);
+  color: var(--bb-color-text-inverse);
   font-family: var(--bb-font-body);
   font-size: 0.92rem;
   font-weight: 700;
 }
 
 .omoss-page__quote-role {
-  color: var(--bb-color-text-muted);
+  color: rgba(255, 255, 255, 0.78);
   font-weight: 500;
 }
 
@@ -389,15 +390,42 @@
    ------------------------------------------------------------- */
 .omoss-page__principles {
   background: var(--bb-color-page);
+  isolation: isolate;
+  overflow: hidden;
   padding-bottom: clamp(4rem, 6vw, 6rem);
-  padding-top: clamp(2rem, 4vw, 3.5rem);
+  padding-top: 0.5rem;
+  position: relative;
+}
+
+.omoss-page__principles > picture,
+.omoss-page__principles > picture > img {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  z-index: -2;
+}
+
+.omoss-page__principles > picture > img {
+  object-position: 80% center;
+}
+
+.omoss-page__principles-shade {
+  background:
+    linear-gradient(rgba(248, 247, 243, .4), rgba(248, 247, 243, .4)),
+    linear-gradient(to bottom, var(--bb-color-page), transparent 50px),
+    linear-gradient(to right, var(--bb-color-page), transparent 50px),
+    linear-gradient(to left, var(--bb-color-page), transparent 50px);
+  inset: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 .omoss-page__principles-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: clamp(2.5rem, 6vw, 6rem);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 3rem);
 }
 
 .omoss-page__principles-header {
@@ -424,8 +452,8 @@
 
 .omoss-page__principles-grid {
   display: grid;
-  gap: clamp(1.75rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3.5rem);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .omoss-page__principle {
@@ -763,8 +791,8 @@
   .omoss-page__trust-item:nth-child(2) {
     border-right: none;
   }
-  .omoss-page__principles-layout {
-    grid-template-columns: 1fr;
+  .omoss-page__principles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .omoss-page__gallery-grid {
     grid-template-columns: repeat(2, 1fr);

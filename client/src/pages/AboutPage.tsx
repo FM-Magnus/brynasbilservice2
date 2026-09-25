@@ -24,6 +24,9 @@ import gallery3Jpg from '../assets/images/workshop/workshop-car-open-hood.jpg'
 import gallery4Webp from '../assets/images/workshop/workshop-car-on-lift.webp'
 import gallery4Jpg from '../assets/images/workshop/workshop-car-on-lift.jpg'
 
+import principlesBgWebp from '../assets/images/about/about-principles-maher-customer-bg.webp'
+import principlesBgJpg from '../assets/images/about/about-principles-maher-customer-bg.jpg'
+
 import { BUSINESS, weekdayHours } from '../data/business'
 import './AboutPage.css'
 
@@ -315,6 +318,11 @@ export default function AboutPage() {
             4. CORE PRINCIPLES
             ========================================================= */}
         <section className="omoss-page__principles" aria-labelledby="principles-title">
+          <picture aria-hidden="true">
+            <source srcSet={principlesBgWebp} type="image/webp" />
+            <img src={principlesBgJpg} alt="" loading="lazy" />
+          </picture>
+          <div className="omoss-page__principles-shade" aria-hidden="true" />
           <div className="bb-wrap omoss-page__principles-layout">
             <div className="omoss-page__principles-header">
               <p className="bb-eyebrow">
