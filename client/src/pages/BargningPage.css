@@ -137,130 +137,11 @@
 }
 
 /* -------------------------------------------------------------
-   2. QUICK 3-STEP ACTION BAR
-   ------------------------------------------------------------- */
-.bargning-page__quick-steps {
-  background-color: var(--bb-color-page);
-  padding-bottom: clamp(3.5rem, 5vw, 5rem);
-  padding-top: clamp(3.5rem, 5vw, 5rem);
-}
-
-.bargning-page__quick-steps-header {
-  margin: 0 auto clamp(2.25rem, 4vw, 3.25rem);
-  max-width: 640px;
-  text-align: center;
-}
-
-.bargning-page__quick-steps-title {
-  color: var(--bb-color-ink-950);
-  margin: 0 0 0.65rem;
-}
-
-.bargning-page__quick-steps-subtitle {
-  font-size: 1.05rem;
-  line-height: 1.55;
-  margin: 0;
-}
-
-.bargning-page__quick-steps-grid {
-  align-items: center;
-  display: flex;
-  gap: 1.5rem;
-  justify-content: space-between;
-}
-
-.bargning-page__quick-step-card {
-  align-items: center;
-  background: var(--bb-color-surface);
-  border: 1px solid rgba(7, 20, 22, 0.08);
-  border-radius: var(--bb-radius-card);
-  box-shadow: var(--bb-shadow-card);
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 2.25rem 1.75rem;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.bargning-page__quick-step-card:hover {
-  box-shadow: 0 14px 34px rgba(7, 20, 22, 0.12);
-  transform: translateY(-3px);
-}
-
-.bargning-page__quick-step-icon-wrap {
-  margin-bottom: 1.25rem;
-  position: relative;
-}
-
-.bargning-page__quick-step-badge {
-  background: var(--bb-color-amber-500);
-  border: 2px solid var(--bb-color-surface);
-  border-radius: 999px;
-  color: var(--bb-color-ink-950);
-  font-family: var(--bb-font-display);
-  font-size: 0.72rem;
-  font-weight: 800;
-  height: 22px;
-  left: -6px;
-  line-height: 18px;
-  position: absolute;
-  text-align: center;
-  top: -4px;
-  width: 22px;
-  z-index: 2;
-}
-
-.bargning-page__quick-step-icon {
-  align-items: center;
-  background: var(--bb-color-teal-700);
-  border-radius: 50%;
-  color: #fff;
-  display: flex;
-  height: 56px;
-  justify-content: center;
-  width: 56px;
-}
-
-.bargning-page__quick-step-icon svg {
-  height: 26px;
-  width: 26px;
-}
-
-.bargning-page__quick-step-heading {
-  color: var(--bb-color-ink-950);
-  font-family: var(--bb-font-display);
-  font-size: 1.12rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  margin: 0 0 0.5rem;
-}
-
-.bargning-page__quick-step-desc {
-  color: var(--bb-color-text-muted);
-  font-size: 0.92rem;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.bargning-page__quick-step-arrow {
-  align-items: center;
-  color: var(--bb-color-amber-500);
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-}
-
-.bargning-page__quick-step-arrow svg {
-  height: 24px;
-  width: 24px;
-}
-
-/* -------------------------------------------------------------
-   3. MAIN SHOWCASE SPLIT CARD
+   2. MAIN SHOWCASE SPLIT CARD
    ------------------------------------------------------------- */
 .bargning-page__showcase {
   padding-bottom: clamp(3.5rem, 5vw, 5.5rem);
+  padding-top: clamp(3.5rem, 5vw, 5.5rem);
 }
 
 .bargning-page__showcase-card {
@@ -980,13 +861,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.75rem;
-  }
-  .bargning-page__quick-steps-grid {
-    flex-direction: column;
-  }
-  .bargning-page__quick-step-arrow {
-    transform: rotate(90deg);
-    padding: 0.25rem 0;
   }
   .bargning-page__showcase-lists {
     grid-template-columns: 1fr;
