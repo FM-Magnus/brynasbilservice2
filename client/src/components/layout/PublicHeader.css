@@ -107,14 +107,14 @@
 }
 
 .public-header__booking {
-  background: rgba(10, 157, 172, 0.82);
+  background: linear-gradient(to bottom, var(--bb-color-amber-600), #b56c01);
   border: 4px solid var(--bb-color-surface);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
   color: var(--bb-color-surface);
   gap: 0.55rem;
   padding: 0.7rem 1.3rem;
 }
-.public-header__booking:hover { background: var(--bb-color-teal-700); transform: translateY(-1px); }
+.public-header__booking:hover { background: linear-gradient(to bottom, var(--bb-color-amber-400), var(--bb-color-amber-600)); transform: translateY(-1px); }
 .public-header__booking svg { fill: none; height: 16px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; width: 16px; }
 
 .public-header__menu-toggle, .public-header__mobile-panel { display: none; }
