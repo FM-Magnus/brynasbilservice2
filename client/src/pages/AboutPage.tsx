@@ -315,7 +315,7 @@ export default function AboutPage() {
             4. CORE PRINCIPLES
             ========================================================= */}
         <section className="omoss-page__principles" aria-labelledby="principles-title">
-          <div className="bb-wrap">
+          <div className="bb-wrap omoss-page__principles-layout">
             <div className="omoss-page__principles-header">
               <p className="bb-eyebrow">
                 Våra principer
@@ -329,7 +329,7 @@ export default function AboutPage() {
             </div>
 
             <div className="omoss-page__principles-grid">
-              <article className="omoss-page__principle-card">
+              <div className="omoss-page__principle">
                 <div className="omoss-page__principle-icon" aria-hidden="true">
                   <ChatDotsIcon />
                 </div>
@@ -337,9 +337,9 @@ export default function AboutPage() {
                 <p className="omoss-page__principle-desc">
                   Vi förklarar vad som behöver göras, visar utbytta delar vid önskemål och håller dig uppdaterad genom hela processen.
                 </p>
-              </article>
+              </div>
 
-              <article className="omoss-page__principle-card">
+              <div className="omoss-page__principle">
                 <div className="omoss-page__principle-icon" aria-hidden="true">
                   <ShieldHeartIcon />
                 </div>
@@ -347,9 +347,9 @@ export default function AboutPage() {
                 <p className="omoss-page__principle-desc">
                   Vi tar hand om din bil som om det vore vår egen – med noggrannhet, rätt moment och godkända vätskor.
                 </p>
-              </article>
+              </div>
 
-              <article className="omoss-page__principle-card">
+              <div className="omoss-page__principle">
                 <div className="omoss-page__principle-icon" aria-hidden="true">
                   <DocumentIcon />
                 </div>
@@ -357,9 +357,9 @@ export default function AboutPage() {
                 <p className="omoss-page__principle-desc">
                   Du får alltid ett tydligt kostnadsförslag innan vi påbörjar något arbete.
                 </p>
-              </article>
+              </div>
 
-              <article className="omoss-page__principle-card">
+              <div className="omoss-page__principle">
                 <div className="omoss-page__principle-icon omoss-page__principle-icon--amber" aria-hidden="true">
                   <StarOutlineIcon />
                 </div>
@@ -367,7 +367,7 @@ export default function AboutPage() {
                 <p className="omoss-page__principle-desc">
                   Vi är inte bundna till någon tillverkare utan rekommenderar det som är bäst och mest ekonomiskt för just din bil.
                 </p>
-              </article>
+              </div>
             </div>
           </div>
         </section>

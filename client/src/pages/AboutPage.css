@@ -33,8 +33,8 @@
 .omoss-page__hero {
   background-color: #081619;
   background-image: image-set(
-    url('../assets/images/about/about-hero-bg.webp') type('image/webp') 1x,
-    url('../assets/images/about/about-hero-bg.jpg') type('image/jpeg') 1x
+    url('../assets/images/about/about-hero-maher-customers.webp') type('image/webp') 1x,
+    url('../assets/images/about/about-hero-maher-customers.jpg') type('image/jpeg') 1x
   );
   background-position: center top;
   background-repeat: no-repeat;
@@ -44,21 +44,6 @@
   padding-bottom: clamp(3.5rem, 4vw, 3.5rem);
   padding-top: var(--bb-hero-clearance);
   position: relative;
-}
-
-.omoss-page__hero::before {
-  background: linear-gradient(
-    90deg,
-    rgba(7, 20, 22, 0.94) 0%,
-    rgba(7, 20, 22, 0.88) 45%,
-    rgba(7, 20, 22, 0.72) 75%,
-    rgba(7, 20, 22, 0.85) 100%
-  );
-  content: '';
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
 }
 
 .omoss-page__hero-inner {
@@ -408,14 +393,16 @@
   padding-top: clamp(2rem, 4vw, 3.5rem);
 }
 
-.omoss-page__principles-header {
-  margin: 0 auto clamp(2.5rem, 4vw, 3.5rem);
-  max-width: 680px;
-  text-align: center;
+.omoss-page__principles-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
 }
 
-.omoss-page__principles-header .bb-eyebrow {
-  justify-content: center;
+.omoss-page__principles-header {
+  margin: 0;
+  max-width: 34rem;
 }
 
 .omoss-page__principles-title {
@@ -437,24 +424,13 @@
 
 .omoss-page__principles-grid {
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.75rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3.5rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.omoss-page__principle-card {
-  background: var(--bb-color-surface);
-  border: 1px solid rgba(7, 20, 22, 0.08);
-  border-radius: var(--bb-radius-card);
-  box-shadow: var(--bb-shadow-card);
-  display: flex;
-  flex-direction: column;
-  padding: 2rem 1.75rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.omoss-page__principle-card:hover {
-  box-shadow: 0 16px 36px rgba(7, 20, 22, 0.12);
-  transform: translateY(-4px);
+.omoss-page__principle {
+  border-top: 1px solid rgba(7, 20, 22, 0.12);
+  padding-top: 1.4rem;
 }
 
 .omoss-page__principle-icon {
@@ -787,8 +763,8 @@
   .omoss-page__trust-item:nth-child(2) {
     border-right: none;
   }
-  .omoss-page__principles-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .omoss-page__principles-layout {
+    grid-template-columns: 1fr;
   }
   .omoss-page__gallery-grid {
     grid-template-columns: repeat(2, 1fr);
