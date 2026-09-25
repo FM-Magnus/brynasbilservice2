@@ -1,7 +1,7 @@
 # Brynäs Bilservice — Design System
 
 This is the living reference for the site's visual tokens and patterns.
-**AUTHORITATIVE CANONICAL TOKENS**: `client/src/styles/design-tokens.css` defines the `--bb-*` design tokens that govern the 7 fully unique standalone pages, the 2 shared service-page families (Bilservice family, Guide family), and the standalone Public Shell (`PublicHeader`, `PublicFooter`, `GalleryTeaserCard`, `GoogleReviewsCard`, and `ContactFormCard`) — see `docs/CSS_OWNERSHIP.md` for the current architecture. The legacy `client/src/css/index.css` and its tokens were deleted in Step 7 (2026-09-19).
+**AUTHORITATIVE CANONICAL TOKENS**: `client/src/styles/design-tokens.css` defines the `--bb-*` design tokens that govern the 7 fully unique standalone pages, the 2 shared service-page families (Bilservice family, Guide family), and the standalone Public Shell (`PublicHeader`, `PublicFooter`, `GoogleReviewsCard`, and `ContactFormCard`) — see `docs/CSS_OWNERSHIP.md` for the current architecture. The legacy `client/src/css/index.css` and its tokens were deleted in Step 7 (2026-09-19).
 
 ## 1. Canonical Design Tokens (`--bb-*`) — Single Source of Truth
 
@@ -84,10 +84,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
    - Column 4: Vertically centered amber clock with verified hours (Mån–Fre 08:00–17:00), cyan `BOKA TID →` button, and direct phone link `RING OSS: 070-553 33 95`.
    - Sub-footer: dynamic copyright with the legal name and org.nr (from `business.ts`), workshop tagline, Facebook + Instagram links and the site credit. The Integritetspolicy and Cookies links were removed on 2026-09-24 until a real page exists; the Instagram button still points at instagram.com's front page (needs an account or removal).
    - Background: Atmospheric automotive wheel asset (`footer-wheel-bg.webp`, 116 KB) on deep `#061518` background.
-3. **`GalleryTeaserCard`** ([`client/src/components/ui/GalleryTeaserCard.tsx`](../client/src/components/ui/GalleryTeaserCard.tsx) + [`GalleryTeaserCard.css`](../client/src/components/ui/GalleryTeaserCard.css)):
-   - Standalone Ken Burns workshop slideshow card with single-source `defaultWorkshopSlides` array.
-   - Frosted "Grundat 2021" badge, active slide indicators, and bottom-right corner cutout badge linking to `/galleri`.
-4. **`GoogleReviewsCard`** ([`client/src/components/ui/GoogleReviewsCard.tsx`](../client/src/components/ui/GoogleReviewsCard.tsx) + [`GoogleReviewsCard.css`](../client/src/components/ui/GoogleReviewsCard.css)):
+3. **`GoogleReviewsCard`** ([`client/src/components/ui/GoogleReviewsCard.tsx`](../client/src/components/ui/GoogleReviewsCard.tsx) + [`GoogleReviewsCard.css`](../client/src/components/ui/GoogleReviewsCard.css)):
    - Standalone Google reviews module with verified Brynäs reviews (`4,3` rating, 50 reviews, link to Google Maps).
    - Encapsulates 8s cyclic rotation, 220ms cross-fade, cleans up interval on unmount, and respects `prefers-reduced-motion`.
    - Single accessible `<a>` tag with visible focus ring.
@@ -95,11 +92,17 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
      - `variant="hero-overlay"`: Frosted-glass transparent bounding field (`background: rgba(3, 22, 26, 0.42); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--bb-radius-card); backdrop-filter: blur(8px)`) with a 660px maximum width, separate 96px rating and 155px Google columns, a 110px reviewer-name track, and a fixed 100px height on desktop/tablet, with the review excerpt clamped to three lines. On phones (≤650px) it has a compact layout (2026-09-24, Magnus's choice): the rating and Google on one row and one line of the rotating quote ("Name: text…", avatar and per-review stars hidden), 94px tall. Every line is single-line, so rotating reviews cannot resize a hero. The `card` variant keeps the full phone layout.
      - `variant="card"`: Elevated dark-ink card (`#0d1f22`) with border and floating shadow for standard page body or sidebar placement.
    - The hero-overlay variant appears in the heroes on Landing, Om oss, Bilservice, Felsökning, Däckservice and Kontakt. The card variant remains in the page flow on AC-service. Page-level link resets require the owning page CSS to preserve light text on the overlay or card.
-5. **`ContactFormCard`** ([`client/src/components/ui/ContactFormCard.tsx`](../client/src/components/ui/ContactFormCard.tsx) + [`ContactFormCard.css`](../client/src/components/ui/ContactFormCard.css)):
+4. **`ContactFormCard`** ([`client/src/components/ui/ContactFormCard.tsx`](../client/src/components/ui/ContactFormCard.tsx) + [`ContactFormCard.css`](../client/src/components/ui/ContactFormCard.css)):
    - Centralized Single Source of Truth for contact topics/subjects (`contactSubjects` in `client/src/api/contact.ts` = `['Bilservice & oljebyte', 'Reparation & felsökning', 'Däckservice & hjulinställning', 'AC-service', 'Bärgning & transport', 'Övrigt']`), direct phone/email/address details, and submission states. Until a `/api/contact` endpoint exists, submitting opens a pre-filled e-mail through `client/src/api/contact.ts` (the Kontakt page's own form shares the submit logic through `hooks/useContactForm.ts`).
    - Dual variants:
      - `variant="full-section"`: Two-column conversion section with background decorative brand art, left contact info column, and right form card.
      - `variant="card-only"`: Standalone teal-gradient contact form card, perfectly suited for embedding in subpages, service guides, or modal flows.
+5. **`GalleryDockStrip`** ([`client/src/components/ui/GalleryDockStrip.tsx`](../client/src/components/ui/GalleryDockStrip.tsx) + [`GalleryDockStrip.css`](../client/src/components/ui/GalleryDockStrip.css)) — added 2026-09-25, replaced the old `GalleryTeaserCard` (removed the same day — its Ken Burns slideshow and dedicated `-card.webp` exports are gone; `/galleri` is now only linked from this strip):
+   - Horizontal photo strip pulling the same images as `/galleri` (via `getGalleryImages()` — never hard-code images here); dropping a file into `client/src/assets/galleri/` makes it appear in both places automatically.
+   - Heading link `"Ta en titt inne hos oss – Galleriet"` sits tight above the row and links to `/galleri`; each photo deep-links to `/galleri?bild={slug}`.
+   - Mobile: one photo at a time with the next peeking, native touch swipe/snap. From 640px: a short row of many photos, mouse-drag-to-scroll (`pointerType === 'mouse'` only — touch keeps native scrolling; pointer capture is claimed lazily, only once a drag crosses the threshold, or Chromium redirects the resulting click to the track div instead of the link underneath; CSS scroll-snap is suspended for the duration of the drag and restored on release, or it fights the per-frame `scrollLeft` write and the drag barely moves).
+   - Desktop hover: macOS-Dock-style magnify (cosine falloff, capped scale/lift so it can't reach the fixed header when the strip is scrolled just below it) via direct `style.transform`/`zIndex` writes on refs, not React state, to stay off the render path. Respects `prefers-reduced-motion` and `pointer: fine`.
+   - Currently used on Landing, directly under the hero's `ContactFormCard`.
 
 ### 2a. `shared-elements.css` — canonical patterns below the token layer
 
@@ -206,7 +209,7 @@ Everything else is a CSS island imported by its own `.tsx` file:
 
 - Each unique page has its own colocated `<Page>.css` with a unique class prefix.
 - The two page families share exactly one file each: `ServiceReparationerPage.css` and `styles/ServiceGuideTemplate.css`. Reuse that file directly; never copy it.
-- Shared components (`PublicHeader`, `PublicFooter`, `BookingForm`, `BiltjansterFaq`, `GalleryTeaserCard`, `GoogleReviewsCard`, `ContactFormCard`) each own a stylesheet next to their `.tsx`.
+- Shared components (`PublicHeader`, `PublicFooter`, `BookingForm`, `BiltjansterFaq`, `GoogleReviewsCard`, `ContactFormCard`, `GalleryDockStrip`) each own a stylesheet next to their `.tsx`.
 - Before naming a new prefix, check it isn't already used anywhere under `client/src` (see [`CSS_OWNERSHIP.md`](CSS_OWNERSHIP.md)).
 - Do not add new global CSS. A pattern needed on several pages belongs in `shared-elements.css`, and only if it genuinely is shared.
 

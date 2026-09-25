@@ -37,11 +37,25 @@
   .landing-v2 .bb-hero__bottom { grid-template-columns: 1fr; }
 }
 
-/* Hero shade: subtle ink scrim for text contrast + atmospheric teal */
+/* Hero shade: half-strength scrim, sunset photo already carries most of the contrast */
 .landing-v2 .bb-hero__shade {
   background:
-    linear-gradient(90deg, rgba(7, 20, 22, 0.65) 0%, rgba(10, 157, 172, 0.15) 55%, rgba(7, 20, 22, 0.3) 100%),
-    linear-gradient(0deg, rgba(7, 20, 22, 0.5) 0%, transparent 60%);
+    linear-gradient(90deg, rgba(7, 20, 22, 0.325) 0%, rgba(10, 157, 172, 0.075) 55%, rgba(7, 20, 22, 0.15) 100%),
+    linear-gradient(0deg, rgba(7, 20, 22, 0.25) 0%, transparent 60%);
+}
+
+/* Hero slideshow: crossfade between background photos */
+.landing-v2 .landing-v2__hero-slide {
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.landing-v2 .landing-v2__hero-slide.is-active {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .landing-v2__hero-slide {
+    transition: none;
+  }
 }
 
 /* Photo-backed reassurance */
@@ -93,7 +107,7 @@
 
 /* About and vehicles */
 .landing-v2__about-section { padding-bottom: clamp(3.2rem, 5vw, 5rem); }
-.landing-v2__about-grid { align-items: center; display: grid; gap: clamp(2rem, 4vw, 4.5rem); grid-template-columns: minmax(300px, .84fr) minmax(0, 1.02fr); }
+.landing-v2__about-grid { max-width: 720px; }
 .landing-v2__about-copy > p:not(.bb-eyebrow) { color: var(--landing-muted); font-size: var(--landing-type-body); line-height: var(--landing-leading-body); margin: 1rem 0; max-width: 610px; }
 .landing-v2__about-copy .bb-btn { margin-top: .6rem; }
 .landing-v2__cars-section { border-radius: var(--bb-radius-card); margin: 0 auto clamp(3.2rem, 5vw, 5rem); max-width: 1520px; min-height: 230px; }
@@ -114,7 +128,6 @@
   .landing-v2__service-grid > li { grid-column: span 2; }
   .landing-v2__service-grid > li:nth-child(4) { grid-column: 2 / span 2; }
   .landing-v2__service-grid > li:nth-child(5) { grid-column: 4 / span 2; }
-  .landing-v2__about-grid { gap: 3.2rem; grid-template-columns: minmax(260px, .78fr) 1fr; }
 }
 
 @media (max-width: 650px) {
@@ -138,7 +151,6 @@
   .landing-v2__process-section { margin-bottom: 4.3rem; }
   .landing-v2__process-content { min-height: 0; padding: 2.5rem 0; }
   .landing-v2__process-content h2 { font-size: clamp(2rem, 10vw, 3.1rem); }
-  .landing-v2__about-grid { grid-template-columns: 1fr; }
   .landing-v2__cars-section { border-radius: 0; margin-bottom: 3.5rem; min-height: 270px; }
   .landing-v2__cars-content { min-height: 270px; }
 }

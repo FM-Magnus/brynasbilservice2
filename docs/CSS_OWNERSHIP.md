@@ -18,10 +18,10 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 - `client/src/data/publicNavigation.ts` is the navigation source for `PublicHeader`.
 - `client/src/data/business.ts` is the single source for the workshop's business facts (phone, e-mail, address, Google Maps link, opening hours, legal name, org.nr). Never hard-code one of these values in a page, a component or a test — import `BUSINESS` / `weekdayHours` instead.
 - `client/src/components/layout/PublicHeader.tsx` / `PublicHeader.css` and `PublicFooter.tsx` / `PublicFooter.css` are the only header and footer. The legacy `Header.tsx`/`Footer.tsx` were deleted in Step 7.
-- `client/src/components/ui/GalleryTeaserCard.tsx` / `.css`: Ken Burns workshop slideshow card (`defaultWorkshopSlides`).
 - `client/src/components/ui/GoogleReviewsCard.tsx` / `.css`: Google reviews (`defaultGoogleReviews`, `.bb-reviews-card*`).
 - `client/src/components/ui/ContactFormCard.tsx` / `.css`: contact module (`.bb-contact-section*`, `.bb-contact-form*`). Submit logic is `hooks/useContactForm.ts`, shared with the Kontakt form; the subject list is `contactSubjects` in `api/contact.ts`.
 - `client/src/components/ui/BiltjansterFaq.tsx` / `.css`: FAQ accordion (`.bb-faq__*`).
+- `client/src/components/ui/GalleryDockStrip.tsx` / `.css`: horizontal photo strip (`.bb-gallery-dock*`) pulling the same images as `/galleri` via `getGalleryImages()`. Currently used on Landing only — replaced `GalleryTeaserCard` there (removed 2026-09-25, along with its `-card.webp` exports, once this strip covered the same job).
 - `client/src/components/BookingForm.tsx` / `.css`: booking modal (`.modal-*`, `.booking-form__*`; the stylesheet is imported by `BookingFormModalImpl.tsx`). Pages render it through `hooks/useBookingModal.tsx`: `openBooking` uses the page's default comment, `openBookingWith(comment)` a trigger-specific one (vehicle inquiries, service cards).
 - `client/src/components/RouteErrorBoundary.tsx`: fallback around the lazy routes in `main.tsx` when a page fails to load or render. Uses only shared `.bb-hero` classes and no lazy code, so it still works when the failure is a missing chunk.
 
@@ -33,10 +33,10 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
    - `client/src/styles/design-tokens.css` owns the `--bb-*` canonical tokens (colors, Archivo display/Manrope body type scales, radii, spacing, shadows).
    - `client/src/styles/shared-elements.css` owns global `.bb-*` pattern classes below the token layer (buttons, eyebrow, headings, card motifs, icon badges) — see `docs/DESIGN_SYSTEM.md` §2a. Loaded globally in `client/src/main.tsx` together with `design-tokens.css`, and used by all rebuilt pages.
    - `client/src/data/publicNavigation.ts` + `PublicHeader.tsx` / `PublicHeader.css` (free-standing navigation element) + `PublicFooter.tsx` / `PublicFooter.css` (canonical standalone global footer).
-   - `client/src/components/ui/GalleryTeaserCard.tsx` / `GalleryTeaserCard.css` (reusable standalone workshop teaser card).
    - `client/src/components/ui/GoogleReviewsCard.tsx` / `GoogleReviewsCard.css` (reusable standalone Google reviews card/overlay).
    - `client/src/components/ui/ContactFormCard.tsx` / `ContactFormCard.css` (reusable standalone contact module and form card).
    - `client/src/components/BookingForm.tsx` / `BookingForm.css` (booking modal, `.modal-*`, on `--bb-*` tokens) and `client/src/components/ui/BiltjansterFaq.tsx` / `BiltjansterFaq.css` (FAQ accordion, `.bb-faq__*`), both independent of `index.css` since 2026-09-19.
+   - `client/src/components/ui/GalleryDockStrip.tsx` / `GalleryDockStrip.css` (reusable standalone photo strip sourced from `/galleri`'s images).
    - `client/src/styles/base.css` (global element defaults) and `client/src/styles/tailwind.css` (Tailwind directives; preflight global, utilities for `/admin` only), both imported in `main.tsx`.
 
 2. **The 7 unique, standalone pages** — each owns its own bespoke design and its own colocated CSS island. No shared page template between them.
@@ -69,8 +69,8 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 
 | Route | Architecture Group | Status | CSS Owner |
 | --- | --- | --- | --- |
-| `/` | Unique | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GalleryTeaserCard.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` |
-| `/om-oss` | Unique | Complete | `AboutPage.css` (`.omoss-page__*`), mounts `PublicHeader` + `PublicFooter` + `GalleryTeaserCard` + `GoogleReviewsCard` |
+| `/` | Unique | Complete / Active | `LandingPage.css` + `PublicHeader.css` + `PublicFooter.css` + `GoogleReviewsCard.css` + `ContactFormCard.css` + `GalleryDockStrip.css` |
+| `/om-oss` | Unique | Complete | `AboutPage.css` (`.omoss-page__*`), mounts `PublicHeader` + `PublicFooter` + `GoogleReviewsCard` |
 | `/kontakt` | Unique | Complete | `ContactPage.css` (`.kontakt-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` + `GoogleReviewsCard` |
 | `/service-reparationer` | Bilservice family (owner) | Complete — on `--bb-*` tokens & `shared-elements.css` (`.bb-*`), mounts `PublicHeader`/`PublicFooter` + `GoogleReviewsCard` | `ServiceReparationerPage.css` (`.bilservice__*`) |
 | `/felsokning` | Bilservice family | Complete — on `--bb-*` tokens & `.bilservice__*` family styles, mounts `PublicHeader` (overlay) + `PublicFooter` + `GoogleReviewsCard` | `ServiceReparationerPage.css` |

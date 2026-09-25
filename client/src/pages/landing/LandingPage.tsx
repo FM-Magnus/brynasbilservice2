@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useBookingModal } from '../../hooks/useBookingModal'
 import { PublicHeader } from '../../components/layout/PublicHeader'
@@ -12,9 +12,11 @@ import { PhoneIcon } from '../../components/icons/PhoneIcon'
 import { WrenchIcon } from '../../components/icons/WrenchIcon'
 import { GaugeIcon } from '../../components/icons/GaugeIcon'
 import { WavesIcon } from '../../components/icons/WavesIcon'
-import heroWebp from '../../assets/images/home/landing-v2/landing-cockpit-steering-hero.webp'
-import heroJpg from '../../assets/images/home/landing-v2/landing-cockpit-steering-hero.jpg'
-import { GalleryTeaserCard } from '../../components/ui/GalleryTeaserCard'
+import heroWebp from '../../assets/images/home/landing-v2/landing-sunset-road-hero.webp'
+import heroJpg from '../../assets/images/home/landing-v2/landing-sunset-road-hero.jpg'
+import heroFamilyWebp from '../../assets/images/home/landing-v2/landing-family-windscreen-hero.webp'
+import heroFamilyJpg from '../../assets/images/home/landing-v2/landing-family-windscreen-hero.jpg'
+import { GalleryDockStrip } from '../../components/ui/GalleryDockStrip'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
 import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake-v2.webp'
@@ -77,15 +79,59 @@ const processIcons: Record<string, ReactNode> = {
   '05': <CheckIcon />,
 }
 
+const heroSlides = [
+  { webp: heroWebp, jpg: heroJpg, alt: 'Bil på väg mot solnedgången' },
+  { webp: heroFamilyWebp, jpg: heroFamilyJpg, alt: 'En mamma kör bil med sitt barn i baksätet' },
+]
+const HERO_SLIDE_INTERVAL_MS = 7000
+
+function useHeroSlideshow(slideCount: number) {
+  const [activeSlide, setActiveSlide] = useState(0)
+
+  useEffect(() => {
+    if (slideCount < 2) return
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) return
+
+    let intervalId: ReturnType<typeof setInterval> | undefined
+    const start = () => {
+      intervalId = setInterval(() => {
+        setActiveSlide(i => (i + 1) % slideCount)
+      }, HERO_SLIDE_INTERVAL_MS)
+    }
+    const stop = () => {
+      if (intervalId) clearInterval(intervalId)
+    }
+    const handleVisibility = () => {
+      if (document.hidden) stop()
+      else start()
+    }
+
+    if (!document.hidden) start()
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => {
+      stop()
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
+  }, [slideCount])
+
+  return activeSlide
+}
+
 export default function LandingPage() {
   const { openBooking, bookingModal } = useBookingModal()
+  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
   return (
     <main className="landing-v2">
       <section className="bb-hero" aria-labelledby="landing-v2-hero-title">
-        <picture className="bb-hero__media">
-          <source srcSet={heroWebp} type="image/webp" />
-          <img src={heroJpg} alt="Förarmiljö med händer på ratten" />
-        </picture>
+        <div className="bb-hero__media" aria-hidden="true">
+          {heroSlides.map((slide, i) => (
+            <picture key={slide.jpg} className={`landing-v2__hero-slide${i === activeHeroSlide ? ' is-active' : ''}`}>
+              <source srcSet={slide.webp} type="image/webp" />
+              <img src={slide.jpg} alt="" />
+            </picture>
+          ))}
+        </div>
         <div className="bb-hero__shade" aria-hidden="true" />
         <PublicHeader onBookingClick={openBooking} variant="overlay" />
         <div className="bb-wrap bb-hero__content">
@@ -131,6 +177,8 @@ export default function LandingPage() {
       </section>
 
       <ContactFormCard variant="full-section" />
+
+      <GalleryDockStrip />
 
       <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
         <img src={whyReassuranceWebp} alt="Två personer skakar hand i en bilverkstad" loading="lazy" />
@@ -224,7 +272,6 @@ export default function LandingPage() {
 
       <section className="landing-v2__about-section" aria-labelledby="landing-v2-about-title">
         <div className="bb-wrap landing-v2__about-grid">
-          <GalleryTeaserCard />
           <div className="landing-v2__about-copy">
             <p className="bb-eyebrow">Om Brynäs Bilservice</p>
             <h2 id="landing-v2-about-title" className="bb-h2">
