@@ -19,7 +19,6 @@ import heroFamilyJpg from '../../assets/images/home/landing-v2/landing-family-wi
 import { GalleryDockStrip } from '../../components/ui/GalleryDockStrip'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
-import whyReassuranceWebp from '../../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.webp'
 import customerInteractionWebp from '../../assets/images/home/landing-v2/landing-customer-interaction-background.webp'
 import customerInteractionJpg from '../../assets/images/home/landing-v2/landing-customer-interaction-background.jpg'
 import vehicleForSale from '../../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
@@ -181,8 +180,6 @@ export default function LandingPage() {
       <GalleryDockStrip />
 
       <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
-        <img src={whyReassuranceWebp} alt="Två personer skakar hand i en bilverkstad" loading="lazy" />
-        <div className="landing-v2__why-shade" aria-hidden="true" />
         <div className="bb-wrap landing-v2__why-content">
           <div>
             <p className="bb-eyebrow">Om Brynäs Bilservice</p>
@@ -225,7 +222,6 @@ export default function LandingPage() {
                 <li key={service.number}>
                   <Link to={service.to} className="landing-v2__service-point">
                     <span className="landing-v2__service-point-icon">{service.icon}</span>
-                    <span className="landing-v2__service-point-number">{service.number}</span>
                     <h3>{service.title}</h3>
                     <p>{service.desc}</p>
                   </Link>
@@ -233,9 +229,8 @@ export default function LandingPage() {
               ))}
             </ol>
           </div>
-          <p className="bb-wrap landing-v2__services-intro bb-lead">
-            Vi hjälper dig med regelbunden bilservice, däckservice, AC-service och reparationer. Vi utför även avancerad diagnostik och större arbeten som motor- och topplocksbyten. Vi arbetar med alla bilmärken.
-            {' '}Märker du ett fel men vet inte vilken tjänst det gäller? Beskriv vad bilen gör – ljud, varningslampor eller hur den känns – så hjälper vi dig vidare, eller läs om hur en <Link to="/felsokning">felsökning</Link> går till.
+          <p className="landing-v2__services-intro">
+            Från rutinservice till stora reparationer – vi fixar alla bilmärken.
           </p>
         </div>
       </section>

@@ -309,6 +309,13 @@
   margin: 0;
   padding: 0;
 }
+/* Fewer than 5 steps: match the column count so items don't trail off with
+   empty tracks at the end (the base grid assumes a 5-step process). Scoped
+   above the grid's own 1024px breakpoint, which already collapses to 3
+   columns and would otherwise lose to this higher-specificity modifier. */
+@media (min-width: 1025px) {
+  .bb-process-grid.bb-process-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 .bb-process-grid > li {
   min-height: 165px;
   padding: 0 0.75rem;

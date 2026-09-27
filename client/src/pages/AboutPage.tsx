@@ -24,8 +24,8 @@ import gallery3Jpg from '../assets/images/workshop/workshop-car-open-hood.jpg'
 import gallery4Webp from '../assets/images/workshop/workshop-car-on-lift.webp'
 import gallery4Jpg from '../assets/images/workshop/workshop-car-on-lift.jpg'
 
-import principlesBgWebp from '../assets/images/about/about-principles-maher-customer-bg.webp'
-import principlesBgJpg from '../assets/images/about/about-principles-maher-customer-bg.jpg'
+import principlesBgWebp from '../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.webp'
+import principlesBgJpg from '../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
 import './AboutPage.css'
@@ -397,54 +397,26 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="omoss-page__process-flow">
-              <div className="omoss-page__step-card">
-                <div className="omoss-page__step-top">
-                  <span className="omoss-page__step-number">01</span>
-                  <div className="omoss-page__step-icon" aria-hidden="true">
-                    <CalendarCheckIcon />
-                  </div>
-                </div>
-                <h3 className="omoss-page__step-title">Du berättar om bilen</h3>
-                <p className="omoss-page__step-desc">
-                  Du bokar via formuläret eller slår en signal till verkstaden. Berätta vad du upplever för symptom, missljud eller vilken serviceintervall bilen har nått.
-                </p>
-              </div>
-
-              <div className="omoss-page__step-connector" aria-hidden="true">
-                <ArrowRightIcon />
-              </div>
-
-              <div className="omoss-page__step-card">
-                <div className="omoss-page__step-top">
-                  <span className="omoss-page__step-number">02</span>
-                  <div className="omoss-page__step-icon" aria-hidden="true">
-                    <SearchLensIcon />
-                  </div>
-                </div>
-                <h3 className="omoss-page__step-title">Vi undersöker och återkopplar</h3>
-                <p className="omoss-page__step-desc">
-                  Vi gör en fackmannamässig undersökning och provkörning. Innan vi gör några åtgärder eller byter slitagedelar får du ett fast och tydligt kostnadsförslag.
-                </p>
-              </div>
-
-              <div className="omoss-page__step-connector" aria-hidden="true">
-                <ArrowRightIcon />
-              </div>
-
-              <div className="omoss-page__step-card">
-                <div className="omoss-page__step-top">
-                  <span className="omoss-page__step-number">03</span>
-                  <div className="omoss-page__step-icon" aria-hidden="true">
-                    <ApprovalCheckIcon />
-                  </div>
-                </div>
-                <h3 className="omoss-page__step-title">Du godkänner innan vi börjar</h3>
-                <p className="omoss-page__step-desc">
-                  Inga överraskningar på fakturan. Vi påbörjar arbetet först när du gett ditt godkännande och meddelar så fort bilen är provkörd, kontrollerad och klar.
-                </p>
-              </div>
-            </div>
+            <ol className="bb-process-grid bb-process-grid--3">
+              <li>
+                <b>01</b>
+                <i className="bb-icon-bare"><CalendarCheckIcon /></i>
+                <h3>Du berättar om bilen</h3>
+                <p>Du bokar via formuläret eller slår en signal till verkstaden. Berätta vad du upplever för symptom, missljud eller vilken serviceintervall bilen har nått.</p>
+              </li>
+              <li>
+                <b>02</b>
+                <i className="bb-icon-bare"><SearchLensIcon /></i>
+                <h3>Vi undersöker och återkopplar</h3>
+                <p>Vi gör en fackmannamässig undersökning och provkörning. Innan vi gör några åtgärder eller byter slitagedelar får du ett fast och tydligt kostnadsförslag.</p>
+              </li>
+              <li>
+                <b>03</b>
+                <i className="bb-icon-bare"><ApprovalCheckIcon /></i>
+                <h3>Du godkänner innan vi börjar</h3>
+                <p>Inga överraskningar på fakturan. Vi påbörjar arbetet först när du gett ditt godkännande och meddelar så fort bilen är provkörd, kontrollerad och klar.</p>
+              </li>
+            </ol>
           </div>
         </section>
 

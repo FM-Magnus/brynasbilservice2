@@ -408,7 +408,7 @@
 }
 
 .omoss-page__principles > picture > img {
-  object-position: 80% center;
+  object-position: center 55%;
 }
 
 .omoss-page__principles-shade {
@@ -510,13 +510,13 @@
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 100% 100%, 40px 40px, 40px 40px;
   color: var(--bb-color-text-inverse);
-  padding-bottom: clamp(4.5rem, 7vw, 6.5rem);
-  padding-top: clamp(4.5rem, 7vw, 6.5rem);
+  padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  padding-top: clamp(2.5rem, 4vw, 3.5rem);
   position: relative;
 }
 
 .omoss-page__process-header {
-  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+  margin: 0 auto clamp(1.25rem, 2.5vw, 2rem);
   max-width: 680px;
   text-align: center;
 }
@@ -540,86 +540,6 @@
   font-size: 1.05rem;
   line-height: 1.5;
   margin: 0;
-}
-
-.omoss-page__process-flow {
-  align-items: stretch;
-  display: flex;
-  gap: 1.25rem;
-}
-
-.omoss-page__step-card {
-  background: rgba(12, 35, 39, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--bb-radius-card);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 2.25rem 1.85rem;
-  position: relative;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.omoss-page__step-card:hover {
-  border-color: rgba(10, 178, 193, 0.4);
-  transform: translateY(-3px);
-}
-
-.omoss-page__step-top {
-  align-items: center;
-  display: flex;
-  gap: 0.9rem;
-  margin-bottom: 1.35rem;
-}
-
-.omoss-page__step-number {
-  background: var(--bb-color-teal-500);
-  border-radius: var(--bb-radius-control);
-  color: var(--bb-color-ink-950);
-  font-family: var(--bb-font-display);
-  font-size: 0.95rem;
-  font-weight: 800;
-  padding: 0.35rem 0.75rem;
-}
-
-.omoss-page__step-icon {
-  color: var(--bb-color-teal-500);
-}
-
-.omoss-page__step-icon svg {
-  height: 22px;
-  width: 22px;
-}
-
-.omoss-page__step-title {
-  color: var(--bb-color-text-inverse);
-  font-family: var(--bb-font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin: 0 0 0.85rem;
-}
-
-.omoss-page__step-desc {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.93rem;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.omoss-page__step-connector {
-  align-items: center;
-  color: var(--bb-color-amber-500);
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-  padding: 0 0.25rem;
-}
-
-.omoss-page__step-connector svg {
-  height: 26px;
-  width: 26px;
 }
 
 /* -------------------------------------------------------------
@@ -808,13 +728,6 @@
   .omoss-page__facts-card {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-  }
-  .omoss-page__process-flow {
-    flex-direction: column;
-  }
-  .omoss-page__step-connector {
-    padding: 0.5rem 0;
-    transform: rotate(90deg);
   }
   .omoss-page__gallery-top {
     align-items: flex-start;
