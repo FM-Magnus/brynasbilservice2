@@ -551,3 +551,22 @@
 
 /* Shared matched hero height (design-tokens.css). */
 .kontakt-page__hero { min-height: var(--bb-hero-matched-height); }
+
+/* Hero crossfade (useHeroSlideshow); beanie photo shifts right on narrow screens so Maher stays in frame. */
+.kontakt-page__hero .kontakt-page__hero-slide { opacity: 0; transition: opacity 1.4s ease; }
+.kontakt-page__hero .kontakt-page__hero-slide.is-active { opacity: 1; }
+@media (max-width: 1023px) {
+  .kontakt-page__hero .kontakt-page__hero-slide--beanie img { object-position: 72% center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kontakt-page__hero .kontakt-page__hero-slide { transition: none; }
+}
+/* Hero shade: darkens toward the copy (left on desktop, behind the text on phones). */
+.kontakt-page__hero .bb-hero__shade {
+  background: linear-gradient(90deg, rgba(8, 22, 25, 0.82) 0%, rgba(8, 22, 25, 0.62) 30%, rgba(8, 22, 25, 0.22) 55%, rgba(8, 22, 25, 0) 72%);
+}
+@media (max-width: 768px) {
+  .kontakt-page__hero .bb-hero__shade {
+    background: linear-gradient(180deg, rgba(8, 22, 25, 0.35) 0%, rgba(8, 22, 25, 0.72) 30%, rgba(8, 22, 25, 0.72) 65%, rgba(8, 22, 25, 0.4) 100%);
+  }
+}

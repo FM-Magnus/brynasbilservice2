@@ -13,9 +13,17 @@ import { InfoIcon } from '../components/icons/InfoIcon'
 import { MailIcon } from '../components/icons/MailIcon'
 import { SendIcon } from '../components/icons/SendIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
-import aboutHeroWebp from '../assets/images/about/about-hero-bg.webp'
-import aboutHeroJpg from '../assets/images/about/about-hero-bg.jpg'
+import beanieHeroWebp from '../assets/images/contact/contact-hero-customer-beanie.webp'
+import beanieHeroJpg from '../assets/images/contact/contact-hero-customer-beanie.jpg'
+import familyHeroWebp from '../assets/images/contact/contact-hero-family-windscreen.webp'
+import familyHeroJpg from '../assets/images/contact/contact-hero-family-windscreen.jpg'
+import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import './ContactPage.css'
+
+const heroSlides = [
+  { webp: beanieHeroWebp, jpg: beanieHeroJpg, modifier: ' kontakt-page__hero-slide--beanie' },
+  { webp: familyHeroWebp, jpg: familyHeroJpg, modifier: '' },
+]
 
 function ChevronDownIcon({ className }: { className?: string }) {
   return (
@@ -32,16 +40,19 @@ const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?q=Utmarksv%C3%A4gen+2
 export default function ContactPage() {
   const { openBooking, bookingModal } = useBookingModal()
   const { mailtoHref, handleSubmit, reset } = useContactForm()
+  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
 
   return (
     <>
       <main className="kontakt-page" id="main-content">
         <section className="bb-hero kontakt-page__hero" aria-labelledby="contact-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
-            <picture>
-              <source srcSet={aboutHeroWebp} type="image/webp" />
-              <img src={aboutHeroJpg} alt="" />
-            </picture>
+            {heroSlides.map((slide, i) => (
+              <picture key={slide.jpg} className={`kontakt-page__hero-slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
+                <source srcSet={slide.webp} type="image/webp" />
+                <img src={slide.jpg} alt="" />
+              </picture>
+            ))}
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
           <PublicHeader onBookingClick={openBooking} variant="overlay" />
