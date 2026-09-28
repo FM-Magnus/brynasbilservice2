@@ -1,9 +1,9 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useBookingModal } from '../../hooks/useBookingModal'
+import { useHeroSlideshow } from '../../hooks/useHeroSlideshow'
 import { PublicHeader } from '../../components/layout/PublicHeader'
 import { PublicFooter } from '../../components/layout/PublicFooter'
-import { ArrowRightIcon } from '../../components/icons/ArrowRightIcon'
 import { CalendarIcon } from '../../components/icons/CalendarIcon'
 import { CheckIcon } from '../../components/icons/CheckIcon'
 import { MapPinIcon } from '../../components/icons/MapPinIcon'
@@ -12,16 +12,15 @@ import { PhoneIcon } from '../../components/icons/PhoneIcon'
 import { WrenchIcon } from '../../components/icons/WrenchIcon'
 import { GaugeIcon } from '../../components/icons/GaugeIcon'
 import { WavesIcon } from '../../components/icons/WavesIcon'
-import heroWebp from '../../assets/images/home/landing-v2/landing-sunset-road-hero.webp'
-import heroJpg from '../../assets/images/home/landing-v2/landing-sunset-road-hero.jpg'
-import heroFamilyWebp from '../../assets/images/home/landing-v2/landing-family-windscreen-hero.webp'
-import heroFamilyJpg from '../../assets/images/home/landing-v2/landing-family-windscreen-hero.jpg'
+import heroWebp from '../../assets/images/home/landing-v2/landing-key-handover-hero.webp'
+import heroJpg from '../../assets/images/home/landing-v2/landing-key-handover-hero.jpg'
+import heroToolsWebp from '../../assets/images/home/landing-v2/landing-tool-drawer-hero.webp'
+import heroToolsJpg from '../../assets/images/home/landing-v2/landing-tool-drawer-hero.jpg'
 import { GalleryDockStrip } from '../../components/ui/GalleryDockStrip'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
 import customerInteractionWebp from '../../assets/images/home/landing-v2/landing-customer-interaction-background.webp'
 import customerInteractionJpg from '../../assets/images/home/landing-v2/landing-customer-interaction-background.jpg'
-import vehicleForSale from '../../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
 import { BUSINESS } from '../../data/business'
 import './LandingPage.css'
 
@@ -79,44 +78,9 @@ const processIcons: Record<string, ReactNode> = {
 }
 
 const heroSlides = [
-  { webp: heroWebp, jpg: heroJpg, alt: 'Bil på väg mot solnedgången' },
-  { webp: heroFamilyWebp, jpg: heroFamilyJpg, alt: 'En mamma kör bil med sitt barn i baksätet' },
+  { webp: heroWebp, jpg: heroJpg, alt: 'Maher lämnar över bilnyckeln till en glad kund' },
+  { webp: heroToolsWebp, jpg: heroToolsJpg, alt: 'En öppen verktygslåda med hylsor och spärrskaft i verkstaden' },
 ]
-const HERO_SLIDE_INTERVAL_MS = 7000
-
-function useHeroSlideshow(slideCount: number) {
-  const [activeSlide, setActiveSlide] = useState(0)
-
-  useEffect(() => {
-    if (slideCount < 2) return
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) return
-
-    let intervalId: ReturnType<typeof setInterval> | undefined
-    const start = () => {
-      intervalId = setInterval(() => {
-        setActiveSlide(i => (i + 1) % slideCount)
-      }, HERO_SLIDE_INTERVAL_MS)
-    }
-    const stop = () => {
-      if (intervalId) clearInterval(intervalId)
-    }
-    const handleVisibility = () => {
-      if (document.hidden) stop()
-      else start()
-    }
-
-    if (!document.hidden) start()
-    document.addEventListener('visibilitychange', handleVisibility)
-    return () => {
-      stop()
-      document.removeEventListener('visibilitychange', handleVisibility)
-    }
-  }, [slideCount])
-
-  return activeSlide
-}
-
 export default function LandingPage() {
   const { openBooking, bookingModal } = useBookingModal()
   const activeHeroSlide = useHeroSlideshow(heroSlides.length)
@@ -263,25 +227,6 @@ export default function LandingPage() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      <section className="landing-v2__cars-section" aria-labelledby="landing-v2-cars-title">
-        <img src={vehicleForSale} alt="Begagnad bil till salu hos Brynäs Bilservice" />
-        <div className="landing-v2__cars-shade" aria-hidden="true" />
-        <div className="bb-wrap landing-v2__cars-content">
-          <div>
-            <p className="bb-eyebrow bb-eyebrow--dark">Kvalitetskontrollerade fordon</p>
-            <h2 id="landing-v2-cars-title" className="bb-h2">
-              Letar du efter en <span className="bb-accent">begagnad bil?</span>
-            </h2>
-            <p className="bb-lead--dark">
-              Vi säljer även noggrant genomgångna och besiktigade begagnade bilar i Gävle. Varje bil kontrolleras av våra mekaniker innan försäljning.
-            </p>
-            <Link className="bb-btn bb-btn--teal" to="/bilar-till-salu">
-              Se bilar till salu <ArrowRightIcon />
-            </Link>
-          </div>
         </div>
       </section>
 

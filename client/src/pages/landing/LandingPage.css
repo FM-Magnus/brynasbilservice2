@@ -37,9 +37,10 @@
   .landing-v2 .bb-hero__bottom { grid-template-columns: 1fr; }
 }
 
-/* Hero shade: half-strength scrim, sunset photo already carries most of the contrast */
+/* Hero shade: half-strength scrim plus a black edge on the far left behind the copy */
 .landing-v2 .bb-hero__shade {
   background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.2) 22%, rgba(0, 0, 0, 0) 40%),
     linear-gradient(90deg, rgba(7, 20, 22, 0.325) 0%, rgba(10, 157, 172, 0.075) 55%, rgba(7, 20, 22, 0.15) 100%),
     linear-gradient(0deg, rgba(7, 20, 22, 0.25) 0%, transparent 60%);
 }
@@ -59,11 +60,10 @@
 }
 
 /* Photo-backed reassurance */
-.landing-v2__process-section, .landing-v2__cars-section { color: #fff; isolation: isolate; overflow: hidden; position: relative; }
-.landing-v2__cars-section > img { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; z-index: -2; }
+.landing-v2__process-section { color: #fff; isolation: isolate; overflow: hidden; position: relative; }
 .landing-v2__process-section > picture { height: 100%; inset: 0; position: absolute; width: 100%; z-index: -2; }
 .landing-v2__process-section > picture > img { height: 100%; object-fit: cover; object-position: center 53%; width: 100%; }
-.landing-v2__process-shade, .landing-v2__cars-shade { background: none; inset: 0; position: absolute; z-index: -1; }
+.landing-v2__process-shade { background: none; inset: 0; position: absolute; z-index: -1; }
 
 /* Plain text reassurance (no photo) */
 .landing-v2__why-section { color: var(--bb-color-ink-950); margin-bottom: clamp(.75rem, 1.5vw, 1.25rem); }
@@ -112,15 +112,6 @@
 .landing-v2__process-content .bb-process-grid > li > h3 { text-shadow: 0 1px 2px rgba(0, 0, 0, .35); }
 .landing-v2__process-content .bb-process-grid .bb-icon-bare svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .5)); }
 
-/* About and vehicles */
-.landing-v2__cars-section { border-radius: var(--bb-radius-card); margin: 0 auto clamp(3.2rem, 5vw, 5rem); max-width: 1520px; min-height: 230px; }
-.landing-v2__cars-section > img { object-position: center 51%; }
-.landing-v2__cars-shade { background: none; }
-.landing-v2__cars-content { align-items: center; display: flex; min-height: 230px; padding: 2rem 0; }
-.landing-v2__cars-content > div { max-width: 560px; }
-.landing-v2__cars-content h2 .bb-accent { display: inline; }
-.landing-v2__cars-content p:not(.bb-eyebrow) { color: rgba(255, 255, 255, .8); font-size: var(--landing-type-support); line-height: var(--landing-leading-body); margin: .9rem 0 1.05rem; }
-
 @media (max-width: 900px) {
   .landing-v2__process-content { grid-template-columns: 1fr; gap: 2rem; }
   .landing-v2__trust-strip { flex-wrap: wrap; }
@@ -154,8 +145,6 @@
   .landing-v2__process-section { margin-bottom: 4.3rem; }
   .landing-v2__process-content { min-height: 0; padding: 2.5rem 0; }
   .landing-v2__process-content h2 { font-size: clamp(2rem, 10vw, 3.1rem); }
-  .landing-v2__cars-section { border-radius: 0; margin-bottom: 3.5rem; min-height: 270px; }
-  .landing-v2__cars-content { min-height: 270px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
