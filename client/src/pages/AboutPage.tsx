@@ -4,6 +4,7 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -12,6 +13,10 @@ import { UsersIcon } from '../components/icons/UsersIcon'
 import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 
+import heroCustomersWebp from '../assets/images/about/about-hero-maher-customers.webp'
+import heroCustomersJpg from '../assets/images/about/about-hero-maher-customers.jpg'
+import heroCarWebp from '../assets/images/about/about-hero-maher-customer-car.webp'
+import heroCarJpg from '../assets/images/about/about-hero-maher-customer-car.jpg'
 import imgMaherBenchWebp from '../assets/images/about/maher-workshop-bench.webp'
 import imgMaherBenchJpg from '../assets/images/about/maher-workshop-bench.jpg'
 
@@ -89,8 +94,14 @@ function ApprovalCheckIcon({ className }: { className?: string }) {
   )
 }
 
+const heroSlides = [
+  { webp: heroCustomersWebp, jpg: heroCustomersJpg },
+  { webp: heroCarWebp, jpg: heroCarJpg },
+]
+
 export default function AboutPage() {
   const { openBooking, bookingModal } = useBookingModal()
+  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
 
 
   useEffect(() => {
@@ -106,6 +117,15 @@ export default function AboutPage() {
             1. HERO SECTION
             ========================================================= */}
         <section className="omoss-page__hero" aria-labelledby="omoss-hero-title">
+          <div className="omoss-page__hero-media" aria-hidden="true">
+            {heroSlides.map((slide, i) => (
+              <picture key={slide.jpg} className={`omoss-page__hero-slide${i === activeHeroSlide ? ' is-active' : ''}`}>
+                <source srcSet={slide.webp} type="image/webp" />
+                <img src={slide.jpg} alt="" />
+              </picture>
+            ))}
+          </div>
+          <div className="omoss-page__hero-shade" aria-hidden="true" />
           <div className="bb-wrap">
             <div className="omoss-page__hero-inner">
               <div className="omoss-page__hero-content">

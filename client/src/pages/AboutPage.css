@@ -32,20 +32,45 @@
    ------------------------------------------------------------- */
 .omoss-page__hero {
   background-color: #081619;
-  background-image:
-    linear-gradient(rgba(8, 22, 25, 0.09), rgba(8, 22, 25, 0.09)),
-    image-set(
-      url('../assets/images/about/about-hero-maher-customers.webp') type('image/webp') 1x,
-      url('../assets/images/about/about-hero-maher-customers.jpg') type('image/jpeg') 1x
-    );
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: cover;
   color: var(--bb-color-text-inverse);
   overflow: hidden;
   padding-bottom: clamp(3.5rem, 4vw, 3.5rem);
   padding-top: var(--bb-hero-clearance);
   position: relative;
+}
+
+.omoss-page__hero-media,
+.omoss-page__hero-slide,
+.omoss-page__hero-shade {
+  inset: 0;
+  position: absolute;
+}
+
+.omoss-page__hero-media { z-index: 0; }
+
+.omoss-page__hero-slide {
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.omoss-page__hero-slide.is-active { opacity: 1; }
+
+.omoss-page__hero-slide img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  width: 100%;
+}
+
+.omoss-page__hero-shade {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 50%),
+    linear-gradient(90deg, rgba(8, 22, 25, 0.82) 0%, rgba(8, 22, 25, 0.62) 30%, rgba(8, 22, 25, 0.22) 55%, rgba(8, 22, 25, 0) 72%);
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .omoss-page__hero-slide { transition: none; }
 }
 
 .omoss-page__hero-inner {
@@ -348,8 +373,8 @@
 }
 
 .omoss-page__quote-card {
-  background: linear-gradient(135deg, var(--bb-color-teal-500), var(--bb-color-teal-800));
-  border-left: 4px solid var(--bb-color-amber-500);
+  background: linear-gradient(to bottom, #b56c01, #8a5301);
+  border-left: 4px solid var(--bb-color-teal-500);
   border-radius: var(--bb-radius-md);
   box-shadow: var(--bb-shadow-card);
   margin-top: 1rem;
@@ -358,7 +383,7 @@
 }
 
 .omoss-page__quote-symbol {
-  color: var(--bb-color-amber-500);
+  color: rgba(255, 255, 255, 0.85);
   font-family: Georgia, serif;
   font-size: 3rem;
   line-height: 1;
@@ -722,6 +747,11 @@
 }
 
 @media (max-width: 768px) {
+  .omoss-page__hero-shade {
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 50%),
+      linear-gradient(180deg, rgba(8, 22, 25, 0.35) 0%, rgba(8, 22, 25, 0.72) 30%, rgba(8, 22, 25, 0.72) 65%, rgba(8, 22, 25, 0.4) 100%);
+  }
   .omoss-page__hero-inner {
     grid-template-columns: 1fr;
   }
