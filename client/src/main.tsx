@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import { RouteErrorBoundary } from './components/RouteErrorBoundary.tsx'
+import { PageMeta } from './components/PageMeta.tsx'
 import './styles/tailwind.css'
 import './styles/design-tokens.css'
 import './styles/base.css'
@@ -70,6 +71,7 @@ if (localStorage.getItem('theme') !== 'light') {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter basename={basename}>
+      <PageMeta />
       <LanguageProvider>
         <RouteErrorBoundary>
           <Suspense fallback={<RouteFallback />}>
