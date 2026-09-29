@@ -201,12 +201,6 @@ export default function DackservicePage() {
                 const isContactPrice = service.priceData.some((price) => price.contactText)
                 return (
                   <article className="bilservice__tire-card" key={service.title} aria-labelledby={`service-${service.title}`}>
-                    <div className="bilservice__tire-media">
-                      <picture data-image-slot={`tire-${service.title.toLowerCase()}`}>
-                        <source srcSet={service.imageWebp} type="image/webp" />
-                        <img src={service.imageJpg} alt={service.imageAlt} loading="lazy" />
-                      </picture>
-                    </div>
                     <div className="bilservice__tire-body">
                       <h3 id={`service-${service.title}`}>{service.title}</h3>
                       <p>{service.description}</p>
@@ -228,9 +222,15 @@ export default function DackservicePage() {
                           )
                         )}
                       </div>
+                      <div className="bilservice__tire-media">
+                        <picture data-image-slot={`tire-${service.title.toLowerCase()}`}>
+                          <source srcSet={service.imageWebp} type="image/webp" />
+                          <img src={service.imageJpg} alt={service.imageAlt} loading="lazy" />
+                        </picture>
+                      </div>
                       <button
                         type="button"
-                        className="bb-btn bb-btn--teal bilservice__tire-cta"
+                        className="bb-btn bb-btn--ember bilservice__tire-cta"
                         onClick={() => openBookingWith(`Gäller ${service.title.toLowerCase()}`)}
                       >
                         <span>{isContactPrice ? 'Kontakta oss' : 'Boka tid'}</span>
