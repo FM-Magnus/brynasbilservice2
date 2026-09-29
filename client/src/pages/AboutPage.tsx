@@ -119,7 +119,7 @@ export default function AboutPage() {
         <section className="omoss-page__hero" aria-labelledby="omoss-hero-title">
           <div className="omoss-page__hero-media" aria-hidden="true">
             {heroSlides.map((slide, i) => (
-              <picture key={slide.jpg} className={`omoss-page__hero-slide${i === activeHeroSlide ? ' is-active' : ''}`}>
+              <picture key={slide.jpg} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
                 <source srcSet={slide.webp} type="image/webp" />
                 <img src={slide.jpg} alt="" />
               </picture>

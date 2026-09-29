@@ -48,7 +48,7 @@ export default function ContactPage() {
         <section className="bb-hero kontakt-page__hero" aria-labelledby="contact-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             {heroSlides.map((slide, i) => (
-              <picture key={slide.jpg} className={`kontakt-page__hero-slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
+              <picture key={slide.jpg} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
                 <source srcSet={slide.webp} type="image/webp" />
                 <img src={slide.jpg} alt="" />
               </picture>

@@ -87,7 +87,7 @@ export default function BargningPage() {
         <section className="bargning-page__hero" aria-labelledby="bargning-hero-title">
           <div className="bargning-page__hero-media" aria-hidden="true">
             {heroSlides.map((slide, i) => (
-              <picture key={slide.jpg} className={`bargning-page__hero-slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
+              <picture key={slide.jpg} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
                 <source srcSet={slide.webp} type="image/webp" />
                 <img src={slide.jpg} alt="" />
               </picture>

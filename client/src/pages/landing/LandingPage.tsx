@@ -89,7 +89,7 @@ export default function LandingPage() {
       <section className="bb-hero" aria-labelledby="landing-v2-hero-title">
         <div className="bb-hero__media" aria-hidden="true">
           {heroSlides.map((slide, i) => (
-            <picture key={slide.jpg} className={`landing-v2__hero-slide${i === activeHeroSlide ? ' is-active' : ''}`}>
+            <picture key={slide.jpg} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
               <source srcSet={slide.webp} type="image/webp" />
               <img src={slide.jpg} alt="" />
             </picture>

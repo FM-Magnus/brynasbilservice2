@@ -45,20 +45,6 @@
     linear-gradient(0deg, rgba(7, 20, 22, 0.25) 0%, transparent 60%);
 }
 
-/* Hero slideshow: crossfade between background photos */
-.landing-v2 .landing-v2__hero-slide {
-  opacity: 0;
-  transition: opacity 1.4s ease;
-}
-.landing-v2 .landing-v2__hero-slide.is-active {
-  opacity: 1;
-}
-@media (prefers-reduced-motion: reduce) {
-  .landing-v2 .landing-v2__hero-slide {
-    transition: none;
-  }
-}
-
 /* Photo-backed reassurance */
 .landing-v2__process-section { color: #fff; isolation: isolate; overflow: hidden; position: relative; }
 .landing-v2__process-section > picture { height: 100%; inset: 0; position: absolute; width: 100%; z-index: -2; }

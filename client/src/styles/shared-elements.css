@@ -477,6 +477,26 @@
   object-position: 55% 53%;
   width: 100%;
 }
+/* Hero slideshow (hooks/useHeroSlideshow.ts): photos stacked in a hero's media
+   layer, crossfading on .is-active. Works inside .bb-hero__media and in the
+   unique pages' own media wrappers (Om oss, Bärgning). The crop stays per page
+   and per photo — set object-position with a page-scoped selector. */
+.bb-hero__slide {
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 1.4s ease;
+}
+.bb-hero__slide.is-active { opacity: 1; }
+.bb-hero__slide img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bb-hero__slide { transition: none; }
+}
 .bb-hero__shade {
   background: none;
   pointer-events: none;

@@ -54,28 +54,14 @@
   z-index: 1;
 }
 
-/* Hero slideshow (useHeroSlideshow): crossfading photos under the shade */
-.bargning-page__hero-media,
-.bargning-page__hero-slide {
+/* Hero slideshow: shared .bb-hero__slide in this page's media layer, under the shade; crops per photo. */
+.bargning-page__hero-media {
   inset: 0;
   position: absolute;
+  z-index: 0;
 }
-.bargning-page__hero-media { z-index: 0; }
-.bargning-page__hero-slide {
-  opacity: 0;
-  transition: opacity 1.4s ease;
-}
-.bargning-page__hero-slide.is-active { opacity: 1; }
-.bargning-page__hero-slide img {
-  height: 100%;
-  object-fit: cover;
-  object-position: right center;
-  width: 100%;
-}
-.bargning-page__hero-slide.bargning-page__hero-slide--highway img { object-position: 70% 60%; }
-@media (prefers-reduced-motion: reduce) {
-  .bargning-page__hero-slide { transition: none; }
-}
+.bargning-page__hero .bb-hero__slide img { object-position: right center; }
+.bargning-page__hero .bb-hero__slide.bargning-page__hero-slide--highway img { object-position: 70% 60%; }
 
 .bargning-page__hero-content {
   display: flex;
