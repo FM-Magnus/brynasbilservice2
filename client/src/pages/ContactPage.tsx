@@ -15,14 +15,14 @@ import { SendIcon } from '../components/icons/SendIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import beanieHeroWebp from '../assets/images/contact/contact-hero-customer-beanie.webp'
 import beanieHeroJpg from '../assets/images/contact/contact-hero-customer-beanie.jpg'
-import familyHeroWebp from '../assets/images/contact/contact-hero-family-windscreen.webp'
-import familyHeroJpg from '../assets/images/contact/contact-hero-family-windscreen.jpg'
+import carHeroWebp from '../assets/images/contact/contact-hero-maher-customer-car.webp'
+import carHeroJpg from '../assets/images/contact/contact-hero-maher-customer-car.jpg'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import './ContactPage.css'
 
 const heroSlides = [
   { webp: beanieHeroWebp, jpg: beanieHeroJpg, modifier: ' kontakt-page__hero-slide--beanie' },
-  { webp: familyHeroWebp, jpg: familyHeroJpg, modifier: '' },
+  { webp: carHeroWebp, jpg: carHeroJpg, modifier: ' kontakt-page__hero-slide--car' },
 ]
 
 function ChevronDownIcon({ className }: { className?: string }) {

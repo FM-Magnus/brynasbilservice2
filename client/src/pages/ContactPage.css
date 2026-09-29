@@ -558,6 +558,11 @@
 @media (max-width: 1023px) {
   .kontakt-page__hero .kontakt-page__hero-slide--beanie img { object-position: 72% center; }
 }
+/* Wide screens crop top and bottom; show the top of both photos so heads clear the header. */
+@media (min-width: 1024px) {
+  .kontakt-page__hero .kontakt-page__hero-slide--beanie img { object-position: 55% 0%; }
+  .kontakt-page__hero .kontakt-page__hero-slide--car img { object-position: 55% 15%; }
+}
 @media (prefers-reduced-motion: reduce) {
   .kontakt-page__hero .kontakt-page__hero-slide { transition: none; }
 }
