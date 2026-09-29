@@ -63,15 +63,15 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Hjullagerbyte | ✓ | ✓ ✓ | — |
 | Styrning & kulleder | ✓ | ✓ ✓ | — |
 | Service-reparationer | ✓ | ✓ servicebook/keys + ✓ four value cards | — |
-| Felsökning | ✓ new diagnostics hero | ✓ engine-bay tablet + ✓ OBD detail | — |
+| Felsökning | ✓ `services/diagnostics/diagnostics-workshop-hero` (3000×1674, replaced 2026-09-29) | ✓ engine-bay tablet + ✓ OBD detail | — |
 | Biltjänster | CSS-only | ✓ all 11 guide cards have photos | — |
 | Bilar till salu | ✓ | conditional placeholders when a car lacks photos | — |
 | Landing | ✓ slideshow: `home/landing-v2/landing-key-handover-hero`, `landing-tool-drawer-hero` (3000×1700) | ✓ why (`landing-why-reassurance-handshake-light`, full-bleed, no overlay, edge-faded to page colour), process (`landing-customer-interaction-background`); the service area is vector icons, no photo | phone crops (1200×2100) |
 | Om oss | ✓ slideshow: `about/about-hero-maher-customers`, `about-hero-maher-customer-car` (3000×1688), shade + 30% black left edge | ✓ workshop and tyre photos (`about/`, `workshop/`, `services/tires/`); ✓ `about/about-principles-maher-customer-bg` behind "Därför väljer kunder oss" | phone crops (1200×2100) |
-| Däckservice | ✓ `services/tires/tires-hero-bg` | ✓ six tyre cards (colour grade in page CSS, files unchanged), storage | — |
+| Däckservice | ✓ `services/tires/tires-hero-bg` | ✓ six tyre cards (photo above the CTA, teal grade + faded edges in page CSS), storage | — |
 | AC-service | ✓ `services/ac/ac-hero-bg` | ✓ `ac-manometers-on-engine` (JPG only, no WebP) | — |
-| Bärgning | ✓ | ✓ tow truck, workshop, car for sale | — |
-| Kontakt | ✓ slideshow: `contact/contact-hero-customer-beanie`, `contact-hero-family-windscreen`; left shade (vertical on phones) | — | phone crops (1200×2100) |
+| Bärgning | ✓ slideshow: `services/towing/towing-hero-bg`, `towing-hero-highway` | ✓ tow truck, workshop, car for sale | — |
+| Kontakt | ✓ slideshow: `contact/contact-hero-customer-beanie`, `contact-hero-maher-customer-car`; left shade (vertical on phones), top-anchored from 1024px | — | phone crops (1200×2100) |
 | Galleri | folder-driven | every photo in `client/src/assets/galleri/` (see `LÄSMIG.md`) | — |
 
 ## Photo brief (what works on this site)
