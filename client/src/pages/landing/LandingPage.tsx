@@ -139,27 +139,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <ContactFormCard variant="full-section" />
-
-      <GalleryDockStrip />
-
-      <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
-        <div className="bb-wrap landing-v2__why-content">
-          <div>
-            <p className="bb-eyebrow">Om Brynäs Bilservice</p>
-            <h2 id="landing-v2-why-title" className="bb-h2">
-              Trygg bilservice<br />i <span className="bb-accent">lokala Gävle</span>
-            </h2>
-            <p className="bb-lead--dark">
-              Brynäs Bilservice grundades 2021 och är din lokala, oberoende verkstad i Brynäs, Gävle. Vi brinner för bilar och för människorna som kör dem. Hos oss möts du av erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.
-            </p>
-            <p className="bb-lead--dark">
-              Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
-            </p>
-          </div>
-        </div>
-      </section>
-
       <section className="landing-v2__services-section" aria-label="Våra tjänster">
         <ul className="bb-wrap landing-v2__trust-strip">
           <li>
@@ -199,6 +178,25 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
+        <div className="bb-wrap landing-v2__why-content">
+          <div>
+            <p className="bb-eyebrow">Om Brynäs Bilservice</p>
+            <h2 id="landing-v2-why-title" className="bb-h2">
+              Trygg bilservice<br />i <span className="bb-accent">lokala Gävle</span>
+            </h2>
+            <p className="bb-lead--dark">
+              Brynäs Bilservice grundades 2021 och är din lokala, oberoende verkstad i Brynäs, Gävle. Vi brinner för bilar och för människorna som kör dem. Hos oss möts du av erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.
+            </p>
+            <p className="bb-lead--dark">
+              Vi servar alla bilmärken. Hittar vi något extra under arbetet kontaktar vi alltid dig först – inga överraskningar på fakturan.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <GalleryDockStrip />
+
       <section className="landing-v2__process-section" aria-labelledby="landing-v2-process-title">
         <picture aria-hidden="true">
           <source srcSet={customerInteractionWebp} type="image/webp" />
@@ -229,6 +227,8 @@ export default function LandingPage() {
           </ol>
         </div>
       </section>
+
+      <ContactFormCard variant="full-section" />
 
       <PublicFooter onBookingClick={openBooking} />
       {bookingModal}
