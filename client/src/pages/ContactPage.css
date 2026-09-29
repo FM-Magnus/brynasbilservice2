@@ -562,12 +562,3 @@
   .kontakt-page__hero .kontakt-page__hero-slide--beanie img { object-position: 55% 0%; }
   .kontakt-page__hero .kontakt-page__hero-slide--car img { object-position: 55% 15%; }
 }
-/* Hero shade: darkens toward the copy (left on desktop, behind the text on phones). */
-.kontakt-page__hero .bb-hero__shade {
-  background: linear-gradient(90deg, rgba(8, 22, 25, 0.82) 0%, rgba(8, 22, 25, 0.62) 30%, rgba(8, 22, 25, 0.22) 55%, rgba(8, 22, 25, 0) 72%);
-}
-@media (max-width: 768px) {
-  .kontakt-page__hero .bb-hero__shade {
-    background: linear-gradient(180deg, rgba(8, 22, 25, 0.35) 0%, rgba(8, 22, 25, 0.72) 30%, rgba(8, 22, 25, 0.72) 65%, rgba(8, 22, 25, 0.4) 100%);
-  }
-}

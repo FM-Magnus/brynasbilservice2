@@ -125,7 +125,7 @@ export default function AboutPage() {
               </picture>
             ))}
           </div>
-          <div className="omoss-page__hero-shade" aria-hidden="true" />
+          <div className="omoss-page__hero-shade bb-shade-copy-left" aria-hidden="true" />
           <div className="bb-wrap">
             <div className="omoss-page__hero-inner">
               <div className="omoss-page__hero-content">

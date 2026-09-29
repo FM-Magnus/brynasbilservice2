@@ -50,11 +50,14 @@
 /* Slideshow: shared .bb-hero__slide; this page crops from the top. */
 .omoss-page__hero .bb-hero__slide img { object-position: center top; }
 
-.omoss-page__hero-shade {
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 50%),
-    linear-gradient(90deg, rgba(8, 22, 25, 0.82) 0%, rgba(8, 22, 25, 0.62) 30%, rgba(8, 22, 25, 0.22) 55%, rgba(8, 22, 25, 0) 72%);
-  z-index: 1;
+.omoss-page__hero-shade { z-index: 1; }
+/* The shared .bb-shade-copy-left gradient, plus a 30% black edge on the left
+   (Magnus 2026-09-27) on top of it at every width. */
+.omoss-page__hero-shade::before {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 50%);
+  content: '';
+  inset: 0;
+  position: absolute;
 }
 
 
@@ -732,11 +735,6 @@
 }
 
 @media (max-width: 768px) {
-  .omoss-page__hero-shade {
-    background:
-      linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 50%),
-      linear-gradient(180deg, rgba(8, 22, 25, 0.35) 0%, rgba(8, 22, 25, 0.72) 30%, rgba(8, 22, 25, 0.72) 65%, rgba(8, 22, 25, 0.4) 100%);
-  }
   .omoss-page__hero-inner {
     grid-template-columns: 1fr;
   }

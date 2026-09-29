@@ -497,6 +497,21 @@
 @media (prefers-reduced-motion: reduce) {
   .bb-hero__slide { transition: none; }
 }
+/* Hero shade that darkens toward the copy: from the left on desktop, a
+   vertical band behind the stacked text on tablets and phones. Add to a hero's
+   shade layer (.bb-hero__shade or a page's own); the compound selector
+   out-ranks .bb-hero__shade's own `background: none`. Used by Om oss and
+   Kontakt. */
+.bb-shade-copy-left,
+.bb-hero__shade.bb-shade-copy-left {
+  background: linear-gradient(90deg, rgba(8, 22, 25, 0.82) 0%, rgba(8, 22, 25, 0.62) 30%, rgba(8, 22, 25, 0.22) 55%, rgba(8, 22, 25, 0) 72%);
+}
+@media (max-width: 768px) {
+  .bb-shade-copy-left,
+  .bb-hero__shade.bb-shade-copy-left {
+    background: linear-gradient(180deg, rgba(8, 22, 25, 0.35) 0%, rgba(8, 22, 25, 0.72) 30%, rgba(8, 22, 25, 0.72) 65%, rgba(8, 22, 25, 0.4) 100%);
+  }
+}
 .bb-hero__shade {
   background: none;
   pointer-events: none;
