@@ -17,9 +17,8 @@ test('bargning page renders without horizontal overflow across breakpoints', asy
   })
   expect(hasHorizontalOverflow).toBe(false)
 
-  // Verify all 8 sections exist
+  // Verify all 7 sections exist (the quick-steps section was removed 2026-09-25)
   await expect(page.locator('.bargning-page__hero')).toBeVisible()
-  await expect(page.locator('.bargning-page__quick-steps')).toBeVisible()
   await expect(page.locator('.bargning-page__showcase')).toBeVisible()
   await expect(page.locator('.bargning-page__scenarios')).toBeVisible()
   await expect(page.locator('.bargning-page__process')).toBeVisible()
