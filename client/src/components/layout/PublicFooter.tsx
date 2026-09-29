@@ -24,6 +24,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
+    <>
     <footer className="bb-footer" role="contentinfo">
       <div className="bb-footer__wrap">
         <div className="bb-footer__grid">
@@ -240,6 +241,28 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
         </div>
       </div>
     </footer>
+
+    {/* Phones: Ring and Boka tid stay within reach on long pages (benchmark B1).
+        The spacer keeps the bar from covering the end of the footer. */}
+    <div className="bb-footer__mobile-bar-spacer" aria-hidden="true" />
+    <nav className="bb-footer__mobile-bar" aria-label="Snabbkontakt">
+      <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+        <PhoneIcon />
+        <span>Ring</span>
+      </a>
+      {onBookingClick ? (
+        <button type="button" onClick={onBookingClick} className="bb-btn bb-btn--teal">
+          <CalendarIcon />
+          <span>Boka tid</span>
+        </button>
+      ) : (
+        <Link to="/kontakt#boka" className="bb-btn bb-btn--teal">
+          <CalendarIcon />
+          <span>Boka tid</span>
+        </Link>
+      )}
+    </nav>
+    </>
   )
 }
 

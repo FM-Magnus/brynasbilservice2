@@ -543,3 +543,46 @@ a.bb-footer__contact-val:hover {
     padding-top: 1.2rem;
   }
 }
+
+/* Phone quick-contact bar (benchmark B1): fixed Ring + Boka tid under 768px.
+   Below the header (z 100) and the booking modal (z 1000). */
+.bb-footer__mobile-bar,
+.bb-footer__mobile-bar-spacer {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .bb-footer__mobile-bar {
+    backdrop-filter: blur(10px);
+    background: rgba(6, 21, 24, 0.9);
+    border-top: 1px solid rgba(10, 178, 193, 0.25);
+    bottom: 0;
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: 1fr 1fr;
+    left: 0;
+    padding: 0.6rem 1rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
+    position: fixed;
+    right: 0;
+    z-index: 90;
+  }
+
+  /* Out-ranks page-level link rules such as .landing-v2 :where(a). */
+  .bb-footer__mobile-bar .bb-btn {
+    color: var(--bb-color-text-inverse);
+    min-height: 46px;
+    padding: 0.6rem 0.8rem;
+    width: 100%;
+  }
+
+  .bb-footer__mobile-bar .bb-btn svg {
+    height: 18px;
+    width: 18px;
+  }
+
+  .bb-footer__mobile-bar-spacer {
+    background-color: var(--bb-color-ink-950);
+    display: block;
+    height: calc(66px + env(safe-area-inset-bottom, 0px));
+  }
+}

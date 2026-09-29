@@ -40,7 +40,20 @@ h1
   box-shadow: none
   display: block
   min-height: 0px
-.bb-btn: (not present)
+.bb-btn
+  font-family: Manrope, Arial, sans-serif
+  font-size: 15.2px
+  font-weight: 700
+  line-height: 15.2px
+  color: rgb(255, 255, 255)
+  background-color: rgba(0, 0, 0, 0)
+  border-top-width: 1px
+  border-top-style: solid
+  border-top-color: rgb(240, 149, 5)
+  border-top-left-radius: 6px
+  box-shadow: none
+  display: inline-flex
+  min-height: 52px
 .bb-footer
   font-family: Manrope, Arial, sans-serif
   font-size: 16px
