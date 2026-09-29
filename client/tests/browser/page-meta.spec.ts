@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { PUBLIC_ROUTES } from './routes'
 import { PAGE_META } from '../../src/data/pageMeta'
+import { BUSINESS } from '../../src/data/business'
 
 // Until 2026-09-29 every page shared the <title> and description from
 // index.html (benchmark finding A1). Each public route now needs its own.
@@ -32,4 +33,24 @@ test('the 404 page has its own title and is kept out of search results', async (
   await page.goto('/finns-inte')
   await expect(page).toHaveTitle('Sidan hittades inte – Brynäs Bilservice')
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex')
+})
+
+test('structured data: AutoRepair on every page, FAQPage where there is a FAQ', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-1440', 'metadata is not viewport-dependent')
+
+  const readJsonLd = async () =>
+    (await page.locator('script[type="application/ld+json"]').allTextContents()).map((text) => JSON.parse(text))
+
+  await page.goto('/bromssystem')
+  await expect(page.locator('h1')).toBeVisible()
+  const data = await readJsonLd()
+  const business = data.find((d) => d['@type'] === 'AutoRepair')
+  expect(business?.telephone).toBe(BUSINESS.phone.e164)
+  expect(business?.address?.streetAddress).toBe(BUSINESS.address.street)
+  const faq = data.find((d) => d['@type'] === 'FAQPage')
+  const visibleQuestions = await page.locator('.bb-faq__item').count()
+  expect(faq?.mainEntity).toHaveLength(visibleQuestions)
+
+  await page.goto('/finns-inte')
+  await expect(page.locator('#ld-business')).toHaveCount(0)
 })

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { faqJsonLd, toJsonLd } from '../../data/structuredData'
 import './BiltjansterFaq.css'
 
 export interface BiltjansterFaqItem {
@@ -68,6 +69,8 @@ export function BiltjansterFaq({ heading, intro, items, id = 'biltjanster-faq' }
           })}
         </div>
       </div>
+      {/* FAQPage data for search engines (benchmark A2); the visible list above is unchanged. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(faqJsonLd(items)) }} />
     </section>
   )
 }
