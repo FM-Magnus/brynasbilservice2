@@ -5,6 +5,7 @@ One dated entry per day, newest first — one short bullet per session, naming t
 ### 2026-09-29
 
 - **Claude Code — heroes, benchmark and page titles (committed `f2568c6a`–`71ec748e`):** Kontakt second slide = Maher over the car roof, both Kontakt photos top-anchored from 1024px so heads clear the header up to 2560px; Bärgning hero turned into a two-photo slideshow (new highway tow truck); new Felsökning hero (344 → 102 KB); Däckservice tyre-card photos moved above the CTA with a teal grade and faded edges, CTA switched to `bb-btn--ember`. Hero layout guides (desktop/phone safe zones measured on the site) in `_incoming-assets/GUIDES/`. Benchmark: Playwright capture of 6 independent workshops (35 pages) and our 22 routes into `_incoming-assets/BENCHMARK/`, report published as an artifact (main findings: shared title/description on every page, few visible prices, no fixed call bar on phones, long mobile guides). A1 done: per-route title and description in `data/pageMeta.ts` (wording approved by Magnus), 404/admin `noindex`, `page-meta.spec.ts`. Playwright run with system Chrome (bundled Chromium missing): 21 passed, 12 skipped.
+- **Claude Code — phone header and quick-contact bar:** fixed Ring/Boka tid bar under 768px in `PublicFooter` (B1); phone logo 142→195px with the menu button at the far right, header height unchanged. Known stale specs, failing before this work too: `bargning.visual.spec.ts` (removed quick-steps section) and the `/`, `/galleri`, `/bargning` baselines.
 
 ### 2026-09-28
 
