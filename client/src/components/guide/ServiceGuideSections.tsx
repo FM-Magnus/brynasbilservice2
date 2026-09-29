@@ -382,15 +382,15 @@ export function GuideQuickFacts({ time }: GuideQuickFactsProps) {
       <div className="bb-wrap service-guide__container">
         <dl className="service-guide__quick-facts-list">
           <div>
-            <dt>Ungefärlig arbetstid</dt>
+            <dt className="bb-eyebrow">Ungefärlig arbetstid</dt>
             <dd>{time}</dd>
           </div>
           <div>
-            <dt>Pris</dt>
+            <dt className="bb-eyebrow">Pris</dt>
             <dd>Tydligt pris innan vi börjar</dd>
           </div>
           <div>
-            <dt>Bilmärken</dt>
+            <dt className="bb-eyebrow">Bilmärken</dt>
             <dd>Alla märken och modeller</dd>
           </div>
         </dl>
