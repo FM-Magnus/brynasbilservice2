@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -99,6 +99,8 @@ export default function StyrningKullederPage() {
           onBooking={openBooking}
         />
 
+        <GuideQuickFacts time="Cirka 1 timme per led" />
+
         <GuideIntro
           id="steering-intro-title"
           heading="Vad gör styrning och kulleder?"
@@ -152,6 +154,8 @@ export default function StyrningKullederPage() {
         />
 
         <BiltjansterFaq id="steering-faq" heading="Vanliga frågor om styrning och kulleder" items={faqs} />
+
+        <GuideRelated route="/styrning-kulleder" />
 
         <GuideClosing
           id="steering-booking-title"

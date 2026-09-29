@@ -6,7 +6,9 @@
  * `children` carries what varies between guides (extra paragraphs, tips).
  */
 import type { ReactElement, ReactNode, SVGProps } from 'react'
+import { Link } from 'react-router-dom'
 import { BUSINESS } from '../../data/business'
+import { relatedServices } from '../../data/relatedServices'
 import { AlertTriangleIcon } from '../icons/AlertTriangleIcon'
 import { CheckIcon } from '../icons/CheckIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
@@ -365,5 +367,55 @@ export function GuideClosing({ id, heading, text, onBooking, bookLabel = 'Boka t
         </div>
       </div>
     </section>
+  )
+}
+
+interface GuideQuickFactsProps {
+  /** Typical workshop time, taken from the page's own FAQ answer. */
+  time: string
+}
+
+/** Short summary right under the hero (benchmark B3): time, price promise, makes. */
+export function GuideQuickFacts({ time }: GuideQuickFactsProps) {
+  return (
+    <section className="service-guide__quick-facts" aria-label="I korthet">
+      <div className="bb-wrap service-guide__container">
+        <dl className="service-guide__quick-facts-list">
+          <div>
+            <dt>Ungefärlig arbetstid</dt>
+            <dd>{time}</dd>
+          </div>
+          <div>
+            <dt>Pris</dt>
+            <dd>Tydligt pris innan vi börjar</dd>
+          </div>
+          <div>
+            <dt>Bilmärken</dt>
+            <dd>Alla märken och modeller</dd>
+          </div>
+        </dl>
+        <p className="service-guide__quick-facts-note">Tiden är ett riktvärde och beror på bilmodell.</p>
+      </div>
+    </section>
+  )
+}
+
+/** "Fler tjänster": links to related guides before the closing call (benchmark B5). */
+export function GuideRelated({ route }: { route: string }) {
+  const links = relatedServices(route)
+  if (links.length === 0) return null
+  return (
+    <nav className="service-guide__section service-guide__section--tight service-guide__related" aria-label="Fler tjänster">
+      <div className="bb-wrap service-guide__container">
+        <h2 className="service-guide__related-title">Fler tjänster</h2>
+        <ul className="service-guide__related-list">
+          {links.map((link) => (
+            <li key={link.to}>
+              <Link to={link.to}>{link.label}<span aria-hidden="true"> →</span></Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   )
 }

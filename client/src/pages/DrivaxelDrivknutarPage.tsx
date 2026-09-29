@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -100,6 +100,8 @@ export default function DrivaxelDrivknutarPage() {
           onBooking={openBooking}
         />
 
+        <GuideQuickFacts time="1–2 timmar per sida" />
+
         <GuideIntro
           id="driveshaft-intro-title"
           heading="Vad gör drivaxeln och drivknutarna?"
@@ -153,6 +155,8 @@ export default function DrivaxelDrivknutarPage() {
         />
 
         <BiltjansterFaq id="drivaxel-faq" heading="Vanliga frågor om drivaxel och drivknutar" items={faqs} />
+
+        <GuideRelated route="/drivaxel-drivknutar" />
 
         <GuideClosing
           id="driveshaft-booking-title"

@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -100,6 +100,8 @@ export default function HjullagerbytePage() {
           onBooking={openBooking}
         />
 
+        <GuideQuickFacts time="1–2 timmar per hjul" />
+
         <GuideIntro
           id="wheel-bearing-intro-title"
           heading="Vad gör ett hjullager?"
@@ -153,6 +155,8 @@ export default function HjullagerbytePage() {
         />
 
         <BiltjansterFaq id="hjullager-faq" heading="Vanliga frågor om hjullagerbyte" items={faqs} />
+
+        <GuideRelated route="/hjullagerbyte" />
 
         <GuideClosing
           id="wheel-bearing-booking-title"

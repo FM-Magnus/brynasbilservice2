@@ -8,7 +8,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -98,6 +98,8 @@ export default function BilbatteriPage() {
           onBooking={openBooking}
         />
 
+        <GuideQuickFacts time="30–60 minuter" />
+
         <GuideIntro
           id="battery-intro-title"
           heading="Vad gör bilbatteriet?"
@@ -148,6 +150,8 @@ export default function BilbatteriPage() {
         />
 
         <BiltjansterFaq id="bilbatteri-faq" heading="Vanliga frågor om bilbatteri" items={faqs} />
+
+        <GuideRelated route="/bilbatteri" />
 
         <GuideClosing
           id="battery-booking-title"

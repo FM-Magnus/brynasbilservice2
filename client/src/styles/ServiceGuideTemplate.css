@@ -488,6 +488,66 @@
   .service-guide__topic-grid--cols-4 { grid-template-columns: 1fr; }
 }
 
+/* I korthet (benchmark B3): three facts on a light band right under the hero. */
+.service-guide__quick-facts {
+  background: var(--bb-color-surface);
+  border-bottom: 1px solid var(--bb-color-border-subtle-light);
+  padding-block: 1.1rem 0.9rem;
+}
+.service-guide__quick-facts-list {
+  display: grid;
+  gap: 0.75rem clamp(1rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+.service-guide__quick-facts-list div { min-width: 0; }
+.service-guide__quick-facts-list dt {
+  color: var(--bb-color-teal-700);
+  font: 700 0.72rem/1.3 var(--bb-font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.service-guide__quick-facts-list dd {
+  color: var(--bb-color-ink-950);
+  font: 800 1.05rem/1.35 var(--bb-font-display);
+  margin: 0.2rem 0 0;
+}
+.service-guide__quick-facts-note {
+  color: var(--bb-color-text-muted);
+  font-size: 0.78rem;
+  margin-top: 0.6rem;
+}
+
+/* Fler tjänster (benchmark B5) */
+.service-guide__related-title {
+  font: 800 1.2rem/1.2 var(--bb-font-display);
+  margin-bottom: 0.75rem;
+}
+.service-guide__related-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.service-guide__related-list a {
+  border: 1px solid var(--bb-color-border-subtle-light);
+  border-radius: var(--bb-radius-control);
+  color: var(--bb-color-ink-950);
+  display: inline-flex;
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  transition: border-color var(--bb-transition-fast), color var(--bb-transition-fast);
+}
+.service-guide__related-list a:hover { border-color: var(--bb-color-teal-600); color: var(--bb-color-teal-700); }
+
+@media (max-width: 640px) {
+  .service-guide__quick-facts-list { grid-template-columns: minmax(0, 1fr); gap: 0.55rem; }
+  .service-guide__quick-facts-list div { align-items: baseline; display: flex; gap: 0.6rem; justify-content: space-between; }
+  .service-guide__quick-facts-list dd { font-size: 0.95rem; margin: 0; text-align: right; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .service-guide *, .service-guide *::before, .service-guide *::after { transition-duration: 0.01ms !important; }
 }

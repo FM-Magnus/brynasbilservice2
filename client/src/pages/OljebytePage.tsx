@@ -11,7 +11,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideServiceCard, GuideSymptoms, GuideTopic } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms, GuideTopic } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -114,6 +114,8 @@ export default function OljebytePage() {
           bookLabel="Boka oljebyte"
         />
 
+        <GuideQuickFacts time="30–60 minuter" />
+
         <GuideIntro
           id="oljebyte-intro-title"
           heading="Vad är ett oljebyte?"
@@ -209,6 +211,8 @@ export default function OljebytePage() {
         />
 
         <BiltjansterFaq id="oljebyte-faq" heading="Vanliga frågor om oljebyte" items={faqs} />
+
+        <GuideRelated route="/oljebyte" />
 
         <GuideClosing
           id="oljebyte-booking-title"

@@ -11,7 +11,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -97,6 +97,8 @@ export default function KopplingPage() {
           onBooking={openBooking}
         />
 
+        <GuideQuickFacts time="4–10 timmar" />
+
         <GuideIntro
           id="koppling-intro-title"
           heading="Vad är en koppling?"
@@ -147,6 +149,8 @@ export default function KopplingPage() {
         />
 
         <BiltjansterFaq id="koppling-faq" heading="Vanliga frågor om koppling" items={faqs} />
+
+        <GuideRelated route="/koppling" />
 
         <GuideClosing
           id="koppling-booking-title"

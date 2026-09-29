@@ -9,7 +9,7 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -108,6 +108,8 @@ export default function BromssystemPage() {
           bookLabel="Boka bromsservice"
         />
 
+        <GuideQuickFacts time="1–3 timmar" />
+
         <GuideIntro
           id="brake-intro-title"
           heading="Vad ingår i bromssystemet?"
@@ -153,6 +155,8 @@ export default function BromssystemPage() {
         />
 
         <BiltjansterFaq id="bromssystem-faq" heading="Vanliga frågor om bromsar" items={faqs} />
+
+        <GuideRelated route="/bromssystem" />
 
         <GuideClosing
           id="brake-booking-title"

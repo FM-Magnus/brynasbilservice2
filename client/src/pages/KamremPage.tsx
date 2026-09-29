@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -95,6 +95,8 @@ export default function KamremPage() {
           onBooking={openBooking}
         />
 
+        <GuideQuickFacts time="2–6 timmar" />
+
         <GuideIntro
           id="kamrem-intro-title"
           heading="Vad är en kamrem?"
@@ -143,6 +145,8 @@ export default function KamremPage() {
         />
 
         <BiltjansterFaq id="kamrem-faq" heading="Vanliga frågor om kamrem" items={faqs} />
+
+        <GuideRelated route="/kamrem" />
 
         <GuideClosing
           id="kamrem-booking-title"

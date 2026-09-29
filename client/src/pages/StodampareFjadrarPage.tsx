@@ -9,7 +9,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
 import type { GuideInfoCard, GuideSymptom } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
@@ -99,6 +99,8 @@ export default function StodampareFjadrarPage() {
           onBooking={openBooking}
         />
 
+        <GuideQuickFacts time="1–3 timmar per axel" />
+
         <GuideIntro
           id="suspension-intro-title"
           heading="Vad gör stötdämpare och fjädrar?"
@@ -152,6 +154,8 @@ export default function StodampareFjadrarPage() {
         />
 
         <BiltjansterFaq id="stodampare-faq" heading="Vanliga frågor om stötdämpare och fjädrar" items={faqs} />
+
+        <GuideRelated route="/stodampare-fjadrar" />
 
         <GuideClosing
           id="suspension-booking-title"
