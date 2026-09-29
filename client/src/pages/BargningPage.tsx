@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -22,6 +23,10 @@ import imgPeugeotFrontJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot
 import imgSunsetRoadWebp from '../assets/images/home/landing-v2/landing-sunset-road-hero.webp'
 import imgSunsetRoadJpg from '../assets/images/home/landing-v2/landing-sunset-road-hero.jpg'
 
+import heroTowingWebp from '../assets/images/services/towing/towing-hero-bg.webp'
+import heroTowingJpg from '../assets/images/services/towing/towing-hero-bg.jpg'
+import heroHighwayWebp from '../assets/images/services/towing/towing-hero-highway.webp'
+import heroHighwayJpg from '../assets/images/services/towing/towing-hero-highway.jpg'
 import { BUSINESS, weekdayHours } from '../data/business'
 import './BargningPage.css'
 
@@ -57,8 +62,14 @@ function RoadWayIcon({ className }: { className?: string }) {
   )
 }
 
+const heroSlides = [
+  { webp: heroTowingWebp, jpg: heroTowingJpg, modifier: '' },
+  { webp: heroHighwayWebp, jpg: heroHighwayJpg, modifier: ' bargning-page__hero-slide--highway' },
+]
+
 export default function BargningPage() {
   const { openBooking, bookingModal } = useBookingModal()
+  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
 
 
   useEffect(() => {
@@ -74,6 +85,14 @@ export default function BargningPage() {
             1. HERO SECTION
             ========================================================= */}
         <section className="bargning-page__hero" aria-labelledby="bargning-hero-title">
+          <div className="bargning-page__hero-media" aria-hidden="true">
+            {heroSlides.map((slide, i) => (
+              <picture key={slide.jpg} className={`bargning-page__hero-slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
+                <source srcSet={slide.webp} type="image/webp" />
+                <img src={slide.jpg} alt="" />
+              </picture>
+            ))}
+          </div>
           <div className="bb-wrap">
             <div className="bargning-page__hero-content">
               <p className="bb-eyebrow bb-eyebrow--dark bargning-page__hero-eyebrow">

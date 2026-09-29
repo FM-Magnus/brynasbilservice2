@@ -32,13 +32,6 @@
    ------------------------------------------------------------- */
 .bargning-page__hero {
   background-color: var(--bb-color-ink-950);
-  background-image: image-set(
-    url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
-    url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
-  );
-  background-position: center right;
-  background-repeat: no-repeat;
-  background-size: cover;
   color: var(--bb-color-text-inverse);
   overflow: hidden;
   padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
@@ -59,6 +52,29 @@
   pointer-events: none;
   position: absolute;
   z-index: 1;
+}
+
+/* Hero slideshow (useHeroSlideshow): crossfading photos under the shade */
+.bargning-page__hero-media,
+.bargning-page__hero-slide {
+  inset: 0;
+  position: absolute;
+}
+.bargning-page__hero-media { z-index: 0; }
+.bargning-page__hero-slide {
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.bargning-page__hero-slide.is-active { opacity: 1; }
+.bargning-page__hero-slide img {
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  width: 100%;
+}
+.bargning-page__hero-slide.bargning-page__hero-slide--highway img { object-position: 70% 60%; }
+@media (prefers-reduced-motion: reduce) {
+  .bargning-page__hero-slide { transition: none; }
 }
 
 .bargning-page__hero-content {
