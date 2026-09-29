@@ -92,7 +92,7 @@ export default function KopplingPage() {
           eyebrow="Kraftöverföring & drivlina"
           title={<>Koppling <span className="bb-accent">när</span><br />kraften behöver<br />nå hjulen</>}
           lead="Kopplingen överför kraften mellan motorn och växellådan och gör att du kan växla utan att motorn stannar eller rycker till. Den är en slitdel, och att den till slut behöver bytas är en förväntad del av bilens underhåll."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Mekaniker arbetar med kopplingen under en lyft bil i verkstaden', lazy: true }}
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Mekaniker arbetar med kopplingen under en lyft bil i verkstaden' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />

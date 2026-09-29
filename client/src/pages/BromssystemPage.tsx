@@ -102,7 +102,7 @@ export default function BromssystemPage() {
           eyebrow="Bromsservice & säkerhet"
           title={<>Bromssystem<br />när <span className="bb-accent">säkerheten</span><br />måste fungera</>}
           lead="Bromsarna är bilens viktigaste säkerhetssystem – helt enkelt det som avgör om du stannar i tid eller inte. Slitna bromsar brukar varna i god tid, men bara om du vet vad du ska lyssna och känna efter."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ventilerad bromsskiva och bromsok monterat på lyft fordon i verkstaden', lazy: true }}
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ventilerad bromsskiva och bromsok monterat på lyft fordon i verkstaden' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
           bookLabel="Boka bromsservice"

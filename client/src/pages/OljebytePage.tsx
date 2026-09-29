@@ -108,7 +108,7 @@ export default function OljebytePage() {
           eyebrow="Motorolja & motorunderhåll"
           title={<>Oljebyte<br />för en motor<br />som <span className="bb-accent">mår bra</span></>}
           lead="Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: '', lazy: true }}
+          image={{ webp: heroWebp, jpg: heroJpg, alt: '' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
           bookLabel="Boka oljebyte"

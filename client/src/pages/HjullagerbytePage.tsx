@@ -95,7 +95,7 @@ export default function HjullagerbytePage() {
           eyebrow="Chassi & hjulupphängning"
           title={<>Hjullagerbyte i <span className="bb-accent">Gävle</span></>}
           lead="Hjullagret bär upp bilens vikt och ser till att hjulen rullar mjukt och friktionsfritt. Upplever du ett brummande missljud eller vibrationer? Vi lokaliserar det slitna lagret och byter till kvalitetsdelar med rätt specifikation."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ny navenhet med integrerat hjullager och hjulbultar på en arbetsbänk i verkstaden', lazy: true }}
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ny navenhet med integrerat hjullager och hjulbultar på en arbetsbänk i verkstaden' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />

@@ -98,7 +98,7 @@ export default function AvgassystemPage() {
           eyebrow="Avgasrening & ljuddämpning"
           title={<>Avgassystem<br />för tyst gång<br />och <span className="bb-accent">ren</span> motor</>}
           lead="Avgassystemet renar utsläpp, dämpar motorljudet och säkerställer att motorns sensorer styr förbränningen optimalt. Vi lokaliserar läckage, byter ljuddämpare och felsöker lambdasonder och katalysatorer."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Underrede på bil på lyft med avgassystem, ljuddämpare och ändrör i verkstadsmiljö', lazy: true }}
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Underrede på bil på lyft med avgassystem, ljuddämpare och ändrör i verkstadsmiljö' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
