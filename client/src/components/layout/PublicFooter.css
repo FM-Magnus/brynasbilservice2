@@ -554,7 +554,7 @@ a.bb-footer__contact-val:hover {
 @media (max-width: 767px) {
   .bb-footer__mobile-bar {
     backdrop-filter: blur(10px);
-    background: rgba(6, 21, 24, 0.9);
+    background: var(--bb-color-ink-glass);
     border-top: 1px solid rgba(10, 178, 193, 0.25);
     bottom: 0;
     display: grid;

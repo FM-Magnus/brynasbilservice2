@@ -19,6 +19,8 @@
   --bb-color-border-subtle: rgba(255, 255, 255, 0.08);
   --bb-color-border-subtle-light: rgba(7, 20, 22, 0.08);
   --bb-color-ink-soft: #0c2327;
+  /* Translucent ink for bars that float over content (phone quick-contact bar). Added 2026-09-29. */
+  --bb-color-ink-glass: rgba(6, 21, 24, 0.9);
   /* Semantic gradient pairs for the Guide family's symptom-row states
      (ServiceGuideTemplate.css) — named by role, not by scale step, since
      they don't sit cleanly on the teal/amber ramps above. Added 2026-09-22
