@@ -20,8 +20,8 @@ import { InfoIcon } from '../components/icons/InfoIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import { WavesIcon } from '../components/icons/WavesIcon'
-import timingBeltJpg from '../assets/images/services/timing-belt/timing-belt-in-hand.jpg'
-import timingBeltWebp from '../assets/images/services/timing-belt/timing-belt-in-hand.webp'
+import timingBeltJpg from '../assets/images/services/timing-belt/timing-belt-kit-hero.jpg'
+import timingBeltWebp from '../assets/images/services/timing-belt/timing-belt-kit-hero.webp'
 import timingBeltKitJpg from '../assets/images/services/timing-belt/timing-belt-kit-workbench.jpg'
 import timingBeltKitWebp from '../assets/images/services/timing-belt/timing-belt-kit-workbench.webp'
 import timingBeltInspectionJpg from '../assets/images/services/timing-belt/timing-belt-worn-belt-inspection.jpg'
@@ -90,7 +90,7 @@ export default function KamremPage() {
           eyebrow="Förebyggande motorskydd"
           title={<>Kamremsbyte i <span className="bb-accent">Gävle</span></>}
           lead="Kamremmen synkroniserar motorns vevaxel och kamaxel så att kolvar och ventiler rör sig i exakt rätt takt. Det är en av bilens mest kritiska delar där ett missat byte kan leda till totalt motorhaveri."
-          image={{ webp: timingBeltWebp, jpg: timingBeltJpg, alt: 'Kamrem som hålls upp vid ett motorarbete', slot: 'timing-belt-hero' }}
+          image={{ webp: timingBeltWebp, jpg: timingBeltJpg, alt: 'Kamremssats med kamrem, spännrulle, styrrulle och vattenpump på ett mörkt bord', slot: 'timing-belt-hero' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
