@@ -303,7 +303,7 @@
 .omoss-page__quote-card {
   background: linear-gradient(to bottom, #b56c01, #8a5301);
   border-left: 4px solid var(--bb-color-teal-500);
-  border-radius: var(--bb-radius-md);
+  border-radius: var(--bb-radius-card);
   box-shadow: var(--bb-shadow-card);
   margin-top: 1rem;
   padding: 1.6rem 2rem;
