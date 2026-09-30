@@ -19,10 +19,11 @@
    `.page__btn`), even though the reset reads as "more generic." It silently
    wins on color/font-weight/font-size and the bug hides in plain sight
    whenever the ambient inherited value happens to coincidentally match.
-   Every reset on every page's own root selector must wrap the element list
-   in :where(), which has zero specificity:
-     .page :where(a) { color: inherit; text-decoration: none; }
-     .page :where(button, input, textarea, select) { font: inherit; }
+   Every reset on every page's own root selector must wrap the root AND the
+   element list in :where(), which has zero specificity (`.page :where(button)`
+   still carries the .page class and ties with `.bb-btn`; audit C13):
+     :where(.page) :where(a) { color: inherit; text-decoration: none; }
+     :where(.page) :where(button, input, textarea, select) { font: inherit; }
    This isn't optional per-page style — it's the only way a component's own
    `color`/`font-weight` rule is guaranteed to win regardless of whether
    it's a <button> or an <a>. */

@@ -24,7 +24,7 @@
 
 .landing-v2 *, .landing-v2 *::before, .landing-v2 *::after { box-sizing: border-box; }
 .landing-v2 :where(a) { color: inherit; text-decoration: none; }
-.landing-v2 :where(button, input, textarea, select) { font: inherit; }
+:where(.landing-v2) :where(button, input, textarea, select) { font: inherit; }
 .landing-v2 button { cursor: pointer; }
 .landing-v2 :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
 .landing-v2 h1, .landing-v2 h2, .landing-v2 h3, .landing-v2 p { margin-top: 0; }

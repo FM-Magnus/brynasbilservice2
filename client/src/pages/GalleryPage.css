@@ -18,7 +18,7 @@
 
 /* Zero-specificity resets (see shared-elements.css reset gotcha). */
 .galleri-page :where(a) { color: inherit; text-decoration: none; }
-.galleri-page :where(button) { font: inherit; }
+:where(.galleri-page) :where(button) { font: inherit; }
 .galleri-page :where(img) { display: block; max-width: 100%; }
 .galleri-page :where(h1, h2, p) { margin: 0; }
 .galleri-page :where(a, button, [tabindex]):focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }

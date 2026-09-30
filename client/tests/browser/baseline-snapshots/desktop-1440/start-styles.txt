@@ -42,9 +42,9 @@ h1
   min-height: 0px
 .bb-btn
   font-family: Manrope, Arial, sans-serif
-  font-size: 16px
-  font-weight: 400
-  line-height: 24px
+  font-size: 15.2px
+  font-weight: 700
+  line-height: 15.2px
   color: rgb(255, 255, 255)
   background-color: rgba(0, 0, 0, 0)
   border-top-width: 1px
