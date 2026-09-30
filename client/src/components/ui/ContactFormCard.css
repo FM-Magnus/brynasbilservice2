@@ -122,7 +122,7 @@
 
 /* Form Card (standalone or embedded in grid) */
 .bb-contact-form-card {
-  background: linear-gradient(135deg, #099bab, #007987);
+  background: linear-gradient(135deg, var(--bb-color-teal-700), #007987);
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: var(--bb-radius-card);
   box-shadow: 0 17px 31px rgba(14, 49, 53, 0.15);
@@ -141,7 +141,7 @@
 }
 
 .bb-contact-form-card > p {
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--bb-color-text-inverse);
   font-family: var(--bb-font-body, 'Manrope', Arial, sans-serif);
   font-size: var(--bb-font-size-support, 0.92rem);
   line-height: var(--bb-line-height-support, 1.55);
