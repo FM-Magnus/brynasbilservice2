@@ -166,7 +166,7 @@
   font: 800 0.85rem var(--bb-font-display);
 }
 .bilservice__level-card--01 .bilservice__level-badge { background: var(--bilservice-amber-soft); color: var(--bb-color-ink-950); }
-.bilservice__level-card--02 .bilservice__level-badge { background: rgba(255, 255, 255, 0.22); color: #fff; }
+.bilservice__level-card--02 .bilservice__level-badge { background: rgba(7, 20, 22, 0.32); color: #fff; }
 .bilservice__level-card--03 .bilservice__level-badge { background: rgba(16, 166, 175, 0.28); color: #7fe0e6; }
 .bilservice__level-card h3 { margin: 0 0 0.6rem; font: 800 1.25rem/1.25 var(--bb-font-display); }
 .bilservice__level-card > p { margin: 0 0 1.1rem; font: 400 0.92rem/1.55 var(--bb-font-body); opacity: 0.85; }
