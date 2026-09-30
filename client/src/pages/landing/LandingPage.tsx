@@ -12,8 +12,8 @@ import { PhoneIcon } from '../../components/icons/PhoneIcon'
 import { WrenchIcon } from '../../components/icons/WrenchIcon'
 import heroWebp from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero.webp'
 import heroJpg from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero.jpg'
-import heroToolsWebp from '../../assets/images/home/landing-v2/landing-tool-drawer-hero.webp'
-import heroToolsJpg from '../../assets/images/home/landing-v2/landing-tool-drawer-hero.jpg'
+import heroBirdsEyeWebp from '../../assets/images/home/landing-v2/landing-birds-eye-hero.webp'
+import heroBirdsEyeJpg from '../../assets/images/home/landing-v2/landing-birds-eye-hero.jpg'
 import { TrustStrip } from '../../components/ui/TrustStrip'
 import { ChatDotsIcon } from '../../components/icons/ChatDotsIcon'
 import { ShieldIcon } from '../../components/icons/ShieldIcon'
@@ -65,7 +65,7 @@ const processIcons: Record<string, ReactNode> = {
 
 const heroSlides = [
   { webp: heroWebp, jpg: heroJpg, alt: 'Maher lämnar över bilnyckeln till en leende kund i verkstaden' },
-  { webp: heroToolsWebp, jpg: heroToolsJpg, alt: 'En öppen verktygslåda med hylsor och spärrskaft i verkstaden' },
+  { webp: heroBirdsEyeWebp, jpg: heroBirdsEyeJpg, alt: 'Verkstaden sedd uppifrån med en bil på lyften och däckhyllor i bakgrunden' },
 ]
 export default function LandingPage() {
   const { openBooking, bookingModal } = useBookingModal()
