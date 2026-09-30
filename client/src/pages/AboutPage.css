@@ -258,7 +258,7 @@
 }
 
 .omoss-page__hours-closed {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .omoss-page__maps-link {
@@ -334,7 +334,7 @@
 }
 
 .omoss-page__quote-role {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--bb-color-text-inverse);
   font-weight: 500;
 }
 
@@ -397,7 +397,7 @@
 }
 
 .omoss-page__principles-intro {
-  color: var(--bb-color-text-muted);
+  color: var(--bb-color-text);
   font-size: 1.05rem;
   line-height: 1.55;
   margin: 0;
@@ -446,7 +446,7 @@
 }
 
 .omoss-page__principle-desc {
-  color: var(--bb-color-text-muted);
+  color: var(--bb-color-text);
   font-size: 0.92rem;
   line-height: 1.55;
   margin: 0;
