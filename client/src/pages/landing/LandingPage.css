@@ -48,7 +48,9 @@
 
 /* Services */
 .landing-v2__services-section { padding-bottom: 0; }
-.landing-v2__services-layout { padding-bottom: clamp(2.5rem, 4vw, 4rem); width: 100%; }
+.landing-v2__services-layout { padding-bottom: 0; width: 100%; }
+/* The contact section follows the services row directly: keep only a small gap. */
+.landing-v2 .bb-contact-section { padding-top: 1rem; }
 .landing-v2__service-graphic { padding: clamp(1.25rem, 2.2vw, 2rem) 0 0; }
 /* Five columns separated by hairlines: bare glyphs, no boxes, no band colour. */
 .landing-v2__service-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
