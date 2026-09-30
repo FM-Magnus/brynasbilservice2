@@ -17,7 +17,7 @@
   --bilservice-ink: var(--bb-color-text);
   --bilservice-muted: var(--bb-color-text-muted);
   --bilservice-teal-800: var(--bb-color-teal-800);
-  --bilservice-teal-700: var(--bb-color-teal-600);
+  --bilservice-teal-700: var(--bb-color-teal-700);
   --bilservice-teal-600: #10a6af;
   --bilservice-amber: var(--bb-color-amber-500);
   --bilservice-amber-soft: rgba(240, 149, 5, 0.18);
