@@ -164,7 +164,7 @@ export default function LandingPage() {
               {services.map(service => (
                 <li key={service.number}>
                   <Link to={service.to} className="landing-v2__service-point">
-                    <span className="landing-v2__service-point-icon">{service.icon}</span>
+                    <i className="bb-icon-bare landing-v2__service-point-icon">{service.icon}</i>
                     <h3>{service.title}</h3>
                     <p>{service.desc}</p>
                   </Link>

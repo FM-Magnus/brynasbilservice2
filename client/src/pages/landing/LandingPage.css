@@ -76,13 +76,16 @@
 .landing-v2__services-intro { color: rgba(255, 255, 255, .92); font-size: clamp(1.15rem, 2.1vw, 1.5rem); font-weight: 700; line-height: 1.35; margin: clamp(1rem, 1.8vw, 1.5rem) auto 0; padding-inline: clamp(1rem, 4vw, 4rem); text-align: center; width: 100%; }
 .landing-v2__services-intro a { color: var(--bb-color-teal-500); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .landing-v2__service-grid { column-gap: clamp(1.25rem, 3vw, 2.5rem); display: grid; grid-template-columns: repeat(5, auto); justify-content: center; list-style: none; margin: 0; padding: 0; position: relative; row-gap: .5rem; }
-.landing-v2__service-grid::before { background: linear-gradient(90deg, transparent, var(--bb-color-teal-500) 12%, var(--bb-color-teal-600) 88%, transparent); content: ''; height: 1px; left: 9%; opacity: .48; position: absolute; right: 9%; top: 3.5rem; }
+.landing-v2__service-grid::before { background: linear-gradient(90deg, transparent, var(--bb-color-teal-500) 12%, var(--bb-color-teal-600) 88%, transparent); content: ''; height: 1px; left: 9%; opacity: .48; position: absolute; right: 9%; top: 1.875rem; }
 .landing-v2__service-grid > li { min-width: 0; }
 .landing-v2__service-point { align-items: center; color: var(--landing-ink); display: flex; flex-direction: column; height: 100%; padding: 0 .4rem .6rem; text-align: center; transition: transform .2s ease; }
 .landing-v2__service-point:hover { transform: translateY(-3px); }
 .landing-v2__service-point:focus-visible { border-radius: var(--bb-radius-control); }
-.landing-v2__service-point-icon { align-items: center; background: var(--bb-color-surface); border: 1px solid rgba(7, 20, 22, .16); border-radius: var(--bb-radius-card); border-top: 2px solid var(--bb-color-teal-600); box-shadow: 0 8px 22px rgba(7, 20, 22, .07); color: var(--landing-ink); display: grid; height: 7rem; justify-items: center; position: relative; width: 7rem; z-index: 1; }
-.landing-v2__service-point-icon svg { height: 3.25rem; width: 3.25rem; }
+/* Bare icon (.bb-icon-bare, shared-elements.css) on the busy gradient band
+   below the hero — no card box, border or shadow; size is set here per the
+   shared pattern's own convention (size comes from the consumer). */
+.landing-v2__service-point-icon { height: 3.75rem; margin-bottom: .5rem; position: relative; width: 3.75rem; z-index: 1; }
+.landing-v2__service-point-icon svg { height: 2.3rem; width: 2.3rem; }
 .landing-v2__service-point h3 { color: var(--bb-color-text-inverse); font-size: clamp(.82rem, .93vw, .98rem); line-height: 1.25; margin: 1rem 0 .45rem; max-width: 13rem; }
 .landing-v2__service-point p { color: rgba(255, 255, 255, .72); font-size: .76rem; line-height: 1.5; margin: 0; max-width: 14rem; }
 
@@ -107,8 +110,8 @@
   .landing-v2__service-grid > li { grid-column: span 2; }
   .landing-v2__service-grid > li:nth-child(4) { grid-column: 2 / span 2; }
   .landing-v2__service-grid > li:nth-child(5) { grid-column: 4 / span 2; }
-  .landing-v2__service-point-icon { height: 5.5rem; width: 5.5rem; }
-  .landing-v2__service-point-icon svg { height: 2.55rem; width: 2.55rem; }
+  .landing-v2__service-point-icon { height: 3.1rem; width: 3.1rem; }
+  .landing-v2__service-point-icon svg { height: 1.9rem; width: 1.9rem; }
 }
 
 @media (max-width: 650px) {
@@ -124,8 +127,8 @@
   .landing-v2__service-grid > li:nth-child(5) { grid-column: auto; }
   .landing-v2__service-grid > li:nth-child(5) { grid-column: 1 / -1; }
   .landing-v2__service-point { padding-inline: .15rem; }
-  .landing-v2__service-point-icon { height: 4rem; width: 4rem; }
-  .landing-v2__service-point-icon svg { height: 1.9rem; width: 1.9rem; }
+  .landing-v2__service-point-icon { height: 2.25rem; width: 2.25rem; }
+  .landing-v2__service-point-icon svg { height: 1.4rem; width: 1.4rem; }
   .landing-v2__service-point h3 { font-size: .88rem; }
   .landing-v2__service-point p { font-size: .72rem; }
   .landing-v2__process-section { margin-bottom: 4.3rem; }
