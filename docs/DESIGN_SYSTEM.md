@@ -103,7 +103,8 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
    - Heading link `"Ta en titt inne hos oss – Galleriet"` sits tight above the row and links to `/galleri`; each photo deep-links to `/galleri?bild={slug}`.
    - Mobile: one photo at a time with the next peeking, native touch swipe/snap. From 640px: a short row of many photos, mouse-drag-to-scroll (`pointerType === 'mouse'` only — touch keeps native scrolling; pointer capture is claimed lazily, only once a drag crosses the threshold, or Chromium redirects the resulting click to the track div instead of the link underneath; CSS scroll-snap is suspended for the duration of the drag and restored on release, or it fights the per-frame `scrollLeft` write and the drag barely moves).
    - Desktop hover: macOS-Dock-style magnify (cosine falloff, capped scale/lift so it can't reach the fixed header when the strip is scrolled just below it) via direct `style.transform`/`zIndex` writes on refs, not React state, to stay off the render path. Respects `prefers-reduced-motion` and `pointer: fine`.
-   - Currently used on Landing, directly under the hero's `ContactFormCard`.
+   - Hover edge scrolling (2026-09-30, mouse only): hovering the outer fifth (`EDGE_ZONE_FRACTION` 0.2) at either end of the track scrolls it that way, speed ramping up quadratically to `EDGE_MAX_SPEED_PX_PER_S` (700 px/s) at the very edge; the middle only magnifies. Gated on `pointerType === 'mouse'` and `(pointer: fine)` without `prefers-reduced-motion`, so touch keeps native swipe and a tap never starts it; stops on leave, at either end, and while dragging; scroll-snap is suspended while it glides and restored after. Guarded by `tests/browser/gallery-dock.spec.ts`.
+   - Used on Landing (directly under the services row/contact area) and Om oss (directly above "Därför väljer kunder oss").
 
 ### 2a. `shared-elements.css` — canonical patterns below the token layer
 
