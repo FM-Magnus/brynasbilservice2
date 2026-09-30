@@ -143,10 +143,10 @@
 }
 
 /* Teal word-highlight inside an otherwise plain heading (e.g. "Service för
-   <span>hela bilen</span>"). Teal-500 on every surface; on the light page
-   background that is only 2.4:1 (audit C05, still open). Hero titles use the
-   lighter cyan below. */
-.bb-accent { color: var(--bb-color-teal-500); }
+   <span>hela bilen</span>"). Teal-700 on the light page background (4.8:1;
+   teal-500 was 2.4:1, audit C05). Sections with a dark surface set
+   teal-500 back in their own island; hero titles use the lighter cyan below. */
+.bb-accent { color: var(--bb-color-teal-700); }
 /* Hero titles sit on photos: teal-500 was 1.4-2.9:1 on some slides and widths, the focus cyan is 3:1 or better (audit C03). */
 h1 .bb-accent { color: var(--bb-color-focus); }
 

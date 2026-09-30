@@ -470,6 +470,7 @@
   overflow: hidden;
   position: relative;
 }
+.kontakt-page__focus .bb-accent { color: var(--bb-color-teal-500); }
 .kontakt-page__focus::before {
   background: none;
   content: '';

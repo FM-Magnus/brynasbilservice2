@@ -191,6 +191,7 @@
 /* ---------- Process anchor ---------- */
 .bilservice__process { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
 .bilservice__process-heading { margin: 0 0 0.9rem; color: #fff; }
+.bilservice__process-heading .bb-accent { color: var(--bb-color-teal-500); }
 .bilservice__process-text > p { margin: 0 0 1.5rem; max-width: 34ch; font: 400 0.95rem/1.6 var(--bb-font-body); }
 /* ---------- Interactive Symptom Selector ---------- */
 .bilservice__symptom-grid {
