@@ -73,6 +73,12 @@
 .public-header__services-trigger[aria-expanded='true'] svg { transform: rotate(180deg); }
 
 .public-header__services-menu {
+  /* Never taller than the screen below the header: on a short laptop the list
+     scrolls instead of running off the bottom of a fixed header. */
+  max-height: calc(100vh - var(--bb-header-height) - 1.5rem);
+  max-height: calc(100svh - var(--bb-header-height) - 1.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: #0d1214;
   border: 1px solid rgba(126, 215, 221, 0.18);
   border-radius: var(--bb-radius-menu);
@@ -166,6 +172,12 @@
     display: grid;
     gap: 0.25rem;
     left: 1rem;
+    /* Scrolls inside itself on a short screen (page scroll is locked while open),
+       so Ring oss and Boka tid stay reachable. */
+    max-height: calc(100vh - var(--bb-header-height) - 1.5rem);
+    max-height: calc(100svh - var(--bb-header-height) - 1.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 0.65rem;
     position: absolute;
     right: 1rem;
