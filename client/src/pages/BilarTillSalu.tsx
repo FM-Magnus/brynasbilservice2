@@ -353,7 +353,7 @@ export default function BilarTillSalu() {
               <img src={heroJpg} alt="" width={1920} height={1278} />
             </picture>
           </div>
-          <div className="bb-hero__shade" aria-hidden="true" />
+          <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
 
           <div className="bb-wrap bb-hero__content">
             <div className="bilartillsalu-page__hero-grid">

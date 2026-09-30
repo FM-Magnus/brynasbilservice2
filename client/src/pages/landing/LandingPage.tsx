@@ -51,6 +51,7 @@ const services = [
   { number: '03', title: 'AC-service', desc: 'Felsökning, provtryckning och påfyllning för god kupékomfort.', to: '/ac-service', icon: 'ac' },
   { number: '04', title: 'Felsökning & diagnostik', desc: 'Felkodsläsning och analys av modern fordonselektronik.', to: '/felsokning', icon: 'felsokning' },
   { number: '05', title: 'Reparationer & större arbeten', desc: 'Större arbeten som motor- och topplocksbyten.', to: '/service-reparationer', icon: 'reparationer' },
+  { number: '06', title: 'Bärgning', desc: 'Lokal bärgningshjälp och säker biltransport direkt till vår verkstad.', to: '/bargning', icon: 'bargning' },
 ]
 const process = [['01', 'Bokning och inlämning', 'Du bokar en tid som passar din bil.'], ['02', 'Initial kontroll', 'Vi gör en första bedömning av behovet.'], ['03', 'Service enligt checklista', 'Arbetet följer den servicenivå som är aktuell.'], ['04', 'Godkännande vid extraarbete', 'Vi kontaktar dig innan vi går vidare.'], ['05', 'Slutkontroll och rapport', 'Du får en genomgång när bilen är klar.']]
 
@@ -80,7 +81,7 @@ export default function LandingPage() {
             </picture>
           ))}
         </div>
-        <div className="bb-hero__shade" aria-hidden="true" />
+        <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
         <PublicHeader onBookingClick={openBooking} variant="overlay" />
         <div className="bb-wrap bb-hero__content">
           <div className="bb-hero__copy">
@@ -109,8 +110,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <TrustStrip items={trustItems} />
-
       <section className="landing-v2__services-section" aria-label="Våra tjänster">
         <div className="landing-v2__services-layout">
           <div className="landing-v2__service-graphic">
@@ -126,11 +125,12 @@ export default function LandingPage() {
               ))}
             </ol>
           </div>
-          <p className="landing-v2__services-intro">
-            Från rutinservice till stora reparationer – vi fixar alla bilmärken.
-          </p>
         </div>
       </section>
+
+      <ContactFormCard variant="full-section" />
+
+      <TrustStrip items={trustItems} />
 
       <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
         <div className="bb-wrap landing-v2__why-content">
@@ -181,8 +181,6 @@ export default function LandingPage() {
           </ol>
         </div>
       </section>
-
-      <ContactFormCard variant="full-section" />
 
       <PublicFooter onBookingClick={openBooking} />
       {bookingModal}

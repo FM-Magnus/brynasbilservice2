@@ -28,7 +28,7 @@
 /* Shorter than the canonical .bb-hero: the stock sits directly below and should
    start above the fold on desktop. Top padding comes from --bb-hero-padding-top,
    which clears the overlay header at every width. */
-.bilartillsalu-page__hero { min-height: clamp(560px, 46vw, 660px); }
+.bilartillsalu-page__hero { --bb-shade-strength: 0.3; min-height: clamp(560px, 46vw, 660px); }
 
 .bilartillsalu-page__hero-copy { max-width: 600px; }
 

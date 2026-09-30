@@ -53,7 +53,7 @@
 /* Slideshow: shared .bb-hero__slide; this page crops from the top. */
 .omoss-page__hero .bb-hero__slide img { object-position: center top; }
 
-.omoss-page__hero-shade { z-index: 1; }
+.omoss-page__hero-shade { --bb-shade-strength: 0.5; z-index: 1; }
 /* The shared .bb-shade-copy-left gradient, plus a 30% black edge on the left
    (Magnus 2026-09-27) on top of it at every width. */
 .omoss-page__hero-shade::before {

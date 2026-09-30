@@ -42,20 +42,8 @@
   position: relative;
 }
 
-.bargning-page__hero::before {
-  background: linear-gradient(
-    90deg,
-    rgba(7, 20, 22, 0.48) 0%,
-    rgba(7, 20, 22, 0.45) 38%,
-    rgba(7, 20, 22, 0.36) 65%,
-    rgba(7, 20, 22, 0.225) 100%
-  );
-  content: '';
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-}
+/* Shared hero shade layer (see .bb-shade-copy-left); sits above the media, under the copy. */
+.bargning-page__hero .bb-hero__shade { --bb-shade-strength: 0.6; z-index: 1; }
 
 /* Hero slideshow: shared .bb-hero__slide in this page's media layer, under the shade; crops per photo. */
 .bargning-page__hero-media {

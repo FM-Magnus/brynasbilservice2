@@ -551,19 +551,33 @@
 @media (prefers-reduced-motion: reduce) {
   .bb-hero__slide { transition: none; }
 }
-/* Hero shade that darkens toward the copy: from the left on desktop, a
-   vertical band behind the stacked text on tablets and phones. Add to a hero's
-   shade layer (.bb-hero__shade or a page's own); the compound selector
-   out-ranks .bb-hero__shade's own `background: none`. Used by Om oss and
-   Kontakt. */
+/* Hero shade anchored to the text corner (bottom-left, where every hero's copy
+   sits): strongest right behind the text, fading to nothing toward the photo's
+   subject. Phones use a vertical gradient that stays clear across the top so the
+   phone photo's focal area is untouched. Strength is one number per hero,
+   --bb-shade-strength (design-tokens.css); set it in the page's island. Add the
+   class to a hero's shade layer (.bb-hero__shade or a page's own); the compound
+   selector out-ranks .bb-hero__shade's own `background: none`. */
 .bb-shade-copy-left,
 .bb-hero__shade.bb-shade-copy-left {
-  background: linear-gradient(90deg, rgba(8, 22, 25, 0.82) 0%, rgba(8, 22, 25, 0.62) 30%, rgba(8, 22, 25, 0.22) 55%, rgba(8, 22, 25, 0) 72%);
+  background: radial-gradient(
+    ellipse 95% 90% at 0% 100%,
+    rgba(8, 22, 25, var(--bb-shade-strength)) 0%,
+    rgba(8, 22, 25, calc(var(--bb-shade-strength) * 0.72)) 38%,
+    rgba(8, 22, 25, calc(var(--bb-shade-strength) * 0.28)) 68%,
+    rgba(8, 22, 25, 0) 100%
+  );
 }
-@media (max-width: 768px) {
+@media (max-width: 650px) {
   .bb-shade-copy-left,
   .bb-hero__shade.bb-shade-copy-left {
-    background: linear-gradient(180deg, rgba(8, 22, 25, 0.35) 0%, rgba(8, 22, 25, 0.72) 30%, rgba(8, 22, 25, 0.72) 65%, rgba(8, 22, 25, 0.4) 100%);
+    background: linear-gradient(
+      0deg,
+      rgba(8, 22, 25, var(--bb-shade-strength)) 0%,
+      rgba(8, 22, 25, calc(var(--bb-shade-strength) * 0.85)) 35%,
+      rgba(8, 22, 25, calc(var(--bb-shade-strength) * 0.3)) 60%,
+      rgba(8, 22, 25, 0) 76%
+    );
   }
 }
 .bb-hero__shade {

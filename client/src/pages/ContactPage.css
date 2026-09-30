@@ -544,7 +544,7 @@
 
 
 /* Shared matched hero height (design-tokens.css). */
-.kontakt-page__hero { min-height: var(--bb-hero-matched-height); }
+.kontakt-page__hero { --bb-shade-strength: 0.45; min-height: var(--bb-hero-matched-height); }
 
 /* Hero slideshow uses the shared .bb-hero__slide; crops per photo below.
    The beanie photo shifts right on narrow screens so Maher stays in frame. */

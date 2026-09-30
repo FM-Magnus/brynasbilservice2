@@ -116,7 +116,7 @@ export default function FelsokningPage() {
               <img src={heroJpg} alt="" />
             </picture>
           </div>
-          <div className="bb-hero__shade" aria-hidden="true" />
+          <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
           <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">

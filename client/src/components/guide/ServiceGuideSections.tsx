@@ -90,6 +90,7 @@ export function GuideHero({ id, eyebrow, title, lead, image, trustBadges, onBook
             <img src={image.jpg} alt={image.alt} loading={image.lazy ? 'lazy' : undefined} />
           </picture>
         </div>
+        <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
         <div className="bb-wrap service-guide__container">
           <div className="service-guide__hero-inner">
             <div>

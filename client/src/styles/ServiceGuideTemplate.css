@@ -162,20 +162,9 @@
 .service-guide__hero-bg--pos-left img {
   object-position: center left;
 }
-.service-guide__hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(7, 20, 22, 0.96) 0%,
-    rgba(7, 20, 22, 0.90) 38%,
-    rgba(7, 20, 22, 0.72) 65%,
-    rgba(7, 20, 22, 0.45) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
+/* Shared hero shade layer (see .bb-shade-copy-left), above the photo and under the copy. */
+.service-guide__hero { --bb-shade-strength: 0.68; }
+.service-guide__hero .bb-hero__shade { z-index: 1; }
 .service-guide__hero-inner {
   position: relative;
   z-index: 2;

@@ -93,6 +93,7 @@ export default function BargningPage() {
               </picture>
             ))}
           </div>
+          <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
           <div className="bb-wrap">
             <div className="bargning-page__hero-content">
               <p className="bb-eyebrow bb-eyebrow--dark bargning-page__hero-eyebrow">
