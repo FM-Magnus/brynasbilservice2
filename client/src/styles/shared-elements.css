@@ -87,7 +87,8 @@
   background: linear-gradient(135deg, #f09505, #d48202);
   border-color: rgba(255, 214, 158, 0.66);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.18);
-  color: var(--bb-color-text-inverse);
+  /* Dark label: white on this amber is only 2.3-3.0:1. Ink is 8.0/6.2:1 at rest, 9.3/4.6:1 on hover. */
+  color: var(--bb-color-ink-950);
 }
 .bb-btn--ember-solid:hover { background: linear-gradient(135deg, #fca311, #b56c01); transform: translateY(-2px); }
 

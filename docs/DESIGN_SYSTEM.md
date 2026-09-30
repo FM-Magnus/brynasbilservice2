@@ -114,7 +114,7 @@ The site is framed and anchored by five standalone, self-contained Level 0 Publi
 - **`.bb-btn` + three variants** — slightly rounded button, every state (hover, `:focus-visible`) defined once per variant:
   - **`.bb-btn--teal`** ("teal_button") — dark surfaces only. Transparent-to-teal horizontal gradient, white border; hover fills in to a solid two-tone gradient.
   - **`.bb-btn--ember`** ("ember_button") — dark surfaces only. Transparent-to-amber horizontal gradient (faint), amber border; hover intensifies the fill.
-  - **`.bb-btn--ember-solid`** — light surfaces only (warm-white page, white card). Solid two-tone diagonal amber gradient, neutral drop shadow, slight inset bevel — a different treatment from `--ember`, not a lighter version of it, since there's no dark backdrop for a transparent gradient to blend into.
+  - **`.bb-btn--ember-solid`** — light surfaces only (warm-white page, white card). Solid two-tone diagonal amber gradient, neutral drop shadow, slight inset bevel — a different treatment from `--ember`, not a lighter version of it, since there's no dark backdrop for a transparent gradient to blend into. The label is dark (`--bb-color-ink-950`, 8.0/6.2:1 at rest); white on this amber is only 2.3-3.0:1 (design audit C01, 2026-09-30).
 - **`.bb-eyebrow`, `.bb-eyebrow--dark`** — bakes in the dark-surface rule: dash stays amber, text turns white. `--dark` is for dark surfaces only, never on the light page background.
 - **`.bb-h1`, `.bb-h2`** — Archivo 800, **mixed case** (not uppercase — Landing's rule, which every page now follows; Biltjänster was the last to change, 2026-09-24).
 - **`.bb-accent`** — teal inline word-highlight inside a heading; same color on light or dark surfaces.
