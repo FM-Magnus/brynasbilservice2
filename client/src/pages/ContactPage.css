@@ -546,6 +546,17 @@
 
 /* Shared matched hero height (design-tokens.css). */
 .kontakt-page__hero { --bb-shade-strength: 0.45; min-height: var(--bb-hero-matched-height); }
+/* Desktop only: the eyebrow sits over bright bokeh where the corner shade is weakest
+   (3.78:1 at 1440, audit C24), so a page-local left-edge scrim is layered on top. Tablet and
+   phone already use the vertical shade. */
+@media (min-width: 1121px) {
+  .kontakt-page__hero .bb-hero__shade::after {
+    background: linear-gradient(90deg, rgba(8, 22, 25, 0.35) 0%, rgba(8, 22, 25, 0) 52%);
+    content: '';
+    inset: 0;
+    position: absolute;
+  }
+}
 
 /* Hero slideshow uses the shared .bb-hero__slide; crops per photo below.
    The beanie photo shifts right on narrow screens so Maher stays in frame. */
