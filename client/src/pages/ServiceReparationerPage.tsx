@@ -178,7 +178,7 @@ export default function ServiceReparationerPage() {
             <div className="bilservice__bridge">
               <h2 className="bb-h2" id="bilservice-more-title">Mer än bara service</h2>
               <p className="bb-lead">
-                Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – <Link to="/ac-service">AC-service</Link>, <Link to="/felsokning">diagnostik när en varningslampa lyser</Link>, och <Link to="/dackservice">däckhotell</Link> om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med <Link to="/bilar-till-salu">försäljning av begagnade bilar</Link> och <Link to="/bargning">transport av fordon</Link>.
+                Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – <Link to="/ac-service">AC-service</Link>, <Link to="/felsokning">diagnostik när en varningslampa lyser</Link>, <Link to="/reparationer-storre-arbeten">större reparationer</Link> när felet är mer än en service, och <Link to="/dackservice">däckhotell</Link> om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med <Link to="/bilar-till-salu">försäljning av begagnade bilar</Link> och <Link to="/bargning">transport av fordon</Link>.
               </p>
             </div>
           </div>

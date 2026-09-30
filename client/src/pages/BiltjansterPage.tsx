@@ -29,6 +29,8 @@ import exhaustThumbJpg from '../assets/images/services/exhaust/exhaust-system-co
 import exhaustThumbWebp from '../assets/images/services/exhaust/exhaust-system-components-underbody.webp'
 import suspensionThumbJpg from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.jpg'
 import suspensionThumbWebp from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.webp'
+import repairThumbJpg from '../assets/images/services/general/service-performance-diagnostics.jpg'
+import repairThumbWebp from '../assets/images/services/general/service-performance-diagnostics.webp'
 import { BUSINESS } from '../data/business'
 import './BiltjansterPage.css'
 
@@ -52,6 +54,15 @@ const serviceGuides: ServiceGuide[] = [
     imageLabel: 'Bilservice i verkstaden',
     imageJpg: bilserviceThumbJpg,
     imageWebp: bilserviceThumbWebp,
+  },
+  {
+    id: 'reparationer',
+    title: 'Reparationer & större arbeten',
+    summary: 'Motor, koppling, avgassystem och andra större jobb, med kostnadsförslag innan vi börjar.',
+    href: '/reparationer-storre-arbeten',
+    imageLabel: 'Reparation i verkstaden',
+    imageJpg: repairThumbJpg,
+    imageWebp: repairThumbWebp,
   },
   {
     id: 'oljebyte',

@@ -13,60 +13,66 @@ Regelbunden service samlar rutinkontroller som hjälper till att bevara bilens f
 
 LÄS MER
 02
+Reparationer & större arbeten
+
+Motor, koppling, avgassystem och andra större jobb, med kostnadsförslag innan vi börjar.
+
+LÄS MER
+03
 Oljebyte
 
 Ny motorolja och ett nytt filter hjälper motorns rörliga delar att smörjas och skyddas mot onödigt slitage.
 
 LÄS MER
-03
+04
 Kamrem
 
 Kamremmen håller motorns rörliga delar i rätt takt och byts enligt rätt intervall för din bil.
 
 LÄS MER
-04
+05
 Koppling
 
 Kopplingen överför kraften mellan motor och växellåda och är en slitdel som kan behöva bytas.
 
 LÄS MER
-05
+06
 Bromssystem
 
 Bromsarna är avgörande för säkerheten, och tidiga tecken kan hjälpa dig att få rätt åtgärd i tid.
 
 LÄS MER
-06
+07
 Bilbatteri
 
 Bilbatteriet ger startkraft och försörjer elsystemet – rätt batterityp behöver testas och anpassas till bilen.
 
 LÄS MER
-07
+08
 Stötdämpare & fjädrar
 
 Stötdämpare och fjädrar hjälper hjulen att hålla kontakt med vägen för stabil och kontrollerad körning.
 
 LÄS MER
-08
+09
 Hjullagerbyte
 
 Ett hjullager ska ge mjuk och friktionsfri gång; brummande ljud eller vibrationer kan vara tecken på slitage.
 
 LÄS MER
-09
+10
 Avgassystem
 
 Avgassystemet dämpar motorljud och samverkar med bilens avgasrening och sensorer.
 
 LÄS MER
-10
+11
 Drivaxel & drivknutar
 
 Drivaxlar och drivknutar för motorkraften till hjulen och behöver fungera utan glapp, läckage eller vibrationer.
 
 LÄS MER
-11
+12
 Styrning & kulleder
 
 Styrning och kulleder hjälper bilen att svara stabilt på ratten och hålla rätt väghållning.
@@ -139,6 +145,7 @@ OM OSS
 BILTJÄNSTER
 VÅRA TJÄNSTER
 BILSERVICE
+REPARATIONER & STÖRRE ARBETEN
 OLJEBYTE
 KAMREM
 KOPPLING

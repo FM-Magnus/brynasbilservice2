@@ -27,6 +27,7 @@ const BilarTillSalu = lazy(() => import('./pages/BilarTillSalu.tsx'))
 const ServiceReparationerPage = lazy(() => import('./pages/ServiceReparationerPage.tsx'))
 const BiltjansterPage = lazy(() => import('./pages/BiltjansterPage.tsx'))
 const FelsokningPage = lazy(() => import('./pages/FelsokningPage.tsx'))
+const ReparationerPage = lazy(() => import('./pages/ReparationerPage.tsx'))
 const OljebytePage = lazy(() => import('./pages/OljebytePage.tsx'))
 const KamremPage = lazy(() => import('./pages/KamremPage.tsx'))
 const KopplingPage = lazy(() => import('./pages/KopplingPage.tsx'))
@@ -83,6 +84,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/service-reparationer" element={<ServiceReparationerPage />} />
               <Route path="/biltjanster" element={<BiltjansterPage />} />
               <Route path="/felsokning" element={<FelsokningPage />} />
+              <Route path="/reparationer-storre-arbeten" element={<ReparationerPage />} />
               <Route path="/oljebyte" element={<OljebytePage />} />
               <Route path="/kamrem" element={<KamremPage />} />
               <Route path="/koppling" element={<KopplingPage />} />

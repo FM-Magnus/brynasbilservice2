@@ -36,6 +36,10 @@ export const PAGE_META: Record<string, PageMeta> = {
     title: 'Bilservice & reparationer i Gävle – Brynäs Bilservice',
     description: 'Bas-, mellan- och stor service samt reparationer för alla bilmärken i Gävle. Tydligt pris innan vi börjar och inget extraarbete utan ditt godkännande.',
   },
+  '/reparationer-storre-arbeten': {
+    title: 'Reparationer & större arbeten i Gävle – Brynäs Bilservice',
+    description: 'Motor, koppling, avgassystem och andra större reparationer för alla bilmärken i Gävle. Kostnadsförslag innan vi börjar och inget extraarbete utan ditt OK.',
+  },
   '/felsokning': {
     title: 'Felsökning & diagnostik i Gävle – Brynäs Bilservice',
     description: 'Lyser en varningslampa eller låter bilen konstigt? Vi läser av felkoder och mäter oss fram till den verkliga orsaken, för alla märken och modeller.',

@@ -686,9 +686,12 @@
 /* Shared matched hero height (design-tokens.css). */
 .bilservice > #felsokning,
 .bilservice > #dackservice,
+.bilservice > #reparationer,
 .bilservice > .bilservice__ac-hero { min-height: var(--bb-hero-matched-height); }
 
 /* Hero shade strength for the Bilservice family; Felsökning's photo needs more (it was
    the heaviest hero overlay, cut down 2026-09-30). */
 .bilservice .bb-hero { --bb-shade-strength: 0.3; }
 .bilservice > #felsokning { --bb-shade-strength: 0.5; }
+/* Placeholder hero photo is bright and busy behind the text; revisit when the real photo arrives. */
+.bilservice > #reparationer { --bb-shade-strength: 0.6; }

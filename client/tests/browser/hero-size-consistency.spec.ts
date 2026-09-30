@@ -5,6 +5,7 @@ const routes = [
   ['Om oss', '/om-oss', '.omoss-page__hero'],
   ['Felsökning', '/felsokning', '#felsokning'],
   ['Däckservice', '/dackservice', '#dackservice'],
+  ['Reparationer', '/reparationer-storre-arbeten', '#reparationer'],
   ['AC-service', '/ac-service', '.bilservice__ac-hero'],
   ['Bärgning', '/bargning', '.bargning-page__hero'],
   ['Kontakt', '/kontakt', '.kontakt-page__hero'],

@@ -50,7 +50,7 @@ const services = [
   { number: '02', title: 'Däckservice', desc: 'Däckskifte, balansering, hjulinställning och däckhotell.', to: '/dackservice', icon: 'dackservice' },
   { number: '03', title: 'AC-service', desc: 'Felsökning, provtryckning och påfyllning för god kupékomfort.', to: '/ac-service', icon: 'ac' },
   { number: '04', title: 'Felsökning & diagnostik', desc: 'Felkodsläsning och analys av modern fordonselektronik.', to: '/felsokning', icon: 'felsokning' },
-  { number: '05', title: 'Reparationer & större arbeten', desc: 'Större arbeten som motor- och topplocksbyten.', to: '/service-reparationer', icon: 'reparationer' },
+  { number: '05', title: 'Reparationer & större arbeten', desc: 'Större arbeten som motor- och topplocksbyten.', to: '/reparationer-storre-arbeten', icon: 'reparationer' },
   { number: '06', title: 'Bärgning', desc: 'Lokal bärgningshjälp och säker biltransport direkt till vår verkstad.', to: '/bargning', icon: 'bargning' },
 ]
 const process = [['01', 'Bokning och inlämning', 'Du bokar en tid som passar din bil.'], ['02', 'Initial kontroll', 'Vi gör en första bedömning av behovet.'], ['03', 'Service enligt checklista', 'Arbetet följer den servicenivå som är aktuell.'], ['04', 'Godkännande vid extraarbete', 'Vi kontaktar dig innan vi går vidare.'], ['05', 'Slutkontroll och rapport', 'Du får en genomgång när bilen är klar.']]

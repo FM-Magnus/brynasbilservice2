@@ -81,7 +81,7 @@ Kontroll av växellåda och koppling
 Kontroll av bilens elektroniska system, inklusive diagnostiska tester
 Mer än bara service
 
-Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – AC-service, diagnostik när en varningslampa lyser, och däckhotell om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med försäljning av begagnade bilar och transport av fordon.
+Utöver ordinarie bilservice hjälper vi dig med det som brukar dyka upp runt omkring – AC-service, diagnostik när en varningslampa lyser, större reparationer när felet är mer än en service, och däckhotell om du vill slippa släpa sommar- och vinterdäck mellan garaget och verkstaden själv. Ska bilen bytas ut istället för att servas? Vi hjälper även till med försäljning av begagnade bilar och transport av fordon.
 
 Så går det till
 hos oss
@@ -182,6 +182,7 @@ OM OSS
 BILTJÄNSTER
 VÅRA TJÄNSTER
 BILSERVICE
+REPARATIONER & STÖRRE ARBETEN
 OLJEBYTE
 KAMREM
 KOPPLING

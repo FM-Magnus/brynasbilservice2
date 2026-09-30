@@ -10,6 +10,7 @@ export type PublicNavigationItem = PublicNavigationChild & {
 export const publicServiceNavigation: PublicNavigationChild[] = [
   { label: 'Våra tjänster', to: '/biltjanster' },
   { label: 'Bilservice', to: '/service-reparationer#bilservice' },
+  { label: 'Reparationer & större arbeten', to: '/reparationer-storre-arbeten' },
   { label: 'Oljebyte', to: '/oljebyte' },
   { label: 'Kamrem', to: '/kamrem' },
   { label: 'Koppling', to: '/koppling' },
