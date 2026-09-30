@@ -177,11 +177,11 @@ export default function BiltjansterPage() {
               Här hittar du fördjupad information om mekaniska reparationer, vanliga symptom och riktad felsökning – ett samlat ställe för hela vårt tjänsteutbud.
             </p>
             <div className="biltjanster-hub__hero-actions">
-              <button type="button" onClick={openBooking} className="biltjanster-hub__btn biltjanster-hub__btn--primary">
+              <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
                 <span>Boka tid</span>
               </button>
-              <a href={BUSINESS.phone.href} className="biltjanster-hub__btn biltjanster-hub__btn--outline">
-                <PhoneIcon className="biltjanster-hub__btn-icon" />
+              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                <PhoneIcon aria-hidden="true" />
                 <span>Ring {BUSINESS.phone.display}</span>
               </a>
             </div>
@@ -248,11 +248,11 @@ export default function BiltjansterPage() {
               </p>
             </div>
             <div className="biltjanster-hub__cta-actions">
-              <button type="button" onClick={openBooking} className="biltjanster-hub__btn biltjanster-hub__btn--primary">
+              <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
                 <span>Boka tid</span>
               </button>
-              <a href={BUSINESS.phone.href} className="biltjanster-hub__btn biltjanster-hub__btn--outline">
-                <PhoneIcon className="biltjanster-hub__btn-icon" />
+              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                <PhoneIcon aria-hidden="true" />
                 <span>Ring: {BUSINESS.phone.display}</span>
               </a>
             </div>

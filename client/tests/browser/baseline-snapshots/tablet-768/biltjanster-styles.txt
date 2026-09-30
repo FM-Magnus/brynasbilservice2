@@ -49,10 +49,10 @@ h1
   background-color: rgba(0, 0, 0, 0)
   border-top-width: 1px
   border-top-style: solid
-  border-top-color: rgb(240, 149, 5)
+  border-top-color: rgba(255, 255, 255, 0.7)
   border-top-left-radius: 6px
-  box-shadow: none
-  display: inline-flex
+  box-shadow: rgba(0, 166, 180, 0.26) 0px 10px 20px 0px
+  display: flex
   min-height: 52px
 .bb-footer
   font-family: Manrope, Arial, sans-serif
