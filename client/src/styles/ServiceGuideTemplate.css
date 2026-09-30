@@ -296,7 +296,6 @@
    render in the muted grey/ink colors meant for the plain white cards. */
 .service-guide__symptom-row.service-guide__symptom-row--featured h3,
 .service-guide__symptom-row.service-guide__symptom-row--featured p { color: var(--bb-color-text-inverse); }
-.service-guide__symptom-row.service-guide__symptom-row--featured p { color: rgba(255, 255, 255, 0.88); }
 .service-guide__symptom-icon {
   flex: 0 0 auto;
   display: flex;
@@ -315,7 +314,6 @@
 }
 .service-guide__symptom-row.service-guide__symptom-row--urgent h3,
 .service-guide__symptom-row.service-guide__symptom-row--urgent p { color: var(--bb-color-text-inverse); }
-.service-guide__symptom-row.service-guide__symptom-row--urgent p { color: rgba(255, 255, 255, 0.9); }
 .service-guide__symptom-row--urgent .service-guide__symptom-icon { background: rgba(255, 255, 255, 0.2); color: var(--bb-color-text-inverse); }
 .service-guide__symptom-icon svg { width: 18px; height: 18px; }
 .service-guide__symptom-row h3 { margin: 0 0 0.25rem; color: var(--bb-color-ink-950); font-family: var(--bb-font-display); font-size: 0.98rem; font-weight: 800; line-height: 1.25; }

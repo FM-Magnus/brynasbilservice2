@@ -32,8 +32,8 @@ Located in [`client/src/styles/design-tokens.css`](../client/src/styles/design-t
 | `--bb-color-text` | `#122225` | Primary body text on light surfaces |
 | `--bb-color-text-muted`| `#5e6c70` | Secondary / supporting text on light surfaces |
 | `--bb-color-text-inverse` | `#ffffff` | Text on dark surfaces. Use this, not a bare `#fff` (11 bare `#fff` in `ServiceGuideTemplate.css` were converted 2026-09-22) |
-| `--bb-color-featured-gradient-start` / `-end` | `#0b848e` / `#066973` | Semantic, not a ramp step: the Guide family's "featured" symptom row (teal gradient). Added 2026-09-22 — was hardcoded hex that `check:css` couldn't see |
-| `--bb-color-urgent-gradient-start` / `-end` | `#e2711d` / `#c25a10` | Semantic: the Guide family's "urgent" symptom row (ember gradient). Added 2026-09-22, same reason |
+| `--bb-color-featured-gradient-start` / `-end` | `var(--bb-color-teal-700)` (`#047784`) / `#066973` | Semantic, not a ramp step: the Guide family's "featured" symptom row (teal gradient). Added 2026-09-22 — was hardcoded hex that `check:css` couldn't see. Start deepened 2026-09-30 (audit C02) so white text is 5.3:1 or better |
+| `--bb-color-urgent-gradient-start` / `-end` | `#b5500d` / `#9a4409` | Semantic: the Guide family's "urgent" symptom row (ember gradient). Added 2026-09-22, same reason. Deepened 2026-09-30 from `#e2711d` / `#c25a10` (white text was 2.8-4.4:1; now 5.1:1 or better; audit C02) |
 
 ### Typography & Hierarchy
 
