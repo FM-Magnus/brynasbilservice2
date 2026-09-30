@@ -212,3 +212,8 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Phones: 44px minimum touch target (audit C10). */
+@media (max-width: 650px) {
+  .biltjanster-hub__guide-cta { min-height: 44px; }
+}

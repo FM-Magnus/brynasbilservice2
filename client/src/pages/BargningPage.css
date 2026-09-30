@@ -894,3 +894,9 @@
   .bargning-page__hero { padding-bottom: var(--bb-hero-padding-bottom-mobile); }
   .bargning-page__hero-lead { display: none; }
 }
+
+/* Phones: 44px minimum touch target (audit C10). */
+@media (max-width: 650px) {
+  .bargning-page__fact-link { align-items: center; display: inline-flex; min-height: 44px; }
+  .bargning-page__showcase-book-link { min-height: 44px; }
+}

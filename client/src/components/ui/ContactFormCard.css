@@ -328,3 +328,8 @@
     min-height: 105px;
   }
 }
+
+/* Phones: 44px minimum touch target (audit C10). */
+@media (max-width: 650px) {
+  .bb-contact-section__list a { min-height: 44px; }
+}

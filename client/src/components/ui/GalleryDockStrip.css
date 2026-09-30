@@ -89,3 +89,8 @@
   .bb-gallery-dock__track { cursor: auto; }
   .bb-gallery-dock__item { transition: none; }
 }
+
+/* Phones: 44px minimum touch target (audit C10). */
+@media (max-width: 650px) {
+  .bb-gallery-dock__heading { align-items: center; display: flex; min-height: 44px; }
+}

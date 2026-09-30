@@ -561,3 +561,10 @@
   .kontakt-page__hero .kontakt-page__hero-slide--beanie img { object-position: 55% 0%; }
   .kontakt-page__hero .kontakt-page__hero-slide--car img { object-position: 55% 15%; }
 }
+
+/* Phones: 44px minimum touch target (audit C10). */
+@media (max-width: 650px) {
+  .kontakt-page__detail-link,
+  .kontakt-page__find-link,
+  .kontakt-page__map-link { align-items: center; display: inline-flex; min-height: 44px; }
+}

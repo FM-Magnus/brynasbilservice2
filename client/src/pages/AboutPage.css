@@ -614,3 +614,8 @@
 
 /* Shared matched hero height (design-tokens.css). */
 .omoss-page__hero { min-height: var(--bb-hero-matched-height); }
+
+/* Phones: 44px minimum touch target (audit C10). */
+@media (max-width: 650px) {
+  .omoss-page__maps-link { min-height: 44px; }
+}

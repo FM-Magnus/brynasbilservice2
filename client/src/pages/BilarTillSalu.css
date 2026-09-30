@@ -471,3 +471,8 @@
   .bilartillsalu-page__hero-feature:hover img { transform: none; }
   .bilartillsalu-page__btn-outline:hover { transform: none; }
 }
+
+/* Phones: 44px minimum touch target (audit C10). */
+@media (max-width: 650px) {
+  .bilartillsalu-page__hero-meta a { align-items: center; display: inline-flex; min-height: 44px; }
+}
