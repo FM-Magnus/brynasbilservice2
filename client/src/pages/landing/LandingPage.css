@@ -32,7 +32,7 @@
 .landing-v2 .bb-hero { min-height: var(--bb-hero-matched-height); }
 
 /* Both slides are bright garage scenes; the photo only has a thin dark edge of its own. */
-.landing-v2 .bb-hero { --bb-shade-strength: 0.5; }
+.landing-v2 .bb-hero { --bb-shade-strength: 0.6; }
 
 /* Photo-backed reassurance */
 .landing-v2__process-section { color: #fff; isolation: isolate; overflow: hidden; position: relative; }

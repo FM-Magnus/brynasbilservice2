@@ -584,6 +584,23 @@ h1 .bb-accent { color: var(--bb-color-focus); }
     );
   }
 }
+/* Tablet (the 1120px breakpoint that already sets the matched hero height): the copy
+   sits half-way up the taller hero, out of reach of the corner-anchored radial shade,
+   so use a bottom-anchored vertical one that reaches higher than the phone shade
+   (audit C04: hero text was 2.5-4.0:1 at 768px on Landing, Bärgning, Om oss and
+   Bilar till salu). */
+@media (min-width: 651px) and (max-width: 1120px) {
+  .bb-shade-copy-left,
+  .bb-hero__shade.bb-shade-copy-left {
+    background: linear-gradient(
+      0deg,
+      rgba(8, 22, 25, var(--bb-shade-strength)) 0%,
+      rgba(8, 22, 25, calc(var(--bb-shade-strength) * 0.85)) 45%,
+      rgba(8, 22, 25, calc(var(--bb-shade-strength) * 0.5)) 70%,
+      rgba(8, 22, 25, 0) 92%
+    );
+  }
+}
 .bb-hero__shade {
   background: none;
   pointer-events: none;
