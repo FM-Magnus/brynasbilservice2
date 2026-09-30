@@ -23,8 +23,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
-import heroJpg from '../assets/images/services/clutch/clutch-under-vehicle-workshop.jpg'
-import heroWebp from '../assets/images/services/clutch/clutch-under-vehicle-workshop.webp'
+import heroJpg from '../assets/images/services/clutch/clutch-kit-hero.jpg'
+import heroWebp from '../assets/images/services/clutch/clutch-kit-hero.webp'
 import componentsJpg from '../assets/images/services/clutch/clutch-components-on-bench.jpg'
 import componentsWebp from '../assets/images/services/clutch/clutch-components-on-bench.webp'
 import symptomsJpg from '../assets/images/services/clutch/mechanic-under-vehicle-diagnosis.jpg'
@@ -92,7 +92,7 @@ export default function KopplingPage() {
           eyebrow="Kraftöverföring & drivlina"
           title={<>Koppling <span className="bb-accent">när</span><br />kraften behöver<br />nå hjulen</>}
           lead="Kopplingen överför kraften mellan motorn och växellådan och gör att du kan växla utan att motorn stannar eller rycker till. Den är en slitdel, och att den till slut behöver bytas är en förväntad del av bilens underhåll."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Mekaniker arbetar med kopplingen under en lyft bil i verkstaden' }}
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Kopplingssats med lamell, tryckplatta och urtrampningslager på ett mörkt bord' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
