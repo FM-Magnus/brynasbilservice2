@@ -102,7 +102,7 @@
 .bilservice__intro--wide-sm { max-width: 75ch; }
 .bilservice__intro--tight { margin-bottom: 1.5rem; }
 .bilservice__intro small { color: var(--bb-color-teal-800); font-weight: 700; }
-.bilservice__intro .bilservice__lead--intro { margin: 0.8rem 0 0.5rem; }
+.bilservice__intro .bilservice__lead--intro { max-width: 62ch; margin: 0.8rem 0 0.5rem; }
 .bilservice__intro .bilservice__lead--intro-tight { margin: 0.8rem 0 0.4rem; }
 .bilservice__intro .bilservice__note { margin-top: 0.5rem; }
 
@@ -647,6 +647,7 @@
 .bilservice__price-grid + .bb-tip { margin-top: clamp(2rem, 3.5vw, 3rem); }
 
 .bilservice__refrigerant-note {
+  max-width: 68ch;
   margin: 1.25rem 0 0;
   color: var(--bb-color-text-muted);
   font: 500 0.92rem / 1.6 var(--bb-font-body);
