@@ -23,8 +23,8 @@ import imgPeugeotFrontJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot
 import imgSunsetRoadWebp from '../assets/images/home/landing-v2/landing-sunset-road-hero.webp'
 import imgSunsetRoadJpg from '../assets/images/home/landing-v2/landing-sunset-road-hero.jpg'
 
-import heroTowingWebp from '../assets/images/services/towing/towing-hero-bg.webp'
-import heroTowingJpg from '../assets/images/services/towing/towing-hero-bg.jpg'
+import heroStrapWebp from '../assets/images/services/towing/towing-hero-strap.webp'
+import heroStrapJpg from '../assets/images/services/towing/towing-hero-strap.jpg'
 import heroHighwayWebp from '../assets/images/services/towing/towing-hero-highway.webp'
 import heroHighwayJpg from '../assets/images/services/towing/towing-hero-highway.jpg'
 import { BUSINESS, weekdayHours } from '../data/business'
@@ -63,7 +63,7 @@ function RoadWayIcon({ className }: { className?: string }) {
 }
 
 const heroSlides = [
-  { webp: heroTowingWebp, jpg: heroTowingJpg, modifier: '' },
+  { webp: heroStrapWebp, jpg: heroStrapJpg, modifier: '' },
   { webp: heroHighwayWebp, jpg: heroHighwayJpg, modifier: ' bargning-page__hero-slide--highway' },
 ]
 
