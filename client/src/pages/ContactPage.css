@@ -278,7 +278,7 @@
   font-weight: 700;
 }
 .kontakt-page__required {
-  color: var(--bb-color-amber-600);
+  color: var(--bb-color-ink-950);
 }
 .kontakt-page__input,
 .kontakt-page__textarea,
