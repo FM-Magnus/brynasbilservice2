@@ -137,7 +137,7 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
         </Link>
 
         <nav className="public-header__desktop-nav" aria-label="Huvudnavigation">
-          {publicNavigation.filter((item) => !item.inServices && !item.hideInDesktopBar).map((item) => {
+          {publicNavigation.filter((item) => !item.inServices).map((item) => {
             const active = isActive(item)
             if (!item.children) {
               return (

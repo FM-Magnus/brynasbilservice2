@@ -15,8 +15,6 @@ export type PublicNavigationItem = PublicNavigationChild & {
   groups?: PublicNavigationGroup[]
   /** Overview links shown next to the groups (the hub and the larger-repairs page). */
   overview?: PublicNavigationChild[]
-  /** Left out of the desktop bar (the logo goes home); still in the phone menu and the footer. */
-  hideInDesktopBar?: boolean
   /** Shown inside the Biltjänster menu (a group there) instead of as its own item in the header; still a plain item in the footer. */
   inServices?: boolean
 }
@@ -68,7 +66,7 @@ export const publicServiceNavigation: PublicNavigationChild[] = [
 ]
 
 export const publicNavigation: PublicNavigationItem[] = [
-  { label: 'Start', to: '/', hideInDesktopBar: true },
+  { label: 'Hem', to: '/' },
   { label: 'Om oss', to: '/om-oss' },
   { label: 'Biltjänster', to: '/biltjanster', children: publicServiceNavigation, groups: publicServiceGroups, overview: publicServiceOverview },
   { label: 'Felsökning', to: '/felsokning', inServices: true },

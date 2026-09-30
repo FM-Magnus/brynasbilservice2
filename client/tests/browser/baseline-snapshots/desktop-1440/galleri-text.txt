@@ -37,7 +37,7 @@ service
 Erfarna
 mekaniker
 SNABBA LÄNKAR
-Start
+Hem
 ›
 Om oss
 ›
@@ -79,6 +79,7 @@ RING OSS: 070-553 33 95
 Din lokala bilverkstad. För en tryggare vardag på vägen.
 
 Skapad och förvaltas av Fenrir Media AB
+HEM
 OM OSS
 BILTJÄNSTER
 VÅRA TJÄNSTER
