@@ -108,7 +108,7 @@ export default function KamremPage() {
           <Tip
             title="Osäker på om din bil har rem eller kedja?"
             text="Vi slår upp exakta uppgifter i biltillverkarens databas utifrån ditt registreringsnummer."
-            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>}
+            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
 
