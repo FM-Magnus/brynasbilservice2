@@ -31,7 +31,7 @@
 }
 
 .public-header__brand { display: block; line-height: 0; width: 260px; }
-.public-header__brand img { display: block; height: auto; max-height: 64px; width: 100%; }
+.public-header__brand img { display: block; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.55)); height: auto; max-height: 64px; width: 100%; }
 
 .public-header__desktop-nav {
   align-items: center;
