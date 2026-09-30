@@ -35,18 +35,16 @@
 
 .public-header__desktop-nav {
   align-items: center;
-  background: var(--bb-color-surface);
   /* The pill and the Boka tid button are one unit at the right of the header: same
-     height, no gap, and the pill's right edge and the button's left edge are square. */
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: var(--bb-radius-control) 0 0 var(--bb-radius-control);
-  border-right: 0;
-  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.22);
+     height, no gap, and the pill's right edge and the button's left edge are square.
+     The pill fades out toward the logo over the left padding; the links sit on the
+     solid part, so their dark text never lands on the photo. */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.55) 2.5rem, var(--bb-color-surface) 6.75rem);
   color: var(--bb-color-ink-950);
   display: flex;
   min-height: 56px;
   min-width: 0;
-  padding: 0.36rem 0.44rem;
+  padding: 0.36rem 0.44rem 0.36rem 7.5rem;
   /* The Biltjänster menu is wider than the pill, so it hangs from the pill's right edge. */
   position: relative;
 }
