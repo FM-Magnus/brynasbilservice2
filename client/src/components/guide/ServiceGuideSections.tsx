@@ -5,6 +5,7 @@
  * page imports. Pages keep their copy and data and compose these in order;
  * `children` carries what varies between guides (extra paragraphs, tips).
  */
+import { useState } from 'react'
 import type { ReactElement, ReactNode, SVGProps } from 'react'
 import { Link } from 'react-router-dom'
 import { BUSINESS } from '../../data/business'
@@ -343,6 +344,50 @@ export function GuideTopic({ id, heading, text, items, variant = 'cards', column
         {note && <p className="service-guide__topic-note">{note}</p>}
       </div>
     </section>
+  )
+}
+
+interface GuideReadMoreProps {
+  id: string
+  label: string
+  /** One or more `GuideTopic` sections (or similar prose blocks) to fold away. */
+  children: ReactNode
+}
+
+/**
+ * Folds deep-dive, photo-less material behind one "Läs mer" toggle below the
+ * template's existing 900px one-column breakpoint (benchmark B4: guides run
+ * 8,000-12,000px on mobile). Above 900px the content stays open and the
+ * toggle is hidden — desktop's two-column prose layout already reads fine at
+ * full length, so only the width that turns it into a single column also
+ * turns on the fold. Content is always in the DOM (`hidden`, not unmounted),
+ * so anything reading raw HTML still sees it. Same disclosure pattern as
+ * `components/ui/BiltjansterFaq.tsx`: a button with a circular +/- symbol,
+ * `aria-expanded`/`aria-controls`, motion-safe via the template's
+ * `prefers-reduced-motion` rule.
+ */
+export function GuideReadMore({ id, label, children }: GuideReadMoreProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const contentId = `${id}-content`
+
+  return (
+    <div className="service-guide__read-more">
+      <div className="bb-wrap service-guide__container service-guide__read-more-toggle-row">
+        <button
+          type="button"
+          className="service-guide__read-more-toggle"
+          aria-expanded={isOpen}
+          aria-controls={contentId}
+          onClick={() => setIsOpen(open => !open)}
+        >
+          <span>{isOpen ? 'Visa mindre' : label}</span>
+          <span className="service-guide__read-more-symbol" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+        </button>
+      </div>
+      <div id={contentId} className="service-guide__read-more-content" hidden={!isOpen}>
+        {children}
+      </div>
+    </div>
   )
 }
 

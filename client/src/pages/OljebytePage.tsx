@@ -11,7 +11,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
-import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms, GuideTopic } from '../components/guide/ServiceGuideSections'
+import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideQuickFacts, GuideReadMore, GuideRelated, GuideServiceCard, GuideSymptoms, GuideTopic } from '../components/guide/ServiceGuideSections'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -164,44 +164,48 @@ export default function OljebytePage() {
           tight
         />
 
-        {/* Intervall kontra verkligheten */}
-        <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-interval-title">
-          <div className="bb-wrap service-guide__container">
-            <div className="service-guide__prose-card">
-              <h3 id="oljebyte-interval-title">Tillverkarens intervall kontra verkligheten</h3>
-              <p>Många nyare bilar har långa rekommenderade serviceintervall – ibland 3 000 mil eller mer, så kallade "long life"-intervall. De är inte felaktiga, men de gäller under förutsättningar som sällan stämmer med hur bilen faktiskt används i vardagen: jämn landsvägskörning, motorvärmare vid kyla under +5 grader, och inga korta stadsturer. Kör bilen istället mycket kortkörning, mycket stillastående i kö, eller drar den ofta släp, bryts oljan ner snabbare än vad intervallet i boken räknar med – utan att bilens egen serviceindikator nödvändigtvis märker det i tid.</p>
-              <p>Vår rekommendation är därför att se tillverkarens intervall som ett tak, inte ett golv. Är körmönstret tufft mot oljan – mycket kortkörning, tät stadstrafik, kyla utan motorvärmare, turboladdad eller direktinsprutad motor – lönar det sig att byta tätare än boken säger snarare än att vänta tills serviceindikatorn tvingar fram det.</p>
+        {/* Deep-dive material (benchmark B4): folded behind "Läs mer" below
+            900px, open on desktop — see GuideReadMore. */}
+        <GuideReadMore id="oljebyte-read-more" label="Läs mer om intervall, viskositet och standarder">
+          {/* Intervall kontra verkligheten */}
+          <section className="service-guide__section service-guide__section--tight" aria-labelledby="oljebyte-interval-title">
+            <div className="bb-wrap service-guide__container">
+              <div className="service-guide__prose-card">
+                <h3 id="oljebyte-interval-title">Tillverkarens intervall kontra verkligheten</h3>
+                <p>Många nyare bilar har långa rekommenderade serviceintervall – ibland 3 000 mil eller mer, så kallade "long life"-intervall. De är inte felaktiga, men de gäller under förutsättningar som sällan stämmer med hur bilen faktiskt används i vardagen: jämn landsvägskörning, motorvärmare vid kyla under +5 grader, och inga korta stadsturer. Kör bilen istället mycket kortkörning, mycket stillastående i kö, eller drar den ofta släp, bryts oljan ner snabbare än vad intervallet i boken räknar med – utan att bilens egen serviceindikator nödvändigtvis märker det i tid.</p>
+                <p>Vår rekommendation är därför att se tillverkarens intervall som ett tak, inte ett golv. Är körmönstret tufft mot oljan – mycket kortkörning, tät stadstrafik, kyla utan motorvärmare, turboladdad eller direktinsprutad motor – lönar det sig att byta tätare än boken säger snarare än att vänta tills serviceindikatorn tvingar fram det.</p>
+              </div>
+              <p className="service-guide__topic-note">Det är alltså inte antalet körda mil som ensamt avgör oljans skick – tiden och körmönstret spelar minst lika stor roll.</p>
             </div>
-            <p className="service-guide__topic-note">Det är alltså inte antalet körda mil som ensamt avgör oljans skick – tiden och körmönstret spelar minst lika stor roll.</p>
-          </div>
-        </section>
+          </section>
 
-        <GuideTopic
-          id="oljebyte-viscosity-title"
-          heading="Vad betyder egentligen siffrorna på oljedunken?"
-          text="De flesta har sett beteckningar som 5W-30 eller 0W-20 utan att egentligen veta vad de betyder. Det är oljans viskositetsklass enligt SAE-systemet (Society of Automotive Engineers), och den beskriver hur trögflytande oljan är – inte hur bra kvalitet den håller."
-          items={viscosityDetails}
-          variant="prose"
-          note="Viskositeten är alltså bara en flödesegenskap, inte ett kvalitetsmått. Två oljor med exakt samma viskositetsbeteckning kan skilja sig kraftigt åt i hur väl de faktiskt skyddar motorn."
-        />
+          <GuideTopic
+            id="oljebyte-viscosity-title"
+            heading="Vad betyder egentligen siffrorna på oljedunken?"
+            text="De flesta har sett beteckningar som 5W-30 eller 0W-20 utan att egentligen veta vad de betyder. Det är oljans viskositetsklass enligt SAE-systemet (Society of Automotive Engineers), och den beskriver hur trögflytande oljan är – inte hur bra kvalitet den håller."
+            items={viscosityDetails}
+            variant="prose"
+            note="Viskositeten är alltså bara en flödesegenskap, inte ett kvalitetsmått. Två oljor med exakt samma viskositetsbeteckning kan skilja sig kraftigt åt i hur väl de faktiskt skyddar motorn."
+          />
 
-        <GuideTopic
-          id="oljebyte-standards-title"
-          heading="API och ACEA – standarderna som faktiskt styr kvaliteten"
-          text="Det som avgör om en olja verkligen passar din motor är inte viskositeten utan godkännandena bredvid den – API (amerikansk standard) och ACEA (europeisk standard). ACEA-klasserna är särskilt viktiga att förstå:"
-          items={oilStandards}
-          variant="prose"
-          note={<>Rätt ordning att välja olja i är: tillverkarens egen specifikation först, sedan ACEA-klass, och viskositet sist. En "rätt" viskositet med fel specifikation kan göra mer skada än nytta.</>}
-        />
+          <GuideTopic
+            id="oljebyte-standards-title"
+            heading="API och ACEA – standarderna som faktiskt styr kvaliteten"
+            text="Det som avgör om en olja verkligen passar din motor är inte viskositeten utan godkännandena bredvid den – API (amerikansk standard) och ACEA (europeisk standard). ACEA-klasserna är särskilt viktiga att förstå:"
+            items={oilStandards}
+            variant="prose"
+            note={<>Rätt ordning att välja olja i är: tillverkarens egen specifikation först, sedan ACEA-klass, och viskositet sist. En "rätt" viskositet med fel specifikation kan göra mer skada än nytta.</>}
+          />
 
-        <GuideTopic
-          id="oljebyte-types-title"
-          heading="Mineral-, halvsyntet- och helsyntetolja – vad är egentligen skillnaden?"
-          text="Basoljan – den vätska additiven blandas i – delas in i grupper, och det är här den verkliga skillnaden mellan oljor ligger:"
-          items={oilTypes}
-          variant="prose"
-          note={<>Den praktiska slutsatsen: beteckningen "fullsyntetisk" på flaskan garanterar inte att två oljor är likvärdiga. Additivpaketet – rengörande, korrosionsskyddande och viskositetsstabiliserande tillsatser – väger minst lika tungt som basoljan, och det är just kombinationen av basolja och additivpaket som gör att pris och prestanda kan skilja sig kraftigt mellan oljor som ser identiska ut på pappret.</>}
-        />
+          <GuideTopic
+            id="oljebyte-types-title"
+            heading="Mineral-, halvsyntet- och helsyntetolja – vad är egentligen skillnaden?"
+            text="Basoljan – den vätska additiven blandas i – delas in i grupper, och det är här den verkliga skillnaden mellan oljor ligger:"
+            items={oilTypes}
+            variant="prose"
+            note={<>Den praktiska slutsatsen: beteckningen "fullsyntetisk" på flaskan garanterar inte att två oljor är likvärdiga. Additivpaketet – rengörande, korrosionsskyddande och viskositetsstabiliserande tillsatser – väger minst lika tungt som basoljan, och det är just kombinationen av basolja och additivpaket som gör att pris och prestanda kan skilja sig kraftigt mellan oljor som ser identiska ut på pappret.</>}
+          />
+        </GuideReadMore>
 
         <GuideTopic
           id="oljebyte-misconceptions-title"

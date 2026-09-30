@@ -52,7 +52,7 @@ Förebilder: Auto Stockholm, JA Car Center, Mattssons, Torsviks, Laga Bilen i Um
 
 ### Mobilfasen (när desktop är klar)
 
-- [ ] **B4 – Kortare guider på mobil**: fäll ihop fördjupningar under "Läs mer" (t.ex. API/ACEA och oljetyper på Oljebyte, 11 957 px). Guiderna är 8 000–12 000 px på mobil; JA:s tjänstesidor är under 5 000 px.
+- [x] **B4 – Kortare guider på mobil**: fäll ihop fördjupningar under "Läs mer" (t.ex. API/ACEA och oljetyper på Oljebyte, 11 957 px). Guiderna är 8 000–12 000 px på mobil; JA:s tjänstesidor är under 5 000 px. **Klart 2026-09-30:** enda guiden med den här sortens djupdykning var Oljebyte (de andra nio saknar `GuideTopic`-blocken helt) — intervall, viskositet, API/ACEA och oljetyper ligger nu bakom en ny delad `GuideReadMore` (`ServiceGuideSections.tsx` + `ServiceGuideTemplate.css`), fälld ihop under 900 px och öppen som förut däröver.
 - [ ] **Mobilbilder 1200 × 2100 px** för hero på Start, Om oss, Kontakt och Bärgning (personerna faller ur bild i 390 px idag).
 
 ### Bilder från Magnus

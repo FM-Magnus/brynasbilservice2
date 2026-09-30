@@ -488,6 +488,42 @@
   .service-guide__topic-grid--cols-4 { grid-template-columns: 1fr; }
 }
 
+/* Läs mer (benchmark B4): folds deep-dive material below the 900px
+   one-column breakpoint above; the media query at the end of this block
+   forces it open and hides the toggle again above that width. */
+.service-guide__read-more-toggle-row { padding-block: 0.25rem 1.75rem; }
+.service-guide__read-more-toggle {
+  align-items: center;
+  background: var(--bb-color-surface);
+  border: 1px solid var(--bb-color-border-subtle-light);
+  border-radius: var(--bb-radius-control);
+  color: var(--bb-color-teal-700);
+  cursor: pointer;
+  display: inline-flex;
+  font: 800 0.95rem/1.3 var(--bb-font-display);
+  gap: 0.75rem;
+  padding: 0.85rem 1.25rem;
+  transition: border-color var(--bb-transition-fast), color var(--bb-transition-fast);
+}
+.service-guide__read-more-toggle:hover,
+.service-guide__read-more-toggle[aria-expanded="true"] { border-color: var(--bb-color-teal-600); color: var(--bb-color-teal-800); }
+.service-guide__read-more-symbol {
+  background: rgba(10, 157, 172, 0.08); /* rgba of --bb-color-teal-600 */
+  border: 1px solid rgba(10, 157, 172, 0.25);
+  border-radius: 50%;
+  color: var(--bb-color-teal-700);
+  display: grid;
+  flex: 0 0 auto;
+  font: 400 1.3rem/1 var(--bb-font-body);
+  height: 26px;
+  place-items: center;
+  width: 26px;
+}
+@media (min-width: 901px) {
+  .service-guide__read-more-toggle-row { display: none; }
+  .service-guide__read-more-content[hidden] { display: block; }
+}
+
 /* I korthet (benchmark B3): three facts on a light band right under the hero. */
 .service-guide__quick-facts {
   background: var(--bb-color-surface);
