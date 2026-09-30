@@ -4,6 +4,7 @@ import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { TrustStrip } from '../components/ui/TrustStrip'
+import { GalleryDockStrip } from '../components/ui/GalleryDockStrip'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -21,14 +22,6 @@ import heroCarJpg from '../assets/images/about/about-hero-maher-customer-car.jpg
 import imgMaherBenchWebp from '../assets/images/about/maher-workshop-bench.webp'
 import imgMaherBenchJpg from '../assets/images/about/maher-workshop-bench.jpg'
 
-import gallery1Webp from '../assets/images/about/about-workshop-exterior.webp'
-import gallery1Jpg from '../assets/images/about/about-workshop-exterior.jpg'
-import gallery2Webp from '../assets/images/services/tires/tire-wheel-change.webp'
-import gallery2Jpg from '../assets/images/services/tires/tire-wheel-change.jpg'
-import gallery3Webp from '../assets/images/workshop/workshop-car-open-hood.webp'
-import gallery3Jpg from '../assets/images/workshop/workshop-car-open-hood.jpg'
-import gallery4Webp from '../assets/images/workshop/workshop-car-on-lift.webp'
-import gallery4Jpg from '../assets/images/workshop/workshop-car-on-lift.jpg'
 
 import principlesBgWebp from '../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.webp'
 import principlesBgJpg from '../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.jpg'
@@ -296,6 +289,8 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <GalleryDockStrip />
+
         {/* =========================================================
             4. CORE PRINCIPLES
             ========================================================= */}
@@ -403,83 +398,7 @@ export default function AboutPage() {
         </section>
 
         {/* =========================================================
-            6. WORKSHOP GALLERY PREVIEW
-            ========================================================= */}
-        <section className="omoss-page__gallery-preview" aria-labelledby="gallery-title">
-          <div className="bb-wrap">
-            <div className="omoss-page__gallery-top">
-              <div className="omoss-page__gallery-header">
-                <h2 className="bb-h2 omoss-page__gallery-title" id="gallery-title">
-                  Bakom garageportarna
-                </h2>
-                <p className="bb-lead omoss-page__gallery-subtitle">
-                  En titt in i vår vardag. Här ser du vår verkstad, utrustning och några glimtar från arbetet vi gör varje dag i Brynäs, Gävle.
-                </p>
-              </div>
-              <Link to="/galleri" className="bb-btn bb-btn--teal">
-                <span>Se fler bilder i galleriet</span>
-                <ArrowRightIcon />
-              </Link>
-            </div>
-
-            <div className="omoss-page__gallery-grid">
-              <Link to="/galleri" className="omoss-page__gallery-item" aria-label="Visa verkstadsfasaden i bildgalleriet">
-                <picture>
-                  <source srcSet={gallery1Webp} type="image/webp" />
-                  <img
-                    src={gallery1Jpg}
-                    alt="Verkstadens entré och fasad i Brynäs"
-                    className="omoss-page__gallery-img"
-                    width={400}
-                    height={275}
-                  />
-                </picture>
-              </Link>
-
-              <Link to="/galleri" className="omoss-page__gallery-item" aria-label="Visa däckarbete i bildgalleriet">
-                <picture>
-                  <source srcSet={gallery2Webp} type="image/webp" />
-                  <img
-                    src={gallery2Jpg}
-                    alt="Mekaniker som arbetar med däck och hjul i verkstaden"
-                    className="omoss-page__gallery-img"
-                    width={400}
-                    height={275}
-                  />
-                </picture>
-              </Link>
-
-              <Link to="/galleri" className="omoss-page__gallery-item" aria-label="Visa motorarbete i bildgalleriet">
-                <picture>
-                  <source srcSet={gallery3Webp} type="image/webp" />
-                  <img
-                    src={gallery3Jpg}
-                    alt="Arbete under öppen motorhuv på billyft"
-                    className="omoss-page__gallery-img"
-                    width={400}
-                    height={275}
-                  />
-                </picture>
-              </Link>
-
-              <Link to="/galleri" className="omoss-page__gallery-item" aria-label="Visa lyft och fordon i bildgalleriet">
-                <picture>
-                  <source srcSet={gallery4Webp} type="image/webp" />
-                  <img
-                    src={gallery4Jpg}
-                    alt="Bil på lyft inne i verkstadshallen"
-                    className="omoss-page__gallery-img"
-                    width={400}
-                    height={275}
-                  />
-                </picture>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================
-            7. CLOSING CTA BANNER
+            6. CLOSING CTA BANNER
             ========================================================= */}
         <section className="omoss-page__cta" aria-labelledby="cta-title">
           <div className="bb-wrap">

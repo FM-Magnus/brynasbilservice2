@@ -23,7 +23,6 @@ test('om-oss page renders without horizontal overflow across breakpoints', async
   await expect(page.locator('.omoss-page__story')).toBeVisible()
   await expect(page.locator('.omoss-page__principles')).toBeVisible()
   await expect(page.locator('.omoss-page__process')).toBeVisible()
-  await expect(page.locator('.omoss-page__gallery-preview')).toBeVisible()
   await expect(page.locator('.omoss-page__cta')).toBeVisible()
 
   // Verify booking modal opens from hero button

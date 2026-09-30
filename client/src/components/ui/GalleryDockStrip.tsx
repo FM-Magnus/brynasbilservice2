@@ -12,11 +12,37 @@ const MAGNIFY_RADIUS_PX = 190
 const MAGNIFY_MAX_EXTRA_SCALE = 0.3
 const MAGNIFY_LIFT_PX = 6
 const DRAG_THRESHOLD_PX = 6
+// Hover near either end of the row scrolls it that way (mouse only, never touch):
+// the outer fifth of the track, speeding up toward the very edge.
+const EDGE_ZONE_FRACTION = 0.2
+const EDGE_MAX_SPEED_PX_PER_S = 700
 
 interface DragState {
   startX: number
   startScrollLeft: number
   moved: boolean
+}
+
+interface EdgeScrollState {
+  velocity: number // px per second, negative = towards the start
+  clientX: number
+  lastTime: number
+  position: number // float scrollLeft; the browser rounds what it reports back
+}
+
+/** Signed edge-scroll speed for a pointer at clientX: 0 in the middle of the track. */
+function edgeVelocity(clientX: number, track: HTMLElement) {
+  const rect = track.getBoundingClientRect()
+  const zone = rect.width * EDGE_ZONE_FRACTION
+  const fromLeft = clientX - rect.left
+  const fromRight = rect.right - clientX
+  const ramp = (distance: number) => {
+    const t = Math.min(1, Math.max(0, (zone - distance) / zone))
+    return t * t
+  }
+  if (fromLeft < zone) return -EDGE_MAX_SPEED_PX_PER_S * ramp(fromLeft)
+  if (fromRight < zone) return EDGE_MAX_SPEED_PX_PER_S * ramp(fromRight)
+  return 0
 }
 
 function usePointerFineAndMotionOk() {
@@ -42,6 +68,8 @@ export function GalleryDockStrip({ className = '' }: { className?: string }) {
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([])
   const rafRef = useRef<number | null>(null)
   const dragRef = useRef<DragState | null>(null)
+  const edgeRef = useRef<EdgeScrollState | null>(null)
+  const edgeRafRef = useRef<number | null>(null)
   const magnifyEnabled = usePointerFineAndMotionOk()
 
   useEffect(() => {
@@ -80,6 +108,62 @@ export function GalleryDockStrip({ className = '' }: { className?: string }) {
     rafRef.current = requestAnimationFrame(() => applyMagnify(clientX))
   }, [applyMagnify])
 
+  const stopEdgeScroll = useCallback(() => {
+    if (edgeRafRef.current !== null) cancelAnimationFrame(edgeRafRef.current)
+    edgeRafRef.current = null
+    edgeRef.current = null
+    // Snapping is suspended while the strip glides (it fights per-frame scrolling,
+    // like during a drag); a drag in progress keeps control of it.
+    if (trackRef.current && !dragRef.current?.moved) trackRef.current.style.scrollSnapType = ''
+  }, [])
+
+  const edgeScrollStep = useCallback((time: number) => {
+    const state = edgeRef.current
+    const track = trackRef.current
+    if (!state || !track || dragRef.current?.moved) {
+      stopEdgeScroll()
+      return
+    }
+    // Someone scrolled by other means (wheel, keyboard): follow, don't fight.
+    if (Math.abs(track.scrollLeft - state.position) > 2) state.position = track.scrollLeft
+    const dt = Math.min(time - state.lastTime, 50)
+    state.lastTime = time
+    const max = track.scrollWidth - track.clientWidth
+    const next = Math.min(max, Math.max(0, state.position + (state.velocity * dt) / 1000))
+    const atEnd = next === state.position && dt > 0
+    state.position = next
+    track.scrollLeft = next
+    applyMagnify(state.clientX)
+    if (atEnd) {
+      stopEdgeScroll()
+      return
+    }
+    edgeRafRef.current = requestAnimationFrame(edgeScrollStep)
+  }, [applyMagnify, stopEdgeScroll])
+
+  const updateEdgeScroll = useCallback((clientX: number) => {
+    const track = trackRef.current
+    if (!track || dragRef.current?.moved) {
+      stopEdgeScroll()
+      return
+    }
+    const velocity = edgeVelocity(clientX, track)
+    if (velocity === 0) {
+      stopEdgeScroll()
+      return
+    }
+    if (edgeRef.current) {
+      edgeRef.current.velocity = velocity
+      edgeRef.current.clientX = clientX
+      return
+    }
+    track.style.scrollSnapType = 'none'
+    edgeRef.current = { velocity, clientX, lastTime: performance.now(), position: track.scrollLeft }
+    edgeRafRef.current = requestAnimationFrame(edgeScrollStep)
+  }, [edgeScrollStep, stopEdgeScroll])
+
+  useEffect(() => stopEdgeScroll, [stopEdgeScroll])
+
   const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== 'mouse') return
     const track = trackRef.current
@@ -92,6 +176,8 @@ export function GalleryDockStrip({ className = '' }: { className?: string }) {
 
   const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (magnifyEnabled) queueMagnify(event.clientX)
+    // Hover-to-scroll is for a real mouse only: touch keeps its native swipe.
+    if (magnifyEnabled && event.pointerType === 'mouse') updateEdgeScroll(event.clientX)
 
     const drag = dragRef.current
     const track = trackRef.current
@@ -118,6 +204,7 @@ export function GalleryDockStrip({ className = '' }: { className?: string }) {
 
   const onPointerLeave = () => {
     if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
+    stopEdgeScroll()
     resetMagnify()
   }
 

@@ -1,5 +1,5 @@
 /* Shared "dock" gallery strip — pulls the same photos as /galleri.
-   Mouse: drag to scroll, hover magnifies like a macOS Dock. Touch: native swipe. */
+   Mouse: drag to scroll, hover magnifies like a macOS Dock, and hovering the outer fifth at either end scrolls that way. Touch: native swipe only. */
 .bb-gallery-dock {
   padding-block: clamp(1.25rem, 2.5vw, 2rem);
 }
