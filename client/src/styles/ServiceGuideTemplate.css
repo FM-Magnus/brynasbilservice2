@@ -79,7 +79,7 @@
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
-.service-guide__title .bb-accent { color: var(--bb-color-teal-500); }
+.service-guide__title .bb-accent { color: var(--bb-color-focus); }
 
 /* Hero-only: a smaller H1 and tighter gaps so the hero fits a laptop screen. Scoped,
    because these classes are also used further down the page. */

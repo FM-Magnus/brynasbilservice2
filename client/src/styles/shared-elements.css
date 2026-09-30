@@ -143,9 +143,12 @@
 }
 
 /* Teal word-highlight inside an otherwise plain heading (e.g. "Service för
-   <span>hela bilen</span>"). Same color on light or dark surfaces — it
-   reads fine on both, unlike the eyebrow. */
+   <span>hela bilen</span>"). Teal-500 on every surface; on the light page
+   background that is only 2.4:1 (audit C05, still open). Hero titles use the
+   lighter cyan below. */
 .bb-accent { color: var(--bb-color-teal-500); }
+/* Hero titles sit on photos: teal-500 was 1.4-2.9:1 on some slides and widths, the focus cyan is 3:1 or better (audit C03). */
+h1 .bb-accent { color: var(--bb-color-focus); }
 
 /* Muted body/lead paragraph. Font-size and line-height stay contextual
    (Landing itself varies these by section — hero intro is larger than a
