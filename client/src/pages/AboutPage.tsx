@@ -135,7 +135,7 @@ export default function AboutPage() {
                   Sedan 2021 i Gävle
                 </p>
                 <h1 className="bb-h1 omoss-page__hero-title" id="omoss-hero-title">
-                  Din lokala och <span className="bb-accent">personliga</span> bilverkstad i Brynäs
+                  Din lokala och <span className="bb-accent">personliga</span> bilverkstad i Gävle
                 </h1>
                 <p className="bb-lead--dark omoss-page__hero-lead">
                   Sedan starten 2021 har vi drivit en oberoende bilverkstad på Utmarksvägen i Gävle med ett enkelt mål: att ge bilägare personlig service, fackmannamässigt utfört arbete och raka besked utan krångel.
