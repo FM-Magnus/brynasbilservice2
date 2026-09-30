@@ -113,7 +113,7 @@ export default function HjullagerbytePage() {
           <Tip
             title="Orolig för ett brummande eller malande missljud?"
             text="Vi hissar upp bilen och kontrollerar mekaniskt vilket lager som orsakar ljudet."
-            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
+            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
 

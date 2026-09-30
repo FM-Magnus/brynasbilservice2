@@ -116,7 +116,7 @@ export default function AvgassystemPage() {
           <Tip
             title="Osäker på vad som gäller för din bil?"
             text="Vi läser av felkoder, gör en bedömning och förklarar vad som behöver åtgärdas – utan överraskningar."
-            action={<Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
+            action={<Link to="/felsokning" className="bb-btn bb-btn--ember-solid service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
           />
         </GuideIntro>
 

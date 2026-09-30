@@ -112,7 +112,7 @@ export default function StodampareFjadrarPage() {
           <Tip
             title="Misstänker du slitage eller missljud från chassit?"
             text="Vi hissar upp bilen och kontrollerar dämpare, fjädrar, bussningar och topplager – snabbt och noggrant."
-            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
+            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
 

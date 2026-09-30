@@ -111,7 +111,7 @@ export default function BilbatteriPage() {
           <Tip
             title="Osäker på vilken batterityp din bil behöver?"
             text="Vi kontrollerar alltid biltillverkarens krav för AGM, EFB eller blysyrabatteri utifrån ditt registreringsnummer."
-            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--teal service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>}
+            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
 

@@ -127,7 +127,7 @@ export default function OljebytePage() {
           <Tip
             title="Osäker på vilken olja din bil behöver?"
             text="Vi läser av tillverkarens specifikation och väljer rätt viskositet och ACEA-klass åt dig."
-            action={<Link to="/felsokning" className="bb-btn bb-btn--teal service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
+            action={<Link to="/felsokning" className="bb-btn bb-btn--ember-solid service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
           />
         </GuideIntro>
 
