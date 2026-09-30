@@ -119,15 +119,24 @@
 
 .public-header__menu-toggle, .public-header__mobile-panel { display: none; }
 
+/* The logo is never smaller than the phone logo (195 x 48). At 1187px the bar has
+   room for it: 195 + 137 (Boka tid) + gaps and padding leave about 785px for the
+   nav, whose links need about 720px at this size. */
 @media (max-width: 1320px) {
   .public-header { padding: 0.75rem 1rem; }
-  .public-header__inner { grid-template-columns: 130px minmax(0, 1fr) auto; }
-  .public-header__brand { max-width: 130px; }
-  .public-header .public-header__nav-link { font-size: 0.875rem; padding: 0.4rem 0.25rem; }
+  .public-header__inner { grid-template-columns: 195px minmax(0, 1fr) auto; }
+  .public-header__brand { max-width: 195px; }
+  .public-header .public-header__nav-link { font-size: 0.875rem; padding: 0.4rem 0.5rem; }
   .public-header__booking { padding-inline: 1rem; }
 }
 
-@media (max-width: 1000px) {
+/* Just above the compact range the 16px links need about 756px and the bar offers
+   748px at 1321px wide; tighter link padding removes the 8px overflow. */
+@media (min-width: 1321px) and (max-width: 1359px) {
+  .public-header .public-header__nav-link { padding-inline: 0.3rem; }
+}
+
+@media (max-width: 1186px) {
   .public-header { padding: 1rem; }
   /* Logo takes the free width, menu button sits at the far right. The logo stops
      at 48px tall (the button's height) so the header height does not change. */
