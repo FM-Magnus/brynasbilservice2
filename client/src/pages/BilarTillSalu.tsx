@@ -9,6 +9,7 @@ import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { CarSaleIcon } from '../components/icons/CarSaleIcon'
+import { TrustStrip } from '../components/ui/TrustStrip'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { getPublicVehicles } from '../api/vehicles'
 import type { Vehicle, VehicleImage } from '../types/vehicle'
@@ -307,6 +308,12 @@ function VehicleGrid({ vehicles, initial, expandedId, onExpand, onInquiry }: Veh
   )
 }
 
+const trustItems = [
+  { icon: ShieldHeartIcon, title: 'Verkstadsinspekterade', text: 'Genomgångna och testade av våra egna mekaniker före försäljning.' },
+  { icon: CheckIcon, title: 'Färdiga för leverans', text: 'Besiktigade, provkörda och redo att rulla ut direkt.' },
+  { icon: ChatDotsIcon, title: 'Personlig kontakt', text: 'Tydlig rådgivning och personlig provkörning utan mellanhänder.' },
+] as const
+
 export default function BilarTillSalu() {
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
   const { openBooking, openBookingWith, bookingModal } = useBookingModal()
@@ -382,32 +389,9 @@ export default function BilarTillSalu() {
               {load.status === 'loading' && <div className="bilartillsalu-page__hero-feature bilartillsalu-page__hero-feature--placeholder" aria-hidden="true" />}
               {featured && <HeroVehiclePanel vehicle={featured} />}
             </div>
-
-            <ul className="bb-trust-row bilartillsalu-page__trust" aria-label="Därför kan du lita på våra bilar">
-              <li className="bb-trust-row__item">
-                <span className="bilartillsalu-page__trust-icon" aria-hidden="true"><ShieldHeartIcon /></span>
-                <span className="bb-trust-row__text">
-                  <strong>Verkstadsinspekterade</strong>
-                  <span>Genomgångna och testade av våra egna mekaniker före försäljning.</span>
-                </span>
-              </li>
-              <li className="bb-trust-row__item">
-                <span className="bilartillsalu-page__trust-icon" aria-hidden="true"><CheckIcon /></span>
-                <span className="bb-trust-row__text">
-                  <strong>Färdiga för leverans</strong>
-                  <span>Besiktigade, provkörda och redo att rulla ut direkt.</span>
-                </span>
-              </li>
-              <li className="bb-trust-row__item">
-                <span className="bilartillsalu-page__trust-icon" aria-hidden="true"><ChatDotsIcon /></span>
-                <span className="bb-trust-row__text">
-                  <strong>Personlig kontakt</strong>
-                  <span>Tydlig rådgivning och personlig provkörning utan mellanhänder.</span>
-                </span>
-              </li>
-            </ul>
           </div>
         </section>
+        <TrustStrip items={trustItems} label="Därför kan du lita på våra bilar" />
 
         {/* 2. Listings */}
         <section className="bilartillsalu-page__listings" aria-labelledby="bilartillsalu-listings-title" aria-busy={load.status === 'loading'}>

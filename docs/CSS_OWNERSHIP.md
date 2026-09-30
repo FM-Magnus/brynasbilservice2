@@ -18,6 +18,7 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 - `client/src/data/publicNavigation.ts` is the navigation source for `PublicHeader`.
 - `client/src/data/business.ts` is the single source for the workshop's business facts (phone, e-mail, address, Google Maps link, opening hours, legal name, org.nr). Never hard-code one of these values in a page, a component or a test — import `BUSINESS` / `weekdayHours` instead.
 - `client/src/components/layout/PublicHeader.tsx` / `PublicHeader.css` and `PublicFooter.tsx` / `PublicFooter.css` are the only header and footer. The legacy `Header.tsx`/`Footer.tsx` were deleted in Step 7.
+- `client/src/components/ui/TrustStrip.tsx`: the trust row under a hero (`.bb-trust-strip` / `.bb-trust-row*` in `shared-elements.css`). Pages pass their items; none defines its own.
 - `client/src/components/ui/GoogleReviewsCard.tsx` / `.css`: Google reviews (`defaultGoogleReviews`, `.bb-reviews-card*`).
 - `client/src/components/ui/ContactFormCard.tsx` / `.css`: contact module (`.bb-contact-section*`, `.bb-contact-form*`). Submit logic is `hooks/useContactForm.ts`, shared with the Kontakt form; the subject list is `contactSubjects` in `api/contact.ts`.
 - `client/src/components/ui/BiltjansterFaq.tsx` / `.css`: FAQ accordion (`.bb-faq__*`).
@@ -59,7 +60,7 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 4. **"Guide" family (shared template)** — technical repair-guide pages, all structurally the same kind of page. There is only one guide template; the remaining six guides join the same one already proven on the first four, not a second template.
    - *Owner*: `ServiceGuideTemplate.css` (`.service-guide__*`).
    - *Markup (2026-09-24)*: the sections are React components in `components/guide/ServiceGuideSections.tsx` (`GuideHero`, `GuideIntro` + `GuideParts`, `GuideImportance`, `GuideSymptoms`, `GuideServiceCard`, `GuideInfo`, `GuideTopic`, `GuideClosing`, plus `GuideQuickFacts` ("I korthet" band under the hero: time from the page's own FAQ, price promise, makes) and `GuideRelated` ("Fler tjänster" links from `data/relatedServices.ts`, before the closing), both added 2026-09-29; `GuideProcess` was removed 2026-09-25 with the generic process block). A guide page holds its copy and data and composes them; change section markup there, not in the pages.
-   - *Hero trust row (2026-09-21)*: the three trust items in every guide hero use the shared `.bb-trust-row` pattern from `shared-elements.css`, with the same markup as the Bilservice-family heroes. `ServiceGuideTemplate.css` holds no trust-row rules; do not add a local one.
+   - *Trust row (2026-09-21, moved 2026-09-30)*: the three trust items render as the shared `<TrustStrip>` (`components/ui/TrustStrip.tsx`, `.bb-trust-strip` in `shared-elements.css`) directly under the hero, mounted from `GuideHero`. `ServiceGuideTemplate.css` holds no trust-row rules; do not add a local one.
    - *Full-bleed hero (2026-09-22)*: all ten guides use `.service-guide__hero-bg` (real `<picture>` behind a gradient), not the old split grid; `.service-guide__hero-media` / `.service-guide__hero-badge` are deleted. Per-photo crop via `.service-guide__hero-bg--pos-left`. Details in `DESIGN_SYSTEM.md` §2c.
    - *Tips (2026-09-22)*: tip callouts use the global `.bb-tip` from `shared-elements.css`; `.service-guide__tip-strip` is deleted. The family owns only the spacing rule `.service-guide__intro-content > .bb-tip`. The Bilservice family's `.bilservice__repair-note` was folded into the same component (`.bilservice__price-grid + .bb-tip` owns its spacing).
    - *Text layouts (2026-09-25)*: `GuideImportance` renders its items as prose (`.service-guide__importance-prose`, bold lead-ins, two text columns) on the dark panel; its rules sit under `.service-guide__importance` because the older `.service-guide__importance > div > p` would otherwise win. `GuideInfo` renders a ruled `<dl>` (`.service-guide__info-ledger` / `__info-row`) instead of cards. `GuideTopic` takes `variant="prose"` (`.service-guide__topic-prose`: heading beside running text) or the default card grid.
@@ -141,10 +142,8 @@ text on every coloured Guide symptom card. Write the modifier with the base clas
 `.bargning-page__scenario-card--light .bargning-page__scenario-heading`,
 `.bb-tip .bb-eyebrow`. `check:css` does not detect this class of bug.
 
-`!important` appears 13 times. All but two are inside `prefers-reduced-motion` blocks; one is
-`.public-header__mobile-panel[hidden] { display: none !important }` — both idiomatic. Only
-`AboutPage.css` `.omoss-page__trust-item { border-right: none !important }` is avoidable
-debt. This is not a specificity-escalation problem; do not "clean it up".
+`!important` appears 12 times (was 13 until the Om oss trust strip was replaced by the shared `TrustStrip`, 2026-09-30). All but one are inside `prefers-reduced-motion` blocks; the one is
+`.public-header__mobile-panel[hidden] { display: none !important }` — both idiomatic. This is not a specificity-escalation problem; do not "clean it up".
 
 ## Token sources — there are two, and both are load-bearing
 

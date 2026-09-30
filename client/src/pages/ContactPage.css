@@ -28,17 +28,11 @@
   max-width: 56ch;
   opacity: 0.85;
 }
-/* Phones skip the second paragraph to keep the hero short; the lead takes
-   over its space above the buttons. */
-@media (max-width: 650px) {
-  .kontakt-page__sub { display: none; }
-  .kontakt-page__hero .kontakt-page__lead { margin-bottom: 1.6rem; }
-}
 
 .kontakt-page__hero .bb-reviews-card--hero-overlay {
-  align-self: flex-end;
+  align-self: flex-start;
   color: var(--bb-color-text-inverse);
-  margin-top: clamp(2rem, 4.6vw, 4.5rem);
+  margin-top: clamp(1.25rem, 2vw, 1.75rem);
 }
 
 /* Two-column info + form section */
@@ -556,6 +550,10 @@
    The beanie photo shifts right on narrow screens so Maher stays in frame. */
 @media (max-width: 1023px) {
   .kontakt-page__hero .kontakt-page__hero-slide--beanie img { object-position: 72% center; }
+}
+/* Phone photo: portrait crop, anchored to the top so the heads stay in the free zone. */
+@media (max-width: 650px) {
+  .kontakt-page__hero .kontakt-page__hero-slide--phone img { object-position: center top; }
 }
 /* Wide screens crop top and bottom; show the top of both photos so heads clear the header. */
 @media (min-width: 1024px) {

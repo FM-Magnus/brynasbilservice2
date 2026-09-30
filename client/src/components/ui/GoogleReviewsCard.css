@@ -24,7 +24,7 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-sizing: border-box;
-  justify-self: end;
+  justify-self: start;
   height: 100px;
   max-width: 660px;
   min-height: 100px;
@@ -185,12 +185,6 @@
 }
 
 /* Responsive */
-@media (max-width: 1120px) {
-  .bb-reviews-card--hero-overlay {
-    justify-self: start;
-  }
-}
-
 @media (max-width: 650px) {
   .bb-reviews-card {
     display: grid;

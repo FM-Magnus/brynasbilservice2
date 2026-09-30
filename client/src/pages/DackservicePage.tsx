@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { TrustStrip } from '../components/ui/TrustStrip'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -20,6 +21,9 @@ import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import heroBgJpg from '../assets/images/services/tires/tires-hero-bg.jpg'
 import heroBgWebp from '../assets/images/services/tires/tires-hero-bg.webp'
+import heroAisleJpg from '../assets/images/services/tires/tires-hero-storage-aisle.jpg'
+import heroAisleWebp from '../assets/images/services/tires/tires-hero-storage-aisle.webp'
+import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
 import wheelChangeJpg from '../assets/images/services/tires/tire-wheel-change.jpg'
 import wheelChangeWebp from '../assets/images/services/tires/tire-wheel-change.webp'
@@ -126,8 +130,14 @@ const faqs = [
   { question: 'Kan jag boka däckhotell utan att göra ett hjulskifte samtidigt?', answer: 'Ja, du kan lämna in däcken för förvaring separat, men de flesta väljer att kombinera det med sitt hjulskifte för att slippa ett extra besök.' },
 ]
 
+const heroSlides = [
+  { webp: heroBgWebp, jpg: heroBgJpg, alt: 'Däckverkstad och hjulförvaring' },
+  { webp: heroAisleWebp, jpg: heroAisleJpg, alt: 'Gång mellan hyllor med däck och fälgar i däckförvaringen' },
+]
+
 export default function DackservicePage() {
   const { openBooking, openBookingWith, bookingModal } = useBookingModal('Gäller däckservice & hjulskifte')
+  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -139,10 +149,12 @@ export default function DackservicePage() {
         {/* Hero */}
         <section className="bb-hero" id="dackservice" aria-labelledby="dackservice-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
-            <picture data-image-slot="tires-hero-bg">
-              <source srcSet={heroBgWebp} type="image/webp" />
-              <img src={heroBgJpg} alt="Däckverkstad och hjulförvaring" />
-            </picture>
+            {heroSlides.map((slide, i) => (
+              <picture key={slide.jpg} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
+                <source srcSet={slide.webp} type="image/webp" />
+                <img src={slide.jpg} alt={slide.alt} />
+              </picture>
+            ))}
           </div>
           <div className="bb-hero__shade" aria-hidden="true" />
           <PublicHeader onBookingClick={openBooking} variant="overlay" />
@@ -168,21 +180,10 @@ export default function DackservicePage() {
               </div>
             </div>
             <div className="bb-hero__bottom">
-              <div className="bb-trust-row">
-                {localValueProps.map(({ icon: Icon, title, text }) => (
-                  <div className="bb-trust-row__item" key={title}>
-                    <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                    <span className="bb-trust-row__text">
-                      <b>{title}</b>
-                      <small>{text}</small>
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <GoogleReviewsCard variant="hero-overlay" />
-            </div>
+              <GoogleReviewsCard variant="hero-overlay" />            </div>
           </div>
         </section>
+        <TrustStrip items={localValueProps} />
 
         {/* 6-Card Tire Service Grid */}
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="dackservice-services-title">

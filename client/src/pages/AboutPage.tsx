@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
+import { TrustStrip } from '../components/ui/TrustStrip'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -43,6 +44,13 @@ function StarBadgeIcon({ className }: { className?: string }) {
     </svg>
   )
 }
+
+const trustItems = [
+  { icon: ShieldIcon, title: 'Personlig service', text: 'Du och din bil i fokus.' },
+  { icon: StarBadgeIcon, title: 'Erfarna mekaniker', text: 'Mångårig erfarenhet.' },
+  { icon: ClockIcon, title: 'Tryggt och enkelt', text: 'Från bokning till färdig bil.' },
+  { icon: UsersIcon, title: 'Oberoende verkstad', text: 'För alla bilmärken.' },
+] as const
 
 function DocumentIcon({ className }: { className?: string }) {
   return (
@@ -104,6 +112,7 @@ export default function AboutPage() {
   const activeHeroSlide = useHeroSlideshow(heroSlides.length)
 
 
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -163,54 +172,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* =========================================================
-            2. TRUST BADGES STRIP
-            ========================================================= */}
-        <section className="omoss-page__trust-strip-section" aria-label="Trygghetsfaktorer">
-          <div className="bb-wrap">
-            <div className="omoss-page__trust-strip">
-              <div className="omoss-page__trust-item">
-                <div className="omoss-page__trust-icon" aria-hidden="true">
-                  <ShieldIcon />
-                </div>
-                <div>
-                  <h2 className="omoss-page__trust-title">Personlig service</h2>
-                  <p className="omoss-page__trust-desc">Du och din bil i fokus.</p>
-                </div>
-              </div>
-
-              <div className="omoss-page__trust-item">
-                <div className="omoss-page__trust-icon" aria-hidden="true">
-                  <StarBadgeIcon />
-                </div>
-                <div>
-                  <h2 className="omoss-page__trust-title">Erfarna mekaniker</h2>
-                  <p className="omoss-page__trust-desc">Mångårig erfarenhet.</p>
-                </div>
-              </div>
-
-              <div className="omoss-page__trust-item">
-                <div className="omoss-page__trust-icon" aria-hidden="true">
-                  <ClockIcon />
-                </div>
-                <div>
-                  <h2 className="omoss-page__trust-title">Tryggt och enkelt</h2>
-                  <p className="omoss-page__trust-desc">Från bokning till färdig bil.</p>
-                </div>
-              </div>
-
-              <div className="omoss-page__trust-item">
-                <div className="omoss-page__trust-icon" aria-hidden="true">
-                  <UsersIcon />
-                </div>
-                <div>
-                  <h2 className="omoss-page__trust-title">Oberoende verkstad</h2>
-                  <p className="omoss-page__trust-desc">För alla bilmärken.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <TrustStrip items={trustItems} label="Trygghetsfaktorer" />
 
         {/* =========================================================
             3. WORKSHOP STORY & FACTS

@@ -18,7 +18,8 @@ test('om-oss page renders without horizontal overflow across breakpoints', async
 
   // Verify key sections exist
   await expect(page.locator('.omoss-page__hero')).toBeVisible()
-  await expect(page.locator('.omoss-page__trust-strip')).toBeVisible()
+  // The shared trust strip under the hero is hidden on phones (<=650px).
+  if ((page.viewportSize()?.width ?? 0) > 650) await expect(page.locator('.bb-trust-strip')).toBeVisible()
   await expect(page.locator('.omoss-page__story')).toBeVisible()
   await expect(page.locator('.omoss-page__principles')).toBeVisible()
   await expect(page.locator('.omoss-page__process')).toBeVisible()

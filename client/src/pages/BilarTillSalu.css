@@ -113,25 +113,6 @@
 .bilartillsalu-page__hero-meta a { text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.35); text-underline-offset: 3px; }
 .bilartillsalu-page__hero-meta a:hover { text-decoration-color: var(--bb-color-amber-500); }
 
-.bilartillsalu-page__trust { margin-top: clamp(2rem, 4vw, 3rem); max-width: 860px; }
-@media (min-width: 1024px) {
-  .bilartillsalu-page__trust { max-width: none; }
-}
-
-/* Amber outline ring around each trust icon (page-local; .bb-icon-bare untouched). */
-.bilartillsalu-page__trust-icon {
-  align-items: center;
-  border: 1.5px solid var(--bb-color-amber-500);
-  border-radius: 50%;
-  color: var(--bb-color-amber-500);
-  display: inline-flex;
-  flex: 0 0 auto;
-  height: 40px;
-  justify-content: center;
-  width: 40px;
-}
-.bilartillsalu-page__trust-icon svg { height: 20px; width: 20px; }
-
 /* ---------- 2. Listings ---------- */
 .bilartillsalu-page__listings { padding-block: clamp(3rem, 6vw, 5rem); }
 
@@ -475,7 +456,7 @@
 }
 
 @media (max-width: 650px) {
-  .bilartillsalu-page__hero { min-height: 0; }
+  .bilartillsalu-page__hero { min-height: var(--bb-hero-matched-height); }
   /* .bb-card--trust stacks as a column at ≤640px, where its text block's
      320px flex-basis would turn into a 320px height. */
   .bilartillsalu-page__closing-card .bb-card--trust__text { flex-basis: auto; }

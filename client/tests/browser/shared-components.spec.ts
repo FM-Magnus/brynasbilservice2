@@ -28,6 +28,12 @@ const RULES = [
     use: 'render <Tip title text action? /> from components/ui/Tip',
   },
   {
+    what: 'the trust row under a hero (.bb-trust-strip / .bb-trust-row)',
+    pattern: /className=["'`{][^"'`]*\bbb-trust-(strip|row)\b(?!__)/,
+    owners: ['components/ui/TrustStrip.tsx'],
+    use: 'render <TrustStrip items label? /> from components/ui/TrustStrip right after the hero',
+  },
+  {
     what: 'the booking modal',
     pattern: /from ['"][./]*(components\/)?BookingForm['"]/,
     owners: ['hooks/useBookingModal.tsx'],

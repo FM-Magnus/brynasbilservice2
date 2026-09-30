@@ -301,17 +301,27 @@
   .bb-tip .bb-btn { width: 100%; justify-content: center; }
 }
 
-/* ---------- 3-Pillar Trust Row (Hero / Footer Anchor) ---------- */
+/* ---------- Trust strip (one flush row directly under a hero) ---------- */
+/* Rendered by `components/ui/TrustStrip.tsx` (guides mount it from `GuideHero`).
+   Moved out of the hero 2026-09-30 to declutter it; dark text on the page
+   background. Phones leave the trust points out (Magnus, 2026-09-24). */
+.bb-trust-strip {
+  border-bottom: 1px solid var(--bb-color-border-subtle-light);
+  padding: clamp(1rem, 2vw, 1.4rem) 0;
+}
 .bb-trust-row {
-  display: grid;
-  gap: clamp(0.5rem, 2.2vw, 1.6rem);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 660px;
+  display: flex;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .bb-trust-row__item {
   align-items: center;
   display: flex;
-  gap: 0.55rem;
+  flex: 1 1 0;
+  gap: 0.7rem;
+  min-width: 0;
 }
 .bb-trust-row__item .bb-icon-bare {
   flex: 0 0 auto;
@@ -319,6 +329,7 @@
   width: 31px;
 }
 .bb-trust-row__item .bb-icon-bare svg {
+  filter: none;
   height: 24px;
   width: 24px;
 }
@@ -326,23 +337,20 @@
   display: grid;
   line-height: 1.25;
 }
-.bb-trust-row__text b,
-.bb-trust-row__text strong {
-  color: var(--bb-color-text-inverse, #fff);
+.bb-trust-row__text b {
+  color: var(--bb-color-ink-950);
   font-family: var(--bb-font-body);
   font-size: 0.88rem;
   font-weight: 700;
 }
-.bb-trust-row__text small,
-.bb-trust-row__text span {
-  color: rgba(255, 255, 255, 0.73);
+.bb-trust-row__text small {
+  color: var(--bb-color-text-muted);
   font-family: var(--bb-font-body);
   font-size: var(--bb-font-size-label, 0.78rem);
   font-weight: 400;
 }
-/* Phones leave the trust points out of the hero (Magnus, 2026-09-24). */
 @media (max-width: 650px) {
-  .bb-trust-row { display: none; }
+  .bb-trust-strip { display: none; }
 }
 
 /* ---------- 5-Step Process Grid (Workshop Protocol) ---------- */
@@ -594,17 +602,9 @@
   flex-wrap: wrap;
   gap: 0.75rem;
 }
+/* The review card sits bottom-left, directly under the buttons. */
 .bb-hero__bottom {
-  align-items: end;
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, auto);
-  margin-top: clamp(2.1rem, 6vw, 5.8rem);
-}
-@media (max-width: 1120px) {
-  .bb-hero__bottom {
-    grid-template-columns: 1fr;
-  }
+  margin-top: clamp(1.25rem, 2vw, 1.75rem);
 }
 @media (max-width: 650px) {
   .bb-hero {
@@ -621,17 +621,15 @@
     padding-bottom: var(--bb-hero-padding-bottom-mobile);
     padding-top: var(--bb-hero-padding-top-mobile);
   }
-  .bb-hero__copy h1,
-  .bb-hero__copy .bb-h1 {
-    font-size: clamp(2.75rem, 13vw, 4rem);
-  }
+  /* Phones drop the hero lead so the text block stays short and the photo
+     keeps a free zone above it (Magnus 2026-09-30). */
   .bb-hero__copy > p:not(.bb-eyebrow) {
-    font-size: var(--bb-font-size-support, 0.92rem);
-    line-height: var(--bb-line-height-body);
-    margin: 1rem 0 1.15rem;
+    display: none;
+  }
+  .bb-hero__copy .bb-hero__actions {
+    margin-top: 1.25rem;
   }
   .bb-hero__bottom {
-    gap: 1.3rem;
     margin-top: 1.75rem;
   }
 }

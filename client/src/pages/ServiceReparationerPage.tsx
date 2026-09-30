@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
+import { TrustStrip } from '../components/ui/TrustStrip'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -112,21 +113,10 @@ export default function ServiceReparationerPage() {
               </div>
             </div>
             <div className="bb-hero__bottom">
-              <div className="bb-trust-row">
-                {trustRow.map(({ icon: Icon, title, text }) => (
-                  <div className="bb-trust-row__item" key={title}>
-                    <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                    <span className="bb-trust-row__text">
-                      <b>{title}</b>
-                      <small>{text}</small>
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <GoogleReviewsCard variant="hero-overlay" />
-            </div>
+              <GoogleReviewsCard variant="hero-overlay" />            </div>
           </div>
         </section>
+        <TrustStrip items={trustRow} />
 
         {/* Vad kostar en bilservice? */}
         <section className="bilservice__section bilservice__section--flow-bottom" aria-labelledby="bilservice-price-title">

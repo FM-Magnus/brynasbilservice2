@@ -17,13 +17,18 @@ import beanieHeroWebp from '../assets/images/contact/contact-hero-customer-beani
 import beanieHeroJpg from '../assets/images/contact/contact-hero-customer-beanie.jpg'
 import carHeroWebp from '../assets/images/contact/contact-hero-maher-customer-car.webp'
 import carHeroJpg from '../assets/images/contact/contact-hero-maher-customer-car.jpg'
+import phoneHeroWebp from '../assets/images/contact/contact-hero-phone.webp'
+import phoneHeroJpg from '../assets/images/contact/contact-hero-phone.jpg'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
+import { useIsPhone } from '../hooks/useIsPhone'
 import './ContactPage.css'
 
 const heroSlides = [
   { webp: beanieHeroWebp, jpg: beanieHeroJpg, modifier: ' kontakt-page__hero-slide--beanie' },
   { webp: carHeroWebp, jpg: carHeroJpg, modifier: ' kontakt-page__hero-slide--car' },
 ]
+// Phones get one static portrait photo: no rotation, and the desktop photos are never downloaded.
+const phoneHeroSlides = [{ webp: phoneHeroWebp, jpg: phoneHeroJpg, modifier: ' kontakt-page__hero-slide--phone' }]
 
 function ChevronDownIcon({ className }: { className?: string }) {
   return (
@@ -40,14 +45,16 @@ const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?q=Utmarksv%C3%A4gen+2
 export default function ContactPage() {
   const { openBooking, bookingModal } = useBookingModal()
   const { mailtoHref, handleSubmit, reset } = useContactForm()
-  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
+  const isPhone = useIsPhone()
+  const slides = isPhone ? phoneHeroSlides : heroSlides
+  const activeHeroSlide = useHeroSlideshow(slides.length)
 
   return (
     <>
       <main className="kontakt-page" id="main-content">
         <section className="bb-hero kontakt-page__hero" aria-labelledby="contact-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
-            {heroSlides.map((slide, i) => (
+            {slides.map((slide, i) => (
               <picture key={slide.jpg} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
                 <source srcSet={slide.webp} type="image/webp" />
                 <img src={slide.jpg} alt="" />

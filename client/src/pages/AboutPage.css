@@ -33,8 +33,11 @@
 .omoss-page__hero {
   background-color: #081619;
   color: var(--bb-color-text-inverse);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
-  padding-bottom: clamp(3.5rem, 4vw, 3.5rem);
+  padding-bottom: var(--bb-hero-padding-bottom);
   padding-top: var(--bb-hero-clearance);
   position: relative;
 }
@@ -114,77 +117,14 @@
 
 .omoss-page__hero-bottom {
   display: flex;
-  justify-content: flex-end;
-  margin-top: clamp(2rem, 5vw, 4.5rem);
+  justify-content: flex-start;
+  margin-top: clamp(1.25rem, 2vw, 1.75rem);
   position: relative;
   z-index: 2;
 }
 
 .omoss-page .bb-reviews-card--hero-overlay {
   color: var(--bb-color-text-inverse);
-}
-
-/* -------------------------------------------------------------
-   2. TRUST BADGES STRIP
-   ------------------------------------------------------------- */
-.omoss-page__trust-strip-section {
-  margin-top: -2.5rem;
-  position: relative;
-  z-index: 10;
-}
-
-.omoss-page__trust-strip {
-  background: var(--bb-color-surface);
-  border: 1px solid rgba(7, 20, 22, 0.08);
-  border-radius: var(--bb-radius-card);
-  box-shadow: var(--bb-shadow-card);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 1.5rem 1.75rem;
-}
-
-.omoss-page__trust-item {
-  align-items: center;
-  display: flex;
-  gap: 1rem;
-  padding: 0.5rem 1rem;
-}
-
-.omoss-page__trust-item:not(:last-child) {
-  border-right: 1px solid rgba(7, 20, 22, 0.08);
-}
-
-.omoss-page__trust-icon {
-  align-items: center;
-  background: var(--bb-color-teal-100);
-  border-radius: var(--bb-radius-md);
-  color: var(--bb-color-teal-700);
-  display: flex;
-  flex-shrink: 0;
-  height: 46px;
-  justify-content: center;
-  width: 46px;
-}
-
-.omoss-page__trust-icon svg {
-  height: 24px;
-  width: 24px;
-}
-
-.omoss-page__trust-title {
-  color: var(--bb-color-ink-950);
-  font-family: var(--bb-font-body);
-  font-size: 0.98rem;
-  font-weight: 700;
-  line-height: 1.25;
-  margin: 0 0 0.2rem;
-}
-
-.omoss-page__trust-desc {
-  color: var(--bb-color-text-muted);
-  font-size: 0.84rem;
-  line-height: 1.35;
-  margin: 0;
 }
 
 /* -------------------------------------------------------------
@@ -716,13 +656,6 @@
    RESPONSIVE BREAKPOINTS
    ------------------------------------------------------------- */
 @media (max-width: 1024px) {
-  .omoss-page__trust-strip {
-    grid-template-columns: repeat(2, 1fr);
-    row-gap: 1.25rem;
-  }
-  .omoss-page__trust-item:nth-child(2) {
-    border-right: none;
-  }
   .omoss-page__principles-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -732,6 +665,11 @@
   .omoss-page__story-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 650px) {
+  .omoss-page__hero { padding-bottom: var(--bb-hero-padding-bottom-mobile); }
+  .omoss-page__hero-lead { display: none; }
 }
 
 @media (max-width: 768px) {
@@ -750,18 +688,6 @@
 }
 
 @media (max-width: 560px) {
-  .omoss-page__trust-strip {
-    grid-template-columns: 1fr;
-  }
-  .omoss-page__trust-item {
-    border-right: none !important;
-    border-bottom: 1px solid rgba(7, 20, 22, 0.08);
-    padding-bottom: 1rem;
-  }
-  .omoss-page__trust-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0.5rem;
-  }
   .omoss-page__principles-grid {
     grid-template-columns: 1fr;
   }

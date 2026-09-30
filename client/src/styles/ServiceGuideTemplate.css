@@ -86,7 +86,7 @@
 .service-guide__hero .service-guide__eyebrow { margin-bottom: 0.75rem; }
 .service-guide__hero .service-guide__title { margin-bottom: 0.75rem; font-size: var(--bb-hero-h1-size); }
 .service-guide__hero .service-guide__lead { margin-bottom: 1.25rem; }
-.service-guide__hero .service-guide__actions { margin-bottom: 1.5rem; }
+.service-guide__hero .service-guide__actions { margin-bottom: 0; }
 
 .service-guide__lead {
   max-width: 46ch;
@@ -126,10 +126,20 @@
    fallback background — still fully readable. */
 .service-guide__hero {
   background-color: var(--bb-color-ink-950);
-  padding-block: var(--bb-hero-clearance) clamp(3rem, 5vw, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-block: var(--bb-hero-clearance) var(--bb-hero-padding-bottom);
   min-height: var(--bb-hero-min-height);
   overflow: hidden;
   position: relative;
+}
+/* Phones: matched hero height, no lead, so the photo keeps a free zone above
+   the text (Magnus 2026-09-30). */
+@media (max-width: 650px) {
+  .service-guide__hero { min-height: var(--bb-hero-matched-height); padding-bottom: var(--bb-hero-padding-bottom-mobile); }
+  .service-guide__hero .service-guide__actions { margin-bottom: 0; }
+  .service-guide__hero .service-guide__lead { display: none; }
 }
 .service-guide__hero-bg {
   position: absolute;

@@ -55,7 +55,7 @@
   --bb-hero-clearance: calc(var(--bb-header-height) + 1.5rem);
   /* Hero geometry (canonical standard from Landing) */
   --bb-hero-min-height: clamp(520px, 70svh, 640px);
-  --bb-hero-min-height-mobile: 780px;
+  --bb-hero-min-height-mobile: 686px;
   /* One shared height for the Landing, Om oss, Felsökning, Däckservice,
      AC-service, Bärgning and Kontakt heroes. Each value is at least the
      tallest of those heroes' content at that width (measured 2026-09-24),
@@ -82,5 +82,10 @@
   :root { --bb-hero-matched-height: clamp(701px, calc(532px + 22vw), 780px); }
 }
 @media (max-width: 650px) {
-  :root { --bb-hero-matched-height: 686px; }
+  :root {
+    --bb-hero-matched-height: 686px;
+    /* One phone heading size for every hero (Magnus 2026-09-30): it leaves the
+       space above the text block free for the phone photo's subject. */
+    --bb-hero-h1-size: 2rem;
+  }
 }

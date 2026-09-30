@@ -9,6 +9,7 @@ import { useState } from 'react'
 import type { ReactElement, ReactNode, SVGProps } from 'react'
 import { Link } from 'react-router-dom'
 import { BUSINESS } from '../../data/business'
+import { TrustStrip } from '../ui/TrustStrip'
 import { relatedServices } from '../../data/relatedServices'
 import { AlertTriangleIcon } from '../icons/AlertTriangleIcon'
 import { CheckIcon } from '../icons/CheckIcon'
@@ -81,35 +82,27 @@ interface GuideHeroProps {
 
 export function GuideHero({ id, eyebrow, title, lead, image, trustBadges, onBooking, bookLabel = 'Boka tid' }: GuideHeroProps) {
   return (
-    <section className="service-guide__hero" aria-labelledby={id}>
-      <div className={`service-guide__hero-bg${image.alignLeft ? ' service-guide__hero-bg--pos-left' : ''}`}>
-        <picture data-image-slot={image.slot}>
-          <source srcSet={image.webp} type="image/webp" />
-          <img src={image.jpg} alt={image.alt} loading={image.lazy ? 'lazy' : undefined} />
-        </picture>
-      </div>
-      <div className="bb-wrap service-guide__container">
-        <div className="service-guide__hero-inner">
-          <div>
-            <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">{eyebrow}</div>
-            <h1 className="bb-h1 service-guide__title" id={id}>{title}</h1>
-            <p className="bb-lead bb-lead--dark service-guide__lead">{lead}</p>
-            <GuideActions onBooking={onBooking} bookLabel={bookLabel} />
-            <div className="bb-trust-row">
-              {trustBadges.map(({ icon: Icon, title: badgeTitle, text }) => (
-                <div className="bb-trust-row__item" key={badgeTitle}>
-                  <span className="bb-icon-bare"><Icon aria-hidden="true" /></span>
-                  <span className="bb-trust-row__text">
-                    <b>{badgeTitle}</b>
-                    <small>{text}</small>
-                  </span>
-                </div>
-              ))}
+    <>
+      <section className="service-guide__hero" aria-labelledby={id}>
+        <div className={`service-guide__hero-bg${image.alignLeft ? ' service-guide__hero-bg--pos-left' : ''}`}>
+          <picture data-image-slot={image.slot}>
+            <source srcSet={image.webp} type="image/webp" />
+            <img src={image.jpg} alt={image.alt} loading={image.lazy ? 'lazy' : undefined} />
+          </picture>
+        </div>
+        <div className="bb-wrap service-guide__container">
+          <div className="service-guide__hero-inner">
+            <div>
+              <div className="bb-eyebrow bb-eyebrow--dark service-guide__eyebrow">{eyebrow}</div>
+              <h1 className="bb-h1 service-guide__title" id={id}>{title}</h1>
+              <p className="bb-lead bb-lead--dark service-guide__lead">{lead}</p>
+              <GuideActions onBooking={onBooking} bookLabel={bookLabel} />
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <TrustStrip items={trustBadges} />
+    </>
   )
 }
 

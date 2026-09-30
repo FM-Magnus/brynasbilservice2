@@ -61,18 +61,6 @@
 .bilservice__section--aqua { background: var(--bilservice-aqua-100); }
 
 /* ---------- AC full-bleed hero copy ---------- */
-.bilservice__ac-hero .bb-hero__content { justify-content: flex-start; }
-@media (max-width: 1120px) {
-  .bilservice__ac-hero .bb-hero__content { padding-top: 9.5rem; }
-}
-/* On phones the copy sits at the bottom like every other hero: there is no
-   room to start it level with Landing's shorter phone copy. */
-@media (max-width: 650px) {
-  .bilservice__ac-hero .bb-hero__content {
-    justify-content: flex-end;
-    padding-top: var(--bb-hero-padding-top-mobile);
-  }
-}
 .bilservice__ac-intro-copy { max-width: 660px; }
 .bilservice__ac-intro-copy > .bb-eyebrow { margin: 0 0 0.7rem; }
 .bilservice__ac-title { margin: 0 0 1rem; }
@@ -699,10 +687,6 @@
 .bilservice > #felsokning,
 .bilservice > #dackservice,
 .bilservice > .bilservice__ac-hero { min-height: var(--bb-hero-matched-height); }
-.bilservice > #felsokning .bb-hero__bottom { margin-top: clamp(2rem, 2.7vw, 2.5rem); }
-@media (max-width: 650px) {
-  .bilservice > #felsokning .bb-hero__bottom { margin-top: 1rem; }
-}
 
 /* Give only the Felsökning hero photo a subtle ember warmth. */
 .bilservice > #felsokning .bb-hero__shade {
