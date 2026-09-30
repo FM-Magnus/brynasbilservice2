@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import brandLogo from '../../assets/images/brand/brynas-bilservice-header-logo.svg'
-import { publicNavigation, type PublicNavigationItem } from '../../data/publicNavigation'
+import { publicNavigation, type PublicNavigationChild, type PublicNavigationItem } from '../../data/publicNavigation'
 import { BUSINESS } from '../../data/business'
 import './PublicHeader.css'
 
@@ -39,6 +39,7 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
   const location = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const [sticky, setSticky] = useState(false)
   const mobileToggleRef = useRef<HTMLButtonElement>(null)
   const mobilePanelRef = useRef<HTMLElement>(null)
@@ -47,6 +48,7 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
 
   const closeMobileMenu = useCallback((restoreFocus = false) => {
     setMobileOpen(false)
+    setMobileServicesOpen(false)
     if (restoreFocus) window.requestAnimationFrame(() => mobileToggleRef.current?.focus())
   }, [])
 
@@ -115,6 +117,8 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
     return item.children?.some((child) => location.pathname === routePath(child.to)) ?? false
   }
 
+  const isChildActive = (child: PublicNavigationChild) => location.pathname === routePath(child.to)
+
   const handleLinkClick = () => {
     closeMobileMenu()
     closeServicesMenu()
@@ -133,7 +137,7 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
         </Link>
 
         <nav className="public-header__desktop-nav" aria-label="Huvudnavigation">
-          {publicNavigation.map((item) => {
+          {publicNavigation.filter((item) => !item.inServices && !item.hideInDesktopBar).map((item) => {
             const active = isActive(item)
             if (!item.children) {
               return (
@@ -152,7 +156,17 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
                   {item.label}<ChevronIcon />
                 </button>
                 <div className={`public-header__services-menu${servicesOpen ? ' is-open' : ''}`} id="public-service-navigation" aria-label="Biltjänster">
-                  {item.children.map((child) => <Link className="public-header__service-link" key={child.to} to={child.to} onClick={handleLinkClick}>{child.label}</Link>)}
+                  <div className="public-header__services-overview">
+                    {(item.overview ?? []).map((child) => <Link className="public-header__service-link" key={child.to} to={child.to} onClick={handleLinkClick}>{child.label}</Link>)}
+                  </div>
+                  <div className="public-header__services-groups">
+                    {(item.groups ?? []).map((group, index) => (
+                      <div className="public-header__services-group" key={group.label} role="group" aria-labelledby={`public-service-group-${index}`}>
+                        <p className="public-header__services-heading" id={`public-service-group-${index}`}>{group.label}</p>
+                        {group.items.map((child) => <Link className="public-header__service-link" key={child.to} to={child.to} onClick={handleLinkClick}>{child.label}</Link>)}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )
@@ -164,7 +178,29 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
       </div>
 
       <nav ref={mobilePanelRef} className="public-header__mobile-panel" id="public-mobile-navigation" aria-label="Mobilnavigation" hidden={!mobileOpen}>
-        {publicNavigation.map((item) => <Link key={item.to} to={item.to} className={`public-header__mobile-link${isActive(item) ? ' is-active' : ''}`} aria-current={isActive(item) ? 'page' : undefined} onClick={handleLinkClick}>{item.label}</Link>)}
+        {publicNavigation.filter((item) => !item.inServices).map((item) => {
+          const active = isActive(item)
+          if (!item.groups) {
+            return <Link key={item.to} to={item.to} className={`public-header__mobile-link${active ? ' is-active' : ''}`} aria-current={active ? 'page' : undefined} onClick={handleLinkClick}>{item.label}</Link>
+          }
+
+          return (
+            <div className="public-header__mobile-services" key={item.to}>
+              <button className={`public-header__mobile-link public-header__mobile-toggle${active ? ' is-active' : ''}`} type="button" aria-expanded={mobileServicesOpen} aria-controls="public-mobile-services" onClick={() => setMobileServicesOpen((open) => !open)}>
+                {item.label}<ChevronIcon />
+              </button>
+              <div className="public-header__mobile-sub" id="public-mobile-services" hidden={!mobileServicesOpen}>
+                {(item.overview ?? []).map((child) => <Link key={child.to} to={child.to} className={`public-header__mobile-link public-header__mobile-link--sub${isChildActive(child) ? ' is-active' : ''}`} aria-current={isChildActive(child) ? 'page' : undefined} onClick={handleLinkClick}>{child.label}</Link>)}
+                {item.groups.map((group, index) => (
+                  <div className="public-header__mobile-group" key={group.label} role="group" aria-labelledby={`public-mobile-group-${index}`}>
+                    <p className="public-header__mobile-heading" id={`public-mobile-group-${index}`}>{group.label}</p>
+                    {group.items.map((child) => <Link key={child.to} to={child.to} className={`public-header__mobile-link public-header__mobile-link--sub${isChildActive(child) ? ' is-active' : ''}`} aria-current={isChildActive(child) ? 'page' : undefined} onClick={handleLinkClick}>{child.label}</Link>)}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })}
         <div className="public-header__mobile-actions">
           <a className="public-header__mobile-call" href={BUSINESS.phone.href}><PhoneIcon />Ring oss: {BUSINESS.phone.display}</a>
           <button className="public-header__mobile-booking" type="button" onClick={handleBookingClick}>Boka tid</button>

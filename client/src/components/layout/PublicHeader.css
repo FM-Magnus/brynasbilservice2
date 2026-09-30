@@ -45,6 +45,8 @@
   justify-content: center;
   min-width: 0;
   padding: 0.36rem 0.44rem;
+  /* The Biltjänster menu is wider than its trigger, so it centres on the whole nav pill. */
+  position: relative;
 }
 
 .public-header .public-header__nav-link {
@@ -68,7 +70,6 @@
 }
 
 .public-header__nav-link:hover, .public-header__nav-link.is-active, .public-header__nav-link[aria-expanded='true'] { background: var(--bb-color-teal-100); color: var(--bb-color-teal-700); }
-.public-header__services { position: relative; }
 .public-header__services-trigger svg { height: 12px; stroke: currentColor; stroke-width: 2; transition: transform var(--bb-transition-fast); width: 12px; }
 .public-header__services-trigger[aria-expanded='true'] svg { transform: rotate(180deg); }
 
@@ -83,20 +84,25 @@
   border: 1px solid rgba(126, 215, 221, 0.18);
   border-radius: var(--bb-radius-menu);
   box-shadow: var(--bb-shadow-floating);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   left: 50%;
-  min-width: 330px;
+  max-width: calc(100vw - 2rem);
   opacity: 0;
   padding: 0.55rem;
   pointer-events: none;
   position: absolute;
-  top: calc(100% + 0.7rem);
+  top: calc(100% + 0.35rem);
+  width: max-content;
   transform: translate(-50%, -0.45rem);
   transition: opacity var(--bb-transition-fast), transform var(--bb-transition-fast);
   z-index: 2;
 }
 
 .public-header__services-menu.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+.public-header__services-groups { display: grid; gap: 0 0.6rem; grid-template-columns: repeat(4, max-content); }
+.public-header__services-heading { color: var(--bb-color-teal-500); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; margin: 0; padding: 0.4rem 0.85rem 0.35rem; text-transform: uppercase; }
+.public-header__services-overview { border-bottom: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.3rem; padding-bottom: 0.45rem; }
 .public-header .public-header__service-link { border-radius: var(--bb-radius-md); color: var(--bb-color-surface); display: block; font-size: 1rem; font-weight: 700; padding: 0.7rem 0.85rem; text-transform: uppercase; }
 .public-header .public-header__service-link:hover, .public-header .public-header__service-link:focus-visible { background: var(--bb-color-ink-800); color: var(--bb-color-focus); outline: 0; }
 
@@ -125,21 +131,14 @@
 
 .public-header__menu-toggle, .public-header__mobile-panel { display: none; }
 
-/* The logo is never smaller than the phone logo (195 x 48). At 1187px the bar has
-   room for it: 195 + 137 (Boka tid) + gaps and padding leave about 785px for the
-   nav, whose links need about 720px at this size. */
+/* The logo is never smaller than the phone logo (195 x 48). The bar carries six
+   items (Start, Felsökning and AC live elsewhere), so the 16px links fit beside it
+   at every width above 1186px. */
 @media (max-width: 1320px) {
   .public-header { padding: 0.75rem 1rem; }
   .public-header__inner { grid-template-columns: 195px minmax(0, 1fr) auto; }
   .public-header__brand { max-width: 195px; }
-  .public-header .public-header__nav-link { font-size: 0.875rem; padding: 0.4rem 0.5rem; }
   .public-header__booking { padding-inline: 1rem; }
-}
-
-/* Just above the compact range the 16px links need about 756px and the bar offers
-   748px at 1321px wide; tighter link padding removes the 8px overflow. */
-@media (min-width: 1321px) and (max-width: 1359px) {
-  .public-header .public-header__nav-link { padding-inline: 0.3rem; }
 }
 
 @media (max-width: 1186px) {
@@ -197,6 +196,14 @@
     text-transform: uppercase;
   }
   .public-header__mobile-link:hover, .public-header__mobile-link.is-active { background: var(--bb-color-ink-800); border-color: var(--bb-color-teal-600); }
+  /* Biltjänster row: a button that opens the grouped service links below it. */
+  .public-header__mobile-toggle { background: transparent; justify-content: space-between; text-align: left; width: 100%; }
+  .public-header__mobile-toggle svg { fill: none; flex: none; height: 14px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; transition: transform var(--bb-transition-fast); width: 14px; }
+  .public-header__mobile-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
+  .public-header__mobile-sub { border-left: 2px solid rgba(126, 215, 221, 0.35); display: grid; gap: 0.1rem; margin: 0.15rem 0 0.4rem 0.5rem; padding-left: 0.6rem; }
+  .public-header__mobile-sub[hidden] { display: none !important; }
+  .public-header__mobile-heading { color: var(--bb-color-teal-500); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; margin: 0; padding: 0.7rem 1rem 0.15rem; text-transform: uppercase; }
+  .public-header__mobile-link.public-header__mobile-link--sub { font-size: 0.9375rem; min-height: 48px; }
   .public-header__mobile-actions { border-top: 1px solid rgba(255, 255, 255, 0.16); display: grid; gap: 0.65rem; margin-top: 0.5rem; padding: 0.8rem 0 0; }
   .public-header__mobile-call { border: 2px solid rgba(255, 255, 255, 0.45); color: var(--bb-color-surface); gap: 0.55rem; padding: 0.75rem 1rem; }
   .public-header__mobile-call:hover { border-color: var(--bb-color-focus); color: var(--bb-color-focus); }
