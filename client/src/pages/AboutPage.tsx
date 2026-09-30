@@ -191,7 +191,7 @@ export default function AboutPage() {
 
                 <div className="omoss-page__facts-card">
                   <div>
-                    <h3 className="omoss-page__facts-title">Företagsfakta &amp; kontakt</h3>
+                    <h2 className="omoss-page__facts-title">Företagsfakta &amp; kontakt</h2>
                     <div className="omoss-page__facts-list">
                       <div className="omoss-page__fact-row">
                         <span className="omoss-page__fact-label">Juridiskt namn:</span>
@@ -233,7 +233,7 @@ export default function AboutPage() {
                   </div>
 
                   <div>
-                    <h3 className="omoss-page__facts-title">Öppettider</h3>
+                    <h2 className="omoss-page__facts-title">Öppettider</h2>
                     <div className="omoss-page__hours-list">
                       <div className="omoss-page__hours-row">
                         <span className="omoss-page__hours-day">Måndag - Fredag:</span>

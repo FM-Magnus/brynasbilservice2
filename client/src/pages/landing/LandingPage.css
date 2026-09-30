@@ -68,7 +68,7 @@
 .landing-v2__service-icon--bargning { --icon: url('../../assets/images/home/landing-v2/landing-service-bargning.svg'); }
 .landing-v2__service-icon--reparationer { --icon: url('../../assets/images/home/landing-v2/landing-service-reparationer.svg'); }
 .landing-v2__service-point:hover .landing-v2__service-icon { background-color: var(--bb-color-ink-950); transform: translateY(-3px); }
-.landing-v2__service-point h3 { color: var(--landing-ink); font-size: clamp(.9rem, 1.05vw, 1.05rem); line-height: 1.25; margin: 0 0 .5rem; max-width: 13rem; }
+.landing-v2__service-point h2 { color: var(--landing-ink); font-size: clamp(.9rem, 1.05vw, 1.05rem); line-height: 1.25; margin: 0 0 .5rem; max-width: 13rem; }
 .landing-v2__service-point p { color: var(--landing-muted); font-size: .84rem; line-height: 1.5; margin: 0; max-width: 14rem; }
 
 /* Five-step process */
@@ -100,7 +100,7 @@
   .landing-v2__service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.75rem; }
   .landing-v2__service-point { padding-inline: .5rem; }
   .landing-v2__service-icon { height: 3rem; margin-bottom: .8rem; width: 3rem; }
-  .landing-v2__service-point h3 { font-size: .92rem; }
+  .landing-v2__service-point h2 { font-size: .92rem; }
   .landing-v2__service-point p { font-size: .8rem; }
   .landing-v2__process-section { margin-bottom: 4.3rem; }
   .landing-v2__process-content { min-height: 0; padding: 2.5rem 0; }

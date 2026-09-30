@@ -118,7 +118,7 @@ export default function LandingPage() {
                 <li key={service.number}>
                   <Link to={service.to} className="landing-v2__service-point">
                     <i className={`landing-v2__service-icon landing-v2__service-icon--${service.icon}`} aria-hidden="true" />
-                    <h3>{service.title}</h3>
+                    <h2>{service.title}</h2>
                     <p>{service.desc}</p>
                   </Link>
                 </li>

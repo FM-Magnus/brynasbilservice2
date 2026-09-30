@@ -185,7 +185,7 @@ export default function BargningPage() {
 
                 <div className="bargning-page__showcase-lists">
                   <div className="bargning-page__showcase-list-col">
-                    <h4 className="bargning-page__showcase-list-title">Det här ingår &amp; utförs:</h4>
+                    <h3 className="bargning-page__showcase-list-title">Det här ingår &amp; utförs:</h3>
                     <ul className="bargning-page__feature-list">
                       <li>
                         <span className="bargning-page__check-icon" aria-hidden="true"><CheckIcon /></span>
@@ -207,7 +207,7 @@ export default function BargningPage() {
                   </div>
 
                   <div className="bargning-page__showcase-list-col">
-                    <h4 className="bargning-page__showcase-list-title">Vanliga tecken på att du behöver hjälp:</h4>
+                    <h3 className="bargning-page__showcase-list-title">Vanliga tecken på att du behöver hjälp:</h3>
                     <ul className="bargning-page__feature-list">
                       <li>
                         <span className="bargning-page__check-icon" aria-hidden="true"><CheckIcon /></span>
