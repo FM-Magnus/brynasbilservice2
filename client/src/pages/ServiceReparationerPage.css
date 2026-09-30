@@ -97,7 +97,8 @@
 /* ---------- Section intro ---------- */
 .bilservice__intro { max-width: 62ch; margin-bottom: clamp(1.5rem, 3vw, 2rem); }
 .bilservice__intro h2 { margin: 0 0 0.6rem; color: var(--bilservice-ink); }
-.bilservice__intro p { margin: 0; font: 400 1rem/1.6 var(--bb-font-body); }
+.bilservice__intro p:not(.bb-eyebrow) { margin: 0; font: 400 1rem/1.6 var(--bb-font-body); }
+.bilservice__intro p.bb-eyebrow { margin: 0; }
 .bilservice__intro--wide { max-width: 78ch; }
 .bilservice__intro--wide-sm { max-width: 75ch; }
 .bilservice__intro--tight { margin-bottom: 1.5rem; }
@@ -117,7 +118,8 @@
   align-items: start;
 }
 .bilservice__editorial-head h2 { margin: 0 0 0.8rem; color: var(--bilservice-ink); }
-.bilservice__editorial-head > p { margin: 0; max-width: 44ch; font: 400 1rem/1.65 var(--bb-font-body); }
+.bilservice__editorial-head > p:not(.bb-eyebrow) { margin: 0; max-width: 44ch; font: 400 1rem/1.65 var(--bb-font-body); }
+.bilservice__editorial-head > p.bb-eyebrow { margin: 0; }
 .bilservice__editorial-head .bilservice__image-frame { margin-top: clamp(1.5rem, 3vw, 2rem); }
 .bilservice__editorial-head .bilservice__actions { margin-top: clamp(1.25rem, 2.5vw, 1.75rem); }
 .bilservice__prose { max-width: 64ch; }
@@ -192,7 +194,7 @@
 .bilservice__process { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
 .bilservice__process-heading { margin: 0 0 0.9rem; color: #fff; }
 .bilservice__process-heading .bb-accent { color: var(--bb-color-teal-500); }
-.bilservice__process-text > p { margin: 0 0 1.5rem; max-width: 34ch; font: 400 0.95rem/1.6 var(--bb-font-body); }
+.bilservice__process-text > p:not(.bb-eyebrow) { margin: 0 0 1.5rem; max-width: 34ch; font: 400 0.95rem/1.6 var(--bb-font-body); }
 /* ---------- Interactive Symptom Selector ---------- */
 .bilservice__symptom-grid {
   display: grid;
