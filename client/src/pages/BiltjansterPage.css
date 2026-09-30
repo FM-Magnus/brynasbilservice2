@@ -22,7 +22,7 @@
 /* Hero */
 .biltjanster-hub__hero {
   background: var(--bb-color-ink-950);
-  color: #ffffff;
+  color: var(--bb-color-surface);
   /* padding-top is a fixed px value matched to PublicHeader's actual rendered
      height at each side of its own 1320px breakpoint (measured via
      getBoundingClientRect), not a vw-scaled clamp — see AGENTS.md's
@@ -81,7 +81,7 @@
   align-items: center;
   background: rgba(10, 178, 193, 0.85);
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--bb-color-surface);
   display: flex;
   height: 36px;
   justify-content: center;
@@ -152,7 +152,7 @@
 .biltjanster-hub__guide-card:hover .biltjanster-hub__guide-arrow { transform: translateX(3px); }
 
 /* Closing CTA */
-.biltjanster-hub__cta { background: var(--bb-color-ink-950); color: #ffffff; padding: clamp(2.75rem, 4.5vw, 4rem) 0; }
+.biltjanster-hub__cta { background: var(--bb-color-ink-950); color: var(--bb-color-surface); padding: clamp(2.75rem, 4.5vw, 4rem) 0; }
 .biltjanster-hub__cta-inner { align-items: center; display: flex; flex-wrap: wrap; gap: 1.75rem; justify-content: space-between; }
 .biltjanster-hub__cta-inner > div:first-child { max-width: 560px; }
 .biltjanster-hub__cta-title {

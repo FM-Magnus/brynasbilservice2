@@ -2,7 +2,7 @@
 
 .bb-reviews-card {
   align-items: center;
-  color: #ffffff;
+  color: var(--bb-color-surface);
   display: grid;
   gap: 0.75rem;
   grid-template-columns: 96px 155px minmax(0, 1fr);
@@ -138,7 +138,7 @@
   align-items: center;
   background: #9e780d;
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--bb-color-surface);
   display: inline-flex;
   flex-shrink: 0;
   font-family: var(--bb-font-body, 'Manrope', Arial, sans-serif);

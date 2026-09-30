@@ -337,7 +337,7 @@
   align-items: center;
   background: var(--bb-color-teal-500);
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--bb-color-surface);
   display: flex;
   font-size: 1.1rem;
   height: 36px;

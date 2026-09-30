@@ -63,7 +63,7 @@
 
 .bb-footer__eyebrow {
   align-items: center;
-  color: #ffffff;
+  color: var(--bb-color-surface);
   display: flex;
   font-size: 0.74rem;
   font-weight: 700;
@@ -74,7 +74,7 @@
 }
 
 .bb-footer__eyebrow-dash {
-  background: #ffffff;
+  background: var(--bb-color-surface);
   border-radius: 2px;
   flex-shrink: 0;
   height: 2px;
@@ -131,7 +131,7 @@
 }
 
 .bb-footer__trust-item b {
-  color: #ffffff;
+  color: var(--bb-color-surface);
   font-size: 0.76rem;
   font-weight: 700;
 }
@@ -270,7 +270,7 @@
 }
 
 .bb-footer__contact-val {
-  color: #ffffff;
+  color: var(--bb-color-surface);
   font-size: var(--bb-font-size-support, 0.92rem);
   font-weight: 600;
   line-height: 1.35;
@@ -291,7 +291,7 @@ a.bb-footer__contact-val:hover {
 }
 
 .bb-footer__maps-link:hover {
-  color: #ffffff;
+  color: var(--bb-color-surface);
   text-decoration: underline;
 }
 
@@ -335,7 +335,7 @@ a.bb-footer__contact-val:hover {
 }
 
 .bb-footer__hours-row dd {
-  color: #ffffff;
+  color: var(--bb-color-surface);
   font-weight: 700;
   margin: 0;
   text-align: right;
@@ -389,7 +389,7 @@ a.bb-footer__contact-val:hover {
 
 .bb-footer__call-link {
   align-items: center;
-  color: #ffffff;
+  color: var(--bb-color-surface);
   display: inline-flex;
   font-size: 0.82rem;
   font-weight: 800;
@@ -451,7 +451,7 @@ a.bb-footer__contact-val:hover {
   background: rgba(5, 22, 26, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: var(--bb-radius-sm, 8px);
-  color: #ffffff;
+  color: var(--bb-color-surface);
   display: inline-flex;
   height: 35px;
   justify-content: center;
