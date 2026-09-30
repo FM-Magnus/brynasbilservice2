@@ -25,8 +25,7 @@
 .public-header__inner {
   align-items: center;
   display: grid;
-  gap: clamp(0.7rem, 1.5vw, 1.6rem);
-  grid-template-columns: 260px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   margin-inline: auto;
   max-width: var(--bb-layout-max);
 }
@@ -37,15 +36,18 @@
 .public-header__desktop-nav {
   align-items: center;
   background: var(--bb-color-surface);
+  /* The pill and the Boka tid button are one unit at the right of the header: same
+     height, no gap, and the pill's right edge and the button's left edge are square. */
   border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: var(--bb-radius-control);
+  border-radius: var(--bb-radius-control) 0 0 var(--bb-radius-control);
+  border-right: 0;
   box-shadow: 0 9px 24px rgba(0, 0, 0, 0.22);
   color: var(--bb-color-ink-950);
   display: flex;
-  justify-content: center;
+  min-height: 56px;
   min-width: 0;
   padding: 0.36rem 0.44rem;
-  /* The Biltjänster menu is wider than its trigger, so it centres on the whole nav pill. */
+  /* The Biltjänster menu is wider than the pill, so it hangs from the pill's right edge. */
   position: relative;
 }
 
@@ -86,20 +88,20 @@
   box-shadow: var(--bb-shadow-floating);
   display: flex;
   flex-direction: column;
-  left: 50%;
   max-width: calc(100vw - 2rem);
   opacity: 0;
   padding: 0.55rem;
   pointer-events: none;
   position: absolute;
+  right: 0;
   top: calc(100% + 0.35rem);
   width: max-content;
-  transform: translate(-50%, -0.45rem);
+  transform: translateY(-0.45rem);
   transition: opacity var(--bb-transition-fast), transform var(--bb-transition-fast);
   z-index: 2;
 }
 
-.public-header__services-menu.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+.public-header__services-menu.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .public-header__services-groups { display: grid; gap: 0 0.6rem; grid-template-columns: repeat(4, max-content); }
 .public-header__services-heading { color: var(--bb-color-teal-500); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; margin: 0; padding: 0.4rem 0.85rem 0.35rem; text-transform: uppercase; }
 .public-header__services-overview { border-bottom: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.3rem; padding-bottom: 0.45rem; }
@@ -121,12 +123,14 @@
 .public-header__booking {
   background: linear-gradient(to bottom, #b56c01, #8a5301);
   border: 4px solid var(--bb-color-surface);
+  border-radius: 0 var(--bb-radius-control) var(--bb-radius-control) 0;
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
   color: var(--bb-color-surface);
   gap: 0.55rem;
+  min-height: 56px;
   padding: 0.7rem 1.3rem;
 }
-.public-header__booking:hover { background: linear-gradient(to bottom, var(--bb-color-amber-400), var(--bb-color-amber-600)); transform: translateY(-1px); }
+.public-header__booking:hover { background: linear-gradient(to bottom, var(--bb-color-amber-400), var(--bb-color-amber-600)); }
 .public-header__booking svg { fill: none; height: 16px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; width: 16px; }
 
 .public-header__menu-toggle, .public-header__mobile-panel { display: none; }
@@ -136,7 +140,7 @@
    at every width above 1186px. */
 @media (max-width: 1320px) {
   .public-header { padding: 0.75rem 1rem; }
-  .public-header__inner { grid-template-columns: 195px minmax(0, 1fr) auto; }
+  .public-header__inner { grid-template-columns: minmax(0, 1fr) auto auto; }
   .public-header__brand { max-width: 195px; }
   .public-header__booking { padding-inline: 1rem; }
 }
