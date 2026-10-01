@@ -53,6 +53,10 @@
 }
 .bargning-page__hero .bb-hero__slide img { object-position: right center; }
 .bargning-page__hero .bb-hero__slide.bargning-page__hero-slide--highway img { object-position: 70% 60%; }
+/* Phone photo: portrait crop, anchored to the top so the truck stays above the text. */
+@media (max-width: 650px) {
+  .bargning-page__hero .bb-hero__slide.bargning-page__hero-slide--phone img { object-position: center top; }
+}
 
 .bargning-page__hero-content {
   display: flex;

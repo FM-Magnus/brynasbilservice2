@@ -27,6 +27,9 @@ import heroStrapWebp from '../assets/images/services/towing/towing-hero-strap.we
 import heroStrapJpg from '../assets/images/services/towing/towing-hero-strap.jpg'
 import heroHighwayWebp from '../assets/images/services/towing/towing-hero-highway.webp'
 import heroHighwayJpg from '../assets/images/services/towing/towing-hero-highway.jpg'
+import heroPhoneWebp from '../assets/images/services/towing/towing-hero-phone.webp'
+import heroPhoneJpg from '../assets/images/services/towing/towing-hero-phone.jpg'
+import { useIsPhone } from '../hooks/useIsPhone'
 import { BUSINESS, weekdayHours } from '../data/business'
 import './BargningPage.css'
 
@@ -66,11 +69,14 @@ const heroSlides = [
   { webp: heroStrapWebp, jpg: heroStrapJpg, modifier: '' },
   { webp: heroHighwayWebp, jpg: heroHighwayJpg, modifier: ' bargning-page__hero-slide--highway' },
 ]
+// Phones get one static portrait photo: no rotation, and the desktop photos are never downloaded.
+const phoneHeroSlides = [{ webp: heroPhoneWebp, jpg: heroPhoneJpg, modifier: ' bargning-page__hero-slide--phone' }]
 
 export default function BargningPage() {
   const { openBooking, bookingModal } = useBookingModal()
-  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
-
+  const isPhone = useIsPhone()
+  const slides = isPhone ? phoneHeroSlides : heroSlides
+  const activeHeroSlide = useHeroSlideshow(slides.length)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -86,7 +92,7 @@ export default function BargningPage() {
             ========================================================= */}
         <section className="bargning-page__hero" aria-labelledby="bargning-hero-title">
           <div className="bargning-page__hero-media" aria-hidden="true">
-            {heroSlides.map((slide, i) => (
+            {slides.map((slide, i) => (
               <picture key={slide.jpg} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
                 <source srcSet={slide.webp} type="image/webp" />
                 <img src={slide.jpg} alt="" />
