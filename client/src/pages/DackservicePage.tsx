@@ -25,18 +25,12 @@ import heroAisleJpg from '../assets/images/services/tires/tires-hero-storage-ais
 import heroAisleWebp from '../assets/images/services/tires/tires-hero-storage-aisle.webp'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
-import wheelChangeJpg from '../assets/images/services/tires/tire-wheel-change.jpg'
-import wheelChangeWebp from '../assets/images/services/tires/tire-wheel-change.webp'
-import storageRackJpg from '../assets/images/services/tires/tire-storage-rack.jpg'
-import storageRackWebp from '../assets/images/services/tires/tire-storage-rack.webp'
-import refittingJpg from '../assets/images/services/tires/tire-refitting.jpg'
-import refittingWebp from '../assets/images/services/tires/tire-refitting.webp'
-import alignmentJpg from '../assets/images/services/tires/tire-wheel-alignment.jpg'
-import alignmentWebp from '../assets/images/services/tires/tire-wheel-alignment.webp'
-import balancingJpg from '../assets/images/services/tires/tire-wheel-balancing.jpg'
-import balancingWebp from '../assets/images/services/tires/tire-wheel-balancing.webp'
-import punctureRepairJpg from '../assets/images/services/tires/tire-puncture-repair.jpg'
-import punctureRepairWebp from '../assets/images/services/tires/tire-puncture-repair.webp'
+import wheelChangeIcon from '../assets/images/services/tires/tire-icon-wheel-change.svg'
+import storageIcon from '../assets/images/services/tires/tire-icon-storage.svg'
+import refittingIcon from '../assets/images/services/tires/tire-icon-refitting.svg'
+import alignmentIcon from '../assets/images/services/tires/tire-icon-alignment.svg'
+import balancingIcon from '../assets/images/services/tires/tire-icon-balancing.svg'
+import punctureRepairIcon from '../assets/images/services/tires/tire-icon-puncture-repair.svg'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 
@@ -46,9 +40,7 @@ type TyreServiceItem = {
   title: string
   description: string
   priceData: PriceEntry[]
-  imageJpg: string
-  imageWebp: string
-  imageAlt: string
+  icon: string
 }
 
 const tyreServices: TyreServiceItem[] = [
@@ -56,49 +48,37 @@ const tyreServices: TyreServiceItem[] = [
     title: 'Hjulskifte',
     description: 'Dags att byta till sommar- eller vinterdäck? Vi ser till att bytet går snabbt, smidigt och säkert. Vi kontrollerar mönsterdjup, slitage och lufttryck samt ser över synliga bromskomponenter. Efterdragning av hjulbultarna efter cirka 10 mil ingår kostnadsfritt.',
     priceData: [{ label: 'Personbil', amount: '350 kr' }, { label: 'SUV & lätt lastbil', amount: '500 kr' }],
-    imageJpg: wheelChangeJpg,
-    imageWebp: wheelChangeWebp,
-    imageAlt: 'Mekaniker lyfter av ett hjul från en bil på lyft vid hjulskifte',
+    icon: wheelChangeIcon,
   },
   {
     title: 'Däckförvaring',
     description: 'Slipp tunga hjul och frigör plats hemma. Vi grovtvättar och kontrollerar hjulen vid inlämning, förvarar dem skyddade från UV-ljus och temperatursvängningar och kontaktar dig via SMS inför nästa säsongsskifte. Om däcken börjar bli slitna hör vi av oss i god tid.',
     priceData: [{ label: 'Personbil', amount: '890 kr' }, { label: 'SUV & lätt lastbil', amount: '990 kr' }],
-    imageJpg: storageRackJpg,
-    imageWebp: storageRackWebp,
-    imageAlt: 'Märkta hjul i förvaringsställ i verkstadens däckhotell',
+    icon: storageIcon,
   },
   {
     title: 'Omläggning av däck',
     description: 'När nya däck ska monteras på fälgarna utför vi omläggningen med precision, monterar nya ventiler och balanserar hjulen så att allt sitter rätt från första kilometern.',
     priceData: [{ prefix: 'Från', amount: '180 kr', unit: 'per däck' }],
-    imageJpg: refittingJpg,
-    imageWebp: refittingWebp,
-    imageAlt: 'Mekaniker monterar ett nytt däck på fälg i däckmaskin',
+    icon: refittingIcon,
   },
   {
     title: 'Hjulinställning',
     description: 'Rätt hjulinställning bidrar till jämnare däckslitage, stabilare vägegenskaper och lägre rullmotstånd. Vi utför fackmässig fyrhjulsinställning med modern utrustning.',
     priceData: [{ prefix: 'Från', amount: '1 495 kr' }],
-    imageJpg: alignmentJpg,
-    imageWebp: alignmentWebp,
-    imageAlt: 'Mekaniker utför fyrhjulsinställning med mätutrustning på en bil',
+    icon: alignmentIcon,
   },
   {
     title: 'Däckbalansering',
     description: 'Vibrationer i ratten vid vissa hastigheter är ofta ett tecken på obalans. Vi mäter hjulen med precisionsutrustning och kompenserar obalansen med rätt vikter. Det ger lugnare körning och minskar onödigt slitage på däck, styrning, fjädring och chassikomponenter.',
     priceData: [{ contactText: 'Kontakta oss för pris' }],
-    imageJpg: balancingJpg,
-    imageWebp: balancingWebp,
-    imageAlt: 'Hjul monterat i balanseringsmaskin som visar obalansvärden',
+    icon: balancingIcon,
   },
   {
     title: 'Punkteringslagning',
     description: 'Har du fått punktering? Vi inspekterar skadan och bedömer om däcket kan repareras säkert. När en fackmässig lagning är möjlig hjälper vi dig tillbaka på vägen utan onödigt dröjsmål.',
     priceData: [{ contactText: 'Kontakta oss för pris' }],
-    imageJpg: punctureRepairJpg,
-    imageWebp: punctureRepairWebp,
-    imageAlt: 'Mekaniker lagar en punktering på ett däck med vulkaniseringslapp',
+    icon: punctureRepairIcon,
   },
 ]
 
@@ -224,10 +204,7 @@ export default function DackservicePage() {
                         )}
                       </div>
                       <div className="bilservice__tire-media">
-                        <picture data-image-slot={`tire-${service.title.toLowerCase()}`}>
-                          <source srcSet={service.imageWebp} type="image/webp" />
-                          <img src={service.imageJpg} alt={service.imageAlt} loading="lazy" />
-                        </picture>
+                        <img src={service.icon} alt="" loading="lazy" width={400} height={300} />
                       </div>
                       <button
                         type="button"

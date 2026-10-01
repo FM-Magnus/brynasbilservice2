@@ -412,31 +412,15 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 .bilservice__tire-media {
-  height: 165px;
-  isolation: isolate;
-  margin: 0.4rem -1.4rem 0;
-  overflow: hidden;
-  position: relative;
-  /* Fade the photo out upward and downward into the card colour. */
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 32%, #000 68%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 32%, #000 68%, transparent 100%);
+  height: 150px;
+  margin: 0.4rem 0 0.2rem;
 }
+/* Vector icon (light body, teal accent) drawn straight on the dark card. */
 .bilservice__tire-media img {
   display: block;
-  filter: brightness(0.85) contrast(1.1) saturate(0.5);
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
-}
-/* Teal grade so the photo melts into the dark card. */
-.bilservice__tire-media::after {
-  background: var(--bb-color-teal-700);
-  content: '';
-  inset: 0;
-  mix-blend-mode: color;
-  opacity: 0.7;
-  pointer-events: none;
-  position: absolute;
 }
 .bilservice__tire-body {
   display: flex;
