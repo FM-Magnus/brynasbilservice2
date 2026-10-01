@@ -59,6 +59,7 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Drivaxel & drivknutar | ✓ (the reference image) | ✓ ✓ | — |
 | Kamrem | ✓ | ✓ ✓ (landscape inspection crop) | — |
 | Avgassystem | ✓ | ✓ ✓ | — |
+| GAT motorvård (`/gat`, new 2026-10-01) | `services/gat/gat-products-bench-hero` (3000×1700, all six cans, replaced by `NEW GAT HERO.jpg` the same day; `object-position` 74% on phones in `GatPage.css`); wanted: a portrait phone version (1200×2000) | ✓ intro: the three product posters (Engine Flush, Diesel/Fuel System Cleaner; Magnus's imagegen, text baked in, 1536×1024) as `gat-spotlight-*-{640,1200}.{webp,jpg}` (50–190 KB each), rotating in `GatSpotlight` (10 s per poster, pause on hover/focus and a pause button; the phone text is small, a portrait version would read better); the Biltjänster card reuses the otherwise unused `services/general/service-longevity-oil-filter` | own hero |
 | Bromssystem | ✓ object close-up (disc, caliper, pads, hose, 2026-10-01) | ✓ ✓ | — |
 | Hjullagerbyte | ✓ | ✓ ✓ | — |
 | Styrning & kulleder | ✓ | ✓ ✓ | — |
