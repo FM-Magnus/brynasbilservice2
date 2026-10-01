@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { useIsPhone } from '../hooks/useIsPhone'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
@@ -10,11 +11,12 @@ import { CheckIcon } from '../components/icons/CheckIcon'
 import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { CarSaleIcon } from '../components/icons/CarSaleIcon'
 import { TrustStrip } from '../components/ui/TrustStrip'
-import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { getPublicVehicles } from '../api/vehicles'
 import type { Vehicle, VehicleImage } from '../types/vehicle'
-import heroWebp from '../assets/images/workshop/workshop-service-aisle.webp'
-import heroJpg from '../assets/images/workshop/workshop-service-aisle.jpg'
+import heroWebp from '../assets/images/workshop/cars-for-sale-estate-on-lift-hero.webp'
+import heroJpg from '../assets/images/workshop/cars-for-sale-estate-on-lift-hero.jpg'
+import phoneHeroWebp from '../assets/images/workshop/cars-for-sale-estate-on-lift-hero-phone.webp'
+import phoneHeroJpg from '../assets/images/workshop/cars-for-sale-estate-on-lift-hero-phone.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
 import './BilarTillSalu.css'
@@ -29,15 +31,8 @@ const formatMileage = (km: number) => `${Math.round(km / 10).toLocaleString('sv-
 const vehicleName = (vehicle: Vehicle) => `${vehicle.make} ${vehicle.model}`
 const inquiryComment = (vehicle: Vehicle) => `Gäller förfrågan om ${vehicleName(vehicle)} (${vehicle.year})`
 
-// 1×1 transparent GIF: used as the <picture> source below the hero panel's
-// breakpoint so the hidden panel's eager image is never downloaded on mobile.
-const EMPTY_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 const COMPACT_SIZES = '(min-width: 1440px) 420px, (min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw'
 const VIEWER_SIZES = '(min-width: 1440px) 690px, (min-width: 961px) 50vw, 100vw'
-const HERO_PANEL_SIZES = '(min-width: 1440px) 620px, 45vw'
-
-// React 18.2 only forwards fetch priority as a lowercase attribute.
-const HIGH_PRIORITY = { fetchpriority: 'high' } as Record<string, string>
 
 const srcSet = (image: VehicleImage, format: 'webp' | 'jpg') =>
   `${image.thumb[format]} ${image.thumb.width}w, ${image.main[format]} ${image.main.width}w`
@@ -50,41 +45,6 @@ const GRID_INITIAL = 9
 const SOLD_INITIAL = 6
 
 type LoadState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; vehicles: Vehicle[] }
-
-function HeroVehiclePanel({ vehicle }: { vehicle: Vehicle }) {
-  const image = vehicle.images[0]
-  const name = vehicleName(vehicle)
-  const price = formatPrice(vehicle.priceSek)
-
-  return (
-    <a className="bilartillsalu-page__hero-feature" href={`#vehicle-${vehicle.slug}`} aria-label={`Se ${name}, ${price}`}>
-      <picture>
-        <source media="(max-width: 1023.98px)" srcSet={EMPTY_IMAGE} />
-        <source type="image/webp" srcSet={srcSet(image, 'webp')} sizes={HERO_PANEL_SIZES} />
-        <img
-          src={image.main.jpg}
-          srcSet={srcSet(image, 'jpg')}
-          sizes={HERO_PANEL_SIZES}
-          alt=""
-          width={image.main.width}
-          height={image.main.height}
-          loading="eager"
-          decoding="async"
-          {...HIGH_PRIORITY}
-        />
-      </picture>
-      <span className="bb-card--glass bilartillsalu-page__hero-feature-caption" aria-hidden="true">
-        <span className="bilartillsalu-page__hero-feature-text">
-          <strong>{name}</strong>
-          <span>{price}</span>
-        </span>
-        <span className="bilartillsalu-page__hero-feature-cta">
-          Se bilen <ArrowRightIcon />
-        </span>
-      </span>
-    </a>
-  )
-}
 
 interface VehicleCardProps {
   vehicle: Vehicle
@@ -317,6 +277,7 @@ const trustItems = [
 export default function BilarTillSalu() {
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
   const { openBooking, openBookingWith, bookingModal } = useBookingModal()
+  const isPhone = useIsPhone()
   const [expandedId, setExpandedId] = useState<number | null>(null)
 
   useEffect(() => {
@@ -333,7 +294,7 @@ export default function BilarTillSalu() {
   const vehicles = load.status === 'ready' ? load.vehicles : []
   const available = vehicles.filter((vehicle) => vehicle.status === 'available')
   const sold = vehicles.filter((vehicle) => vehicle.status === 'sold')
-  // The lead vehicle (hero panel + full card) is the first available one with
+  // The lead vehicle (full card) is the first available one with
   // photos; order otherwise follows the data (sort_order once the API is live).
   const featured = available.find((vehicle) => vehicle.images.length > 0)
   const lead = featured ?? available[0]
@@ -349,45 +310,40 @@ export default function BilarTillSalu() {
         <section className="bb-hero bilartillsalu-page__hero" aria-labelledby="bilartillsalu-hero-title">
           <div className="bb-hero__media">
             <picture>
-              <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="" width={1920} height={1278} />
+              <source srcSet={isPhone ? phoneHeroWebp : heroWebp} type="image/webp" />
+              <img src={isPhone ? phoneHeroJpg : heroJpg} alt="" width={isPhone ? 1200 : 3000} height={isPhone ? 2001 : 1700} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
 
           <div className="bb-wrap bb-hero__content">
-            <div className="bilartillsalu-page__hero-grid">
-              <div className="bb-hero__copy bilartillsalu-page__hero-copy">
-                <p className="bb-eyebrow bb-eyebrow--dark">Begagnade bilar i Gävle</p>
-                <h1 className="bb-h1 bilartillsalu-page__hero-title" id="bilartillsalu-hero-title">
-                  <span>Bilar till <span className="bb-accent">salu</span></span>
-                </h1>
-                <p>
-                  Alla våra bilar är noggrant genomgångna, kontrollerade och servade av våra egna mekaniker på Brynäs Bilservice. Vi säkerställer att bilen är trygg och trafiksäker innan den säljs.
-                </p>
-                <div className="bb-hero__actions">
-                  <a href={PHONE_HREF} className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
-                    <PhoneIcon />
-                    <span>Ring {BUSINESS.phone.display}</span>
-                  </a>
-                  <button type="button" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onClick={openBooking}>
-                    Boka tid för visning
-                  </button>
-                </div>
-                <ul className="bilartillsalu-page__hero-meta">
-                  <li>
-                    <MapPinIcon />
-                    <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer">{BUSINESS.address.full}</a>
-                  </li>
-                  <li>
-                    <ClockIcon />
-                    <span>Mån–Fre {weekdayHours()} (Lör förfrågan)</span>
-                  </li>
-                </ul>
+            <div className="bb-hero__copy bilartillsalu-page__hero-copy">
+              <p className="bb-eyebrow bb-eyebrow--dark">Begagnade bilar i Gävle</p>
+              <h1 className="bb-h1 bilartillsalu-page__hero-title" id="bilartillsalu-hero-title">
+                <span>Bilar till <span className="bb-accent">salu</span></span>
+              </h1>
+              <p>
+                Alla våra bilar är noggrant genomgångna, kontrollerade och servade av våra egna mekaniker på Brynäs Bilservice. Vi säkerställer att bilen är trygg och trafiksäker innan den säljs.
+              </p>
+              <div className="bb-hero__actions">
+                <a href={PHONE_HREF} className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
+                  <PhoneIcon />
+                  <span>Ring {BUSINESS.phone.display}</span>
+                </a>
+                <button type="button" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onClick={openBooking}>
+                  Boka tid för visning
+                </button>
               </div>
-
-              {load.status === 'loading' && <div className="bilartillsalu-page__hero-feature bilartillsalu-page__hero-feature--placeholder" aria-hidden="true" />}
-              {featured && <HeroVehiclePanel vehicle={featured} />}
+              <ul className="bilartillsalu-page__hero-meta">
+                <li>
+                  <MapPinIcon />
+                  <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer">{BUSINESS.address.full}</a>
+                </li>
+                <li>
+                  <ClockIcon />
+                  <span>Mån–Fre {weekdayHours()} (Lör förfrågan)</span>
+                </li>
+              </ul>
             </div>
           </div>
         </section>

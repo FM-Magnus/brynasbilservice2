@@ -50,17 +50,8 @@ test('bilar till salu renders on its own island without horizontal overflow', as
   await expect(viewerImg).toHaveAttribute('srcset', /640w.*1920w/)
   await expect(viewerImg).toHaveAttribute('sizes', /.+/)
 
-  // Hero vehicle panel: data-driven, desktop only
-  const heroPanel = page.locator('a.bilartillsalu-page__hero-feature')
-  const isDesktop = testInfo.project.name === 'desktop-1440'
-  if (isDesktop) {
-    await expect(heroPanel).toBeVisible()
-    await expect(heroPanel).toHaveAttribute('href', '#vehicle-peugeot-307-cc-2-0-2006')
-    await expect(heroPanel).toContainText('39 900 kr')
-    await expect(heroPanel.locator('img')).toHaveAttribute('fetchpriority', 'high')
-  } else {
-    await expect(heroPanel).toBeHidden()
-  }
+  // The hero carries no vehicle panel: the photo is the backdrop on every viewport
+  await expect(page.locator('.bilartillsalu-page__hero-feature')).toHaveCount(0)
 
   // Equal-width thumbnails; full-width stacked actions
   const thumbWidths = await vehicle.locator('.bilartillsalu-page__thumb').evaluateAll((els) => els.map((el) => el.getBoundingClientRect().width))
@@ -86,16 +77,6 @@ test('bilar till salu renders on its own island without horizontal overflow', as
   // Clean console on load. Checked before the booking modal opens: the modal
   // fetches /api/services, which has no backend in this dev-only test run.
   expect(consoleProblems).toEqual([])
-
-  // Hero panel jumps to the card with the title clear of the sticky header
-  if (isDesktop) {
-    await heroPanel.click()
-    await page.waitForTimeout(600)
-    const headerBottom = await page.locator('.public-header').evaluate((el) => el.getBoundingClientRect().bottom)
-    const titleTop = await vehicle.getByRole('heading', { level: 3 }).evaluate((el) => el.getBoundingClientRect().top)
-    expect(titleTop).toBeGreaterThan(headerBottom)
-    await page.evaluate(() => window.scrollTo(0, 0))
-  }
 
   // Thumbnails switch the main image
   const mainImg = vehicle.locator('.bilartillsalu-page__viewer img')
