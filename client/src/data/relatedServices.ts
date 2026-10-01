@@ -6,6 +6,7 @@ import { publicNavigation, publicServiceNavigation } from './publicNavigation'
  * renames its links too.
  */
 const RELATED: Record<string, readonly string[]> = {
+  '/gat': ['/oljebyte', '/felsokning', '/service-reparationer#bilservice'],
   '/oljebyte': ['/service-reparationer#bilservice', '/kamrem', '/bilbatteri'],
   '/kamrem': ['/oljebyte', '/koppling', '/felsokning'],
   '/koppling': ['/drivaxel-drivknutar', '/kamrem', '/felsokning'],

@@ -1,3 +1,4 @@
+import { ArrowRightIcon } from '../../components/icons/ArrowRightIcon'
 import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useBookingModal } from '../../hooks/useBookingModal'
@@ -131,6 +132,12 @@ export default function LandingPage() {
               ))}
             </ol>
           </div>
+        </div>
+        <div className="bb-wrap">
+          <Link to="/gat" className="landing-v2__gat-link">
+            <span>Auktoriserad återförsäljare av GAT – motor- och bränslesystemvård</span>
+            <ArrowRightIcon aria-hidden="true" />
+          </Link>
         </div>
       </section>
 

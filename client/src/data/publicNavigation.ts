@@ -30,6 +30,7 @@ export const publicServiceGroups: PublicNavigationGroup[] = [
     items: [
       { label: 'Bilservice', to: '/service-reparationer#bilservice' },
       { label: 'Oljebyte', to: '/oljebyte' },
+      { label: 'GAT motorvård', to: '/gat' },
       { label: 'Bilbatteri', to: '/bilbatteri' },
     ],
   },

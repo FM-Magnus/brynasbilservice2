@@ -29,6 +29,7 @@ const BiltjansterPage = lazy(() => import('./pages/BiltjansterPage.tsx'))
 const FelsokningPage = lazy(() => import('./pages/FelsokningPage.tsx'))
 const ReparationerPage = lazy(() => import('./pages/ReparationerPage.tsx'))
 const OljebytePage = lazy(() => import('./pages/OljebytePage.tsx'))
+const GatPage = lazy(() => import('./pages/GatPage.tsx'))
 const KamremPage = lazy(() => import('./pages/KamremPage.tsx'))
 const KopplingPage = lazy(() => import('./pages/KopplingPage.tsx'))
 const BromssystemPage = lazy(() => import('./pages/BromssystemPage.tsx'))
@@ -86,6 +87,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/felsokning" element={<FelsokningPage />} />
               <Route path="/reparationer-storre-arbeten" element={<ReparationerPage />} />
               <Route path="/oljebyte" element={<OljebytePage />} />
+              <Route path="/gat" element={<GatPage />} />
               <Route path="/kamrem" element={<KamremPage />} />
               <Route path="/koppling" element={<KopplingPage />} />
               <Route path="/bromssystem" element={<BromssystemPage />} />

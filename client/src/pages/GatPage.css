@@ -1,0 +1,10 @@
+/* GAT page: the wide hero photo shows all six cans; on phones only the right-hand cans fit
+   until a portrait photo exists, so anchor the crop on them. */
+@media (max-width: 650px) {
+  .gat-page .service-guide__hero .service-guide__hero-bg img { object-position: 74% 50%; }
+}
+
+/* The rotating posters carry small text, so give the intro's media column more room than the template's 0.95fr. */
+@media (min-width: 901px) {
+  .gat-page .service-guide__intro-layout { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+}

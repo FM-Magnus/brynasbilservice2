@@ -1,0 +1,55 @@
+/* GAT product posters: stacked 3:2 slides that crossfade. Used on /gat only. */
+.gat-spotlight { min-width: 0; }
+.gat-spotlight__stage {
+  aspect-ratio: 3 / 2;
+  background: var(--bb-color-ink-950);
+  border-radius: var(--bb-radius-card);
+  box-shadow: var(--bb-shadow-card);
+  overflow: hidden;
+  position: relative;
+}
+.gat-spotlight__slide {
+  display: block;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 0.7s ease;
+}
+.gat-spotlight__slide.is-active { opacity: 1; }
+.gat-spotlight__slide img { display: block; height: 100%; object-fit: cover; width: 100%; }
+.gat-spotlight__controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.gat-spotlight__tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.gat-spotlight__tab,
+.gat-spotlight__toggle {
+  background: transparent;
+  border: 1px solid var(--bb-color-border-subtle-light);
+  border-radius: var(--bb-radius-control);
+  color: var(--bb-color-ink-950);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+}
+.gat-spotlight__tab:hover,
+.gat-spotlight__toggle:hover { border-color: var(--bb-color-teal-700); }
+.gat-spotlight__tab.is-active { background: var(--bb-color-ink-950); border-color: var(--bb-color-ink-950); color: #fff; }
+.gat-spotlight__toggle { border-color: transparent; color: var(--bb-color-teal-700); text-decoration: underline; text-underline-offset: 3px; }
+.gat-spotlight__tab:focus-visible,
+.gat-spotlight__toggle:focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
+@media (max-width: 650px) {
+  .gat-spotlight__tabs { width: 100%; }
+  .gat-spotlight__tab { flex: 1 1 0; font-size: 0.8rem; padding: 0.5rem 0.4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gat-spotlight__slide { transition: none; }
+}

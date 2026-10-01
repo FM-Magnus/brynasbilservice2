@@ -31,6 +31,8 @@ import suspensionThumbJpg from '../assets/images/services/suspension/suspension-
 import suspensionThumbWebp from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.webp'
 import repairThumbJpg from '../assets/images/services/general/service-performance-diagnostics.jpg'
 import repairThumbWebp from '../assets/images/services/general/service-performance-diagnostics.webp'
+import gatThumbJpg from '../assets/images/services/general/service-longevity-oil-filter.jpg'
+import gatThumbWebp from '../assets/images/services/general/service-longevity-oil-filter.webp'
 import { BUSINESS } from '../data/business'
 import './BiltjansterPage.css'
 
@@ -72,6 +74,15 @@ const serviceGuides: ServiceGuide[] = [
     imageLabel: 'Oljebyte i verkstaden',
     imageJpg: oljebyteThumbJpg,
     imageWebp: oljebyteThumbWebp,
+  },
+  {
+    id: 'gat',
+    title: 'GAT motorvård',
+    summary: 'Vi är auktoriserad återförsäljare av GAT och använder produkterna för att hålla motorns insida och bränslesystemet rena.',
+    href: '/gat',
+    imageLabel: 'GAT motorvård i verkstaden',
+    imageJpg: gatThumbJpg,
+    imageWebp: gatThumbWebp,
   },
   {
     id: 'kamrem',

@@ -110,20 +110,25 @@ export function GuideHero({ id, eyebrow, title, lead, image, trustBadges, onBook
 interface GuideIntroProps {
   id: string
   heading: ReactNode
-  image: GuideImage
-  caption: string
+  /** The photo and its caption; leave both out when passing `media`. */
+  image?: GuideImage
+  caption?: string
+  /** Replaces the photo box with custom content (the GAT page's poster rotation). */
+  media?: ReactNode
   /** Everything under the heading: paragraphs, `GuideParts`, a `Tip`. */
   children: ReactNode
 }
 
-export function GuideIntro({ id, heading, image, caption, children }: GuideIntroProps) {
+export function GuideIntro({ id, heading, image, caption, media, children }: GuideIntroProps) {
   return (
     <section className="service-guide__section" aria-labelledby={id}>
       <div className="bb-wrap service-guide__container service-guide__intro-layout">
-        <div className="service-guide__intro-media">
-          <Picture image={image} />
-          <p className="service-guide__intro-caption">{caption}</p>
-        </div>
+        {media ?? (
+          <div className="service-guide__intro-media">
+            {image && <Picture image={image} />}
+            {caption && <p className="service-guide__intro-caption">{caption}</p>}
+          </div>
+        )}
         <div className="service-guide__intro-content">
           <h2 id={id}>{heading}</h2>
           {children}

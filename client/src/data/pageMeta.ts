@@ -60,6 +60,10 @@ export const PAGE_META: Record<string, PageMeta> = {
     title: 'Bromsservice & bromsbyte i Gävle – Brynäs Bilservice',
     description: 'Byte av bromsbelägg, bromsskivor och bromsvätska. Vi kontrollerar hela bromssystemet på alla bilmärken hos Brynäs Bilservice i Gävle.',
   },
+  '/gat': {
+    title: 'GAT motorvård i Gävle – Brynäs Bilservice',
+    description: 'Auktoriserad återförsäljare av GAT. Engine Flush, Diesel System Cleaner och Fuel System Cleaner för en renare motor, hos Brynäs Bilservice i Gävle.',
+  },
   '/bilbatteri': {
     title: 'Bilbatteri & batteribyte i Gävle – Brynäs Bilservice',
     description: 'Svårstartad bil? Vi testar batteriet, byter och kodar rätt batterityp för din bil, oavsett märke. Brynäs Bilservice i Gävle.',
