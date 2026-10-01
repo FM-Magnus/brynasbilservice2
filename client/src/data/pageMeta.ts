@@ -21,7 +21,7 @@ export const PAGE_META: Record<string, PageMeta> = {
     description: 'Oberoende bilverkstad på Sörby Urfjäll i Gävle. Service och reparationer för alla bilmärken, däck, AC, felsökning och bärgning. Pris innan vi börjar.',
   },
   '/om-oss': {
-    title: 'Om oss – din bilverkstad i Brynäs | Brynäs Bilservice',
+    title: 'Om oss – din bilverkstad i Gävle | Brynäs Bilservice',
     description: 'Sedan 2021 driver vi en oberoende bilverkstad på Utmarksvägen i Gävle. Personlig service, fackmannamässigt arbete och raka besked.',
   },
   '/galleri': {
