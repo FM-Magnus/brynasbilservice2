@@ -2,6 +2,7 @@ import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useBookingModal } from '../../hooks/useBookingModal'
 import { useHeroSlideshow } from '../../hooks/useHeroSlideshow'
+import { useIsPhone } from '../../hooks/useIsPhone'
 import { PublicHeader } from '../../components/layout/PublicHeader'
 import { PublicFooter } from '../../components/layout/PublicFooter'
 import { CalendarIcon } from '../../components/icons/CalendarIcon'
@@ -12,6 +13,8 @@ import { PhoneIcon } from '../../components/icons/PhoneIcon'
 import { WrenchIcon } from '../../components/icons/WrenchIcon'
 import heroWebp from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero.webp'
 import heroJpg from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero.jpg'
+import heroPhoneWebp from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero-phone.webp'
+import heroPhoneJpg from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero-phone.jpg'
 import heroBirdsEyeWebp from '../../assets/images/home/landing-v2/landing-birds-eye-hero.webp'
 import heroBirdsEyeJpg from '../../assets/images/home/landing-v2/landing-birds-eye-hero.jpg'
 import { TrustStrip } from '../../components/ui/TrustStrip'
@@ -64,18 +67,22 @@ const processIcons: Record<string, ReactNode> = {
 }
 
 const heroSlides = [
-  { webp: heroWebp, jpg: heroJpg, alt: 'Maher lämnar över bilnyckeln till en leende kund i verkstaden' },
-  { webp: heroBirdsEyeWebp, jpg: heroBirdsEyeJpg, alt: 'Verkstaden sedd uppifrån med en bil på lyften och däckhyllor i bakgrunden' },
+  { webp: heroWebp, jpg: heroJpg, modifier: ' landing-v2__hero-slide--key', alt: 'Maher lämnar över bilnyckeln till en leende kund i verkstaden' },
+  { webp: heroBirdsEyeWebp, jpg: heroBirdsEyeJpg, modifier: '', alt: 'Verkstaden sedd uppifrån med en bil på lyften och däckhyllor i bakgrunden' },
 ]
+// Phones get one static portrait photo: no rotation, and the desktop photos are never downloaded.
+const phoneHeroSlides = [{ webp: heroPhoneWebp, jpg: heroPhoneJpg, alt: heroSlides[0].alt, modifier: ' landing-v2__hero-slide--phone' }]
 export default function LandingPage() {
   const { openBooking, bookingModal } = useBookingModal()
-  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
+  const isPhone = useIsPhone()
+  const slides = isPhone ? phoneHeroSlides : heroSlides
+  const activeHeroSlide = useHeroSlideshow(slides.length)
   return (
     <main className="landing-v2">
       <section className="bb-hero" aria-labelledby="landing-v2-hero-title">
         <div className="bb-hero__media" aria-hidden="true">
-          {heroSlides.map((slide, i) => (
-            <picture key={slide.jpg} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
+          {slides.map((slide, i) => (
+            <picture key={slide.jpg} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
               <source srcSet={slide.webp} type="image/webp" />
               <img src={slide.jpg} alt="" />
             </picture>

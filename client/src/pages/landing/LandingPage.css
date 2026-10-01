@@ -33,6 +33,14 @@
 
 /* Both slides are bright garage scenes; the photo only has a thin dark edge of its own. */
 .landing-v2 .bb-hero { --bb-shade-strength: 0.6; }
+/* Phone photo: portrait crop, anchored to the top so both faces stay in the free zone above the text. */
+@media (max-width: 650px) {
+  .landing-v2 .bb-hero__slide.landing-v2__hero-slide--phone img { object-position: center top; }
+}
+/* Tablet: the photo is wider than the hero, so show the right part where both faces are. */
+@media (min-width: 651px) and (max-width: 1100px) {
+  .landing-v2 .bb-hero__slide.landing-v2__hero-slide--key img { object-position: 100% center; }
+}
 
 /* Photo-backed reassurance */
 .landing-v2__process-section { color: #fff; isolation: isolate; overflow: hidden; position: relative; }
