@@ -72,7 +72,7 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Däckservice | ✓ slideshow: `services/tires/tires-hero-bg`, `tires-hero-storage-aisle` (3000×1674) | ✓ six tyre cards (photo above the CTA, teal grade + faded edges in page CSS), storage | — |
 | AC-service | ✓ `services/ac/ac-hero-bg` | ✓ `ac-manometers-on-engine` (JPG only, no WebP) | — |
 | Bärgning | ✓ slideshow: `services/towing/towing-hero-strap`, `towing-hero-highway`; **phone: one static portrait photo** `towing-hero-phone` (1200×2000, no rotation, rendered via `useIsPhone`) | ✓ tow truck, workshop, car for sale | — |
-| Kontakt | ✓ slideshow: `contact/contact-hero-customer-beanie`, `contact-hero-maher-customer-car`; **phone: one static portrait photo** `contact/contact-hero-phone` (1200×2000, no rotation, only this photo is rendered on phones via `useIsPhone`); left shade (vertical on phones), top-anchored from 1024px | — | phone crops (1200×2100) |
+| Kontakt | ✓ slideshow: `contact/contact-hero-customer-beanie` (3000×1700, replaced 2026-10-01), `contact-hero-maher-customer-car`; **phone: one static portrait photo** `contact/contact-hero-phone` (1200×2000, no rotation, only this photo is rendered on phones via `useIsPhone`); left shade (vertical on phones), top-anchored from 1024px | — | phone crops (1200×2100) |
 | Galleri | folder-driven | every photo in `client/src/assets/galleri/` (see `LÄSMIG.md`) | — |
 
 ## Phone hero photos: free zone (2026-09-30)

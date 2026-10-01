@@ -4,6 +4,7 @@ One dated entry per day, newest first — one short bullet per session, naming t
 
 ### 2026-10-01
 
+- **Claude Code — Kontakt desktop hero, slide 1 replaced (uncommitted):** `NEW HERO KONTAKTA OSS.jpg` (3000×1700, the same beanie scene pulled back wider, with the sunset sky) now replaces `contact/contact-hero-customer-beanie.{webp,jpg}` in place (113/234 KB, was 83/125 KB), so no code or CSS changed; slide 2 (Maher at the car) and the phone photo are untouched. Existing crops kept (72% centre below 1024px, 55% 0% above). At 768 the woman's face still sits behind the lead text, as it did with the old tighter crop. Suite (system Chrome) 220 passed, 32 skipped.
 - **Claude Code — Bärgning phone hero (uncommitted):** `HERO_MOBILE_BARGNING 2.jpg` (1200×2000, truck higher in the frame, bottom faded to dark) added as `services/towing/towing-hero-phone.{webp,jpg}` (119/178 KB; the first version, 179/249 KB, had the flatbed edge behind the eyebrow and was replaced). Wired like Kontakt: `useIsPhone` renders only this photo on phones (no rotation, desktop photos not downloaded), `object-position: center top` at ≤650px. Measured at 390: hero 686px, eyebrow top 401px on dark asphalt, zero overflow. Known: at 320px the hero phone button ("Ring för bärgning: …") is 342px wide and runs 40px past the viewport, clipped by the hero (page overflow 0; not caused by the photo). Suite (system Chrome, first version) 220 passed, 32 skipped.
 
 ### 2026-09-30
