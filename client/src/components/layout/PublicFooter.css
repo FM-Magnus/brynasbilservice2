@@ -544,6 +544,82 @@ a.bb-footer__contact-val:hover {
   }
 }
 
+/* Phone footer (<= 650px, Magnus 2026-10-01): a short footer that holds only what people
+   look for on a phone: logo, tap-to-call and e-mail, address with the map link, opening
+   hours, social icons and the legal line. The Ring + Boka tid bar below already covers
+   the call and booking actions, so the footer's copies of them are gone, and so are the
+   description, trust row, tagline picture, wheel photo and the page list (the header's
+   phone menu has the pages). Elements are hidden, not removed, so the markup that
+   tests and desktop use stays the same. `.bb-footer .bb-footer__x` out-ranks the base rules. */
+@media (max-width: 650px) {
+  .bb-footer.bb-footer {
+    background-image: none;
+    padding-top: 2.4rem;
+  }
+
+  .bb-footer .bb-footer__grid {
+    gap: 1.6rem;
+  }
+
+  .bb-footer .bb-footer__col--brand {
+    align-items: center;
+    max-width: none;
+  }
+
+  .bb-footer .bb-footer__logo-link {
+    margin-bottom: 0;
+  }
+
+  .bb-footer .bb-footer__eyebrow,
+  .bb-footer .bb-footer__desc,
+  .bb-footer .bb-footer__trust-row,
+  .bb-footer .bb-footer__signature-wrap,
+  .bb-footer .bb-footer__col--links,
+  .bb-footer .bb-footer__contact-badge,
+  .bb-footer .bb-footer__contact-label,
+  .bb-footer .bb-footer__clock-badge,
+  .bb-footer .bb-footer__hours-divider,
+  .bb-footer .bb-footer__actions,
+  .bb-footer .bb-footer__bottom-sub {
+    display: none;
+  }
+
+  .bb-footer .bb-footer__heading {
+    margin-bottom: 0.4rem;
+  }
+
+  .bb-footer .bb-footer__contact-items {
+    gap: 0;
+  }
+
+  .bb-footer .bb-footer__contact-card {
+    min-height: 44px;
+  }
+
+  /* Tap targets of at least 44px (the base footer links are 29px high). */
+  .bb-footer a.bb-footer__contact-val,
+  .bb-footer .bb-footer__maps-link {
+    align-items: center;
+    display: inline-flex;
+    min-height: 44px;
+  }
+
+  .bb-footer .bb-footer__bottom {
+    gap: 0.9rem;
+    margin-top: 1.6rem;
+    padding-top: 1.2rem;
+  }
+
+  .bb-footer .bb-footer__bottom-social {
+    order: -1;
+  }
+
+  .bb-footer .bb-footer__social-btn {
+    height: 44px;
+    width: 44px;
+  }
+}
+
 /* Phone quick-contact bar (benchmark B1): fixed Ring + Boka tid under 768px.
    Below the header (z 100) and the booking modal (z 1000). */
 .bb-footer__mobile-bar,
