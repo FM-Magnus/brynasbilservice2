@@ -6,6 +6,7 @@ import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { TrustStrip } from '../components/ui/TrustStrip'
 import { GalleryDockStrip } from '../components/ui/GalleryDockStrip'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { useIsPhone } from '../hooks/useIsPhone'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
@@ -19,6 +20,8 @@ import heroCustomersWebp from '../assets/images/about/about-hero-maher-customers
 import heroCustomersJpg from '../assets/images/about/about-hero-maher-customers.jpg'
 import heroCarWebp from '../assets/images/about/about-hero-maher-customer-car.webp'
 import heroCarJpg from '../assets/images/about/about-hero-maher-customer-car.jpg'
+import phoneHeroWebp from '../assets/images/about/about-hero-phone.webp'
+import phoneHeroJpg from '../assets/images/about/about-hero-phone.jpg'
 import imgMaherBenchWebp from '../assets/images/about/maher-workshop-bench.webp'
 import imgMaherBenchJpg from '../assets/images/about/maher-workshop-bench.jpg'
 
@@ -99,10 +102,14 @@ const heroSlides = [
   { webp: heroCustomersWebp, jpg: heroCustomersJpg },
   { webp: heroCarWebp, jpg: heroCarJpg },
 ]
+// Phones get one static portrait photo: no rotation, and the desktop photos are never downloaded.
+const phoneHeroSlides = [{ webp: phoneHeroWebp, jpg: phoneHeroJpg }]
 
 export default function AboutPage() {
   const { openBooking, bookingModal } = useBookingModal()
-  const activeHeroSlide = useHeroSlideshow(heroSlides.length)
+  const isPhone = useIsPhone()
+  const slides = isPhone ? phoneHeroSlides : heroSlides
+  const activeHeroSlide = useHeroSlideshow(slides.length)
 
 
 
@@ -120,7 +127,7 @@ export default function AboutPage() {
             ========================================================= */}
         <section className="omoss-page__hero" aria-labelledby="omoss-hero-title">
           <div className="omoss-page__hero-media" aria-hidden="true">
-            {heroSlides.map((slide, i) => (
+            {slides.map((slide, i) => (
               <picture key={slide.jpg} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
                 <source srcSet={slide.webp} type="image/webp" />
                 <img src={slide.jpg} alt="" />
