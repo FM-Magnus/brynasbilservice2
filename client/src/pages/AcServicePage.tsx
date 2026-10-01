@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { useIsPhone } from '../hooks/useIsPhone'
 import { Tip } from '../components/ui/Tip'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
@@ -20,6 +21,8 @@ import { ClockIcon } from '../components/icons/ClockIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
 import heroBgJpg from '../assets/images/services/ac/ac-hero-bg.jpg'
 import heroBgWebp from '../assets/images/services/ac/ac-hero-bg.webp'
+import heroPhoneJpg from '../assets/images/services/ac/ac-hero-phone.jpg'
+import heroPhoneWebp from '../assets/images/services/ac/ac-hero-phone.webp'
 import manometersJpg from '../assets/images/services/ac/ac-manometers-on-engine.jpg'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
@@ -70,6 +73,8 @@ export default function AcServicePage() {
     recommendation ? `Önskad hjälp: ${recommendation}` : 'Gäller AC-service & klimatrengöring',
   )
 
+  const isPhone = useIsPhone()
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -80,8 +85,8 @@ export default function AcServicePage() {
         <section className="bb-hero bilservice__ac-hero" id="ac-service" aria-labelledby="ac-service-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="ac-hero-bg">
-              <source srcSet={heroBgWebp} type="image/webp" />
-              <img src={heroBgJpg} alt="" />
+              <source srcSet={isPhone ? heroPhoneWebp : heroBgWebp} type="image/webp" />
+              <img src={isPhone ? heroPhoneJpg : heroBgJpg} alt="" />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />

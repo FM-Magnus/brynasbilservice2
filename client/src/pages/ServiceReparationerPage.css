@@ -681,5 +681,7 @@
    the heaviest hero overlay, cut down 2026-09-30). */
 .bilservice .bb-hero { --bb-shade-strength: 0.3; }
 .bilservice > #felsokning { --bb-shade-strength: 0.5; }
+/* AC's photo has bright, saturated hoses behind the copy. */
+.bilservice > #ac-service { --bb-shade-strength: 0.8; }
 /* Placeholder hero photo is bright and busy behind the text; revisit when the real photo arrives. */
 .bilservice > #reparationer { --bb-shade-strength: 0.6; }
