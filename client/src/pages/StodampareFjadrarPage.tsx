@@ -42,7 +42,7 @@ const parts = [
 
 const benefits = [
   { title: 'Bättre väggrepp', text: 'Fungerande stötdämpare hjälper hjulen att hålla kontakten med vägen. Är de slitna tappar hjulen lättare greppet på ojämnt underlag, vilket kan påverka både styrning och inbromsning.' },
-  { title: 'Bättre väggrepp', text: 'Minskar risken för vattenplaning och ger stabilare kontakt mellan däck och vägbana i kurvor och vid undanmanövrar.' },
+  { title: 'Säkrare i kurvor', text: 'Minskar risken för vattenplaning och ger stabilare kontakt mellan däck och vägbana i kurvor och vid undanmanövrar.' },
   { title: 'Jämnare däckslitage', text: 'En korrekt dämpad fjädring förhindrar att däcken nöts vågigt eller trappstegsformat, vilket sparar pengar över tid.' },
   { title: 'Helhetsbedömning', text: 'Vi ser över dämparfästen, krängningshämmarlänkar och länkarmar samtidigt för att slippa framtida onödiga verkstadsbesök.' },
 ] as const
