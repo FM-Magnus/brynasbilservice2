@@ -53,13 +53,13 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Page | Hero | Other slots | Planned |
 |---|---|---|---|
 | Koppling | ✓ | ✓ ✓ | swap hero to object close-up |
-| Oljebyte | ✓ | ✓ ✓ | — |
-| Stötdämpare & fjädrar | ✓ (mechanic, `--pos-left`) | ✓ ✓ | optional swap to object close-up |
+| Oljebyte | ✓ object close-up (can, filter, plug on a dark bench, 2026-10-01) | ✓ ✓ | phone crop: can's cap is cut at 390 |
+| Stötdämpare & fjädrar | ✓ object close-up (springs, shocks, strut mount, 2026-10-01) | ✓ ✓ | — |
 | Bilbatteri | ✓ | ✓ ✓ | — |
 | Drivaxel & drivknutar | ✓ (the reference image) | ✓ ✓ | — |
 | Kamrem | ✓ | ✓ ✓ (landscape inspection crop) | — |
 | Avgassystem | ✓ | ✓ ✓ | — |
-| Bromssystem | ✓ | ✓ ✓ | — |
+| Bromssystem | ✓ object close-up (disc, caliper, pads, hose, 2026-10-01) | ✓ ✓ | — |
 | Hjullagerbyte | ✓ | ✓ ✓ | — |
 | Styrning & kulleder | ✓ | ✓ ✓ | — |
 | Service-reparationer | ✓ | ✓ servicebook/keys + ✓ four value cards | — |
@@ -99,7 +99,7 @@ The camera presets and grade presets live on **Google Drive, `My Drive/## FOR AG
 
 ## Files and markup
 
-- **Location:** `client/src/assets/images/services/<topic>/<topic>-<subject>-<role>.{webp,jpg}` for service and guide pages; Landing uses `home/landing-v2/landing-<subject>.{webp,jpg}` — e.g. `services/suspension/suspension-mechanic-wrench-workshop-hero`. Always both formats.
+- **Location:** `client/src/assets/images/services/<topic>/<topic>-<subject>-<role>.{webp,jpg}` for service and guide pages; Landing uses `home/landing-v2/landing-<subject>.{webp,jpg}` — e.g. `services/suspension/suspension-springs-shocks-bench-hero`. Always both formats.
 - **WebP:** `sips` cannot write WebP here; use `cwebp -q 90 in.jpg -o out.webp`. `sips -r -90` rotates counter-clockwise.
 - **Markup:** `<picture><source srcSet={webp} type="image/webp" /><img src={jpg} alt="…" loading="lazy" /></picture>` inside the slot. Swedish alt text that says what is in the picture. No inline `style=`.
 - **Intake:** finished exports come from `_incoming-assets/IMPLEMENT/`. Don't pull from the other intake subfolders unless Magnus points at a file ([`_incoming-assets/README.md`](../_incoming-assets/README.md)).

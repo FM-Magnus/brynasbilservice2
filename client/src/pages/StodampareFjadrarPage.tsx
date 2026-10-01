@@ -21,8 +21,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
-import heroJpg from '../assets/images/services/suspension/suspension-mechanic-wrench-workshop-hero.jpg'
-import heroWebp from '../assets/images/services/suspension/suspension-mechanic-wrench-workshop-hero.webp'
+import heroJpg from '../assets/images/services/suspension/suspension-springs-shocks-bench-hero.jpg'
+import heroWebp from '../assets/images/services/suspension/suspension-springs-shocks-bench-hero.webp'
 import inspectionJpg from '../assets/images/services/suspension/suspension-mechanic-strut-inspection-portrait.jpg'
 import inspectionWebp from '../assets/images/services/suspension/suspension-mechanic-strut-inspection-portrait.webp'
 import comparisonJpg from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.jpg'
@@ -94,7 +94,7 @@ export default function StodampareFjadrarPage() {
           eyebrow="Chassi & fjädring"
           title={<>Stötdämpare<br />för <span className="bb-accent">stabil</span><br />körning</>}
           lead="Stötdämpare och fjädrar samverkar för att hålla hjulen i kontakt med vägen och ge en stabil, säker och kontrollerad körning. Vi inspekterar, byter och utför korrekt hjulinställning."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Mekaniker arbetar med fjäderben och stötdämpare på en lyft bil i verkstaden', alignLeft: true }}
+          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Skruvfjädrar, stötdämpare och fjäderbenslager på mörk verkstadsbänk' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
