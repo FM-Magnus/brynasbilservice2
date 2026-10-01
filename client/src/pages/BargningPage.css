@@ -166,7 +166,7 @@
 .bargning-page__showcase-img {
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: 36% center;
   width: 100%;
 }
 

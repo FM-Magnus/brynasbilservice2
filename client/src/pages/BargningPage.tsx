@@ -14,8 +14,8 @@ import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 
-import imgTowTruckJpg from '../assets/images/services/towing/tow-truck-at-workshop.jpg'
-import imgTowTruckWebp from '../assets/images/services/towing/tow-truck-at-workshop.webp'
+import imgTowTruckJpg from '../assets/images/services/towing/towing-truck-with-car-showcase.jpg'
+import imgTowTruckWebp from '../assets/images/services/towing/towing-truck-with-car-showcase.webp'
 import imgWorkshopLiftJpg from '../assets/images/workshop/workshop-car-on-lift.jpg'
 import imgWorkshopLiftWebp from '../assets/images/workshop/workshop-car-on-lift.webp'
 import imgPeugeotFrontWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
@@ -165,11 +165,11 @@ export default function BargningPage() {
                   <source srcSet={imgTowTruckWebp} type="image/webp" />
                   <img
                     src={imgTowTruckJpg}
-                    alt="Brynäs Bilservice Iveco bärgningsbil parkerad vid verkstaden"
+                    alt="Blå Iveco bärgningsbil med en personbil fastsurrad på flaket"
                     className="bargning-page__showcase-img"
                     loading="lazy"
-                    width={580}
-                    height={460}
+                    width={1600}
+                    height={893}
                   />
                 </picture>
                 <div className="bargning-page__showcase-location-badge">
