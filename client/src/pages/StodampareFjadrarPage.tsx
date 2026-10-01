@@ -92,7 +92,7 @@ export default function StodampareFjadrarPage() {
         <GuideHero
           id="suspension-title"
           eyebrow="Chassi & fjädring"
-          title={<>Stötdämpare &amp; fjädrar i <span className="bb-accent">Gävle</span></>}
+          title={<>Stötdämpare<br />för <span className="bb-accent">stabil</span><br />körning</>}
           lead="Stötdämpare och fjädrar samverkar för att hålla hjulen i kontakt med vägen och ge en stabil, säker och kontrollerad körning. Vi inspekterar, byter och utför korrekt hjulinställning."
           image={{ webp: heroWebp, jpg: heroJpg, alt: 'Mekaniker arbetar med fjäderben och stötdämpare på en lyft bil i verkstaden', alignLeft: true }}
           trustBadges={trustBadges}

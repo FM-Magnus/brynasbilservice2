@@ -34,7 +34,7 @@ export const BUSINESS = {
     street: 'Utmarksvägen 21B',
     postalCode: '802 91',
     city: 'Gävle',
-    district: 'Brynäs',
+    district: 'Sörby Urfjäll',
     full: 'Utmarksvägen 21B, 802 91 Gävle',
     mapsUrl: 'https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A4vle',
   },
@@ -52,10 +52,8 @@ export const BUSINESS = {
  *
  *   weekdayHours()                          → '08:00–17:00'
  *   weekdayHours({ dash: ' – ' })           → '08:00 – 17:00'
- *   weekdayHours({ dash: ' – ', dots: true }) → '08.00 – 17.00'
  */
-export function weekdayHours({ dash = '–', dots = false }: { dash?: string; dots?: boolean } = {}): string {
+export function weekdayHours({ dash = '–' }: { dash?: string } = {}): string {
   const { open, close } = BUSINESS.hours.weekdays
-  const format = (time: string) => (dots ? time.replace(':', '.') : time)
-  return `${format(open)}${dash}${format(close)}`
+  return `${open}${dash}${close}`
 }

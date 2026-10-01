@@ -358,7 +358,7 @@ export default function BilarTillSalu() {
           <div className="bb-wrap bb-hero__content">
             <div className="bilartillsalu-page__hero-grid">
               <div className="bb-hero__copy bilartillsalu-page__hero-copy">
-                <p className="bb-eyebrow bb-eyebrow--dark">Begagnade bilar i Brynäs</p>
+                <p className="bb-eyebrow bb-eyebrow--dark">Begagnade bilar i Gävle</p>
                 <h1 className="bb-h1 bilartillsalu-page__hero-title" id="bilartillsalu-hero-title">
                   <span>Bilar till <span className="bb-accent">salu</span></span>
                 </h1>
@@ -469,7 +469,7 @@ export default function BilarTillSalu() {
                 <p className="bb-eyebrow">Frågor om våra bilar?</p>
                 <h2 className="bilartillsalu-page__closing-title" id="bilartillsalu-closing-title">Vill du provköra eller sälja din bil?</h2>
                 <p className="bb-lead">
-                  Du är varmt välkommen att ringa oss eller svänga förbi verkstaden på Utmarksvägen i Brynäs för att titta på bilen eller diskutera bilaffärer.
+                  Du är varmt välkommen att ringa oss eller svänga förbi verkstaden på Utmarksvägen i Gävle för att titta på bilen eller diskutera bilaffärer.
                 </p>
               </div>
               <div className="bilartillsalu-page__closing-actions">

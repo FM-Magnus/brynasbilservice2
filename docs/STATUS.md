@@ -51,6 +51,7 @@ Phases 1–7 are done (production fixes, facts and data, documentation, assets a
 - The owner is **Maher**. Old customers call him "Shomaher" after his first workshop; reviews naming him are genuine.
 - Google rating **4,3 from 50 reviews** is real data.
 - Org.nr **559343-5307** (company registers). Opening hours, phone, address, org.nr: only in `client/src/data/business.ts` — never hard-code them. (hitta.se lists "Utmarksvägen 21" without the B; not yet checked with Magnus.)
+- **Location:** the workshop is on **Sörby Urfjäll in Gävle**, not in Brynäs (Magnus, 2026-10-01). "Brynäs" is only the company name; copy says "i Gävle" or "på Sörby Urfjäll" (`business.ts` `district`).
 - Public copy is Swedish and not final-approved; don't change it without asking.
 
 ## Open decisions and cautions

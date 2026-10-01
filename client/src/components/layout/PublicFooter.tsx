@@ -37,7 +37,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
 
             <div className="bb-footer__eyebrow">
               <span className="bb-footer__eyebrow-dash" aria-hidden="true" />
-              <span>Din lokala bilverkstad i Brynäs, Gävle</span>
+              <span>Din lokala bilverkstad i Gävle</span>
             </div>
 
             <p className="bb-footer__desc">

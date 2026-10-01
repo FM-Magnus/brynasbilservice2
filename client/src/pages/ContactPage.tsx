@@ -66,12 +66,12 @@ export default function ContactPage() {
 
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
-              <p className="bb-eyebrow bb-eyebrow--dark">Din lokala bilverkstad i Brynäs, Gävle</p>
+              <p className="bb-eyebrow bb-eyebrow--dark">Sörby Urfjäll, Gävle</p>
               <h1 className="bb-h1" id="contact-hero-title">
-                <span className="bb-accent">Hör av dig</span> till Brynäs Bilservice
+                Ring, mejla eller <span className="bb-accent">kom förbi</span>
               </h1>
               <p className="bb-lead--dark kontakt-page__lead">
-                Har du frågor om din bil, behöver rådgivning eller vill skicka en förfrågan? Vår verkstad ligger på Utmarksvägen i Brynäs, Gävle och vi hjälper dig gärna med snabba och raka besked.
+                Har du frågor om din bil, behöver rådgivning eller vill skicka en förfrågan? Vår verkstad ligger på Utmarksvägen, Sörby Urfjäll i Gävle, och vi hjälper dig gärna med snabba och raka besked.
               </p>
               <p className="bb-lead--dark kontakt-page__sub">
                 Välj det sätt som passar dig bäst: skicka ett meddelande via formuläret, ring oss direkt eller boka tid via vårt bokningssystem.
@@ -95,7 +95,7 @@ export default function ContactPage() {
             <div className="kontakt-page__info-col">
               <div className="kontakt-page__card kontakt-page__card--dark">
                 <span className="bb-eyebrow bb-eyebrow--dark">Direktkontakt</span>
-                <h2 className="bb-h2 kontakt-page__card-title">Kontakt &amp; Besöksadress</h2>
+                <h2 className="bb-h2 kontakt-page__card-title">Kontakt &amp; besöksadress</h2>
 
                 <ul className="kontakt-page__details-list">
                   <li className="kontakt-page__detail-item">

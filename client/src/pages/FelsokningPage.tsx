@@ -122,8 +122,8 @@ export default function FelsokningPage() {
             <div className="bb-hero__copy">
               <p className="bb-eyebrow bb-eyebrow--dark">Elektronik &amp; diagnostik</p>
               <h1 className="bb-h1" id="felsokning-hero-title">
-                <span>Felsökning &amp; <span className="bb-accent">Diagnostik</span></span>
-                <span>i Gävle</span>
+                <span>Felsökning som</span>
+                <span className="bb-accent">hittar orsaken</span>
               </h1>
               <p>
                 Lyser en varningslampa eller låter bilen konstigt? Vi läser av felkoder och mäter oss fram till den verkliga orsaken med modern diagnostikutrustning — för alla märken och modeller.

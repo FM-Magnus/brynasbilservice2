@@ -88,7 +88,7 @@ export default function KamremPage() {
         <GuideHero
           id="kamrem-title"
           eyebrow="Förebyggande motorskydd"
-          title={<>Kamremsbyte i <span className="bb-accent">Gävle</span></>}
+          title={<>Kamremsbyte<br /><span className="bb-accent">i tid</span> skyddar<br />motorn</>}
           lead="Kamremmen synkroniserar motorns vevaxel och kamaxel så att kolvar och ventiler rör sig i exakt rätt takt. Det är en av bilens mest kritiska delar där ett missat byte kan leda till totalt motorhaveri."
           image={{ webp: timingBeltWebp, jpg: timingBeltJpg, alt: 'Kamremssats med kamrem, spännrulle, styrrulle och vattenpump på ett mörkt bord', slot: 'timing-belt-hero' }}
           trustBadges={trustBadges}

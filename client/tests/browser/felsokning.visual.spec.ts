@@ -9,8 +9,8 @@ test('felsökning & diagnostik page renders without horizontal overflow across b
   // Verify H1 is visible and contains expected text
   const h1 = page.getByRole('heading', { level: 1 })
   await expect(h1).toBeVisible()
-  await expect(h1).toContainText('Felsökning &')
-  await expect(h1).toContainText('Diagnostik')
+  await expect(h1).toContainText('Felsökning')
+  await expect(h1).toContainText('hittar orsaken')
 
   // Verify horizontal overflow is strictly 0px
   const hasHorizontalOverflow = await page.evaluate(() => {

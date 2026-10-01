@@ -90,9 +90,9 @@ export default function AcServicePage() {
             <div className="bb-hero__copy bilservice__ac-intro-copy">
               <p className="bb-eyebrow bb-eyebrow--dark">AC &amp; klimatanläggning</p>
               <h1 className="bb-h1 bilservice__ac-title" id="ac-service-title">
-                <span>AC-service &amp;</span>
-                <span className="bb-accent">Klimat{'\u00AD'}rengöring</span>
-                <span>i Gävle</span>
+                <span>AC-service</span>
+                <span>för <span className="bb-accent">klar sikt</span></span>
+                <span>och sval kupé</span>
               </h1>
               <p className="bilservice__ac-lead">
                 En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer. Ett system med för lite köldmedium smörjs sämre, och att köra vidare så kan i värsta fall leda till en betydligt dyrare kompressorreparation.

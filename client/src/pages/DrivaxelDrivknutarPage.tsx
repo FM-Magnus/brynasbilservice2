@@ -93,7 +93,7 @@ export default function DrivaxelDrivknutarPage() {
         <GuideHero
           id="driveshaft-title"
           eyebrow="Drivlina & kraftöverföring"
-          title={<>Drivaxel &amp; drivknutar i <span className="bb-accent">Gävle</span></>}
+          title={<>Drivknutar<br />som <span className="bb-accent">klickar</span><br />i kurvan</>}
           lead="Drivaxeln överför motorkraften från växellådan till drivhjulen via rörliga drivknutar (CV-knutar). Vi inspekterar damasker, åtgärdar fettläckage och byter slitna knutar eller kompletta drivaxlar."
           image={{ webp: heroWebp, jpg: heroJpg, alt: 'Drivaxel med CV-knut på arbetsbänk i verkstaden', slot: 'driveshaft-hero' }}
           trustBadges={trustBadges}

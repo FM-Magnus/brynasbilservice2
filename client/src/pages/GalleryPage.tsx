@@ -255,7 +255,7 @@ export default function GalleryPage() {
               </div>
               <div className="galleri-page__intro-body">
                 <p className="bb-lead--dark galleri-page__lead">
-                  Ta en titt in i vår verkstad och däckavdelning på Utmarksvägen i Brynäs. Här ser du lokalerna, utrustningen och miljön där vi tar hand om din bil.
+                  Ta en titt in i vår verkstad och däckavdelning på Utmarksvägen i Gävle. Här ser du lokalerna, utrustningen och miljön där vi tar hand om din bil.
                 </p>
                 <div className="galleri-page__actions">
                   <button type="button" className="bb-btn bb-btn--teal galleri-page__book" onClick={openBooking}>

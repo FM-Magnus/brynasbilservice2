@@ -9,7 +9,7 @@ test('styrning och kulleder page renders without horizontal overflow across brea
   // Verify H1 is visible and contains expected text
   const h1 = page.getByRole('heading', { level: 1 })
   await expect(h1).toBeVisible()
-  await expect(h1).toContainText('Styrning & kulleder')
+  await expect(h1).toContainText('Styrning')
 
   // Verify horizontal overflow is strictly 0px
   const hasHorizontalOverflow = await page.evaluate(() => {

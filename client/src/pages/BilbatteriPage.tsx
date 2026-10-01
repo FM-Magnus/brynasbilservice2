@@ -91,7 +91,7 @@ export default function BilbatteriPage() {
         <GuideHero
           id="battery-title"
           eyebrow="Elsystem & startkraft"
-          title={<>Bilbatteri &amp; <span className="bb-accent">Batteribyte</span> i Gävle</>}
+          title={<>Bilbatteri<br />som <span className="bb-accent">startar</span><br />varje morgon</>}
           lead="Bilbatteriet driver startmotorn och håller igång bilens elsystem — från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil."
           image={{ webp: heroWebp, jpg: heroJpg, alt: 'Startkablar anslutna till ett bilbatteri i motorrummet', slot: 'battery-hero' }}
           trustBadges={trustBadges}

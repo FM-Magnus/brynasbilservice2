@@ -16,7 +16,7 @@ interface LocationPinProps {
  * the pin anchors to its bottom-center by default. Never write this markup
  * by hand on a page, and never bake the label into a photo's pixels again —
  * that drifts out of sync with `business.ts` silently (the original Om oss
- * photo did, by one line: no "B" and the wrong district).
+ * photo did: its street lacked the "B").
  */
 export function LocationPin({ label = 'Här finns vi', address = BUSINESS.address.full, className = '' }: LocationPinProps) {
   return (

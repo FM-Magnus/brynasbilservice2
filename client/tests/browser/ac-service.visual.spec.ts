@@ -9,8 +9,8 @@ test('AC-service & klimatrengöring page renders without horizontal overflow acr
   // Verify H1 is visible and contains expected text
   const h1 = page.getByRole('heading', { level: 1 })
   await expect(h1).toBeVisible()
-  await expect(h1).toContainText('AC-service &')
-  await expect(h1).toContainText('Klimatrengöring')
+  await expect(h1).toContainText('AC-service')
+  await expect(h1).toContainText('klar sikt')
 
   // Verify horizontal overflow is strictly 0px
   const hasHorizontalOverflow = await page.evaluate(() => {

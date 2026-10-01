@@ -163,10 +163,6 @@ export function ContactFormCard({
               </span>
             </a>
           </div>
-
-          <p className="bb-contact-section__note">
-            Fyll i formuläret så återkommer vi till dig så snart som möjligt!
-          </p>
         </div>
 
         {formCardElement}

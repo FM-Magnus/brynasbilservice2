@@ -18,7 +18,7 @@ export interface PageMeta {
 export const PAGE_META: Record<string, PageMeta> = {
   '/': {
     title: 'Bilverkstad i Gävle – Brynäs Bilservice',
-    description: 'Oberoende bilverkstad på Brynäs i Gävle. Service och reparationer för alla bilmärken, däck, AC, felsökning och bärgning. Tydligt pris innan vi börjar.',
+    description: 'Oberoende bilverkstad på Sörby Urfjäll i Gävle. Service och reparationer för alla bilmärken, däck, AC, felsökning och bärgning. Pris innan vi börjar.',
   },
   '/om-oss': {
     title: 'Om oss – din bilverkstad i Brynäs | Brynäs Bilservice',

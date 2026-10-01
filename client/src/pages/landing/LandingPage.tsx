@@ -45,7 +45,7 @@ const trustItems = [
   { icon: ChatDotsIcon, title: 'Tydlig kommunikation', text: 'Vi håller dig uppdaterad genom hela processen.' },
   { icon: ShieldIcon, title: 'Omsorg om din bil', text: 'Vi arbetar noggrant och med rätt kunskap.' },
   { icon: WrenchIcon, title: 'Personlig service', text: 'Du och din bil är alltid i fokus.' },
-  { icon: MapPinIcon, title: 'Lokal verkstad', text: 'Nära dig i Brynäs, Gävle.' },
+  { icon: MapPinIcon, title: 'Lokal verkstad', text: 'På Sörby Urfjäll i Gävle.' },
 ] as const
 
 const services = [
@@ -92,14 +92,13 @@ export default function LandingPage() {
         <PublicHeader onBookingClick={openBooking} variant="overlay" />
         <div className="bb-wrap bb-hero__content">
           <div className="bb-hero__copy">
-            <p className="bb-eyebrow bb-eyebrow--dark">Din lokala bilverkstad i Gävle</p>
+            <p className="bb-eyebrow bb-eyebrow--dark">Alla bilmärken, en verkstad</p>
             <h1 id="landing-v2-hero-title" className="bb-h1">
-              <span>Din bil</span>
-              <span className="bb-accent">förtjänar</span>
-              <span>det bästa</span>
+              <span>Bilverkstad i Gävle</span>
+              <span>med <span className="bb-accent">raka besked</span></span>
             </h1>
             <p>
-              Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation – för alla bilmärken, till konkurrenskraftiga priser.
+              Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför alla typer av service och reparation – för alla bilmärken, till konkurrenskraftiga priser.
             </p>
             <div className="bb-hero__actions">
               <button className="bb-btn bb-btn--teal" type="button" onClick={openBooking}>
@@ -144,7 +143,7 @@ export default function LandingPage() {
           <div>
             <p className="bb-eyebrow">Om Brynäs Bilservice</p>
             <h2 id="landing-v2-why-title" className="bb-h2">
-              Trygg bilservice<br />i <span className="bb-accent">lokala Gävle</span>
+              Trygg bilservice<br />i <span className="bb-accent">Gävle</span>
             </h2>
             <p className="bb-lead--dark">
               Brynäs Bilservice grundades 2021 och är din lokala, oberoende verkstad i Brynäs, Gävle. Vi brinner för bilar och för människorna som kör dem. Hos oss möts du av erfarenhet, noggrannhet och ett personligt bemötande – oavsett om det gäller en enkel service eller en mer omfattande reparation.

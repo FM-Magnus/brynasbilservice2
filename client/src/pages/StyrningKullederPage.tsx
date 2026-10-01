@@ -92,7 +92,7 @@ export default function StyrningKullederPage() {
         <GuideHero
           id="steering-title"
           eyebrow="Framvagn & styrprecision"
-          title={<>Styrning &amp; kulleder i <span className="bb-accent">Gävle</span></>}
+          title={<>Styrning<br />som <span className="bb-accent">lyder</span><br />ratten</>}
           lead="Styrleder, spindelleder och servostyrning ser till att bilen lyder ratten direkt och rullar stabilt. Vi felsöker missljud och glapp, byter slitna leder och utför professionell hjulinställning."
           image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ny kuggstång och styrväxel med damasker och styrleder på en arbetsbänk i verkstaden' }}
           trustBadges={trustBadges}

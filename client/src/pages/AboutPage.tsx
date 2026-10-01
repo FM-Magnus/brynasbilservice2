@@ -135,7 +135,7 @@ export default function AboutPage() {
                   Sedan 2021 i Gävle
                 </p>
                 <h1 className="bb-h1 omoss-page__hero-title" id="omoss-hero-title">
-                  Din lokala och <span className="bb-accent">personliga</span> bilverkstad i Gävle
+                  Liten verkstad, <span className="bb-accent">personlig</span> service
                 </h1>
                 <p className="bb-lead--dark omoss-page__hero-lead">
                   Sedan starten 2021 har vi drivit en oberoende bilverkstad på Utmarksvägen i Gävle med ett enkelt mål: att ge bilägare personlig service, fackmannamässigt utfört arbete och raka besked utan krångel.
@@ -236,8 +236,8 @@ export default function AboutPage() {
                     <h2 className="omoss-page__facts-title">Öppettider</h2>
                     <div className="omoss-page__hours-list">
                       <div className="omoss-page__hours-row">
-                        <span className="omoss-page__hours-day">Måndag - Fredag:</span>
-                        <span className="omoss-page__hours-time">{weekdayHours({ dash: ' – ', dots: true })}</span>
+                        <span className="omoss-page__hours-day">Måndag – Fredag:</span>
+                        <span className="omoss-page__hours-time">{weekdayHours({ dash: ' – ' })}</span>
                       </div>
                       <div className="omoss-page__hours-row">
                         <span className="omoss-page__hours-day">Lördag:</span>
@@ -266,7 +266,7 @@ export default function AboutPage() {
                   Om Brynäs Bilservice
                 </p>
                 <h2 className="bb-h2 omoss-page__story-heading" id="story-title">
-                  En fristående verkstad med hjärtat i Gävle
+                  En oberoende verkstad med hjärtat i Gävle
                 </h2>
                 <p className="omoss-page__story-paragraph">
                   Brynäs Bilservice drivs av Maher Basher, som vuxit upp med bilar och motorer som en livslång passion, gick fordonsprogrammet på gymnasiet och arbetade sedan som mekaniker innan han startade eget. Han drev tidigare en verkstad som gick under smeknamnet Shomaher – ett skämtsamt spel på hans eget namn och F1-föraren Schumacher – och namnet lever kvar än idag.

@@ -106,7 +106,7 @@ export default function BargningPage() {
                 Bärgning i Gävle med omnejd
               </p>
               <h1 className="bb-h1 bargning-page__hero-title" id="bargning-hero-title">
-                Bärgning &amp; <span className="bb-accent">Biltransport</span>
+                Bärgning <span className="bb-accent">direkt till</span> verkstaden
               </h1>
               <p className="bb-lead--dark bargning-page__hero-lead">
                 Ett haveri kommer sällan lägligt. Vi erbjuder lokal bärgningshjälp, starthjälp och säker biltransport direkt till vår verkstad i Gävle — så att vi snabbt kan påbörja felsökning och reparation.
@@ -391,7 +391,7 @@ export default function BargningPage() {
                 </div>
                 <h3 className="bargning-page__process-step-title">Felsökning &amp; åtgärd</h3>
                 <p className="bargning-page__process-step-desc">
-                  Bilen tas emot i vår verkstad i Brynäs för direkt diagnos och kostnadsförslag.
+                  Bilen tas emot i vår verkstad på Sörby Urfjäll för direkt diagnos och kostnadsförslag.
                 </p>
               </div>
             </div>

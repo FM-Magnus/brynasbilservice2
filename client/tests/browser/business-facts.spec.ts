@@ -19,7 +19,7 @@ function sourceFiles(dir: string): string[] {
   })
 }
 
-// Fixed facts written out literally. Prose such as "på Utmarksvägen i Brynäs"
+// Fixed facts written out literally. Prose such as "på Utmarksvägen i Gävle"
 // (street name without a number) is copy, not a fact, and is allowed.
 const HARD_CODED_FACT = /\b559343-\d{4}\b|Utmarksvägen \d|802 91|070[- ]?553|46705533395|info@brynasbilservice\.se|Brynäs Bilservice AB\b/
 

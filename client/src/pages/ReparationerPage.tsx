@@ -34,7 +34,7 @@ import './ServiceReparationerPage.css'
 const trustRow = [
   { icon: CheckIcon, title: 'Kostnadsförslag först', text: 'Du vet vad det kostar innan vi börjar.' },
   { icon: ShieldIcon, title: 'Inget extra utan ditt OK', text: 'Vi frågar innan vi går utanför uppdraget.' },
-  { icon: WrenchIcon, title: 'Alla bilmärken', text: 'Oberoende verkstad i Brynäs.' },
+  { icon: WrenchIcon, title: 'Alla bilmärken', text: 'Oberoende verkstad i Gävle.' },
 ] as const
 
 const jobTypes = [
@@ -100,11 +100,11 @@ export default function ReparationerPage() {
           <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
-              <p className="bb-eyebrow bb-eyebrow--dark">Reparationer i Brynäs, Gävle</p>
+              <p className="bb-eyebrow bb-eyebrow--dark">Motor, drivlina &amp; chassi</p>
               <h1 className="bb-h1" id="reparationer-hero-title">
-                <span>Reparationer</span>
-                <span className="bb-accent">&amp; större arbeten</span>
-                <span>i Gävle</span>
+                <span>Reparationer när</span>
+                <span>det är <span className="bb-accent">mer än</span></span>
+                <span>en service</span>
               </h1>
               <p>
                 Motor, koppling, avgassystem eller fjädring – när det som är fel är mer än en vanlig service tar vi oss an jobbet. Du får ett tydligt kostnadsförslag innan vi börjar, och vi gör inget extra utan att ha frågat dig.

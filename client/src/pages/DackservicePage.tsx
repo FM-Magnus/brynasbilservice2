@@ -160,11 +160,11 @@ export default function DackservicePage() {
           <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
-              <p className="bb-eyebrow bb-eyebrow--dark">Däckverkstad i Brynäs, Gävle</p>
+              <p className="bb-eyebrow bb-eyebrow--dark">Däckverkstad i Gävle</p>
               <h1 className="bb-h1" id="dackservice-hero-title">
-                <span>Däckservice &amp;</span>
-                <span className="bb-accent">Hjulskifte</span>
-                <span>i Gävle</span>
+                <span>Däckservice</span>
+                <span className="bb-accent">inför varje</span>
+                <span>säsong</span>
               </h1>
               <p>
                 Vi hjälper dig med hjulskifte, montering, balansering, hjulinställning, punkteringslagning och däckhotell — med omtanke om säkerhet, körkomfort och dina hjul.

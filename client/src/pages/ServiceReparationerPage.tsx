@@ -98,14 +98,14 @@ export default function ServiceReparationerPage() {
           <PublicHeader onBookingClick={openBooking} variant="overlay" />
           <div className="bb-wrap bb-hero__content">
             <div className="bb-hero__copy">
-              <p className="bb-eyebrow bb-eyebrow--dark">Din bilverkstad i Brynäs, Gävle</p>
+              <p className="bb-eyebrow bb-eyebrow--dark">Service &amp; underhåll</p>
               <h1 className="bb-h1" id="bilservice-hero-title">
-                <span>Din bil</span>
-                <span className="bb-accent">förtjänar</span>
-                <span>det bästa</span>
+                <span>Bilservice</span>
+                <span>med <span className="bb-accent">tydligt pris</span></span>
+                <span>innan vi börjar</span>
               </h1>
               <p>
-                Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför all typ av service och reparation — för alla bilmärken, till konkurrenskraftiga priser.
+                Bas-, mellan- och stor service för alla bilmärken. Du får ett tydligt pris innan vi börjar, och vi gör inget extra utan att fråga dig först.
               </p>
               <div className="bb-hero__actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
@@ -123,7 +123,7 @@ export default function ServiceReparationerPage() {
           <div className="bb-wrap bilservice__container bilservice__split">
             <div className="bilservice__prose">
               <h2 className="bb-h2" id="bilservice-price-title">Vad kostar en <span className="bb-accent">bilservice</span>?</h2>
-              <p>Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som fristående verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
+              <p>Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som oberoende verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
               <p>Be om ett kostnadsförslag som visar vad som ingår: arbete, delar och vätskor, och vad som ligger utanför. Är priset en ungefärlig uppgift får slutpriset enligt konsumentreglerna inte bli mer än 15 procent högre, och hittar verkstaden något mer som behöver åtgärdas ska du kontaktas innan det arbetet görs.</p>
               <div className="bilservice__actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid för bilservice</button>

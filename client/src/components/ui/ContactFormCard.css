@@ -111,14 +111,6 @@
   line-height: 1.38;
 }
 
-.bb-contact-section__note {
-  color: var(--bb-color-text-muted, #5e6c70);
-  font-family: var(--bb-font-body, 'Manrope', Arial, sans-serif);
-  font-size: var(--bb-font-size-support, 0.92rem);
-  line-height: var(--bb-line-height-support, 1.55);
-  margin: 1.25rem 0 0;
-  max-width: 310px;
-}
 
 /* Form Card (standalone or embedded in grid) */
 .bb-contact-form-card {
