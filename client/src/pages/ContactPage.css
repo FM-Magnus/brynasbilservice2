@@ -416,6 +416,19 @@
   pointer-events: none;
   position: absolute;
 }
+.kontakt-page__find-photo {
+  border-radius: var(--bb-radius-control);
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+.kontakt-page__find-photo img {
+  aspect-ratio: 3 / 2;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
 .kontakt-page__find-title {
   color: var(--bb-color-text-inverse);
   font-size: clamp(1.6rem, 2.4vw, 2.1rem);
@@ -472,7 +485,9 @@
 }
 .kontakt-page__focus .bb-accent { color: var(--bb-color-teal-500); }
 .kontakt-page__focus::before {
-  background: none;
+  /* Readability scrim: the copy sits over the bright wheel, so darken the left
+     two-thirds and let the mechanic on the right stay clear. rgba of --bb-color-ink-950. */
+  background: linear-gradient(90deg, rgba(8, 22, 25, 0.82) 0%, rgba(8, 22, 25, 0.78) 38%, rgba(8, 22, 25, 0.5) 56%, rgba(8, 22, 25, 0) 74%);
   content: '';
   inset: 0;
   position: absolute;
@@ -531,6 +546,13 @@
   .kontakt-page__find-grid { grid-template-columns: 1fr; }
   .kontakt-page__find-card { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
   .kontakt-page__map-card, .kontakt-page__map-card iframe { min-height: 280px; }
+}
+
+@media (max-width: 1023px) {
+  /* The copy spans most of the band here, so the scrim covers nearly all of it. */
+  .kontakt-page__focus::before {
+    background: linear-gradient(90deg, rgba(8, 22, 25, 0.8) 0%, rgba(8, 22, 25, 0.74) 70%, rgba(8, 22, 25, 0.55) 100%);
+  }
 }
 
 @media (max-width: 650px) {

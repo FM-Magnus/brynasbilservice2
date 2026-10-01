@@ -19,6 +19,8 @@ import carHeroWebp from '../assets/images/contact/contact-hero-maher-customer-ca
 import carHeroJpg from '../assets/images/contact/contact-hero-maher-customer-car.jpg'
 import phoneHeroWebp from '../assets/images/contact/contact-hero-phone.webp'
 import phoneHeroJpg from '../assets/images/contact/contact-hero-phone.jpg'
+import findWebp from '../assets/images/contact/contact-find-us-entrance.webp'
+import findJpg from '../assets/images/contact/contact-find-us-entrance.jpg'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { useIsPhone } from '../hooks/useIsPhone'
 import './ContactPage.css'
@@ -262,6 +264,16 @@ export default function ContactPage() {
               />
             </div>
             <div className="kontakt-page__find-card">
+              <picture className="kontakt-page__find-photo">
+                <source srcSet={findWebp} type="image/webp" />
+                <img
+                  src={findJpg}
+                  alt="Infarten från Utmarksvägen med skylten Här finns vi och en pil mot verkstaden"
+                  loading="lazy"
+                  width={1600}
+                  height={1067}
+                />
+              </picture>
               <h2 className="bb-h2 kontakt-page__find-title" id="contact-find-title">Hitta till oss</h2>
               <p className="kontakt-page__find-address">{ADDRESS}</p>
               <div className="kontakt-page__find-actions">
