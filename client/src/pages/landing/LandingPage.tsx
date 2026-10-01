@@ -17,14 +17,14 @@ import heroPhoneWebp from '../../assets/images/home/landing-v2/landing-happy-cus
 import heroPhoneJpg from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero-phone.jpg'
 import heroBirdsEyeWebp from '../../assets/images/home/landing-v2/landing-birds-eye-hero.webp'
 import heroBirdsEyeJpg from '../../assets/images/home/landing-v2/landing-birds-eye-hero.jpg'
+import customerInteractionWebp from '../../assets/images/home/landing-v2/landing-customer-interaction-background.webp'
+import customerInteractionJpg from '../../assets/images/home/landing-v2/landing-customer-interaction-background.jpg'
 import { TrustStrip } from '../../components/ui/TrustStrip'
 import { ChatDotsIcon } from '../../components/icons/ChatDotsIcon'
 import { ShieldIcon } from '../../components/icons/ShieldIcon'
 import { GalleryDockStrip } from '../../components/ui/GalleryDockStrip'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
-import customerInteractionWebp from '../../assets/images/home/landing-v2/landing-customer-interaction-background.webp'
-import customerInteractionJpg from '../../assets/images/home/landing-v2/landing-customer-interaction-background.jpg'
 import { BUSINESS } from '../../data/business'
 import './LandingPage.css'
 
@@ -139,6 +139,10 @@ export default function LandingPage() {
       <TrustStrip items={trustItems} />
 
       <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
+        <picture className="landing-v2__why-photo" aria-hidden="true">
+          <source srcSet={customerInteractionWebp} type="image/webp" />
+          <img src={customerInteractionJpg} alt="" loading="lazy" width={2170} height={630} />
+        </picture>
         <div className="bb-wrap landing-v2__why-content">
           <div>
             <p className="bb-eyebrow">Om Brynäs Bilservice</p>
@@ -158,11 +162,6 @@ export default function LandingPage() {
       <GalleryDockStrip />
 
       <section className="landing-v2__process-section" aria-labelledby="landing-v2-process-title">
-        <picture aria-hidden="true">
-          <source srcSet={customerInteractionWebp} type="image/webp" />
-          <img src={customerInteractionJpg} alt="" />
-        </picture>
-        <div className="landing-v2__process-shade" aria-hidden="true" />
         <div className="bb-wrap landing-v2__process-content">
           <div>
             <p className="bb-eyebrow bb-eyebrow--dark">Så går det till</p>
