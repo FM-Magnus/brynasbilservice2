@@ -73,7 +73,7 @@ Kontroll av relevanta tryckgivare vid elfel eller utebliven funktion
 BOKA TID
 TIPS
 Service eller reparation?
-En AC-service är en proaktiv kontroll och påfyllning. Misstänker du istället en läcka, en trasig kompressor eller ett annat fel är det en AC-reparation — då gör vi alltid en felsökning och lämnar ett prisförslag innan vi går vidare.
+En AC-service är en proaktiv kontroll och påfyllning. Misstänker du istället en läcka, en trasig kompressor eller ett annat fel är det en AC-reparation – då gör vi alltid en felsökning och lämnar ett prisförslag innan vi går vidare.
 
 Priset 1 495 kr gäller bilar med köldmedium R134a. För nyare bilar med R1234yf, vanligt efter cirka 2017, kontakta oss för prisuppgift.
 
@@ -83,7 +83,7 @@ Från kontroll till komfort
 
 Vi följer en noggrann process så att du vet att ditt AC-system fungerar tryggt och effektivt.
 
-RING OSS: 070-553 33 95
+RING 070-553 33 95
 01
 Provtryckning & visuell inspektion
 
@@ -121,7 +121,7 @@ BRA ATT VETA
 Så håller du koll på AC:n mellan servicarna
 R134a eller R1234yf?
 
-Köldmediet står på en märkning i motorrummet. Bilar äldre än cirka 2017 har oftast R134a, nyare har vanligen R1234yf — vi kontrollerar alltid vilket som gäller för din bil.
+Köldmediet står på en märkning i motorrummet. Bilar äldre än cirka 2017 har oftast R134a, nyare har vanligen R1234yf – vi kontrollerar alltid vilket som gäller för din bil.
 
 Hur ofta bör AC:n servas?
 
@@ -133,7 +133,7 @@ Sämre kyla kan bero på för lite köldmedium, men också på kondensorn, fläk
 
 Kör AC:n även på vintern
 
-Att köra AC:n en stund varje månad, även när det är kallt, håller kompressorn smord och packningarna täta — annars torkar de och risken för läckage ökar.
+Att köra AC:n en stund varje månad, även när det är kallt, håller kompressorn smord och packningarna täta – annars torkar de och risken för läckage ökar.
 
 KUNDOMDÖMEN
 
@@ -163,7 +163,7 @@ Boka AC-service hos Brynäs Bilservice
 Välj datum, tid och tjänst i vårt smidiga bokningsformulär.
 
 ÖPPNA BOKNING
-RING: 070-553 33 95
+RING 070-553 33 95
 DIN LOKALA BILVERKSTAD I GÄVLE
 
 Vi erbjuder professionell bilservice, reparationer och däckservice för alla bilmärken. Personlig service, trygghet och ärliga priser – sedan 2021.
@@ -210,9 +210,9 @@ Förfrågan
 Söndag
 Stängt
 BOKA TID →
-RING OSS: 070-553 33 95
+RING 070-553 33 95
 
-© 2026 Brynäs Bilservice AB - Org.nr 559343-5307 - Gävle
+© 2026 Brynäs Bilservice AB · Org.nr 559343-5307 · Gävle
 
 Din lokala bilverkstad. För en tryggare vardag på vägen.
 

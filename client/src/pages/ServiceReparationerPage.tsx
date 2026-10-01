@@ -190,7 +190,7 @@ export default function ServiceReparationerPage() {
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="bilservice-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
               <p className="bb-lead--dark">Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring oss: {BUSINESS.phone.display}</span></a>
+              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
             </div>
             <ol className="bb-process-grid">
               {processSteps.map((step) => (
@@ -228,8 +228,8 @@ export default function ServiceReparationerPage() {
                 <p className="bb-lead">Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring: {BUSINESS.phone.display}</a>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

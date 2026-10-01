@@ -415,7 +415,7 @@ export default function AboutPage() {
                   onClick={openBooking}
                   className="bb-btn bb-btn--teal"
                 >
-                  <span>Boka tid nu</span>
+                  <span>Boka tid</span>
                   <ArrowRightIcon />
                 </button>
                 <Link
@@ -429,7 +429,7 @@ export default function AboutPage() {
                   className="bb-btn bb-btn--ember omoss-page__cta-phone-btn"
                 >
                   <PhoneIcon />
-                  <span>Ring: {BUSINESS.phone.display}</span>
+                  <span>Ring {BUSINESS.phone.display}</span>
                 </a>
               </div>
             </div>

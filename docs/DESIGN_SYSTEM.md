@@ -201,6 +201,14 @@ Apply this in the reset block of every new unique page from the start — do not
 
 **Same bug, different property, found the same day**: `.page-prefix a { color: inherit; text-decoration: none; }` beats `.page-prefix__btn--primary { color: #fff; }` by the identical specificity math. On Landing this stayed invisible even longer than the font-weight case, because `inherit` doesn't produce an obviously-wrong value — it just pulls whatever color the ambient section already has. On the four dark-photo sections that's `#fff` too, so the button "happened" to look right by coincidence; on the two light sections it silently inherited the page's dark ink color instead, and a screenshot glance didn't catch it — only comparing `getComputedStyle(el).color` against the source did. **The lesson**: any reset combining a class with an element type (`a`, `button`, `input`, …) needs `:where()`, not just the one line that happened to cause a visibly-broken font-weight once. Audit every such line on a page, not just the one that already bit you.
 
+## Copy conventions (established 2026-10-01)
+
+- **Dash:** the Swedish en dash with spaces (` – `) in running text, never the em dash (`—`). Separators in short lines (footer legal line) are ` · `.
+- **Buttons:** booking is `Boka tid` (a specific job may say `Boka oljebyte`, `Boka tid för visning`, `Boka verkstadstid`); phone is `Ring 070-553 33 95` without a colon, except the hero's `Ring oss nu`.
+- **Hero H1:** keep the service word and add a benefit or a symptom from the page's own copy; at most three short lines; the accent marks the point, never the town. "i Gävle" belongs in `<title>` and the meta description, not in every H1.
+- **Location:** the workshop is on Sörby Urfjäll in Gävle. "Brynäs" is the company name only.
+- **Form subjects** (`api/contact.ts`) use the same service names as the Landing service cards.
+
 ## CSS file organization
 
 Global stylesheets, loaded once in `client/src/main.tsx` in this order:

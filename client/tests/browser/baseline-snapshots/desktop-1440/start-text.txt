@@ -54,7 +54,7 @@ BESÖK OSS
 Utmarksvägen 21B, 802 91 Gävle
 Skicka ett meddelande
 
-Berätta hur vi kan hjälpa dig. Obligatoriska fält är markerade med *.
+Berätta hur vi kan hjälpa dig. Fält markerade med * är obligatoriska.
 
 Namn
 *
@@ -63,19 +63,20 @@ E-post
 Telefon
 Ärende
 Välj ärende
-Bilservice & oljebyte
-Reparation & felsökning
-Däckservice & hjulinställning
+Bilservice & underhåll
+Däckservice
 AC-service
-Bärgning & transport
+Felsökning & diagnostik
+Reparationer & större arbeten
+Bärgning
 Övrigt
 Meddelande
 *
 SKICKA MEDDELANDE
-Tydlig kommunikation
-Vi håller dig uppdaterad genom hela processen.
-Omsorg om din bil
-Vi arbetar noggrant och med rätt kunskap.
+Du godkänner först
+Vi gör inget extra utan att fråga.
+Oberoende verkstad
+Vi servar alla bilmärken.
 Personlig service
 Du och din bil är alltid i fokus.
 Lokal verkstad
@@ -170,9 +171,9 @@ Förfrågan
 Söndag
 Stängt
 BOKA TID →
-RING OSS: 070-553 33 95
+RING 070-553 33 95
 
-© 2026 Brynäs Bilservice AB - Org.nr 559343-5307 - Gävle
+© 2026 Brynäs Bilservice AB · Org.nr 559343-5307 · Gävle
 
 Din lokala bilverkstad. För en tryggare vardag på vägen.
 

@@ -3,7 +3,7 @@ Bilbatteri
 som startar
 varje morgon
 
-Bilbatteriet driver startmotorn och håller igång bilens elsystem — från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil.
+Bilbatteriet driver startmotorn och håller igång bilens elsystem – från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil.
 
 BOKA TID
 RING 070-553 33 95
@@ -26,7 +26,7 @@ Noggrann mätning och konditionstest.
 
 Vad gör bilbatteriet?
 
-Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ — till exempel ett standardbatteri i en bil som kräver AGM — ger kortare livslängd och sämre funktion.
+Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ – till exempel ett standardbatteri i en bil som kräver AGM – ger kortare livslängd och sämre funktion.
 
 01
 Konventionellt blysyrabatteri
@@ -144,7 +144,7 @@ Bilservice
 →
 Boka batteribyte
 
-Priset beror på vilken batterityp och kapacitet din bil kräver — AGM kostar mer än ett konventionellt batteri, men är nödvändigt för moderna elsystem. Ring oss på 070-553 33 95 för en tydlig prisuppgift innan vi sätter igång.
+Priset beror på vilken batterityp och kapacitet din bil kräver – AGM kostar mer än ett konventionellt batteri, men är nödvändigt för moderna elsystem. Ring oss på 070-553 33 95 för en tydlig prisuppgift innan vi sätter igång.
 
 BOKA TID
 RING 070-553 33 95
@@ -194,9 +194,9 @@ Förfrågan
 Söndag
 Stängt
 BOKA TID →
-RING OSS: 070-553 33 95
+RING 070-553 33 95
 
-© 2026 Brynäs Bilservice AB - Org.nr 559343-5307 - Gävle
+© 2026 Brynäs Bilservice AB · Org.nr 559343-5307 · Gävle
 
 Din lokala bilverkstad. För en tryggare vardag på vägen.
 

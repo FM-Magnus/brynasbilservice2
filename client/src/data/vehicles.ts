@@ -38,7 +38,7 @@ export const seedVehicles: Vehicle[] = [
     description:
       'Snygg och välskött cabriolet med elektriskt hopfällbart hardtop. Nybesiktigad maj 2026 och godkänd till juli 2027. ' +
       'Dragkrok. Aluminiumfälgar. Inga anmärkningar i senaste besiktning. ' +
-      'Perfekt sommarbil — ring oss för att boka en provkörning.',
+      'Perfekt sommarbil – ring oss för att boka en provkörning.',
     status: 'available',
     soldAt: null,
     images: [

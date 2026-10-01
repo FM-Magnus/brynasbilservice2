@@ -67,7 +67,7 @@ const serviceItems = [
 ]
 
 const infoCards: readonly GuideInfoCard[] = [
-  { icon: AlertTriangleIcon, title: 'Fettet måste stanna inuti knuten', text: 'Smörjfettet är specialanpassat för knutens höga belastning. Fett som läckt ut kan aldrig "fyllas på" utifrån — en läckande damask måste alltid bytas och åtgärdas.', flag: 'VIKTIGT' },
+  { icon: AlertTriangleIcon, title: 'Fettet måste stanna inuti knuten', text: 'Smörjfettet är specialanpassat för knutens höga belastning. Fett som läckt ut kan aldrig "fyllas på" utifrån – en läckande damask måste alltid bytas och åtgärdas.', flag: 'VIKTIGT' },
   { icon: ClockIcon, title: 'Knackande skada är permanent', text: 'Har knuten väl börjat knacka eller klicka vid sväng är slitaget på kulor och banor permanent. Det går inte att rädda med nytt fett, utan knuten måste bytas.' },
   { icon: WrenchIcon, title: 'Yttre kontra inre knut', text: 'Yttre drivknutar slits oftast först och går på många bilar att byta separat. Inre knutar säljs däremot sällan lösa utan kräver oftast byte av komplett drivaxel.' },
   { icon: ThumbsUpIcon, title: 'Fånga felet i tid och spara tusenlappar', text: 'Kostnadsskillnaden mellan att byta en sprucken damask i tid jämfört med att vänta tills knuten rasar kan vara flera tusen kronor.' },
@@ -108,7 +108,7 @@ export default function DrivaxelDrivknutarPage() {
           image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Komplett drivaxel med drivknutar, gummidamasker och metallklämmor på verkstadsbänk' }}
           caption="Kraftöverföring med konstant hastighet."
         >
-          <p>Drivaxeln för kraften från växellådan ut till hjulen, och i varje ände sitter en drivknut som klarar av att vinklas när hjulen styrs eller fjädrar. Runt varje knut sitter en gummidamask som håller kvar smörjfettet och stänger ute smuts och väta — damasken är systemets svagaste länk, och upptäcks en spricka i tid räcker det oftast med att byta enbart den.</p>
+          <p>Drivaxeln för kraften från växellådan ut till hjulen, och i varje ände sitter en drivknut som klarar av att vinklas när hjulen styrs eller fjädrar. Runt varje knut sitter en gummidamask som håller kvar smörjfettet och stänger ute smuts och väta – damasken är systemets svagaste länk, och upptäcks en spricka i tid räcker det oftast med att byta enbart den.</p>
           <GuideParts items={parts} />
           <Tip
             title="Misstänker du knäppande ljud eller trasig damask?"

@@ -15,11 +15,12 @@ export type ContactMessage = {
 
 /** Inquiry subjects offered by the contact forms. */
 export const contactSubjects: readonly string[] = [
-  'Bilservice & oljebyte',
-  'Reparation & felsökning',
-  'Däckservice & hjulinställning',
+  'Bilservice & underhåll',
+  'Däckservice',
   'AC-service',
-  'Bärgning & transport',
+  'Felsökning & diagnostik',
+  'Reparationer & större arbeten',
+  'Bärgning',
   'Övrigt',
 ]
 

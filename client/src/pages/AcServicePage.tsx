@@ -43,10 +43,10 @@ const symptoms = [
 ] as const
 
 const tips = [
-  { title: 'R134a eller R1234yf?', text: 'Köldmediet står på en märkning i motorrummet. Bilar äldre än cirka 2017 har oftast R134a, nyare har vanligen R1234yf — vi kontrollerar alltid vilket som gäller för din bil.' },
+  { title: 'R134a eller R1234yf?', text: 'Köldmediet står på en märkning i motorrummet. Bilar äldre än cirka 2017 har oftast R134a, nyare har vanligen R1234yf – vi kontrollerar alltid vilket som gäller för din bil.' },
   { title: 'Hur ofta bör AC:n servas?', text: 'Det beror på bilen och hur den används. Utgå från tillverkarens serviceprogram och låt kontrollera systemet när kylan blir sämre, rutorna immar igen lättare eller det luktar från utblåsen.' },
   { title: 'Kyla, lukt och läckage är olika fel', text: 'Sämre kyla kan bero på för lite köldmedium, men också på kondensorn, fläkten eller kompressorn. Unken lukt kommer oftast från fukt och beläggningar i förångaren och har inget med köldmediemängden att göra. Ett läckage betyder att köldmedium försvinner ur ett system som ska vara slutet. Då behöver läckan hittas och åtgärdas; en ny påfyllning ersätter bara det som redan har försvunnit.' },
-  { title: 'Kör AC:n även på vintern', text: 'Att köra AC:n en stund varje månad, även när det är kallt, håller kompressorn smord och packningarna täta — annars torkar de och risken för läckage ökar.' },
+  { title: 'Kör AC:n även på vintern', text: 'Att köra AC:n en stund varje månad, även när det är kallt, håller kompressorn smord och packningarna täta – annars torkar de och risken för läckage ökar.' },
 ] as const
 
 const processSteps = [
@@ -260,7 +260,7 @@ export default function AcServicePage() {
 
             <Tip
               title="Service eller reparation?"
-              text="En AC-service är en proaktiv kontroll och påfyllning. Misstänker du istället en läcka, en trasig kompressor eller ett annat fel är det en AC-reparation — då gör vi alltid en felsökning och lämnar ett prisförslag innan vi går vidare."
+              text="En AC-service är en proaktiv kontroll och påfyllning. Misstänker du istället en läcka, en trasig kompressor eller ett annat fel är det en AC-reparation – då gör vi alltid en felsökning och lämnar ett prisförslag innan vi går vidare."
             />
 
             {/* FACT TO CONFIRM: Om Brynäs har utrustning för båda köldmedietyperna (R134a och R1234yf) – den befintliga texten hänvisar redan till kontakt för R1234yf. */}
@@ -283,7 +283,7 @@ export default function AcServicePage() {
               </p>
               <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal">
                 <PhoneIcon aria-hidden="true" />
-                <span>Ring oss: {BUSINESS.phone.display}</span>
+                <span>Ring {BUSINESS.phone.display}</span>
               </a>
             </div>
             <ol className="bb-process-grid">
@@ -391,7 +391,7 @@ export default function AcServicePage() {
                   Öppna bokning
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
-                  Ring: {BUSINESS.phone.display}
+                  Ring {BUSINESS.phone.display}
                 </a>
               </div>
             </div>

@@ -166,7 +166,7 @@ export default function ReparationerPage() {
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="reparationer-process-title">Så går ett <span className="bb-accent">större arbete</span> till</h2>
               <p className="bb-lead--dark">Ett större arbete ska aldrig komma som en överraskning. Så här går vi tillväga.</p>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring oss: {BUSINESS.phone.display}</span></a>
+              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
             </div>
             <ol className="bb-process-grid">
               {processSteps.map((step) => (
@@ -251,8 +251,8 @@ export default function ReparationerPage() {
                 <p className="bb-lead">Berätta vad som är fel eller vad du vill ha gjort, så återkommer vi med ett kostnadsförslag. Vi gör inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring: {BUSINESS.phone.display}</a>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

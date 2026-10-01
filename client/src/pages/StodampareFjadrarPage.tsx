@@ -74,7 +74,7 @@ const infoCards: readonly GuideInfoCard[] = [
 
 const faqs = [
   { question: 'Hur vet jag om det är dämparna eller fjädrarna som är trasiga?', answer: 'Slitna dämpare märks oftast som en gungig, ostabil körkänsla som kommer smygande över tid. En trasig fjäder ger istället ofta ett tydligt, metalliskt "klonk"-ljud över gupp och kan göra att bilen lutar synligt. Är du osäker gör vi en snabb och säker bedömning åt dig.' },
-  { question: 'Måste jag byta både dämpare och fjädrar samtidigt?', answer: 'Inte nödvändigtvis — det beror på vilken komponent som faktiskt är sliten eller trasig. Eftersom de på många bilar sitter ihop i ett fjäderben är det dock ofta arbetsmässigt och ekonomiskt klokt att se över båda delarna i samma ingrepp.' },
+  { question: 'Måste jag byta både dämpare och fjädrar samtidigt?', answer: 'Inte nödvändigtvis – det beror på vilken komponent som faktiskt är sliten eller trasig. Eftersom de på många bilar sitter ihop i ett fjäderben är det dock ofta arbetsmässigt och ekonomiskt klokt att se över båda delarna i samma ingrepp.' },
   { question: 'Varför måste fjädrar bytas i par?', answer: 'Ett ensidigt fjäderbyte ger olika fjäderkonstanter mellan höger och vänster sida. Det leder till att bilen står snett och uppträder instabilt i kurvor och vid panikinbromsningar, även om den andra fjädern fortfarande är hel.' },
   { question: 'Kan jag köra med en trasig fjäder tills jag hinner boka tid?', answer: 'Vi avråder starkt från det. En bruten fjäder gör bilen instabil, förlänger bromssträckan och den vassa brottytan riskerar att skära sönder däck eller bromsslangar under färd.' },
   { question: 'Behöver jag göra en hjulinställning efter bytet?', answer: 'Ja, i de allra flesta fall. All demontering och montering i fram- och bakvagn påverkar hjulens vinklar och geometri. Utan hjulinställning riskerar däcken att snedslitas på nolltid.' },
@@ -134,7 +134,7 @@ export default function StodampareFjadrarPage() {
           <p>Fjädern och stötdämparen har olika uppgifter. Fjädern bär bilens vikt och tar upp gupp; en trött eller bruten fjäder märks därför ofta på att bilen står lägre eller lutar. Stötdämparen bromsar fjäderns rörelse så att bilen inte fortsätter gunga och hjulen håller kontakten med vägen. Slitna dämpare märks snarare som ett gungigt, flytande beteende och sämre väggrepp på ojämn väg.</p>
           <Tip
             title="Enkelt eget gungtest:"
-            text="Tryck bestämt ner ett hörn av bilen med kroppsvikten och släpp snabbt. Reser sig bilen och stabiliseras direkt är dämparna troligen i bra skick — fortsätter bilen gunga eller studsa kan dämparen vara sliten. Testet ger en fingervisning, men en säker bedömning kräver en kontroll."
+            text="Tryck bestämt ner ett hörn av bilen med kroppsvikten och släpp snabbt. Reser sig bilen och stabiliseras direkt är dämparna troligen i bra skick – fortsätter bilen gunga eller studsa kan dämparen vara sliten. Testet ger en fingervisning, men en säker bedömning kräver en kontroll."
           />
         </GuideSymptoms>
 

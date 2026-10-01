@@ -67,7 +67,7 @@ const serviceItems = [
 
 const infoCards: readonly GuideInfoCard[] = [
   { icon: AlertTriangleIcon, title: 'Kulleder är säkerhetskritiska', text: 'Spindelleden bär upp hjulet under körning. Ett kraftigt glapp riskerar att få kulleden att hoppa ur sin skål vid kraftig påfrestning eller ett gupp.', flag: 'VIKTIGT' },
-  { icon: ShieldIcon, title: 'Går servon sönder går bilen att styra', text: 'Slutar servostyrningen att fungera behåller bilen mekanisk styrning. Ratten blir dock extremt tung i låg fart — håll stadigt och stanna kontrollerat.' },
+  { icon: ShieldIcon, title: 'Går servon sönder går bilen att styra', text: 'Slutar servostyrningen att fungera behåller bilen mekanisk styrning. Ratten blir dock extremt tung i låg fart – håll stadigt och stanna kontrollerat.' },
   { icon: GaugeIcon, title: 'Hjulinställning beror på arbetet', text: 'Byts en styrled ändras framhjulens spårning, och då behöver hjulinställningen justeras. Efter byte av andra delar i hjulupphängningen beror behovet på vilken del som bytts och hur den sitter, men hjulvinklarna bör kontrolleras efter arbetet.' },
   { icon: ClockIcon, title: 'Priset beror på felets art', text: 'Ett byte av en yttre styrstagsände är ett relativt snabbt ingrepp, medan byte av en kuggstång eller elektrisk servomotor är betydligt mer omfattande.' },
 ]
@@ -107,7 +107,7 @@ export default function StyrningKullederPage() {
           image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Framvagnskomponenter på verkstadsbänk med länkarm, bussningar, spindelled, inre styrstag och styrled' }}
           caption="Exakt geometri, maximal kontroll."
         >
-          <p>Under styrning och kulleder samlar vi de komponenter som gör att bilen lyder rattrörelserna exakt och att hjulen rör sig kontrollerat med fjädringen. Kulleder och styrleder skyddas av gummidamasker — spricker en damask tränger fukt och smuts in, vilket snabbt nöter ner leden och skapar farligt glapp.</p>
+          <p>Under styrning och kulleder samlar vi de komponenter som gör att bilen lyder rattrörelserna exakt och att hjulen rör sig kontrollerat med fjädringen. Kulleder och styrleder skyddas av gummidamasker – spricker en damask tränger fukt och smuts in, vilket snabbt nöter ner leden och skapar farligt glapp.</p>
           <GuideParts items={parts} />
           <Tip
             title="Upplever du glapp, klapper eller tung styrning?"
@@ -160,7 +160,7 @@ export default function StyrningKullederPage() {
         <GuideClosing
           id="steering-booking-title"
           heading="Boka kontroll av styrning & kulleder"
-          text={<>Priset beror helt på vad som behöver åtgärdas — ett byte av en yttre styrled är ett prisvärt ingrepp, medan reparation av servopump eller kuggstång är mer omfattande. Ring oss på {BUSINESS.phone.display} så felsöker vi och ger dig ett tydligt kostnadsförslag innan vi sätter igång.</>}
+          text={<>Priset beror helt på vad som behöver åtgärdas – ett byte av en yttre styrled är ett prisvärt ingrepp, medan reparation av servopump eller kuggstång är mer omfattande. Ring oss på {BUSINESS.phone.display} så felsöker vi och ger dig ett tydligt kostnadsförslag innan vi sätter igång.</>}
           onBooking={openBooking}
         />
       </main>

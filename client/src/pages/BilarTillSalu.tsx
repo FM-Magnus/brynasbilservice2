@@ -368,7 +368,7 @@ export default function BilarTillSalu() {
                 <div className="bb-hero__actions">
                   <a href={PHONE_HREF} className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
                     <PhoneIcon />
-                    <span>Ring: {BUSINESS.phone.display}</span>
+                    <span>Ring {BUSINESS.phone.display}</span>
                   </a>
                   <button type="button" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onClick={openBooking}>
                     Boka tid för visning

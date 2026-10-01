@@ -198,7 +198,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
 
               <a href={BUSINESS.phone.href} className="bb-footer__call-link">
                 <i className="bb-footer__call-icon"><PhoneIcon /></i>
-                <span>RING OSS: {BUSINESS.phone.display}</span>
+                <span>RING {BUSINESS.phone.display}</span>
               </a>
             </div>
           </div>
@@ -208,7 +208,7 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
         {/* Sub-footer bottom bar */}
         <div className="bb-footer__bottom">
           <div className="bb-footer__bottom-left">
-            <p>© {currentYear} {BUSINESS.legalName} - Org.nr {BUSINESS.orgNumber} - {BUSINESS.address.city}</p>
+            <p>© {currentYear} {BUSINESS.legalName} · Org.nr {BUSINESS.orgNumber} · {BUSINESS.address.city}</p>
             <p className="bb-footer__bottom-sub">Din lokala bilverkstad. För en tryggare vardag på vägen.</p>
           </div>
 

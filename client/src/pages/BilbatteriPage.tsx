@@ -92,7 +92,7 @@ export default function BilbatteriPage() {
           id="battery-title"
           eyebrow="Elsystem & startkraft"
           title={<>Bilbatteri<br />som <span className="bb-accent">startar</span><br />varje morgon</>}
-          lead="Bilbatteriet driver startmotorn och håller igång bilens elsystem — från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil."
+          lead="Bilbatteriet driver startmotorn och håller igång bilens elsystem – från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil."
           image={{ webp: heroWebp, jpg: heroJpg, alt: 'Startkablar anslutna till ett bilbatteri i motorrummet', slot: 'battery-hero' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
@@ -106,7 +106,7 @@ export default function BilbatteriPage() {
           image={{ webp: introWebp, jpg: introJpg, alt: 'Mekaniker testar batteriets spänning med en multimeter i verkstaden' }}
           caption="Noggrann mätning och konditionstest."
         >
-          <p>Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ — till exempel ett standardbatteri i en bil som kräver AGM — ger kortare livslängd och sämre funktion.</p>
+          <p>Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ – till exempel ett standardbatteri i en bil som kräver AGM – ger kortare livslängd och sämre funktion.</p>
           <GuideParts items={parts} />
           <Tip
             title="Osäker på vilken batterityp din bil behöver?"
@@ -156,7 +156,7 @@ export default function BilbatteriPage() {
         <GuideClosing
           id="battery-booking-title"
           heading="Boka batteribyte"
-          text={<>Priset beror på vilken batterityp och kapacitet din bil kräver — AGM kostar mer än ett konventionellt batteri, men är nödvändigt för moderna elsystem. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</>}
+          text={<>Priset beror på vilken batterityp och kapacitet din bil kräver – AGM kostar mer än ett konventionellt batteri, men är nödvändigt för moderna elsystem. Ring oss på {BUSINESS.phone.display} för en tydlig prisuppgift innan vi sätter igång.</>}
           onBooking={openBooking}
         />
       </main>

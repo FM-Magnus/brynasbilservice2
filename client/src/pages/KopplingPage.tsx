@@ -60,7 +60,7 @@ const symptoms: readonly GuideSymptom[] = [
 const serviceItems = [
   'Bedömning av om hela kopplingssatsen behöver bytas eller om felet sitter i en enskild komponent, till exempel urtrampningslagret.',
   'Byte av lamell, tryckplatta och urtrampningslager som en samlad kopplingssats.',
-  'Kontroll av svänghjulet och byte om det visar tecken på slitage — särskilt relevant på bilar med tvåmassesvänghjul.',
+  'Kontroll av svänghjulet och byte om det visar tecken på slitage – särskilt relevant på bilar med tvåmassesvänghjul.',
   'Kontroll av kopplingens hydraulik på bilar med hydraulisk urkoppling och luftning av systemet vid behov.',
   'Funktionstest efter monteringen innan bilen lämnas ut.',
 ]

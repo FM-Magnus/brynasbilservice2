@@ -42,8 +42,8 @@ function Icon({ name, className = '' }: { name: IconName; className?: string }) 
 }
 
 const trustItems = [
-  { icon: ChatDotsIcon, title: 'Tydlig kommunikation', text: 'Vi håller dig uppdaterad genom hela processen.' },
-  { icon: ShieldIcon, title: 'Omsorg om din bil', text: 'Vi arbetar noggrant och med rätt kunskap.' },
+  { icon: ChatDotsIcon, title: 'Du godkänner först', text: 'Vi gör inget extra utan att fråga.' },
+  { icon: ShieldIcon, title: 'Oberoende verkstad', text: 'Vi servar alla bilmärken.' },
   { icon: WrenchIcon, title: 'Personlig service', text: 'Du och din bil är alltid i fokus.' },
   { icon: MapPinIcon, title: 'Lokal verkstad', text: 'På Sörby Urfjäll i Gävle.' },
 ] as const

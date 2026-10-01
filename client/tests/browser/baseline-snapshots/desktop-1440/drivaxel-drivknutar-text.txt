@@ -26,7 +26,7 @@ Kraftöverföring med konstant hastighet.
 
 Vad gör drivaxeln och drivknutarna?
 
-Drivaxeln för kraften från växellådan ut till hjulen, och i varje ände sitter en drivknut som klarar av att vinklas när hjulen styrs eller fjädrar. Runt varje knut sitter en gummidamask som håller kvar smörjfettet och stänger ute smuts och väta — damasken är systemets svagaste länk, och upptäcks en spricka i tid räcker det oftast med att byta enbart den.
+Drivaxeln för kraften från växellådan ut till hjulen, och i varje ände sitter en drivknut som klarar av att vinklas när hjulen styrs eller fjädrar. Runt varje knut sitter en gummidamask som håller kvar smörjfettet och stänger ute smuts och väta – damasken är systemets svagaste länk, och upptäcks en spricka i tid räcker det oftast med att byta enbart den.
 
 01
 Drivaxel
@@ -116,7 +116,7 @@ Här är praktiska fakta och råd kring drivaxlar och knutar. Vi gör alltid en 
 
 Fettet måste stanna inuti knuten
 VIKTIGT
-Smörjfettet är specialanpassat för knutens höga belastning. Fett som läckt ut kan aldrig "fyllas på" utifrån — en läckande damask måste alltid bytas och åtgärdas.
+Smörjfettet är specialanpassat för knutens höga belastning. Fett som läckt ut kan aldrig "fyllas på" utifrån – en läckande damask måste alltid bytas och åtgärdas.
 Knackande skada är permanent
 Har knuten väl börjat knacka eller klicka vid sväng är slitaget på kulor och banor permanent. Det går inte att rädda med nytt fett, utan knuten måste bytas.
 Yttre kontra inre knut
@@ -198,9 +198,9 @@ Förfrågan
 Söndag
 Stängt
 BOKA TID →
-RING OSS: 070-553 33 95
+RING 070-553 33 95
 
-© 2026 Brynäs Bilservice AB - Org.nr 559343-5307 - Gävle
+© 2026 Brynäs Bilservice AB · Org.nr 559343-5307 · Gävle
 
 Din lokala bilverkstad. För en tryggare vardag på vägen.
 

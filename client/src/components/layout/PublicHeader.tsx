@@ -202,7 +202,7 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
           )
         })}
         <div className="public-header__mobile-actions">
-          <a className="public-header__mobile-call" href={BUSINESS.phone.href}><PhoneIcon />Ring oss: {BUSINESS.phone.display}</a>
+          <a className="public-header__mobile-call" href={BUSINESS.phone.href}><PhoneIcon />Ring {BUSINESS.phone.display}</a>
           <button className="public-header__mobile-booking" type="button" onClick={handleBookingClick}>Boka tid</button>
         </div>
       </nav>

@@ -88,7 +88,7 @@ Vi börjar med att bedöma vad som faktiskt behöver göras och kontaktar dig in
 
 Bedömning av om hela kopplingssatsen behöver bytas eller om felet sitter i en enskild komponent, till exempel urtrampningslagret.
 Byte av lamell, tryckplatta och urtrampningslager som en samlad kopplingssats.
-Kontroll av svänghjulet och byte om det visar tecken på slitage — särskilt relevant på bilar med tvåmassesvänghjul.
+Kontroll av svänghjulet och byte om det visar tecken på slitage – särskilt relevant på bilar med tvåmassesvänghjul.
 Kontroll av kopplingens hydraulik på bilar med hydraulisk urkoppling och luftning av systemet vid behov.
 Funktionstest efter monteringen innan bilen lämnas ut.
 Livslängd och arbetstid
@@ -174,9 +174,9 @@ Förfrågan
 Söndag
 Stängt
 BOKA TID →
-RING OSS: 070-553 33 95
+RING 070-553 33 95
 
-© 2026 Brynäs Bilservice AB - Org.nr 559343-5307 - Gävle
+© 2026 Brynäs Bilservice AB · Org.nr 559343-5307 · Gävle
 
 Din lokala bilverkstad. För en tryggare vardag på vägen.
 

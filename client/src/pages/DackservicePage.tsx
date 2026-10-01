@@ -103,7 +103,7 @@ const tyreServices: TyreServiceItem[] = [
 ]
 
 const localValueProps = [
-  { icon: UsersIcon, title: 'Personlig service', text: 'Du möter samma ansikten varje gång — ingen anonym kö eller nummerlapp.' },
+  { icon: UsersIcon, title: 'Personlig service', text: 'Du möter samma ansikten varje gång – ingen anonym kö eller nummerlapp.' },
   { icon: MapPinIcon, title: 'Din lokala verkstad', text: 'Vi finns på Utmarksvägen i Gävle och känner våra kunder och deras bilar.' },
   { icon: ClockIcon, title: 'Snabb hjälp inför säsong', text: 'Vi planerar för säsongstoppen så du slipper onödigt lång väntetid vid hjulskifte.' },
 ] as const
@@ -123,10 +123,10 @@ const storageBenefits = [
 ] as const
 
 const faqs = [
-  { question: 'Hur lång tid tar ett hjulskifte?', answer: 'Ett vanligt hjulskifte tar normalt 20–30 minuter. Vid högsäsong, när många byter samtidigt, kan väntetiden bli längre — boka gärna i god tid.' },
+  { question: 'Hur lång tid tar ett hjulskifte?', answer: 'Ett vanligt hjulskifte tar normalt 20–30 minuter. Vid högsäsong, när många byter samtidigt, kan väntetiden bli längre – boka gärna i god tid.' },
   { question: 'Behövs hjulinställning efter ett däckbyte?', answer: 'Inte alltid. Drar bilen åt ena hållet, står ratten snett när du kör rakt fram, slits däcken ojämnt eller har hjulet tagit i en trottoarkant är det klokt att kontrollera hjulinställningen. Vibrerar ratten vid en viss hastighet är obalans i hjulen en vanligare orsak, men även en skadad fälg eller ett skadat däck kan ge vibrationer.' },
   { question: 'Vad är skillnaden mellan hjulskifte och omläggning av däck?', answer: 'Ett hjulskifte innebär att färdigmonterade hjul (däck + fälg) byts som en enhet, till exempel sommar- mot vinterhjul. En omläggning innebär att nya däck monteras på dina befintliga fälgar.' },
-  { question: 'Behöver jag tänka på däcktrycksövervakningen (TPMS)?', answer: 'På bilar med TPMS varnar systemet när lufttrycket är för lågt. Efter ett hjulskifte kan systemet i vissa fall behöva kontrolleras eller återställas — fråga oss vid bokning så ser vi vad som gäller för din bil.' },
+  { question: 'Behöver jag tänka på däcktrycksövervakningen (TPMS)?', answer: 'På bilar med TPMS varnar systemet när lufttrycket är för lågt. Efter ett hjulskifte kan systemet i vissa fall behöva kontrolleras eller återställas – fråga oss vid bokning så ser vi vad som gäller för din bil.' },
   { question: 'Kan jag boka däckhotell utan att göra ett hjulskifte samtidigt?', answer: 'Ja, du kan lämna in däcken för förvaring separat, men de flesta väljer att kombinera det med sitt hjulskifte för att slippa ett extra besök.' },
 ]
 
@@ -167,7 +167,7 @@ export default function DackservicePage() {
                 <span>säsong</span>
               </h1>
               <p>
-                Vi hjälper dig med hjulskifte, montering, balansering, hjulinställning, punkteringslagning och däckhotell — med omtanke om säkerhet, körkomfort och dina hjul.
+                Vi hjälper dig med hjulskifte, montering, balansering, hjulinställning, punkteringslagning och däckhotell – med omtanke om säkerhet, körkomfort och dina hjul.
               </p>
               <div className="bb-hero__actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
@@ -192,7 +192,7 @@ export default function DackservicePage() {
               <p className="bb-eyebrow">Våra däcktjänster</p>
               <h2 className="bb-h2" id="dackservice-services-title">Allt för dina <span className="bb-accent">hjul</span></h2>
               <p className="bb-lead bilservice__lead--intro">
-                Från säsongsskifte till kontroll och reparation — välj den hjälp som passar din bil. Oavsett om det är dags att byta till vinterhjul, om ratten vibrerar vid motorväg, om ett däck fått en punktering eller om du bara vill slippa släpa på hjulen mellan säsongerna, hjälper vi dig hela vägen. Nedan hittar du våra vanligaste däck- och hjultjänster med tydliga priser, så att du vet vad som ingår innan du bokar.
+                Från säsongsskifte till kontroll och reparation – välj den hjälp som passar din bil. Oavsett om det är dags att byta till vinterhjul, om ratten vibrerar vid motorväg, om ett däck fått en punktering eller om du bara vill slippa släpa på hjulen mellan säsongerna, hjälper vi dig hela vägen. Nedan hittar du våra vanligaste däck- och hjultjänster med tydliga priser, så att du vet vad som ingår innan du bokar.
               </p>
               <small>Samtliga priser är inklusive moms.</small>
             </div>
@@ -269,7 +269,7 @@ export default function DackservicePage() {
           <div className="bb-wrap bilservice__container bilservice__container--pad-lg">
             <div className="bilservice__storage-card">
               <h2 className="bb-h2" id="dackservice-storage-title">Trångt i garaget? Låt oss förvara dina däck.</h2>
-              <p>Slipp bära och lagra tunga hjul hemma — vi tar hand om dem tryggt mellan säsongerna.</p>
+              <p>Slipp bära och lagra tunga hjul hemma – vi tar hand om dem tryggt mellan säsongerna.</p>
               <ul className="bilservice__storage-grid">
                 {storageBenefits.map(([title, text]) => (
                   <li key={title}>
@@ -331,10 +331,10 @@ export default function DackservicePage() {
                   Balansering, hjulinställning och en skada på däcket är tre olika saker. Balansering gäller hjulet självt: däck och fälg ska väga jämnt runt om, och obalans märks oftast som vibrationer vid vissa hastigheter. Hjulinställning gäller bilens hjulvinklar; fel där märks snarare som att bilen drar åt ena hållet eller att däcken slits ojämnt, till exempel mer på ena kanten. En bula i däcksidan, ett snitt eller en spricka behöver bedömas för sig, eftersom den varken kan balanseras eller ställas bort.
                 </p>
                 <p>
-                  Lagen kräver ett minsta mönsterdjup på 1,6 mm för sommardäck och 3 mm vid vinterväglag. För verkligt säker körning rekommenderas dock byte i god tid innan gränsen nås — sommardäck bör bytas vid cirka 3 mm för att minimera risken för vattenplaning, och vinterdäck bör bytas vid cirka 3–5 mm (gärna minst 4 mm) för att behålla fästet på snö och modd.
+                  Lagen kräver ett minsta mönsterdjup på 1,6 mm för sommardäck och 3 mm vid vinterväglag. För verkligt säker körning rekommenderas dock byte i god tid innan gränsen nås – sommardäck bör bytas vid cirka 3 mm för att minimera risken för vattenplaning, och vinterdäck bör bytas vid cirka 3–5 mm (gärna minst 4 mm) för att behålla fästet på snö och modd.
                 </p>
                 <p>
-                  Kontrollera även däckens ålder via den fyrsiffriga DOT-koden på däcksidan. De sista fyra siffrorna visar tillverkningsvecka och tillverkningsår — till exempel anger 2421 vecka 24 år 2021. Gummi är en färskvara som åldras och hårdnar med tiden. Däck äldre än 6–10 år bör bytas ut oavsett kvarvarande mönsterdjup, eftersom åldrat gummi förlorar sin elasticitet och inte längre greppar vägbanan säkert.
+                  Kontrollera även däckens ålder via den fyrsiffriga DOT-koden på däcksidan. De sista fyra siffrorna visar tillverkningsvecka och tillverkningsår – till exempel anger 2421 vecka 24 år 2021. Gummi är en färskvara som åldras och hårdnar med tiden. Däck äldre än 6–10 år bör bytas ut oavsett kvarvarande mönsterdjup, eftersom åldrat gummi förlorar sin elasticitet och inte längre greppar vägbanan säkert.
                 </p>
                 <p>
                   Gör det till en vana att regelbundet syna däcken efter sprickor, utbuktningar, ojämnt slitage och främmande föremål. Är du osäker på däckens skick eller ålder är du alltid välkommen in till oss på Brynäs Bilservice för en fackmässig bedömning.
@@ -361,7 +361,7 @@ export default function DackservicePage() {
                   Boka tid
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
-                  Ring: {BUSINESS.phone.display}
+                  Ring {BUSINESS.phone.display}
                 </a>
               </div>
             </div>

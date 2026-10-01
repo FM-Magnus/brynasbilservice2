@@ -263,7 +263,7 @@ export default function GalleryPage() {
                   </button>
                   <a href={PHONE_HREF} className="bb-btn bb-btn--ember">
                     <PhoneIcon />
-                    <span>Ring: {BUSINESS.phone.display}</span>
+                    <span>Ring {BUSINESS.phone.display}</span>
                   </a>
                 </div>
               </div>
@@ -282,7 +282,7 @@ export default function GalleryPage() {
                 <p>Vi kunde inte visa bilderna just nu. Försök igen om en stund, eller ring oss.</p>
                 <a href={PHONE_HREF} className="bb-btn bb-btn--ember">
                   <PhoneIcon />
-                  <span>Ring: {BUSINESS.phone.display}</span>
+                  <span>Ring {BUSINESS.phone.display}</span>
                 </a>
               </div>
             )}
@@ -327,14 +327,14 @@ export default function GalleryPage() {
               </div>
               <div className="galleri-page__closing-actions">
                 <button type="button" className="bb-btn bb-btn--ember-solid" onClick={openBooking}>
-                  Boka tid nu
+                  Boka tid
                 </button>
                 <Link to="/biltjanster" className="bb-btn galleri-page__btn-outline">
                   Se alla tjänster
                 </Link>
                 <a href={PHONE_HREF} className="bb-btn galleri-page__btn-outline">
                   <PhoneIcon />
-                  <span>Ring: {BUSINESS.phone.display}</span>
+                  <span>Ring {BUSINESS.phone.display}</span>
                 </a>
               </div>
             </div>

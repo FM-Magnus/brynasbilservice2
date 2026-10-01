@@ -29,7 +29,7 @@ export interface ContactFormCardProps {
 export function ContactFormCard({
   variant = 'full-section',
   title = 'Skicka ett meddelande',
-  description = 'Berätta hur vi kan hjälpa dig. Obligatoriska fält är markerade med *.',
+  description = 'Berätta hur vi kan hjälpa dig. Fält markerade med * är obligatoriska.',
   subjects = contactSubjects,
   initialSubject = '',
   sectionTitle = 'Hör av dig',

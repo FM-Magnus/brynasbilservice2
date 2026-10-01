@@ -353,7 +353,7 @@ const BookingFormModalImpl: React.FC<BookingFormModalProps> = ({ isOpen, onClose
             )}
             <div className="booking-form__footer">
               <div className="booking-form__required-note">
-                Fält märkt med * är obligatoriska
+                Fält markerade med * är obligatoriska.
               </div>
               <button type="submit" className="modal-submit">
                 {isSubmitting ? 'Skickar…' : 'Skicka bokning'}

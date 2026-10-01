@@ -20,7 +20,7 @@ test('the Kontakt form hands a pre-filled message to the e-mail program', async 
   const form = page.locator('.kontakt-page__form')
   await form.getByLabel(/Namn/).fill('Anna Andersson')
   await form.getByLabel(/E-post/).fill('anna@example.se')
-  await form.getByLabel(/Telefonnummer/).fill('0701234567')
+  await form.getByLabel(/^Telefon/).fill('0701234567')
   await form.getByLabel(/Ärende/).selectOption('AC-service')
   await form.getByLabel(/Meddelande/).fill('AC:n blåser varmt.')
   await form.getByRole('button', { name: /Skicka meddelande/ }).click()

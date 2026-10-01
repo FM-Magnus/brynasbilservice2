@@ -81,7 +81,7 @@ const faqs = [
   { question: 'Betyder motorlampan att katalysatorn är trasig?', answer: 'Inte nödvändigtvis. En trasig lambdasond eller ett mindre läckage i flexröret ger ofta samma typ av felkod (t.ex. felaktiga avgasvärden). Att byta lambdasond eller täta ett rör är en betydligt billigare åtgärd än att byta hela katalysatorn, och vi felsöker alltid ordentligt först.' },
   { question: 'Är det farligt att köra med ett skadat avgassystem?', answer: 'Det beror på var skadan sitter. Ett läckage nära motorrum eller kupé som gör att avgaslukt tränger in i bilen är en direkt hälsorisk och bör åtgärdas omgående. Ett hål i den bakre ljuddämparen ger mest ett högt brummande ljud men bör ändå åtgärdas inför besiktningen.' },
   { question: 'Kan ett trasigt avgassystem ge underkänd besiktning?', answer: 'Ja, det är en av de absolut vanligaste orsakerna till underkänd besiktning. Otätheter i systemet, bullernivåer över gränsvärdet eller felaktiga avgasutsläpp (CO-halt och lambda-värde) leder till ombesiktning.' },
-  { question: 'Måste hela avgassystemet bytas om en del gått sönder?', answer: 'Nästan aldrig. Det vanligaste är att byta den enskilda sektion som är trasig — oftast den bakre ljuddämparen eller flexröret — snarare än hela systemet från grenrör till ändrör.' },
+  { question: 'Måste hela avgassystemet bytas om en del gått sönder?', answer: 'Nästan aldrig. Det vanligaste är att byta den enskilda sektion som är trasig – oftast den bakre ljuddämparen eller flexröret – snarare än hela systemet från grenrör till ändrör.' },
   { question: 'Hur lång tid tar en reparation av avgassystemet?', answer: 'Ett byte av en bakre eller mellersta ljuddämpare går ofta snabbt (under 1 timme), medan felsökning av en lambdasond eller katalysatorproblem kan ta något längre tid.' },
 ]
 
@@ -111,7 +111,7 @@ export default function AvgassystemPage() {
           image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Komplett avgassystem under bil med katalysator, flexrör, ljuddämpare och värmesköldar' }}
           caption="Rent, tyst och lagligt."
         >
-          <p>Avgassystemet gör mer än att bara leda bort avgaser från motorn — det renar utsläppen, dämpar ljudet ner till godkända nivåer och övervakas av sensorer som styr motorns bränsleblandning. Eftersom systemet sitter oskyddat under bilen utsätts det för fukt och vägsalt, vilket gör att det oftast rostar bakifrån och inåt.</p>
+          <p>Avgassystemet gör mer än att bara leda bort avgaser från motorn – det renar utsläppen, dämpar ljudet ner till godkända nivåer och övervakas av sensorer som styr motorns bränsleblandning. Eftersom systemet sitter oskyddat under bilen utsätts det för fukt och vägsalt, vilket gör att det oftast rostar bakifrån och inåt.</p>
           <GuideParts items={components} />
           <Tip
             title="Osäker på vad som gäller för din bil?"
@@ -123,7 +123,7 @@ export default function AvgassystemPage() {
         <GuideImportance
           id="exhaust-importance-title"
           heading="Varför är det viktigt att åtgärda i tid?"
-          text="Ett skadat avgassystem påverkar mer än bara ljudnivån — det kan påverka besiktning, hälsa och bränsleförbrukning."
+          text="Ett skadat avgassystem påverkar mer än bara ljudnivån – det kan påverka besiktning, hälsa och bränsleförbrukning."
           items={importance}
         />
 
@@ -161,7 +161,7 @@ export default function AvgassystemPage() {
         <GuideClosing
           id="exhaust-booking-title"
           heading="Boka reparation av avgassystem"
-          text={<>Priset beror helt på vilken del av avgassystemet som behöver åtgärdas — ett byte av en bakre ljuddämpare skiljer sig från byte av lambdasond eller katalysator. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag innan vi sätter igång.</>}
+          text={<>Priset beror helt på vilken del av avgassystemet som behöver åtgärdas – ett byte av en bakre ljuddämpare skiljer sig från byte av lambdasond eller katalysator. Ring oss på {BUSINESS.phone.display} så ger vi dig ett tydligt och transparent kostnadsförslag innan vi sätter igång.</>}
           onBooking={openBooking}
         />
       </main>

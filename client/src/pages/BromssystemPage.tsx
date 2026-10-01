@@ -63,7 +63,7 @@ const symptoms: readonly GuideSymptom[] = [
 ]
 
 const serviceItems = [
-  'Bedömning av vilka delar som faktiskt behöver bytas — belägg, skivor, ok, bromsrör/slangar eller en kombination.',
+  'Bedömning av vilka delar som faktiskt behöver bytas – belägg, skivor, ok, bromsrör/slangar eller en kombination.',
   'Byte av de aktuella delarna med kvalitetskomponenter.',
   'Kontroll av bromsvätskans nivå och skick, med byte vid behov.',
   'Luftning av systemet när arbetet kräver det.',
@@ -82,10 +82,10 @@ const infoCards = [
 const faqs = [
   { question: 'Hur ofta behöver jag byta bromsar?', answer: 'Det beror på körstil, körmiljö och bilmodell, så det finns inget fast miltal. Det som avgör är hur mycket belägg och skivor har slitits, vilket syns vid en kontroll, till exempel i samband med hjulskifte eller service.' },
   { question: 'Hur ofta ska bromsvätskan bytas?', answer: 'Vanligtvis vart 2–3 år, oavsett hur mycket bilen körts. Vätskan drar åt sig fukt över tid även om bilen står stilla, vilket sänker bromsverkan gradvis utan att du märker det förrän vid en kontroll.' },
-  { question: 'Behöver handbromsen service om jag ändå ska byta bromsarna?', answer: 'Inte alltid, men det är ett bra tillfälle att kontrollera den samtidigt eftersom bilen ändå är uppe — särskilt på bilar med mekanisk vajerhandbroms som kan behöva efterjusteras med tiden.' },
+  { question: 'Behöver handbromsen service om jag ändå ska byta bromsarna?', answer: 'Inte alltid, men det är ett bra tillfälle att kontrollera den samtidigt eftersom bilen ändå är uppe – särskilt på bilar med mekanisk vajerhandbroms som kan behöva efterjusteras med tiden.' },
   { question: 'Hur mycket kostar det att byta bromsar?', answer: 'Kostnaden beror på vilka delar som behöver bytas. Ett byte av enbart belägg brukar kosta mindre än ett komplett byte som även innefattar skivor och eventuellt ok. Ring oss för en tydlig prisuppgift innan vi sätter igång.' },
-  { question: 'Kan jag byta bromsar själv?', answer: 'Det går, med rätt verktyg och kunskap. Men bromssystemet är en säkerhetskomponent där en felaktig montering kan få allvarliga konsekvenser — vi rekommenderar att låta en verkstad göra jobbet.' },
-  { question: 'Hur lång tid tar ett bromsbyte?', answer: 'Vanligtvis 1–3 timmar beroende på omfattning — ett rent beläggbyte går snabbare än ett byte som även omfattar skivor, ok eller luftning.' },
+  { question: 'Kan jag byta bromsar själv?', answer: 'Det går, med rätt verktyg och kunskap. Men bromssystemet är en säkerhetskomponent där en felaktig montering kan få allvarliga konsekvenser – vi rekommenderar att låta en verkstad göra jobbet.' },
+  { question: 'Hur lång tid tar ett bromsbyte?', answer: 'Vanligtvis 1–3 timmar beroende på omfattning – ett rent beläggbyte går snabbare än ett byte som även omfattar skivor, ok eller luftning.' },
   { question: 'Vad händer om jag väntar för länge med att byta bromsar?', answer: 'Utslitna belägg som får gå för länge sliter i sin tur ner bromsskivorna, och i värsta fall skadas även bromsoket. Det som hade varit ett enkelt beläggbyte kan då bli ett betydligt dyrare, mer omfattande jobb.' },
 ]
 

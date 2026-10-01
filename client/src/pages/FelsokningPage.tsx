@@ -52,7 +52,7 @@ const symptoms = [
   {
     question: 'Bilen är svårstartad eller stannar under körning',
     advice: 'Motor- och elsystemdiagnostik',
-    description: 'Kan bero på allt från tändning och bränsletillförsel till sensorer eller batteri/laddsystem — vi mäter oss fram till orsaken.',
+    description: 'Kan bero på allt från tändning och bränsletillförsel till sensorer eller batteri/laddsystem – vi mäter oss fram till orsaken.',
     adviceDetail: 'Kontroll av tändning, bränsletillförsel och elsystem. Normalt 1–2 timmar beroende på orsak.',
   },
   {
@@ -87,9 +87,9 @@ const serviceItems = [
 ]
 
 const faqs = [
-  { question: 'Vad betyder det att motorlampan lyser?', answer: 'Det betyder att bilens styrsystem har upptäckt en avvikelse och sparat en felkod i felminnet. Koden visar vilket system som larmar, men avgör inte ensam vilken del som är trasig — därför läser vi av koden och gör en bedömning utifrån den.' },
+  { question: 'Vad betyder det att motorlampan lyser?', answer: 'Det betyder att bilens styrsystem har upptäckt en avvikelse och sparat en felkod i felminnet. Koden visar vilket system som larmar, men avgör inte ensam vilken del som är trasig – därför läser vi av koden och gör en bedömning utifrån den.' },
   { question: 'Hur lång tid tar en felsökning?', answer: 'En vanlig felkodsläsning med grundläggande kontroll tar normalt 1–2 timmar. Mer komplicerade fel som kräver ytterligare mätning kan ta längre tid.' },
-  { question: 'Behöver jag veta vad problemet är innan jag bokar?', answer: 'Nej. Berätta gärna vad du har märkt — ljud, lampor eller beteende — men du behöver inte kunna peka ut orsaken själv. Det är det vi hjälper till med.' },
+  { question: 'Behöver jag veta vad problemet är innan jag bokar?', answer: 'Nej. Berätta gärna vad du har märkt – ljud, lampor eller beteende – men du behöver inte kunna peka ut orsaken själv. Det är det vi hjälper till med.' },
   { question: 'Bör jag felsöka bilen innan besiktningen?', answer: 'Ja, om en varningslampa lyser är det klokt att åtgärda orsaken innan besiktningen. Annars riskerar bilen bli underkänd och kräva en omkörning.' },
   { question: 'Förklarar ni vad felkoderna betyder?', answer: 'Ja, vi går igenom vad koderna innebär i klartext och vad vi rekommenderar innan något repareras.' },
   { question: 'Vad kostar en felsökning?', answer: `Kostnaden beror på hur omfattande felsökningen blir. Ring oss på ${BUSINESS.phone.display} så ger vi en tydlig prisuppgift innan vi sätter igång.` },
@@ -126,7 +126,7 @@ export default function FelsokningPage() {
                 <span className="bb-accent">hittar orsaken</span>
               </h1>
               <p>
-                Lyser en varningslampa eller låter bilen konstigt? Vi läser av felkoder och mäter oss fram till den verkliga orsaken med modern diagnostikutrustning — för alla märken och modeller.
+                Lyser en varningslampa eller låter bilen konstigt? Vi läser av felkoder och mäter oss fram till den verkliga orsaken med modern diagnostikutrustning – för alla märken och modeller.
               </p>
               <div className="bb-hero__actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
@@ -149,7 +149,7 @@ export default function FelsokningPage() {
               <div>
                 <h2 className="bb-h2" id="felsokning-intro-title">Vad innebär en <span className="bb-accent">felsökning</span>?</h2>
                 <p className="bb-lead bilservice__lead--split">
-                  Moderna bilar styrs av ett nätverk av datorer som ständigt övervakar motor, elsystem och avgasrening. När något avviker sparas en felkod i felminnet och en varningslampa kan tändas. Vi kopplar in diagnostikutrustning, läser av koderna och avgör vad de faktiskt betyder för just din bil — istället för att bara byta delar på måfå.
+                  Moderna bilar styrs av ett nätverk av datorer som ständigt övervakar motor, elsystem och avgasrening. När något avviker sparas en felkod i felminnet och en varningslampa kan tändas. Vi kopplar in diagnostikutrustning, läser av koderna och avgör vad de faktiskt betyder för just din bil – istället för att bara byta delar på måfå.
                 </p>
                 <div className="bilservice__actions">
                   <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka felsökning</button>
@@ -270,8 +270,8 @@ export default function FelsokningPage() {
                 <p className="bb-lead">Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid nu</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring: {BUSINESS.phone.display}</a>
+                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

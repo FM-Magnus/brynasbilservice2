@@ -216,7 +216,7 @@ export default function ContactPage() {
 
                     <div className="kontakt-page__form-row">
                       <div className="kontakt-page__field">
-                        <label htmlFor="contact-phone" className="kontakt-page__label">Telefonnummer</label>
+                        <label htmlFor="contact-phone" className="kontakt-page__label">Telefon</label>
                         <input type="tel" id="contact-phone" name="phone" placeholder="07X - XXX XX XX" className="kontakt-page__input" autoComplete="tel" />
                       </div>
                       <div className="kontakt-page__field">
@@ -294,11 +294,11 @@ export default function ContactPage() {
               </p>
               <div className="kontakt-page__closing-actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
-                  <span>Boka tid nu</span>
+                  <span>Boka tid</span>
                 </button>
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                   <PhoneIcon />
-                  <span>Ring: {BUSINESS.phone.display}</span>
+                  <span>Ring {BUSINESS.phone.display}</span>
                 </a>
                 <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="bb-btn bb-btn--ember">
                   <MapPinIcon />

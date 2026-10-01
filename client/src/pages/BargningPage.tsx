@@ -109,7 +109,7 @@ export default function BargningPage() {
                 Bärgning <span className="bb-accent">direkt till</span> verkstaden
               </h1>
               <p className="bb-lead--dark bargning-page__hero-lead">
-                Ett haveri kommer sällan lägligt. Vi erbjuder lokal bärgningshjälp, starthjälp och säker biltransport direkt till vår verkstad i Gävle — så att vi snabbt kan påbörja felsökning och reparation.
+                Ett haveri kommer sällan lägligt. Vi erbjuder lokal bärgningshjälp, starthjälp och säker biltransport direkt till vår verkstad i Gävle – så att vi snabbt kan påbörja felsökning och reparation.
               </p>
               <div className="bargning-page__hero-actions">
                 <a
@@ -117,7 +117,7 @@ export default function BargningPage() {
                   className="bb-btn bb-btn--teal bargning-page__hero-phone-btn"
                 >
                   <PhoneIcon />
-                  <span>Ring för bärgning: {BUSINESS.phone.display}</span>
+                  <span>Ring för bärgning {BUSINESS.phone.display}</span>
                 </a>
                 <button
                   type="button"
@@ -186,7 +186,7 @@ export default function BargningPage() {
                   Lokal bärgningshjälp och säker fordonstransport i Gävle med omnejd
                 </div>
                 <p className="bargning-page__showcase-lead">
-                  Ett haveri kommer sällan lägligt. Oavsett om bilen har stannat på vägen, inte startar på uppfarten eller är för skadad för att köras säkert, hjälper vi dig med bärgning och transport direkt till verkstaden i Gävle — så att felsökningen kan komma igång så fort bilen är hos oss.
+                  Ett haveri kommer sällan lägligt. Oavsett om bilen har stannat på vägen, inte startar på uppfarten eller är för skadad för att köras säkert, hjälper vi dig med bärgning och transport direkt till verkstaden i Gävle – så att felsökningen kan komma igång så fort bilen är hos oss.
                 </p>
 
                 <div className="bargning-page__showcase-lists">
@@ -550,7 +550,7 @@ export default function BargningPage() {
                   className="bb-btn bb-btn--teal bargning-page__cta-phone-btn"
                 >
                   <PhoneIcon />
-                  <span>Ring för bärgning: {BUSINESS.phone.display}</span>
+                  <span>Ring för bärgning {BUSINESS.phone.display}</span>
                 </a>
                 <button
                   type="button"

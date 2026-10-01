@@ -253,7 +253,7 @@ export default function BiltjansterPage() {
               </button>
               <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
                 <PhoneIcon aria-hidden="true" />
-                <span>Ring: {BUSINESS.phone.display}</span>
+                <span>Ring {BUSINESS.phone.display}</span>
               </a>
             </div>
           </div>
