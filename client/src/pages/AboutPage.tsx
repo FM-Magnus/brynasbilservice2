@@ -192,7 +192,7 @@ export default function AboutPage() {
                     />
                   </picture>
                   <div className="omoss-page__bench-badge">
-                    Maher Basher | Grundare &amp; mekaniker
+                    Maher &quot;Shomaher&quot; Basher | Grundare &amp; mekaniker
                   </div>
                 </div>
 
@@ -288,7 +288,7 @@ export default function AboutPage() {
                     Det viktigaste för mig är nöjda kunder som känner sig trygga. Vi förklarar alltid vad som behöver göras och varför – på ett enkelt och tydligt sätt.
                   </p>
                   <div className="omoss-page__quote-author">
-                    Maher Basher <span className="omoss-page__quote-role">– Grundare &amp; mekaniker</span>
+                    Maher &quot;Shomaher&quot; Basher <span className="omoss-page__quote-role">– Grundare &amp; mekaniker</span>
                   </div>
                 </div>
               </div>
