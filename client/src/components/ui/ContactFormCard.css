@@ -218,6 +218,18 @@
 .bb-contact-form__submit:hover {
   background: #041d22;
 }
+.bb-contact-form__submit:disabled { cursor: wait; opacity: 0.72; }
+
+.bb-contact-form__error {
+  background: rgba(7, 20, 22, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: var(--bb-radius-sm);
+  color: var(--bb-color-surface);
+  font-size: var(--bb-font-size-support);
+  line-height: 1.5;
+  padding: 0.75rem 1rem;
+}
+.bb-contact-form__error a { color: inherit; font-weight: 700; text-decoration: underline; }
 
 .bb-contact-form__submit svg {
   height: 14px;

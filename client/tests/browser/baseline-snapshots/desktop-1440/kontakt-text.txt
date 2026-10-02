@@ -37,23 +37,6 @@ Lördag
 Förfrågan
 Söndag
 Stängt
-SÅ FUNGERAR DET
-Från förfrågan till bekräftad tid
-01
-Du skickar en förfrågan eller ringer
-
-Beskriv vad du vill ha hjälp med, vilka symptom du upplever eller vilken service bilen behöver.
-
-02
-Vi undersöker och återkopplar
-
-Vi återkommer till dig under våra öppettider med förslag på tid och tydliga kostnadsuppgifter.
-
-03
-Tid bekräftas innan vi börjar
-
-Vi påbörjar inga reparationer utan ditt godkännande. Du har full kontroll hela vägen.
-
 Skicka ett meddelande
 
 Fyll i dina uppgifter och vad ärendet gäller. Fält markerade med * är obligatoriska.
@@ -74,6 +57,23 @@ Bärgning
 Övrigt
 Meddelande *
 SKICKA MEDDELANDE
+SÅ FUNGERAR DET
+Från förfrågan till bekräftad tid
+01
+Du skickar en förfrågan eller ringer
+
+Beskriv vad du vill ha hjälp med, vilka symptom du upplever eller vilken service bilen behöver.
+
+02
+Vi undersöker och återkopplar
+
+Vi återkommer till dig under våra öppettider med förslag på tid och tydliga kostnadsuppgifter.
+
+03
+Tid bekräftas innan vi börjar
+
+Vi påbörjar inga reparationer utan ditt godkännande. Du har full kontroll hela vägen.
+
 Hitta till oss
 
 Utmarksvägen 21B, 802 91 Gävle

@@ -1,9 +1,4 @@
-import { BUSINESS } from '../data/business'
-
-// There is no /api/contact endpoint yet (docs/BACKEND.md). Until there is, the
-// contact forms hand the message to the visitor's own e-mail program as a
-// pre-filled mailto: link, so nothing is silently lost behind a false "Tack".
-// When the endpoint exists, replace this module; the forms only call it.
+import axiosInstance from './axiosConfig'
 
 export type ContactMessage = {
   name: string
@@ -13,7 +8,7 @@ export type ContactMessage = {
   message: string
 }
 
-/** Inquiry subjects offered by the contact forms. */
+/** Inquiry subjects offered by both contact forms and accepted by the API. */
 export const contactSubjects: readonly string[] = [
   'Bilservice & underhåll',
   'Däckservice',
@@ -24,19 +19,7 @@ export const contactSubjects: readonly string[] = [
   'Övrigt',
 ]
 
-export function contactMailtoHref({ name, email, phone, subject, message }: ContactMessage, to: string = BUSINESS.email.address): string {
-  const lines = [`Namn: ${name}`, `E-post: ${email}`]
-  if (phone) lines.push(`Telefon: ${phone}`)
-  if (subject) lines.push(`Ärende: ${subject}`)
-  lines.push('', message)
-
-  const mailSubject = `Förfrågan via webbplatsen${subject ? ` – ${subject}` : ''}`
-  // encodeURIComponent turns the CRLF line breaks mail clients expect into %0D%0A.
-  return `mailto:${to}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(lines.join('\r\n'))}`
-}
-
-export function openContactEmail(message: ContactMessage, to?: string): string {
-  const href = contactMailtoHref(message, to)
-  window.location.href = href
-  return href
+/** A successful response means the configured mail server accepted the message. */
+export async function submitContact(message: ContactMessage, signal?: AbortSignal): Promise<void> {
+  await axiosInstance.post('/api/contact', message, { signal })
 }

@@ -7,6 +7,7 @@ import '../styles/ServiceGuideTemplate.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
 import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
@@ -108,7 +109,7 @@ export default function KamremPage() {
           <Tip
             title="Osäker på om din bil har rem eller kedja?"
             text="Vi slår upp exakta uppgifter i biltillverkarens databas utifrån ditt registreringsnummer."
-            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>}
+            action={<PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></PublicAction>}
           />
         </GuideIntro>
 

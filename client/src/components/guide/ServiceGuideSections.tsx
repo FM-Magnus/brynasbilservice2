@@ -14,6 +14,7 @@ import { relatedServices } from '../../data/relatedServices'
 import { AlertTriangleIcon } from '../icons/AlertTriangleIcon'
 import { CheckIcon } from '../icons/CheckIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
+import { PublicAction } from '../ui/PublicAction'
 
 export type GuideIcon = (props: SVGProps<SVGSVGElement>) => ReactElement | null
 
@@ -63,8 +64,8 @@ function Picture({ image }: { image: GuideImage }) {
 function GuideActions({ onBooking, bookLabel }: { onBooking: () => void; bookLabel: string }) {
   return (
     <div className="service-guide__actions">
-      <button type="button" onClick={onBooking} className="bb-btn bb-btn--teal service-guide__btn">{bookLabel}</button>
-      <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</a>
+      <PublicAction intent="book" onBook={onBooking} className="bb-btn bb-btn--teal service-guide__btn">{bookLabel}</PublicAction>
+      <PublicAction intent="call" className="bb-btn bb-btn--ember service-guide__btn"><PhoneIcon aria-hidden="true" />Ring {BUSINESS.phone.display}</PublicAction>
     </div>
   )
 }

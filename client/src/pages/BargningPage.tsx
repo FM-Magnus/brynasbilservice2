@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
@@ -116,20 +117,18 @@ export default function BargningPage() {
                 Ett haveri kommer sällan lägligt. Vi erbjuder lokal bärgningshjälp, starthjälp och säker biltransport direkt till vår verkstad i Gävle – så att vi snabbt kan påbörja felsökning och reparation.
               </p>
               <div className="bargning-page__hero-actions">
-                <a
-                  href={BUSINESS.phone.href}
+                <PublicAction intent="call"
                   className="bb-btn bb-btn--teal bargning-page__hero-phone-btn"
                 >
                   <PhoneIcon />
                   <span>Ring för bärgning {BUSINESS.phone.display}</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={openBooking}
+                </PublicAction>
+                <PublicAction intent="book"
+                  onBook={openBooking}
                   className="bb-btn bb-btn--ember bargning-page__hero-book-btn"
                 >
                   <span>Boka verkstadstid</span>
-                </button>
+                </PublicAction>
               </div>
 
               <div className="bargning-page__hero-trust-row" aria-label="Fördelar med vår bärgning">
@@ -240,21 +239,19 @@ export default function BargningPage() {
                 </div>
 
                 <div className="bargning-page__showcase-actions">
-                  <a
-                    href={BUSINESS.phone.href}
+                  <PublicAction intent="call"
                     className="bb-btn bb-btn--teal bargning-page__showcase-phone-btn"
                   >
                     <span>Ring {BUSINESS.phone.display}</span>
                     <PhoneIcon />
-                  </a>
-                  <button
-                    type="button"
-                    onClick={openBooking}
+                  </PublicAction>
+                  <PublicAction intent="book"
+                    onBook={openBooking}
                     className="bargning-page__showcase-book-link"
                   >
                     <span>Boka tid direkt i verkstaden</span>
                     <ArrowRightIcon />
-                  </button>
+                  </PublicAction>
                 </div>
               </div>
             </div>
@@ -568,20 +565,18 @@ export default function BargningPage() {
                 Ring oss direkt så hjälper vi dig att få bilen till vår verkstad.
               </p>
               <div className="bargning-page__cta-actions">
-                <a
-                  href={BUSINESS.phone.href}
+                <PublicAction intent="call"
                   className="bb-btn bb-btn--teal bargning-page__cta-phone-btn"
                 >
                   <PhoneIcon />
                   <span>Ring för bärgning {BUSINESS.phone.display}</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={openBooking}
+                </PublicAction>
+                <PublicAction intent="book"
+                  onBook={openBooking}
                   className="bb-btn bb-btn--ember bargning-page__cta-book-btn"
                 >
                   <span>Boka verkstadstid</span>
-                </button>
+                </PublicAction>
               </div>
             </div>
           </div>

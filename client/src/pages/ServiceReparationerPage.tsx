@@ -13,6 +13,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { TrustStrip } from '../components/ui/TrustStrip'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -108,8 +109,8 @@ export default function ServiceReparationerPage() {
                 Bas-, mellan- och stor service för alla bilmärken. Du får ett tydligt pris innan vi börjar, och vi gör inget extra utan att fråga dig först.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring oss nu</span></a>
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">Boka tid</PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring oss nu</span></PublicAction>
               </div>
             </div>
             <div className="bb-hero__bottom">
@@ -126,8 +127,8 @@ export default function ServiceReparationerPage() {
               <p>Priset beror på bilmodell, ålder och vilken nivå av service som behövs – som oberoende verkstad ligger vi normalt under vad en märkesverkstad tar för motsvarande arbete. Ring oss så får du ett tydligt pris innan vi sätter igång, inga överraskningar på slutfakturan.</p>
               <p>Be om ett kostnadsförslag som visar vad som ingår: arbete, delar och vätskor, och vad som ligger utanför. Är priset en ungefärlig uppgift får slutpriset enligt konsumentreglerna inte bli mer än 15 procent högre, och hittar verkstaden något mer som behöver åtgärdas ska du kontaktas innan det arbetet görs.</p>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid för bilservice</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid för bilservice</PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</PublicAction>
               </div>
             </div>
             <ServiceImage id="bilservice-servicebook-keys" jpg={servicebookJpg} webp={servicebookWebp} alt="Öppen servicebok och bilnyckel på en verkstadsbänk" className="bilservice__split-media--right bilservice__image-frame--wide" />
@@ -190,7 +191,7 @@ export default function ServiceReparationerPage() {
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="bilservice-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
               <p className="bb-lead--dark">Att förstå processen gör det enklare att veta vad som händer med bilen och varför en service ibland behöver ta lite tid.</p>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
+              <PublicAction intent="call" className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></PublicAction>
             </div>
             <ol className="bb-process-grid">
               {processSteps.map((step) => (
@@ -228,8 +229,8 @@ export default function ServiceReparationerPage() {
                 <p className="bb-lead">Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</PublicAction>
               </div>
             </div>
           </div>

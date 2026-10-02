@@ -11,6 +11,11 @@ export default defineConfig(async ({ command }) => {
   return {
     plugins: [react(), guardDeletedImages(imagetools())],
     base: command === 'serve' ? '/' : '/brynasbilservice/',
+    server: {
+      proxy: {
+        '/api': 'http://127.0.0.1:3000',
+      },
+    },
     resolve: {
       dedupe: ['react', 'react-dom'],
     },

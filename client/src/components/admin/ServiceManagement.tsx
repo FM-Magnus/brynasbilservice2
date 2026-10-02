@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axiosInstance from '../../api/axiosConfig'
+import adminClient from '../../api/adminClient'
 import { useLanguage } from '../../context/useLanguage'
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
@@ -31,12 +31,7 @@ export function ServiceManagement() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const token = localStorage.getItem('adminToken')
-        const response = await axiosInstance.get('/api/admin/services', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
+        const response = await adminClient.get('/api/admin/services')
         setServices(response.data)
         setFilteredServices(response.data)
         setLoading(false)
@@ -79,12 +74,7 @@ export function ServiceManagement() {
   const executeDelete = async () => {
     if (deleteConfirmId === null) return
     try {
-      const token = localStorage.getItem('adminToken')
-      await axiosInstance.delete(`/api/admin/services/${deleteConfirmId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+      await adminClient.delete(`/api/admin/services/${deleteConfirmId}`)
       setServices(services.filter(service => service.id !== deleteConfirmId))
     } catch (error) {
       setError('Failed to delete service')
@@ -98,26 +88,16 @@ export function ServiceManagement() {
     try {
       if (!currentService) return
       
-      const token = localStorage.getItem('adminToken')
-      
       if (currentService.id) {
         // Update existing service
-        await axiosInstance.put(`/api/admin/services/${currentService.id}`, currentService, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
+        await adminClient.put(`/api/admin/services/${currentService.id}`, currentService)
         // Update locally
         setServices(services.map(service => 
           service.id === currentService.id ? currentService : service
         ))
       } else {
         // Add new service
-        const response = await axiosInstance.post('/api/admin/services', currentService, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
+        const response = await adminClient.post('/api/admin/services', currentService)
         // Add locally
         setServices([...services, {...currentService, id: response.data.id}])
       }

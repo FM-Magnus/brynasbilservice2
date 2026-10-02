@@ -38,6 +38,9 @@ const counter = (page: Page) => page.locator('.galleri-page__counter')
 const stageBox = async (page: Page) => (await page.locator('.galleri-page__stage').boundingBox())!
 
 test('galleri: folder-driven viewer on its own island', async ({ page }, testInfo) => {
+  await page.route('**/api/public/actions', (route) => route.fulfill({ json: {
+    version: 1, actions: { book: 'book', contact: 'contact', call: 'call', email: 'email', directions: 'directions' },
+  } }))
   expect(N).toBeGreaterThan(1)
   const consoleProblems: string[] = []
   page.on('console', (message) => {

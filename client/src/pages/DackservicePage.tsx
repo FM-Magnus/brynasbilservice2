@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { TrustStrip } from '../components/ui/TrustStrip'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
@@ -150,13 +151,13 @@ export default function DackservicePage() {
                 Vi hjälper dig med hjulskifte, montering, balansering, hjulinställning, punkteringslagning och däckhotell – med omtanke om säkerhet, körkomfort och dina hjul.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">
                   Boka tid
-                </button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                </PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
                   <span>Ring oss nu</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
             <div className="bb-hero__bottom">
@@ -206,14 +207,14 @@ export default function DackservicePage() {
                       <div className="bilservice__tire-media">
                         <img src={service.icon} alt="" loading="lazy" width={400} height={300} />
                       </div>
-                      <button
-                        type="button"
+                      <PublicAction intent="book"
                         className="bb-btn bb-btn--ember bilservice__tire-cta"
-                        onClick={() => openBookingWith(`Gäller ${service.title.toLowerCase()}`)}
+                        comment={`Gäller ${service.title.toLowerCase()}`}
+                        onBook={() => openBookingWith(`Gäller ${service.title.toLowerCase()}`)}
                       >
                         <span>{isContactPrice ? 'Kontakta oss' : 'Boka tid'}</span>
                         <ArrowRightIcon aria-hidden="true" />
-                      </button>
+                      </PublicAction>
                     </div>
                   </article>
                 )
@@ -257,13 +258,13 @@ export default function DackservicePage() {
               </ul>
               <div className="bilservice__storage-footer">
                 <p>Från 890 kr för personbil, 990 kr för SUV &amp; lätt lastbil per säsong.</p>
-                <button
-                  type="button"
+                <PublicAction intent="book"
                   className="bb-btn bb-btn--ember-solid"
-                  onClick={() => openBookingWith('Gäller däckhotell & förvaring')}
+                  comment="Gäller däckhotell & förvaring"
+                  onBook={() => openBookingWith('Gäller däckhotell & förvaring')}
                 >
                   Boka däckhotellplats
-                </button>
+                </PublicAction>
               </div>
             </div>
           </div>
@@ -285,7 +286,7 @@ export default function DackservicePage() {
                   </p>
                 </div>
                 <div className="bilservice__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid för däckservice</button>
+                  <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">Boka tid för däckservice</PublicAction>
                 </div>
               </div>
             </div>
@@ -334,12 +335,12 @@ export default function DackservicePage() {
                 <p className="bb-lead">Vi hjälper dig att upptäcka skador, felaktigt lufttryck och slitage i tid.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={() => openBookingWith('Gäller genomgång av hjul & däck')} className="bb-btn bb-btn--ember-solid">
+                <PublicAction intent="book" comment="Gäller genomgång av hjul & däck" onBook={() => openBookingWith('Gäller genomgång av hjul & däck')} className="bb-btn bb-btn--ember-solid">
                   Boka tid
-                </button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                </PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">
                   Ring {BUSINESS.phone.display}
-                </a>
+                </PublicAction>
               </div>
             </div>
           </div>

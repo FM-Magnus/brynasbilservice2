@@ -1,6 +1,9 @@
 import { expect, test } from '@playwright/test'
 
 test('bilar till salu renders on its own island without horizontal overflow', async ({ page }, testInfo) => {
+  await page.route('**/api/public/actions', (route) => route.fulfill({ json: {
+    version: 1, actions: { book: 'book', contact: 'contact', call: 'call', email: 'email', directions: 'directions' },
+  } }))
   const consoleProblems: string[] = []
   page.on('console', (message) => {
     if (message.type() === 'error' || message.type() === 'warning') consoleProblems.push(message.text())

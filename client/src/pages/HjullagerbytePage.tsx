@@ -7,6 +7,7 @@ import '../styles/ServiceGuideTemplate.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
 import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
@@ -113,7 +114,7 @@ export default function HjullagerbytePage() {
           <Tip
             title="Orolig för ett brummande eller malande missljud?"
             text="Vi hissar upp bilen och kontrollerar mekaniskt vilket lager som orsakar ljudet."
-            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
+            action={<PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></PublicAction>}
           />
         </GuideIntro>
 

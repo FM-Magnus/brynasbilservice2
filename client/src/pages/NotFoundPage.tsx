@@ -4,7 +4,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
-import { BUSINESS } from '../data/business'
+import { PublicAction } from '../components/ui/PublicAction'
 
 // Catch-all route (`*` in main.tsx). Without it an unknown address rendered an
 // empty page with no header. Built only from the shared hero pattern, so it has
@@ -32,10 +32,10 @@ export default function NotFoundPage() {
                   <span>Till startsidan</span>
                   <ArrowRightIcon aria-hidden="true" />
                 </Link>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
                   <span>Ring oss nu</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
           </div>

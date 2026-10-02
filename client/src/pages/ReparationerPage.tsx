@@ -13,6 +13,7 @@ import { TrustStrip } from '../components/ui/TrustStrip'
 import { Tip } from '../components/ui/Tip'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -110,11 +111,11 @@ export default function ReparationerPage() {
                 Motor, koppling, avgassystem eller fjädring – när det som är fel är mer än en vanlig service tar vi oss an jobbet. Du får ett tydligt kostnadsförslag innan vi börjar, och vi gör inget extra utan att ha frågat dig.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">Boka tid</PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
                   <span>Ring oss nu</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
             <div className="bb-hero__bottom">
@@ -137,8 +138,8 @@ export default function ReparationerPage() {
                   Läs mer om de vanligaste jobben: <Link to="/kamrem">kamrem</Link>, <Link to="/koppling">koppling</Link>, <Link to="/bromssystem">bromssystem</Link>, <Link to="/drivaxel-drivknutar">drivaxel och drivknutar</Link> och <Link to="/avgassystem">avgassystem</Link>.
                 </p>
                 <div className="bilservice__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
+                  <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</PublicAction>
+                  <PublicAction intent="call" className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</PublicAction>
                 </div>
               </div>
               <div className="bilservice__split-media--right">
@@ -166,7 +167,7 @@ export default function ReparationerPage() {
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="reparationer-process-title">Så går ett <span className="bb-accent">större arbete</span> till</h2>
               <p className="bb-lead--dark">Ett större arbete ska aldrig komma som en överraskning. Så här går vi tillväga.</p>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
+              <PublicAction intent="call" className="bb-btn bb-btn--teal"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></PublicAction>
             </div>
             <ol className="bb-process-grid">
               {processSteps.map((step) => (
@@ -188,7 +189,7 @@ export default function ReparationerPage() {
               <h2 className="bb-h2" id="reparationer-rights-title">Bra att veta om pris och dina rättigheter</h2>
               <p className="bb-lead">Tydliga besked är en del av jobbet. Här är det viktigaste att veta innan du lämnar in bilen för ett större arbete.</p>
               <div className="bilservice__actions">
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember-solid"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember-solid"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></PublicAction>
               </div>
             </div>
             <div className="bilservice__prose">
@@ -233,7 +234,7 @@ export default function ReparationerPage() {
             <Tip
               title="Äldre bil och stor reparation?"
               text="Fråga oss vad reparationen kostar i förhållande till bilens värde innan du bestämmer dig. Vi hjälper dig att väga det och berättar om det finns fler sätt att lösa jobbet."
-              action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>}
+              action={<PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</PublicAction>}
             />
           </div>
         </section>
@@ -251,8 +252,8 @@ export default function ReparationerPage() {
                 <p className="bb-lead">Berätta vad som är fel eller vad du vill ha gjort, så återkommer vi med ett kostnadsförslag. Vi gör inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</PublicAction>
               </div>
             </div>
           </div>

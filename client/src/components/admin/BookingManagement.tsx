@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import axiosInstance from '../../api/axiosConfig'
+import adminClient from '../../api/adminClient'
 import { useLanguage } from '../../context/useLanguage'
 import { format } from 'date-fns';
 import { sv } from 'date-fns/locale';
@@ -37,12 +37,7 @@ export function BookingManagement() {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const token = localStorage.getItem('adminToken')
-        const response = await axiosInstance.get('/api/admin/bookings', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
+        const response = await adminClient.get('/api/admin/bookings')
         setBookings(response.data.map((booking: Booking) => ({
           ...booking,
           service_price: booking.service_price // Map service_price from response
@@ -103,12 +98,7 @@ export function BookingManagement() {
 
   const updateBookingStatus = async (id: number, status: Booking['status']) => {
     try {
-      const token = localStorage.getItem('adminToken')
-      await axiosInstance.put(`/api/admin/bookings/${id}`, { status }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+      await adminClient.put(`/api/admin/bookings/${id}`, { status })
       // Update locally
       setBookings(bookings.map(booking => 
         booking.id === id ? {...booking, status} : booking
@@ -126,12 +116,7 @@ export function BookingManagement() {
   const deleteBooking = async () => {
     if (deleteConfirmId === null) return
     try {
-      const token = localStorage.getItem('adminToken')
-      await axiosInstance.delete(`/api/admin/bookings/${deleteConfirmId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+      await adminClient.delete(`/api/admin/bookings/${deleteConfirmId}`)
       setBookings(bookings.filter(booking => booking.id !== deleteConfirmId))
     } catch (error) {
       setError('Failed to delete booking')
@@ -151,9 +136,6 @@ export function BookingManagement() {
     setSelectedBooking(null);
   };
 
-  // Add debugging logs to verify sorting behavior
-  console.log('Sort Config:', sortConfig);
-  console.log('Sorted Bookings:', sortedBookings);
 
   const handleSort = (key: keyof Booking) => {
     setSortConfig((prev) => {

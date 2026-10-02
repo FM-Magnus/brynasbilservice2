@@ -4,6 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
@@ -16,7 +17,6 @@ import './GalleryPage.css'
 // Images come from src/assets/galleri/ (see LÄSMIG.md there) via api/gallery.ts —
 // never import gallery images or the data module here.
 
-const PHONE_HREF = BUSINESS.phone.href
 const STAGE_SIZES = '(min-width: 1440px) 920px, (min-width: 1024px) 70vw, 92vw'
 const SWIPE_MIN_PX = 40
 
@@ -258,13 +258,13 @@ export default function GalleryPage() {
                   Ta en titt in i vår verkstad och däckavdelning på Utmarksvägen i Gävle. Här ser du lokalerna, utrustningen och miljön där vi tar hand om din bil.
                 </p>
                 <div className="galleri-page__actions">
-                  <button type="button" className="bb-btn bb-btn--teal galleri-page__book" onClick={openBooking}>
+                  <PublicAction intent="book" className="bb-btn bb-btn--teal galleri-page__book" onBook={openBooking}>
                     Boka tid
-                  </button>
-                  <a href={PHONE_HREF} className="bb-btn bb-btn--ember">
+                  </PublicAction>
+                  <PublicAction intent="call" className="bb-btn bb-btn--ember">
                     <PhoneIcon />
                     <span>Ring {BUSINESS.phone.display}</span>
-                  </a>
+                  </PublicAction>
                 </div>
               </div>
             </header>
@@ -280,10 +280,10 @@ export default function GalleryPage() {
             {load.status === 'error' && (
               <div className="galleri-page__notice" role="status">
                 <p>Vi kunde inte visa bilderna just nu. Försök igen om en stund, eller ring oss.</p>
-                <a href={PHONE_HREF} className="bb-btn bb-btn--ember">
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">
                   <PhoneIcon />
                   <span>Ring {BUSINESS.phone.display}</span>
-                </a>
+                </PublicAction>
               </div>
             )}
 
@@ -326,16 +326,16 @@ export default function GalleryPage() {
                 </p>
               </div>
               <div className="galleri-page__closing-actions">
-                <button type="button" className="bb-btn bb-btn--ember-solid" onClick={openBooking}>
+                <PublicAction intent="book" className="bb-btn bb-btn--ember-solid" onBook={openBooking}>
                   Boka tid
-                </button>
+                </PublicAction>
                 <Link to="/biltjanster" className="bb-btn galleri-page__btn-outline">
                   Se alla tjänster
                 </Link>
-                <a href={PHONE_HREF} className="bb-btn galleri-page__btn-outline">
+                <PublicAction intent="call" className="bb-btn galleri-page__btn-outline">
                   <PhoneIcon />
                   <span>Ring {BUSINESS.phone.display}</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
           </div>

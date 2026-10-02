@@ -6,6 +6,7 @@ import { useHeroSlideshow } from '../../hooks/useHeroSlideshow'
 import { useIsPhone } from '../../hooks/useIsPhone'
 import { PublicHeader } from '../../components/layout/PublicHeader'
 import { PublicFooter } from '../../components/layout/PublicFooter'
+import { PublicAction } from '../../components/ui/PublicAction'
 import { CalendarIcon } from '../../components/icons/CalendarIcon'
 import { CheckIcon } from '../../components/icons/CheckIcon'
 import { MapPinIcon } from '../../components/icons/MapPinIcon'
@@ -28,7 +29,6 @@ import { ShieldIcon } from '../../components/icons/ShieldIcon'
 import { GalleryDockStrip } from '../../components/ui/GalleryDockStrip'
 import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
-import { BUSINESS } from '../../data/business'
 import './LandingPage.css'
 
 type IconName = 'chat' | 'shield' | 'clock' | 'car'
@@ -104,14 +104,14 @@ export default function LandingPage() {
               Brynäs Bilservice är din lokala, oberoende verkstad i Gävle. Vi utför alla typer av service och reparation – för alla bilmärken, till konkurrenskraftiga priser.
             </p>
             <div className="bb-hero__actions">
-              <button className="bb-btn bb-btn--teal" type="button" onClick={openBooking}>
+              <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">
                 <CalendarIcon />
                 Boka tid
-              </button>
-              <a className="bb-btn bb-btn--ember" href={BUSINESS.phone.href}>
+              </PublicAction>
+              <PublicAction intent="call" onBook={openBooking} className="bb-btn bb-btn--ember">
                 <PhoneIcon />
                 Ring oss nu
-              </a>
+              </PublicAction>
             </div>
           </div>
           <div className="bb-hero__bottom">

@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { useIsPhone } from '../hooks/useIsPhone'
 import { Tip } from '../components/ui/Tip'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
@@ -103,13 +104,13 @@ export default function AcServicePage() {
                 En välfungerande AC ger behaglig kupétemperatur, hjälper rutorna att hålla sig klara under höst och vinter och är värd att underhålla innan problemen kommer. Ett system med för lite köldmedium smörjs sämre, och att köra vidare så kan i värsta fall leda till en betydligt dyrare kompressorreparation.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">
                   Boka tid
-                </button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                </PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
                   <span>Ring oss nu</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
           </div>
@@ -126,8 +127,8 @@ export default function AcServicePage() {
               <p>Du vet priset innan vi sätter igång, så det blir inga överraskningar på fakturan. Vi följer tillverkarens föreskrifter, vilket betyder att nybilsgarantin inte påverkas av att vi utför servicen.</p>
               <p>Och vi är din lokala verkstad: vi finns på Utmarksvägen i Gävle och känner våra kunder och deras bilar.</p>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka AC-service</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka AC-service</PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></PublicAction>
               </div>
             </div>
           </div>
@@ -170,13 +171,12 @@ export default function AcServicePage() {
                 <p>
                   Vi föreslår: <strong>{recommendation}</strong>. Det följer med till bokningsformulärets kommentar.
                 </p>
-                <button
-                  type="button"
+                <PublicAction intent="book"
                   className="bb-btn bb-btn--ember-solid"
-                  onClick={openBooking}
+                  onBook={openBooking}
                 >
                   Boka rekommenderad åtgärd
-                </button>
+                </PublicAction>
               </div>
             )}
           </div>
@@ -208,13 +208,12 @@ export default function AcServicePage() {
                     </li>
                   ))}
                 </ul>
-                <button
-                  type="button"
-                  onClick={() => openBookingWith('Gäller AC-service (1 495 kr)')}
+                <PublicAction intent="book"
+                  onBook={() => openBookingWith('Gäller AC-service (1 495 kr)')}
                   className="bb-btn bb-btn--teal bilservice__price-cta"
                 >
                   Boka tid
-                </button>
+                </PublicAction>
               </article>
 
               <article className="bilservice__price-card">
@@ -233,13 +232,12 @@ export default function AcServicePage() {
                 <p className="bilservice__price-note">
                   OBS! Materialkostnad för kupéfilter tillkommer och varierar per bilmodell.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => openBookingWith('Gäller AC-rengöring (800 kr arbetskostnad)')}
+                <PublicAction intent="book"
+                  onBook={() => openBookingWith('Gäller AC-rengöring (800 kr arbetskostnad)')}
                   className="bb-btn bb-btn--teal bilservice__price-cta"
                 >
                   Boka tid
-                </button>
+                </PublicAction>
               </article>
 
               <article className="bilservice__price-card">
@@ -253,13 +251,12 @@ export default function AcServicePage() {
                     </li>
                   ))}
                 </ul>
-                <button
-                  type="button"
-                  onClick={() => openBookingWith('Gäller OBD-diagnostik & felsökning för AC (500 kr)')}
+                <PublicAction intent="book"
+                  onBook={() => openBookingWith('Gäller OBD-diagnostik & felsökning för AC (500 kr)')}
                   className="bb-btn bb-btn--teal bilservice__price-cta"
                 >
                   Boka tid
-                </button>
+                </PublicAction>
               </article>
             </div>
 
@@ -286,10 +283,10 @@ export default function AcServicePage() {
               <p className="bb-lead--dark">
                 Vi följer en noggrann process så att du vet att ditt AC-system fungerar tryggt och effektivt.
               </p>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--teal">
+              <PublicAction intent="call" className="bb-btn bb-btn--teal">
                 <PhoneIcon aria-hidden="true" />
                 <span>Ring {BUSINESS.phone.display}</span>
-              </a>
+              </PublicAction>
             </div>
             <ol className="bb-process-grid">
               {processSteps.map((step) => (
@@ -392,12 +389,12 @@ export default function AcServicePage() {
                 </p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">
                   Öppna bokning
-                </button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                </PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">
                   Ring {BUSINESS.phone.display}
-                </a>
+                </PublicAction>
               </div>
             </div>
           </div>

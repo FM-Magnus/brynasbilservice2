@@ -1,5 +1,6 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { BookingFormModal } from '../components/BookingForm'
+import { publicActionHref, usePublicAction } from '../api/publicActions'
 
 /**
  * The booking modal's open state and pre-filled comment, shared by every public page.
@@ -14,10 +15,22 @@ import { BookingFormModal } from '../components/BookingForm'
  */
 export function useBookingModal(defaultComment = '') {
   const [booking, setBooking] = useState({ isOpen: false, comment: defaultComment })
+  const kind = usePublicAction('book')
 
-  const openBooking = useCallback(() => setBooking({ isOpen: true, comment: defaultComment }), [defaultComment])
-  const openBookingWith = useCallback((comment: string) => setBooking({ isOpen: true, comment }), [])
+  const openBookingWith = useCallback((comment: string) => {
+    if (kind === 'book') setBooking({ isOpen: true, comment })
+    else window.location.href = publicActionHref(kind, comment)
+  }, [kind])
+  const openBooking = useCallback(() => openBookingWith(defaultComment), [defaultComment, openBookingWith])
   const closeBooking = useCallback(() => setBooking((current) => ({ ...current, isOpen: false })), [])
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<{ comment?: string }>).detail
+      setBooking({ isOpen: true, comment: detail?.comment || defaultComment })
+    }
+    window.addEventListener('bb:request-booking', handler)
+    return () => window.removeEventListener('bb:request-booking', handler)
+  }, [defaultComment])
 
   const bookingModal = (
     <BookingFormModal isOpen={booking.isOpen} onClose={closeBooking} initialComment={booking.comment || undefined} />

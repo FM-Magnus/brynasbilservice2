@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { useIsPhone } from '../hooks/useIsPhone'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
@@ -23,7 +24,6 @@ import './BilarTillSalu.css'
 
 // Stock is edited in data/vehicles.ts (or, once live, from /admin) — never here.
 
-const PHONE_HREF = BUSINESS.phone.href
 const MAPS_HREF = BUSINESS.address.mapsUrl
 
 const formatPrice = (sek: number) => `${sek.toLocaleString('sv-SE')} kr`
@@ -144,13 +144,13 @@ function VehicleCard({ vehicle, eager, onInquiry, onCollapse }: VehicleCardProps
 
         {!sold && (
           <div className="bilartillsalu-page__vehicle-actions">
-            <button type="button" className="bb-btn bb-btn--ember-solid bilartillsalu-page__inquiry-btn" onClick={() => onInquiry(vehicle)}>
+            <PublicAction intent="book" className="bb-btn bb-btn--ember-solid bilartillsalu-page__inquiry-btn" comment={inquiryComment(vehicle)} onBook={() => onInquiry(vehicle)}>
               Skicka förfrågan
-            </button>
-            <a href={PHONE_HREF} className="bb-btn bilartillsalu-page__btn-outline">
+            </PublicAction>
+            <PublicAction intent="call" className="bb-btn bilartillsalu-page__btn-outline">
               <PhoneIcon />
               <span>Ring för mer info &amp; provkörning</span>
-            </a>
+            </PublicAction>
           </div>
         )}
 
@@ -213,9 +213,9 @@ function CompactVehicleCard({ vehicle, onInquiry, onExpand }: CompactVehicleCard
         </p>
         <div className="bilartillsalu-page__compact-actions">
           {!sold && (
-            <button type="button" className="bb-btn bb-btn--ember-solid bilartillsalu-page__inquiry-btn" onClick={() => onInquiry(vehicle)}>
+            <PublicAction intent="book" className="bb-btn bb-btn--ember-solid bilartillsalu-page__inquiry-btn" comment={inquiryComment(vehicle)} onBook={() => onInquiry(vehicle)}>
               Skicka förfrågan
-            </button>
+            </PublicAction>
           )}
           <button
             type="button"
@@ -326,13 +326,13 @@ export default function BilarTillSalu() {
                 Alla våra bilar är noggrant genomgångna, kontrollerade och servade av våra egna mekaniker på Brynäs Bilservice. Vi säkerställer att bilen är trygg och trafiksäker innan den säljs.
               </p>
               <div className="bb-hero__actions">
-                <a href={PHONE_HREF} className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
+                <PublicAction intent="call" className="bb-btn bb-btn--teal bilartillsalu-page__hero-call">
                   <PhoneIcon />
                   <span>Ring {BUSINESS.phone.display}</span>
-                </a>
-                <button type="button" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onClick={openBooking}>
+                </PublicAction>
+                <PublicAction intent="book" className="bb-btn bb-btn--ember bilartillsalu-page__hero-book" onBook={openBooking}>
                   Boka tid för visning
-                </button>
+                </PublicAction>
               </div>
               <ul className="bilartillsalu-page__hero-meta">
                 <li>
@@ -369,10 +369,10 @@ export default function BilarTillSalu() {
                 <span className="bb-icon-badge" aria-hidden="true"><CarSaleIcon /></span>
                 <h3>Vi kunde inte hämta bilarna just nu</h3>
                 <p>Försök igen om en stund, eller ring oss så berättar vi vad vi har i lager.</p>
-                <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
+                <PublicAction intent="call" className="bb-btn bb-btn--ember-solid">
                   <PhoneIcon />
                   <span>Ring oss på {BUSINESS.phone.display}</span>
-                </a>
+                </PublicAction>
               </div>
             )}
 
@@ -383,10 +383,10 @@ export default function BilarTillSalu() {
                 <p>
                   Vi får löpande in nya noggrant kontrollerade bilar. Hör gärna av dig med dina önskemål så berättar vi vad som är på gång in.
                 </p>
-                <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
+                <PublicAction intent="call" className="bb-btn bb-btn--ember-solid">
                   <PhoneIcon />
                   <span>Ring oss på {BUSINESS.phone.display}</span>
-                </a>
+                </PublicAction>
               </div>
             )}
 
@@ -429,10 +429,10 @@ export default function BilarTillSalu() {
                 </p>
               </div>
               <div className="bilartillsalu-page__closing-actions">
-                <a href={PHONE_HREF} className="bb-btn bb-btn--ember-solid">
+                <PublicAction intent="call" className="bb-btn bb-btn--ember-solid">
                   <PhoneIcon />
                   <span>Ring {BUSINESS.phone.display}</span>
-                </a>
+                </PublicAction>
                 <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" className="bb-btn bilartillsalu-page__btn-outline">
                   <MapPinIcon />
                   <span>Hitta till oss</span>

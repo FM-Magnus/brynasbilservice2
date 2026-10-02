@@ -1,6 +1,7 @@
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
@@ -188,13 +189,13 @@ export default function BiltjansterPage() {
               Här hittar du fördjupad information om mekaniska reparationer, vanliga symptom och riktad felsökning – ett samlat ställe för hela vårt tjänsteutbud.
             </p>
             <div className="biltjanster-hub__hero-actions">
-              <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
+              <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">
                 <span>Boka tid</span>
-              </button>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+              </PublicAction>
+              <PublicAction intent="call" className="bb-btn bb-btn--ember">
                 <PhoneIcon aria-hidden="true" />
                 <span>Ring {BUSINESS.phone.display}</span>
-              </a>
+              </PublicAction>
             </div>
           </div>
         </section>
@@ -259,13 +260,13 @@ export default function BiltjansterPage() {
               </p>
             </div>
             <div className="biltjanster-hub__cta-actions">
-              <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
+              <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">
                 <span>Boka tid</span>
-              </button>
-              <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+              </PublicAction>
+              <PublicAction intent="call" className="bb-btn bb-btn--ember">
                 <PhoneIcon aria-hidden="true" />
                 <span>Ring {BUSINESS.phone.display}</span>
-              </a>
+              </PublicAction>
             </div>
           </div>
         </section>

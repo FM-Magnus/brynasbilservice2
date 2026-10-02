@@ -1,7 +1,8 @@
 import { BUSINESS } from '../../data/business'
 import { contactSubjects } from '../../api/contact'
 import type { ContactMessage } from '../../api/contact'
-import { useContactForm } from '../../hooks/useContactForm'
+import { contactErrorMessage, useContactForm } from '../../hooks/useContactForm'
+import { ContactSubmitAction } from './ContactSubmitAction'
 import { MailIcon } from '../icons/MailIcon'
 import { MapPinIcon } from '../icons/MapPinIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
@@ -43,27 +44,32 @@ export function ContactFormCard({
   className = '',
   onSubmitSuccess,
 }: ContactFormCardProps) {
-  const { mailtoHref, handleSubmit, reset } = useContactForm({ to: email, onSent: onSubmitSuccess })
+  const { status, errorKind, isSubmitting, handleSubmit, reset } = useContactForm({ onSent: onSubmitSuccess })
 
   const formCardElement = (
     <div className={`bb-contact-form-card ${variant === 'card-only' ? className : ''}`.trim()}>
       <h2>{title}</h2>
       <p>{description}</p>
 
-      {mailtoHref ? (
+      {status === 'success' ? (
         <div className="bb-contact-form__success" role="status">
           <span>✉</span>
-          <h3>Klart att skicka</h3>
+          <h3>Förfrågan mottagen</h3>
           <p>
-            Ditt e-postprogram öppnas med meddelandet ifyllt. Skicka det därifrån, så återkommer vi så snart vi kan. Öppnades inget? Mejla oss på{' '}
-            <a href={mailtoHref}>{email}</a> eller ring <a href={`tel:${phone}`}>{phoneDisplay}</a>.
+            Ditt meddelande har tagits emot. Vi återkommer under våra öppettider.
+            Du kan också ringa <a href={`tel:${phone}`}>{phoneDisplay}</a>.
           </p>
           <button type="button" onClick={reset}>
             Skriv ett nytt meddelande
           </button>
         </div>
       ) : (
-        <form className="bb-contact-form" onSubmit={handleSubmit}>
+        <form className="bb-contact-form" onSubmit={handleSubmit} aria-busy={isSubmitting}>
+          {status === 'error' && (
+            <div className="bb-contact-form__error" role="alert">
+              {contactErrorMessage(errorKind)} Ring <a href={`tel:${phone}`}>{phoneDisplay}</a> om det är brådskande.
+            </div>
+          )}
           <div className="bb-contact-form__grid">
             <label>
               Namn <span>*</span>
@@ -95,9 +101,9 @@ export function ContactFormCard({
             <textarea required name="message" rows={4} placeholder="Skriv ditt meddelande här..." />
           </label>
 
-          <button className="bb-contact-form__submit" type="submit">
-            Skicka meddelande <SendIcon />
-          </button>
+          <ContactSubmitAction className="bb-contact-form__submit" isSubmitting={isSubmitting}>
+            {isSubmitting ? 'Skickar…' : 'Skicka meddelande'} <SendIcon />
+          </ContactSubmitAction>
         </form>
       )}
     </div>

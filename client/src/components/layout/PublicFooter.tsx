@@ -14,6 +14,7 @@ import { SendIcon } from '../icons/SendIcon'
 import { CalendarIcon } from '../icons/CalendarIcon'
 import { BUSINESS, weekdayHours } from '../../data/business'
 import { publicNavigation } from '../../data/publicNavigation'
+import { PublicAction } from '../ui/PublicAction'
 import './PublicFooter.css'
 
 export interface PublicFooterProps {
@@ -177,29 +178,15 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
             <div className="bb-footer__hours-divider" />
 
             <div className="bb-footer__actions">
-              {onBookingClick ? (
-                <button
-                  type="button"
-                  onClick={onBookingClick}
-                  className="bb-footer__btn-book"
-                >
-                  <CalendarIcon />
-                  <span>BOKA TID →</span>
-                </button>
-              ) : (
-                <Link
-                  to="/kontakt#boka"
-                  className="bb-footer__btn-book"
-                >
-                  <CalendarIcon />
-                  <span>BOKA TID →</span>
-                </Link>
-              )}
+              <PublicAction intent="book" onBook={onBookingClick} className="bb-footer__btn-book">
+                <CalendarIcon />
+                <span>BOKA TID →</span>
+              </PublicAction>
 
-              <a href={BUSINESS.phone.href} className="bb-footer__call-link">
+              <PublicAction intent="call" onBook={onBookingClick} className="bb-footer__call-link">
                 <i className="bb-footer__call-icon"><PhoneIcon /></i>
                 <span>RING {BUSINESS.phone.display}</span>
-              </a>
+              </PublicAction>
             </div>
           </div>
 
@@ -246,21 +233,14 @@ export function PublicFooter({ onBookingClick }: PublicFooterProps) {
         The spacer keeps the bar from covering the end of the footer. */}
     <div className="bb-footer__mobile-bar-spacer" aria-hidden="true" />
     <nav className="bb-footer__mobile-bar" aria-label="Snabbkontakt">
-      <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+      <PublicAction intent="call" onBook={onBookingClick} className="bb-btn bb-btn--ember">
         <PhoneIcon />
         <span>Ring</span>
-      </a>
-      {onBookingClick ? (
-        <button type="button" onClick={onBookingClick} className="bb-btn bb-btn--teal">
-          <CalendarIcon />
-          <span>Boka tid</span>
-        </button>
-      ) : (
-        <Link to="/kontakt#boka" className="bb-btn bb-btn--teal">
-          <CalendarIcon />
-          <span>Boka tid</span>
-        </Link>
-      )}
+      </PublicAction>
+      <PublicAction intent="book" onBook={onBookingClick} className="bb-btn bb-btn--teal">
+        <CalendarIcon />
+        <span>Boka tid</span>
+      </PublicAction>
     </nav>
     </>
   )

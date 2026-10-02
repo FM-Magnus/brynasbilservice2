@@ -11,7 +11,7 @@ This README is for people (Magnus, Johnny, any developer). AI tools read [`AGENT
 | Layer | Technology |
 |---|---|
 | Frontend | React 18, TypeScript, Vite 4. Plain CSS with shared design tokens; Tailwind 3 only in `/admin` |
-| Backend | Node.js 16 on the server, Express 4, JavaScript |
+| Backend | Express 4, JavaScript; this review branch requires Node.js 22+ (documented live runtime needs verification) |
 | Database | MySQL |
 | Hosting | VPS behind Cloudflare, PM2 via fnm — details in [`docs/BACKEND.md`](docs/BACKEND.md) |
 
@@ -36,23 +36,16 @@ _magnus/                  Magnus's personal notes (local only, git-ignored)
 ## Running it locally
 
 ```bash
-# Terminal 1 — backend (only needed for booking and admin)
-cd server && npm install && npm run dev     # http://localhost:3000
+# Terminal 1 — backend (contact, booking, CTA policy and admin)
+cd server && npm ci && npm run dev     # http://localhost:3000
 
 # Terminal 2 — frontend
 cd client && npm install && npm run dev     # http://localhost:5173
 ```
 
-The public pages work without the backend; only booking and admin need it. The backend needs a database connection from `server/.env`; to use the live database from a laptop, open the SSH tunnel first (the command is in [`docs/BACKEND.md`](docs/BACKEND.md)). Without MySQL the API calls fail but the site still loads.
+The public pages render without the backend, but contact, booking, CTA policy and admin need it to work. Configure the database and mail service privately using `server/env.example` as a variable list. Do not test against live customer data. Without MySQL the API calls fail but the site still loads.
 
-`server/.env` (never commit it):
-```
-DB_HOST=
-DB_USER=
-DB_PASSWORD=
-DB_NAME=
-PORT=3000
-```
+Keep `server/.env` private and uncommitted. [`server/env.example`](server/env.example) lists every required variable without credentials.
 
 ## Building
 
@@ -60,7 +53,7 @@ PORT=3000
 cd client && npm run build      # outputs client/dist/
 ```
 
-Building needs Node 18.17 or newer (it generates the gallery image sizes), so build on a laptop, never on the production server (Node 16). A build or a git push does **not** deploy anything — there is no automatic deploy. Deployment is Johnny's; see [`docs/BACKEND.md`](docs/BACKEND.md) and [`docs/ops/deployment.md`](docs/ops/deployment.md).
+Build the client on a laptop with Node 18.17 or newer. The new backend requires Node 22+, while the documented labb host used Node 16; Johnny must verify a supported runtime before deployment. A build or git push does **not** deploy anything — there is no automatic deploy. Deployment is Johnny's; see [`docs/BACKEND.md`](docs/BACKEND.md) and [`docs/ops/backend-owner-review.md`](docs/ops/backend-owner-review.md).
 
 ## Everyday content changes
 
@@ -74,7 +67,7 @@ Building needs Node 18.17 or newer (it generates the gallery image sizes), so bu
 
 ## Admin panel
 
-At `/admin`: view, filter and update bookings; add, edit and delete services. **The login (`admin` / `admin123`) is checked only in the browser and is not safe for production** — see [`docs/BACKEND.md`](docs/BACKEND.md) §2.1 and [`docs/ops/admin-panel.md`](docs/ops/admin-panel.md).
+At `/admin`: view, filter and update bookings; add, edit and delete services. **This branch uses server sessions and CSRF protection; Johnny must review the migration and deployment before the panel is used on the review server.** See [`docs/BACKEND.md`](docs/BACKEND.md) §2.1 and [`docs/ops/admin-panel.md`](docs/ops/admin-panel.md).
 
 ## Documentation
 
@@ -83,7 +76,7 @@ At `/admin`: view, filter and update bookings; add, edit and delete services. **
 | [`AGENTS.md`](AGENTS.md) | AI tools | The rules every AI assistant follows (`CLAUDE.md` / `GEMINI.md` just point to it) |
 | [`docs/STATUS.md`](docs/STATUS.md) | everyone | What's done, what's next, what's broken |
 | [`docs/IMAGES.md`](docs/IMAGES.md) | image work | How a page gets its pictures, per-page status |
-| [`docs/BACKEND.md`](docs/BACKEND.md) | Johnny | Production setup, current API, live database, backend proposals |
+| [`docs/BACKEND.md`](docs/BACKEND.md) | Johnny | Current API, deployment gates and backend handoff |
 | [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md), [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) | frontend | Which CSS file owns what; colours, fonts, shared patterns |
 | [`docs/ops/`](docs/ops/) | server work | Deployment, SSH setup, admin panel, git recovery |
 | [`docs/LOG.md`](docs/LOG.md) | anyone | Dated work notes, newest first |

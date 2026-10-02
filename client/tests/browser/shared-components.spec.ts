@@ -47,9 +47,9 @@ const RULES = [
   },
   {
     what: 'sending a contact message',
-    pattern: /\b(openContactEmail|contactMailtoHref)\(/,
+    pattern: /\bsubmitContact\(/,
     owners: ['hooks/useContactForm.ts', 'api/contact.ts'],
-    use: 'const { mailtoHref, handleSubmit, reset } = useContactForm()',
+    use: 'const { handleSubmit, reset } = useContactForm()',
   },
   {
     what: 'Guide-family section markup',

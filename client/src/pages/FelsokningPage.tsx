@@ -11,6 +11,7 @@ import { PublicFooter } from '../components/layout/PublicFooter'
 import { TrustStrip } from '../components/ui/TrustStrip'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
@@ -129,11 +130,11 @@ export default function FelsokningPage() {
                 Lyser en varningslampa eller låter bilen konstigt? Vi läser av felkoder och mäter oss fram till den verkliga orsaken med modern diagnostikutrustning – för alla märken och modeller.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">Boka tid</PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
                   <span>Ring oss nu</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
             <div className="bb-hero__bottom">
@@ -152,8 +153,8 @@ export default function FelsokningPage() {
                   Moderna bilar styrs av ett nätverk av datorer som ständigt övervakar motor, elsystem och avgasrening. När något avviker sparas en felkod i felminnet och en varningslampa kan tändas. Vi kopplar in diagnostikutrustning, läser av koderna och avgör vad de faktiskt betyder för just din bil – istället för att bara byta delar på måfå.
                 </p>
                 <div className="bilservice__actions">
-                  <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka felsökning</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
+                  <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka felsökning</PublicAction>
+                  <PublicAction intent="call" className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</PublicAction>
                 </div>
               </div>
               <div className="bilservice__split-media--right">
@@ -204,7 +205,7 @@ export default function FelsokningPage() {
               <div className="bilservice__recommendation" role="status">
                 <span className="bb-icon-badge"><CheckIcon aria-hidden="true" /></span>
                 <p>Vi föreslår: <strong>{recommendation}</strong>. Det följer med till bokningsformulärets kommentar.</p>
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</PublicAction>
               </div>
             )}
           </div>
@@ -217,7 +218,7 @@ export default function FelsokningPage() {
               <h2 className="bb-h2" id="felsokning-guidance-title">Bra att veta om felsökning och pris</h2>
               <p className="bb-lead">Här är branschmässiga riktlinjer kring tidsåtgång och vad en diagnostik faktiskt kan säga dig. Vi kontrollerar alltid vad som gäller för din bil.</p>
               <div className="bilservice__actions">
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember-solid"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember-solid"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></PublicAction>
               </div>
             </div>
             <div className="bilservice__prose">
@@ -270,8 +271,8 @@ export default function FelsokningPage() {
                 <p className="bb-lead">Hos Brynäs Bilservice bemöts du av mekanikern som arbetar med din bil. Vi lämnar tydliga kostnadsförslag och utför inga reparationer utan ditt medgivande.</p>
               </div>
               <div className="bilservice__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</PublicAction>
+                <PublicAction intent="call" className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</PublicAction>
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { TrustStrip } from '../components/ui/TrustStrip'
 import { GalleryDockStrip } from '../components/ui/GalleryDockStrip'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { useIsPhone } from '../hooks/useIsPhone'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
@@ -148,21 +149,19 @@ export default function AboutPage() {
                   Sedan starten 2021 har vi drivit en oberoende bilverkstad på Utmarksvägen i Gävle med ett enkelt mål: att ge bilägare personlig service, fackmannamässigt utfört arbete och raka besked utan krångel.
                 </p>
                 <div className="omoss-page__hero-actions">
-                  <button
-                    type="button"
-                    onClick={openBooking}
+                  <PublicAction intent="book"
+                    onBook={openBooking}
                     className="bb-btn bb-btn--teal"
                   >
                     <span>Boka tid</span>
                     <ArrowRightIcon />
-                  </button>
-                  <a
-                    href={BUSINESS.phone.href}
+                  </PublicAction>
+                  <PublicAction intent="call"
                     className="bb-btn bb-btn--ember omoss-page__hero-phone-btn"
                   >
                     <PhoneIcon />
                     <span>Ring oss nu</span>
-                  </a>
+                  </PublicAction>
                 </div>
               </div>
             </div>
@@ -418,27 +417,25 @@ export default function AboutPage() {
                 Har du frågor om din bil eller vill du boka tid? Skicka en förfrågan via formuläret eller ring direkt till verkstaden på Utmarksvägen.
               </p>
               <div className="omoss-page__cta-actions">
-                <button
-                  type="button"
-                  onClick={openBooking}
+                <PublicAction intent="book"
+                  onBook={openBooking}
                   className="bb-btn bb-btn--teal"
                 >
                   <span>Boka tid</span>
                   <ArrowRightIcon />
-                </button>
+                </PublicAction>
                 <Link
                   to="/biltjanster"
                   className="bb-btn omoss-page__cta-secondary-btn"
                 >
                   <span>Se alla tjänster</span>
                 </Link>
-                <a
-                  href={BUSINESS.phone.href}
+                <PublicAction intent="call"
                   className="bb-btn bb-btn--ember omoss-page__cta-phone-btn"
                 >
                   <PhoneIcon />
                   <span>Ring {BUSINESS.phone.display}</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
           </div>

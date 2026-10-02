@@ -40,19 +40,23 @@
   padding: clamp(3rem, 5vw, 4.5rem) 0;
 }
 .kontakt-page__grid {
-  align-items: start;
+  align-items: stretch;
   display: grid;
   gap: clamp(1.5rem, 3vw, 3rem);
   grid-template-columns: minmax(300px, 0.85fr) minmax(380px, 1fr);
 }
-.kontakt-page__info-col {
+.kontakt-page__info-col,
+.kontakt-page__form-col {
   display: grid;
-  gap: 1.25rem;
+  min-width: 0;
+}
+.kontakt-page__steps-card {
+  grid-column: 1 / -1;
 }
 
 .kontakt-page__card {
   border-radius: var(--bb-radius-card);
-  padding: clamp(1.5rem, 2.5vw, 2.2rem);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
 }
 .kontakt-page__card--dark {
   background: var(--bb-color-ink-950);
@@ -179,14 +183,15 @@
 .kontakt-page__steps-title {
   color: var(--bb-color-ink-950);
   font-family: var(--bb-font-display);
-  font-size: 1.3rem;
+  font-size: clamp(1.4rem, 1.7vw, 1.6rem);
   font-weight: 800;
   letter-spacing: -0.01em;
   margin: 0 0 1.3rem;
 }
 .kontakt-page__steps-list {
   display: grid;
-  gap: 1.1rem;
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .kontakt-page__step-item {
   display: flex;
@@ -207,13 +212,13 @@
 }
 .kontakt-page__step-heading {
   color: var(--bb-color-ink-950);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0 0 0.3rem;
 }
 .kontakt-page__step-text {
   color: var(--bb-color-text-muted);
-  font-size: 0.85rem;
+  font-size: var(--bb-font-size-support);
   line-height: 1.5;
   margin: 0;
 }
@@ -224,6 +229,7 @@
   border: 1px solid rgba(7, 20, 22, 0.08);
   border-radius: var(--bb-radius-card);
   box-shadow: var(--bb-shadow-card);
+  min-width: 0;
   padding: clamp(1.75rem, 3vw, 2.5rem);
 }
 .kontakt-page__form-heading {
@@ -324,6 +330,17 @@
 .kontakt-page__form-action {
   margin-top: 0.3rem;
 }
+.kontakt-page__form-error {
+  background: rgba(154, 36, 36, 0.08);
+  border: 1px solid rgba(154, 36, 36, 0.35);
+  border-radius: var(--bb-radius-sm);
+  color: var(--bb-color-ink-950);
+  font-size: var(--bb-font-size-support);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+}
+.kontakt-page__form-error a { color: inherit; font-weight: 700; text-decoration: underline; }
 
 .kontakt-page__form-success {
   background: rgba(10, 178, 193, 0.08);
@@ -516,6 +533,9 @@
 .kontakt-page__closing {
   padding: 0 0 clamp(3.5rem, 5vw, 5rem);
 }
+.kontakt-page__closing > .bb-wrap {
+  width: min(100%, 1520px);
+}
 .kontakt-page__closing-card {
   /* BACKGROUNDS.md treatment D: dark veil over a photo, left-aligned copy. */
   background-color: var(--bb-color-ink-950);
@@ -530,6 +550,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--bb-radius-card);
   color: var(--bb-color-text-inverse);
+  min-height: 330px;
   padding: clamp(2.25rem, 4vw, 3.5rem);
 }
 .kontakt-page__closing-title {
@@ -553,7 +574,8 @@
 }
 
 @media (max-width: 1100px) {
-  .kontakt-page__grid { grid-template-columns: 1fr; }
+  .kontakt-page__grid,
+  .kontakt-page__steps-list { grid-template-columns: 1fr; }
   .kontakt-page__find-grid { grid-template-columns: 1fr; }
   .kontakt-page__find-card { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
   .kontakt-page__map-card, .kontakt-page__map-card iframe { min-height: 280px; }
@@ -567,6 +589,9 @@
 }
 
 @media (max-width: 650px) {
+  .kontakt-page__card--dark,
+  .kontakt-page__steps-card { padding: 1.5rem; }
+  .kontakt-page__steps-title { font-size: 1.3rem; }
   .kontakt-page__form-row { grid-template-columns: 1fr; }
   .kontakt-page__focus { border-radius: 0; margin-bottom: 3.5rem; }
   .kontakt-page__closing-card {

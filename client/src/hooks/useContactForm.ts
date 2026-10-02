@@ -1,19 +1,25 @@
-import { useCallback, useState } from 'react'
 import type { FormEvent } from 'react'
-import { openContactEmail } from '../api/contact'
+import { submitContact } from '../api/contact'
 import type { ContactMessage } from '../api/contact'
+import { useFormSubmission } from './useFormSubmission'
+import type { SubmissionErrorKind } from './useFormSubmission'
 
-/**
- * Submit and "sent" state shared by the contact forms (Kontakt and the
- * Landing card), which differ only in markup and copy.
- *
- * The form's fields must be named `name`, `email`, `phone`, `subject` and
- * `message`. Values are trimmed, handed to the visitor's e-mail program
- * (see `api/contact.ts`), and `mailtoHref` is set so the form can show its
- * "Klart att skicka" panel with a fallback link. `reset` returns to the form.
- */
-export function useContactForm({ to, onSent }: { to?: string; onSent?: (message: ContactMessage) => void } = {}) {
-  const [mailtoHref, setMailtoHref] = useState<string | null>(null)
+const contactErrors: Record<SubmissionErrorKind, string> = {
+  network: 'Vi når inte servern just nu. Ditt meddelande har inte skickats.',
+  timeout: 'Det tog för lång tid att skicka. Kontrollera om meddelandet kom fram innan du försöker igen.',
+  'rate-limit': 'För många försök på kort tid. Vänta en stund innan du försöker igen.',
+  rejected: 'Meddelandet kunde inte skickas. Kontrollera uppgifterna och försök igen.',
+  server: 'Vi kunde inte ta emot meddelandet just nu. Försök igen senare.',
+  unknown: 'Meddelandet kunde inte skickas. Försök igen senare.',
+}
+
+export function contactErrorMessage(kind: SubmissionErrorKind | null): string {
+  return contactErrors[kind || 'unknown']
+}
+
+/** Shared submission state for the Kontakt and Landing contact forms. */
+export function useContactForm({ onSent }: { onSent?: (message: ContactMessage) => void } = {}) {
+  const submission = useFormSubmission()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -26,11 +32,10 @@ export function useContactForm({ to, onSent }: { to?: string; onSent?: (message:
       subject: field('subject'),
       message: field('message'),
     }
-    setMailtoHref(openContactEmail(message, to))
-    onSent?.(message)
+    void submission.submit((signal) => submitContact(message, signal)).then((accepted) => {
+      if (accepted) onSent?.(message)
+    })
   }
 
-  const reset = useCallback(() => setMailtoHref(null), [])
-
-  return { mailtoHref, handleSubmit, reset }
+  return { ...submission, handleSubmit }
 }

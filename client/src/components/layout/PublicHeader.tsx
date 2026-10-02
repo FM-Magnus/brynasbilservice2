@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import brandLogo from '../../assets/images/brand/brynas-bilservice-header-logo.svg'
 import { publicNavigation, type PublicNavigationChild, type PublicNavigationItem } from '../../data/publicNavigation'
 import { BUSINESS } from '../../data/business'
+import { PublicAction } from '../ui/PublicAction'
 import './PublicHeader.css'
 
 type PublicHeaderProps = {
@@ -173,7 +174,7 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
           })}
         </nav>
 
-        <button className="public-header__booking" type="button" onClick={handleBookingClick}><CalendarIcon />Boka tid</button>
+        <PublicAction intent="book" className="public-header__booking" onBook={handleBookingClick}><CalendarIcon />Boka tid</PublicAction>
         <button ref={mobileToggleRef} className="public-header__menu-toggle" type="button" aria-label={mobileOpen ? 'Stäng meny' : 'Öppna meny'} aria-expanded={mobileOpen} aria-controls="public-mobile-navigation" onClick={() => setMobileOpen((open) => !open)}>{mobileOpen ? <CloseIcon /> : <MenuIcon />}</button>
       </div>
 
@@ -202,8 +203,8 @@ export function PublicHeader({ onBookingClick, variant = 'overlay' }: PublicHead
           )
         })}
         <div className="public-header__mobile-actions">
-          <a className="public-header__mobile-call" href={BUSINESS.phone.href}><PhoneIcon />Ring {BUSINESS.phone.display}</a>
-          <button className="public-header__mobile-booking" type="button" onClick={handleBookingClick}>Boka tid</button>
+          <PublicAction intent="call" className="public-header__mobile-call" onBook={handleBookingClick}><PhoneIcon />Ring {BUSINESS.phone.display}</PublicAction>
+          <PublicAction intent="book" className="public-header__mobile-booking" onBook={handleBookingClick}>Boka tid</PublicAction>
         </div>
       </nav>
     </header>,

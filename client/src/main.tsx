@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import { RouteErrorBoundary } from './components/RouteErrorBoundary.tsx'
 import { PageMeta } from './components/PageMeta.tsx'
+import { loadPublicActions } from './api/publicActions.ts'
 import './styles/tailwind.css'
 import './styles/design-tokens.css'
 import './styles/base.css'
@@ -64,6 +65,7 @@ function RouteFallback() {
 }
 
 const basename = import.meta.env.DEV ? '/' : '/brynasbilservice'
+void loadPublicActions()
 
 // Default to dark theme unless the user has explicitly opted into light.
 if (localStorage.getItem('theme') !== 'light') {

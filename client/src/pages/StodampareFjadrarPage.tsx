@@ -7,6 +7,7 @@ import '../styles/ServiceGuideTemplate.css'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { PublicAction } from '../components/ui/PublicAction'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
 import { Tip } from '../components/ui/Tip'
 import { GuideClosing, GuideHero, GuideImportance, GuideInfo, GuideIntro, GuideParts, GuideQuickFacts, GuideRelated, GuideServiceCard, GuideSymptoms } from '../components/guide/ServiceGuideSections'
@@ -112,7 +113,7 @@ export default function StodampareFjadrarPage() {
           <Tip
             title="Misstänker du slitage eller missljud från chassit?"
             text="Vi hissar upp bilen och kontrollerar dämpare, fjädrar, bussningar och topplager – snabbt och noggrant."
-            action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
+            action={<PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></PublicAction>}
           />
         </GuideIntro>
 

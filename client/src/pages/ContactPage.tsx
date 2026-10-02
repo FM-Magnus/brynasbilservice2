@@ -1,10 +1,13 @@
 import { contactSubjects } from '../api/contact'
-import { useContactForm } from '../hooks/useContactForm'
+import { contactErrorMessage, useContactForm } from '../hooks/useContactForm'
 import { BUSINESS, weekdayHours } from '../data/business'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { GoogleReviewsCard } from '../components/ui/GoogleReviewsCard'
 import { useBookingModal } from '../hooks/useBookingModal'
+import { useSearchParams } from 'react-router-dom'
+import { ContactSubmitAction } from '../components/ui/ContactSubmitAction'
+import { PublicAction } from '../components/ui/PublicAction'
 import { PhoneIcon } from '../components/icons/PhoneIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { FacebookIcon } from '../components/icons/FacebookIcon'
@@ -45,8 +48,10 @@ const GOOGLE_MAPS_URL = 'https://maps.google.com/?q=Utmarksv%C3%A4gen+21B+G%C3%A
 const GOOGLE_MAPS_EMBED_URL = 'https://www.google.com/maps?q=Utmarksv%C3%A4gen+21B,+802+91+G%C3%A4vle&output=embed'
 
 export default function ContactPage() {
+  const [searchParams] = useSearchParams()
+  const prefilledMessage = (searchParams.get('message') || '').slice(0, 4000)
   const { openBooking, bookingModal } = useBookingModal()
-  const { mailtoHref, handleSubmit, reset } = useContactForm()
+  const { status, errorKind, isSubmitting, handleSubmit, reset } = useContactForm()
   const isPhone = useIsPhone()
   const slides = isPhone ? phoneHeroSlides : heroSlides
   const activeHeroSlide = useHeroSlideshow(slides.length)
@@ -79,13 +84,13 @@ export default function ContactPage() {
                 Välj det sätt som passar dig bäst: skicka ett meddelande via formuläret, ring oss direkt eller boka tid via vårt bokningssystem.
               </p>
               <div className="bb-hero__actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">
                   <span>Boka tid</span>
-                </button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                </PublicAction>
+                <PublicAction intent="call" onBook={openBooking} className="bb-btn bb-btn--ember">
                   <PhoneIcon aria-hidden="true" />
                   <span>Ring oss nu</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
             <GoogleReviewsCard variant="hero-overlay" />
@@ -149,34 +154,6 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-
-              <div className="kontakt-page__card kontakt-page__card--light">
-                <span className="bb-eyebrow">Så fungerar det</span>
-                <h3 className="kontakt-page__steps-title">Från förfrågan till bekräftad tid</h3>
-                <div className="kontakt-page__steps-list">
-                  <div className="kontakt-page__step-item">
-                    <span className="kontakt-page__step-badge">01</span>
-                    <div>
-                      <h4 className="kontakt-page__step-heading">Du skickar en förfrågan eller ringer</h4>
-                      <p className="kontakt-page__step-text">Beskriv vad du vill ha hjälp med, vilka symptom du upplever eller vilken service bilen behöver.</p>
-                    </div>
-                  </div>
-                  <div className="kontakt-page__step-item">
-                    <span className="kontakt-page__step-badge">02</span>
-                    <div>
-                      <h4 className="kontakt-page__step-heading">Vi undersöker och återkopplar</h4>
-                      <p className="kontakt-page__step-text">Vi återkommer till dig under våra öppettider med förslag på tid och tydliga kostnadsuppgifter.</p>
-                    </div>
-                  </div>
-                  <div className="kontakt-page__step-item">
-                    <span className="kontakt-page__step-badge">03</span>
-                    <div>
-                      <h4 className="kontakt-page__step-heading">Tid bekräftas innan vi börjar</h4>
-                      <p className="kontakt-page__step-text">Vi påbörjar inga reparationer utan ditt godkännande. Du har full kontroll hela vägen.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="kontakt-page__form-col">
@@ -191,20 +168,25 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                {mailtoHref ? (
+                {status === 'success' ? (
                   <div className="kontakt-page__form-success" role="status">
                     <span className="kontakt-page__success-icon">✉</span>
-                    <h3 className="kontakt-page__success-title">Klart att skicka</h3>
+                    <h3 className="kontakt-page__success-title">Förfrågan mottagen</h3>
                     <p className="kontakt-page__success-desc">
-                      Ditt e-postprogram öppnas med meddelandet ifyllt. Skicka det därifrån, så återkommer vi så snart vi kan under våra öppettider (Mån–Fre {weekdayHours()}). Öppnades inget? Mejla oss på{' '}
-                      <a href={mailtoHref}>{BUSINESS.email.address}</a> eller ring <a href={BUSINESS.phone.href}>{BUSINESS.phone.display}</a>.
+                      Ditt meddelande har tagits emot. Vi återkommer under våra öppettider (Mån–Fre {weekdayHours()}).
+                      Du kan också ringa <a href={BUSINESS.phone.href}>{BUSINESS.phone.display}</a>.
                     </p>
                     <button type="button" className="bb-btn bb-btn--teal kontakt-page__reset-btn" onClick={reset}>
                       Skriv ett nytt meddelande
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="kontakt-page__form">
+                  <form id="contact-form" onSubmit={handleSubmit} className="kontakt-page__form" aria-busy={isSubmitting}>
+                    {status === 'error' && (
+                      <div className="kontakt-page__form-error" role="alert">
+                        {contactErrorMessage(errorKind)} Ring <a href={BUSINESS.phone.href}>{BUSINESS.phone.display}</a> om det är brådskande.
+                      </div>
+                    )}
                     <div className="kontakt-page__form-row">
                       <div className="kontakt-page__field">
                         <label htmlFor="contact-name" className="kontakt-page__label">Namn <span className="kontakt-page__required">*</span></label>
@@ -237,17 +219,45 @@ export default function ContactPage() {
 
                     <div className="kontakt-page__field kontakt-page__field--full">
                       <label htmlFor="contact-message" className="kontakt-page__label">Meddelande <span className="kontakt-page__required">*</span></label>
-                      <textarea id="contact-message" name="message" required rows={5} placeholder="Beskriv vad du behöver hjälp med, bilmodell, registreringsnummer eller eventuella felkoder/symptom..." className="kontakt-page__textarea" />
+                      <textarea id="contact-message" name="message" required rows={5} defaultValue={prefilledMessage} placeholder="Beskriv vad du behöver hjälp med, bilmodell, registreringsnummer eller eventuella felkoder/symptom..." className="kontakt-page__textarea" />
                     </div>
 
                     <div className="kontakt-page__form-action">
-                      <button type="submit" className="bb-btn bb-btn--ember-solid">
-                        <span>Skicka meddelande</span>
+                      <ContactSubmitAction className="bb-btn bb-btn--ember-solid" isSubmitting={isSubmitting}>
+                        <span>{isSubmitting ? 'Skickar…' : 'Skicka meddelande'}</span>
                         <SendIcon />
-                      </button>
+                      </ContactSubmitAction>
                     </div>
                   </form>
                 )}
+              </div>
+            </div>
+
+            <div className="kontakt-page__card kontakt-page__card--light kontakt-page__steps-card">
+              <span className="bb-eyebrow">Så fungerar det</span>
+              <h2 className="kontakt-page__steps-title">Från förfrågan till bekräftad tid</h2>
+              <div className="kontakt-page__steps-list">
+                <div className="kontakt-page__step-item">
+                  <span className="kontakt-page__step-badge">01</span>
+                  <div>
+                    <h3 className="kontakt-page__step-heading">Du skickar en förfrågan eller ringer</h3>
+                    <p className="kontakt-page__step-text">Beskriv vad du vill ha hjälp med, vilka symptom du upplever eller vilken service bilen behöver.</p>
+                  </div>
+                </div>
+                <div className="kontakt-page__step-item">
+                  <span className="kontakt-page__step-badge">02</span>
+                  <div>
+                    <h3 className="kontakt-page__step-heading">Vi undersöker och återkopplar</h3>
+                    <p className="kontakt-page__step-text">Vi återkommer till dig under våra öppettider med förslag på tid och tydliga kostnadsuppgifter.</p>
+                  </div>
+                </div>
+                <div className="kontakt-page__step-item">
+                  <span className="kontakt-page__step-badge">03</span>
+                  <div>
+                    <h3 className="kontakt-page__step-heading">Tid bekräftas innan vi börjar</h3>
+                    <p className="kontakt-page__step-text">Vi påbörjar inga reparationer utan ditt godkännande. Du har full kontroll hela vägen.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -305,17 +315,17 @@ export default function ContactPage() {
                 Oavsett om det gäller regelbunden service, felsökning eller däckskifte är du varmt välkommen att kontakta oss.
               </p>
               <div className="kontakt-page__closing-actions">
-                <button type="button" onClick={openBooking} className="bb-btn bb-btn--teal">
+                <PublicAction intent="book" onBook={openBooking} className="bb-btn bb-btn--teal">
                   <span>Boka tid</span>
-                </button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">
+                </PublicAction>
+                <PublicAction intent="call" onBook={openBooking} className="bb-btn bb-btn--ember">
                   <PhoneIcon />
                   <span>Ring {BUSINESS.phone.display}</span>
-                </a>
-                <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="bb-btn bb-btn--ember">
+                </PublicAction>
+                <PublicAction intent="directions" onBook={openBooking} className="bb-btn bb-btn--ember">
                   <MapPinIcon />
                   <span>Vägbeskrivning</span>
-                </a>
+                </PublicAction>
               </div>
             </div>
           </div>

@@ -3,15 +3,15 @@ import { BookingManagement } from '../../components/admin/BookingManagement'
 import { ServiceManagement } from '../../components/admin/ServiceManagement'
 import { useLanguage } from '../../context/useLanguage'
 import ThemeSwitcher from '../../components/ThemeSwitcher'
+import { useAdminSession } from '../../components/admin/ProtectedRoute'
 
 export default function AdminDashboard() {
   const { t, language, setLanguage } = useLanguage()
+  const { logout } = useAdminSession()
   const [activeTab, setActiveTab] = useState<'bookings' | 'services'>('bookings')
 
   const handleLogout = () => {
-    localStorage.removeItem('isAdminLoggedIn')
-    localStorage.removeItem('adminToken')
-    window.location.reload()
+    void logout()
   }
 
   return (
