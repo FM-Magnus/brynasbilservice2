@@ -719,3 +719,16 @@
       );
   }
 }
+
+/* Bilservice hero (new photo 2026-10-02): the car fills the right two thirds, the copy sits on
+   the left. Crop and shade are tuned per width; white text measured >= 4.8:1 in the copy area. */
+.bilservice > #bilservice { --bb-shade-strength: 0.38; }
+.bilservice > #bilservice .bb-hero__media img { object-position: 55% 53%; }
+@media (max-width: 1120px) {
+  .bilservice > #bilservice { --bb-shade-strength: 0.45; }
+  .bilservice > #bilservice .bb-hero__media img { object-position: 35% 53%; }
+}
+@media (max-width: 650px) {
+  .bilservice > #bilservice { --bb-shade-strength: 0.55; }
+  .bilservice > #bilservice .bb-hero__media img { object-position: 40% 52%; }
+}
