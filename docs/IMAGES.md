@@ -64,7 +64,7 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Hjullagerbyte | ✓ | ✓ ✓ | — |
 | Styrning & kulleder | ✓ | ✓ ✓ | — |
 | Service-reparationer | ✓ | ✓ servicebook/keys + ✓ four value cards | — |
-| Reparationer & större arbeten | **placeholder** `workshop/workshop-car-on-lift` (hero slot `reparationer-hero`, wanted 3000×1674) | **placeholders**: intro `workshop/workshop-car-open-hood` (slot `reparationer-intro`, 16:9), service card `services/general/service-performance-diagnostics` (slot `reparationer-service`; also the Biltjänster hub thumbnail) | phone crop (1200×2000): none yet, the desktop hero is cropped |
+| Reparationer & större arbeten | ✓ `services/repair/repair-engine-bay-workshop-hero` (3000×1700, replaced the placeholder 2026-10-02) | **placeholders**: intro `workshop/workshop-car-open-hood` (slot `reparationer-intro`, 16:9), service card `services/general/service-performance-diagnostics` (slot `reparationer-service`; also the Biltjänster hub thumbnail) | phone crop (1200×2000): none yet, the desktop hero is cropped |
 | Felsökning | ✓ `services/diagnostics/diagnostics-workshop-hero` (3000×1674, replaced 2026-09-29) | ✓ engine-bay tablet + ✓ OBD detail | — |
 | Biltjänster | CSS-only | ✓ all 11 guide cards have photos | — |
 | Bilar till salu | ✓ `workshop/cars-for-sale-estate-on-lift-hero` (3000×1700, replaced 2026-10-01); **phone: one static portrait photo** `…-hero-phone` (1200×2001, via `useIsPhone`). The featured-car panel over the hero was removed the same day, the photo is the backdrop alone | conditional placeholders when a car lacks photos | — |
