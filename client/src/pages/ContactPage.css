@@ -550,6 +550,20 @@
   gap: 0.75rem;
 }
 
+/* Desktop: contact card and form share the first row; the steps card spans the full width below. */
+@media (min-width: 1101px) {
+  .kontakt-page__grid { align-items: stretch; }
+  .kontakt-page__info-col { display: contents; }
+  .kontakt-page__card--dark { grid-column: 1; grid-row: 1; }
+  .kontakt-page__form-col { grid-column: 2; grid-row: 1; }
+  .kontakt-page__card--light { grid-column: 1 / -1; grid-row: 2; }
+  .kontakt-page__steps-list { gap: clamp(1.5rem, 3vw, 3rem); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* A shorter message box and tighter spacing so the form matches the contact card's height. */
+  .kontakt-page__textarea { height: 92px; min-height: 92px; }
+  .kontakt-page__form-intro { margin-bottom: 1rem; }
+  .kontakt-page__notice { margin-bottom: 1.1rem; }
+}
+
 @media (max-width: 1100px) {
   .kontakt-page__grid { grid-template-columns: 1fr; }
   .kontakt-page__find-grid { grid-template-columns: 1fr; }
