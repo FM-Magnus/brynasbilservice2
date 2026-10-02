@@ -14,23 +14,19 @@ import { MailIcon } from '../components/icons/MailIcon'
 import { SendIcon } from '../components/icons/SendIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import beanieHeroWebp from '../assets/images/contact/contact-hero-customer-beanie.webp'
-import beanieHeroJpg from '../assets/images/contact/contact-hero-customer-beanie.jpg'
 import carHeroWebp from '../assets/images/contact/contact-hero-maher-customer-car.webp'
-import carHeroJpg from '../assets/images/contact/contact-hero-maher-customer-car.jpg'
 import phoneHeroWebp from '../assets/images/contact/contact-hero-phone.webp'
-import phoneHeroJpg from '../assets/images/contact/contact-hero-phone.jpg'
 import findWebp from '../assets/images/contact/contact-find-us-entrance.webp'
-import findJpg from '../assets/images/contact/contact-find-us-entrance.jpg'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { useIsPhone } from '../hooks/useIsPhone'
 import './ContactPage.css'
 
 const heroSlides = [
-  { webp: beanieHeroWebp, jpg: beanieHeroJpg, modifier: ' kontakt-page__hero-slide--beanie' },
-  { webp: carHeroWebp, jpg: carHeroJpg, modifier: ' kontakt-page__hero-slide--car' },
+  { webp: beanieHeroWebp, modifier: ' kontakt-page__hero-slide--beanie' },
+  { webp: carHeroWebp, modifier: ' kontakt-page__hero-slide--car' },
 ]
 // Phones get one static portrait photo: no rotation, and the desktop photos are never downloaded.
-const phoneHeroSlides = [{ webp: phoneHeroWebp, jpg: phoneHeroJpg, modifier: ' kontakt-page__hero-slide--phone' }]
+const phoneHeroSlides = [{ webp: phoneHeroWebp, modifier: ' kontakt-page__hero-slide--phone' }]
 
 function ChevronDownIcon({ className }: { className?: string }) {
   return (
@@ -57,9 +53,8 @@ export default function ContactPage() {
         <section className="bb-hero kontakt-page__hero" aria-labelledby="contact-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             {slides.map((slide, i) => (
-              <picture key={slide.jpg} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
-                <source srcSet={slide.webp} type="image/webp" />
-                <img src={slide.jpg} alt="" />
+              <picture key={slide.webp} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
+                <img src={slide.webp} alt="" />
               </picture>
             ))}
           </div>
@@ -265,9 +260,8 @@ export default function ContactPage() {
             </div>
             <div className="kontakt-page__find-card">
               <picture className="kontakt-page__find-photo">
-                <source srcSet={findWebp} type="image/webp" />
                 <img
-                  src={findJpg}
+                  src={findWebp}
                   alt="Infarten från Utmarksvägen med skylten Här finns vi och en pil mot verkstaden"
                   loading="lazy"
                   width={1600}

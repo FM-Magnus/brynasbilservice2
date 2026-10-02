@@ -8,8 +8,6 @@ export interface GatSpotlightSlide {
   alt: string
   webp640: string
   webp1200: string
-  jpg640: string
-  jpg1200: string
 }
 
 // Long enough to read a poster (about 35 words) before it changes.
@@ -44,10 +42,9 @@ export function GatSpotlight({ slides }: { slides: readonly GatSpotlightSlide[] 
       <div className="gat-spotlight__stage">
         {slides.map((slide, i) => (
           <picture key={slide.label} className={`gat-spotlight__slide${i === active ? ' is-active' : ''}`} aria-hidden={i !== active}>
-            <source type="image/webp" srcSet={`${slide.webp640} 640w, ${slide.webp1200} 1200w`} sizes={SIZES} />
             <img
-              src={slide.jpg1200}
-              srcSet={`${slide.jpg640} 640w, ${slide.jpg1200} 1200w`}
+              src={slide.webp1200}
+              srcSet={`${slide.webp640} 640w, ${slide.webp1200} 1200w`}
               sizes={SIZES}
               alt={slide.alt}
               loading="lazy"

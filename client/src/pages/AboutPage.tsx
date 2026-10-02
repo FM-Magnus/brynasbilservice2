@@ -17,17 +17,12 @@ import { ChatDotsIcon } from '../components/icons/ChatDotsIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 
 import heroCustomersWebp from '../assets/images/about/about-hero-maher-customers.webp'
-import heroCustomersJpg from '../assets/images/about/about-hero-maher-customers.jpg'
 import heroCarWebp from '../assets/images/about/about-hero-maher-customer-car.webp'
-import heroCarJpg from '../assets/images/about/about-hero-maher-customer-car.jpg'
 import phoneHeroWebp from '../assets/images/about/about-hero-phone.webp'
-import phoneHeroJpg from '../assets/images/about/about-hero-phone.jpg'
 import imgMaherBenchWebp from '../assets/images/about/maher-workshop-bench.webp'
-import imgMaherBenchJpg from '../assets/images/about/maher-workshop-bench.jpg'
 
 
 import principlesBgWebp from '../assets/images/about/about-principles-handover-key.webp'
-import principlesBgJpg from '../assets/images/about/about-principles-handover-key.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
 import './AboutPage.css'
@@ -99,11 +94,11 @@ function ApprovalCheckIcon({ className }: { className?: string }) {
 }
 
 const heroSlides = [
-  { webp: heroCustomersWebp, jpg: heroCustomersJpg },
-  { webp: heroCarWebp, jpg: heroCarJpg },
+  { webp: heroCustomersWebp },
+  { webp: heroCarWebp },
 ]
 // Phones get one static portrait photo: no rotation, and the desktop photos are never downloaded.
-const phoneHeroSlides = [{ webp: phoneHeroWebp, jpg: phoneHeroJpg }]
+const phoneHeroSlides = [{ webp: phoneHeroWebp }]
 
 export default function AboutPage() {
   const { openBooking, bookingModal } = useBookingModal()
@@ -128,9 +123,8 @@ export default function AboutPage() {
         <section className="omoss-page__hero" aria-labelledby="omoss-hero-title">
           <div className="omoss-page__hero-media" aria-hidden="true">
             {slides.map((slide, i) => (
-              <picture key={slide.jpg} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
-                <source srcSet={slide.webp} type="image/webp" />
-                <img src={slide.jpg} alt="" />
+              <picture key={slide.webp} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
+                <img src={slide.webp} alt="" />
               </picture>
             ))}
           </div>
@@ -183,9 +177,8 @@ export default function AboutPage() {
               <div className="omoss-page__story-aside">
                 <div className="omoss-page__bench-card">
                   <picture>
-                    <source srcSet={imgMaherBenchWebp} type="image/webp" />
                     <img
-                      src={imgMaherBenchJpg}
+                      src={imgMaherBenchWebp}
                       alt="Maher Basher vid arbetsbänken i verkstaden"
                       className="omoss-page__bench-img"
                       loading="lazy"
@@ -304,8 +297,7 @@ export default function AboutPage() {
             ========================================================= */}
         <section className="omoss-page__principles" aria-labelledby="principles-title">
           <picture aria-hidden="true">
-            <source srcSet={principlesBgWebp} type="image/webp" />
-            <img src={principlesBgJpg} alt="" loading="lazy" />
+            <img src={principlesBgWebp} alt="" loading="lazy" />
           </picture>
           <div className="omoss-page__principles-shade" aria-hidden="true" />
           <div className="bb-wrap omoss-page__principles-layout">

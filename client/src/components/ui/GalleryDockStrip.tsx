@@ -244,8 +244,7 @@ export function GalleryDockStrip({ className = '' }: { className?: string }) {
             draggable={false}
           >
             <picture>
-              <source type="image/webp" srcSet={image.thumb.webp} />
-              <img src={image.thumb.jpg} alt="" loading="lazy" decoding="async" draggable={false} />
+              <img src={image.thumb.webp} alt="" loading="lazy" decoding="async" draggable={false} />
             </picture>
           </Link>
         ))}

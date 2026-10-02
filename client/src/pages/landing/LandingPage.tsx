@@ -13,15 +13,10 @@ import { MonitorIcon } from '../../components/icons/MonitorIcon'
 import { PhoneIcon } from '../../components/icons/PhoneIcon'
 import { WrenchIcon } from '../../components/icons/WrenchIcon'
 import heroWebp from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero.webp'
-import heroJpg from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero.jpg'
 import heroPhoneWebp from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero-phone.webp'
-import heroPhoneJpg from '../../assets/images/home/landing-v2/landing-happy-customer-key-hero-phone.jpg'
 import heroBirdsEyeWebp from '../../assets/images/home/landing-v2/landing-birds-eye-hero.webp'
-import heroBirdsEyeJpg from '../../assets/images/home/landing-v2/landing-birds-eye-hero.jpg'
 import whyWebp from '../../assets/images/home/landing-v2/landing-why-customer-woman-volvo.webp'
-import whyJpg from '../../assets/images/home/landing-v2/landing-why-customer-woman-volvo.jpg'
 import processWebp from '../../assets/images/home/landing-v2/landing-process-technical-work.webp'
-import processJpg from '../../assets/images/home/landing-v2/landing-process-technical-work.jpg'
 import { TrustStrip } from '../../components/ui/TrustStrip'
 import { ChatDotsIcon } from '../../components/icons/ChatDotsIcon'
 import { ShieldIcon } from '../../components/icons/ShieldIcon'
@@ -70,11 +65,11 @@ const processIcons: Record<string, ReactNode> = {
 }
 
 const heroSlides = [
-  { webp: heroWebp, jpg: heroJpg, modifier: ' landing-v2__hero-slide--key', alt: 'Maher lämnar över bilnyckeln till en leende kund i verkstaden' },
-  { webp: heroBirdsEyeWebp, jpg: heroBirdsEyeJpg, modifier: '', alt: 'Verkstaden sedd uppifrån med en bil på lyften och däckhyllor i bakgrunden' },
+  { webp: heroWebp, modifier: ' landing-v2__hero-slide--key', alt: 'Maher lämnar över bilnyckeln till en leende kund i verkstaden' },
+  { webp: heroBirdsEyeWebp, modifier: '', alt: 'Verkstaden sedd uppifrån med en bil på lyften och däckhyllor i bakgrunden' },
 ]
 // Phones get one static portrait photo: no rotation, and the desktop photos are never downloaded.
-const phoneHeroSlides = [{ webp: heroPhoneWebp, jpg: heroPhoneJpg, alt: heroSlides[0].alt, modifier: ' landing-v2__hero-slide--phone' }]
+const phoneHeroSlides = [{ webp: heroPhoneWebp, alt: heroSlides[0].alt, modifier: ' landing-v2__hero-slide--phone' }]
 export default function LandingPage() {
   const { openBooking, bookingModal } = useBookingModal()
   const isPhone = useIsPhone()
@@ -85,9 +80,8 @@ export default function LandingPage() {
       <section className="bb-hero" aria-labelledby="landing-v2-hero-title">
         <div className="bb-hero__media" aria-hidden="true">
           {slides.map((slide, i) => (
-            <picture key={slide.jpg} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
-              <source srcSet={slide.webp} type="image/webp" />
-              <img src={slide.jpg} alt="" />
+            <picture key={slide.webp} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
+              <img src={slide.webp} alt="" />
             </picture>
           ))}
         </div>
@@ -150,8 +144,7 @@ export default function LandingPage() {
       <section className="landing-v2__why-section" aria-labelledby="landing-v2-why-title">
         <div className="bb-wrap landing-v2__why-content">
           <picture className="landing-v2__why-photo" aria-hidden="true">
-            <source srcSet={whyWebp} type="image/webp" />
-            <img src={whyJpg} alt="" loading="lazy" width={1400} height={700} />
+            <img src={whyWebp} alt="" loading="lazy" width={1400} height={700} />
           </picture>
           <div>
             <p className="bb-eyebrow">Om Brynäs Bilservice</p>
@@ -172,8 +165,7 @@ export default function LandingPage() {
 
       <section className="landing-v2__process-section" aria-labelledby="landing-v2-process-title">
         <picture className="landing-v2__process-photo" aria-hidden="true">
-          <source srcSet={processWebp} type="image/webp" />
-          <img src={processJpg} alt="" loading="lazy" width={1400} height={700} />
+          <img src={processWebp} alt="" loading="lazy" width={1400} height={700} />
         </picture>
         <div className="bb-wrap landing-v2__process-content">
           <div>

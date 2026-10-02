@@ -524,8 +524,7 @@
   background-image:
     linear-gradient(rgba(7, 20, 22, 0.38), rgba(7, 20, 22, 0.38)),
     image-set(
-      url('../assets/images/about/about-cta-tabletop-tools.webp') type('image/webp') 1x,
-      url('../assets/images/about/about-cta-tabletop-tools.jpg') type('image/jpeg') 1x
+      url('../assets/images/about/about-cta-tabletop-tools.webp') type('image/webp') 1x
     );
   background-position: center;
   background-size: cover;

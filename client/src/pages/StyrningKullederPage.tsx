@@ -21,11 +21,8 @@ import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import heroWebp from '../assets/images/services/steering/steering-gear-rack-tie-rod-hero.webp'
-import heroJpg from '../assets/images/services/steering/steering-gear-rack-tie-rod-hero.jpg'
 import componentsWebp from '../assets/images/services/steering/steering-linkage-components-workbench.webp'
-import componentsJpg from '../assets/images/services/steering/steering-linkage-components-workbench.jpg'
 import inspectionWebp from '../assets/images/services/steering/steering-ball-joint-inspection-portrait.webp'
-import inspectionJpg from '../assets/images/services/steering/steering-ball-joint-inspection-portrait.jpg'
 
 const trustBadges = [
   { icon: ShieldIcon, title: 'Säker väghållning', text: 'Vi åtgärdar glapp i framvagnen innan det blir farligt.' },
@@ -94,7 +91,7 @@ export default function StyrningKullederPage() {
           eyebrow="Framvagn & styrprecision"
           title={<>Styrning<br />som <span className="bb-accent">lyder</span><br />ratten</>}
           lead="Styrleder, spindelleder och servostyrning ser till att bilen lyder ratten direkt och rullar stabilt. Vi felsöker missljud och glapp, byter slitna leder och utför professionell hjulinställning."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ny kuggstång och styrväxel med damasker och styrleder på en arbetsbänk i verkstaden' }}
+          image={{ webp: heroWebp, alt: 'Ny kuggstång och styrväxel med damasker och styrleder på en arbetsbänk i verkstaden' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
@@ -104,7 +101,7 @@ export default function StyrningKullederPage() {
         <GuideIntro
           id="steering-intro-title"
           heading="Vad gör styrning och kulleder?"
-          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Framvagnskomponenter på verkstadsbänk med länkarm, bussningar, spindelled, inre styrstag och styrled' }}
+          image={{ webp: componentsWebp, alt: 'Framvagnskomponenter på verkstadsbänk med länkarm, bussningar, spindelled, inre styrstag och styrled' }}
           caption="Exakt geometri, maximal kontroll."
         >
           <p>Under styrning och kulleder samlar vi de komponenter som gör att bilen lyder rattrörelserna exakt och att hjulen rör sig kontrollerat med fjädringen. Kulleder och styrleder skyddas av gummidamasker – spricker en damask tränger fukt och smuts in, vilket snabbt nöter ner leden och skapar farligt glapp.</p>
@@ -128,7 +125,7 @@ export default function StyrningKullederPage() {
           heading="Tecken på sliten styrning eller trasiga leder"
           text="Glapp i framvagnen och fel på servostyrningen ger tydliga signaler i ratten och vid körning över gupp. Här är de vanligaste tecknen du bör vara uppmärksam på."
           items={symptoms}
-          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Närbild på mekaniker som inspekterar glapp och sprucken damask på styrled under bilen' }}
+          image={{ webp: inspectionWebp, alt: 'Närbild på mekaniker som inspekterar glapp och sprucken damask på styrled under bilen' }}
           caption="Säker väghållning kräver intakta leder."
         >
           <p>Glapp känns ofta i ratten eller hörs som en smäll över gupp, men det säger inte i vilken led det sitter. Styrleder, kulleder, länkarmsbussningar och hjullager kan alla ge liknande symptom. Därför lokaliseras glappet genom att hjulet och de enskilda delarna belastas åt olika håll, med bilen både upplyft och stående på hjulen, innan det bestäms vad som ska bytas.</p>

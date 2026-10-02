@@ -22,11 +22,8 @@ import { MonitorIcon } from '../components/icons/MonitorIcon'
 import { CarSaleIcon } from '../components/icons/CarSaleIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import heroJpg from '../assets/images/services/repair/repair-engine-bay-workshop-hero.jpg'
 import heroWebp from '../assets/images/services/repair/repair-engine-bay-workshop-hero.webp'
-import introJpg from '../assets/images/workshop/workshop-car-open-hood.jpg'
 import introWebp from '../assets/images/workshop/workshop-car-open-hood.webp'
-import serviceJpg from '../assets/images/services/general/service-performance-diagnostics.jpg'
 import serviceWebp from '../assets/images/services/general/service-performance-diagnostics.webp'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
@@ -92,8 +89,7 @@ export default function ReparationerPage() {
         <section className="bb-hero" id="reparationer" aria-labelledby="reparationer-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="reparationer-hero">
-              <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="" />
+              <img src={heroWebp} alt="" />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
@@ -143,8 +139,7 @@ export default function ReparationerPage() {
               </div>
               <div className="bilservice__split-media--right">
                 <picture data-image-slot="reparationer-intro" className="bilservice__image-slot--radius-lg bilservice__image-slot--ar-16-9">
-                  <source srcSet={introWebp} type="image/webp" />
-                  <img src={introJpg} alt="Bil med öppen motorhuv i verkstaden" loading="lazy" />
+                  <img src={introWebp} alt="Bil med öppen motorhuv i verkstaden" loading="lazy" />
                 </picture>
               </div>
             </div>
@@ -205,8 +200,7 @@ export default function ReparationerPage() {
             <div className="bilservice__service-card">
               <div className="bilservice__service-media">
                 <picture data-image-slot="reparationer-service">
-                  <source srcSet={serviceWebp} type="image/webp" />
-                  <img src={serviceJpg} alt="Mekaniker arbetar i motorrummet med en surfplatta" loading="lazy" />
+                  <img src={serviceWebp} alt="Mekaniker arbetar i motorrummet med en surfplatta" loading="lazy" />
                 </picture>
               </div>
               <div className="bilservice__service-content">

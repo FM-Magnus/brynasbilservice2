@@ -1,15 +1,9 @@
 import type { Vehicle } from '../types/vehicle'
-import sideJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.jpg'
 import sideWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
-import sideThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile-thumb.jpg'
 import sideThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile-thumb.webp'
-import rearJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter.jpg'
 import rearWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter.webp'
-import rearThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter-thumb.jpg'
 import rearThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-rear-three-quarter-thumb.webp'
-import wheelJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup.jpg'
 import wheelWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup.webp'
-import wheelThumbJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup-thumb.jpg'
 import wheelThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-wheel-closeup-thumb.webp'
 
 // Static stock list, used while VITE_VEHICLES_SOURCE is 'static' (the default).
@@ -20,8 +14,8 @@ import wheelThumbWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307
 // mileageKm is in km — the page shows Swedish mil (km / 10) automatically.
 // Delete this file once the backend is live (§3.7).
 
-const main = (webp: string, jpg: string) => ({ webp, jpg, width: 1920, height: 1440 })
-const thumb = (webp: string, jpg: string) => ({ webp, jpg, width: 640, height: 480 })
+const main = (webp: string) => ({ webp, width: 1920, height: 1440 })
+const thumb = (webp: string) => ({ webp, width: 640, height: 480 })
 
 export const seedVehicles: Vehicle[] = [
   {
@@ -42,9 +36,9 @@ export const seedVehicles: Vehicle[] = [
     status: 'available',
     soldAt: null,
     images: [
-      { id: 1, alt: 'Peugeot 307 CC från sidan', main: main(sideWebp, sideJpg), thumb: thumb(sideThumbWebp, sideThumbJpg) },
-      { id: 2, alt: 'Peugeot 307 CC snett bakifrån', main: main(rearWebp, rearJpg), thumb: thumb(rearThumbWebp, rearThumbJpg) },
-      { id: 3, alt: 'Aluminiumfälg på Peugeot 307 CC', main: main(wheelWebp, wheelJpg), thumb: thumb(wheelThumbWebp, wheelThumbJpg) },
+      { id: 1, alt: 'Peugeot 307 CC från sidan', main: main(sideWebp), thumb: thumb(sideThumbWebp) },
+      { id: 2, alt: 'Peugeot 307 CC snett bakifrån', main: main(rearWebp), thumb: thumb(rearThumbWebp) },
+      { id: 3, alt: 'Aluminiumfälg på Peugeot 307 CC', main: main(wheelWebp), thumb: thumb(wheelThumbWebp) },
     ],
     createdAt: '2026-05-01T00:00:00Z',
     updatedAt: '2026-09-19T00:00:00Z',

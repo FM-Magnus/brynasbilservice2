@@ -19,11 +19,9 @@ import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
-import heroBgJpg from '../assets/images/services/ac/ac-hero-bg.jpg'
 import heroBgWebp from '../assets/images/services/ac/ac-hero-bg.webp'
-import heroPhoneJpg from '../assets/images/services/ac/ac-hero-phone.jpg'
 import heroPhoneWebp from '../assets/images/services/ac/ac-hero-phone.webp'
-import manometersJpg from '../assets/images/services/ac/ac-manometers-on-engine.jpg'
+import manometersWebp from '../assets/images/services/ac/ac-manometers-on-engine.webp'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 
@@ -85,8 +83,7 @@ export default function AcServicePage() {
         <section className="bb-hero bilservice__ac-hero" id="ac-service" aria-labelledby="ac-service-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="ac-hero-bg">
-              <source srcSet={isPhone ? heroPhoneWebp : heroBgWebp} type="image/webp" />
-              <img src={isPhone ? heroPhoneJpg : heroBgJpg} alt="" />
+              <img src={isPhone ? heroPhoneWebp : heroBgWebp} alt="" />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
@@ -310,7 +307,7 @@ export default function AcServicePage() {
             <div className="bilservice__service-card">
               <div className="bilservice__service-media">
                 <img
-                  src={manometersJpg}
+                  src={manometersWebp}
                   alt="Manometerställ kopplat till bilens AC-system för tryck- och läckagekontroll"
                   loading="lazy"
                 />

@@ -19,7 +19,6 @@ export type GuideIcon = (props: SVGProps<SVGSVGElement>) => ReactElement | null
 
 export interface GuideImage {
   webp: string
-  jpg: string
   alt: string
 }
 
@@ -54,8 +53,7 @@ export interface GuideInfoCard extends GuideIconItem {
 function Picture({ image }: { image: GuideImage }) {
   return (
     <picture>
-      <source srcSet={image.webp} type="image/webp" />
-      <img src={image.jpg} alt={image.alt} loading="lazy" />
+      <img src={image.webp} alt={image.alt} loading="lazy" />
     </picture>
   )
 }
@@ -86,8 +84,7 @@ export function GuideHero({ id, eyebrow, title, lead, image, trustBadges, onBook
       <section className="service-guide__hero" aria-labelledby={id}>
         <div className={`service-guide__hero-bg${image.alignLeft ? ' service-guide__hero-bg--pos-left' : ''}`}>
           <picture data-image-slot={image.slot}>
-            <source srcSet={image.webp} type="image/webp" />
-            <img src={image.jpg} alt={image.alt} loading={image.lazy ? 'lazy' : undefined} />
+            <img src={image.webp} alt={image.alt} loading={image.lazy ? 'lazy' : undefined} />
           </picture>
         </div>
         <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />

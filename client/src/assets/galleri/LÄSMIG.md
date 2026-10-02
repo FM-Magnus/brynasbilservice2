@@ -7,7 +7,7 @@ Varje bild i den här mappen visas automatiskt på sidan **/galleri**. Du behöv
 1. Lägg bildfilen i den här mappen (`client/src/assets/galleri/`).
 2. Klart. Med `npm run dev` igång syns bilden i galleriet efter några sekunder. På den riktiga webbplatsen syns den efter nästa bygge och publicering.
 
-Storlekarna som sidan behöver skapas automatiskt: en stor bild (1920 px) och en miniatyr (640 px), i både WebP och JPG. Små bilder förstoras aldrig.
+Storlekarna som sidan behöver skapas automatiskt: en stor bild (1920 px) och en miniatyr (640 px), i WebP. Små bilder förstoras aldrig.
 
 ## Ta bort en bild
 

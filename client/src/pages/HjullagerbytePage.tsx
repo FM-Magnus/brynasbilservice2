@@ -22,11 +22,8 @@ import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import heroWebp from '../assets/images/services/wheel-bearing/wheel-bearing-hub-unit-workbench-hero.webp'
-import heroJpg from '../assets/images/services/wheel-bearing/wheel-bearing-hub-unit-workbench-hero.jpg'
 import componentsWebp from '../assets/images/services/wheel-bearing/wheel-bearing-hub-assembly-closeup.webp'
-import componentsJpg from '../assets/images/services/wheel-bearing/wheel-bearing-hub-assembly-closeup.jpg'
 import inspectionWebp from '../assets/images/services/wheel-bearing/wheel-bearing-play-inspection-portrait.webp'
-import inspectionJpg from '../assets/images/services/wheel-bearing/wheel-bearing-play-inspection-portrait.jpg'
 
 const trustBadges = [
   { icon: ShieldIcon, title: 'Tyst & säker gång', text: 'Vi åtgärdar missljud och vibrationer i tid.' },
@@ -95,7 +92,7 @@ export default function HjullagerbytePage() {
           eyebrow="Chassi & hjulupphängning"
           title={<>Hjullagerbyte<br />när det <span className="bb-accent">brummar</span></>}
           lead="Hjullagret bär upp bilens vikt och ser till att hjulen rullar mjukt och friktionsfritt. Upplever du ett brummande missljud eller vibrationer? Vi lokaliserar det slitna lagret och byter till kvalitetsdelar med rätt specifikation."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ny navenhet med hjulbultar och ett separat hjullager på en mörk metallbänk' }}
+          image={{ webp: heroWebp, alt: 'Ny navenhet med hjulbultar och ett separat hjullager på en mörk metallbänk' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
@@ -105,7 +102,7 @@ export default function HjullagerbytePage() {
         <GuideIntro
           id="wheel-bearing-intro-title"
           heading="Vad gör ett hjullager?"
-          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Hjullager, hjulnav, monteringsbultar och ABS-kontakt på arbetsbänk i verkstaden' }}
+          image={{ webp: componentsWebp, alt: 'Hjullager, hjulnav, monteringsbultar och ABS-kontakt på arbetsbänk i verkstaden' }}
           caption="Minimal friktion, maximal driftsäkerhet."
         >
           <p>Hjullagret gör att hjulet kan snurra fritt med minimal friktion samtidigt som det bär upp bilens vikt. På moderna bilar är lagret en förseglad, underhållsfri enhet som roterar miljontals varv under hård belastning.</p>
@@ -129,7 +126,7 @@ export default function HjullagerbytePage() {
           heading="Tecken på ett slitet eller trasigt hjullager"
           text="Ett dåligt hjullager ger nästan alltid ifrån sig tydliga varningssignaler innan det havererar helt. Här är de vanligaste tecknen du bör vara uppmärksam på."
           items={symptoms}
-          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker undersöker hjullager och glapp under lyft bil i verkstaden' }}
+          image={{ webp: inspectionWebp, alt: 'Mekaniker undersöker hjullager och glapp under lyft bil i verkstaden' }}
           caption="Säker gång och kontroll av glapp."
         >
           <p>Ett brummande eller malande ljud behöver lokaliseras innan något lager byts. Samma ljud kan komma från däck med ojämnt slitage, en drivknut eller bromsarna, och ljudet från ett lager kan höras på fel sida av bilen. Därför kontrolleras hjulen för glapp och ljud med bilen upplyft, och ofta hjälper en provkörning där man lyssnar på hur ljudet ändras med hastighet och i kurvor.</p>

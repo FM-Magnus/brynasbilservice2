@@ -20,11 +20,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { BoltIcon } from '../components/icons/BoltIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import { WavesIcon } from '../components/icons/WavesIcon'
-import heroJpg from '../assets/images/services/battery/battery-jump-start-hero.jpg'
 import heroWebp from '../assets/images/services/battery/battery-jump-start-hero.webp'
-import introJpg from '../assets/images/services/battery/battery-multimeter-test-workshop.jpg'
 import introWebp from '../assets/images/services/battery/battery-multimeter-test-workshop.webp'
-import serviceJpg from '../assets/images/services/battery/battery-terminal-voltage-closeup.jpg'
 import serviceWebp from '../assets/images/services/battery/battery-terminal-voltage-closeup.webp'
 
 const trustBadges = [
@@ -93,7 +90,7 @@ export default function BilbatteriPage() {
           eyebrow="Elsystem & startkraft"
           title={<>Bilbatteri<br />som <span className="bb-accent">startar</span><br />varje morgon</>}
           lead="Bilbatteriet driver startmotorn och håller igång bilens elsystem – från belysning till infotainment och start-stopp-funktion. Vi testar, byter och kodar rätt batterityp för din bil."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Startkablar anslutna till ett bilbatteri i motorrummet', slot: 'battery-hero' }}
+          image={{ webp: heroWebp, alt: 'Startkablar anslutna till ett bilbatteri i motorrummet', slot: 'battery-hero' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
@@ -103,7 +100,7 @@ export default function BilbatteriPage() {
         <GuideIntro
           id="battery-intro-title"
           heading="Vad gör bilbatteriet?"
-          image={{ webp: introWebp, jpg: introJpg, alt: 'Mekaniker testar batteriets spänning med en multimeter i verkstaden' }}
+          image={{ webp: introWebp, alt: 'Mekaniker testar batteriets spänning med en multimeter i verkstaden' }}
           caption="Noggrann mätning och konditionstest."
         >
           <p>Bilbatteriet driver startmotorn och strömförsörjer bilens elsystem. Till skillnad från de flesta andra slitdelarna på bilen ger batteriet ofta bara en kort varningsperiod innan det slutar fungera helt, särskilt vid kyla. Att montera fel typ – till exempel ett standardbatteri i en bil som kräver AGM – ger kortare livslängd och sämre funktion.</p>
@@ -127,7 +124,7 @@ export default function BilbatteriPage() {
           heading="Varningstecken på svagt eller dåligt batteri"
           text="Batteriet ger ofta subtila ledtrådar innan det lägger av helt. Känner du igen något av följande symptom är det klokt att låta oss testa batteriets hälsa innan kylan slår till."
           items={symptoms}
-          image={{ webp: serviceWebp, jpg: serviceJpg, alt: 'Mekaniker mäter batterispänningen med en multimeter, 12,6 volt' }}
+          image={{ webp: serviceWebp, alt: 'Mekaniker mäter batterispänningen med en multimeter, 12,6 volt' }}
           caption="Konditionstest före byte – inga onödiga kostnader."
         >
           <p>Ett batteri som inte orkar starta bilen är inte alltid slut. Samma symptom kan komma av att batteriet inte laddas, till exempel på grund av generatorn eller en dålig anslutning, eller av att något drar ström när bilen står parkerad. Därför behöver batteriets skick och laddsystemet kontrolleras var för sig innan batteriet byts.</p>

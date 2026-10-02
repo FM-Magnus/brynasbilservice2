@@ -3,8 +3,8 @@ import { naturalCompare, resolveCaption, slugFromFilename, type GalleryCaption }
 import captions from '../assets/galleri/bildtexter.json'
 
 // Folder-driven gallery: every JPG/PNG/WebP in src/assets/galleri/ becomes a
-// gallery image. vite-imagetools generates 640px and 1920px variants in WebP
-// and JPG at build time (never upscaled). quality=70 matches the old hand-exported
+// gallery image. vite-imagetools generates 640px and 1920px WebP variants
+// at build time (never upscaled). quality=70 matches the old hand-exported
 // files visually (checked side by side) at ~230–320 KB per 1920px WebP.
 // See src/assets/galleri/LÄSMIG.md.
 
@@ -17,7 +17,7 @@ interface ImagetoolsMeta {
 
 const files = import.meta.glob('../assets/galleri/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
   eager: true,
-  query: { w: '640;1920', format: 'webp;jpg', quality: '70', as: 'meta:src;width;height;format' },
+  query: { w: '640;1920', format: 'webp', quality: '70', as: 'meta:src;width;height;format' },
   import: 'default',
 }) as Record<string, ImagetoolsMeta[]>
 
@@ -27,8 +27,7 @@ function variant(metas: ImagetoolsMeta[], smallest: boolean): GalleryImageVarian
     return smallest ? matches[0] : matches[matches.length - 1]
   }
   const webp = pick('webp')
-  const jpg = pick('jpg') ?? pick('jpeg')
-  return { webp: webp.src, jpg: jpg.src, width: jpg.width, height: jpg.height }
+  return { webp: webp.src, width: webp.width, height: webp.height }
 }
 
 const captionMap = captions as Record<string, GalleryCaption>

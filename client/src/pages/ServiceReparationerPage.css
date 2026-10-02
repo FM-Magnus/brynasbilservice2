@@ -692,8 +692,7 @@
   background-image:
     linear-gradient(rgba(7, 20, 22, 0.28), rgba(7, 20, 22, 0.28)),
     image-set(
-      url('../assets/images/services/tires/tyre-rack-closing-wide.webp') type('image/webp') 1x,
-      url('../assets/images/services/tires/tyre-rack-closing-wide.jpg') type('image/jpeg') 1x
+      url('../assets/images/services/tires/tyre-rack-closing-wide.webp') type('image/webp') 1x
     );
   background-position: center;
   background-size: cover;
@@ -713,8 +712,7 @@
     background-image:
       linear-gradient(rgba(7, 20, 22, 0.28), rgba(7, 20, 22, 0.28)),
       image-set(
-        url('../assets/images/services/tires/tyre-rack-closing-tall.webp') type('image/webp') 1x,
-        url('../assets/images/services/tires/tyre-rack-closing-tall.jpg') type('image/jpeg') 1x
+        url('../assets/images/services/tires/tyre-rack-closing-tall.webp') type('image/webp') 1x
       );
   }
 }

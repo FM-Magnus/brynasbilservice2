@@ -14,9 +14,7 @@ import { TrustStrip } from '../components/ui/TrustStrip'
 import { getPublicVehicles } from '../api/vehicles'
 import type { Vehicle, VehicleImage } from '../types/vehicle'
 import heroWebp from '../assets/images/workshop/cars-for-sale-estate-on-lift-hero.webp'
-import heroJpg from '../assets/images/workshop/cars-for-sale-estate-on-lift-hero.jpg'
 import phoneHeroWebp from '../assets/images/workshop/cars-for-sale-estate-on-lift-hero-phone.webp'
-import phoneHeroJpg from '../assets/images/workshop/cars-for-sale-estate-on-lift-hero-phone.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
 import './BilarTillSalu.css'
@@ -34,8 +32,8 @@ const inquiryComment = (vehicle: Vehicle) => `Gäller förfrågan om ${vehicleNa
 const COMPACT_SIZES = '(min-width: 1440px) 420px, (min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw'
 const VIEWER_SIZES = '(min-width: 1440px) 690px, (min-width: 961px) 50vw, 100vw'
 
-const srcSet = (image: VehicleImage, format: 'webp' | 'jpg') =>
-  `${image.thumb[format]} ${image.thumb.width}w, ${image.main[format]} ${image.main.width}w`
+const srcSet = (image: VehicleImage) =>
+  `${image.thumb.webp} ${image.thumb.width}w, ${image.main.webp} ${image.main.width}w`
 
 // Layout scales with stock: up to FULL_CARD_LIMIT vehicles get the full card;
 // beyond that the lead vehicle keeps the full card and the rest become compact
@@ -84,10 +82,9 @@ function VehicleCard({ vehicle, eager, onInquiry, onCollapse }: VehicleCardProps
         <div className="bilartillsalu-page__viewer">
           {active ? (
             <picture>
-              <source type="image/webp" srcSet={srcSet(active, 'webp')} sizes={VIEWER_SIZES} />
               <img
-                src={active.main.jpg}
-                srcSet={srcSet(active, 'jpg')}
+                src={active.main.webp}
+                srcSet={srcSet(active)}
                 sizes={VIEWER_SIZES}
                 alt={active.alt}
                 width={active.main.width}
@@ -118,8 +115,7 @@ function VehicleCard({ vehicle, eager, onInquiry, onCollapse }: VehicleCardProps
                 onClick={() => setActiveIndex(index)}
               >
                 <picture>
-                  <source srcSet={image.thumb.webp} type="image/webp" />
-                  <img src={image.thumb.jpg} alt="" width={image.thumb.width} height={image.thumb.height} loading="lazy" decoding="async" />
+                  <img src={image.thumb.webp} alt="" width={image.thumb.width} height={image.thumb.height} loading="lazy" decoding="async" />
                 </picture>
               </button>
             ))}
@@ -184,10 +180,9 @@ function CompactVehicleCard({ vehicle, onInquiry, onExpand }: CompactVehicleCard
       <div className="bilartillsalu-page__compact-media">
         {image ? (
           <picture>
-            <source type="image/webp" srcSet={srcSet(image, 'webp')} sizes={COMPACT_SIZES} />
             <img
-              src={image.main.jpg}
-              srcSet={srcSet(image, 'jpg')}
+              src={image.main.webp}
+              srcSet={srcSet(image)}
               sizes={COMPACT_SIZES}
               alt={image.alt}
               width={image.main.width}
@@ -310,8 +305,7 @@ export default function BilarTillSalu() {
         <section className="bb-hero bilartillsalu-page__hero" aria-labelledby="bilartillsalu-hero-title">
           <div className="bb-hero__media">
             <picture>
-              <source srcSet={isPhone ? phoneHeroWebp : heroWebp} type="image/webp" />
-              <img src={isPhone ? phoneHeroJpg : heroJpg} alt="" width={isPhone ? 1200 : 3000} height={isPhone ? 2001 : 1700} />
+              <img src={isPhone ? phoneHeroWebp : heroWebp} alt="" width={isPhone ? 1200 : 3000} height={isPhone ? 2001 : 1700} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />

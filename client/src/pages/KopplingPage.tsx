@@ -23,11 +23,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
-import heroJpg from '../assets/images/services/clutch/clutch-kit-hero.jpg'
 import heroWebp from '../assets/images/services/clutch/clutch-kit-hero.webp'
-import componentsJpg from '../assets/images/services/clutch/clutch-components-on-bench.jpg'
 import componentsWebp from '../assets/images/services/clutch/clutch-components-on-bench.webp'
-import symptomsJpg from '../assets/images/services/clutch/mechanic-under-vehicle-diagnosis.jpg'
 import symptomsWebp from '../assets/images/services/clutch/mechanic-under-vehicle-diagnosis.webp'
 import '../styles/ServiceGuideTemplate.css'
 
@@ -92,7 +89,7 @@ export default function KopplingPage() {
           eyebrow="Kraftöverföring & drivlina"
           title={<>Koppling <span className="bb-accent">när</span><br />kraften behöver<br />nå hjulen</>}
           lead="Kopplingen överför kraften mellan motorn och växellådan och gör att du kan växla utan att motorn stannar eller rycker till. Den är en slitdel, och att den till slut behöver bytas är en förväntad del av bilens underhåll."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Kopplingssats med lamell, tryckplatta och urtrampningslager på ett mörkt bord' }}
+          image={{ webp: heroWebp, alt: 'Kopplingssats med lamell, tryckplatta och urtrampningslager på ett mörkt bord' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
@@ -102,7 +99,7 @@ export default function KopplingPage() {
         <GuideIntro
           id="koppling-intro-title"
           heading="Vad är en koppling?"
-          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Kopplingssats med lamell, tryckplatta och svänghjul på en arbetsbänk' }}
+          image={{ webp: componentsWebp, alt: 'Kopplingssats med lamell, tryckplatta och svänghjul på en arbetsbänk' }}
           caption="Samma kraft. En mjukare resa."
         >
           <p>Varje gång du släpper upp kopplingspedalen sliter friktionsmaterialet på kopplingsskivan lite grann. Därför är ett framtida byte inte i sig ett fel, utan en del av bilens normala underhåll.</p>
@@ -126,7 +123,7 @@ export default function KopplingPage() {
           heading="Tecken på att kopplingen behöver ses över"
           text="Du behöver inte själv avgöra exakt vilken del som är problemet. De här signalerna är skäl att låta oss bedöma bilen."
           items={symptoms}
-          image={{ webp: symptomsWebp, jpg: symptomsJpg, alt: 'Mekaniker från Brynäs Bilservice arbetar under en lyft bil' }}
+          image={{ webp: symptomsWebp, alt: 'Mekaniker från Brynäs Bilservice arbetar under en lyft bil' }}
           caption="Vi hittar problemet – innan det blir större."
         >
           <p>Slirning, en pedal som känns annorlunda och missljud kan ha helt olika orsaker, och därför bedöms de var för sig. Slirning handlar oftast om lamellens friktionsbelägg, en tung eller svampig pedal om urtrampningen eller hydrauliken, och ljud kan komma från urtrampningslagret, svänghjulet eller växellådan. Berätta gärna om symptomet märks vid start, i en viss växel eller när pedalen är nedtryckt.</p>

@@ -23,11 +23,8 @@ import { CarSaleIcon } from '../components/icons/CarSaleIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { BUSINESS } from '../data/business'
-import heroJpg from '../assets/images/services/general/service-ready-car-workshop-hero.jpg'
 import heroWebp from '../assets/images/services/general/service-ready-car-workshop-hero.webp'
-import servicebookJpg from '../assets/images/services/general/servicebook-car-key-counter.jpg'
 import servicebookWebp from '../assets/images/services/general/servicebook-car-key-counter.webp'
-import safetyJpg from '../assets/images/services/general/service-safety-brake-inspection.jpg'
 import safetyWebp from '../assets/images/services/general/service-safety-brake-inspection.webp'
 import './ServiceReparationerPage.css'
 
@@ -70,11 +67,10 @@ const processSteps = [
   { num: '05', icon: CheckIcon, title: 'Slutkontroll och rapport', desc: 'När bilen är klar får du en genomgång och råd inför nästa service.' },
 ] as const
 
-function ServiceImage({ id, jpg, webp, alt, className = '' }: { id: string; jpg: string; webp: string; alt: string; className?: string }) {
+function ServiceImage({ id, webp, alt, className = '' }: { id: string; webp: string; alt: string; className?: string }) {
   return (
     <picture className={`bilservice__image-frame${className ? ` ${className}` : ''}`} data-image-slot={id}>
-      <source srcSet={webp} type="image/webp" />
-      <img src={jpg} alt={alt} loading="lazy" />
+      <img src={webp} alt={alt} loading="lazy" />
     </picture>
   )
 }
@@ -90,8 +86,7 @@ export default function ServiceReparationerPage() {
         <section className="bb-hero" id="bilservice" aria-labelledby="bilservice-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="bilservice-hero-car">
-              <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="" />
+              <img src={heroWebp} alt="" />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
@@ -130,14 +125,14 @@ export default function ServiceReparationerPage() {
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
-            <ServiceImage id="bilservice-servicebook-keys" jpg={servicebookJpg} webp={servicebookWebp} alt="Öppen servicebok och bilnyckel på en verkstadsbänk" className="bilservice__split-media--right bilservice__image-frame--wide" />
+            <ServiceImage id="bilservice-servicebook-keys" webp={servicebookWebp} alt="Öppen servicebok och bilnyckel på en verkstadsbänk" className="bilservice__split-media--right bilservice__image-frame--wide" />
           </div>
         </section>
 
         {/* Varför är bilservice viktigt? */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="bilservice-why-title">
           <div className="bb-wrap bilservice__container bilservice__split">
-            <ServiceImage id="bilservice-value-säkerhet" jpg={safetyJpg} webp={safetyWebp} alt="Mekaniker kontrollerar bromsskiva och däck med inspektionslampa" className="bilservice__image-frame--wide" />
+            <ServiceImage id="bilservice-value-säkerhet" webp={safetyWebp} alt="Mekaniker kontrollerar bromsskiva och däck med inspektionslampa" className="bilservice__image-frame--wide" />
             <div className="bilservice__prose">
               <h2 className="bb-h2" id="bilservice-why-title">Varför är bilservice viktigt?</h2>
               <p>Regelbunden service påverkar hur säker bilen är, hur länge den håller, hur den går och vad den är värd den dag du säljer den.</p>

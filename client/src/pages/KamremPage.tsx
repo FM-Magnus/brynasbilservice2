@@ -20,11 +20,8 @@ import { InfoIcon } from '../components/icons/InfoIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import { WavesIcon } from '../components/icons/WavesIcon'
-import timingBeltJpg from '../assets/images/services/timing-belt/timing-belt-kit-hero.jpg'
 import timingBeltWebp from '../assets/images/services/timing-belt/timing-belt-kit-hero.webp'
-import timingBeltKitJpg from '../assets/images/services/timing-belt/timing-belt-kit-workbench.jpg'
 import timingBeltKitWebp from '../assets/images/services/timing-belt/timing-belt-kit-workbench.webp'
-import timingBeltInspectionJpg from '../assets/images/services/timing-belt/timing-belt-worn-belt-inspection.jpg'
 import timingBeltInspectionWebp from '../assets/images/services/timing-belt/timing-belt-worn-belt-inspection.webp'
 
 const trustBadges = [
@@ -90,7 +87,7 @@ export default function KamremPage() {
           eyebrow="Förebyggande motorskydd"
           title={<>Kamremsbyte<br /><span className="bb-accent">i tid</span> skyddar<br />motorn</>}
           lead="Kamremmen synkroniserar motorns vevaxel och kamaxel så att kolvar och ventiler rör sig i exakt rätt takt. Det är en av bilens mest kritiska delar där ett missat byte kan leda till totalt motorhaveri."
-          image={{ webp: timingBeltWebp, jpg: timingBeltJpg, alt: 'Kamremssats med kamrem, spännrulle, styrrulle och vattenpump på ett mörkt bord', slot: 'timing-belt-hero' }}
+          image={{ webp: timingBeltWebp, alt: 'Kamremssats med kamrem, spännrulle, styrrulle och vattenpump på ett mörkt bord', slot: 'timing-belt-hero' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
@@ -100,7 +97,7 @@ export default function KamremPage() {
         <GuideIntro
           id="kamrem-intro-title"
           heading="Vad är en kamrem?"
-          image={{ webp: timingBeltKitWebp, jpg: timingBeltKitJpg, alt: 'Ny kamrem, spännrullar och vattenpump på en verkstadsbänk' }}
+          image={{ webp: timingBeltKitWebp, alt: 'Ny kamrem, spännrullar och vattenpump på en verkstadsbänk' }}
           caption="Precision, synk och driftsäkerhet."
         >
           <p>Värt att veta innan man läser vidare: inte alla bilar har kamrem. Vissa motorer har istället kamkedja i metall, som ofta saknar fast bytesintervall. Eftersom samma bilmodell kan ha kamrem på en motorvariant och kamkedja på en annan räcker inte modellnamnet ensamt för att veta vad som gäller din bil.</p>
@@ -124,7 +121,7 @@ export default function KamremPage() {
           heading="Varningstecken och när kamremmen ska bytas"
           text="Till skillnad från de flesta andra delar på bilen ger kamremmen sällan någon tillförlitlig förvarning innan den går sönder. Vissa tecken kan förekomma, men de ska aldrig tolkas som att det finns gott om tid."
           items={symptoms}
-          image={{ webp: timingBeltInspectionWebp, jpg: timingBeltInspectionJpg, alt: 'Hand som inspekterar en kamrem intill motorns remhjul' }}
+          image={{ webp: timingBeltInspectionWebp, alt: 'Hand som inspekterar en kamrem intill motorns remhjul' }}
           caption="Rätt intervall och åtgärd i tid."
           landscape
         />
