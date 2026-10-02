@@ -41,7 +41,8 @@ Phases 1–7 are done (production fixes, facts and data, documentation, assets a
 2. **Performance follow-up (from Phase 5):** Hjullagerbyte shifts its hero lead and buttons by CLS 0.12 on phones at about 2.9 s (Google's "good" limit is 0.1), most likely when the Google web font swaps in; the other guides stay at or below 0.016. The durable fix is self-hosting Archivo and Manrope with matched fallback metrics — a separate change.
 3. **GAT page (`/gat`, 2026-10-01):** built on the guide template from the three wall posters; original Swedish copy that attributes product claims to GAT. A portrait phone crop of the hero is still wanted. Open: Maher confirming which treatments are sold as a service, prices, time per treatment and over-the-counter sales (`GatPage.tsx` header comment).
 4. **Content gaps:** Bromssystem, Felsökning, Däckservice and Service-reparationer have no `.bb-tip`.
-5. **Deferred idea:** the "Schomaher" mascot on `.bb-tip` (one edit in `Tip.tsx`) — waiting for the mascot art and Maher's sign-off (plan in the 2026-09-22 entry of [`LOG.md`](LOG.md)).
+5. **CSS audit (2026-10-02, read-only, nothing changed):** [`CSS_AUDIT_2026-10-02.md`](CSS_AUDIT_2026-10-02.md), scripts in `audit-harness/css/`. Dead CSS is negligible; measured zero-change cleanups save 220–460 B gzip per page; shared patterns cost bytes per page. Waiting on Magnus: two cascade defects (`PublicHeader.css:15` overrides the Boka tid button's own font; the pages' `.page :where(a)` reset overrides `.bb-btn--ember` colour, and keeps the "Ring 070-…" buttons on light family surfaces readable), Tailwind utilities out of the public `index.css` (−3.35 KB gzip on every page) and splitting the Bilservice family file (−0.9 to −1.9 KB gzip per family page).
+6. **Deferred idea:** the "Schomaher" mascot on `.bb-tip` (one edit in `Tip.tsx`) — waiting for the mascot art and Maher's sign-off (plan in the 2026-09-22 entry of [`LOG.md`](LOG.md)).
 
 ## Broken or incomplete
 
