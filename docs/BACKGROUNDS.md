@@ -13,7 +13,7 @@ Magnus's design decisions for card and band backgrounds, written down so the unf
 
 **Starting in a fresh context window:** read, in order, `AGENTS.md`, this file, `docs/CSS_OWNERSHIP.md`, `docs/IMAGES.md`, then the three reference pages in the code (`pages/landing/LandingPage.*`, `pages/AboutPage.*`, `pages/BargningPage.*`). Work on branch `redesign/blue-teal-v1` (`design/card-backgrounds` was merged into it 2026-10-02): one slot per round, one commit per page, nothing pushed or merged without Magnus's go-ahead.
 
-Image sources (git-ignored, outside the repo): `_incoming-assets/IMPLEMENT/backgrounds/custom/` (curated, **prefer these**, with 11 cards in wide/square/tall) and `…/backgrounds/` (generic dark / amber / white). Both have a `MANIFEST.md`. Copy a file into `client/src/assets/images/<area>/` only when a slot uses it. The custom set shows faces and invented licence plates (`KLP 482`, `TYK 07K`, `RRR 997`, `PBR 997`): **Maher must approve before they are used.**
+Image sources (git-ignored, outside the repo): `_incoming-assets/IMPLEMENT/backgrounds/custom/` (curated, **prefer these**, with 11 cards in wide/square/tall) and `…/backgrounds/` (generic dark / amber / white). Both have a `MANIFEST.md`. The 25 teal full-frame cards (10:9, WebP 1000 and 640 px) are sorted in `…/backgrounds/teal/{light,mid,dark}/` with a contact sheet (`teal/_CONTACT-SHEET.jpg`); tone and text colour come from the file name. Copy a file into `client/src/assets/images/<area>/` only when a slot uses it. The custom set shows faces and invented licence plates (`KLP 482`, `TYK 07K`, `RRR 997`, `PBR 997`): **Maher must approve before they are used.**
 
 ## Missing material: the gap log
 
