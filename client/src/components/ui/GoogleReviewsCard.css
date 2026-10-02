@@ -25,7 +25,7 @@
   -webkit-backdrop-filter: blur(8px);
   box-sizing: border-box;
   justify-self: start;
-  height: 100px;
+  height: auto;
   max-width: 660px;
   min-height: 100px;
   overflow: hidden;
@@ -38,6 +38,21 @@
   background: rgba(4, 28, 34, 0.54);
   border-color: rgba(255, 255, 255, 0.22);
   transform: translateY(-2px);
+}
+
+/* The hero card shows the whole review: no line clamp, the stacked reviews size the card. */
+.bb-reviews-card--hero-overlay .bb-reviews-card__text {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  max-height: none;
+  overflow: visible;
+}
+
+.bb-reviews-card--hero-overlay .bb-reviews-card__author-name {
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 /* Variant: card (for light/dark page bodies or sidebar placement) */
@@ -117,7 +132,23 @@
   white-space: nowrap;
 }
 
-/* Review content */
+/* Review content. All reviews are stacked in one cell (see the component), so the
+   cell takes the height of the longest one; the inactive ones are only there to
+   reserve that space. */
+.bb-reviews-card__reviews {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+}
+
+.bb-reviews-card__reviews > .bb-reviews-card__review {
+  grid-area: 1 / 1;
+}
+
+.bb-reviews-card__review--idle {
+  visibility: hidden;
+}
+
 .bb-reviews-card__review {
   align-items: center;
   border-left: 1px solid rgba(255, 255, 255, 0.28);
@@ -238,11 +269,14 @@
     white-space: normal;
   }
 
+  .bb-reviews-card__reviews {
+    grid-area: review;
+  }
+
   .bb-reviews-card__review {
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.18);
     gap: 0.55rem;
-    grid-area: review;
     grid-template-columns: 26px 100px minmax(0, 1fr);
     min-height: 68px;
     padding-left: 0;
@@ -277,11 +311,10 @@
     min-height: 0;
   }
 
-  /* Compact hero card for phones (2026-09-24): the rating row and one line of
-     the rotating quote, so the shared phone hero stays short. Every line is
-     single-line (nowrap or clamped), so rotating reviews cannot change its
-     height. The .bb-reviews-card--hero-overlay prefix out-ranks the phone
-     rules above. */
+  /* Compact hero card for phones: the rating row and the whole rotating quote
+     (2026-10-01; it was one clamped line before). The stacked reviews keep the
+     height the same for every review. The .bb-reviews-card--hero-overlay prefix
+     out-ranks the phone rules above. */
   .bb-reviews-card--hero-overlay {
     grid-template-areas:
       "rating google"
@@ -326,9 +359,6 @@
 
   .bb-reviews-card--hero-overlay .bb-reviews-card__text {
     flex: 1;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    max-height: 1.35em;
   }
 }
 

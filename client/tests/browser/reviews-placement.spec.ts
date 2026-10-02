@@ -40,7 +40,7 @@ for (const route of routes) {
     expect(layout.bottom).toBeLessThanOrEqual(layout.heroBottom)
     expect(layout.documentWidth).toBeLessThanOrEqual(layout.viewportWidth)
 
-    const reviewColor = await card.locator('.bb-reviews-card__text').evaluate((element) =>
+    const reviewColor = await card.locator('.bb-reviews-card__review:not([aria-hidden="true"]) .bb-reviews-card__text').evaluate((element) =>
       getComputedStyle(element).color,
     )
     expect(reviewColor).toBe('rgb(255, 255, 255)')

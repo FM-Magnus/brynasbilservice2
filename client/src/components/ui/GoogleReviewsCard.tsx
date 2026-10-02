@@ -112,17 +112,31 @@ export function GoogleReviewsCard({
         <small className="bb-reviews-card__google-sub">Omdömen på Google Maps</small>
       </div>
 
-      <div className={`bb-reviews-card__review ${fading ? 'bb-reviews-card__review--fading' : ''}`.trim()}>
-        <span className="bb-reviews-card__avatar">{currentReview.name[0]}</span>
-        <div className="bb-reviews-card__author">
-          <b className="bb-reviews-card__author-name">{currentReview.name}</b>
-          <span className="bb-reviews-card__stars">
-            {[1, 2, 3, 4, 5].map(star => (
-              <Star key={star} size={13} />
-            ))}
-          </span>
-        </div>
-        <p className="bb-reviews-card__text">{currentReview.text}</p>
+      {/* All reviews share one grid cell and only the active one is visible, so the
+          cell is always as tall as the longest review at the current width and the
+          card never changes height when the review rotates. */}
+      <div className="bb-reviews-card__reviews">
+        {reviews.map((review, index) => {
+          const isActive = review === currentReview
+          return (
+            <div
+              key={`${review.name}-${index}`}
+              className={`bb-reviews-card__review${isActive ? '' : ' bb-reviews-card__review--idle'}${isActive && fading ? ' bb-reviews-card__review--fading' : ''}`}
+              aria-hidden={isActive ? undefined : true}
+            >
+              <span className="bb-reviews-card__avatar">{review.name[0]}</span>
+              <div className="bb-reviews-card__author">
+                <b className="bb-reviews-card__author-name">{review.name}</b>
+                <span className="bb-reviews-card__stars">
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <Star key={star} size={13} />
+                  ))}
+                </span>
+              </div>
+              <p className="bb-reviews-card__text">{review.text}</p>
+            </div>
+          )
+        })}
       </div>
     </a>
   )
