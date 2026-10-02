@@ -11,7 +11,7 @@ Magnus's design decisions for card and band backgrounds, written down so the unf
 5. **Just enough.** Use the lowest overlay that passes. When Magnus changes a value, replace it here (don't append).
 6. **Page-local for now.** Each treatment is written in the page's own CSS island with the page's prefix. The glass effect exists twice (Om oss, Bärgning): a shared pattern needs Magnus's approval before it spreads (`AGENTS.md`).
 
-**Starting in a fresh context window:** read, in order, `AGENTS.md`, this file, `docs/CSS_OWNERSHIP.md`, `docs/IMAGES.md`, then the three reference pages in the code (`pages/landing/LandingPage.*`, `pages/AboutPage.*`, `pages/BargningPage.*`). Work on branch `design/card-backgrounds`: one slot per round, one commit per page, nothing pushed or merged without Magnus's go-ahead.
+**Starting in a fresh context window:** read, in order, `AGENTS.md`, this file, `docs/CSS_OWNERSHIP.md`, `docs/IMAGES.md`, then the three reference pages in the code (`pages/landing/LandingPage.*`, `pages/AboutPage.*`, `pages/BargningPage.*`). Work on branch `redesign/blue-teal-v1` (`design/card-backgrounds` was merged into it 2026-10-02): one slot per round, one commit per page, nothing pushed or merged without Magnus's go-ahead.
 
 Image sources (git-ignored, outside the repo): `_incoming-assets/IMPLEMENT/backgrounds/custom/` (curated, **prefer these**, with 11 cards in wide/square/tall) and `…/backgrounds/` (generic dark / amber / white). Both have a `MANIFEST.md`. Copy a file into `client/src/assets/images/<area>/` only when a slot uses it. The custom set shows faces and invented licence plates (`KLP 482`, `TYK 07K`, `RRR 997`, `PBR 997`): **Maher must approve before they are used.**
 
