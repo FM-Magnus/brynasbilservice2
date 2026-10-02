@@ -6,6 +6,13 @@ const HERO_SLIDE_INTERVAL_MS = 7000
 export function useHeroSlideshow(slideCount: number) {
   const [activeSlide, setActiveSlide] = useState(0)
 
+  // The slide list can shrink while the page is open (a window narrowed to phone width
+  // swaps the desktop photos for the single phone photo). Start over then, or the old
+  // index points past the end and no photo is active.
+  useEffect(() => {
+    setActiveSlide(0)
+  }, [slideCount])
+
   useEffect(() => {
     if (slideCount < 2) return
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -33,5 +40,5 @@ export function useHeroSlideshow(slideCount: number) {
     }
   }, [slideCount])
 
-  return activeSlide
+  return slideCount > 0 ? activeSlide % slideCount : 0
 }
