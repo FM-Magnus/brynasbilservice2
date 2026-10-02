@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { PublicHeader } from '../components/layout/PublicHeader'
 import { PublicFooter } from '../components/layout/PublicFooter'
 import { useBookingModal } from '../hooks/useBookingModal'
@@ -40,7 +41,7 @@ interface ServiceGuide {
   id: string
   title: string
   summary: string
-  href: string
+  to: string
   imageLabel: string
   imageJpg: string
   imageWebp: string
@@ -52,7 +53,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'bilservice',
     title: 'Bilservice',
     summary: 'Regelbunden service samlar rutinkontroller som hjälper till att bevara bilens funktion, säkerhet och livslängd.',
-    href: '/service-reparationer#bilservice',
+    to: '/service-reparationer#bilservice',
     imageLabel: 'Bilservice i verkstaden',
     imageJpg: bilserviceThumbJpg,
     imageWebp: bilserviceThumbWebp,
@@ -61,7 +62,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'reparationer',
     title: 'Reparationer & större arbeten',
     summary: 'Motor, koppling, avgassystem och andra större jobb, med kostnadsförslag innan vi börjar.',
-    href: '/reparationer-storre-arbeten',
+    to: '/reparationer-storre-arbeten',
     imageLabel: 'Reparation i verkstaden',
     imageJpg: repairThumbJpg,
     imageWebp: repairThumbWebp,
@@ -70,7 +71,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'oljebyte',
     title: 'Oljebyte',
     summary: 'Ny motorolja och ett nytt filter hjälper motorns rörliga delar att smörjas och skyddas mot onödigt slitage.',
-    href: '/oljebyte',
+    to: '/oljebyte',
     imageLabel: 'Oljebyte i verkstaden',
     imageJpg: oljebyteThumbJpg,
     imageWebp: oljebyteThumbWebp,
@@ -79,7 +80,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'gat',
     title: 'GAT motorvård',
     summary: 'Vi är auktoriserad återförsäljare av GAT och använder produkterna för att hålla motorns insida och bränslesystemet rena.',
-    href: '/gat',
+    to: '/gat',
     imageLabel: 'GAT motorvård i verkstaden',
     imageJpg: gatThumbJpg,
     imageWebp: gatThumbWebp,
@@ -88,7 +89,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'kamrem',
     title: 'Kamrem',
     summary: 'Kamremmen håller motorns rörliga delar i rätt takt och byts enligt rätt intervall för din bil.',
-    href: '/kamrem',
+    to: '/kamrem',
     imageLabel: 'Kamremsarbete i verkstaden',
     imageJpg: kamremThumbJpg,
     imageWebp: kamremThumbWebp,
@@ -98,7 +99,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'koppling',
     title: 'Koppling',
     summary: 'Kopplingen överför kraften mellan motor och växellåda och är en slitdel som kan behöva bytas.',
-    href: '/koppling',
+    to: '/koppling',
     imageLabel: 'Kopplingsdelar på en verkstadsbänk',
     imageJpg: clutchThumbJpg,
     imageWebp: clutchThumbWebp,
@@ -107,7 +108,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'bromssystem',
     title: 'Bromssystem',
     summary: 'Bromsarna är avgörande för säkerheten, och tidiga tecken kan hjälpa dig att få rätt åtgärd i tid.',
-    href: '/bromssystem',
+    to: '/bromssystem',
     imageLabel: 'Bromsarbete i verkstaden',
     imageJpg: brakesThumbJpg,
     imageWebp: brakesThumbWebp,
@@ -117,7 +118,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'bilbatteri',
     title: 'Bilbatteri',
     summary: 'Bilbatteriet ger startkraft och försörjer elsystemet – rätt batterityp behöver testas och anpassas till bilen.',
-    href: '/bilbatteri',
+    to: '/bilbatteri',
     imageLabel: 'Batterikontroll i verkstaden',
     imageJpg: bilbatteriThumbJpg,
     imageWebp: bilbatteriThumbWebp,
@@ -127,7 +128,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'stodampare-fjadrar',
     title: 'Stötdämpare & fjädrar',
     summary: 'Stötdämpare och fjädrar hjälper hjulen att hålla kontakt med vägen för stabil och kontrollerad körning.',
-    href: '/stodampare-fjadrar',
+    to: '/stodampare-fjadrar',
     imageLabel: 'Ny och sliten stötdämpare bredvid varandra',
     imageJpg: suspensionThumbJpg,
     imageWebp: suspensionThumbWebp,
@@ -136,7 +137,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'hjullagerbyte',
     title: 'Hjullagerbyte',
     summary: 'Ett hjullager ska ge mjuk och friktionsfri gång; brummande ljud eller vibrationer kan vara tecken på slitage.',
-    href: '/hjullagerbyte',
+    to: '/hjullagerbyte',
     imageLabel: 'Hjullagerbyte i verkstaden',
     imageJpg: hjullagerThumbJpg,
     imageWebp: hjullagerThumbWebp,
@@ -145,7 +146,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'avgassystem',
     title: 'Avgassystem',
     summary: 'Avgassystemet dämpar motorljud och samverkar med bilens avgasrening och sensorer.',
-    href: '/avgassystem',
+    to: '/avgassystem',
     imageLabel: 'Avgassystem i verkstaden',
     imageJpg: exhaustThumbJpg,
     imageWebp: exhaustThumbWebp,
@@ -154,7 +155,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'drivaxel-drivknutar',
     title: 'Drivaxel & drivknutar',
     summary: 'Drivaxlar och drivknutar för motorkraften till hjulen och behöver fungera utan glapp, läckage eller vibrationer.',
-    href: '/drivaxel-drivknutar',
+    to: '/drivaxel-drivknutar',
     imageLabel: 'Drivaxelarbete i verkstaden',
     imageJpg: drivaxelThumbJpg,
     imageWebp: drivaxelThumbWebp,
@@ -163,7 +164,7 @@ const serviceGuides: ServiceGuide[] = [
     id: 'styrning-kulleder',
     title: 'Styrning & kulleder',
     summary: 'Styrning och kulleder hjälper bilen att svara stabilt på ratten och hålla rätt väghållning.',
-    href: '/styrning-kulleder',
+    to: '/styrning-kulleder',
     imageLabel: 'Styrningsarbete i verkstaden',
     imageJpg: steeringThumbJpg,
     imageWebp: steeringThumbWebp,
@@ -229,8 +230,8 @@ export default function BiltjansterPage() {
                         {guide.title}
                       </h2>
                       <p className="biltjanster-hub__guide-desc">{guide.summary}</p>
-                      <a
-                        href={guide.href}
+                      <Link
+                        to={guide.to}
                         className="biltjanster-hub__guide-cta"
                         aria-label={`Läs mer om ${guide.title}`}
                       >
@@ -238,7 +239,7 @@ export default function BiltjansterPage() {
                         <span className="biltjanster-hub__guide-arrow" aria-hidden="true">
                           <ArrowRightIcon />
                         </span>
-                      </a>
+                      </Link>
                     </div>
                   </article>
                 )
