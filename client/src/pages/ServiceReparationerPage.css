@@ -156,6 +156,10 @@
 .bilservice__level-card--01 { background: var(--bilservice-aqua-100); color: var(--bilservice-ink); }
 .bilservice__level-card--02 { background: linear-gradient(155deg, var(--bilservice-teal-700) 0%, var(--bilservice-teal-800) 100%); color: #fff; box-shadow: var(--bb-shadow-card); }
 .bilservice__level-card--03 { background: linear-gradient(155deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%); color: #fff; }
+/* Tier photo: sits behind the card's own text (bright workshop, dark text). */
+.bilservice__level-card--photo { isolation: isolate; overflow: hidden; position: relative; }
+.bilservice__level-photo { bottom: 0; display: block; left: 0; position: absolute; right: 0; top: 0; z-index: -1; }
+.bilservice__level-photo img { display: block; height: 100%; object-fit: cover; object-position: 70% center; width: 100%; }
 .bilservice__level-badge {
   display: inline-flex;
   align-items: center;

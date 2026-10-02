@@ -25,6 +25,7 @@ import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { BUSINESS } from '../data/business'
 import heroWebp from '../assets/images/services/general/service-ready-car-workshop-hero.webp'
 import servicebookWebp from '../assets/images/services/general/servicebook-car-key-counter.webp'
+import levelBasicWebp from '../assets/images/services/general/service-level-basic-bright-workshop.webp'
 import safetyWebp from '../assets/images/services/general/service-safety-brake-inspection.webp'
 import './ServiceReparationerPage.css'
 import { heroImgAttrs } from '../data/heroImgAttrs'
@@ -46,6 +47,7 @@ const serviceBenefits = [
 const serviceLevels = [
   {
     title: 'Bas- eller mindre service',
+    photo: levelBasicWebp,
     description: 'Detta är det mest grundläggande underhållsprogrammet, vanligtvis rekommenderat varje 12:e månad eller varje 10 000 km.',
     items: ['Oljebyte', 'Byte av oljefilter', 'Kontroll av däck och däcktryck', 'Kontroll av vätskenivåer (spolarvätska, kylvätska, bromsvätska)'],
   },
@@ -155,7 +157,12 @@ export default function ServiceReparationerPage() {
             </div>
             <div className="bilservice__levels-grid">
               {serviceLevels.map((level, index) => (
-                <article className={`bilservice__level-card bilservice__level-card--0${index + 1}`} key={level.title}>
+                <article className={`bilservice__level-card bilservice__level-card--0${index + 1}${'photo' in level ? ' bilservice__level-card--photo' : ''}`} key={level.title}>
+                  {'photo' in level && (
+                    <picture className="bilservice__level-photo" aria-hidden="true">
+                      <img src={level.photo} alt="" loading="lazy" width={1000} height={900} />
+                    </picture>
+                  )}
                   <span className="bilservice__level-badge" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <h3>{level.title}</h3>
                   <p>{level.description}</p>
