@@ -43,21 +43,24 @@
 }
 
 /* Photo-backed reassurance */
-.landing-v2__process-section { background: linear-gradient(135deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%); color: #fff; }
+.landing-v2__process-section { background: linear-gradient(135deg, var(--bb-color-ink-900) 0%, var(--bb-color-ink-950) 100%); color: #fff; isolation: isolate; overflow: hidden; position: relative; }
+/* A faint photo behind the steps (Magnus 2026-10-02): low opacity, soft on the left so the heading stays on plain dark. */
+.landing-v2__process-photo { bottom: 0; display: block; left: 0; opacity: .22; position: absolute; right: 0; top: 0; z-index: -1; }
+.landing-v2__process-photo img { display: block; height: 100%; object-fit: cover; object-position: 70% center; width: 100%; }
 .landing-v2__process-section .bb-accent { color: var(--bb-color-teal-500); }
 
-/* Text reassurance with a photo faded in from the page colour on the right
-   (desktop only; the photo is hidden at 900px and below, where the text spans the width). */
-.landing-v2__why-section { color: var(--bb-color-ink-950); isolation: isolate; margin-bottom: clamp(.75rem, 1.5vw, 1.25rem); overflow: hidden; position: relative; }
-.landing-v2__why-photo { bottom: 0; display: block; position: absolute; right: 0; top: 0; width: min(58%, 920px); z-index: -1; }
-.landing-v2__why-photo img { display: block; height: 100%; object-fit: cover; object-position: 62% center; width: 100%; }
+/* Text reassurance with a photo on the right. The photo belongs to the text column's
+   container (the same width as the page content), not to the viewport edge, and fades into
+   the page colour on its left edge only; top and bottom stay hard. Hidden at 900px and
+   below, where the text spans the width. Photo and fade are Magnus's call (2026-10-02). */
+.landing-v2__why-section { color: var(--bb-color-ink-950); margin-bottom: clamp(.75rem, 1.5vw, 1.25rem); }
 .landing-v2__why-photo {
-  -webkit-mask-composite: source-in;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 42%), linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
-  mask-composite: intersect;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 42%), linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 46%);
+  bottom: 0; display: block; mask-image: linear-gradient(90deg, transparent 0%, #000 46%);
+  position: absolute; right: 0; top: 0; width: 72%; z-index: -1;
 }
-.landing-v2__why-content { padding: 0.5rem 0 clamp(.6rem, 1vw, 1rem); }
+.landing-v2__why-photo img { display: block; height: 100%; object-fit: cover; object-position: 78% center; width: 100%; }
+.landing-v2__why-content { isolation: isolate; padding: 0.5rem 0 clamp(.6rem, 1vw, 1rem); position: relative; }
 .landing-v2__why-content > div { max-width: 620px; }
 .landing-v2__why-content > div > p:not(.bb-eyebrow) { color: rgba(7, 20, 22, .78); font-size: var(--landing-type-body); line-height: var(--landing-leading-body); margin: 1rem 0 1.25rem; max-width: 500px; }
 
@@ -92,10 +95,6 @@
 .landing-v2__process-section { margin-bottom: clamp(3.2rem, 5vw, 5rem); min-height: 335px; }
 .landing-v2__process-content { align-items: center; display: grid; gap: clamp(1.75rem, 3.5vw, 4rem); grid-template-columns: minmax(255px, .65fr) minmax(0, 1.4fr); min-height: 335px; padding: clamp(1.8rem, 3vw, 3rem) 0; }
 .landing-v2__process-content > div > p:not(.bb-eyebrow) { color: rgba(255, 255, 255, .78); font-size: var(--landing-type-support); line-height: var(--landing-leading-body); margin: 1rem 0 1.2rem; }
-
-@media (max-width: 1200px) {
-  .landing-v2__why-photo { width: 46%; }
-}
 
 @media (max-width: 900px) {
   .landing-v2__why-photo { display: none; }
