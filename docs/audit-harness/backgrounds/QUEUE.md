@@ -15,4 +15,6 @@ One row per page. *Notes* are suggestions the page plan may overrule; every row 
 | 9 | `/` (Landing) | Details only: it is a reference page. Do not add photos to clean surfaces (service row, trust strip, contact card). |
 | 10 | `/om-oss`, `/bargning`, `/kontakt` | Reference pages. Do not change unless a surface breaks the budget. |
 
+Balance hot spots found by `balance.cjs` 2026-10-03 (1440): `/felsokning` y≈2530 (text 271 px beside a 559 px image), `/ac-service` y≈794 and y≈3573, `/reparationer-storre-arbeten` y≈2062, `/oljebyte` y≈3664, 4071, 4551 (also in the other guides; check the shared guide template once, not per guide). False positives: footer grid, `/bilar-till-salu` gallery thumbs.
+
 Status column is kept in `/tmp/bgnight/log.md`, not here.

@@ -119,6 +119,17 @@ Also today: Landing's GAT dealer line is one unit (`nowrap`) and the contact hea
 - **Where:** one amber photo surface per long page, on a feature surface (a CTA, a process band or one card in a stepped row), never on forms, FAQ, tips or ledgers. Amber photo, teal photo and a clean surface should alternate; amber must not exceed one in three photo surfaces.
 - **Gap:** a proper amber set in the same 1600×1440 format as the teal cards (AMBER tone, copy-left) for oil, brakes, battery, exhaust, wheel bearing, tyres, towing and steering would remove the need for duotone; produce it when possible.
 
+## Balance and symmetry (no dead white)
+
+Why: the Kontakt page looked unfinished until the contact card and the form shared a row at equal height and the steps card spanned the full width below (2026-10-03). Do the same everywhere:
+1. **Side-by-side blocks (text | image, card | card, text | card) differ in height by at most ~15%.** Fix by stretching (`align-items: stretch`), cropping the image (`object-fit: cover` with a `max-height`), shortening the taller one (e.g. the form's message box), or adding a block under the short one.
+2. **No empty space under the content inside a coloured card** (more than ~70 px). Centre the content vertically or let a sibling set the height.
+3. **Text and image mirror each other:** tops and bottoms align, gutters are equal, the image is never much taller than its text. A short text beside a tall photo is wrong: crop the photo or put a ledger or stat card under the text.
+4. **Use full-width cards below paired rows** for the third item (steps, facts, CTA) instead of leaving a half-empty column.
+5. **Cap paragraph width (about 65 ch) and do not leave a wide white margin next to a short text**: pair it with a photo, a card or a split layout.
+6. **Editorial heading | prose layouts are asymmetric on purpose** (short heading column, long text column). Leave them; just make sure the heading column is not stranded under 200 px tall next to 600 px of text with nothing else.
+`docs/audit-harness/backgrounds/balance.cjs <routes>` lists suspect rows (sibling height difference over 15% and 60 px, boxes with over 70 px empty under their content) at 1440 and 768. It flags, you judge: the footer grid and gallery thumbs are false positives, a stranded text beside a tall image is a real one (2026-10-03: Felsökning y≈2530, AC y≈3573, Oljebyte several, Reparationer y≈2062).
+
 ## Reference philosophy and the clean budget (read before touching a page)
 
 Landing, Om oss and Bärgning are the reference (looked at 2026-10-03). What they do:
@@ -133,7 +144,7 @@ Landing, Om oss and Bärgning are the reference (looked at 2026-10-03). What the
 2. Always clean, never a photo: forms and their notices, FAQ items, tips (`.bb-tip`), ledgers and price lists, tables, legal/fact cards, any card with a long paragraph or more than one list, the contact/direct-contact cards, review cards, step cards that already have an icon row.
 3. At most 2 photo-treated surfaces per screen height and no two touching each other; between two photo surfaces put a clean one.
 4. The same photo never twice on a page, and the same treatment at most twice per page.
-5. Variety: alternate light, mid and dark; every long page gets at least one **amber photo surface** (recipe O or a native amber card; solid amber cards and amber text do not count) and teal and amber photos alternate; mix directions (fade from the left, from the right, top to bottom).
+5. Variety: alternate light, mid and dark; every long page should get an **amber photo surface** (a native amber card, or recipe O once amber is rolled out; solid amber cards and amber text do not count; **tonight only the three native amber photos, no duotone rollout**) and teal and amber photos alternate; mix directions (fade from the left, from the right, top to bottom).
 6. A "visible" photo is the point: if the veil needed for 4.5:1 makes the photo disappear (it should still read as a motif at 1440 px), use a clean card instead.
 
 ## Kept plain (no photo), on purpose
