@@ -11,7 +11,32 @@ Magnus's design decisions for card and band backgrounds, written down so the unf
 5. **Just enough.** Use the lowest overlay that passes. When Magnus changes a value, replace it here (don't append).
 6. **Page-local for now.** Each treatment is written in the page's own CSS island with the page's prefix. The glass effect exists twice (Om oss, Bärgning): a shared pattern needs Magnus's approval before it spreads (`AGENTS.md`).
 
+**Starting in a fresh context window:** read, in order, `AGENTS.md`, this file, `docs/CSS_OWNERSHIP.md`, `docs/IMAGES.md`, then the three reference pages in the code (`pages/landing/LandingPage.*`, `pages/AboutPage.*`, `pages/BargningPage.*`). Work on branch `design/card-backgrounds`: one slot per round, one commit per page, nothing pushed or merged without Magnus's go-ahead.
+
 Image sources (git-ignored, outside the repo): `_incoming-assets/IMPLEMENT/backgrounds/custom/` (curated, **prefer these**, with 11 cards in wide/square/tall) and `…/backgrounds/` (generic dark / amber / white). Both have a `MANIFEST.md`. Copy a file into `client/src/assets/images/<area>/` only when a slot uses it. The custom set shows faces and invented licence plates (`KLP 482`, `TYK 07K`, `RRR 997`, `PBR 997`): **Maher must approve before they are used.**
+
+## Missing material: the gap log
+
+When no image in the sets fits a slot (wrong topic, tone or shape, or only a duplicate card exists), **do not force a mediocre image.** Propose the slot without a photo (or with the closest match, clearly labelled as second best) and add one row to the table below, so Magnus can produce the right material later. Rows are replaced when the material arrives (move it to "Delivered" with the file name).
+
+Each row: **page / slot** · **slot type and tone** (dark band, light card, hero ...) · **shape and size** at 1440 and 390 (measured in the browser, not guessed) · **motif wanted** (what it should show, the real workshop where possible) · **closest existing** (and why it is not enough) · **priority** (H/M/L) · **source of need** (which page or message).
+
+| Page / slot | Type, tone | Shape and size | Motif wanted | Closest existing (why not enough) | Prio |
+|---|---|---|---|---|---|
+| *(seed, from the card inventory; slots not measured yet)* Bromssystem cards | dark + light card | wide / square | brake disc and caliper, pads, brake fluid check | none: no brake card in any tone | H |
+| Bilbatteri cards | dark + light card | wide / square | battery on a bench, terminals, tester | none | H |
+| Styrning & kulleder cards | dark + light card | wide / square | tie rod end, ball joint, steering rack | none | M |
+| Oljebyte cards | dark + light card | wide / square | oil filter, oil pouring, drain plug | none | M |
+| Hjullagerbyte cards | dark + light card | wide / square | hub and bearing on the bench | none | M |
+| Kamrem cards (dark/amber) | dark / amber card | wide / square | timing belt and tensioner | `card-dark-engine-work` (an engine bay, not a belt); white timing-belt card exists | M |
+| Kylare / cooling (dark, amber) | dark / amber card | wide / square | radiator and hoses | white cooler-hose exists; the amber/dark "cooler" original was a copy of the AC card | M |
+| Avgas och sensor (dark, amber) | dark / amber card | wide / square | exhaust pipe, lambda sensor | the "exhaust_and_sensor" original was a copy of the AC card | M |
+| Hjulupphängning (dark) | dark card | wide / square | strut, spring, control arm | white suspension card exists; the dark original was a copy of the engine-work card | M |
+| Real-workshop people shots | any | wide | Maher with a customer, in the actual workshop (no invented plates) | custom cards show invented plates `KLP 482`, `TYK 07K`, `RRR 997`, `PBR 997`, which Maher must approve | M |
+| Phone-sized crops of heroes | hero | 1200×2000 | portrait versions for Reparationer, Hjullager, GAT, Bromssystem, Oljebyte | the wide hero cropped (Oljebyte's can is cut at the top on phones) | M |
+
+### Delivered
+*(none yet)*
 
 ## Treatments
 
