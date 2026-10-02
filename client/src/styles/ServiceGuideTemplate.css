@@ -425,6 +425,26 @@
 .service-guide__closing .service-guide__actions { margin-bottom: 0; flex-wrap: nowrap; }
 
 /* ---------- Responsive ---------- */
+/* Photos behind the three dark guide cards (BACKGROUNDS.md treatment D): neutral workshop
+   motifs, since the same cards are on every guide. The veil keeps white copy above 7:1. */
+.service-guide__importance {
+  background-image: linear-gradient(90deg, rgba(7, 20, 22, 0.88) 0%, rgba(7, 20, 22, 0.8) 55%, rgba(7, 20, 22, 0.66) 100%), url('../assets/images/services/general/band-process-tabletop-tools.webp');
+  background-position: center, right center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.service-guide__service-card {
+  background-image: linear-gradient(90deg, rgba(7, 20, 22, 0.88) 0%, rgba(7, 20, 22, 0.78) 55%, rgba(7, 20, 22, 0.62) 100%), url('../assets/images/services/repair/band-process-engine-work.webp');
+  background-position: center, right center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.service-guide__closing {
+  background-image: linear-gradient(90deg, rgba(7, 20, 22, 0.86) 0%, rgba(7, 20, 22, 0.7) 55%, rgba(7, 20, 22, 0.5) 100%), url('../assets/images/services/repair/closing-dark-under-lift.webp');
+  background-position: center, center 70%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 @media (max-width: 900px) {
   .service-guide__intro-layout { grid-template-columns: 1fr; }
   .service-guide__importance { grid-template-columns: 1fr; }
