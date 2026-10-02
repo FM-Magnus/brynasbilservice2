@@ -19,9 +19,12 @@ function tsxFiles(dir: string): string[] {
   })
 }
 
-// href="/x", href='/x' and href={'/x'} / href={"/x"} / href={`/x`}. Protocol-relative
-// '//host' is excluded; it is external by definition.
-const ROOT_RELATIVE_HREF = /href=\{?\s*["'`]\/(?!\/)/
+// href="/x", href='/x' and href={'/x'} / href={"/x"} / href={`/x`}, and also a data
+// field written `href: '/x'`: that one reached an <a href={item.href}> on /biltjanster
+// and left the basename for the live site (fixed 2026-10-02). Name such a field `to`
+// and render it with <Link to>. Protocol-relative '//host' is excluded; it is external
+// by definition.
+const ROOT_RELATIVE_HREF = /href(?:=\{?|:)\s*["'`]\/(?!\/)/
 
 test('no internal link bypasses the router basename', async ({}, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-1440', 'source scan, not viewport-dependent')
