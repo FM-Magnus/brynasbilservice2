@@ -33,7 +33,7 @@ Phases 1–7 are done (production fixes, facts and data, documentation, assets a
 
 **Handover to Codex (2026-10-02), first in the queue:**
 - **Repo-wide check run, first thing:** `typecheck`, `check:css`, `build`, `test:browser` (1440/768/390), `git diff --check`, plus a read-only review of the whole branch `redesign/blue-teal-v1` (`design/card-backgrounds` was merged into it 2026-10-02; nothing pushed yet) against `CSS_OWNERSHIP.md` (cascade ties, `.x.x--variant` rule, page-local copies of shared patterns, unused images). Report findings with file:line; fix nothing without Magnus.
-- **Backgrounds go in by hand, one slot at a time** (Magnus places each in Codex; no batch automation). Method and treatments: [`BACKGROUNDS.md`](BACKGROUNDS.md). Done: Landing, Om oss, Bärgning, Kontakt (closing card only). Not assigned: Däckservice, AC, Bilservice, Felsökning, Reparationer, the ten guides, Biltjänster, Bilar till salu, Galleri.
+- **Backgrounds go in by hand, one slot at a time** (Magnus places each in Codex; no batch automation). Method and treatments: [`BACKGROUNDS.md`](BACKGROUNDS.md). Done: Landing, Om oss, Bärgning, Kontakt (closing card only). Done on the unpushed branch `design/backgrounds-freestyle` (Magnus's free-hands round, 2026-10-02, table in [`BACKGROUNDS.md`](BACKGROUNDS.md)): Bilservice, AC, Felsökning, Reparationer, Däckservice, Biltjänster, Bilar till salu and the guide cards. Not assigned: the price cards on Däckservice and AC, Galleri, per-guide topic photos.
 - Faces and plates in the custom cards need Maher's OK; missing motifs go in the gap log.
 - The new Felsökning hero (2026-10-02, two mechanics' faces) is live without Maher's OK yet; Magnus keeps it until Maher objects. Swap it if he does.
 
