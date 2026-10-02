@@ -402,18 +402,6 @@
   color: var(--bb-color-text-muted);
 }
 
-.bargning-page__scenario-card--teal-gradient {
-  background: linear-gradient(145deg, #0c2b30 0%, #07191d 100%);
-  border: 1px solid rgba(19, 154, 140, 0.3);
-  color: var(--bb-color-text-inverse);
-}
-.bargning-page__scenario-card--teal-gradient .bargning-page__scenario-heading {
-  color: var(--bb-color-text-inverse);
-}
-.bargning-page__scenario-card--teal-gradient .bargning-page__scenario-desc {
-  color: rgba(255, 255, 255, 0.78);
-}
-
 .bargning-page__scenario-card--dark {
   background: var(--bb-color-ink-950);
   border: 1px solid rgba(255, 255, 255, 0.08);

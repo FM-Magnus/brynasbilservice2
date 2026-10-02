@@ -79,7 +79,6 @@
 .bilservice__image-frame { display: block; width: 100%; overflow: hidden; background: var(--bilservice-aqua-100); }
 .bilservice__image-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .bilservice__image-frame--wide { aspect-ratio: 16 / 9; border-radius: var(--bb-radius-card); box-shadow: var(--bb-shadow-card); }
-.bilservice__image-frame--card { aspect-ratio: 4 / 3; }
 .bilservice__image-slot--radius-lg { border-radius: var(--bb-radius-card); }
 .bilservice__image-slot--ar-16-9 { aspect-ratio: 16 / 9; }
 
