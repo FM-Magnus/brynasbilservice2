@@ -2,6 +2,10 @@
 
 One dated entry per day, newest first — one short bullet per session, naming the tool and topic first. **History, never instructions:** rules live in `AGENTS.md`, the current state in [`STATUS.md`](STATUS.md). When the oldest entries here are more than about two weeks old, move them to the top of [`archive/SESSION_LOG_ARCHIVE.md`](archive/SESSION_LOG_ARCHIVE.md). (Renamed from `SESSION_LOG_CURRENT.md` on 2026-09-23; entries below keep their original file names.)
 
+### 2026-10-02
+
+- **Claude Code — card and band backgrounds, slot by slot (Magnus decides each one):** 24 PNG cards in `_incoming-assets/IMPLEMENT/` optimized into `backgrounds/` (generic, 20 unique: four originals were byte-identical copies) and `backgrounds/custom/` (curated `custom_card_*`, 11 cards, higher quality) as WebP+JPG crops (wide/square/tall), originals untouched. Applied by hand on Landing (process band, why-section photo), Om oss (principles, process, closing card with glass buttons, facts grid, hero left ramp) and Bärgning (showcase, scenarios, process band with glass cards, teal CTA). Also: hero reviews card shows the whole review (stacked reviews, stable height); slideshow no longer blanks when the window is narrowed to phone width (+ `hero-resize.spec.ts`); new heroes for Reparationer and Hjullager (the latter had sat unimplemented since 2026-09-30); read-only audit run 1 (shared layer + Landing, Om oss, Kontakt: 25 findings, tranches T1–T7 proposed, nothing acted on). Effects are page-local CSS for now; a shared pattern and a written design log are the next step. Suite 235 passed.
+
 ### 2026-10-01
 
 - **Claude Code — phone footer (Magnus chose option A, no page links, no wheel, no description/trust/tagline):** measured first (1508px at 390, 15 targets under 44px, contrast fine), then one `@media (max-width: 650px)` block in `PublicFooter.css`, same DOM. Result 633-658px at 320-650px, 0 small targets, no wheel request, 25px above the fixed bar on `/`, `/kontakt`, `/oljebyte`, `/bilar-till-salu`, `/galleri` and the 404 page; 651px, 768px and 1440px heights unchanged (1508 / 906 / 548). Suite 223 passed; no baseline needed refreshing.
