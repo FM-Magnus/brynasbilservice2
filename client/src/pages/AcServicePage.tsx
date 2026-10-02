@@ -383,7 +383,7 @@ export default function AcServicePage() {
         {/* Closing Reassurance Card */}
         <section aria-labelledby="ac-closing-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card bilservice__closing-card--gauges">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="ac-closing-title">Boka AC-service hos Brynäs Bilservice</h3>

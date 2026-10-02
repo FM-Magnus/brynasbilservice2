@@ -244,7 +244,7 @@ export default function ReparationerPage() {
         {/* Tydligt pris, inga överraskningar */}
         <section aria-labelledby="reparationer-trust-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card bilservice__closing-card--underlift">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="reparationer-trust-title">Tydligt pris, inga överraskningar</h3>

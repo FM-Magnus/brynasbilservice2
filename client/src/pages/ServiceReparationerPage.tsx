@@ -231,7 +231,7 @@ export default function ServiceReparationerPage() {
         {/* Alltid tydliga besked och ärliga priser */}
         <section aria-labelledby="bilservice-trust-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card--light bilservice__closing-card--sparkplugs">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="bilservice-trust-title">Alltid tydliga besked och ärliga priser</h3>

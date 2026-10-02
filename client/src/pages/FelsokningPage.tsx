@@ -259,7 +259,7 @@ export default function FelsokningPage() {
         {/* Alltid tydliga besked och ärliga priser */}
         <section aria-labelledby="felsokning-trust-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card--light bilservice__closing-card--diagnosis">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="felsokning-trust-title">Alltid tydliga besked och ärliga priser</h3>
