@@ -26,8 +26,8 @@ import imgMaherBenchWebp from '../assets/images/about/maher-workshop-bench.webp'
 import imgMaherBenchJpg from '../assets/images/about/maher-workshop-bench.jpg'
 
 
-import principlesBgWebp from '../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.webp'
-import principlesBgJpg from '../assets/images/home/landing-v2/landing-why-reassurance-handshake-light.jpg'
+import principlesBgWebp from '../assets/images/about/about-principles-handover-key.webp'
+import principlesBgJpg from '../assets/images/about/about-principles-handover-key.jpg'
 
 import { BUSINESS, weekdayHours } from '../data/business'
 import './AboutPage.css'
@@ -220,7 +220,8 @@ export default function AboutPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            {BUSINESS.address.full}
+                            {BUSINESS.address.street},{' '}
+                            <span className="omoss-page__nowrap">{BUSINESS.address.postalCode} {BUSINESS.address.city}</span>
                           </a>
                         </span>
                       </div>
