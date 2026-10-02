@@ -25,6 +25,8 @@ import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { BUSINESS } from '../data/business'
 import heroWebp from '../assets/images/services/general/service-ready-car-workshop-hero.webp'
 import servicebookWebp from '../assets/images/services/general/servicebook-car-key-counter.webp'
+import levelMidWebp from '../assets/images/services/general/service-level-mid-brake-parts.webp'
+import levelMajorWebp from '../assets/images/services/general/service-level-major-steering-suspension.webp'
 import levelBasicWebp from '../assets/images/services/general/service-level-basic-bright-workshop.webp'
 import safetyWebp from '../assets/images/services/general/service-safety-brake-inspection.webp'
 import './ServiceReparationerPage.css'
@@ -53,11 +55,13 @@ const serviceLevels = [
   },
   {
     title: 'Mellanservice',
+    photo: levelMidWebp,
     description: 'Mellanservice är mer omfattande och inkluderar allt i en bas- eller mindre service, plus:',
     items: ['Byte av luftfilter', 'Byte av bränslefilter', 'Granskning av bromssystem', 'Kontroll av drivremmar och övriga remmar', 'Kontroll av belysning och signaler', 'Inspektion av avgassystemet'],
   },
   {
     title: 'Stor service',
+    photo: levelMajorWebp,
     description: 'En stor service är den mest omfattande och inkluderar följande, utöver de tidigare nämnda punkterna:',
     items: ['Byte av tändstift', 'Kontroll och justering av tändsystem', 'Inspektion av fjädring och stötdämpare', 'Kontroll av växellåda och koppling', 'Kontroll av bilens elektroniska system, inklusive diagnostiska tester'],
   },
@@ -157,12 +161,10 @@ export default function ServiceReparationerPage() {
             </div>
             <div className="bilservice__levels-grid">
               {serviceLevels.map((level, index) => (
-                <article className={`bilservice__level-card bilservice__level-card--0${index + 1}${'photo' in level ? ' bilservice__level-card--photo' : ''}`} key={level.title}>
-                  {'photo' in level && (
-                    <picture className="bilservice__level-photo" aria-hidden="true">
-                      <img src={level.photo} alt="" loading="lazy" width={1000} height={900} />
-                    </picture>
-                  )}
+                <article className={`bilservice__level-card bilservice__level-card--0${index + 1} bilservice__level-card--photo`} key={level.title}>
+                  <picture className="bilservice__level-photo" aria-hidden="true">
+                    <img src={level.photo} alt="" loading="lazy" width={1000} height={900} />
+                  </picture>
                   <span className="bilservice__level-badge" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <h3>{level.title}</h3>
                   <p>{level.description}</p>
