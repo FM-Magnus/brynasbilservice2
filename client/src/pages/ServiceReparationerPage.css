@@ -729,3 +729,9 @@
   .bilservice > #bilservice { --bb-shade-strength: 0.55; }
   .bilservice > #bilservice .bb-hero__media img { object-position: 40% 52%; }
 }
+
+/* Felsökning hero (new photo 2026-10-02): the mechanic sits at the right edge, so on phones the crop
+   moves right to keep his face and the laptop in frame. */
+@media (max-width: 650px) {
+  .bilservice > #felsokning .bb-hero__media img { object-position: 80% 50%; }
+}
