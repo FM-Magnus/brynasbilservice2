@@ -685,3 +685,37 @@
 .bilservice > #ac-service { --bb-shade-strength: 0.8; }
 /* Placeholder hero photo is bright and busy behind the text; revisit when the real photo arrives. */
 .bilservice > #reparationer { --bb-shade-strength: 0.6; }
+
+/* BACKGROUNDS.md treatment D on Däckservice's closing card: dark veil over a photo, white copy.
+   Written as .bb-card--trust.bilservice__closing-card so it out-ranks the shared light card. */
+.bb-card--trust.bilservice__closing-card {
+  background-color: var(--bb-color-ink-950);
+  background-image:
+    linear-gradient(rgba(7, 20, 22, 0.28), rgba(7, 20, 22, 0.28)),
+    image-set(
+      url('../assets/images/services/tires/tyre-rack-closing-wide.webp') type('image/webp') 1x,
+      url('../assets/images/services/tires/tyre-rack-closing-wide.jpg') type('image/jpeg') 1x
+    );
+  background-position: center;
+  background-size: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--bb-color-text-inverse);
+}
+.bb-card--trust.bilservice__closing-card h3 {
+  color: var(--bb-color-text-inverse);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+.bb-card--trust.bilservice__closing-card .bb-lead {
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+@media (max-width: 650px) {
+  .bb-card--trust.bilservice__closing-card {
+    background-image:
+      linear-gradient(rgba(7, 20, 22, 0.28), rgba(7, 20, 22, 0.28)),
+      image-set(
+        url('../assets/images/services/tires/tyre-rack-closing-tall.webp') type('image/webp') 1x,
+        url('../assets/images/services/tires/tyre-rack-closing-tall.jpg') type('image/jpeg') 1x
+      );
+  }
+}

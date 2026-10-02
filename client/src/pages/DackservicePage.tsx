@@ -327,7 +327,7 @@ export default function DackservicePage() {
         {/* Closing Reassurance Card */}
         <section aria-labelledby="dackservice-closing-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="dackservice-closing-title">Låt oss gå igenom dina hjul</h3>
