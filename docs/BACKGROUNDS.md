@@ -112,6 +112,13 @@ Also today: Landing's GAT dealer line is one unit (`nowrap`) and the contact hea
 - **M. Split card, hard edge:** card as a two-column grid, one half a clean colour (dark, teal gradient or white), the other half the photo (`object-fit: cover`, no veil) with a 1–2 px edge, stacked on phones with the photo on top (Bärgning's service card and used-cars banner already do it).
 - **N. Top-to-bottom dissolve on a white band:** photo at the bottom of a page-colour band, `mask-image: linear-gradient(180deg, transparent 0, #000 55%)`, text at the top; same `multiply` rule as K for `white-*` images.
 
+### O. Amber photo (amber is the accent, so it belongs in the backgrounds too, not only in text and solid cards)
+- **Native amber photos:** only three exist (`amber-ac`, `amber-luftfilter`, `amber-spark-plugs`); cooler and exhaust/sensor were copies of the AC card (gap log). Use them first for dark bands and cards.
+- **Amber duotone from any mid or bright photo** (prototype 2026-10-03: tabletop tools, oil filter): card background `linear-gradient(135deg, #b56c01, #8a5301)`, the `<img>` on top with `mix-blend-mode: soft-light; filter: grayscale(1) contrast(1.3) brightness(1.4)`, photo absolutely placed behind the copy (`isolation: isolate`, `z-index: -1`). Reads as a warm amber photograph. Dark photos (steering, under lift) turn dark brown, not amber: brighten more or use a native amber photo.
+- **Avoid:** `mix-blend-mode: overlay` (red cast), `#d98200` as the base (too orange), white body text on `#b56c01` without a measurement (about 4:1): deepen the lower half to `#8a5301` or `#5e3800` under the copy and measure.
+- **Where:** one amber photo surface per long page, on a feature surface (a CTA, a process band or one card in a stepped row), never on forms, FAQ, tips or ledgers. Amber photo, teal photo and a clean surface should alternate; amber must not exceed one in three photo surfaces.
+- **Gap:** a proper amber set in the same 1600×1440 format as the teal cards (AMBER tone, copy-left) for oil, brakes, battery, exhaust, wheel bearing, tyres, towing and steering would remove the need for duotone; produce it when possible.
+
 ## Reference philosophy and the clean budget (read before touching a page)
 
 Landing, Om oss and Bärgning are the reference (looked at 2026-10-03). What they do:
@@ -126,7 +133,7 @@ Landing, Om oss and Bärgning are the reference (looked at 2026-10-03). What the
 2. Always clean, never a photo: forms and their notices, FAQ items, tips (`.bb-tip`), ledgers and price lists, tables, legal/fact cards, any card with a long paragraph or more than one list, the contact/direct-contact cards, review cards, step cards that already have an icon row.
 3. At most 2 photo-treated surfaces per screen height and no two touching each other; between two photo surfaces put a clean one.
 4. The same photo never twice on a page, and the same treatment at most twice per page.
-5. Variety: alternate light, mid and dark; at least one amber or teal-gradient surface per long page; mix directions (fade from the left, from the right, top to bottom).
+5. Variety: alternate light, mid and dark; every long page gets at least one **amber photo surface** (recipe O or a native amber card; solid amber cards and amber text do not count) and teal and amber photos alternate; mix directions (fade from the left, from the right, top to bottom).
 6. A "visible" photo is the point: if the veil needed for 4.5:1 makes the photo disappear (it should still read as a motif at 1440 px), use a clean card instead.
 
 ## Kept plain (no photo), on purpose
