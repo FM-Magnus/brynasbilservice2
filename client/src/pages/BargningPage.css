@@ -400,6 +400,9 @@
 .bargning-page__scenario-light-photo { display: block; inset: 0; position: absolute; z-index: -1; }
 .bargning-page__scenario-light-photo img { display: block; height: 100%; object-fit: cover; object-position: 70% center; width: 100%; }
 .bargning-page__scenario-light-photo::after { background: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.92) 55%, rgba(255, 255, 255, 0.76) 100%); content: ''; inset: 0; position: absolute; }
+/* Card 2: mid-teal tow-truck photo under a teal veil, between the pale card and the dark photo cards. */
+.bargning-page__scenario-card--dark.bargning-page__scenario-card--mid { background: var(--bb-color-teal-800); isolation: isolate; }
+.bargning-page__scenario-card--mid .bargning-page__scenario-light-photo::after { background: linear-gradient(155deg, rgba(4, 96, 108, 0.52) 0%, rgba(3, 80, 92, 0.7) 100%); }
 .bargning-page__scenario-card--light .bargning-page__scenario-heading {
   color: var(--bb-color-ink-950);
 }

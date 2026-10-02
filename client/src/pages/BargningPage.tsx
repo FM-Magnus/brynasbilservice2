@@ -23,6 +23,7 @@ import heroStrapWebp from '../assets/images/services/towing/towing-hero-strap.we
 import heroHighwayWebp from '../assets/images/services/towing/towing-hero-highway.webp'
 import heroPhoneWebp from '../assets/images/services/towing/towing-hero-phone.webp'
 import processBgWebp from '../assets/images/services/towing/towing-process-workshop-evening.webp'
+import midTowingWebp from '../assets/images/services/towing/towing-scenario-mid-towing.webp'
 import lightRecoveryWebp from '../assets/images/services/towing/towing-scenario-light-recovery.webp'
 import winterWebp from '../assets/images/services/towing/towing-scenario-winter.webp'
 import { useIsPhone } from '../hooks/useIsPhone'
@@ -282,7 +283,10 @@ export default function BargningPage() {
               </article>
 
               {/* Card 2: Haveri, punktering eller överhettning */}
-              <article className="bargning-page__scenario-card bargning-page__scenario-card--dark">
+              <article className="bargning-page__scenario-card bargning-page__scenario-card--dark bargning-page__scenario-card--mid">
+                <picture className="bargning-page__scenario-light-photo" aria-hidden="true">
+                  <img src={midTowingWebp} alt="" loading="lazy" width={640} height={576} />
+                </picture>
                 <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
                   <AlertTriangleIcon />
                 </div>
