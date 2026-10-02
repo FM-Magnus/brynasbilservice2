@@ -148,7 +148,6 @@ export default function LandingPage() {
             <img src={whyWebp} alt="" loading="lazy" width={1400} height={700} />
           </picture>
           <div>
-            <p className="bb-eyebrow">Om Brynäs Bilservice</p>
             <h2 id="landing-v2-why-title" className="bb-h2">
               Trygg bilservice<br />i <span className="bb-accent">Gävle</span>
             </h2>
