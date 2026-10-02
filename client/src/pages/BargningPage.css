@@ -166,7 +166,7 @@
 .bargning-page__showcase-img {
   height: 100%;
   object-fit: cover;
-  object-position: 36% center;
+  object-position: center;
   width: 100%;
 }
 
@@ -447,12 +447,17 @@
 }
 
 .bargning-page__scenario-photo::after {
-  background: none;
+  /* Dark ramp under the copy: the truck sits right behind the heading and text. */
+  background: linear-gradient(180deg, rgba(7, 20, 22, 0) 0%, rgba(7, 20, 22, 0.35) 30%, rgba(7, 20, 22, 0.62) 55%, rgba(7, 20, 22, 0.74) 100%);
   content: '';
   inset: 0;
   position: absolute;
 }
 
+.bargning-page__scenario-card--winter .bargning-page__scenario-photo::after {
+  /* Teal-tinted dark ramp: keeps the card in the white-to-black step and tames the bright snow. */
+  background: linear-gradient(180deg, rgba(12, 43, 48, 0.5) 0%, rgba(8, 28, 33, 0.78) 45%, rgba(7, 25, 29, 0.88) 100%);
+}
 .bargning-page__scenario-photo-content {
   display: flex;
   flex-direction: column;
@@ -475,25 +480,29 @@
    ------------------------------------------------------------- */
 .bargning-page__process {
   background-color: var(--bb-color-ink-950);
-  background-image: 
-    radial-gradient(circle at 85% 50%, rgba(19, 154, 140, 0.08) 0%, transparent 60%),
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 40px 40px, 40px 40px;
+  /* The 40px grid mesh was replaced by a faint photo (Magnus 2026-10-02). */
+  background-image: radial-gradient(circle at 85% 50%, rgba(19, 154, 140, 0.08) 0%, transparent 60%);
   color: var(--bb-color-text-inverse);
+  isolation: isolate;
+  overflow: hidden;
   padding-bottom: clamp(4.5rem, 6.5vw, 6rem);
   padding-top: clamp(4.5rem, 6.5vw, 6rem);
   position: relative;
 }
 
+.bargning-page__process-photo {
+  bottom: 0; display: block; left: 0; opacity: 0.2; position: absolute; right: 0; top: 0; z-index: -1;
+}
+.bargning-page__process-photo img { display: block; height: 100%; object-fit: cover; object-position: center 60%; width: 100%; }
+
 .bargning-page__process-header {
-  margin: 0 auto clamp(2.5rem, 4.5vw, 3.5rem);
+  margin: 0 0 clamp(2.5rem, 4.5vw, 3.5rem) auto;
   max-width: 680px;
-  text-align: center;
+  text-align: right;
 }
 
 .bargning-page__process-header .bb-eyebrow--dark {
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .bargning-page__process-title {
@@ -514,10 +523,14 @@
 }
 
 .bargning-page__process-card {
-  background: rgba(12, 35, 39, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* "Stained glass" (Magnus 2026-10-02): translucent teal-tinted fill that blurs the photo behind it,
+     a light edge and a top highlight. */
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  background: linear-gradient(160deg, rgba(10, 178, 193, 0.2) 0%, rgba(12, 43, 48, 0.5) 100%);
+  border: 1px solid rgba(127, 220, 224, 0.28);
   border-radius: var(--bb-radius-card);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 12px 32px rgba(0, 0, 0, 0.3);
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -785,7 +798,11 @@
 
 .bargning-page__cta-card {
   background-color: var(--bb-color-ink-950);
-  background-image: 
+  /* Mid-teal veil (--bb-color-teal-700) over the photo, more see-through, plus a darker ramp
+     behind the copy on the left (Magnus 2026-10-02). Top layer first. */
+  background-image:
+    linear-gradient(90deg, rgba(7, 20, 22, 0.6) 0%, rgba(7, 20, 22, 0.38) 36%, rgba(7, 20, 22, 0) 64%),
+    linear-gradient(90deg, rgba(4, 119, 132, 0.7) 0%, rgba(4, 119, 132, 0.5) 40%, rgba(4, 119, 132, 0.3) 70%, rgba(4, 119, 132, 0.4) 100%),
     image-set(
       url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
       url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
@@ -796,24 +813,24 @@
   box-shadow: var(--bb-shadow-floating);
   color: var(--bb-color-text-inverse);
   padding: clamp(3rem, 5vw, 4.5rem) clamp(2rem, 4vw, 3.5rem);
-  text-align: center;
+  text-align: left;
 }
 
 .bargning-page__cta-eyebrow {
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 0.75rem;
 }
 
 .bargning-page__cta-title {
   color: var(--bb-color-text-inverse);
-  margin: 0 auto 0.85rem;
+  margin: 0 0 0.85rem;
   max-width: 650px;
 }
 
 .bargning-page__cta-desc {
   font-size: 1.05rem;
   line-height: 1.6;
-  margin: 0 auto 2.25rem;
+  margin: 0 0 2.25rem;
   max-width: 580px;
 }
 
@@ -822,13 +839,23 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 /* -------------------------------------------------------------
    RESPONSIVE BREAKPOINTS
    ------------------------------------------------------------- */
 @media (max-width: 1024px) {
+  /* The copy spans most of the card here, so the teal veil stays strong across it. */
+  .bargning-page__cta-card {
+    background-image:
+      linear-gradient(90deg, rgba(7, 20, 22, 0.55) 0%, rgba(7, 20, 22, 0.42) 60%, rgba(7, 20, 22, 0.2) 100%),
+      linear-gradient(90deg, rgba(4, 119, 132, 0.7) 0%, rgba(4, 119, 132, 0.6) 60%, rgba(4, 119, 132, 0.38) 100%),
+      image-set(
+        url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
+        url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
+      );
+  }
   .bargning-page__showcase-card {
     grid-template-columns: 1fr;
   }

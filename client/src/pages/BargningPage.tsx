@@ -14,14 +14,14 @@ import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 
-import imgTowTruckJpg from '../assets/images/services/towing/towing-truck-with-car-showcase.jpg'
-import imgTowTruckWebp from '../assets/images/services/towing/towing-truck-with-car-showcase.webp'
+import imgTowTruckJpg from '../assets/images/services/towing/towing-mechanic-strap-showcase.jpg'
+import imgTowTruckWebp from '../assets/images/services/towing/towing-mechanic-strap-showcase.webp'
 import imgWorkshopLiftJpg from '../assets/images/workshop/workshop-car-on-lift.jpg'
 import imgWorkshopLiftWebp from '../assets/images/workshop/workshop-car-on-lift.webp'
 import imgPeugeotFrontWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
 import imgPeugeotFrontJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.jpg'
-import imgSunsetRoadWebp from '../assets/images/home/landing-v2/landing-sunset-road-hero.webp'
-import imgSunsetRoadJpg from '../assets/images/home/landing-v2/landing-sunset-road-hero.jpg'
+import imgSunsetRoadWebp from '../assets/images/services/towing/towing-scenario-wet-road.webp'
+import imgSunsetRoadJpg from '../assets/images/services/towing/towing-scenario-wet-road.jpg'
 
 import heroStrapWebp from '../assets/images/services/towing/towing-hero-strap.webp'
 import heroStrapJpg from '../assets/images/services/towing/towing-hero-strap.jpg'
@@ -29,6 +29,10 @@ import heroHighwayWebp from '../assets/images/services/towing/towing-hero-highwa
 import heroHighwayJpg from '../assets/images/services/towing/towing-hero-highway.jpg'
 import heroPhoneWebp from '../assets/images/services/towing/towing-hero-phone.webp'
 import heroPhoneJpg from '../assets/images/services/towing/towing-hero-phone.jpg'
+import processBgWebp from '../assets/images/services/towing/towing-process-workshop-evening.webp'
+import processBgJpg from '../assets/images/services/towing/towing-process-workshop-evening.jpg'
+import winterWebp from '../assets/images/services/towing/towing-scenario-winter.webp'
+import winterJpg from '../assets/images/services/towing/towing-scenario-winter.jpg'
 import { useIsPhone } from '../hooks/useIsPhone'
 import { BUSINESS, weekdayHours } from '../data/business'
 import './BargningPage.css'
@@ -165,11 +169,11 @@ export default function BargningPage() {
                   <source srcSet={imgTowTruckWebp} type="image/webp" />
                   <img
                     src={imgTowTruckJpg}
-                    alt="Blå Iveco bärgningsbil med en personbil fastsurrad på flaket"
+                    alt="Mekaniker surrar fast en personbil med gul spännrem på en bärgningsbils flak"
                     className="bargning-page__showcase-img"
                     loading="lazy"
-                    width={1600}
-                    height={893}
+                    width={800}
+                    height={800}
                   />
                 </picture>
                 <div className="bargning-page__showcase-location-badge">
@@ -284,14 +288,27 @@ export default function BargningPage() {
               </article>
 
               {/* Card 2: Haveri, punktering eller överhettning */}
-              <article className="bargning-page__scenario-card bargning-page__scenario-card--teal-gradient">
-                <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
-                  <AlertTriangleIcon />
+              <article className="bargning-page__scenario-card bargning-page__scenario-card--photo bargning-page__scenario-card--winter">
+                <picture className="bargning-page__scenario-photo">
+                  <source srcSet={winterWebp} type="image/webp" />
+                  <img
+                    src={winterJpg}
+                    alt="Mekaniker och kund pratar vid en bärgningsbil på en snöig väg"
+                    className="bargning-page__scenario-photo-img"
+                    loading="lazy"
+                    width={640}
+                    height={640}
+                  />
+                </picture>
+                <div className="bargning-page__scenario-photo-content">
+                  <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
+                    <AlertTriangleIcon />
+                  </div>
+                  <h3 className="bargning-page__scenario-heading">Haveri, punktering eller överhettning</h3>
+                  <p className="bargning-page__scenario-desc">
+                    Vi bärgar din bil om den inte kan köras vidare på ett säkert eller lagligt sätt.
+                  </p>
                 </div>
-                <h3 className="bargning-page__scenario-heading">Haveri, punktering eller överhettning</h3>
-                <p className="bargning-page__scenario-desc">
-                  Vi bärgar din bil om den inte kan köras vidare på ett säkert eller lagligt sätt.
-                </p>
               </article>
 
               {/* Card 3: Kan inte framföras säkert eller lagligt */}
@@ -311,9 +328,11 @@ export default function BargningPage() {
                   <source srcSet={imgSunsetRoadWebp} type="image/webp" />
                   <img
                     src={imgSunsetRoadJpg}
-                    alt="Biltransport på väg mot verkstaden"
+                    alt="Blå bärgningsbil med en personbil på flaket kör på en blöt motorväg"
                     className="bargning-page__scenario-photo-img"
                     loading="lazy"
+                    width={640}
+                    height={640}
                   />
                 </picture>
                 <div className="bargning-page__scenario-photo-content">
@@ -334,6 +353,10 @@ export default function BargningPage() {
             4. STEP-BY-STEP WORKSHOP PROTOCOL
             ========================================================= */}
         <section className="bargning-page__process" aria-labelledby="process-title">
+          <picture className="bargning-page__process-photo" aria-hidden="true">
+            <source srcSet={processBgWebp} type="image/webp" />
+            <img src={processBgJpg} alt="" loading="lazy" width={1400} height={700} />
+          </picture>
           <div className="bb-wrap">
             <div className="bargning-page__process-header">
               <p className="bb-eyebrow bb-eyebrow--dark">
