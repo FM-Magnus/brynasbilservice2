@@ -395,6 +395,11 @@
   background: var(--bb-color-surface);
   border: 1px solid rgba(7, 20, 22, 0.08);
 }
+/* Pale teal photo behind card 1 (BACKGROUNDS.md B/C): the truck sits right, dark copy stays left. */
+.bargning-page__scenario-card--light { isolation: isolate; }
+.bargning-page__scenario-light-photo { display: block; inset: 0; position: absolute; z-index: -1; }
+.bargning-page__scenario-light-photo img { display: block; height: 100%; object-fit: cover; object-position: 70% center; width: 100%; }
+.bargning-page__scenario-light-photo::after { background: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.92) 55%, rgba(255, 255, 255, 0.76) 100%); content: ''; inset: 0; position: absolute; }
 .bargning-page__scenario-card--light .bargning-page__scenario-heading {
   color: var(--bb-color-ink-950);
 }
