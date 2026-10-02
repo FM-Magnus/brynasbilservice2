@@ -284,10 +284,14 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <section className="kontakt-page__focus" aria-labelledby="contact-focus-title">
-          <div className="bb-wrap kontakt-page__focus-content">
-            <h2 className="bb-h2 kontakt-page__focus-title" id="contact-focus-title">Personlig service<br /><span className="bb-accent">i fokus</span></h2>
-            <p className="bb-lead--dark kontakt-page__focus-lead">Vi tar hand om din bil med noggrannhet, erfarenhet och engagemang.</p>
+        <section className="kontakt-page__focus-section" aria-labelledby="contact-focus-title">
+          <div className="bb-wrap">
+            <div className="kontakt-page__focus">
+              <div className="kontakt-page__focus-content">
+                <h2 className="bb-h2 kontakt-page__focus-title" id="contact-focus-title">Personlig service<br /><span className="bb-accent">i fokus</span></h2>
+                <p className="bb-lead--dark kontakt-page__focus-lead">Vi tar hand om din bil med noggrannhet, erfarenhet och engagemang.</p>
+              </div>
+            </div>
           </div>
         </section>
 

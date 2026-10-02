@@ -475,12 +475,16 @@
   border-radius: var(--bb-radius-card);
   color: var(--bb-color-text-inverse);
   display: flex;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   isolation: isolate;
-  margin: 0 auto clamp(3rem, 5vw, 4.5rem);
-  max-width: 1520px;
-  min-height: 330px;
+  min-height: 300px;
   overflow: hidden;
+  padding: clamp(2.25rem, 4vw, 3.5rem);
   position: relative;
+}
+/* Same card geometry as the closing card below: inside the content width, rounded, left-aligned. */
+.kontakt-page__focus-section {
+  margin: 0 0 clamp(3rem, 5vw, 4.5rem);
 }
 .kontakt-page__focus .bb-accent { color: var(--bb-color-teal-500); }
 .kontakt-page__focus::before {
@@ -494,7 +498,6 @@
 }
 .kontakt-page__focus-content {
   max-width: 480px;
-  padding: clamp(2.5rem, 4vw, 3.5rem) 0;
   position: relative;
   z-index: 1;
 }
@@ -580,7 +583,7 @@
 
 @media (max-width: 650px) {
   .kontakt-page__form-row { grid-template-columns: 1fr; }
-  .kontakt-page__focus { border-radius: 0; margin-bottom: 3.5rem; }
+  .kontakt-page__focus-section { margin-bottom: 3.5rem; }
   .kontakt-page__closing-card {
     /* Phone: the tall crop puts the bright mechanic's arm behind the paragraph, so the veil is a little denser (.38 measured 4.45:1). */
     background-image:
