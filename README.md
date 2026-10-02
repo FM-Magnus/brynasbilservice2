@@ -76,6 +76,8 @@ Building needs Node 18.17 or newer (it generates the gallery image sizes), so bu
 
 At `/admin`: view, filter and update bookings; add, edit and delete services. **The login (`admin` / `admin123`) is checked only in the browser and is not safe for production** — see [`docs/BACKEND.md`](docs/BACKEND.md) §2.1 and [`docs/ops/admin-panel.md`](docs/ops/admin-panel.md).
 
+A new backend (server-side login, `/api/contact`, saved booking comments) is on the branch `codex/repo-audit-2026-10-02` and waits for Johnny's review. It is not in `main`.
+
 ## Documentation
 
 | File | For | What's in it |
