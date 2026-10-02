@@ -132,7 +132,7 @@ export default function LandingPage() {
         </div>
         <div className="bb-wrap">
           <Link to="/gat" className="landing-v2__gat-link">
-            <span>Auktoriserad återförsäljare av GAT – motor- och bränslesystemvård</span>
+            <span><span className="landing-v2__gat-name">Auktoriserad återförsäljare av GAT</span> – motor- och bränslesystemvård</span>
             <ArrowRightIcon aria-hidden="true" />
           </Link>
         </div>
