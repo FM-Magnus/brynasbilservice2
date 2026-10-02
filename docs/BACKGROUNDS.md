@@ -100,6 +100,23 @@ Also today: Landing's GAT dealer line is one unit (`nowrap`) and the contact hea
 
 **Not done:** Däckservice and AC price cards (dark, with icon art), Galleri closing card, Kontakt/Om oss/Landing (already worked), per-guide topic photos (no oil, battery, brake-system or steering motifs in the sets; the guide cards use neutral workshop images, a gap-log item).
 
+## Reference philosophy and the clean budget (read before touching a page)
+
+Landing, Om oss and Bärgning are the reference (looked at 2026-10-03). What they do:
+
+- **One photo-treated surface per section, never a wall of photos.** Between photo bands there is always a calm one: Landing's service row (icons only), Om oss's story text, facts card and statistics, Bärgning's white dealer card and used-cars banner text.
+- **Photos sit on feature surfaces:** hero, a band that introduces a step (process band, treatment A at 15–24%), a closing CTA (D/E), the one white band per page that gets a photo faded in from one side (B/C: Landing "Trygga bilservice", Om oss "Därför väljer kunder oss"), or a split card with the photo as a hard-edged half (Bärgning's service card and used-cars banner).
+- **Solid-colour cards carry the reading:** the amber quote (Om oss), the teal form card (Landing), the dark facts card, ledgers, FAQ, tips, forms. Their colour is the decoration.
+- **Stepped rows keep a clean member:** Bärgning's scenario row is pale, mid teal, dark photo, dark photo (never four photos in a row).
+
+**Clean budget (binding for autonomous rounds):**
+1. In any card group (row or grid) at most half the cards carry a photo; the rest stay clean (solid colour or gradient only).
+2. Always clean, never a photo: forms and their notices, FAQ items, tips (`.bb-tip`), ledgers and price lists, tables, legal/fact cards, any card with a long paragraph or more than one list, the contact/direct-contact cards, review cards, step cards that already have an icon row.
+3. At most 2 photo-treated surfaces per screen height and no two touching each other; between two photo surfaces put a clean one.
+4. The same photo never twice on a page, and the same treatment at most twice per page.
+5. Variety: alternate light, mid and dark; at least one amber or teal-gradient surface per long page; mix directions (fade from the left, from the right, top to bottom).
+6. A "visible" photo is the point: if the veil needed for 4.5:1 makes the photo disappear (it should still read as a motif at 1440 px), use a clean card instead.
+
 ## Kept plain (no photo), on purpose
 Confirm with Magnus before adding a photo to any of these:
 - Landing: the service row (icon, title, text), the trust strip, the contact card.
