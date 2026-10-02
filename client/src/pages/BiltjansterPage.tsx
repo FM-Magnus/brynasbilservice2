@@ -21,6 +21,7 @@ import exhaustThumbWebp from '../assets/images/services/exhaust/exhaust-system-c
 import suspensionThumbWebp from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.webp'
 import repairThumbWebp from '../assets/images/services/general/service-performance-diagnostics.webp'
 import gatThumbWebp from '../assets/images/services/general/service-longevity-oil-filter.webp'
+import ctaBandWebp from '../assets/images/services/general/band-cta-amber-spark-plugs.webp'
 import { BUSINESS } from '../data/business'
 import './BiltjansterPage.css'
 
@@ -221,6 +222,9 @@ export default function BiltjansterPage() {
         </section>
 
         <section className="biltjanster-hub__cta" aria-labelledby="biltjanster-cta-title">
+          <picture className="biltjanster-hub__cta-photo" aria-hidden="true">
+            <img src={ctaBandWebp} alt="" loading="lazy" width={1000} height={500} />
+          </picture>
           <div className="biltjanster-hub__wrap biltjanster-hub__cta-inner">
             <div>
               <p className="bb-eyebrow bb-eyebrow--dark">Redo att boka?</p>
