@@ -85,7 +85,7 @@ export default function StyrningKullederPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--steering">
         <GuideHero
           id="steering-title"
           eyebrow="Framvagn & styrprecision"

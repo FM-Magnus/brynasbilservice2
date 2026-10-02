@@ -102,7 +102,7 @@ footer
   font-weight: 400
   line-height: 25.6px
   color: rgb(7, 20, 22)
-  background-color: rgb(7, 20, 22)
+  background-color: rgb(0, 122, 134)
   border-top-width: 1px
   border-top-style: solid
   border-top-color: rgba(255, 255, 255, 0.08)

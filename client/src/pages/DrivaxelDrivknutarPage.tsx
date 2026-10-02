@@ -86,7 +86,7 @@ export default function DrivaxelDrivknutarPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--driveshaft">
         <GuideHero
           id="driveshaft-title"
           eyebrow="Drivlina & kraftöverföring"

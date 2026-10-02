@@ -83,7 +83,7 @@ export default function KopplingPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--clutch">
         <GuideHero
           id="koppling-title"
           eyebrow="Kraftöverföring & drivlina"

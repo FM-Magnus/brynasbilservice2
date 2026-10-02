@@ -99,7 +99,7 @@ export default function OljebytePage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--oil">
         <GuideHero
           id="oljebyte-title"
           eyebrow="Motorolja & motorunderhåll"

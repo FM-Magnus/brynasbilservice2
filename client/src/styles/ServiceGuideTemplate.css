@@ -445,6 +445,31 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+/* Topic photos for the dark guide cards: each guide's <main> carries service-guide--<topic>; the template stays one. Importance card = dark teal
+   photo under a dark veil; service card = mid-teal photo under a teal veil (topics without a mid photo keep the neutral dark card). */
+.service-guide--oil { --guide-importance-photo: url('../assets/images/services/guide-cards/oil-importance.webp'); --guide-service-photo: url('../assets/images/services/guide-cards/oil-service.webp'); }
+.service-guide--brakes { --guide-importance-photo: url('../assets/images/services/guide-cards/brakes-importance.webp'); --guide-service-photo: url('../assets/images/services/guide-cards/brakes-service.webp'); }
+.service-guide--battery { --guide-importance-photo: url('../assets/images/services/guide-cards/battery-importance.webp'); }
+.service-guide--wheel-bearing { --guide-importance-photo: url('../assets/images/services/guide-cards/wheel-bearing-importance.webp'); }
+.service-guide--exhaust { --guide-importance-photo: url('../assets/images/services/guide-cards/exhaust-importance.webp'); }
+.service-guide--steering { --guide-importance-photo: url('../assets/images/services/guide-cards/steering-importance.webp'); }
+.service-guide--gat { --guide-importance-photo: url('../assets/images/services/guide-cards/gat-importance.webp'); }
+.service-guide--clutch { --guide-importance-photo: url('../assets/images/services/guide-cards/wrench-importance.webp'); }
+.service-guide--timing { --guide-importance-photo: url('../assets/images/services/guide-cards/wrench-importance.webp'); }
+.service-guide--driveshaft { --guide-importance-photo: url('../assets/images/services/guide-cards/wrench-importance.webp'); }
+.service-guide--shocks { --guide-importance-photo: url('../assets/images/services/guide-cards/wrench-importance.webp'); }
+.service-guide--oil .service-guide__importance, .service-guide--brakes .service-guide__importance, .service-guide--battery .service-guide__importance, .service-guide--wheel-bearing .service-guide__importance, .service-guide--exhaust .service-guide__importance, .service-guide--steering .service-guide__importance, .service-guide--gat .service-guide__importance, .service-guide--clutch .service-guide__importance, .service-guide--timing .service-guide__importance, .service-guide--driveshaft .service-guide__importance, .service-guide--shocks .service-guide__importance {
+  background-image: linear-gradient(90deg, rgba(7, 20, 22, 0.8) 0%, rgba(7, 20, 22, 0.66) 55%, rgba(7, 20, 22, 0.46) 100%), var(--guide-importance-photo);
+}
+.service-guide--oil .service-guide__service-card, .service-guide--brakes .service-guide__service-card {
+  background-color: var(--bb-color-teal-800);
+  background-image: linear-gradient(155deg, rgba(4, 112, 125, 0.74) 0%, rgba(3, 92, 105, 0.82) 100%), var(--guide-service-photo);
+}
+.service-guide--oil .service-guide__service-card {
+  /* The oil filter photo is brighter: a denser veil keeps white copy above 4.5:1. */
+  background-image: linear-gradient(155deg, rgba(4, 112, 125, 0.8) 0%, rgba(3, 92, 105, 0.86) 100%), var(--guide-service-photo);
+}
+
 @media (max-width: 900px) {
   .service-guide__intro-layout { grid-template-columns: 1fr; }
   .service-guide__importance { grid-template-columns: 1fr; }

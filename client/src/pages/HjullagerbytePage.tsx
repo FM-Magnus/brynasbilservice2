@@ -86,7 +86,7 @@ export default function HjullagerbytePage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--wheel-bearing">
         <GuideHero
           id="wheel-bearing-title"
           eyebrow="Chassi & hjulupphängning"

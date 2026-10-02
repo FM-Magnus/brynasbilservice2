@@ -81,7 +81,7 @@ export default function KamremPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--timing">
         <GuideHero
           id="kamrem-title"
           eyebrow="Förebyggande motorskydd"

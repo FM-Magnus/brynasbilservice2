@@ -85,7 +85,7 @@ export default function StodampareFjadrarPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--shocks">
         <GuideHero
           id="suspension-title"
           eyebrow="Chassi & fjädring"

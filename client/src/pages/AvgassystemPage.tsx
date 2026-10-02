@@ -89,7 +89,7 @@ export default function AvgassystemPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--exhaust">
         <GuideHero
           id="exhaust-title"
           eyebrow="Avgasrening & ljuddämpning"

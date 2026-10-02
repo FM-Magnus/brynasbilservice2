@@ -84,7 +84,7 @@ export default function BilbatteriPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--battery">
         <GuideHero
           id="battery-title"
           eyebrow="Elsystem & startkraft"

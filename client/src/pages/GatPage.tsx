@@ -80,7 +80,7 @@ export default function GatPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide gat-page">
+      <main className="service-guide gat-page service-guide--gat">
         <GuideHero
           id="gat-title"
           eyebrow="Motor- & bränslesystemvård"

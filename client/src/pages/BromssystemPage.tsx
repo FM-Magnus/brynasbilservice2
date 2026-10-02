@@ -93,7 +93,7 @@ export default function BromssystemPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--brakes">
         <GuideHero
           id="brake-title"
           eyebrow="Bromsservice & säkerhet"
