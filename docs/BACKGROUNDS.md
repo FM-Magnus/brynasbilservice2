@@ -100,6 +100,13 @@ Also today: Landing's GAT dealer line is one unit (`nowrap`) and the contact hea
 
 **Not done:** Däckservice and AC price cards (dark, with icon art), Galleri closing card, Kontakt/Om oss/Landing (already worked), per-guide topic photos (no oil, battery, brake-system or steering motifs in the sets; the guide cards use neutral workshop images, a gap-log item).
 
+### K. Object on the page (white cards, no veil)
+- **For:** the `white-*` cards (clutch, driveshaft, timing belt, suspension, spark plugs, air filter, cooler hose, diagnosis, AC, handover key, tyre) and `teal-light-*` on a section whose background is the page colour `--bb-color-page` (#f8f7f3) or white. Text on the left, the object on the right looks as if it lies on the page itself (prototype 2026-10-03, tested on clutch, key and tyre).
+- **Values:** an `<img>` absolutely placed right (`right: 0; top: 0; height: 100%; width: 60–70%; object-fit: cover; object-position: right center`), `mix-blend-mode: multiply` so the image's pale floor takes the page colour, `filter: brightness(1.18) contrast(1.15) saturate(.7)` to lift the blue-grey of the left side to near white (it measures about (226,240,243), not white), and `mask-image: linear-gradient(90deg, transparent 0, #000 40%)` to dissolve the left edge. Brightness 1.10 without the desaturation leaves a faint blue haze.
+- **Contrast:** the text sits where the mask is transparent, so it is plain text on the page colour: no veil to tune and the object stays fully visible. Measure the text anyway.
+- **Do:** keep the host section a clean page-colour band, one per page (it is the white band that gets the photo, like Landing "Trygg bilservice"). Mirror (object left, text right) with `scaleX(-1)` on the image only when the object is symmetric; the flip reverses labels and plates, so not for the handover key or tyre.
+- **Don't:** use it on an aqua (`--bilservice-aqua-100`) or dark section: multiply tints the photo and the effect is lost. The right edge of the image is a hard cut: let it end at the container edge or add a short right fade (`linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%)`).
+
 ## Reference philosophy and the clean budget (read before touching a page)
 
 Landing, Om oss and Bärgning are the reference (looked at 2026-10-03). What they do:
