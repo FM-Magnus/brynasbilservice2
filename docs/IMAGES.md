@@ -2,6 +2,8 @@
 
 This is the working guide for the current stage: filling image slots one page at a time. Rules for code live in `AGENTS.md`; this file covers the image workflow only.
 
+> Card and band backgrounds (overlays, veils, glass, which cards stay plain) are in [`BACKGROUNDS.md`](BACKGROUNDS.md).
+
 ## The loop (one page at a time)
 
 1. **Inventory the page.** List its image slots and measure each one in the browser (snippet below) — never guess the size from the CSS.
