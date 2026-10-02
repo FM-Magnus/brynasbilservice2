@@ -229,52 +229,6 @@ h1 .bb-accent { color: var(--bb-color-focus); }
 }
 .bb-icon-bare svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)); }
 
-/* ---------- Location pin ("Här finns vi" photo callout) ---------- */
-/* Rendered by `components/ui/LocationPin.tsx`. An absolute overlay for a
-   location/exterior photo: a white arrow above a solid dark label card, so
-   it stays legible over any photo. The photo's own wrapper needs
-   `position: relative`; this anchors to its bottom-center by default — a
-   consumer needing a different anchor overrides via the component's
-   `className` prop, the same way other shared patterns take their size or
-   position from the consumer's own island. Added 2026-09-30 to replace a
-   one-off: the Om oss gallery photo had this same message baked into its
-   pixels, with an address that had already drifted from `business.ts`. */
-.bb-location-pin {
-  align-items: center;
-  bottom: 8%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  left: 50%;
-  position: absolute;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-.bb-location-pin__arrow {
-  color: #fff;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-  height: 28px;
-  width: 28px;
-}
-.bb-location-pin__label {
-  background: var(--bb-color-ink-950);
-  border-radius: var(--bb-radius-card);
-  box-shadow: var(--bb-shadow-floating);
-  color: var(--bb-color-text-inverse);
-  display: grid;
-  gap: 0.15rem;
-  padding: 0.65rem 1.1rem;
-  text-align: center;
-  white-space: nowrap;
-}
-.bb-location-pin__label strong { font: 800 0.98rem/1.2 var(--bb-font-display); }
-.bb-location-pin__label span { color: rgba(255, 255, 255, 0.78); font: 400 0.8rem/1.3 var(--bb-font-body); }
-@media (max-width: 480px) {
-  .bb-location-pin__label { padding: 0.55rem 0.9rem; white-space: normal; }
-  .bb-location-pin__label strong { font-size: 0.9rem; }
-  .bb-location-pin__label span { font-size: 0.74rem; }
-}
-
 /* ---------- Tip callout ("TIPS") ---------- */
 /* Canonical site-wide replacement for what used to be two separate,
    inconsistent patterns: the Guide family's .service-guide__tip-strip and
