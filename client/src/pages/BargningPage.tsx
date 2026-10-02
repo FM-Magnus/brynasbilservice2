@@ -282,6 +282,17 @@ export default function BargningPage() {
               </article>
 
               {/* Card 2: Haveri, punktering eller överhettning */}
+              <article className="bargning-page__scenario-card bargning-page__scenario-card--dark">
+                <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
+                  <AlertTriangleIcon />
+                </div>
+                <h3 className="bargning-page__scenario-heading">Haveri, punktering eller överhettning</h3>
+                <p className="bargning-page__scenario-desc">
+                  Vi bärgar din bil om den inte kan köras vidare på ett säkert eller lagligt sätt.
+                </p>
+              </article>
+
+              {/* Card 3: Kan inte framföras säkert eller lagligt */}
               <article className="bargning-page__scenario-card bargning-page__scenario-card--photo bargning-page__scenario-card--winter">
                 <picture className="bargning-page__scenario-photo">
                   <img
@@ -295,24 +306,13 @@ export default function BargningPage() {
                 </picture>
                 <div className="bargning-page__scenario-photo-content">
                   <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
-                    <AlertTriangleIcon />
+                    <RoadWayIcon />
                   </div>
-                  <h3 className="bargning-page__scenario-heading">Haveri, punktering eller överhettning</h3>
+                  <h3 className="bargning-page__scenario-heading">Kan inte framföras säkert eller lagligt</h3>
                   <p className="bargning-page__scenario-desc">
-                    Vi bärgar din bil om den inte kan köras vidare på ett säkert eller lagligt sätt.
+                    Vi transporterar bilen till vår verkstad i Gävle för felsökning och kostnadsförslag.
                   </p>
                 </div>
-              </article>
-
-              {/* Card 3: Kan inte framföras säkert eller lagligt */}
-              <article className="bargning-page__scenario-card bargning-page__scenario-card--dark">
-                <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
-                  <RoadWayIcon />
-                </div>
-                <h3 className="bargning-page__scenario-heading">Kan inte framföras säkert eller lagligt</h3>
-                <p className="bargning-page__scenario-desc">
-                  Vi transporterar bilen till vår verkstad i Gävle för felsökning och kostnadsförslag.
-                </p>
               </article>
 
               {/* Card 4: Transport till verkstaden */}
