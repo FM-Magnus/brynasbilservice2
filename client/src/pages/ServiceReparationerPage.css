@@ -516,6 +516,21 @@
   color: var(--bb-color-text-muted);
   font: 400 1rem / 1.6 var(--bb-font-body);
 }
+/* Tyre photo faded in from the right under a white veil (treatment B/C). */
+.bilservice__storage-card.bilservice__storage-card--photo {
+  background-color: #fff;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.95) 52%, rgba(255, 255, 255, 0.86) 100%),
+    url('../assets/images/services/tires/storage-white-tyre.webp');
+  background-position: center, right 70%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 900px) {
+  .bilservice__storage-card.bilservice__storage-card--photo {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('../assets/images/services/tires/storage-white-tyre.webp');
+  }
+}
 .bilservice__storage-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -242,7 +242,7 @@ export default function DackservicePage() {
         {/* Däckhotell Section */}
         <section className="bilservice__section--aqua" aria-labelledby="dackservice-storage-title">
           <div className="bb-wrap bilservice__container bilservice__container--pad-lg">
-            <div className="bilservice__storage-card">
+            <div className="bilservice__storage-card bilservice__storage-card--photo">
               <h2 className="bb-h2" id="dackservice-storage-title">Trångt i garaget? Låt oss förvara dina däck.</h2>
               <p>Slipp bära och lagra tunga hjul hemma – vi tar hand om dem tryggt mellan säsongerna.</p>
               <ul className="bilservice__storage-grid">
