@@ -107,6 +107,11 @@ Also today: Landing's GAT dealer line is one unit (`nowrap`) and the contact hea
 - **Do:** keep the host section a clean page-colour band, one per page (it is the white band that gets the photo, like Landing "Trygg bilservice"). Mirror (object left, text right) with `scaleX(-1)` on the image only when the object is symmetric; the flip reverses labels and plates, so not for the handover key or tyre.
 - **Don't:** use it on an aqua (`--bilservice-aqua-100`) or dark section: multiply tints the photo and the effect is lost. The right edge of the image is a hard cut: let it end at the container edge or add a short right fade (`linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%)`).
 
+### L–N. More recipes (starting values, **not yet measured on a page**: test, record the measured values here, then use)
+- **L. Teal-to-amber blend over a dark photo (CTA bands):** two stacked veils, `linear-gradient(120deg, rgba(4,96,108,.72) 0%, rgba(4,96,108,.3) 55%, rgba(240,149,5,.16) 100%)` over the photo, white copy. Keep the amber at or below .2 so it reads as warmth, not as a stain.
+- **M. Split card, hard edge:** card as a two-column grid, one half a clean colour (dark, teal gradient or white), the other half the photo (`object-fit: cover`, no veil) with a 1–2 px edge, stacked on phones with the photo on top (Bärgning's service card and used-cars banner already do it).
+- **N. Top-to-bottom dissolve on a white band:** photo at the bottom of a page-colour band, `mask-image: linear-gradient(180deg, transparent 0, #000 55%)`, text at the top; same `multiply` rule as K for `white-*` images.
+
 ## Reference philosophy and the clean budget (read before touching a page)
 
 Landing, Om oss and Bärgning are the reference (looked at 2026-10-03). What they do:
