@@ -18,6 +18,7 @@ import phoneHeroWebp from '../assets/images/workshop/cars-for-sale-estate-on-lif
 
 import { BUSINESS, weekdayHours } from '../data/business'
 import './BilarTillSalu.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
 
 // Stock is edited in data/vehicles.ts (or, once live, from /admin) — never here.
 
@@ -305,7 +306,7 @@ export default function BilarTillSalu() {
         <section className="bb-hero bilartillsalu-page__hero" aria-labelledby="bilartillsalu-hero-title">
           <div className="bb-hero__media">
             <picture>
-              <img src={isPhone ? phoneHeroWebp : heroWebp} alt="" width={isPhone ? 1200 : 3000} height={isPhone ? 2001 : 1700} />
+              <img src={isPhone ? phoneHeroWebp : heroWebp} alt="" {...heroImgAttrs} width={isPhone ? 1200 : 3000} height={isPhone ? 2001 : 1700} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />

@@ -20,6 +20,7 @@ import findWebp from '../assets/images/contact/contact-find-us-entrance.webp'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
 import { useIsPhone } from '../hooks/useIsPhone'
 import './ContactPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
 
 const heroSlides = [
   { webp: beanieHeroWebp, modifier: ' kontakt-page__hero-slide--beanie' },
@@ -54,7 +55,7 @@ export default function ContactPage() {
           <div className="bb-hero__media" aria-hidden="true">
             {slides.map((slide, i) => (
               <picture key={slide.webp} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
-                <img src={slide.webp} alt="" />
+                <img src={slide.webp} alt="" {...(i === 0 ? heroImgAttrs : {})} />
               </picture>
             ))}
           </div>

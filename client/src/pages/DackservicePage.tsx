@@ -31,6 +31,7 @@ import balancingIcon from '../assets/images/services/tires/tire-icon-balancing.s
 import punctureRepairIcon from '../assets/images/services/tires/tire-icon-puncture-repair.svg'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
 
 type PriceEntry = { label?: string; prefix?: string; amount?: string; unit?: string; contactText?: string }
 
@@ -129,7 +130,7 @@ export default function DackservicePage() {
           <div className="bb-hero__media" aria-hidden="true">
             {heroSlides.map((slide, i) => (
               <picture key={slide.webp} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
-                <img src={slide.webp} alt={slide.alt} />
+                <img src={slide.webp} alt={slide.alt} {...(i === 0 ? heroImgAttrs : {})} />
               </picture>
             ))}
           </div>

@@ -27,6 +27,8 @@ import heroWebp from '../assets/images/services/general/service-ready-car-worksh
 import servicebookWebp from '../assets/images/services/general/servicebook-car-key-counter.webp'
 import safetyWebp from '../assets/images/services/general/service-safety-brake-inspection.webp'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
+import { heroSrcSet } from '../data/heroSrcSet'
 
 const trustRow = [
   { icon: ShieldIcon, title: 'Personlig service', text: 'Du och din bil i fokus.' },
@@ -86,7 +88,7 @@ export default function ServiceReparationerPage() {
         <section className="bb-hero" id="bilservice" aria-labelledby="bilservice-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="bilservice-hero-car">
-              <img src={heroWebp} alt="" />
+              <img src={heroWebp} srcSet={heroSrcSet(heroWebp)} sizes="100vw" alt="" {...heroImgAttrs} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />

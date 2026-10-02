@@ -25,6 +25,7 @@ import { GoogleReviewsCard } from '../../components/ui/GoogleReviewsCard'
 import { ContactFormCard } from '../../components/ui/ContactFormCard'
 import { BUSINESS } from '../../data/business'
 import './LandingPage.css'
+import { heroImgAttrs } from '../../data/heroImgAttrs'
 
 type IconName = 'chat' | 'shield' | 'clock' | 'car'
 
@@ -81,7 +82,7 @@ export default function LandingPage() {
         <div className="bb-hero__media" aria-hidden="true">
           {slides.map((slide, i) => (
             <picture key={slide.webp} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
-              <img src={slide.webp} alt="" />
+              <img src={slide.webp} alt="" {...(i === 0 ? heroImgAttrs : {})} />
             </picture>
           ))}
         </div>

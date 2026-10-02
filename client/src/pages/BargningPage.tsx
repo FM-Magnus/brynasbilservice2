@@ -27,6 +27,7 @@ import winterWebp from '../assets/images/services/towing/towing-scenario-winter.
 import { useIsPhone } from '../hooks/useIsPhone'
 import { BUSINESS, weekdayHours } from '../data/business'
 import './BargningPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
 
 function SparkleDirectIcon({ className }: { className?: string }) {
   return (
@@ -89,7 +90,7 @@ export default function BargningPage() {
           <div className="bargning-page__hero-media" aria-hidden="true">
             {slides.map((slide, i) => (
               <picture key={slide.webp} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
-                <img src={slide.webp} alt="" />
+                <img src={slide.webp} alt="" {...(i === 0 ? heroImgAttrs : {})} />
               </picture>
             ))}
           </div>

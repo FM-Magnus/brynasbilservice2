@@ -26,6 +26,7 @@ import principlesBgWebp from '../assets/images/about/about-principles-handover-k
 
 import { BUSINESS, weekdayHours } from '../data/business'
 import './AboutPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
 
 function StarBadgeIcon({ className }: { className?: string }) {
   return (
@@ -124,7 +125,7 @@ export default function AboutPage() {
           <div className="omoss-page__hero-media" aria-hidden="true">
             {slides.map((slide, i) => (
               <picture key={slide.webp} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
-                <img src={slide.webp} alt="" />
+                <img src={slide.webp} alt="" {...(i === 0 ? heroImgAttrs : {})} />
               </picture>
             ))}
           </div>

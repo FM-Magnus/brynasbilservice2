@@ -23,6 +23,8 @@ import introWebp from '../assets/images/services/diagnostics/diagnostics-engine-
 import serviceWebp from '../assets/images/services/diagnostics/diagnostics-obd-connection-detail.webp'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
+import { heroSrcSet } from '../data/heroSrcSet'
 
 const trustRow = [
   { icon: ShieldIcon, title: 'Personlig service', text: 'Du och din bil i fokus.' },
@@ -109,7 +111,7 @@ export default function FelsokningPage() {
         <section className="bb-hero" id="felsokning" aria-labelledby="felsokning-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="diagnostics-hero">
-              <img src={heroWebp} alt="" />
+              <img src={heroWebp} srcSet={heroSrcSet(heroWebp)} sizes="100vw" alt="" {...heroImgAttrs} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />

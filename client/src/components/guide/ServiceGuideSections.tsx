@@ -14,6 +14,8 @@ import { relatedServices } from '../../data/relatedServices'
 import { AlertTriangleIcon } from '../icons/AlertTriangleIcon'
 import { CheckIcon } from '../icons/CheckIcon'
 import { PhoneIcon } from '../icons/PhoneIcon'
+import { heroImgAttrs } from '../../data/heroImgAttrs'
+import { heroSrcSet } from '../../data/heroSrcSet'
 
 export type GuideIcon = (props: SVGProps<SVGSVGElement>) => ReactElement | null
 
@@ -84,7 +86,7 @@ export function GuideHero({ id, eyebrow, title, lead, image, trustBadges, onBook
       <section className="service-guide__hero" aria-labelledby={id}>
         <div className={`service-guide__hero-bg${image.alignLeft ? ' service-guide__hero-bg--pos-left' : ''}`}>
           <picture data-image-slot={image.slot}>
-            <img src={image.webp} alt={image.alt} loading={image.lazy ? 'lazy' : undefined} />
+            <img src={image.webp} srcSet={heroSrcSet(image.webp)} sizes="100vw" alt={image.alt} loading={image.lazy ? 'lazy' : undefined} {...(image.lazy ? {} : heroImgAttrs)} />
           </picture>
         </div>
         <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />

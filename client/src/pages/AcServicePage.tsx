@@ -24,6 +24,7 @@ import heroPhoneWebp from '../assets/images/services/ac/ac-hero-phone.webp'
 import manometersWebp from '../assets/images/services/ac/ac-manometers-on-engine.webp'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
 
 const symptoms = [
   {
@@ -83,7 +84,7 @@ export default function AcServicePage() {
         <section className="bb-hero bilservice__ac-hero" id="ac-service" aria-labelledby="ac-service-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="ac-hero-bg">
-              <img src={isPhone ? heroPhoneWebp : heroBgWebp} alt="" />
+              <img src={isPhone ? heroPhoneWebp : heroBgWebp} alt="" {...heroImgAttrs} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
