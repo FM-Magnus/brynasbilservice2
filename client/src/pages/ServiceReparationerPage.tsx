@@ -32,6 +32,7 @@ import safetyWebp from '../assets/images/services/general/service-safety-brake-i
 import './ServiceReparationerPage.css'
 import { heroImgAttrs } from '../data/heroImgAttrs'
 import { heroSrcSet } from '../data/heroSrcSet'
+import processBandWebp from '../assets/images/services/general/band-process-tabletop-tools.webp'
 
 const trustRow = [
   { icon: ShieldIcon, title: 'Personlig service', text: 'Du och din bil i fokus.' },
@@ -191,7 +192,10 @@ export default function ServiceReparationerPage() {
         </section>
 
         {/* Så går det till hos oss */}
-        <section className="bilservice__section bilservice__section--dark" aria-labelledby="bilservice-process-title">
+        <section className="bilservice__section bilservice__section--dark bilservice__section--photo" aria-labelledby="bilservice-process-title">
+          <picture className="bilservice__band-photo" aria-hidden="true">
+            <img src={processBandWebp} alt="" loading="lazy" width={1000} height={500} />
+          </picture>
           <div className="bb-wrap bilservice__container bilservice__process">
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="bilservice-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>

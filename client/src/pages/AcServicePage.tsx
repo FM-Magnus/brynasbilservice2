@@ -25,6 +25,7 @@ import manometersWebp from '../assets/images/services/ac/ac-manometers-on-engine
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 import { heroImgAttrs } from '../data/heroImgAttrs'
+import processBandWebp from '../assets/images/services/ac/band-process-amber-gauges.webp'
 
 const symptoms = [
   {
@@ -274,7 +275,10 @@ export default function AcServicePage() {
         </section>
 
         {/* Så går det till (4-step process) */}
-        <section className="bilservice__section bilservice__section--dark" aria-labelledby="ac-process-title">
+        <section className="bilservice__section bilservice__section--dark bilservice__section--photo" aria-labelledby="ac-process-title">
+          <picture className="bilservice__band-photo" aria-hidden="true">
+            <img src={processBandWebp} alt="" loading="lazy" width={1000} height={500} />
+          </picture>
           <div className="bb-wrap bilservice__container bilservice__process">
             <div className="bilservice__process-text">
               <p className="bb-eyebrow bb-eyebrow--dark">Så går det till</p>

@@ -58,6 +58,11 @@
    Landing more closely; tight and flow-bottom variants shorten transitions. */
 .bilservice__section--flow-bottom { padding-bottom: clamp(2rem, 3vw, 2.5rem); }
 .bilservice__section--dark { background: linear-gradient(150deg, var(--bb-color-ink-950) 0%, var(--bb-color-ink-900) 100%); color: #fff; }
+/* Faint photo behind a dark band (BACKGROUNDS.md treatment A). */
+.bilservice__section--photo { isolation: isolate; overflow: hidden; position: relative; }
+.bilservice__band-photo { bottom: 0; display: block; left: 0; opacity: .24; position: absolute; right: 0; top: 0; z-index: -1; }
+.bilservice__band-photo img { display: block; height: 100%; object-fit: cover; object-position: 60% center; width: 100%; }
+@media (max-width: 650px) { .bilservice__band-photo { opacity: .15; } }
 .bilservice__section--aqua { background: var(--bilservice-aqua-100); }
 
 /* ---------- AC full-bleed hero copy ---------- */

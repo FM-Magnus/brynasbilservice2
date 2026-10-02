@@ -29,6 +29,7 @@ import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
 import { heroImgAttrs } from '../data/heroImgAttrs'
 import { heroSrcSet } from '../data/heroSrcSet'
+import processBandWebp from '../assets/images/services/repair/band-process-engine-work.webp'
 
 const trustRow = [
   { icon: CheckIcon, title: 'Kostnadsförslag först', text: 'Du vet vad det kostar innan vi börjar.' },
@@ -158,7 +159,10 @@ export default function ReparationerPage() {
         </section>
 
         {/* Så går ett större arbete till */}
-        <section className="bilservice__section bilservice__section--dark" aria-labelledby="reparationer-process-title">
+        <section className="bilservice__section bilservice__section--dark bilservice__section--photo" aria-labelledby="reparationer-process-title">
+          <picture className="bilservice__band-photo" aria-hidden="true">
+            <img src={processBandWebp} alt="" loading="lazy" width={1000} height={500} />
+          </picture>
           <div className="bb-wrap bilservice__container bilservice__process">
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="reparationer-process-title">Så går ett <span className="bb-accent">större arbete</span> till</h2>
