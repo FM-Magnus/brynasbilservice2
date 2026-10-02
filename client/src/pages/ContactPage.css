@@ -517,7 +517,16 @@
   padding: 0 0 clamp(3.5rem, 5vw, 5rem);
 }
 .kontakt-page__closing-card {
-  background: var(--bb-color-ink-950);
+  /* BACKGROUNDS.md treatment D: dark veil over a photo, left-aligned copy. */
+  background-color: var(--bb-color-ink-950);
+  background-image:
+    linear-gradient(rgba(7, 20, 22, 0.38), rgba(7, 20, 22, 0.38)),
+    image-set(
+      url('../assets/images/contact/contact-closing-suspension-wide.webp') type('image/webp') 1x,
+      url('../assets/images/contact/contact-closing-suspension-wide.jpg') type('image/jpeg') 1x
+    );
+  background-position: center;
+  background-size: cover;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--bb-radius-card);
   color: var(--bb-color-text-inverse);
@@ -527,9 +536,11 @@
   color: var(--bb-color-text-inverse);
   font-size: clamp(1.8rem, 2.6vw, 2.4rem);
   margin: 0.5rem 0 0.8rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
 }
 .kontakt-page__closing-desc {
   color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
   font-size: var(--bb-font-size-support);
   line-height: var(--bb-line-height-body);
   margin: 0 0 1.5rem;
@@ -558,6 +569,15 @@
 @media (max-width: 650px) {
   .kontakt-page__form-row { grid-template-columns: 1fr; }
   .kontakt-page__focus { border-radius: 0; margin-bottom: 3.5rem; }
+  .kontakt-page__closing-card {
+    /* Phone: the tall crop puts the bright mechanic's arm behind the paragraph, so the veil is a little denser (.38 measured 4.45:1). */
+    background-image:
+      linear-gradient(rgba(7, 20, 22, 0.46), rgba(7, 20, 22, 0.46)),
+      image-set(
+        url('../assets/images/contact/contact-closing-suspension-tall.webp') type('image/webp') 1x,
+        url('../assets/images/contact/contact-closing-suspension-tall.jpg') type('image/jpeg') 1x
+      );
+  }
   .kontakt-page__find-grid { border-radius: 0; }
 }
 

@@ -58,7 +58,7 @@ Each row: **page / slot** · **slot type and tone** (dark band, light card, hero
 
 ### D. Dark veil over a photo (closing CTA card)
 - **Values:** `rgba(7,20,22,.38)` over the photo, text left-aligned, headline `text-shadow: 0 2px 10px rgba(0,0,0,.55)`, paragraph `0 1px 8px rgba(0,0,0,.6)`. Measured 6.6–8.4:1.
-- **Used:** Om oss "Redo att boka service eller reparation?" (`.omoss-page__cta-card`, `tabletop-tools`).
+- **Used:** Om oss "Redo att boka service eller reparation?" (`.omoss-page__cta-card`, `tabletop-tools`); Kontakt "Behöver du hjälp med din bil?" (`.kontakt-page__closing-card`, custom `technical-work-suspension`: wide-1400 above 650px, tall-600 on phones where the veil is `.46` because `.38` measured 4.45:1). Measured 5.2–14.9:1. Buttons stay the plain shared ones (no glass).
 
 ### E. Mid-teal veil with a darker ramp behind the copy (CTA card)
 - **Values (≥1025px):** top layer `rgba(7,20,22,.6) 0% → .38 36% → 0 64%`; below it teal-700 `rgba(4,119,132,.7) 0% → .5 40% → .3 70% → .4 100%`. ≤1024px: dark `.55 → .42 → .2`, teal `.7 → .6 → .38`. Content left-aligned and vertically centred.
@@ -86,10 +86,11 @@ Each row: **page / slot** · **slot type and tone** (dark band, light card, hero
 Confirm with Magnus before adding a photo to any of these:
 - Landing: the service row (icon, title, text), the trust strip, the contact card.
 - Om oss: the four principle cards, the story text, the facts card (dark, two-column grid), the trust strip.
+- Kontakt: Direktkontakt card, "Så fungerar det", the form card and notice, the map, "Hitta till oss" (already has the entrance photo), the "Personlig service i fokus" band (already a photo, non-curated `tire-wheel-change`).
 - Bärgning: scenario card 1 (white) and card 3 (near black), the intake card, the used-cars banner, the hero card text.
 - Every card on the pages not yet worked through: unfixed until Magnus names the slot.
 
 ## Still open
 - A shared pattern for F (and possibly A, B) is awaiting approval; today the effects are page-local.
 - No dark photos yet for cooler, exhaust sensor, timing belt or wheel suspension (four originals were copies of other cards).
-- Slots on Däckservice, AC-service, Bilservice, Felsökning, Reparationer, the ten guides, Biltjänster, Bilar till salu, Galleri and Kontakt have not been assigned a treatment.
+- Slots on Däckservice, AC-service, Bilservice, Felsökning, Reparationer, the ten guides, Biltjänster, Bilar till salu and Galleri have not been assigned a treatment.
