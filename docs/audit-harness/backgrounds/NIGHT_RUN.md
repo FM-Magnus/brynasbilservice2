@@ -3,7 +3,7 @@
 For one unattended session. Read first, in this order: `AGENTS.md`, `docs/BACKGROUNDS.md` (treatments A–N, **the clean budget**, recipe K), `docs/CSS_OWNERSHIP.md`, `_incoming-assets/IMPLEMENT/backgrounds/MANIFEST.md`, `docs/audit-harness/backgrounds/SLOT_BRIEF.md`, and the queue `docs/audit-harness/backgrounds/QUEUE.md`.
 
 ## Setup (once)
-1. The branch `design/backgrounds-night` already exists (from `redesign/blue-teal-v1`, checkpoint tag `checkpoint/pre-backgrounds-night`): `git checkout design/backgrounds-night` and confirm `git branch --show-current`. If it is missing, create it from `redesign/blue-teal-v1` and tag the start. Never push. Stage files by name. One commit per page.
+1. The branch `design/backgrounds-night` already exists (from `redesign/blue-teal-v1`, now merged into `main` and deleted; checkpoint tag `checkpoint/pre-backgrounds-night`): `git checkout design/backgrounds-night` and confirm `git branch --show-current`. If it is missing, create it from `redesign/blue-teal-v1` and tag the start. Never push. Stage files by name. One commit per page.
 2. Start the dev server (`npm --prefix client run dev`, port 5173). Use `OUT=/tmp/bgnight` and `BASE=http://localhost:5173` for the harness scripts.
 3. `node docs/audit-harness/backgrounds/shots.cjs before <all queue routes>` (before-shots for the morning review).
 4. Create `/tmp/bgnight/log.md`; append one short entry per page (decisions, numbers, anything skipped).

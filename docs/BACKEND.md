@@ -1,6 +1,6 @@
 # Backend handoff — Brynäs Bilservice
 
-**For:** Johnny (backend owner) · **From:** Magnus · **Written:** 2026-09-19 · **Branch:** `redesign/blue-teal-v1`
+**For:** Johnny (backend owner) · **From:** Magnus · **Written:** 2026-09-19 · **Branch:** `main` (formerly `redesign/blue-teal-v1`)
 
 This document explains how the frontend is built and what it expects from the backend. Section 3 is the main new feature: vehicle listings that can be managed from `/admin`.
 
@@ -404,7 +404,7 @@ Use this section only if we try the backend on our own branch instead of handing
 1. **Johnny must agree first.** `AGENTS.md` lists `server/` as his. Get his OK before the first commit that touches `server/`. He reviews the branch before anything is merged or deployed.
 2. **Separate branch.** Commit Step 6 first, then create the branch:
    ```bash
-   git switch redesign/blue-teal-v1 && git switch -c backend/vehicles-attempt
+   git switch main && git switch -c backend/vehicles-attempt
    ```
    Make one commit per phase (§6.5), and don't push until Magnus says so.
 3. **Additive only.** New tables and new files only. Never `ALTER` or `DROP` existing tables. Never rewrite Johnny's booking code; the only edits to `server/index.js` are small, listed ones (§6.4). Because the changes are additive, a rollback never needs a database restore.

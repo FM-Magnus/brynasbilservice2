@@ -9,7 +9,7 @@ Förebilder: Auto Stockholm, JA Car Center, Mattssons, Torsviks, Laga Bilen i Um
 
 ---
 
-## Klart (pushat till `redesign/blue-teal-v1`)
+## Klart (pushat, ligger i `main`)
 
 | # | Åtgärd | Commit |
 |---|---|---|
