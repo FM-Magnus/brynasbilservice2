@@ -2,6 +2,10 @@
 
 One dated entry per day, newest first — one short bullet per session, naming the tool and topic first. **History, never instructions:** rules live in `AGENTS.md`, the current state in [`STATUS.md`](STATUS.md). When the oldest entries here are more than about two weeks old, move them to the top of [`archive/SESSION_LOG_ARCHIVE.md`](archive/SESSION_LOG_ARCHIVE.md). (Renamed from `SESSION_LOG_CURRENT.md` on 2026-09-23; entries below keep their original file names.)
 
+### 2026-10-03
+
+- **Claude Code — autonomous backgrounds night run on `design/backgrounds-night`:** queue rows 1–10 worked in order; five commits (Däckservice, AC-service, Felsökning, Reparationer, four guides), K objects only, desktop-only slots, suite 235 passed after each; skipped and why in the run log (`/tmp/bgnight/log.md`, review at `/tmp/bgnight/index.html`).
+
 ### 2026-10-02
 
 - **Claude Code — tools for an unattended backgrounds run:** `docs/audit-harness/backgrounds/` (contrast, visibility, balance, shots/morning review, slot brief, night-run brief and queue); `BACKGROUNDS.md` got the clean budget, balance rules and recipes K–O (K = white-card objects on the page, tested; O = amber duotone, tested in a prototype only); guides now take their photos from one class per topic (`b9fe7d3f`), two guide baselines updated for the service card colour. Amber photos: only three native ones, no duotone rollout yet.
