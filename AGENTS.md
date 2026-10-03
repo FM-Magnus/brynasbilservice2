@@ -41,7 +41,7 @@ Read [`docs/CSS_OWNERSHIP.md`](docs/CSS_OWNERSHIP.md) before any CSS task.
 
 ## Roles
 
-- **Claude Code, Antigravity and Codex** implement or review, one bounded task at a time, as the task brief says.
+- **Claude Code, Antigravity and Codex** implement or review, one bounded task at a time, as the task brief says. While branch `cheap-agent/stage-1` is active, Antigravity edits only as [`docs/CHEAP_AGENT_STAGE.md`](docs/CHEAP_AGENT_STAGE.md) allows.
 - A **review** is read-only unless the brief allows edits. It checks changes against `CSS_OWNERSHIP.md`, `check:css`, `typecheck` and Playwright, and reports findings with file:line.
 - **Magnus** decides design, copy and scope. **Johnny** owns the server, database and deploy.
 
