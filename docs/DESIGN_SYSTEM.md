@@ -206,7 +206,7 @@ Apply this in the reset block of every new unique page from the start — do not
 
 Global stylesheets, loaded once in `client/src/main.tsx` in this order:
 
-1. `styles/tailwind.css`: Tailwind directives. Preflight is global; utilities are for `/admin` only.
+1. `styles/tailwind.css`: Tailwind preflight only (global). Utilities are in `pages/admin/admin-tailwind.css`, loaded only with `/admin`.
 2. `styles/design-tokens.css`: `--bb-*` tokens (§1).
 3. `styles/base.css`: global element defaults.
 4. `styles/shared-elements.css`: `.bb-*` patterns (§2a).

@@ -9,10 +9,15 @@ A static copy of the frontend can be put on Netlify (<https://app.netlify.com/pr
 ```bash
 cd client
 VITE_BASE=/ npm run build
-echo "/*  /index.html  200" > dist/_redirects     # SPA fallback, otherwise direct links such as /dackservice give 404
-cd dist && zip -qr ~/Downloads/brynasbilservice-netlify.zip . -x "*.DS_Store"
+printf '/brynasbilservice/api/*  /404.html  404\n/api/*  /404.html  404\n/*  /index.html  200\n' > dist/_redirects
+printf '/*\n  X-Robots-Tag: noindex, nofollow\n' > dist/_headers
+echo '<!doctype html><meta charset="utf-8"><title>404</title><p>Not found</p>' > dist/404.html
+cd dist && zip -qr ../../_magnus/netlify-brynasbilservice.zip . -x "*.DS_Store"
 ```
-Zip the **contents** of `dist/` (`index.html` at the zip's root), not the folder. Then drag the zip onto Deploys.
+- Zip the **contents** of `dist/` (`index.html` at the zip's root), not the folder; then drag it onto Deploys.
+- `_redirects`: API calls answer 404 (so the booking modal shows its "ring oss" notice) and every other path loads the app (SPA fallback; without it `/dackservice` 404s).
+- `_headers`: `noindex` keeps the preview out of Google until launch. The same three files were used by the earlier manual deploy (`_magnus/netlify-temp/`, which used the sub-path build with a redirect from `/`).
+- Write the zip inside the repo folder (`_magnus/` is git-ignored): an agent session cannot write to `~/Downloads`.
 
 ## How it works in the code
 - `client/vite.config.ts`: `base` is `/` in dev and `process.env.VITE_BASE || '/brynasbilservice/'` in builds. Without `VITE_BASE` the build is unchanged, so the production build for Johnny is still `npm run build`.

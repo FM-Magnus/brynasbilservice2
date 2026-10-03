@@ -1,3 +1,4 @@
+import './admin-tailwind.css'
 import { useState } from 'react'
 import { BookingManagement } from '../../components/admin/BookingManagement'
 import { ServiceManagement } from '../../components/admin/ServiceManagement'
