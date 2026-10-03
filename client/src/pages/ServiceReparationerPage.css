@@ -516,19 +516,31 @@
   color: var(--bb-color-text-muted);
   font: 400 1rem / 1.6 var(--bb-font-body);
 }
-/* Tyre photo faded in from the right under a white veil (treatment B/C). */
+/* Tyre lying on the white card (recipe K): the photo's pale floor takes the card colour via multiply, the left edge dissolves. */
 .bilservice__storage-card.bilservice__storage-card--photo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background-color: #fff;
-  background-image:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.95) 52%, rgba(255, 255, 255, 0.86) 100%),
-    url('../assets/images/services/tires/storage-white-tyre.webp');
-  background-position: center, right 70%;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
-@media (max-width: 900px) {
+@media (min-width: 901px) {
   .bilservice__storage-card.bilservice__storage-card--photo {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('../assets/images/services/tires/storage-white-tyre.webp');
+    padding-right: 36%;
+  }
+  .bilservice__storage-card.bilservice__storage-card--photo::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 40%;
+    background: url('../assets/images/services/tires/storage-white-tyre.webp') right center / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 40%);
+    pointer-events: none;
   }
 }
 .bilservice__storage-grid {
@@ -793,4 +805,77 @@
    moves right to keep his face and the laptop in frame. */
 @media (max-width: 650px) {
   .bilservice > #felsokning .bb-hero__media img { object-position: 80% 50%; }
+}
+
+/* ---------- AC-service: object on the page + a photo block under the tips heading (night run 2026-10-03) ---------- */
+/* K: white-ac lies on the page colour in a third column right of the prose; the left edge dissolves. */
+@media (min-width: 1025px) {
+  section[aria-labelledby="ac-value-title"] .bilservice__editorial {
+    position: relative;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3.4fr);
+  }
+  section[aria-labelledby="ac-value-title"] .bilservice__editorial::after {
+    content: '';
+    grid-column: 3;
+    grid-row: 1;
+    align-self: stretch;
+    margin-right: calc(-1 * var(--bb-wrap-pad, 0px));
+    background: url('../assets/images/services/ac/value-white-ac.webp') right center / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%);
+    pointer-events: none;
+  }
+}
+/* Balance: the short heading column gets a hard-edged photo block so it matches the long prose beside it. */
+@media (min-width: 1025px) {
+  section[aria-labelledby="ac-tips-title"] .bilservice__editorial-head::after {
+    content: '';
+    display: block;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    aspect-ratio: 10 / 7;
+    border-radius: var(--bb-radius-card);
+    background: url('../assets/images/services/ac/tips-teal-hoses-gauges.webp') 88% 62% / 150% auto no-repeat;
+    box-shadow: var(--bb-shadow-card);
+  }
+}
+
+/* ---------- Felsökning: K object under the guidance heading (night run 2026-10-03) ----------
+   white-diagnosis lies on the page colour below the heading, lead and button; it dissolves from the top and the left,
+   and fills the height the long prose column needs (balance: heading column 271 px vs prose 559 px). */
+@media (min-width: 1025px) {
+  section[aria-labelledby="felsokning-guidance-title"] .bilservice__editorial-head::after {
+    content: '';
+    display: block;
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+    aspect-ratio: 2 / 1;
+    background: url('../assets/images/services/diagnostics/guidance-white-diagnosis.webp') right bottom / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 35%), linear-gradient(90deg, transparent 0, #000 25%, #000 92%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(180deg, transparent 0, #000 35%), linear-gradient(90deg, transparent 0, #000 25%, #000 92%, transparent 100%);
+    mask-composite: intersect;
+    pointer-events: none;
+  }
+}
+
+/* ---------- Reparationer: K object under the rights heading (night run 2026-10-03) ----------
+   white-clutch lies on the page colour below the heading, lead and button; fills the gap to the longer prose column. */
+@media (min-width: 1025px) {
+  section[aria-labelledby="reparationer-rights-title"] .bilservice__editorial-head::after {
+    content: '';
+    display: block;
+    margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+    aspect-ratio: 3.4 / 1;
+    background: url('../assets/images/services/repair/rights-white-clutch.webp') right 85% / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 30%), linear-gradient(90deg, transparent 0, #000 25%, #000 92%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(180deg, transparent 0, #000 30%), linear-gradient(90deg, transparent 0, #000 25%, #000 92%, transparent 100%);
+    mask-composite: intersect;
+    pointer-events: none;
+  }
 }

@@ -11,7 +11,7 @@ One row per page. *Notes* are suggestions the page plan may overrule; every row 
 | 5 | `/service-reparationer` | Tier cards and band done. Check the white sections for one K band (`white-spark-plugs` is on the closing card already; pick another). |
 | 6 | `/biltjanster` | Hub cards are photo thumbnails already; closing band done. Only add if the budget allows. |
 | 7 | `/galleri` | Closing card only (light, `white-*` K or veil). |
-| 8 | Guides: `/koppling` (`white-clutch`), `/kamrem` (`white-timing-belt`), `/drivaxel-drivknutar` (`white-driveshaft`), `/stodampare-fjadrar` (`white-suspension`) | One K band each in a white section, same recipe; dark cards are already treated. Other guides have no `white-*` match: `/oljebyte`, `/bromssystem`, `/bilbatteri`, `/hjullagerbyte`, `/avgassystem`, `/styrning-kulleder`, `/gat` — use a `teal-*` motif on one dark surface only if the topic fits (see MANIFEST *find by topic*), else leave clean. |
+| 8 | Guides: `/koppling` (`white-clutch`), `/kamrem` (`white-timing-belt`), `/drivaxel-drivknutar` (`white-driveshaft`), `/stodampare-fjadrar` (`white-suspension`) | Dark cards already have topic photos (class `service-guide--<topic>` in `ServiceGuideTemplate.css`, commit `b9fe7d3f`). What is left: one K band each in a white section (find a host in the shared template once, not per guide). `/oljebyte`, `/bromssystem`, `/bilbatteri`, `/hjullagerbyte`, `/avgassystem`, `/styrning-kulleder`, `/gat` are done except the balance findings; leave them clean otherwise. |
 | 9 | `/` (Landing) | Details only: it is a reference page. Do not add photos to clean surfaces (service row, trust strip, contact card). |
 | 10 | `/om-oss`, `/bargning`, `/kontakt` | Reference pages. Do not change unless a surface breaks the budget. |
 

@@ -91,7 +91,12 @@ Page-local CSS only (family files `ServiceReparationerPage.css`, `ServiceGuideTe
 | Bilservice, tier cards 01 / 02 / 03 | `bright-workshop-sedan` / `brake-parts` (teal veil) / `steering-suspension` | photo under the card's own colour, light → mid → dark kept | 7.7 / 5.0 / 11.7:1 |
 | Bilservice, AC, Reparationer "Så går det till" bands | tools / amber gauges / engine work | A at 24% (15% on phones) | 6.3:1 or better |
 | Closing trust cards: Bilservice, Felsökning (light), Reparationer, AC (dark) | spark plugs, diagnostic tablet / under the lift, amber gauges | B/C light (white veil .87–.97) and D dark (left-heavy veil) | 4.8 / 12:1 or better |
-| Däckservice, tyre storage card | `white-tyre` | white veil from the left | 4.5:1 |
+| Däckservice, tyre storage card | `white-tyre` | K (night run 2026-10-03): object on the white card, multiply, left dissolve; ≥901px only, clean below | text on white, 5.1:1 (teal price line) |
+| AC-service, "Varför boka" band | `white-ac` | K (night run): third column right of the prose, multiply, left dissolve and short right fade; ≥1025px only | text on page colour, 4.75:1 (eyebrow) |
+| AC-service, tips heading column | `teal-mid-ac-service-hoses-gauges` (640) | hard-edged photo block under the heading, balances heading 182 px against prose 617 px; ≥1025px only | no text on it |
+| Felsökning, "Bra att veta" heading column | `white-diagnosis` | K under the heading/lead/button, dissolves from top, left and right; ≥1025px only; fixes balance y≈2530 | lead text on page colour, 5.08:1 |
+| Reparationer, "Bra att veta om pris" heading column | `white-clutch` | K under heading/lead/button, 3.4:1 crop, dissolves top/left/right; ≥1025px only; fixes balance y≈2062 | lead text on page colour, 5.08:1 |
+| Guides Koppling / Kamrem / Drivaxel / Stötdämpare, "info" heading (GuideInfo) | `white-clutch` / `white-timing-belt` / `white-driveshaft` / `white-suspension` | K right of heading and lead, one `--guide-k-object` per guide class in `ServiceGuideTemplate.css`, heading block min-height 11.5rem, ≥1025px only | text on page colour 5.08:1 (h2 box spans the object so the script reads 2.29: a false positive, the heading ends at x≈520, the object starts at x≈1050) |
 | Biltjänster closing band | amber spark plugs | A, amber | 14.6:1 |
 | Bilar till salu closing card | key handover (hands only) | light veil | 4.7:1 |
 | All ten guides + GAT: importance, service and closing cards | tools, engine work, under the lift | D, same on every guide (neutral motifs) | 9.7:1 or better |
