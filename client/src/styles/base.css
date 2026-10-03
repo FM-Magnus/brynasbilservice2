@@ -11,6 +11,28 @@
    fallback enlarges the layout shift when Manrope swaps in (measured on
    /galleri under load). Change them together with a font-loading fix. */
 
+/* Self-hosted fonts (latin subset, OFL; licences in assets/fonts/). The family
+   names stay exactly 'Archivo' and 'Manrope'. Manrope is one variable file for
+   weights 400-700. No size-adjusted fallback face is in the stacks: a third
+   family name there changes the computed font-family that baseline.spec
+   pins. Revisit together with the stack untangling noted below. */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../assets/fonts/archivo-800-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/manrope-variable-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 html {
   font-family: 'Manrope', sans-serif;
   scroll-behavior: smooth;

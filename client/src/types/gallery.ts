@@ -3,7 +3,6 @@
 
 export interface GalleryImageVariant {
   webp: string
-  jpg: string
   width: number
   height: number
 }

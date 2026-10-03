@@ -367,6 +367,20 @@
 /* ---------- 3. Closing reassurance ---------- */
 .bilartillsalu-page__closing { padding-bottom: clamp(3rem, 6vw, 5rem); }
 
+/* Key handover photo faded in from the right under a white veil (treatments B/C). */
+.bb-card--trust.bilartillsalu-page__closing-card {
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.95) 60%, rgba(255, 255, 255, 0.86) 100%),
+    url('../assets/images/workshop/closing-white-handover-key.webp');
+  background-position: center, right 40%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 1024px) {
+  .bb-card--trust.bilartillsalu-page__closing-card {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)), url('../assets/images/workshop/closing-white-handover-key.webp');
+  }
+}
 .bilartillsalu-page__closing-card .bb-card--trust__icon svg { height: 24px; width: 24px; }
 .bilartillsalu-page__closing-title {
   font-family: var(--bb-font-display);

@@ -425,6 +425,51 @@
 .service-guide__closing .service-guide__actions { margin-bottom: 0; flex-wrap: nowrap; }
 
 /* ---------- Responsive ---------- */
+/* Photos behind the three dark guide cards (BACKGROUNDS.md treatment D): neutral workshop
+   motifs, since the same cards are on every guide. The veil keeps white copy above 7:1. */
+.service-guide__importance {
+  background-image: linear-gradient(90deg, rgba(7, 20, 22, 0.88) 0%, rgba(7, 20, 22, 0.8) 55%, rgba(7, 20, 22, 0.66) 100%), url('../assets/images/services/general/band-process-tabletop-tools.webp');
+  background-position: center, right center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.service-guide__service-card {
+  background-image: linear-gradient(90deg, rgba(7, 20, 22, 0.88) 0%, rgba(7, 20, 22, 0.78) 55%, rgba(7, 20, 22, 0.62) 100%), url('../assets/images/services/repair/band-process-engine-work.webp');
+  background-position: center, right center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.service-guide__closing {
+  background-image: linear-gradient(90deg, rgba(7, 20, 22, 0.86) 0%, rgba(7, 20, 22, 0.7) 55%, rgba(7, 20, 22, 0.5) 100%), url('../assets/images/services/repair/closing-dark-under-lift.webp');
+  background-position: center, center 70%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* Topic photos for the dark guide cards: each guide's <main> carries service-guide--<topic>; the template stays one. Importance card = dark teal
+   photo under a dark veil; service card = mid-teal photo under a teal veil (topics without a mid photo keep the neutral dark card). */
+.service-guide--oil { --guide-importance-photo: url('../assets/images/services/guide-cards/oil-importance.webp'); --guide-service-photo: url('../assets/images/services/guide-cards/oil-service.webp'); }
+.service-guide--brakes { --guide-importance-photo: url('../assets/images/services/guide-cards/brakes-importance.webp'); --guide-service-photo: url('../assets/images/services/guide-cards/brakes-service.webp'); }
+.service-guide--battery { --guide-importance-photo: url('../assets/images/services/guide-cards/battery-importance.webp'); }
+.service-guide--wheel-bearing { --guide-importance-photo: url('../assets/images/services/guide-cards/wheel-bearing-importance.webp'); }
+.service-guide--exhaust { --guide-importance-photo: url('../assets/images/services/guide-cards/exhaust-importance.webp'); }
+.service-guide--steering { --guide-importance-photo: url('../assets/images/services/guide-cards/steering-importance.webp'); }
+.service-guide--gat { --guide-importance-photo: url('../assets/images/services/guide-cards/gat-importance.webp'); }
+.service-guide--clutch { --guide-importance-photo: url('../assets/images/services/guide-cards/wrench-importance.webp'); }
+.service-guide--timing { --guide-importance-photo: url('../assets/images/services/guide-cards/wrench-importance.webp'); }
+.service-guide--driveshaft { --guide-importance-photo: url('../assets/images/services/guide-cards/wrench-importance.webp'); }
+.service-guide--shocks { --guide-importance-photo: url('../assets/images/services/guide-cards/wrench-importance.webp'); }
+.service-guide--oil .service-guide__importance, .service-guide--brakes .service-guide__importance, .service-guide--battery .service-guide__importance, .service-guide--wheel-bearing .service-guide__importance, .service-guide--exhaust .service-guide__importance, .service-guide--steering .service-guide__importance, .service-guide--gat .service-guide__importance, .service-guide--clutch .service-guide__importance, .service-guide--timing .service-guide__importance, .service-guide--driveshaft .service-guide__importance, .service-guide--shocks .service-guide__importance {
+  background-image: linear-gradient(90deg, rgba(7, 20, 22, 0.8) 0%, rgba(7, 20, 22, 0.66) 55%, rgba(7, 20, 22, 0.46) 100%), var(--guide-importance-photo);
+}
+.service-guide--oil .service-guide__service-card, .service-guide--brakes .service-guide__service-card {
+  background-color: var(--bb-color-teal-800);
+  background-image: linear-gradient(155deg, rgba(4, 112, 125, 0.74) 0%, rgba(3, 92, 105, 0.82) 100%), var(--guide-service-photo);
+}
+.service-guide--oil .service-guide__service-card {
+  /* The oil filter photo is brighter: a denser veil keeps white copy above 4.5:1. */
+  background-image: linear-gradient(155deg, rgba(4, 112, 125, 0.8) 0%, rgba(3, 92, 105, 0.86) 100%), var(--guide-service-photo);
+}
+
 @media (max-width: 900px) {
   .service-guide__intro-layout { grid-template-columns: 1fr; }
   .service-guide__importance { grid-template-columns: 1fr; }
@@ -583,4 +628,30 @@
 
 @media (prefers-reduced-motion: reduce) {
   .service-guide *, .service-guide *::before, .service-guide *::after { transition-duration: 0.01ms !important; }
+}
+
+/* K object in the info section (night run 2026-10-03): a white-* card lies on the page colour right of the heading and lead.
+   One class per guide sets --guide-k-object; guides without it render nothing. Multiply takes the pale floor to the page colour,
+   the left edge dissolves, desktop only. */
+.service-guide--clutch { --guide-k-object: url('../assets/images/services/guide-cards/k-clutch.webp'); }
+.service-guide--timing { --guide-k-object: url('../assets/images/services/guide-cards/k-timing-belt.webp'); }
+.service-guide--driveshaft { --guide-k-object: url('../assets/images/services/guide-cards/k-driveshaft.webp'); }
+.service-guide--shocks { --guide-k-object: url('../assets/images/services/guide-cards/k-suspension.webp'); }
+@media (min-width: 1025px) {
+  :is(.service-guide--clutch, .service-guide--timing, .service-guide--driveshaft, .service-guide--shocks) .service-guide__info-heading { min-height: 11.5rem; }
+  .service-guide .service-guide__info-heading { position: relative; }
+  .service-guide .service-guide__info-heading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 1.75rem;
+    width: 36%;
+    background: var(--guide-k-object, none) right 78% / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%);
+    pointer-events: none;
+  }
 }

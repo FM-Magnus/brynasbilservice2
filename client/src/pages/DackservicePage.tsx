@@ -19,12 +19,10 @@ import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { UsersIcon } from '../components/icons/UsersIcon'
 import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
-import heroBgJpg from '../assets/images/services/tires/tires-hero-bg.jpg'
 import heroBgWebp from '../assets/images/services/tires/tires-hero-bg.webp'
-import heroAisleJpg from '../assets/images/services/tires/tires-hero-storage-aisle.jpg'
 import heroAisleWebp from '../assets/images/services/tires/tires-hero-storage-aisle.webp'
 import { useHeroSlideshow } from '../hooks/useHeroSlideshow'
-import imgTyres from '../assets/images/services/tires/tire-storage-wheel.jpg'
+import imgTyres from '../assets/images/services/tires/tire-storage-wheel.webp'
 import wheelChangeIcon from '../assets/images/services/tires/tire-icon-wheel-change.svg'
 import storageIcon from '../assets/images/services/tires/tire-icon-storage.svg'
 import refittingIcon from '../assets/images/services/tires/tire-icon-refitting.svg'
@@ -33,6 +31,7 @@ import balancingIcon from '../assets/images/services/tires/tire-icon-balancing.s
 import punctureRepairIcon from '../assets/images/services/tires/tire-icon-puncture-repair.svg'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
 
 type PriceEntry = { label?: string; prefix?: string; amount?: string; unit?: string; contactText?: string }
 
@@ -111,8 +110,8 @@ const faqs = [
 ]
 
 const heroSlides = [
-  { webp: heroBgWebp, jpg: heroBgJpg, alt: 'Däckverkstad och hjulförvaring' },
-  { webp: heroAisleWebp, jpg: heroAisleJpg, alt: 'Gång mellan hyllor med däck och fälgar i däckförvaringen' },
+  { webp: heroBgWebp, alt: 'Däckverkstad och hjulförvaring' },
+  { webp: heroAisleWebp, alt: 'Gång mellan hyllor med däck och fälgar i däckförvaringen' },
 ]
 
 export default function DackservicePage() {
@@ -130,9 +129,8 @@ export default function DackservicePage() {
         <section className="bb-hero" id="dackservice" aria-labelledby="dackservice-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             {heroSlides.map((slide, i) => (
-              <picture key={slide.jpg} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
-                <source srcSet={slide.webp} type="image/webp" />
-                <img src={slide.jpg} alt={slide.alt} />
+              <picture key={slide.webp} className={`bb-hero__slide${i === activeHeroSlide ? ' is-active' : ''}`}>
+                <img src={slide.webp} alt={slide.alt} {...(i === 0 ? heroImgAttrs : {})} />
               </picture>
             ))}
           </div>
@@ -244,7 +242,7 @@ export default function DackservicePage() {
         {/* Däckhotell Section */}
         <section className="bilservice__section--aqua" aria-labelledby="dackservice-storage-title">
           <div className="bb-wrap bilservice__container bilservice__container--pad-lg">
-            <div className="bilservice__storage-card">
+            <div className="bilservice__storage-card bilservice__storage-card--photo">
               <h2 className="bb-h2" id="dackservice-storage-title">Trångt i garaget? Låt oss förvara dina däck.</h2>
               <p>Slipp bära och lagra tunga hjul hemma – vi tar hand om dem tryggt mellan säsongerna.</p>
               <ul className="bilservice__storage-grid">

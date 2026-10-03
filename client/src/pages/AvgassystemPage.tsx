@@ -22,11 +22,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
-import heroJpg from '../assets/images/services/exhaust/exhaust-system-underbody-muffler-hero.jpg'
 import heroWebp from '../assets/images/services/exhaust/exhaust-system-underbody-muffler-hero.webp'
-import componentsJpg from '../assets/images/services/exhaust/exhaust-system-components-underbody.jpg'
 import componentsWebp from '../assets/images/services/exhaust/exhaust-system-components-underbody.webp'
-import inspectionJpg from '../assets/images/services/exhaust/exhaust-clamp-inspection-mechanic-portrait.jpg'
 import inspectionWebp from '../assets/images/services/exhaust/exhaust-clamp-inspection-mechanic-portrait.webp'
 import '../styles/ServiceGuideTemplate.css'
 
@@ -92,13 +89,13 @@ export default function AvgassystemPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--exhaust">
         <GuideHero
           id="exhaust-title"
           eyebrow="Avgasrening & ljuddämpning"
           title={<>Avgassystem<br />för tyst gång<br />och <span className="bb-accent">ren</span> motor</>}
           lead="Avgassystemet renar utsläpp, dämpar motorljudet och säkerställer att motorns sensorer styr förbränningen optimalt. Vi lokaliserar läckage, byter ljuddämpare och felsöker lambdasonder och katalysatorer."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Underrede på bil på lyft med avgassystem, ljuddämpare och ändrör i verkstadsmiljö' }}
+          image={{ webp: heroWebp, alt: 'Underrede på bil på lyft med avgassystem, ljuddämpare och ändrör i verkstadsmiljö' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
@@ -108,7 +105,7 @@ export default function AvgassystemPage() {
         <GuideIntro
           id="exhaust-intro-title"
           heading="Vad gör avgassystemet?"
-          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Komplett avgassystem under bil med katalysator, flexrör, ljuddämpare och värmesköldar' }}
+          image={{ webp: componentsWebp, alt: 'Komplett avgassystem under bil med katalysator, flexrör, ljuddämpare och värmesköldar' }}
           caption="Rent, tyst och lagligt."
         >
           <p>Avgassystemet gör mer än att bara leda bort avgaser från motorn – det renar utsläppen, dämpar ljudet ner till godkända nivåer och övervakas av sensorer som styr motorns bränsleblandning. Eftersom systemet sitter oskyddat under bilen utsätts det för fukt och vägsalt, vilket gör att det oftast rostar bakifrån och inåt.</p>
@@ -132,7 +129,7 @@ export default function AvgassystemPage() {
           heading="Tecken på fel i avgassystemet"
           text="Ett skadat eller läckande avgassystem märks oftast tydligt på ljudnivån, lukten eller via bilens varningslampor. Här är de vanligaste tecknen du bör vara uppmärksam på."
           items={symptoms}
-          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker som kontrollerar och drar åt klämma på avgassystem under bil på tvåpelarlyft' }}
+          image={{ webp: inspectionWebp, alt: 'Mekaniker som kontrollerar och drar åt klämma på avgassystem under bil på tvåpelarlyft' }}
           caption="Vi hittar problemet – innan det blir större."
         >
           <p>Ett läckage, en felaktig givarsignal och en motor som går ojämnt kan ge liknande tecken, och de behöver skiljas åt innan någon del byts. Även ett litet läckage före lambdasonden kan släppa in luft och göra att givaren mäter fel, och en felkod för katalysatorn kan i själva verket bero på en givare eller på hur motorn går. Därför kontrolleras skarvar och svetsar för läckage och givarnas värden innan en dyr del som katalysatorn byts.</p>

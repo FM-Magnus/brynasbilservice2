@@ -22,11 +22,8 @@ import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
 import { HourglassIcon } from '../components/icons/HourglassIcon'
 import heroWebp from '../assets/images/services/brakes/brakes-disc-caliper-workshop-hero.webp'
-import heroJpg from '../assets/images/services/brakes/brakes-disc-caliper-workshop-hero.jpg'
 import componentsWebp from '../assets/images/services/brakes/brakes-components-caliper-pads.webp'
-import componentsJpg from '../assets/images/services/brakes/brakes-components-caliper-pads.jpg'
 import inspectionWebp from '../assets/images/services/brakes/brakes-mechanic-caliper-inspection-portrait.webp'
-import inspectionJpg from '../assets/images/services/brakes/brakes-mechanic-caliper-inspection-portrait.jpg'
 import '../styles/ServiceGuideTemplate.css'
 
 const trustBadges = [
@@ -96,13 +93,13 @@ export default function BromssystemPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--brakes">
         <GuideHero
           id="brake-title"
           eyebrow="Bromsservice & säkerhet"
           title={<>Bromssystem<br />när <span className="bb-accent">säkerheten</span><br />måste fungera</>}
           lead="Bromsarna är bilens viktigaste säkerhetssystem – helt enkelt det som avgör om du stannar i tid eller inte. Slitna bromsar brukar varna i god tid, men bara om du vet vad du ska lyssna och känna efter."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Ventilerad bromsskiva, bromsok, bromsklossar och bromsslang på mörk verkstadsbänk' }}
+          image={{ webp: heroWebp, alt: 'Ventilerad bromsskiva, bromsok, bromsklossar och bromsslang på mörk verkstadsbänk' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
           bookLabel="Boka bromsservice"
@@ -113,7 +110,7 @@ export default function BromssystemPage() {
         <GuideIntro
           id="brake-intro-title"
           heading="Vad ingår i bromssystemet?"
-          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Bromsok, bromsbelägg, monteringsfjädrar och slitagesensor uppradade på verkstadsbänk' }}
+          image={{ webp: componentsWebp, alt: 'Bromsok, bromsbelägg, monteringsfjädrar och slitagesensor uppradade på verkstadsbänk' }}
           caption="Säkra stopp, varje mil räknas."
         >
           <p>Bromssystemet består av flera delar som slits i olika takt. En kontroll handlar därför om mer än att bara titta på belägg och skivor.</p>
@@ -132,7 +129,7 @@ export default function BromssystemPage() {
           heading="Tecken på att bromsarna behöver ses över"
           text="Du behöver inte själv avgöra exakt vad som är fel. De här signalerna är skäl att låta oss kontrollera systemet."
           items={symptoms}
-          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker mäter bromsskivans tjocklek med digitalt skjutmått under lyft bil i verkstaden' }}
+          image={{ webp: inspectionWebp, alt: 'Mekaniker mäter bromsskivans tjocklek med digitalt skjutmått under lyft bil i verkstaden' }}
           caption="Vi hittar problemet – innan det blir större."
         >
           <p>Belägg, skivor och bromsok arbetar som ett system och bedöms därför tillsammans. Ett ok eller en kolv som kärvar kan göra att ett belägg ligger an hela tiden, slits snett eller blir varmt, och då hjälper nya belägg och skivor bara en kort tid. Gnissel, vibrationer eller en bil som drar åt sidan vid inbromsning kan komma från vilken som helst av delarna.</p>

@@ -14,28 +14,22 @@ import { MapPinIcon } from '../components/icons/MapPinIcon'
 import { AlertTriangleIcon } from '../components/icons/AlertTriangleIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 
-import imgTowTruckJpg from '../assets/images/services/towing/towing-mechanic-strap-showcase.jpg'
 import imgTowTruckWebp from '../assets/images/services/towing/towing-mechanic-strap-showcase.webp'
-import imgWorkshopLiftJpg from '../assets/images/workshop/workshop-car-on-lift.jpg'
 import imgWorkshopLiftWebp from '../assets/images/workshop/workshop-car-on-lift.webp'
 import imgPeugeotFrontWebp from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.webp'
-import imgPeugeotFrontJpg from '../assets/images/vehicles/peugeot-307-cc/peugeot-307-cc-side-profile.jpg'
 import imgSunsetRoadWebp from '../assets/images/services/towing/towing-scenario-wet-road.webp'
-import imgSunsetRoadJpg from '../assets/images/services/towing/towing-scenario-wet-road.jpg'
 
 import heroStrapWebp from '../assets/images/services/towing/towing-hero-strap.webp'
-import heroStrapJpg from '../assets/images/services/towing/towing-hero-strap.jpg'
 import heroHighwayWebp from '../assets/images/services/towing/towing-hero-highway.webp'
-import heroHighwayJpg from '../assets/images/services/towing/towing-hero-highway.jpg'
 import heroPhoneWebp from '../assets/images/services/towing/towing-hero-phone.webp'
-import heroPhoneJpg from '../assets/images/services/towing/towing-hero-phone.jpg'
 import processBgWebp from '../assets/images/services/towing/towing-process-workshop-evening.webp'
-import processBgJpg from '../assets/images/services/towing/towing-process-workshop-evening.jpg'
+import midTowingWebp from '../assets/images/services/towing/towing-scenario-mid-towing.webp'
+import lightRecoveryWebp from '../assets/images/services/towing/towing-scenario-light-recovery.webp'
 import winterWebp from '../assets/images/services/towing/towing-scenario-winter.webp'
-import winterJpg from '../assets/images/services/towing/towing-scenario-winter.jpg'
 import { useIsPhone } from '../hooks/useIsPhone'
 import { BUSINESS, weekdayHours } from '../data/business'
 import './BargningPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
 
 function SparkleDirectIcon({ className }: { className?: string }) {
   return (
@@ -70,11 +64,11 @@ function RoadWayIcon({ className }: { className?: string }) {
 }
 
 const heroSlides = [
-  { webp: heroStrapWebp, jpg: heroStrapJpg, modifier: '' },
-  { webp: heroHighwayWebp, jpg: heroHighwayJpg, modifier: ' bargning-page__hero-slide--highway' },
+  { webp: heroStrapWebp, modifier: '' },
+  { webp: heroHighwayWebp, modifier: ' bargning-page__hero-slide--highway' },
 ]
 // Phones get one static portrait photo: no rotation, and the desktop photos are never downloaded.
-const phoneHeroSlides = [{ webp: heroPhoneWebp, jpg: heroPhoneJpg, modifier: ' bargning-page__hero-slide--phone' }]
+const phoneHeroSlides = [{ webp: heroPhoneWebp, modifier: ' bargning-page__hero-slide--phone' }]
 
 export default function BargningPage() {
   const { openBooking, bookingModal } = useBookingModal()
@@ -97,9 +91,8 @@ export default function BargningPage() {
         <section className="bargning-page__hero" aria-labelledby="bargning-hero-title">
           <div className="bargning-page__hero-media" aria-hidden="true">
             {slides.map((slide, i) => (
-              <picture key={slide.jpg} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
-                <source srcSet={slide.webp} type="image/webp" />
-                <img src={slide.jpg} alt="" />
+              <picture key={slide.webp} className={`bb-hero__slide${slide.modifier}${i === activeHeroSlide ? ' is-active' : ''}`}>
+                <img src={slide.webp} alt="" {...(i === 0 ? heroImgAttrs : {})} />
               </picture>
             ))}
           </div>
@@ -166,9 +159,8 @@ export default function BargningPage() {
             <div className="bargning-page__showcase-card">
               <div className="bargning-page__showcase-media">
                 <picture>
-                  <source srcSet={imgTowTruckWebp} type="image/webp" />
                   <img
-                    src={imgTowTruckJpg}
+                    src={imgTowTruckWebp}
                     alt="Mekaniker surrar fast en personbil med gul spännrem på en bärgningsbils flak"
                     className="bargning-page__showcase-img"
                     loading="lazy"
@@ -278,6 +270,9 @@ export default function BargningPage() {
             <div className="bargning-page__scenarios-grid">
               {/* Card 1: Bilen startar inte */}
               <article className="bargning-page__scenario-card bargning-page__scenario-card--light">
+                <picture className="bargning-page__scenario-light-photo" aria-hidden="true">
+                  <img src={lightRecoveryWebp} alt="" loading="lazy" width={640} height={576} />
+                </picture>
                 <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
                   <CarBatteryIcon />
                 </div>
@@ -288,11 +283,24 @@ export default function BargningPage() {
               </article>
 
               {/* Card 2: Haveri, punktering eller överhettning */}
+              <article className="bargning-page__scenario-card bargning-page__scenario-card--dark bargning-page__scenario-card--mid">
+                <picture className="bargning-page__scenario-light-photo" aria-hidden="true">
+                  <img src={midTowingWebp} alt="" loading="lazy" width={640} height={576} />
+                </picture>
+                <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
+                  <AlertTriangleIcon />
+                </div>
+                <h3 className="bargning-page__scenario-heading">Haveri, punktering eller överhettning</h3>
+                <p className="bargning-page__scenario-desc">
+                  Vi bärgar din bil om den inte kan köras vidare på ett säkert eller lagligt sätt.
+                </p>
+              </article>
+
+              {/* Card 3: Kan inte framföras säkert eller lagligt */}
               <article className="bargning-page__scenario-card bargning-page__scenario-card--photo bargning-page__scenario-card--winter">
                 <picture className="bargning-page__scenario-photo">
-                  <source srcSet={winterWebp} type="image/webp" />
                   <img
-                    src={winterJpg}
+                    src={winterWebp}
                     alt="Mekaniker och kund pratar vid en bärgningsbil på en snöig väg"
                     className="bargning-page__scenario-photo-img"
                     loading="lazy"
@@ -302,32 +310,20 @@ export default function BargningPage() {
                 </picture>
                 <div className="bargning-page__scenario-photo-content">
                   <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
-                    <AlertTriangleIcon />
+                    <RoadWayIcon />
                   </div>
-                  <h3 className="bargning-page__scenario-heading">Haveri, punktering eller överhettning</h3>
+                  <h3 className="bargning-page__scenario-heading">Kan inte framföras säkert eller lagligt</h3>
                   <p className="bargning-page__scenario-desc">
-                    Vi bärgar din bil om den inte kan köras vidare på ett säkert eller lagligt sätt.
+                    Vi transporterar bilen till vår verkstad i Gävle för felsökning och kostnadsförslag.
                   </p>
                 </div>
-              </article>
-
-              {/* Card 3: Kan inte framföras säkert eller lagligt */}
-              <article className="bargning-page__scenario-card bargning-page__scenario-card--dark">
-                <div className="bargning-page__scenario-icon bargning-page__scenario-icon--amber" aria-hidden="true">
-                  <RoadWayIcon />
-                </div>
-                <h3 className="bargning-page__scenario-heading">Kan inte framföras säkert eller lagligt</h3>
-                <p className="bargning-page__scenario-desc">
-                  Vi transporterar bilen till vår verkstad i Gävle för felsökning och kostnadsförslag.
-                </p>
               </article>
 
               {/* Card 4: Transport till verkstaden */}
               <article className="bargning-page__scenario-card bargning-page__scenario-card--photo">
                 <picture className="bargning-page__scenario-photo">
-                  <source srcSet={imgSunsetRoadWebp} type="image/webp" />
                   <img
-                    src={imgSunsetRoadJpg}
+                    src={imgSunsetRoadWebp}
                     alt="Blå bärgningsbil med en personbil på flaket kör på en blöt motorväg"
                     className="bargning-page__scenario-photo-img"
                     loading="lazy"
@@ -354,8 +350,7 @@ export default function BargningPage() {
             ========================================================= */}
         <section className="bargning-page__process" aria-labelledby="process-title">
           <picture className="bargning-page__process-photo" aria-hidden="true">
-            <source srcSet={processBgWebp} type="image/webp" />
-            <img src={processBgJpg} alt="" loading="lazy" width={1400} height={700} />
+            <img src={processBgWebp} alt="" loading="lazy" width={1400} height={700} />
           </picture>
           <div className="bb-wrap">
             <div className="bargning-page__process-header">
@@ -429,9 +424,8 @@ export default function BargningPage() {
             <div className="bargning-page__intake-card">
               <div className="bargning-page__intake-media">
                 <picture>
-                  <source srcSet={imgWorkshopLiftWebp} type="image/webp" />
                   <img
-                    src={imgWorkshopLiftJpg}
+                    src={imgWorkshopLiftWebp}
                     alt="Verkstadshallen med bil på lyft hos Brynäs Bilservice"
                     className="bargning-page__intake-img"
                     loading="lazy"
@@ -540,9 +534,8 @@ export default function BargningPage() {
 
               <div className="bargning-page__cars-media" aria-hidden="true">
                 <picture>
-                  <source srcSet={imgPeugeotFrontWebp} type="image/webp" />
                   <img
-                    src={imgPeugeotFrontJpg}
+                    src={imgPeugeotFrontWebp}
                     alt=""
                     className="bargning-page__cars-img"
                   />

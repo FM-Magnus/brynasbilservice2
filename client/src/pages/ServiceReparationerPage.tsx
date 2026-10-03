@@ -23,13 +23,16 @@ import { CarSaleIcon } from '../components/icons/CarSaleIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { ArrowRightIcon } from '../components/icons/ArrowRightIcon'
 import { BUSINESS } from '../data/business'
-import heroJpg from '../assets/images/services/general/service-ready-car-workshop-hero.jpg'
 import heroWebp from '../assets/images/services/general/service-ready-car-workshop-hero.webp'
-import servicebookJpg from '../assets/images/services/general/servicebook-car-key-counter.jpg'
 import servicebookWebp from '../assets/images/services/general/servicebook-car-key-counter.webp'
-import safetyJpg from '../assets/images/services/general/service-safety-brake-inspection.jpg'
+import levelMidWebp from '../assets/images/services/general/service-level-mid-brake-parts.webp'
+import levelMajorWebp from '../assets/images/services/general/service-level-major-steering-suspension.webp'
+import levelBasicWebp from '../assets/images/services/general/service-level-basic-bright-workshop.webp'
 import safetyWebp from '../assets/images/services/general/service-safety-brake-inspection.webp'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
+import { heroSrcSet } from '../data/heroSrcSet'
+import processBandWebp from '../assets/images/services/general/band-process-tabletop-tools.webp'
 
 const trustRow = [
   { icon: ShieldIcon, title: 'Personlig service', text: 'Du och din bil i fokus.' },
@@ -47,16 +50,19 @@ const serviceBenefits = [
 const serviceLevels = [
   {
     title: 'Bas- eller mindre service',
+    photo: levelBasicWebp,
     description: 'Detta är det mest grundläggande underhållsprogrammet, vanligtvis rekommenderat varje 12:e månad eller varje 10 000 km.',
     items: ['Oljebyte', 'Byte av oljefilter', 'Kontroll av däck och däcktryck', 'Kontroll av vätskenivåer (spolarvätska, kylvätska, bromsvätska)'],
   },
   {
     title: 'Mellanservice',
+    photo: levelMidWebp,
     description: 'Mellanservice är mer omfattande och inkluderar allt i en bas- eller mindre service, plus:',
     items: ['Byte av luftfilter', 'Byte av bränslefilter', 'Granskning av bromssystem', 'Kontroll av drivremmar och övriga remmar', 'Kontroll av belysning och signaler', 'Inspektion av avgassystemet'],
   },
   {
     title: 'Stor service',
+    photo: levelMajorWebp,
     description: 'En stor service är den mest omfattande och inkluderar följande, utöver de tidigare nämnda punkterna:',
     items: ['Byte av tändstift', 'Kontroll och justering av tändsystem', 'Inspektion av fjädring och stötdämpare', 'Kontroll av växellåda och koppling', 'Kontroll av bilens elektroniska system, inklusive diagnostiska tester'],
   },
@@ -70,11 +76,10 @@ const processSteps = [
   { num: '05', icon: CheckIcon, title: 'Slutkontroll och rapport', desc: 'När bilen är klar får du en genomgång och råd inför nästa service.' },
 ] as const
 
-function ServiceImage({ id, jpg, webp, alt, className = '' }: { id: string; jpg: string; webp: string; alt: string; className?: string }) {
+function ServiceImage({ id, webp, alt, className = '' }: { id: string; webp: string; alt: string; className?: string }) {
   return (
     <picture className={`bilservice__image-frame${className ? ` ${className}` : ''}`} data-image-slot={id}>
-      <source srcSet={webp} type="image/webp" />
-      <img src={jpg} alt={alt} loading="lazy" />
+      <img src={webp} alt={alt} loading="lazy" />
     </picture>
   )
 }
@@ -90,8 +95,7 @@ export default function ServiceReparationerPage() {
         <section className="bb-hero" id="bilservice" aria-labelledby="bilservice-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="bilservice-hero-car">
-              <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="" />
+              <img src={heroWebp} srcSet={heroSrcSet(heroWebp)} sizes="100vw" alt="" {...heroImgAttrs} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
@@ -130,14 +134,14 @@ export default function ServiceReparationerPage() {
                 <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
-            <ServiceImage id="bilservice-servicebook-keys" jpg={servicebookJpg} webp={servicebookWebp} alt="Öppen servicebok och bilnyckel på en verkstadsbänk" className="bilservice__split-media--right bilservice__image-frame--wide" />
+            <ServiceImage id="bilservice-servicebook-keys" webp={servicebookWebp} alt="Öppen servicebok och bilnyckel på en verkstadsbänk" className="bilservice__split-media--right bilservice__image-frame--wide" />
           </div>
         </section>
 
         {/* Varför är bilservice viktigt? */}
         <section className="bilservice__section bilservice__section--tight" aria-labelledby="bilservice-why-title">
           <div className="bb-wrap bilservice__container bilservice__split">
-            <ServiceImage id="bilservice-value-säkerhet" jpg={safetyJpg} webp={safetyWebp} alt="Mekaniker kontrollerar bromsskiva och däck med inspektionslampa" className="bilservice__image-frame--wide" />
+            <ServiceImage id="bilservice-value-säkerhet" webp={safetyWebp} alt="Mekaniker kontrollerar bromsskiva och däck med inspektionslampa" className="bilservice__image-frame--wide" />
             <div className="bilservice__prose">
               <h2 className="bb-h2" id="bilservice-why-title">Varför är bilservice viktigt?</h2>
               <p>Regelbunden service påverkar hur säker bilen är, hur länge den håller, hur den går och vad den är värd den dag du säljer den.</p>
@@ -158,7 +162,10 @@ export default function ServiceReparationerPage() {
             </div>
             <div className="bilservice__levels-grid">
               {serviceLevels.map((level, index) => (
-                <article className={`bilservice__level-card bilservice__level-card--0${index + 1}`} key={level.title}>
+                <article className={`bilservice__level-card bilservice__level-card--0${index + 1} bilservice__level-card--photo`} key={level.title}>
+                  <picture className="bilservice__level-photo" aria-hidden="true">
+                    <img src={level.photo} alt="" loading="lazy" width={1000} height={900} />
+                  </picture>
                   <span className="bilservice__level-badge" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <h3>{level.title}</h3>
                   <p>{level.description}</p>
@@ -185,7 +192,10 @@ export default function ServiceReparationerPage() {
         </section>
 
         {/* Så går det till hos oss */}
-        <section className="bilservice__section bilservice__section--dark" aria-labelledby="bilservice-process-title">
+        <section className="bilservice__section bilservice__section--dark bilservice__section--photo" aria-labelledby="bilservice-process-title">
+          <picture className="bilservice__band-photo" aria-hidden="true">
+            <img src={processBandWebp} alt="" loading="lazy" width={1000} height={500} />
+          </picture>
           <div className="bb-wrap bilservice__container bilservice__process">
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="bilservice-process-title">Så går det till<br /><span className="bb-accent">hos oss</span></h2>
@@ -221,7 +231,7 @@ export default function ServiceReparationerPage() {
         {/* Alltid tydliga besked och ärliga priser */}
         <section aria-labelledby="bilservice-trust-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card--light bilservice__closing-card--sparkplugs">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="bilservice-trust-title">Alltid tydliga besked och ärliga priser</h3>

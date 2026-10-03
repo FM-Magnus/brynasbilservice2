@@ -18,20 +18,13 @@ import { ShieldIcon } from '../components/icons/ShieldIcon'
 import { CheckIcon } from '../components/icons/CheckIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
-import heroJpg from '../assets/images/services/gat/gat-products-bench-hero.jpg'
 import heroWebp from '../assets/images/services/gat/gat-products-bench-hero.webp'
 import engineFlushWebp640 from '../assets/images/services/gat/gat-spotlight-engine-flush-640.webp'
-import engineFlushJpg640 from '../assets/images/services/gat/gat-spotlight-engine-flush-640.jpg'
 import engineFlushWebp1200 from '../assets/images/services/gat/gat-spotlight-engine-flush-1200.webp'
-import engineFlushJpg1200 from '../assets/images/services/gat/gat-spotlight-engine-flush-1200.jpg'
 import dieselWebp640 from '../assets/images/services/gat/gat-spotlight-diesel-system-cleaner-640.webp'
-import dieselJpg640 from '../assets/images/services/gat/gat-spotlight-diesel-system-cleaner-640.jpg'
 import dieselWebp1200 from '../assets/images/services/gat/gat-spotlight-diesel-system-cleaner-1200.webp'
-import dieselJpg1200 from '../assets/images/services/gat/gat-spotlight-diesel-system-cleaner-1200.jpg'
 import fuelWebp640 from '../assets/images/services/gat/gat-spotlight-fuel-system-cleaner-640.webp'
-import fuelJpg640 from '../assets/images/services/gat/gat-spotlight-fuel-system-cleaner-640.jpg'
 import fuelWebp1200 from '../assets/images/services/gat/gat-spotlight-fuel-system-cleaner-1200.webp'
-import fuelJpg1200 from '../assets/images/services/gat/gat-spotlight-fuel-system-cleaner-1200.jpg'
 import '../styles/ServiceGuideTemplate.css'
 import './GatPage.css'
 
@@ -67,9 +60,9 @@ const infoCards = [
 ] as const
 
 const spotlightSlides = [
-  { label: 'Engine Flush', alt: 'GAT Engine Flush: Fräsch olja förtjänar en ren motor. Rengör motorn invändigt före oljebyte och löser upp avlagringar som följer med den gamla oljan ut. Rengör oljekanaler och kolvringar, löser upp oljeslam och avlagringar, ger den nya oljan en renare start. Finns hos Brynäs Bilservice.', webp640: engineFlushWebp640, webp1200: engineFlushWebp1200, jpg640: engineFlushJpg640, jpg1200: engineFlushJpg1200 },
-  { label: 'Diesel System Cleaner', alt: 'GAT Diesel System Cleaner: Låt dieselmotorn arbeta renare. Löser upp avlagringar i dieselsystemet och hjälper till att hålla insprutningen ren. Rengör från tank till förbränningsrum, binder fukt i bränslesystemet, hjälper till att skydda mot korrosion. Finns hos Brynäs Bilservice.', webp640: dieselWebp640, webp1200: dieselWebp1200, jpg640: dieselJpg640, jpg1200: dieselJpg1200 },
-  { label: 'Fuel System Cleaner', alt: 'GAT Fuel System Cleaner: Ge bensinmotorn en renare start. Löser upp avlagringar i bränslesystemet och hjälper till att hålla insprutningen ren. Rengör från tank till förbränningsrum, bidrar till effektivare förbränning, hjälper till att skydda mot korrosion. Finns hos Brynäs Bilservice.', webp640: fuelWebp640, webp1200: fuelWebp1200, jpg640: fuelJpg640, jpg1200: fuelJpg1200 },
+  { label: 'Engine Flush', alt: 'GAT Engine Flush: Fräsch olja förtjänar en ren motor. Rengör motorn invändigt före oljebyte och löser upp avlagringar som följer med den gamla oljan ut. Rengör oljekanaler och kolvringar, löser upp oljeslam och avlagringar, ger den nya oljan en renare start. Finns hos Brynäs Bilservice.', webp640: engineFlushWebp640, webp1200: engineFlushWebp1200 },
+  { label: 'Diesel System Cleaner', alt: 'GAT Diesel System Cleaner: Låt dieselmotorn arbeta renare. Löser upp avlagringar i dieselsystemet och hjälper till att hålla insprutningen ren. Rengör från tank till förbränningsrum, binder fukt i bränslesystemet, hjälper till att skydda mot korrosion. Finns hos Brynäs Bilservice.', webp640: dieselWebp640, webp1200: dieselWebp1200 },
+  { label: 'Fuel System Cleaner', alt: 'GAT Fuel System Cleaner: Ge bensinmotorn en renare start. Löser upp avlagringar i bränslesystemet och hjälper till att hålla insprutningen ren. Rengör från tank till förbränningsrum, bidrar till effektivare förbränning, hjälper till att skydda mot korrosion. Finns hos Brynäs Bilservice.', webp640: fuelWebp640, webp1200: fuelWebp1200 },
 ] as const
 
 const faqs = [
@@ -87,13 +80,13 @@ export default function GatPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide gat-page">
+      <main className="service-guide gat-page service-guide--gat">
         <GuideHero
           id="gat-title"
           eyebrow="Motor- & bränslesystemvård"
           title={<>GAT-vård<br />för en <span className="bb-accent">renare</span><br />motor</>}
           lead="Vi är auktoriserad återförsäljare av GAT och använder produkterna i vår egen verkstad. Med rätt tillsats kan motorns insida och bränslesystemet hållas rena, som ett komplement till oljebyte och service."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: '' }}
+          image={{ webp: heroWebp, alt: '' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
           bookLabel="Boka GAT-behandling"

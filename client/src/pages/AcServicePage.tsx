@@ -19,13 +19,13 @@ import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { WrenchIcon } from '../components/icons/WrenchIcon'
 import { ClockIcon } from '../components/icons/ClockIcon'
 import { ShieldIcon } from '../components/icons/ShieldIcon'
-import heroBgJpg from '../assets/images/services/ac/ac-hero-bg.jpg'
 import heroBgWebp from '../assets/images/services/ac/ac-hero-bg.webp'
-import heroPhoneJpg from '../assets/images/services/ac/ac-hero-phone.jpg'
 import heroPhoneWebp from '../assets/images/services/ac/ac-hero-phone.webp'
-import manometersJpg from '../assets/images/services/ac/ac-manometers-on-engine.jpg'
+import manometersWebp from '../assets/images/services/ac/ac-manometers-on-engine.webp'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
+import processBandWebp from '../assets/images/services/ac/band-process-amber-gauges.webp'
 
 const symptoms = [
   {
@@ -85,8 +85,7 @@ export default function AcServicePage() {
         <section className="bb-hero bilservice__ac-hero" id="ac-service" aria-labelledby="ac-service-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="ac-hero-bg">
-              <source srcSet={isPhone ? heroPhoneWebp : heroBgWebp} type="image/webp" />
-              <img src={isPhone ? heroPhoneJpg : heroBgJpg} alt="" />
+              <img src={isPhone ? heroPhoneWebp : heroBgWebp} alt="" {...heroImgAttrs} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
@@ -276,7 +275,10 @@ export default function AcServicePage() {
         </section>
 
         {/* Så går det till (4-step process) */}
-        <section className="bilservice__section bilservice__section--dark" aria-labelledby="ac-process-title">
+        <section className="bilservice__section bilservice__section--dark bilservice__section--photo" aria-labelledby="ac-process-title">
+          <picture className="bilservice__band-photo" aria-hidden="true">
+            <img src={processBandWebp} alt="" loading="lazy" width={1000} height={500} />
+          </picture>
           <div className="bb-wrap bilservice__container bilservice__process">
             <div className="bilservice__process-text">
               <p className="bb-eyebrow bb-eyebrow--dark">Så går det till</p>
@@ -310,7 +312,7 @@ export default function AcServicePage() {
             <div className="bilservice__service-card">
               <div className="bilservice__service-media">
                 <img
-                  src={manometersJpg}
+                  src={manometersWebp}
                   alt="Manometerställ kopplat till bilens AC-system för tryck- och läckagekontroll"
                   loading="lazy"
                 />
@@ -381,7 +383,7 @@ export default function AcServicePage() {
         {/* Closing Reassurance Card */}
         <section aria-labelledby="ac-closing-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card bilservice__closing-card--gauges">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="ac-closing-title">Boka AC-service hos Brynäs Bilservice</h3>

@@ -475,8 +475,10 @@
    ------------------------------------------------------------- */
 .omoss-page__process {
   background-color: var(--bb-color-ink-950);
-  /* Gradient only: the 40px grid mesh was removed (Magnus 2026-10-02). */
-  background-image: radial-gradient(circle at 50% 0%, rgba(10, 178, 193, 0.08) 0%, transparent 70%);
+  /* Gradient only: the 40px grid mesh was removed (Magnus 2026-10-02). Dark teal fades in from the left, where the right-aligned heading leaves the band empty. */
+  background-image:
+    linear-gradient(90deg, rgba(4, 96, 108, 0.62) 0%, rgba(4, 96, 108, 0.34) 32%, rgba(4, 96, 108, 0) 62%),
+    radial-gradient(circle at 50% 0%, rgba(10, 178, 193, 0.08) 0%, transparent 70%);
   color: var(--bb-color-text-inverse);
   padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
   padding-top: clamp(2.5rem, 4vw, 3.5rem);
@@ -524,8 +526,7 @@
   background-image:
     linear-gradient(rgba(7, 20, 22, 0.38), rgba(7, 20, 22, 0.38)),
     image-set(
-      url('../assets/images/about/about-cta-tabletop-tools.webp') type('image/webp') 1x,
-      url('../assets/images/about/about-cta-tabletop-tools.jpg') type('image/jpeg') 1x
+      url('../assets/images/about/about-cta-tabletop-tools.webp') type('image/webp') 1x
     );
   background-position: center;
   background-size: cover;

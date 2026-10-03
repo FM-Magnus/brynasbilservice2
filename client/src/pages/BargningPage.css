@@ -395,23 +395,19 @@
   background: var(--bb-color-surface);
   border: 1px solid rgba(7, 20, 22, 0.08);
 }
+/* Pale teal photo behind card 1 (BACKGROUNDS.md B/C): the truck sits right, dark copy stays left. */
+.bargning-page__scenario-card--light { isolation: isolate; }
+.bargning-page__scenario-light-photo { display: block; inset: 0; position: absolute; z-index: -1; }
+.bargning-page__scenario-light-photo img { display: block; height: 100%; object-fit: cover; object-position: 70% center; width: 100%; }
+.bargning-page__scenario-light-photo::after { background: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.92) 55%, rgba(255, 255, 255, 0.76) 100%); content: ''; inset: 0; position: absolute; }
+/* Card 2: mid-teal tow-truck photo under a teal veil, between the pale card and the dark photo cards. */
+.bargning-page__scenario-card--dark.bargning-page__scenario-card--mid { background: var(--bb-color-teal-800); isolation: isolate; }
+.bargning-page__scenario-card--mid .bargning-page__scenario-light-photo::after { background: linear-gradient(155deg, rgba(4, 96, 108, 0.52) 0%, rgba(3, 80, 92, 0.7) 100%); }
 .bargning-page__scenario-card--light .bargning-page__scenario-heading {
   color: var(--bb-color-ink-950);
 }
 .bargning-page__scenario-card--light .bargning-page__scenario-desc {
   color: var(--bb-color-text-muted);
-}
-
-.bargning-page__scenario-card--teal-gradient {
-  background: linear-gradient(145deg, #0c2b30 0%, #07191d 100%);
-  border: 1px solid rgba(19, 154, 140, 0.3);
-  color: var(--bb-color-text-inverse);
-}
-.bargning-page__scenario-card--teal-gradient .bargning-page__scenario-heading {
-  color: var(--bb-color-text-inverse);
-}
-.bargning-page__scenario-card--teal-gradient .bargning-page__scenario-desc {
-  color: rgba(255, 255, 255, 0.78);
 }
 
 .bargning-page__scenario-card--dark {
@@ -804,8 +800,7 @@
     linear-gradient(90deg, rgba(7, 20, 22, 0.6) 0%, rgba(7, 20, 22, 0.38) 36%, rgba(7, 20, 22, 0) 64%),
     linear-gradient(90deg, rgba(4, 119, 132, 0.7) 0%, rgba(4, 119, 132, 0.5) 40%, rgba(4, 119, 132, 0.3) 70%, rgba(4, 119, 132, 0.4) 100%),
     image-set(
-      url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
-      url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
+      url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x
     );
   background-position: center;
   background-size: cover;
@@ -852,8 +847,7 @@
       linear-gradient(90deg, rgba(7, 20, 22, 0.55) 0%, rgba(7, 20, 22, 0.42) 60%, rgba(7, 20, 22, 0.2) 100%),
       linear-gradient(90deg, rgba(4, 119, 132, 0.7) 0%, rgba(4, 119, 132, 0.6) 60%, rgba(4, 119, 132, 0.38) 100%),
       image-set(
-        url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x,
-        url('../assets/images/services/towing/towing-hero-bg.jpg') type('image/jpeg') 1x
+        url('../assets/images/services/towing/towing-hero-bg.webp') type('image/webp') 1x
       );
   }
   .bargning-page__showcase-card {

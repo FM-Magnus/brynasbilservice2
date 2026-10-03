@@ -21,11 +21,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
-import heroJpg from '../assets/images/services/suspension/suspension-springs-shocks-bench-hero.jpg'
 import heroWebp from '../assets/images/services/suspension/suspension-springs-shocks-bench-hero.webp'
-import inspectionJpg from '../assets/images/services/suspension/suspension-mechanic-strut-inspection-portrait.jpg'
 import inspectionWebp from '../assets/images/services/suspension/suspension-mechanic-strut-inspection-portrait.webp'
-import comparisonJpg from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.jpg'
 import comparisonWebp from '../assets/images/services/suspension/suspension-strut-new-vs-old-comparison.webp'
 
 const trustBadges = [
@@ -88,13 +85,13 @@ export default function StodampareFjadrarPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--shocks">
         <GuideHero
           id="suspension-title"
           eyebrow="Chassi & fjädring"
           title={<>Stötdämpare<br />för <span className="bb-accent">stabil</span><br />körning</>}
           lead="Stötdämpare och fjädrar samverkar för att hålla hjulen i kontakt med vägen och ge en stabil, säker och kontrollerad körning. Vi inspekterar, byter och utför korrekt hjulinställning."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Skruvfjädrar, stötdämpare och fjäderbenslager på mörk verkstadsbänk' }}
+          image={{ webp: heroWebp, alt: 'Skruvfjädrar, stötdämpare och fjäderbenslager på mörk verkstadsbänk' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
@@ -104,7 +101,7 @@ export default function StodampareFjadrarPage() {
         <GuideIntro
           id="suspension-intro-title"
           heading="Vad gör stötdämpare och fjädrar?"
-          image={{ webp: comparisonWebp, jpg: comparisonJpg, alt: 'Ny stötdämpare med fjäderben jämfört med en sliten, rostig stötdämpare' }}
+          image={{ webp: comparisonWebp, alt: 'Ny stötdämpare med fjäderben jämfört med en sliten, rostig stötdämpare' }}
           caption="Stabilitet, komfort och säkerhet."
         >
           <p>Fjädern bär bilens vikt och tar upp stötar från vägbanan, medan stötdämparen dämpar fjäderns svängningar så att hjulen behåller markkontakt. På många bilar är dämpare, fjäder och topplager samlade i ett fjäderben, vilket gör att arbete och åtkomst ofta sker i samma moment.</p>
@@ -128,7 +125,7 @@ export default function StodampareFjadrarPage() {
           heading="Tecken på slitna dämpare eller trasiga fjädrar"
           text="Medan stötdämpare slits smygande och gradvis, ger en bruten fjäder ofta ett plötsligt metalliskt missljud eller en synlig lutning på bilen. Här är de vanligaste signalerna på att fjädringen behöver ses över."
           items={symptoms}
-          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Mekaniker inspekterar stötdämpare och fjäder på en lyft bil' }}
+          image={{ webp: inspectionWebp, alt: 'Mekaniker inspekterar stötdämpare och fjäder på en lyft bil' }}
           caption="Säker väghållning börjar under bilen."
         >
           <p>Fjädern och stötdämparen har olika uppgifter. Fjädern bär bilens vikt och tar upp gupp; en trött eller bruten fjäder märks därför ofta på att bilen står lägre eller lutar. Stötdämparen bromsar fjäderns rörelse så att bilen inte fortsätter gunga och hjulen håller kontakten med vägen. Slitna dämpare märks snarare som ett gungigt, flytande beteende och sämre väggrepp på ojämn väg.</p>

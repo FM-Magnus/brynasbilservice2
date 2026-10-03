@@ -25,10 +25,10 @@ const HIGH_PRIORITY = { fetchpriority: 'high' } as Record<string, string>
 
 type LoadState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; images: GalleryImage[] }
 
-const srcSet = (image: GalleryImage, format: 'webp' | 'jpg') =>
+const srcSet = (image: GalleryImage) =>
   image.thumb.width === image.main.width
-    ? `${image.main[format]} ${image.main.width}w`
-    : `${image.thumb[format]} ${image.thumb.width}w, ${image.main[format]} ${image.main.width}w`
+    ? `${image.main.webp} ${image.main.width}w`
+    : `${image.thumb.webp} ${image.thumb.width}w, ${image.main.webp} ${image.main.width}w`
 
 const pad = (value: number, total: number) => String(value).padStart(Math.max(2, String(total).length), '0')
 
@@ -37,8 +37,8 @@ const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: r
 function preload(image: GalleryImage) {
   const img = new Image()
   img.sizes = STAGE_SIZES
-  img.srcset = srcSet(image, 'webp')
-  img.src = image.main.jpg
+  img.srcset = srcSet(image)
+  img.src = image.main.webp
 }
 
 interface StageProps {
@@ -72,11 +72,10 @@ function GalleryStage({ image, eager, onSwipe, onLoaded }: StageProps) {
       onPointerCancel={() => { start.current = null }}
     >
       <picture key={image.slug}>
-        <source type="image/webp" srcSet={srcSet(image, 'webp')} sizes={STAGE_SIZES} />
         <img
           className="galleri-page__stage-img"
-          src={image.main.jpg}
-          srcSet={srcSet(image, 'jpg')}
+          src={image.main.webp}
+          srcSet={srcSet(image)}
           sizes={STAGE_SIZES}
           alt={image.alt}
           width={image.main.width}
@@ -174,8 +173,7 @@ function ThumbnailStrip({ images, activeIndex, onSelect }: StripProps) {
           onClick={() => onSelect(index, false)}
         >
           <picture>
-            <source type="image/webp" srcSet={image.thumb.webp} />
-            <img src={image.thumb.jpg} alt="" width={image.thumb.width} height={image.thumb.height} loading="lazy" decoding="async" draggable={false} />
+            <img src={image.thumb.webp} alt="" width={image.thumb.width} height={image.thumb.height} loading="lazy" decoding="async" draggable={false} />
           </picture>
         </button>
       ))}

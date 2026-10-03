@@ -18,14 +18,13 @@ import { ClockIcon } from '../components/icons/ClockIcon'
 import { MonitorIcon } from '../components/icons/MonitorIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import heroJpg from '../assets/images/services/diagnostics/diagnostics-workshop-hero.jpg'
 import heroWebp from '../assets/images/services/diagnostics/diagnostics-workshop-hero.webp'
-import introJpg from '../assets/images/services/diagnostics/diagnostics-engine-bay-tablet.jpg'
 import introWebp from '../assets/images/services/diagnostics/diagnostics-engine-bay-tablet.webp'
-import serviceJpg from '../assets/images/services/diagnostics/diagnostics-obd-connection-detail.jpg'
 import serviceWebp from '../assets/images/services/diagnostics/diagnostics-obd-connection-detail.webp'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
+import { heroSrcSet } from '../data/heroSrcSet'
 
 const trustRow = [
   { icon: ShieldIcon, title: 'Personlig service', text: 'Du och din bil i fokus.' },
@@ -112,8 +111,7 @@ export default function FelsokningPage() {
         <section className="bb-hero" id="felsokning" aria-labelledby="felsokning-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="diagnostics-hero">
-              <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="" />
+              <img src={heroWebp} srcSet={heroSrcSet(heroWebp)} sizes="100vw" alt="" {...heroImgAttrs} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
@@ -158,8 +156,7 @@ export default function FelsokningPage() {
               </div>
               <div className="bilservice__split-media--right">
                 <picture data-image-slot="diagnostics-intro" className="bilservice__image-slot--radius-lg bilservice__image-slot--ar-16-9">
-                  <source srcSet={introWebp} type="image/webp" />
-                  <img src={introJpg} alt="Mekaniker ansluter ett diagnosverktyg och kontrollerar motorrummets elsystem" loading="lazy" />
+                  <img src={introWebp} alt="Mekaniker ansluter ett diagnosverktyg och kontrollerar motorrummets elsystem" loading="lazy" />
                 </picture>
               </div>
             </div>
@@ -235,8 +232,7 @@ export default function FelsokningPage() {
             <div className="bilservice__service-card">
               <div className="bilservice__service-media">
                 <picture data-image-slot="diagnostics-service">
-                  <source srcSet={serviceWebp} type="image/webp" />
-                  <img src={serviceJpg} alt="Diagnosverktyg anslutet till bilens OBD-uttag under instrumentpanelen" loading="lazy" />
+                  <img src={serviceWebp} alt="Diagnosverktyg anslutet till bilens OBD-uttag under instrumentpanelen" loading="lazy" />
                 </picture>
               </div>
               <div className="bilservice__service-content">
@@ -263,7 +259,7 @@ export default function FelsokningPage() {
         {/* Alltid tydliga besked och ärliga priser */}
         <section aria-labelledby="felsokning-trust-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card--light bilservice__closing-card--diagnosis">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="felsokning-trust-title">Alltid tydliga besked och ärliga priser</h3>

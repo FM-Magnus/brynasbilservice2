@@ -19,11 +19,8 @@ import { ClockIcon } from '../components/icons/ClockIcon'
 import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { InfoIcon } from '../components/icons/InfoIcon'
 import { HourglassIcon } from '../components/icons/HourglassIcon'
-import heroJpg from '../assets/images/services/oil/oil-filter-workbench-hero.jpg'
 import heroWebp from '../assets/images/services/oil/oil-filter-workbench-hero.webp'
-import funnelJpg from '../assets/images/services/oil/oil-poured-into-funnel.jpg'
 import funnelWebp from '../assets/images/services/oil/oil-poured-into-funnel.webp'
-import drainJpg from '../assets/images/services/oil/oil-drain-under-car.jpg'
 import drainWebp from '../assets/images/services/oil/oil-drain-under-car.webp'
 import '../styles/ServiceGuideTemplate.css'
 
@@ -102,13 +99,13 @@ export default function OljebytePage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--oil">
         <GuideHero
           id="oljebyte-title"
           eyebrow="Motorolja & motorunderhåll"
           title={<>Oljebyte<br />för en motor<br />som <span className="bb-accent">mår bra</span></>}
           lead="Ett oljebyte är ett av de mest grundläggande men samtidigt viktigaste underhållsmomenten på en bil. Motorns rörliga delar smörjs av oljan, som håller nere friktionen och skyddar motorn från onödigt slitage."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: '' }}
+          image={{ webp: heroWebp, alt: '' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
           bookLabel="Boka oljebyte"
@@ -119,7 +116,7 @@ export default function OljebytePage() {
         <GuideIntro
           id="oljebyte-intro-title"
           heading="Vad är ett oljebyte?"
-          image={{ webp: funnelWebp, jpg: funnelJpg, alt: 'Ny motorolja hälls i en tratt i motorrummet' }}
+          image={{ webp: funnelWebp, alt: 'Ny motorolja hälls i en tratt i motorrummet' }}
           caption="Rätt olja. Rätt mängd. Varje gång."
         >
           <p>Med tiden bryts oljan ner, tappar sina smörjande egenskaper och samlar på sig sot och förbränningsrester. Ett oljebyte innebär att den gamla, uttjänta oljan dräneras ur motorn, oljefiltret byts ut, ny olja fylls på och nivån kontrolleras innan bilen lämnas tillbaka till dig.</p>
@@ -159,7 +156,7 @@ export default function OljebytePage() {
           heading="Hur oljan blir sämre med tiden – även om bilen knappt körs"
           text="Olja som står oöppnad i en dunk åldras i praktiken inte. Det är först när den börjar arbeta i motorn som nedbrytningen startar, och det sker på flera sätt samtidigt:"
           items={oilAgeing}
-          image={{ webp: drainWebp, jpg: drainJpg, alt: 'Mekaniker skruvar loss oljefiltret under en lyft bil och låter gammal motorolja dräneras' }}
+          image={{ webp: drainWebp, alt: 'Mekaniker skruvar loss oljefiltret under en lyft bil och låter gammal motorolja dräneras' }}
           caption="Gammal olja och föroreningar dräneras ut."
           tight
         />

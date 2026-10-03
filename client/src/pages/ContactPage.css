@@ -468,20 +468,23 @@
   align-items: center;
   background-color: var(--bb-color-ink-950);
   background-image: image-set(
-    url('../assets/images/services/tires/tire-wheel-change.webp') type('image/webp') 1x,
-    url('../assets/images/services/tires/tire-wheel-change.jpg') type('image/jpeg') 1x
+    url('../assets/images/services/tires/tire-wheel-change.webp') type('image/webp') 1x
   );
   background-position: center 35%;
   background-size: cover;
   border-radius: var(--bb-radius-card);
   color: var(--bb-color-text-inverse);
   display: flex;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   isolation: isolate;
-  margin: 0 auto clamp(3rem, 5vw, 4.5rem);
-  max-width: 1520px;
-  min-height: 330px;
+  min-height: 300px;
   overflow: hidden;
+  padding: clamp(2.25rem, 4vw, 3.5rem);
   position: relative;
+}
+/* Same card geometry as the closing card below: inside the content width, rounded, left-aligned. */
+.kontakt-page__focus-section {
+  margin: 0 0 clamp(3rem, 5vw, 4.5rem);
 }
 .kontakt-page__focus .bb-accent { color: var(--bb-color-teal-500); }
 .kontakt-page__focus::before {
@@ -495,7 +498,6 @@
 }
 .kontakt-page__focus-content {
   max-width: 480px;
-  padding: clamp(2.5rem, 4vw, 3.5rem) 0;
   position: relative;
   z-index: 1;
 }
@@ -522,8 +524,7 @@
   background-image:
     linear-gradient(rgba(7, 20, 22, 0.38), rgba(7, 20, 22, 0.38)),
     image-set(
-      url('../assets/images/contact/contact-closing-suspension-wide.webp') type('image/webp') 1x,
-      url('../assets/images/contact/contact-closing-suspension-wide.jpg') type('image/jpeg') 1x
+      url('../assets/images/contact/contact-closing-suspension-wide.webp') type('image/webp') 1x
     );
   background-position: center;
   background-size: cover;
@@ -552,6 +553,20 @@
   gap: 0.75rem;
 }
 
+/* Desktop: contact card and form share the first row; the steps card spans the full width below. */
+@media (min-width: 1101px) {
+  .kontakt-page__grid { align-items: stretch; }
+  .kontakt-page__info-col { display: contents; }
+  .kontakt-page__card--dark { grid-column: 1; grid-row: 1; }
+  .kontakt-page__form-col { grid-column: 2; grid-row: 1; }
+  .kontakt-page__card--light { grid-column: 1 / -1; grid-row: 2; }
+  .kontakt-page__steps-list { gap: clamp(1.5rem, 3vw, 3rem); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* A shorter message box and tighter spacing so the form matches the contact card's height. */
+  .kontakt-page__textarea { height: 92px; min-height: 92px; }
+  .kontakt-page__form-intro { margin-bottom: 1rem; }
+  .kontakt-page__notice { margin-bottom: 1.1rem; }
+}
+
 @media (max-width: 1100px) {
   .kontakt-page__grid { grid-template-columns: 1fr; }
   .kontakt-page__find-grid { grid-template-columns: 1fr; }
@@ -568,14 +583,13 @@
 
 @media (max-width: 650px) {
   .kontakt-page__form-row { grid-template-columns: 1fr; }
-  .kontakt-page__focus { border-radius: 0; margin-bottom: 3.5rem; }
+  .kontakt-page__focus-section { margin-bottom: 3.5rem; }
   .kontakt-page__closing-card {
     /* Phone: the tall crop puts the bright mechanic's arm behind the paragraph, so the veil is a little denser (.38 measured 4.45:1). */
     background-image:
       linear-gradient(rgba(7, 20, 22, 0.46), rgba(7, 20, 22, 0.46)),
       image-set(
-        url('../assets/images/contact/contact-closing-suspension-tall.webp') type('image/webp') 1x,
-        url('../assets/images/contact/contact-closing-suspension-tall.jpg') type('image/jpeg') 1x
+        url('../assets/images/contact/contact-closing-suspension-tall.webp') type('image/webp') 1x
       );
   }
   .kontakt-page__find-grid { border-radius: 0; }

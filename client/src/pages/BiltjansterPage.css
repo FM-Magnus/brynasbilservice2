@@ -152,7 +152,11 @@
 .biltjanster-hub__guide-card:hover .biltjanster-hub__guide-arrow { transform: translateX(3px); }
 
 /* Closing CTA */
-.biltjanster-hub__cta { background: var(--bb-color-ink-950); color: var(--bb-color-surface); padding: clamp(2.75rem, 4.5vw, 4rem) 0; }
+.biltjanster-hub__cta { background: var(--bb-color-ink-950); color: var(--bb-color-surface); isolation: isolate; overflow: hidden; position: relative; padding: clamp(2.75rem, 4.5vw, 4rem) 0; }
+/* Warm amber photo behind the dark closing band (BACKGROUNDS.md treatment A). */
+.biltjanster-hub__cta-photo { bottom: 0; display: block; left: 0; opacity: .5; position: absolute; right: 0; top: 0; z-index: -1; }
+.biltjanster-hub__cta-photo img { display: block; height: 100%; object-fit: cover; object-position: 65% center; width: 100%; }
+.biltjanster-hub__cta-photo::after { background: linear-gradient(90deg, rgba(7, 20, 22, .82) 0%, rgba(7, 20, 22, .5) 60%, rgba(7, 20, 22, .3) 100%); content: ''; inset: 0; position: absolute; }
 .biltjanster-hub__cta-inner { align-items: center; display: flex; flex-wrap: wrap; gap: 1.75rem; justify-content: space-between; }
 .biltjanster-hub__cta-inner > div:first-child { max-width: 560px; }
 .biltjanster-hub__cta-title {

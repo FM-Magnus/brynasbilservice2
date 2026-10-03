@@ -72,6 +72,7 @@
 .landing-v2__service-graphic { padding: clamp(1.25rem, 2.2vw, 2rem) 0 0; }
 /* Five columns separated by hairlines: bare glyphs, no boxes, no band colour. */
 .landing-v2__gat-link { align-items: center; border-top: 1px solid var(--bb-color-border-subtle-light); color: var(--bb-color-ink-950); display: flex; font-size: var(--landing-type-support); font-weight: 700; gap: .6rem; justify-content: center; margin-top: clamp(1.25rem, 2vw, 1.75rem); min-height: 44px; padding: clamp(.9rem, 1.4vw, 1.2rem) 0 0; text-align: center; text-decoration: none; }
+.landing-v2__gat-name { white-space: nowrap; }
 .landing-v2__gat-link svg { color: var(--bb-color-teal-700); flex: 0 0 auto; height: 16px; width: 16px; }
 .landing-v2__gat-link:hover span { text-decoration: underline; text-underline-offset: 3px; }
 .landing-v2__service-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
@@ -97,6 +98,8 @@
 .landing-v2__process-content > div > p:not(.bb-eyebrow) { color: rgba(255, 255, 255, .78); font-size: var(--landing-type-support); line-height: var(--landing-leading-body); margin: 1rem 0 1.2rem; }
 
 @media (max-width: 900px) {
+  /* The contact heading stacks right under the link here; give it room. */
+  .landing-v2__gat-link { margin-bottom: 2.5rem; }
   .landing-v2__why-photo { display: none; }
   .landing-v2__process-content { grid-template-columns: 1fr; gap: 2rem; }
   .landing-v2__service-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 1.75rem; }

@@ -13,7 +13,7 @@ Magnus's design decisions for card and band backgrounds, written down so the unf
 
 **Starting in a fresh context window:** read, in order, `AGENTS.md`, this file, `docs/CSS_OWNERSHIP.md`, `docs/IMAGES.md`, then the three reference pages in the code (`pages/landing/LandingPage.*`, `pages/AboutPage.*`, `pages/BargningPage.*`). Work on branch `redesign/blue-teal-v1` (`design/card-backgrounds` was merged into it 2026-10-02): one slot per round, one commit per page, nothing pushed or merged without Magnus's go-ahead.
 
-Image sources (git-ignored, outside the repo): `_incoming-assets/IMPLEMENT/backgrounds/custom/` (curated, **prefer these**, with 11 cards in wide/square/tall) and `…/backgrounds/` (generic dark / amber / white). Both have a `MANIFEST.md`. Copy a file into `client/src/assets/images/<area>/` only when a slot uses it. The custom set shows faces and invented licence plates (`KLP 482`, `TYK 07K`, `RRR 997`, `PBR 997`): **Maher must approve before they are used.**
+Image sources (git-ignored, outside the repo): `_incoming-assets/IMPLEMENT/backgrounds/`, one flat folder (WebP only, 56 images: generic dark/amber/white cards, 11 curated `custom` real-workshop scenes — **prefer these where a topic matches** — and 25 teal full-frame cards). Start from its `MANIFEST.md`, the agent index (choose by topic, tone and copy side; motif, suits, notes, used on). Copy a file into `client/src/assets/images/<area>/` only when a slot uses it. The custom set shows faces and invented licence plates (`KLP 482`, `TYK 07K`, `RRR 997`, `PBR 997`): **Maher must approve before they are used.**
 
 ## Missing material: the gap log
 
@@ -81,6 +81,76 @@ Each row: **page / slot** · **slot type and tone** (dark band, light card, hero
 
 ### J. Alignment rhythm
 - Vary the heading block between bands: **centred → right → left** on consecutive dark bands (Om oss process band right-aligned, closing card left-aligned, Bärgning process band right-aligned, CTA left-aligned). Right-aligned blocks end exactly at the content's right edge (the `.bb-wrap` edge), never at the viewport edge.
+
+## Round on `design/backgrounds-freestyle` (2026-10-02, Magnus gave free hands; unpushed, unmerged)
+
+Page-local CSS only (family files `ServiceReparationerPage.css`, `ServiceGuideTemplate.css`, page islands); no shared CSS or tokens touched. Every slot measured per element (weakest text, 4.5:1 for body, taken with the text hidden) at 1440/768/390, no overflow, full Playwright green. Photos are from `_incoming-assets/IMPLEMENT/backgrounds/` (generic sets plus the eight teal full-frame cards added today; no faces).
+
+| Page / slot | Photo | Treatment | Weakest text |
+|---|---|---|---|
+| Bilservice, tier cards 01 / 02 / 03 | `bright-workshop-sedan` / `brake-parts` (teal veil) / `steering-suspension` | photo under the card's own colour, light → mid → dark kept | 7.7 / 5.0 / 11.7:1 |
+| Bilservice, AC, Reparationer "Så går det till" bands | tools / amber gauges / engine work | A at 24% (15% on phones) | 6.3:1 or better |
+| Closing trust cards: Bilservice, Felsökning (light), Reparationer, AC (dark) | spark plugs, diagnostic tablet / under the lift, amber gauges | B/C light (white veil .87–.97) and D dark (left-heavy veil) | 4.8 / 12:1 or better |
+| Däckservice, tyre storage card | `white-tyre` | K (night run 2026-10-03): object on the white card, multiply, left dissolve; ≥901px only, clean below | text on white, 5.1:1 (teal price line) |
+| AC-service, "Varför boka" band | `white-ac` | K (night run): third column right of the prose, multiply, left dissolve and short right fade; ≥1025px only | text on page colour, 4.75:1 (eyebrow) |
+| AC-service, tips heading column | `teal-mid-ac-service-hoses-gauges` (640) | hard-edged photo block under the heading, balances heading 182 px against prose 617 px; ≥1025px only | no text on it |
+| Felsökning, "Bra att veta" heading column | `white-diagnosis` | K under the heading/lead/button, dissolves from top, left and right; ≥1025px only; fixes balance y≈2530 | lead text on page colour, 5.08:1 |
+| Reparationer, "Bra att veta om pris" heading column | `white-clutch` | K under heading/lead/button, 3.4:1 crop, dissolves top/left/right; ≥1025px only; fixes balance y≈2062 | lead text on page colour, 5.08:1 |
+| Guides Koppling / Kamrem / Drivaxel / Stötdämpare, "info" heading (GuideInfo) | `white-clutch` / `white-timing-belt` / `white-driveshaft` / `white-suspension` | K right of heading and lead, one `--guide-k-object` per guide class in `ServiceGuideTemplate.css`, heading block min-height 11.5rem, ≥1025px only | text on page colour 5.08:1 (h2 box spans the object so the script reads 2.29: a false positive, the heading ends at x≈520, the object starts at x≈1050) |
+| Biltjänster closing band | amber spark plugs | A, amber | 14.6:1 |
+| Bilar till salu closing card | key handover (hands only) | light veil | 4.7:1 |
+| All ten guides + GAT: importance, service and closing cards | tools, engine work, under the lift | D, same on every guide (neutral motifs) | 9.7:1 or better |
+
+Also today: Landing's GAT dealer line is one unit (`nowrap`) and the contact heading gets 40 px more room below 900 px.
+
+**Not done:** Däckservice and AC price cards (dark, with icon art), Galleri closing card, Kontakt/Om oss/Landing (already worked), per-guide topic photos (no oil, battery, brake-system or steering motifs in the sets; the guide cards use neutral workshop images, a gap-log item).
+
+### K. Object on the page (white cards, no veil)
+- **For:** the `white-*` cards (clutch, driveshaft, timing belt, suspension, spark plugs, air filter, cooler hose, diagnosis, AC, handover key, tyre) and `teal-light-*` on a section whose background is the page colour `--bb-color-page` (#f8f7f3) or white. Text on the left, the object on the right looks as if it lies on the page itself (prototype 2026-10-03, tested on clutch, key and tyre).
+- **Values:** an `<img>` absolutely placed right (`right: 0; top: 0; height: 100%; width: 60–70%; object-fit: cover; object-position: right center`), `mix-blend-mode: multiply` so the image's pale floor takes the page colour, `filter: brightness(1.18) contrast(1.15) saturate(.7)` to lift the blue-grey of the left side to near white (it measures about (226,240,243), not white), and `mask-image: linear-gradient(90deg, transparent 0, #000 40%)` to dissolve the left edge. Brightness 1.10 without the desaturation leaves a faint blue haze.
+- **Contrast:** the text sits where the mask is transparent, so it is plain text on the page colour: no veil to tune and the object stays fully visible. Measure the text anyway.
+- **Do:** keep the host section a clean page-colour band, one per page (it is the white band that gets the photo, like Landing "Trygg bilservice"). Mirror (object left, text right) with `scaleX(-1)` on the image only when the object is symmetric; the flip reverses labels and plates, so not for the handover key or tyre.
+- **Don't:** use it on an aqua (`--bilservice-aqua-100`) or dark section: multiply tints the photo and the effect is lost. The right edge of the image is a hard cut: let it end at the container edge or add a short right fade (`linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%)`).
+
+### L–N. More recipes (starting values, **not yet measured on a page**: test, record the measured values here, then use)
+- **L. Teal-to-amber blend over a dark photo (CTA bands):** two stacked veils, `linear-gradient(120deg, rgba(4,96,108,.72) 0%, rgba(4,96,108,.3) 55%, rgba(240,149,5,.16) 100%)` over the photo, white copy. Keep the amber at or below .2 so it reads as warmth, not as a stain.
+- **M. Split card, hard edge:** card as a two-column grid, one half a clean colour (dark, teal gradient or white), the other half the photo (`object-fit: cover`, no veil) with a 1–2 px edge, stacked on phones with the photo on top (Bärgning's service card and used-cars banner already do it).
+- **N. Top-to-bottom dissolve on a white band:** photo at the bottom of a page-colour band, `mask-image: linear-gradient(180deg, transparent 0, #000 55%)`, text at the top; same `multiply` rule as K for `white-*` images.
+
+### O. Amber photo (amber is the accent, so it belongs in the backgrounds too, not only in text and solid cards)
+- **Native amber photos:** only three exist (`amber-ac`, `amber-luftfilter`, `amber-spark-plugs`); cooler and exhaust/sensor were copies of the AC card (gap log). Use them first for dark bands and cards.
+- **Amber duotone from any mid or bright photo** (prototype 2026-10-03: tabletop tools, oil filter): card background `linear-gradient(135deg, #b56c01, #8a5301)`, the `<img>` on top with `mix-blend-mode: soft-light; filter: grayscale(1) contrast(1.3) brightness(1.4)`, photo absolutely placed behind the copy (`isolation: isolate`, `z-index: -1`). Reads as a warm amber photograph. Dark photos (steering, under lift) turn dark brown, not amber: brighten more or use a native amber photo.
+- **Avoid:** `mix-blend-mode: overlay` (red cast), `#d98200` as the base (too orange), white body text on `#b56c01` without a measurement (about 4:1): deepen the lower half to `#8a5301` or `#5e3800` under the copy and measure.
+- **Where:** one amber photo surface per long page, on a feature surface (a CTA, a process band or one card in a stepped row), never on forms, FAQ, tips or ledgers. Amber photo, teal photo and a clean surface should alternate; amber must not exceed one in three photo surfaces.
+- **Gap:** a proper amber set in the same 1600×1440 format as the teal cards (AMBER tone, copy-left) for oil, brakes, battery, exhaust, wheel bearing, tyres, towing and steering would remove the need for duotone; produce it when possible.
+
+## Balance and symmetry (no dead white)
+
+Why: the Kontakt page looked unfinished until the contact card and the form shared a row at equal height and the steps card spanned the full width below (2026-10-03). Do the same everywhere:
+1. **Side-by-side blocks (text | image, card | card, text | card) differ in height by at most ~15%.** Fix by stretching (`align-items: stretch`), cropping the image (`object-fit: cover` with a `max-height`), shortening the taller one (e.g. the form's message box), or adding a block under the short one.
+2. **No empty space under the content inside a coloured card** (more than ~70 px). Centre the content vertically or let a sibling set the height.
+3. **Text and image mirror each other:** tops and bottoms align, gutters are equal, the image is never much taller than its text. A short text beside a tall photo is wrong: crop the photo or put a ledger or stat card under the text.
+4. **Use full-width cards below paired rows** for the third item (steps, facts, CTA) instead of leaving a half-empty column.
+5. **Cap paragraph width (about 65 ch) and do not leave a wide white margin next to a short text**: pair it with a photo, a card or a split layout.
+6. **Editorial heading | prose layouts are asymmetric on purpose** (short heading column, long text column). Leave them; just make sure the heading column is not stranded under 200 px tall next to 600 px of text with nothing else.
+`docs/audit-harness/backgrounds/balance.cjs <routes>` lists suspect rows (sibling height difference over 15% and 60 px, boxes with over 70 px empty under their content) at 1440 and 768. It flags, you judge: the footer grid and gallery thumbs are false positives, a stranded text beside a tall image is a real one (2026-10-03: Felsökning y≈2530, AC y≈3573, Oljebyte several, Reparationer y≈2062).
+
+## Reference philosophy and the clean budget (read before touching a page)
+
+Landing, Om oss and Bärgning are the reference (looked at 2026-10-03). What they do:
+
+- **One photo-treated surface per section, never a wall of photos.** Between photo bands there is always a calm one: Landing's service row (icons only), Om oss's story text, facts card and statistics, Bärgning's white dealer card and used-cars banner text.
+- **Photos sit on feature surfaces:** hero, a band that introduces a step (process band, treatment A at 15–24%), a closing CTA (D/E), the one white band per page that gets a photo faded in from one side (B/C: Landing "Trygga bilservice", Om oss "Därför väljer kunder oss"), or a split card with the photo as a hard-edged half (Bärgning's service card and used-cars banner).
+- **Solid-colour cards carry the reading:** the amber quote (Om oss), the teal form card (Landing), the dark facts card, ledgers, FAQ, tips, forms. Their colour is the decoration.
+- **Stepped rows keep a clean member:** Bärgning's scenario row is pale, mid teal, dark photo, dark photo (never four photos in a row).
+
+**Clean budget (binding for autonomous rounds):**
+1. In any card group (row or grid) at most half the cards carry a photo; the rest stay clean (solid colour or gradient only).
+2. Always clean, never a photo: forms and their notices, FAQ items, tips (`.bb-tip`), ledgers and price lists, tables, legal/fact cards, any card with a long paragraph or more than one list, the contact/direct-contact cards, review cards, step cards that already have an icon row.
+3. At most 2 photo-treated surfaces per screen height and no two touching each other; between two photo surfaces put a clean one.
+4. The same photo never twice on a page, and the same treatment at most twice per page.
+5. Variety: alternate light, mid and dark; every long page should get an **amber photo surface** (a native amber card, or recipe O once amber is rolled out; solid amber cards and amber text do not count; **tonight only the three native amber photos, no duotone rollout**) and teal and amber photos alternate; mix directions (fade from the left, from the right, top to bottom).
+6. A "visible" photo is the point: if the veil needed for 4.5:1 makes the photo disappear (it should still read as a motif at 1440 px), use a clean card instead.
 
 ## Kept plain (no photo), on purpose
 Confirm with Magnus before adding a photo to any of these:

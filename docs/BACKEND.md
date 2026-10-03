@@ -328,7 +328,7 @@ The public page needs, for each photo:
 
 | Variant | Size | Formats | Used for |
 |---|---|---|---|
-| `main` | 1600 px wide, **16:10**, centre-cropped | WebP (q≈0.8) + JPG (q≈0.82) | large viewer, `<picture>` with WebP and a JPG fallback |
+| `main` | 1600 px wide, **16:10**, centre-cropped | WebP (q≈0.8) + JPG (q≈0.82) | large viewer. The frontend uses only the WebP since 2026-10-02 and ignores `jpg` fields, so the API may drop them (Johnny's call) |
 | `thumb` | 640 px wide, 16:10 | WebP + JPG | thumbnail buttons |
 
 **Proposal: the admin UI makes these four files in the browser** (canvas `toBlob`) and uploads them together.
@@ -593,7 +593,7 @@ The test database is emptied and reseeded before each run.
 
 `/galleri` shows every JPG, PNG or WebP in `client/src/assets/galleri/`.
 
-- **Variants:** `vite-imagetools` generates a `main` (≤1920px) and a `thumb` (≤640px) for each photo, in WebP and JPG, at build time.
+- **Variants:** `vite-imagetools` generates a `main` (≤1920px) and a `thumb` (≤640px) for each photo, in WebP, at build time (the originals stay in the folder as sources; no JPG variants since 2026-10-02).
 - **Captions** live in `bildtexter.json` in the same folder.
 - **Adding or removing a photo** is a file change followed by a build and deploy. See `client/src/assets/galleri/LÄSMIG.md`.
 - **No backend is involved yet.**

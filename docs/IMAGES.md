@@ -67,13 +67,13 @@ Below 1024 px the intro and symptom slots stack to one column (min-height 320 / 
 | Styrning & kulleder | ✓ | ✓ ✓ | — |
 | Service-reparationer | ✓ | ✓ servicebook/keys + ✓ four value cards | — |
 | Reparationer & större arbeten | ✓ `services/repair/repair-engine-bay-workshop-hero` (3000×1700, replaced the placeholder 2026-10-02) | **placeholders**: intro `workshop/workshop-car-open-hood` (slot `reparationer-intro`, 16:9), service card `services/general/service-performance-diagnostics` (slot `reparationer-service`; also the Biltjänster hub thumbnail) | phone crop (1200×2000): none yet, the desktop hero is cropped |
-| Felsökning | ✓ `services/diagnostics/diagnostics-workshop-hero` (3000×1674, replaced 2026-09-29) | ✓ engine-bay tablet + ✓ OBD detail | — |
+| Felsökning | ✓ `services/diagnostics/diagnostics-workshop-hero` (3000×1700, replaced 2026-10-02 from `HERO FELSOK.jpg`: mechanic at a laptop with a diagnostic tool, 145 KB; phones use `object-position: 80% 50%` in `ServiceReparationerPage.css` to keep his face in frame, no dedicated phone crop) | ✓ engine-bay tablet + ✓ OBD detail | — |
 | Biltjänster | CSS-only | ✓ all 11 guide cards have photos | — |
 | Bilar till salu | ✓ `workshop/cars-for-sale-estate-on-lift-hero` (3000×1700, replaced 2026-10-01); **phone: one static portrait photo** `…-hero-phone` (1200×2001, via `useIsPhone`). The featured-car panel over the hero was removed the same day, the photo is the backdrop alone | conditional placeholders when a car lacks photos | — |
 | Landing | ✓ slideshow: `home/landing-v2/landing-happy-customer-key-hero`, `landing-birds-eye-hero` (3000×1700); **phone: one static portrait photo** `landing-happy-customer-key-hero-phone` (1200×2000, via `useIsPhone`) | ✓ why (`landing-why-customer-woman-volvo`, faded in from the text), process (`landing-process-technical-work`, faint photo); the service area is vector icons, no photo | phone crops (1200×2100) |
 | Om oss | ✓ slideshow: `about/about-hero-maher-customers`, `about-hero-maher-customer-car` (3000×1688), shade + 30% black left edge; **phone: one static portrait photo** `about/about-hero-phone` (1200×2000, no rotation, via `useIsPhone`) | ✓ `about/about-principles-maher-customer-bg` behind "Därför väljer kunder oss" (the old four-photo gallery preview at the bottom was removed 2026-09-30) | phone crops (1200×2100) |
 | Däckservice | ✓ slideshow: `services/tires/tires-hero-bg`, `tires-hero-storage-aisle` (3000×1674) | ✓ six tyre cards (photo above the CTA, teal grade + faded edges in page CSS), storage | — |
-| AC-service | ✓ `services/ac/ac-hero-bg` | ✓ `ac-manometers-on-engine` (JPG only, no WebP) | — |
+| AC-service | ✓ `services/ac/ac-hero-bg` | ✓ `ac-manometers-on-engine` | — |
 | Bärgning | ✓ slideshow: `services/towing/towing-hero-strap`, `towing-hero-highway`; **phone: one static portrait photo** `towing-hero-phone` (1200×2000, no rotation, rendered via `useIsPhone`) | ✓ tow truck, workshop, car for sale | — |
 | Kontakt | ✓ slideshow: `contact/contact-hero-customer-beanie` (3000×1700, replaced 2026-10-01), `contact-hero-maher-customer-car`; **phone: one static portrait photo** `contact/contact-hero-phone` (1200×2000, no rotation, only this photo is rendered on phones via `useIsPhone`); left shade (vertical on phones), top-anchored from 1024px | — | phone crops (1200×2100) |
 | Galleri | folder-driven | every photo in `client/src/assets/galleri/` (see `LÄSMIG.md`) | — |
@@ -102,8 +102,8 @@ The camera presets and grade presets live on **Google Drive, `My Drive/## FOR AG
 
 ## Files and markup
 
-- **Location:** `client/src/assets/images/services/<topic>/<topic>-<subject>-<role>.{webp,jpg}` for service and guide pages; Landing uses `home/landing-v2/landing-<subject>.{webp,jpg}` — e.g. `services/suspension/suspension-springs-shocks-bench-hero`. Always both formats.
-- **WebP:** `sips` cannot write WebP here; use `cwebp -q 90 in.jpg -o out.webp`. `sips -r -90` rotates counter-clockwise.
-- **Markup:** `<picture><source srcSet={webp} type="image/webp" /><img src={jpg} alt="…" loading="lazy" /></picture>` inside the slot. Swedish alt text that says what is in the picture. No inline `style=`.
+- **Location:** `client/src/assets/images/services/<topic>/<topic>-<subject>-<role>.webp` for service and guide pages; Landing uses `home/landing-v2/landing-<subject>.webp` — e.g. `services/suspension/suspension-springs-shocks-bench-hero`. WebP only: since 2026-10-02 the site ships no JPG fallbacks (WebP is supported by ~97–99 % of browsers); don't add JPG copies.
+- **WebP:** `sips` cannot write WebP here; use `cwebp -q 90 in.jpg -o out.webp` and keep only the `.webp` in the repo. `sips -r -90` rotates counter-clockwise.
+- **Markup:** `<picture><img src={webp} alt="…" loading="lazy" /></picture>` inside the slot. Swedish alt text that says what is in the picture. No inline `style=`.
 - **Intake:** finished exports come from `_incoming-assets/IMPLEMENT/`. Don't pull from the other intake subfolders unless Magnus points at a file ([`_incoming-assets/README.md`](../_incoming-assets/README.md)).
 - **Gallery** photos go straight into `client/src/assets/galleri/` (see `LÄSMIG.md` there); that folder drives `/galleri` and the Landing page's `GalleryDockStrip` (via `getGalleryImages()`) and nothing else. `client/src/assets/images/workshop/` holds fixed exports of some of the same workshop photos for other pages (Om oss, Bärgning, Bilar till salu); renaming or removing a `/galleri` photo never affects them. **Car photos** are wired in `client/src/data/vehicles.ts`.

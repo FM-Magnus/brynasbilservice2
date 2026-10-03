@@ -21,11 +21,8 @@ import { GaugeIcon } from '../components/icons/GaugeIcon'
 import { SlidersIcon } from '../components/icons/SlidersIcon'
 import { WavesIcon } from '../components/icons/WavesIcon'
 import { Volume2Icon } from '../components/icons/Volume2Icon'
-import heroJpg from '../assets/images/services/driveshaft/cv-joint-workbench.jpg'
 import heroWebp from '../assets/images/services/driveshaft/cv-joint-workbench.webp'
-import componentsJpg from '../assets/images/services/driveshaft/driveshaft-components-workbench.jpg'
 import componentsWebp from '../assets/images/services/driveshaft/driveshaft-components-workbench.webp'
-import inspectionJpg from '../assets/images/services/driveshaft/driveshaft-torn-boot-inspection-portrait.jpg'
 import inspectionWebp from '../assets/images/services/driveshaft/driveshaft-torn-boot-inspection-portrait.webp'
 
 const trustBadges = [
@@ -89,13 +86,13 @@ export default function DrivaxelDrivknutarPage() {
   return (
     <>
       <PublicHeader onBookingClick={openBooking} variant="overlay" />
-      <main className="service-guide">
+      <main className="service-guide service-guide--driveshaft">
         <GuideHero
           id="driveshaft-title"
           eyebrow="Drivlina & kraftöverföring"
           title={<>Drivknutar<br />som <span className="bb-accent">klickar</span><br />i kurvan</>}
           lead="Drivaxeln överför motorkraften från växellådan till drivhjulen via rörliga drivknutar (CV-knutar). Vi inspekterar damasker, åtgärdar fettläckage och byter slitna knutar eller kompletta drivaxlar."
-          image={{ webp: heroWebp, jpg: heroJpg, alt: 'Drivaxel med CV-knut på arbetsbänk i verkstaden', slot: 'driveshaft-hero' }}
+          image={{ webp: heroWebp, alt: 'Drivaxel med CV-knut på arbetsbänk i verkstaden', slot: 'driveshaft-hero' }}
           trustBadges={trustBadges}
           onBooking={openBooking}
         />
@@ -105,7 +102,7 @@ export default function DrivaxelDrivknutarPage() {
         <GuideIntro
           id="driveshaft-intro-title"
           heading="Vad gör drivaxeln och drivknutarna?"
-          image={{ webp: componentsWebp, jpg: componentsJpg, alt: 'Komplett drivaxel med drivknutar, gummidamasker och metallklämmor på verkstadsbänk' }}
+          image={{ webp: componentsWebp, alt: 'Komplett drivaxel med drivknutar, gummidamasker och metallklämmor på verkstadsbänk' }}
           caption="Kraftöverföring med konstant hastighet."
         >
           <p>Drivaxeln för kraften från växellådan ut till hjulen, och i varje ände sitter en drivknut som klarar av att vinklas när hjulen styrs eller fjädrar. Runt varje knut sitter en gummidamask som håller kvar smörjfettet och stänger ute smuts och väta – damasken är systemets svagaste länk, och upptäcks en spricka i tid räcker det oftast med att byta enbart den.</p>
@@ -129,7 +126,7 @@ export default function DrivaxelDrivknutarPage() {
           heading="Tecken på sliten drivknut eller trasig damask"
           text="Slitna drivknutar och spruckna damasker ger tydliga varningssignaler vid kurvtagning och acceleration. Här är de vanligaste signalerna du bör vara vaksam på."
           items={symptoms}
-          image={{ webp: inspectionWebp, jpg: inspectionJpg, alt: 'Närbild på mekaniker som inspekterar sprucken drivaxeldamask och fettläckage under bil' }}
+          image={{ webp: inspectionWebp, alt: 'Närbild på mekaniker som inspekterar sprucken drivaxeldamask och fettläckage under bil' }}
           caption="Tidigt damaskbyte skyddar knuten."
         >
           <p>En skadad damask och en sliten drivknut är två olika lägen. Damasken är gummiskyddet som håller kvar fettet i knuten och håller smuts och vatten ute. Är den bara sprucken kan knuten fortfarande vara hel. Har smuts och fukt redan kommit in, och knuten börjat knacka i kurvor, är själva knuten sliten och ett damaskbyte räcker inte längre.</p>

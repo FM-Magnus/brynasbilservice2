@@ -22,14 +22,14 @@ import { MonitorIcon } from '../components/icons/MonitorIcon'
 import { CarSaleIcon } from '../components/icons/CarSaleIcon'
 import { ShieldHeartIcon } from '../components/icons/ShieldHeartIcon'
 import { BiltjansterFaq } from '../components/ui/BiltjansterFaq'
-import heroJpg from '../assets/images/services/repair/repair-engine-bay-workshop-hero.jpg'
 import heroWebp from '../assets/images/services/repair/repair-engine-bay-workshop-hero.webp'
-import introJpg from '../assets/images/workshop/workshop-car-open-hood.jpg'
 import introWebp from '../assets/images/workshop/workshop-car-open-hood.webp'
-import serviceJpg from '../assets/images/services/general/service-performance-diagnostics.jpg'
 import serviceWebp from '../assets/images/services/general/service-performance-diagnostics.webp'
 import { BUSINESS } from '../data/business'
 import './ServiceReparationerPage.css'
+import { heroImgAttrs } from '../data/heroImgAttrs'
+import { heroSrcSet } from '../data/heroSrcSet'
+import processBandWebp from '../assets/images/services/repair/band-process-engine-work.webp'
 
 const trustRow = [
   { icon: CheckIcon, title: 'Kostnadsförslag först', text: 'Du vet vad det kostar innan vi börjar.' },
@@ -92,8 +92,7 @@ export default function ReparationerPage() {
         <section className="bb-hero" id="reparationer" aria-labelledby="reparationer-hero-title">
           <div className="bb-hero__media" aria-hidden="true">
             <picture data-image-slot="reparationer-hero">
-              <source srcSet={heroWebp} type="image/webp" />
-              <img src={heroJpg} alt="" />
+              <img src={heroWebp} srcSet={heroSrcSet(heroWebp)} sizes="100vw" alt="" {...heroImgAttrs} />
             </picture>
           </div>
           <div className="bb-hero__shade bb-shade-copy-left" aria-hidden="true" />
@@ -143,8 +142,7 @@ export default function ReparationerPage() {
               </div>
               <div className="bilservice__split-media--right">
                 <picture data-image-slot="reparationer-intro" className="bilservice__image-slot--radius-lg bilservice__image-slot--ar-16-9">
-                  <source srcSet={introWebp} type="image/webp" />
-                  <img src={introJpg} alt="Bil med öppen motorhuv i verkstaden" loading="lazy" />
+                  <img src={introWebp} alt="Bil med öppen motorhuv i verkstaden" loading="lazy" />
                 </picture>
               </div>
             </div>
@@ -161,7 +159,10 @@ export default function ReparationerPage() {
         </section>
 
         {/* Så går ett större arbete till */}
-        <section className="bilservice__section bilservice__section--dark" aria-labelledby="reparationer-process-title">
+        <section className="bilservice__section bilservice__section--dark bilservice__section--photo" aria-labelledby="reparationer-process-title">
+          <picture className="bilservice__band-photo" aria-hidden="true">
+            <img src={processBandWebp} alt="" loading="lazy" width={1000} height={500} />
+          </picture>
           <div className="bb-wrap bilservice__container bilservice__process">
             <div className="bilservice__process-text">
               <h2 className="bilservice__process-heading bb-h2" id="reparationer-process-title">Så går ett <span className="bb-accent">större arbete</span> till</h2>
@@ -205,8 +206,7 @@ export default function ReparationerPage() {
             <div className="bilservice__service-card">
               <div className="bilservice__service-media">
                 <picture data-image-slot="reparationer-service">
-                  <source srcSet={serviceWebp} type="image/webp" />
-                  <img src={serviceJpg} alt="Mekaniker arbetar i motorrummet med en surfplatta" loading="lazy" />
+                  <img src={serviceWebp} alt="Mekaniker arbetar i motorrummet med en surfplatta" loading="lazy" />
                 </picture>
               </div>
               <div className="bilservice__service-content">
@@ -244,7 +244,7 @@ export default function ReparationerPage() {
         {/* Tydligt pris, inga överraskningar */}
         <section aria-labelledby="reparationer-trust-title">
           <div className="bb-wrap bilservice__container bilservice__container--flow">
-            <div className="bb-card--trust">
+            <div className="bb-card--trust bilservice__closing-card bilservice__closing-card--underlift">
               <span className="bb-icon-badge bb-card--trust__icon"><ShieldHeartIcon aria-hidden="true" /></span>
               <div className="bb-card--trust__text">
                 <h3 id="reparationer-trust-title">Tydligt pris, inga överraskningar</h3>

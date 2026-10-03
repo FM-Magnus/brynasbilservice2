@@ -6,7 +6,6 @@ export type VehicleStatus = 'draft' | 'available' | 'sold'
 
 export interface VehicleImageVariant {
   webp: string
-  jpg: string
   width: number
   height: number
 }
