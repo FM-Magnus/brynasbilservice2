@@ -13,6 +13,17 @@ Small, directed edits (mainly placing the icon pool) are done by a cheap agent (
 
 Frozen files = `.githooks/frozen-paths.txt` (single source). In words: the contract and hooks; the four global CSS files and `main.tsx`; `business.ts`, `publicNavigation.ts`, `pageMeta.ts`, `structuredData.ts`, `heroImgAttrs.ts`, `Tip.tsx`; build, dependency, lint and TypeScript config and `package-lock.json`; `client/tests/` and `client/scripts/`; `server/` and `client/public/`. **Not frozen:** page TSX and CSS islands, family CSS (`ServiceGuideTemplate.css`, `ServiceReparationerPage.css`), `components/guide/`, `components/layout/`, `hooks/`, the icon pool (read; no edits).
 
+## Claude Code (and you) are not constrained
+- The commit guard works **only on `cheap-agent/*` branches** and `freeze.sh on` refuses to run anywhere else, so `main`, `fix/*`, `icons/*` and every other branch behave exactly as before.
+- `.agents/rules/` is read by Antigravity only. Claude Code reads `CLAUDE.md` → `AGENTS.md` (one extra pointer line) and ignores the rest.
+- On a cheap-agent branch a deliberate frozen-file commit is `ALLOW_FROZEN=1 git commit ...`; with the lock on, run `freeze.sh off` first. Claude's own sessions normally run with the lock off and on other branches.
+- Switching branch while the lock is on can fail on frozen files: run `freeze.sh off` first.
+
+## Pulling it back
+- **Stage tooling:** `docs/audit-harness/end-stage.sh` (try `--dry-run` first). It reverts exactly the three prep commits (`checkpoint/pre-cheap-agent..checkpoint/stage-1-ready`) as one commit: guard, tools, rules, docs and the `AGENTS.md` pointer line. Edits made afterwards stay.
+- **Agent edits:** each edit is its own commit on the stage branch, so `git revert <sha>` undoes one; `git reset --hard checkpoint/stage-1-ready` (after `freeze.sh off`) drops everything the agent did; never merging the branch drops it all, and `main` is untouched until you merge.
+- **Antigravity:** remove the deny rules and switch the preset back by hand (outside the repo).
+
 ## Workflow
 1. `docs/audit-harness/freeze.sh on` (once per sitting).
 2. Fill in `docs/CHEAP_AGENT_PROMPT_TEMPLATE.md` and send it to Antigravity. New session per edit.
@@ -44,7 +55,7 @@ Frozen files = `.githooks/frozen-paths.txt` (single source). In words: the contr
 4. Ask it to `git push`. Expected: refused by the deny rule.
 
 ## Ending the stage
-`freeze.sh off`; full suite green (`npx playwright test -c ../docs/audit-harness/pw.config.ts`, typecheck, check:css, build); reviewer pass; `python3 docs/audit-harness/icons/prune.py --delete` (with `ALLOW_FROZEN=1`) to remove unused pool icons; merge with Magnus's go-ahead; delete this file, the `.agents/` folder, `frozen-paths.txt`, `protect-frozen`, the pre-commit call and the pointer line in `AGENTS.md`.
+`end-stage.sh` (or the manual list below); `freeze.sh off`; full suite green (`npx playwright test -c ../docs/audit-harness/pw.config.ts`, typecheck, check:css, build); reviewer pass; `python3 docs/audit-harness/icons/prune.py --delete` (with `ALLOW_FROZEN=1`) to remove unused pool icons; merge with Magnus's go-ahead; delete this file, the `.agents/` folder, `frozen-paths.txt`, `protect-frozen`, the pre-commit call and the pointer line in `AGENTS.md`.
 
 ## Known weaknesses
 Flash may report completion without having edited anything, ignore or forget the rules in a long session, loop on a failed command (a locked file produces an error it may retry), and attempt `git push` despite a ban. 3.8-specific behaviour is unverified: see `_magnus/research/VERIFICATION.md` (local). A new session starts with no memory, so every prompt repeats the key prohibitions.

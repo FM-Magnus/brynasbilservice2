@@ -6,6 +6,8 @@
 # Called from .githooks/pre-commit; exits non-zero when blocked.
 . "$(dirname "$0")/frozen-lib.sh"
 
+# Active only on cheap-agent/* branches: work on main or any other branch is never constrained.
+case "$(git rev-parse --abbrev-ref HEAD)" in cheap-agent/*) ;; *) exit 0 ;; esac
 [ "${ALLOW_FROZEN:-}" = "1" ] && exit 0
 
 bad=0

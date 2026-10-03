@@ -9,6 +9,9 @@ set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 . .githooks/frozen-lib.sh
 mode="${1:-status}"
+if [ "$mode" = on ]; then
+  case "$(git rev-parse --abbrev-ref HEAD)" in cheap-agent/*) ;; *) echo "refusing: 'on' only works on a cheap-agent/* branch (so main and other work stay editable)"; exit 1 ;; esac
+fi
 n=0; locked=0
 while IFS= read -r f; do
   is_frozen "$f" || continue
