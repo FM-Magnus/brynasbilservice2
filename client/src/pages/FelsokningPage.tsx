@@ -151,7 +151,7 @@ export default function FelsokningPage() {
                 </p>
                 <div className="bilservice__actions">
                   <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka felsökning</button>
-                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
+                  <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember-solid">Ring {BUSINESS.phone.display}</a>
                 </div>
               </div>
               <div className="bilservice__split-media--right">
@@ -267,7 +267,7 @@ export default function FelsokningPage() {
               </div>
               <div className="bilservice__actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka tid</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember">Ring {BUSINESS.phone.display}</a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember-solid">Ring {BUSINESS.phone.display}</a>
               </div>
             </div>
           </div>

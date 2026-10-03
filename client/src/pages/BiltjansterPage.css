@@ -9,7 +9,7 @@
 }
 
 .biltjanster-hub *, .biltjanster-hub *::before, .biltjanster-hub *::after { box-sizing: border-box; }
-.biltjanster-hub :where(a) { color: inherit; text-decoration: none; }
+:where(.biltjanster-hub) :where(a) { color: inherit; text-decoration: none; }
 :where(.biltjanster-hub) :where(button) { cursor: pointer; font: inherit; }
 .biltjanster-hub h1, .biltjanster-hub h2, .biltjanster-hub p { margin: 0; }
 .biltjanster-hub :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }

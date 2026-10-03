@@ -15,7 +15,7 @@
 }
 
 /* Reset specificity protection via :where() per shared-elements.css */
-.omoss-page :where(a) {
+:where(.omoss-page) :where(a) {
   color: inherit;
   text-decoration: none;
 }

@@ -17,7 +17,7 @@
 .bilartillsalu-page *::after { box-sizing: border-box; }
 
 /* Zero-specificity resets (see shared-elements.css reset gotcha). */
-.bilartillsalu-page :where(a) { color: inherit; text-decoration: none; }
+:where(.bilartillsalu-page) :where(a) { color: inherit; text-decoration: none; }
 :where(.bilartillsalu-page) :where(button) { font: inherit; }
 .bilartillsalu-page :where(img) { display: block; max-width: 100%; }
 .bilartillsalu-page :where(ul, dl, dd) { list-style: none; margin: 0; padding: 0; }

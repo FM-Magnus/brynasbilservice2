@@ -110,13 +110,14 @@
   align-items: center;
   border-radius: var(--bb-radius-control);
   display: inline-flex;
-  font-size: 0.72rem;
-  font-weight: 800;
   justify-content: center;
   letter-spacing: 0.03em;
   min-height: 52px;
   text-transform: uppercase;
 }
+
+/* The two <button>s inherit the header's font (the `.public-header button` reset out-ranks any font rule here); only the call link, an <a>, takes this size and weight. */
+.public-header__mobile-call { font-size: 0.72rem; font-weight: 800; }
 
 .public-header__booking {
   background: linear-gradient(to bottom, #b56c01, #8a5301);

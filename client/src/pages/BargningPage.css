@@ -15,7 +15,7 @@
 }
 
 /* Reset specificity protection via :where() per shared-elements.css */
-.bargning-page :where(a) {
+:where(.bargning-page) :where(a) {
   color: inherit;
   text-decoration: none;
 }

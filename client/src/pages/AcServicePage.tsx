@@ -126,7 +126,7 @@ export default function AcServicePage() {
               <p>Och vi är din lokala verkstad: vi finns på Utmarksvägen i Gävle och känner våra kunder och deras bilar.</p>
               <div className="bilservice__actions">
                 <button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid">Boka AC-service</button>
-                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
+                <a href={BUSINESS.phone.href} className="bb-btn bb-btn--ember-solid"><PhoneIcon aria-hidden="true" /><span>Ring {BUSINESS.phone.display}</span></a>
               </div>
             </div>
           </div>
