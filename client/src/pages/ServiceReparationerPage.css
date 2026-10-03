@@ -28,7 +28,7 @@
 }
 
 .bilservice *, .bilservice *::before, .bilservice *::after { box-sizing: border-box; }
-.bilservice :where(a) { color: inherit; text-decoration: none; }
+:where(.bilservice) :where(a) { color: inherit; text-decoration: none; }
 .bilservice .bb-reviews-card { color: var(--bb-color-text-inverse); }
 :where(.bilservice) :where(button, input, textarea, select) { font: inherit; }
 .bilservice button { cursor: pointer; }

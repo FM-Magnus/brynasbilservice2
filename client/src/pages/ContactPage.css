@@ -9,7 +9,7 @@
 }
 
 .kontakt-page *, .kontakt-page *::before, .kontakt-page *::after { box-sizing: border-box; }
-.kontakt-page :where(a) { color: inherit; text-decoration: none; }
+:where(.kontakt-page) :where(a) { color: inherit; text-decoration: none; }
 :where(.kontakt-page) :where(button, input, textarea, select) { font: inherit; }
 .kontakt-page :where(h1, h2, h3, h4, p) { margin: 0; }
 .kontakt-page :focus-visible { outline: 3px solid var(--bb-color-focus); outline-offset: 3px; }
