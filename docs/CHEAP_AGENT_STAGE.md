@@ -1,6 +1,6 @@
 # Cheap-agent stage (temporary)
 
-Small, directed edits (mainly placing the icon pool) are done by a cheap agent (Gemini 3.8 Flash in Antigravity 2.0). Claude reviews **read-only** beside it. This stage lives on branch `cheap-agent/stage-1`, checkpoint tag `checkpoint/pre-cheap-agent`. It ends by merging only after the checks below pass. This file is a stage document, not part of the permanent rules: delete it when the stage ends.
+Small, directed edits (mainly placing the icon pool) are done by a cheap agent (Gemini 3.8 Flash in Antigravity 2.0). Claude reviews **read-only** beside it. This stage lives on branch `cheap-agent/stage-1`, checkpoint tags `checkpoint/pre-cheap-agent` (before any stage work) and `checkpoint/stage-1-ready` (guards in place; the base for reviews). It ends by merging only after the checks below pass. This file is a stage document, not part of the permanent rules: delete it when the stage ends.
 
 ## What binds, and what doesn't
 | Layer | What it does | Bypass |

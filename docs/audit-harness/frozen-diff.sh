@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Reviewer helper (read-only): lists frozen files changed since <base> (default checkpoint/pre-cheap-agent),
+# Reviewer helper (read-only): lists frozen files changed since <base> (default checkpoint/stage-1-ready),
 # in commits, in the working tree and untracked. Empty list = the agent kept out of the frozen layer.
 # Usage: docs/audit-harness/frozen-diff.sh [base]
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 . .githooks/frozen-lib.sh
-base="${1:-checkpoint/pre-cheap-agent}"
+base="${1:-checkpoint/stage-1-ready}"
 hits=0
 while IFS= read -r f; do
   [ -z "$f" ] && continue
