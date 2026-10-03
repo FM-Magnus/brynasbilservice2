@@ -76,7 +76,7 @@ The live database is the truth. Nobody but Johnny edits `schema.sql`; §6.3 prop
 |---|---|---|
 | App root | `client/` | React 18.2, Vite 4.5, TypeScript. The repo root has no package of its own. |
 | Routing | `client/src/main.tsx` | React Router. Pages are lazy-loaded. |
-| Base path | `client/vite.config.ts` | `/` in dev, `/brynasbilservice/` in production builds. |
+| Base path | `client/vite.config.ts`, `client/src/main.tsx` | `/` in dev, `/brynasbilservice/` in production builds; `VITE_BASE=/` overrides it for the Netlify preview zip (router `basename` follows `BASE_URL`), see [`ops/netlify.md`](ops/netlify.md). |
 | HTTP client | `client/src/api/axiosConfig.ts` | `baseURL` is `http://localhost:3000` in dev and `/brynasbilservice` in prod, so the frontend calls `/brynasbilservice/api/...`, which Apache proxies to Express. |
 | Public pages | `client/src/pages/*.tsx` | Page content is **hardcoded in the TSX**, except for bookings. The site works with no backend apart from the booking form. |
 | Styling | Colocated `<Page>.css` files, plus `client/src/styles/design-tokens.css` and `shared-elements.css` | Not relevant to the backend. `client/src/css/index.css` was deleted on 2026-09-19. |

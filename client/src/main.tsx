@@ -63,7 +63,7 @@ function RouteFallback() {
   )
 }
 
-const basename = import.meta.env.DEV ? '/' : '/brynasbilservice'
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
 
 // Default to dark theme unless the user has explicitly opted into light.
 if (localStorage.getItem('theme') !== 'light') {

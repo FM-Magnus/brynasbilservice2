@@ -10,7 +10,7 @@ export default defineConfig(async ({ command }) => {
   const { imagetools } = await import('vite-imagetools');
   return {
     plugins: [react(), guardDeletedImages(imagetools())],
-    base: command === 'serve' ? '/' : '/brynasbilservice/',
+    base: command === 'serve' ? '/' : (process.env.VITE_BASE || '/brynasbilservice/'),
     resolve: {
       dedupe: ['react', 'react-dom'],
     },

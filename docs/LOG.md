@@ -4,6 +4,7 @@ One dated entry per day, newest first — one short bullet per session, naming t
 
 ### 2026-10-03
 
+- **Claude Code — Netlify preview zip:** the first zip was blank because the build uses base `/brynasbilservice/`; `vite.config.ts` now takes `VITE_BASE` and `main.tsx` derives the router `basename` from `BASE_URL` (default unchanged); zip recipe and `_redirects` in `docs/ops/netlify.md`. `redesign/blue-teal-v1` and `main` merged and pushed.
 - **Claude Code — autonomous backgrounds night run on `design/backgrounds-night`:** queue rows 1–10 worked in order; five commits (Däckservice, AC-service, Felsökning, Reparationer, four guides), K objects only, desktop-only slots, suite 235 passed after each; skipped and why in the run log (`/tmp/bgnight/log.md`, review at `/tmp/bgnight/index.html`).
 
 ### 2026-10-02
