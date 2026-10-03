@@ -189,6 +189,54 @@ h1 .bb-accent { color: var(--bb-color-focus); }
 }
 .bb-icon-bare svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)); }
 
+/* ---------- Icon backdrop (an icon from the pool, enlarged, behind a card's content) ---------- */
+/* Host = any card or band. The icon is the host's ::before: above the host's own background,
+   below its content (z-index -1 in an isolated stacking context), never catches clicks.
+   The page's island sets the file and, if it wants, the numbers; nothing below is declared on the
+   host, so a page value can never tie with a default here:
+     --bb-icon-image    url('../assets/images/icons/pool/<motif>--<dark|white|teal|amber>.svg')  (required)
+     --bb-icon-size     background-size, default `auto 90%` (e.g. `auto 140%`, `70%`)
+     --bb-icon-x / -y   anchor, default `100%` / `50%` (over 100% pushes it past the edge; add --clip)
+     --bb-icon-opacity  default 0.14
+     --bb-icon-rotate   default 0deg
+     --bb-icon-blend    mix-blend-mode, default normal
+     --bb-icon-fade     a gradient used as an alpha mask, e.g. dissolve toward the text
+     --bb-icon-fill     (--tint only) colour or gradient the icon is painted in, default teal-500
+   Modifiers: --tint paints the file's shape with --bb-icon-fill (one shape, any colour or gradient;
+   two-tone detail is lost), --clip cuts what bleeds past the card edge, --desktop hides it at <=650px. */
+.bb-icon-backdrop {
+  isolation: isolate;
+  position: relative;
+}
+.bb-icon-backdrop::before {
+  background: var(--bb-icon-image, none) var(--bb-icon-x, 100%) var(--bb-icon-y, 50%) / var(--bb-icon-size, auto 90%) no-repeat;
+  content: '';
+  inset: 0;
+  -webkit-mask-image: var(--bb-icon-fade, none);
+  mask-image: var(--bb-icon-fade, none);
+  mix-blend-mode: var(--bb-icon-blend, normal);
+  opacity: var(--bb-icon-opacity, 0.14);
+  pointer-events: none;
+  position: absolute;
+  transform: rotate(var(--bb-icon-rotate, 0deg));
+  z-index: -1;
+}
+.bb-icon-backdrop.bb-icon-backdrop--tint::before {
+  background: var(--bb-icon-fill, var(--bb-color-teal-500));
+  -webkit-mask:
+    var(--bb-icon-image, none) var(--bb-icon-x, 100%) var(--bb-icon-y, 50%) / var(--bb-icon-size, auto 90%) no-repeat,
+    var(--bb-icon-fade, linear-gradient(#000, #000));
+  -webkit-mask-composite: source-in;
+  mask:
+    var(--bb-icon-image, none) var(--bb-icon-x, 100%) var(--bb-icon-y, 50%) / var(--bb-icon-size, auto 90%) no-repeat,
+    var(--bb-icon-fade, linear-gradient(#000, #000));
+  mask-composite: intersect;
+}
+.bb-icon-backdrop.bb-icon-backdrop--clip { overflow: hidden; }
+@media (max-width: 650px) {
+  .bb-icon-backdrop.bb-icon-backdrop--desktop::before { display: none; }
+}
+
 /* ---------- Tip callout ("TIPS") ---------- */
 /* Canonical site-wide replacement for what used to be two separate,
    inconsistent patterns: the Guide family's .service-guide__tip-strip and
