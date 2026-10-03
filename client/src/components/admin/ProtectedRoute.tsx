@@ -1,3 +1,4 @@
+import '../../pages/admin/admin-tailwind.css'
 import { useState } from 'react'
 import { useLanguage } from '../../context/useLanguage'
 

@@ -1,0 +1,5 @@
+/* Tailwind components and utilities for /admin only. Imported by the lazy admin
+   chunks (Dashboard, ProtectedRoute); the preflight reset stays global in
+   styles/tailwind.css. Public pages must not use these classes. */
+@tailwind components;
+@tailwind utilities;

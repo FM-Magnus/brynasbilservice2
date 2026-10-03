@@ -35,7 +35,7 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
    - `client/src/styles/shared-elements.css` owns global `.bb-*` pattern classes below the token layer (buttons, eyebrow, headings, card motifs, icon badges) — see `docs/DESIGN_SYSTEM.md` §2a.
    - The header, footer and shared components (`PublicHeader`, `PublicFooter`, `GoogleReviewsCard`, `ContactFormCard`, `BookingForm`, `BiltjansterFaq`, `GalleryDockStrip`) are listed with their owner files under "Public shell and shared components" above.
    - **Phone footer (<= 650px, 2026-10-01):** one `@media (max-width: 650px)` block in `PublicFooter.css` hides the description, trust row, tagline picture, page list, contact badges and labels, hours badge, the footer's own Boka/Ring buttons and the bottom tagline, and drops the wheel background (`.bb-footer.bb-footer { background-image: none }`); rules are written `.bb-footer .bb-footer__x` to out-rank the base rules. Same DOM at every width, elements are hidden not removed, so `business-facts.spec.ts` still finds the nine `.bb-footer__nav-link`s. Tablet and desktop are unchanged.
-   - `client/src/styles/base.css` (global element defaults) and `client/src/styles/tailwind.css` (Tailwind directives; preflight global, utilities for `/admin` only), both imported in `main.tsx`.
+   - `client/src/styles/base.css` (global element defaults) and `client/src/styles/tailwind.css` (Tailwind preflight only, global; the components/utilities live in `pages/admin/admin-tailwind.css`, imported by the lazy admin chunks), both imported in `main.tsx`.
 
 2. **The 7 unique, standalone pages** — each owns its own bespoke design and its own colocated CSS island. No shared page template between them.
    - `Startsidan` (`/`) — `LandingPage.tsx` + `LandingPage.css` (`.landing-v2__*`). Complete.
@@ -92,7 +92,7 @@ The legacy `client/src/css/index.css` was **deleted in Step 7 (2026-09-19)**. Th
 | `/bilar-till-salu` | Unique | Complete | `BilarTillSalu.css` (`.bilartillsalu-page__*`), mounts `PublicHeader` (overlay) + `PublicFooter` |
 | `/biltjanster` | Unique | Complete | `BiltjansterPage.css` (`.biltjanster-hub__*`), mounts `PublicHeader` + `PublicFooter` |
 | `/tjanster` | Redirect | Retired in Step 7 — `<Navigate to="/biltjanster" replace />` in `main.tsx` | — |
-| `/admin` | Admin | Internal utility; the `ProtectedRoute` gate is lazy too | Tailwind utilities (`styles/tailwind.css`) |
+| `/admin` | Admin | Internal utility; the `ProtectedRoute` gate is lazy too | Tailwind utilities (`pages/admin/admin-tailwind.css`) |
 | `*` (unknown address) | Fallback | `NotFoundPage.tsx`, built only from the shared `.bb-hero` pattern | none of its own |
 
 ## Class-prefix collision check (mandatory before naming a new CSS island)
