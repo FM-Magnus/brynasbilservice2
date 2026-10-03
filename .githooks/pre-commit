@@ -23,7 +23,7 @@ check_no_growth () {
     echo ""
     echo "$reason"
     echo ""
-    echo "If this growth is genuinely intentional, confirm with Magnus, then commit with --no-verify."
+    echo "If this growth is genuinely intentional, stop and ask Magnus. Do not bypass this hook."
     echo ""
     BLOCKED=1
   fi
@@ -130,7 +130,7 @@ check_no_tailwind_in_public () {
     echo "Violating line(s):"
     echo "$violations"
     echo ""
-    echo "If this change is genuinely intentional, confirm with Magnus, then commit with --no-verify."
+    echo "If this change is genuinely intentional, stop and ask Magnus. Do not bypass this hook."
     echo ""
     BLOCKED=1
   fi
@@ -142,5 +142,10 @@ check_router "GEMINI.md" "@./AGENTS.md" 12
 check_max_lines "docs/STATUS.md" 120 "STATUS.md is the current state only. Replace outdated lines instead of adding; history belongs in docs/LOG.md."
 check_css_layer
 check_no_tailwind_in_public
+
+# Cheap-agent stage: frozen files (see .githooks/frozen-paths.txt)
+if [ -x .githooks/protect-frozen ]; then
+  bash .githooks/protect-frozen || BLOCKED=1
+fi
 
 exit $BLOCKED

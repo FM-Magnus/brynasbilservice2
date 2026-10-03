@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Commit guard for the cheap-agent stage (docs/CHEAP_AGENT_STAGE.md, "What binds").
+# Blocks a commit that touches a frozen path (.githooks/frozen-paths.txt), deletes or renames a file
+# under client/src/, or adds a new global CSS file in client/src/styles/.
+# Magnus or Claude (review side) commit such changes deliberately with ALLOW_FROZEN=1 in the environment.
+# Called from .githooks/pre-commit; exits non-zero when blocked.
+. "$(dirname "$0")/frozen-lib.sh"
+
+[ "${ALLOW_FROZEN:-}" = "1" ] && exit 0
+
+bad=0
+while IFS=$'\t' read -r status path rest; do
+  [ -z "$path" ] && continue
+  if is_frozen "$path"; then
+    echo "BLOCKED (frozen file): $path"; bad=1
+  fi
+  if [ -n "$rest" ] && is_frozen "$rest"; then
+    echo "BLOCKED (frozen file, rename target): $rest"; bad=1
+  fi
+  case "$status" in
+    D*|R*) case "$path" in client/src/*) echo "BLOCKED (delete/rename under client/src): $path"; bad=1 ;; esac ;;
+    A*) case "$path" in client/src/styles/*.css) echo "BLOCKED (new global stylesheet; only the existing four plus family files are allowed): $path"; bad=1 ;; esac ;;
+  esac
+done < <(git diff --cached --name-status)
+
+if [ "$bad" = 1 ]; then
+  echo ""
+  echo "Rule: docs/CHEAP_AGENT_STAGE.md, section 'Frozen files'. These files belong to the shared layer, tests, build"
+  echo "config, server or contract. Do not work around this: unstage them (git restore --staged <file>) and tell"
+  echo "Magnus the edit needs a frozen file. Do not use --no-verify."
+  exit 1
+fi
+exit 0

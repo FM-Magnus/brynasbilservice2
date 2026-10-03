@@ -1,0 +1,49 @@
+# Frozen during the cheap-agent stage (docs/CHEAP_AGENT_STAGE.md). One repo-relative path per line.
+# A line ending in "/" freezes every tracked file under it; otherwise it is an exact file.
+# Read by protect-frozen (commit guard), docs/audit-harness/freeze.sh (OS lock) and
+# docs/audit-harness/frozen-diff.sh (reviewer). Change this file only on Magnus's say-so.
+
+# The contract and the tooling that enforces it
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.githooks/
+.claude/
+.agents/
+docs/audit-harness/pw.config.ts
+docs/audit-harness/icons/
+docs/audit-harness/freeze.sh
+docs/audit-harness/frozen-diff.sh
+
+# Global CSS layer and the app shell
+client/src/styles/tailwind.css
+client/src/styles/design-tokens.css
+client/src/styles/base.css
+client/src/styles/shared-elements.css
+client/src/main.tsx
+
+# Business facts, routing/meta data and the one shared component Playwright guards
+client/src/data/business.ts
+client/src/data/publicNavigation.ts
+client/src/data/pageMeta.ts
+client/src/data/structuredData.ts
+client/src/data/heroImgAttrs.ts
+client/src/components/ui/Tip.tsx
+
+# Build, dependencies, checks and tests
+client/package.json
+client/package-lock.json
+client/vite.config.ts
+client/tsconfig.json
+client/tsconfig.app.json
+client/tsconfig.node.json
+client/playwright.config.ts
+client/eslint.config.js
+client/postcss.config.js
+client/tailwind.config.js
+client/scripts/
+client/tests/
+
+# Server and deploy (Johnny's)
+server/
+client/public/
