@@ -96,6 +96,7 @@ Page-local CSS only (family files `ServiceReparationerPage.css`, `ServiceGuideTe
 | AC-service, tips heading column | `teal-mid-ac-service-hoses-gauges` (640) | hard-edged photo block under the heading, balances heading 182 px against prose 617 px; ≥1025px only | no text on it |
 | Felsökning, "Bra att veta" heading column | `white-diagnosis` | K under the heading/lead/button, dissolves from top, left and right; ≥1025px only; fixes balance y≈2530 | lead text on page colour, 5.08:1 |
 | Reparationer, "Bra att veta om pris" heading column | `white-clutch` | K under heading/lead/button, 3.4:1 crop, dissolves top/left/right; ≥1025px only; fixes balance y≈2062 | lead text on page colour, 5.08:1 |
+| Guides Koppling / Kamrem / Drivaxel / Stötdämpare, "info" heading (GuideInfo) | `white-clutch` / `white-timing-belt` / `white-driveshaft` / `white-suspension` | K right of heading and lead, one `--guide-k-object` per guide class in `ServiceGuideTemplate.css`, heading block min-height 11.5rem, ≥1025px only | text on page colour 5.08:1 (h2 box spans the object so the script reads 2.29: a false positive, the heading ends at x≈520, the object starts at x≈1050) |
 | Biltjänster closing band | amber spark plugs | A, amber | 14.6:1 |
 | Bilar till salu closing card | key handover (hands only) | light veil | 4.7:1 |
 | All ten guides + GAT: importance, service and closing cards | tools, engine work, under the lift | D, same on every guide (neutral motifs) | 9.7:1 or better |

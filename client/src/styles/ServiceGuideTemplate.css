@@ -629,3 +629,29 @@
 @media (prefers-reduced-motion: reduce) {
   .service-guide *, .service-guide *::before, .service-guide *::after { transition-duration: 0.01ms !important; }
 }
+
+/* K object in the info section (night run 2026-10-03): a white-* card lies on the page colour right of the heading and lead.
+   One class per guide sets --guide-k-object; guides without it render nothing. Multiply takes the pale floor to the page colour,
+   the left edge dissolves, desktop only. */
+.service-guide--clutch { --guide-k-object: url('../assets/images/services/guide-cards/k-clutch.webp'); }
+.service-guide--timing { --guide-k-object: url('../assets/images/services/guide-cards/k-timing-belt.webp'); }
+.service-guide--driveshaft { --guide-k-object: url('../assets/images/services/guide-cards/k-driveshaft.webp'); }
+.service-guide--shocks { --guide-k-object: url('../assets/images/services/guide-cards/k-suspension.webp'); }
+@media (min-width: 1025px) {
+  :is(.service-guide--clutch, .service-guide--timing, .service-guide--driveshaft, .service-guide--shocks) .service-guide__info-heading { min-height: 11.5rem; }
+  .service-guide .service-guide__info-heading { position: relative; }
+  .service-guide .service-guide__info-heading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 1.75rem;
+    width: 36%;
+    background: var(--guide-k-object, none) right 78% / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%);
+    pointer-events: none;
+  }
+}
