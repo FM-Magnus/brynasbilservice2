@@ -111,8 +111,6 @@ export default function OljebytePage() {
           bookLabel="Boka oljebyte"
         />
 
-        <GuideQuickFacts time="30–60 minuter" />
-
         <GuideIntro
           id="oljebyte-intro-title"
           heading="Vad är ett oljebyte?"
@@ -127,6 +125,8 @@ export default function OljebytePage() {
             action={<Link to="/felsokning" className="bb-btn bb-btn--ember-solid service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="30–60 minuter" />
 
         <GuideImportance
           id="oljebyte-importance-title"

@@ -13,14 +13,6 @@ Kodning & diagnostik
 Korrekt registrering i bilens BMS-system för optimal livslängd.
 Snabbt & smidigt
 Konditionstest och byte utförs normalt inom 30–60 minuter.
-UNGEFÄRLIG ARBETSTID
-30–60 minuter
-PRIS
-Tydligt pris innan vi börjar
-BILMÄRKEN
-Alla märken och modeller
-
-Tiden är ett riktvärde och beror på bilmodell.
 
 Noggrann mätning och konditionstest.
 
@@ -47,6 +39,15 @@ TIPS
 Osäker på vilken batterityp din bil behöver?
 Vi kontrollerar alltid biltillverkarens krav för AGM, EFB eller blysyrabatteri utifrån ditt registreringsnummer.
 FRÅGA OSS
+UNGEFÄRLIG ARBETSTID
+30–60 minuter
+PRIS
+Tydligt pris innan vi börjar
+BILMÄRKEN
+Alla märken och modeller
+
+Tiden är ett riktvärde och beror på bilmodell.
+
 Varför är det viktigt att byta i tid?
 
 Ett svagt batteri ger ofta kort förvarning och sviker gärna en kall morgon, när startmotorn behöver som mest kraft.

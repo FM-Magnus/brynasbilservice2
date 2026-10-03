@@ -92,8 +92,6 @@ export default function KamremPage() {
           onBooking={openBooking}
         />
 
-        <GuideQuickFacts time="2–6 timmar" />
-
         <GuideIntro
           id="kamrem-intro-title"
           heading="Vad är en kamrem?"
@@ -108,6 +106,8 @@ export default function KamremPage() {
             action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="2–6 timmar" />
 
         <GuideImportance
           id="kamrem-importance-title"

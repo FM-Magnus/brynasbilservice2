@@ -96,8 +96,6 @@ export default function StyrningKullederPage() {
           onBooking={openBooking}
         />
 
-        <GuideQuickFacts time="Cirka 1 timme per led" />
-
         <GuideIntro
           id="steering-intro-title"
           heading="Vad gör styrning och kulleder?"
@@ -112,6 +110,8 @@ export default function StyrningKullederPage() {
             action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="Cirka 1 timme per led" />
 
         <GuideImportance
           id="steering-importance-title"

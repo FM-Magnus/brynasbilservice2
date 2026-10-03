@@ -92,8 +92,6 @@ export default function GatPage() {
           bookLabel="Boka GAT-behandling"
         />
 
-        <GuideQuickFacts time="Beror på behandling" />
-
         <GuideIntro
           id="gat-intro-title"
           heading="Vad är GAT?"
@@ -102,6 +100,8 @@ export default function GatPage() {
           <p>GAT, German Automotive Technology, är ett tyskt märke för vård av motor och bränslesystem. Produkterna tillsätts i oljan eller i bränslet och är framtagna för att hålla motorns insida och insprutningen rena. Enligt tillverkaren är kvaliteten TÜV-certifierad.</p>
           <p>Hos oss är GAT inget vi bara säljer över disk. Vi använder dem själva, och vi hjälper dig välja rätt produkt och rätt tillfälle, så att du inte köper något din bil inte behöver.</p>
         </GuideIntro>
+
+        <GuideQuickFacts time="Beror på behandling" />
 
         <GuideImportance
           id="gat-importance-title"

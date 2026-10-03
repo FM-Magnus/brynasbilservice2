@@ -97,8 +97,6 @@ export default function DrivaxelDrivknutarPage() {
           onBooking={openBooking}
         />
 
-        <GuideQuickFacts time="1–2 timmar per sida" />
-
         <GuideIntro
           id="driveshaft-intro-title"
           heading="Vad gör drivaxeln och drivknutarna?"
@@ -113,6 +111,8 @@ export default function DrivaxelDrivknutarPage() {
             action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="1–2 timmar per sida" />
 
         <GuideImportance
           id="driveshaft-importance-title"

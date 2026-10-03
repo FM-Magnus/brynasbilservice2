@@ -94,8 +94,6 @@ export default function KopplingPage() {
           onBooking={openBooking}
         />
 
-        <GuideQuickFacts time="4–10 timmar" />
-
         <GuideIntro
           id="koppling-intro-title"
           heading="Vad är en koppling?"
@@ -110,6 +108,8 @@ export default function KopplingPage() {
             action={<Link to="/felsokning" className="bb-btn bb-btn--ember-solid service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="4–10 timmar" />
 
         <GuideImportance
           id="koppling-importance-title"

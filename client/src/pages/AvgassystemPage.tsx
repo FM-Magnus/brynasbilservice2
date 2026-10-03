@@ -100,8 +100,6 @@ export default function AvgassystemPage() {
           onBooking={openBooking}
         />
 
-        <GuideQuickFacts time="Ofta under 1 timme för en ljuddämpare" />
-
         <GuideIntro
           id="exhaust-intro-title"
           heading="Vad gör avgassystemet?"
@@ -116,6 +114,8 @@ export default function AvgassystemPage() {
             action={<Link to="/felsokning" className="bb-btn bb-btn--ember-solid service-guide__btn">Boka en felsökning<ArrowRightIcon aria-hidden="true" /></Link>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="Ofta under 1 timme för en ljuddämpare" />
 
         <GuideImportance
           id="exhaust-importance-title"

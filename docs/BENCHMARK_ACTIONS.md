@@ -18,7 +18,7 @@ Förebilder: Auto Stockholm, JA Car Center, Mattssons, Torsviks, Laga Bilen i Um
 | A3 | `/tjanster` → `/biltjanster` – var redan löst, ingen åtgärd | – |
 | B1 | Fast rad med Ring och Boka tid på mobil (under 768 px) | `2210aa3a`-serien |
 | B2 | Startsidan: hero → tjänster → om oss → galleri → process → kontaktformulär | `6153ca40`-serien |
-| B3 | "I korthet" under heron på de tio guiderna (arbetstid, pris, bilmärken) | `6153ca40`-serien |
+| B3 | "I korthet" på de elva guiderna (arbetstid, pris, bilmärken); flyttad 2026-10-03 från direkt under heron till efter introt (Magnus) | `6153ca40`-serien |
 | B5 | "Fler tjänster" – tre länkar längst ner på de tio guiderna | `6153ca40`-serien |
 | – | Lazy-loading borttaget på sju guiders hero-bilder | `cf208017` |
 | – | Mobilheader: större logotyp (195 px), menyknappen längst till höger | `2210aa3a`-serien |

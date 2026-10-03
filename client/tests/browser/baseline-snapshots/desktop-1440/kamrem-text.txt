@@ -13,14 +13,6 @@ Erfarna mekaniker
 Exakt nollställning och låsning med modellanpassade specialverktyg.
 Tydlig rådgivning
 Vi kontrollerar intervall via reg.nr och ger fast prisuppgift.
-UNGEFÄRLIG ARBETSTID
-2–6 timmar
-PRIS
-Tydligt pris innan vi börjar
-BILMÄRKEN
-Alla märken och modeller
-
-Tiden är ett riktvärde och beror på bilmodell.
 
 Precision, synk och driftsäkerhet.
 
@@ -47,6 +39,15 @@ TIPS
 Osäker på om din bil har rem eller kedja?
 Vi slår upp exakta uppgifter i biltillverkarens databas utifrån ditt registreringsnummer.
 FRÅGA OSS
+UNGEFÄRLIG ARBETSTID
+2–6 timmar
+PRIS
+Tydligt pris innan vi börjar
+BILMÄRKEN
+Alla märken och modeller
+
+Tiden är ett riktvärde och beror på bilmodell.
+
 Varför är det viktigt att byta i tid?
 
 Ett förebyggande kamremsbyte kostar en bråkdel av vad en motor kostar att reparera efter ett haveri.

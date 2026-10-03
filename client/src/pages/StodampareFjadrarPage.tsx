@@ -96,8 +96,6 @@ export default function StodampareFjadrarPage() {
           onBooking={openBooking}
         />
 
-        <GuideQuickFacts time="1–3 timmar per axel" />
-
         <GuideIntro
           id="suspension-intro-title"
           heading="Vad gör stötdämpare och fjädrar?"
@@ -112,6 +110,8 @@ export default function StodampareFjadrarPage() {
             action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="1–3 timmar per axel" />
 
         <GuideImportance
           id="suspension-importance-title"

@@ -97,8 +97,6 @@ export default function HjullagerbytePage() {
           onBooking={openBooking}
         />
 
-        <GuideQuickFacts time="1–2 timmar per hjul" />
-
         <GuideIntro
           id="wheel-bearing-intro-title"
           heading="Vad gör ett hjullager?"
@@ -113,6 +111,8 @@ export default function HjullagerbytePage() {
             action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Boka kontroll<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="1–2 timmar per hjul" />
 
         <GuideImportance
           id="wheel-bearing-importance-title"

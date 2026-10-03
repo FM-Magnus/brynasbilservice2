@@ -95,8 +95,6 @@ export default function BilbatteriPage() {
           onBooking={openBooking}
         />
 
-        <GuideQuickFacts time="30–60 minuter" />
-
         <GuideIntro
           id="battery-intro-title"
           heading="Vad gör bilbatteriet?"
@@ -111,6 +109,8 @@ export default function BilbatteriPage() {
             action={<button type="button" onClick={openBooking} className="bb-btn bb-btn--ember-solid service-guide__btn">Fråga oss<ArrowRightIcon aria-hidden="true" /></button>}
           />
         </GuideIntro>
+
+        <GuideQuickFacts time="30–60 minuter" />
 
         <GuideImportance
           id="battery-importance-title"

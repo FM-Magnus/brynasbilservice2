@@ -105,8 +105,6 @@ export default function BromssystemPage() {
           bookLabel="Boka bromsservice"
         />
 
-        <GuideQuickFacts time="1–3 timmar" />
-
         <GuideIntro
           id="brake-intro-title"
           heading="Vad ingår i bromssystemet?"
@@ -116,6 +114,8 @@ export default function BromssystemPage() {
           <p>Bromssystemet består av flera delar som slits i olika takt. En kontroll handlar därför om mer än att bara titta på belägg och skivor.</p>
           <GuideParts items={brakeParts} />
         </GuideIntro>
+
+        <GuideQuickFacts time="1–3 timmar" />
 
         <GuideImportance
           id="brake-importance-title"
