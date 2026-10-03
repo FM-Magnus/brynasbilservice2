@@ -860,3 +860,22 @@
     pointer-events: none;
   }
 }
+
+/* ---------- Reparationer: K object under the rights heading (night run 2026-10-03) ----------
+   white-clutch lies on the page colour below the heading, lead and button; fills the gap to the longer prose column. */
+@media (min-width: 1025px) {
+  section[aria-labelledby="reparationer-rights-title"] .bilservice__editorial-head::after {
+    content: '';
+    display: block;
+    margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+    aspect-ratio: 3.4 / 1;
+    background: url('../assets/images/services/repair/rights-white-clutch.webp') right 85% / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 30%), linear-gradient(90deg, transparent 0, #000 25%, #000 92%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(180deg, transparent 0, #000 30%), linear-gradient(90deg, transparent 0, #000 25%, #000 92%, transparent 100%);
+    mask-composite: intersect;
+    pointer-events: none;
+  }
+}
