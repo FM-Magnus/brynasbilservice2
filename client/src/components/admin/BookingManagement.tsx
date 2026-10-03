@@ -151,9 +151,6 @@ export function BookingManagement() {
     setSelectedBooking(null);
   };
 
-  // Add debugging logs to verify sorting behavior
-  console.log('Sort Config:', sortConfig);
-  console.log('Sorted Bookings:', sortedBookings);
 
   const handleSort = (key: keyof Booking) => {
     setSortConfig((prev) => {

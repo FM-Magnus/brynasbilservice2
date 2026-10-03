@@ -53,7 +53,7 @@ Phases 1–7 are done (production fixes, facts and data, documentation, assets a
 5. **`schema.sql` ≠ live database** — the live DB is the truth ([`BACKEND.md`](BACKEND.md)).
 6. **Google reviews are hard-coded** (`defaultGoogleReviews` in `GoogleReviewsCard.tsx`) and will drift from the live profile.
 7. **Footer Instagram button** points at instagram.com's front page — needs the workshop's account or removal.
-8. **Not there yet:** ESLint config is broken; booking against a real API is unverified locally; two `console.log`s print bookings in `components/admin/BookingManagement.tsx`.
+8. **Not there yet:** ESLint config is broken; booking against a real API is unverified locally.
 9. **Unconfirmed copy, flagged in code:** Felsökning "1–2 tim" (`DRAFT GUIDANCE`); AC-service frequency (`DRAFT GUIDANCE`) and refrigerant capability (`FACT TO CONFIRM`). Numeric claims on guide pages carry "branschmässigt riktvärde".
 
 ## Facts Magnus has confirmed
@@ -70,4 +70,3 @@ Phases 1–7 are done (production fixes, facts and data, documentation, assets a
 - **Waiting on Johnny:** the six yes/no server questions in [`ops/server-questions.md`](ops/server-questions.md) (Brotli, HTTP/3, Rocket Loader, final address, `/assets` headers, HTML cache), server-side admin auth, saving `comment_customer`, a `/api/contact` endpoint, the `.htaccess` conflict and the deploy method.
 - **Research documents** (Magnus's Drive, `> RESEARCH OUTPUTS/BBilservice/`): an IA/trust spec written for Astro (its IA and trust chapters transfer, the tech doesn't) and a Gävle competitor analysis. Their facts about Brynäs are wrong in places (owner name, opening hours) — verify with Magnus before using any.
 - **Paused design review** against that spec: the headline gap (company-presenting nav vs. symptom-based `/problem/*` entry points) is not addressed. The repeated generic process block now appears only on Landing and Service & reparationer (editorial-rhythm branch).
-- **Unused dependencies:** `classnames`, `@types/axios` (remove with approval).
