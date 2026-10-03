@@ -806,3 +806,37 @@
 @media (max-width: 650px) {
   .bilservice > #felsokning .bb-hero__media img { object-position: 80% 50%; }
 }
+
+/* ---------- AC-service: object on the page + a photo block under the tips heading (night run 2026-10-03) ---------- */
+/* K: white-ac lies on the page colour in a third column right of the prose; the left edge dissolves. */
+@media (min-width: 1025px) {
+  section[aria-labelledby="ac-value-title"] .bilservice__editorial {
+    position: relative;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3.4fr);
+  }
+  section[aria-labelledby="ac-value-title"] .bilservice__editorial::after {
+    content: '';
+    grid-column: 3;
+    grid-row: 1;
+    align-self: stretch;
+    margin-right: calc(-1 * var(--bb-wrap-pad, 0px));
+    background: url('../assets/images/services/ac/value-white-ac.webp') right center / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 40%, #000 92%, transparent 100%);
+    pointer-events: none;
+  }
+}
+/* Balance: the short heading column gets a hard-edged photo block so it matches the long prose beside it. */
+@media (min-width: 1025px) {
+  section[aria-labelledby="ac-tips-title"] .bilservice__editorial-head::after {
+    content: '';
+    display: block;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    aspect-ratio: 10 / 7;
+    border-radius: var(--bb-radius-card);
+    background: url('../assets/images/services/ac/tips-teal-hoses-gauges.webp') 88% 62% / 150% auto no-repeat;
+    box-shadow: var(--bb-shadow-card);
+  }
+}
