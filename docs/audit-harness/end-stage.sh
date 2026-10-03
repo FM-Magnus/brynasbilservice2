@@ -9,6 +9,7 @@ set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 dry=0; [ "${1:-}" = "--dry-run" ] && dry=1
 git diff --quiet && git diff --cached --quiet || { echo "working tree not clean: commit or stash first"; exit 1; }
+was_locked=0; ls -lO .githooks/frozen-paths.txt 2>/dev/null | grep -q uchg && was_locked=1
 [ -x docs/audit-harness/freeze.sh ] && docs/audit-harness/freeze.sh off || true
 commits=$(git rev-list checkpoint/pre-cheap-agent..checkpoint/stage-1-ready)
 [ -n "$commits" ] || { echo "no stage commits found between the checkpoint tags"; exit 1; }
@@ -20,6 +21,7 @@ fi
 git status --short
 if [ "$dry" = 1 ]; then
   git reset -q --hard HEAD
+  [ "$was_locked" = 1 ] && docs/audit-harness/freeze.sh on   # a dry run leaves the lock as it found it
   echo "dry run: nothing changed"
   exit 0
 fi

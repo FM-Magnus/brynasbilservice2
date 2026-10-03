@@ -15,6 +15,7 @@ docs/audit-harness/icons/
 docs/audit-harness/freeze.sh
 docs/audit-harness/frozen-diff.sh
 docs/audit-harness/end-stage.sh
+docs/audit-harness/review.sh
 
 # Global CSS layer and the app shell
 client/src/styles/tailwind.css

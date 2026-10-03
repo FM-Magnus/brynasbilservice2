@@ -27,7 +27,7 @@ Frozen files = `.githooks/frozen-paths.txt` (single source). In words: the contr
 ## Workflow
 1. `docs/audit-harness/freeze.sh on` (once per sitting).
 2. Fill in `docs/CHEAP_AGENT_PROMPT_TEMPLATE.md` and send it to Antigravity. New session per edit.
-3. Review (Claude, read-only, low effort): `docs/audit-harness/frozen-diff.sh`, `git diff --stat -p`, then the checklist below.
+3. Review (Claude, read-only, low effort): `docs/audit-harness/review.sh [base] [--pw "spec ..."]` runs the mechanical part in one go (frozen files, deletions, dependencies, `style=`, `<a href>`, React 19 / Tailwind v4, hard-coded colours/px, changed Swedish text, typecheck, check:css, optional Playwright specs; FAIL = rule break, WARN = look). Then read `git diff --stat -p` and finish the checklist below by hand.
 4. Commit by hand, by file name, one logical change each. Frozen files only with `ALLOW_FROZEN=1` and only deliberately.
 5. Before switching branches, merging or touching a frozen file: `freeze.sh off`.
 
