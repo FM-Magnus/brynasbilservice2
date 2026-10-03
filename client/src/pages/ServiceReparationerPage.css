@@ -516,19 +516,31 @@
   color: var(--bb-color-text-muted);
   font: 400 1rem / 1.6 var(--bb-font-body);
 }
-/* Tyre photo faded in from the right under a white veil (treatment B/C). */
+/* Tyre lying on the white card (recipe K): the photo's pale floor takes the card colour via multiply, the left edge dissolves. */
 .bilservice__storage-card.bilservice__storage-card--photo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background-color: #fff;
-  background-image:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.95) 52%, rgba(255, 255, 255, 0.86) 100%),
-    url('../assets/images/services/tires/storage-white-tyre.webp');
-  background-position: center, right 70%;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
-@media (max-width: 900px) {
+@media (min-width: 901px) {
   .bilservice__storage-card.bilservice__storage-card--photo {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('../assets/images/services/tires/storage-white-tyre.webp');
+    padding-right: 36%;
+  }
+  .bilservice__storage-card.bilservice__storage-card--photo::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 40%;
+    background: url('../assets/images/services/tires/storage-white-tyre.webp') right center / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 40%);
+    pointer-events: none;
   }
 }
 .bilservice__storage-grid {

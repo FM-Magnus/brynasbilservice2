@@ -91,7 +91,7 @@ Page-local CSS only (family files `ServiceReparationerPage.css`, `ServiceGuideTe
 | Bilservice, tier cards 01 / 02 / 03 | `bright-workshop-sedan` / `brake-parts` (teal veil) / `steering-suspension` | photo under the card's own colour, light → mid → dark kept | 7.7 / 5.0 / 11.7:1 |
 | Bilservice, AC, Reparationer "Så går det till" bands | tools / amber gauges / engine work | A at 24% (15% on phones) | 6.3:1 or better |
 | Closing trust cards: Bilservice, Felsökning (light), Reparationer, AC (dark) | spark plugs, diagnostic tablet / under the lift, amber gauges | B/C light (white veil .87–.97) and D dark (left-heavy veil) | 4.8 / 12:1 or better |
-| Däckservice, tyre storage card | `white-tyre` | white veil from the left | 4.5:1 |
+| Däckservice, tyre storage card | `white-tyre` | K (night run 2026-10-03): object on the white card, multiply, left dissolve; ≥901px only, clean below | text on white, 5.1:1 (teal price line) |
 | Biltjänster closing band | amber spark plugs | A, amber | 14.6:1 |
 | Bilar till salu closing card | key handover (hands only) | light veil | 4.7:1 |
 | All ten guides + GAT: importance, service and closing cards | tools, engine work, under the lift | D, same on every guide (neutral motifs) | 9.7:1 or better |
