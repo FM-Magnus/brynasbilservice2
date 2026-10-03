@@ -88,6 +88,12 @@
 .service-guide__hero .service-guide__lead { margin-bottom: 1.25rem; }
 .service-guide__hero .service-guide__actions { margin-bottom: 0; }
 
+/* Guides only (the shared strip stays flat elsewhere): the Tip's solid light teal
+   behind the trust row under the hero. */
+.service-guide .bb-trust-strip {
+  background: var(--bb-color-teal-100);
+}
+
 .service-guide__lead {
   max-width: 46ch;
   margin: 0 0 1.75rem;
@@ -572,8 +578,9 @@
 
 /* I korthet (benchmark B3): three facts on a light band right under the hero. */
 .service-guide__quick-facts {
-  background: var(--bb-color-surface);
-  border-bottom: 1px solid var(--bb-color-border-subtle-light);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--bb-color-amber-600) 75%, var(--bb-color-ink-950));
+  border-block: 1px solid var(--bb-color-border-subtle-light);
   padding-block: 1.1rem 0.9rem;
 }
 .service-guide__quick-facts-list {
@@ -583,15 +590,56 @@
   margin: 0;
 }
 .service-guide__quick-facts-list div { min-width: 0; }
+/* A white decorative icon (CSS background, markup unchanged) beside each fact: hourglass, document, car. */
+.service-guide__quick-facts-list > div {
+  align-items: center;
+  column-gap: 0.9rem;
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+}
+.service-guide__quick-facts-list > div::before {
+  background: center / contain no-repeat;
+  content: '';
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  height: 2.6rem;
+  width: 2.6rem;
+}
+.service-guide__quick-facts-list > div > * { grid-column: 2; position: relative; z-index: 1; }
+.service-guide__quick-facts-list > div:nth-child(1)::before { background-image: url('../assets/images/services/quick-facts/qf-time.svg'); }
+.service-guide__quick-facts-list > div:nth-child(2)::before { background-image: url('../assets/images/services/quick-facts/qf-price.svg'); }
+/* The car is huge and sits behind the text of its fact at 40 % opacity, bleeding past the band's edges (the band clips it); dark so the white text stays readable. */
+.service-guide__quick-facts-list > div:nth-child(3) {
+  grid-template-columns: minmax(0, 1fr);
+  position: relative;
+}
+.service-guide__quick-facts-list > div:nth-child(3)::before {
+  background-image: url('../assets/images/services/quick-facts/qf-car-dark.svg');
+  height: 14rem;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  opacity: 0.4;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 36.4rem;
+  z-index: 0;
+}
+.service-guide__quick-facts-list > div:nth-child(3) > * {
+  grid-column: 1;
+  position: relative;
+  z-index: 1;
+}
 /* Labels are the shared .bb-eyebrow; only its bottom margin is tightened here. */
-.service-guide__quick-facts-list .bb-eyebrow { margin: 0; }
+.service-guide__quick-facts-list .bb-eyebrow { color: var(--bb-color-text-inverse); margin: 0; }
 .service-guide__quick-facts-list dd {
-  color: var(--bb-color-ink-950);
+  color: var(--bb-color-text-inverse);
   font: 800 1.05rem/1.35 var(--bb-font-display);
   margin: 0.2rem 0 0;
 }
 .service-guide__quick-facts-note {
-  color: var(--bb-color-text-muted);
+  color: var(--bb-color-text-inverse);
+  position: relative;
+  z-index: 1;
   font-size: 0.78rem;
   margin-top: 0.6rem;
 }
@@ -623,6 +671,7 @@
 @media (max-width: 640px) {
   .service-guide__quick-facts-list { grid-template-columns: minmax(0, 1fr); gap: 0.55rem; }
   .service-guide__quick-facts-list div { align-items: baseline; display: flex; gap: 0.6rem; justify-content: space-between; }
+  .service-guide__quick-facts-list > div::before { display: none; }
   .service-guide__quick-facts-list dd { font-size: 0.95rem; margin: 0; text-align: right; }
 }
 
