@@ -324,8 +324,39 @@
   border-radius: var(--bb-radius-card);
   box-shadow: var(--bb-shadow-card);
   margin-top: 1rem;
+  overflow: hidden;
   padding: 1.6rem 2rem;
   position: relative;
+}
+
+/* Decorative: a white wrench (the mechanic) bleeding off the right edge,
+   more than half of it visible, fading out towards the text. */
+.omoss-page__quote-card::after {
+  background: url('../assets/images/about/quote-wrench.svg') center / contain no-repeat;
+  content: '';
+  height: 16rem;
+  inset-block-start: 50%;
+  inset-inline-end: -6rem;
+  opacity: 0.24;
+  pointer-events: none;
+  position: absolute;
+  transform: translateY(-50%);
+  width: 16rem;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 38%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 38%);
+}
+
+.omoss-page__quote-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Phones: the card is narrow, so the shield would sit behind the text; keep it fainter and further out. */
+@media (max-width: 650px) {
+  .omoss-page__quote-card::after {
+    inset-inline-end: -9rem;
+    opacity: 0.14;
+  }
 }
 
 .omoss-page__quote-symbol {
