@@ -383,3 +383,51 @@
     width: 100%;
   }
 }
+
+/* Date picker popup: the library's default blue and orange replaced by the site's teal and amber (2026-10-03). */
+.modal-container .react-datepicker {
+  border: 1px solid rgba(16, 22, 24, 0.14);
+  border-radius: var(--bb-radius-md);
+  box-shadow: var(--bb-shadow-card);
+  color: var(--bb-color-text);
+  font-family: var(--bb-font-body);
+}
+.modal-container .react-datepicker__header {
+  border-bottom: 1px solid rgba(16, 22, 24, 0.1);
+  background: var(--bb-color-page);
+}
+.modal-container .react-datepicker__current-month,
+.modal-container .react-datepicker-time__header,
+.modal-container .react-datepicker__day-name {
+  color: var(--bb-color-ink-950);
+}
+.modal-container .react-datepicker__day:hover,
+.modal-container .react-datepicker__month-text:hover,
+.modal-container .react-datepicker__time-list-item:hover {
+  background-color: rgba(4, 119, 132, 0.12);
+}
+.modal-container .react-datepicker__day--today {
+  color: var(--bb-color-teal-700);
+  font-weight: 800;
+}
+.modal-container .react-datepicker__day--selected,
+.modal-container .react-datepicker__day--keyboard-selected,
+.modal-container .react-datepicker__day--in-selecting-range,
+.modal-container .react-datepicker__day--in-range,
+.modal-container .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: var(--bb-color-teal-700);
+  color: #fff;
+}
+.modal-container .react-datepicker__day--selected:hover,
+.modal-container .react-datepicker__day--keyboard-selected:hover,
+.modal-container .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected:hover {
+  background-color: var(--bb-color-teal-800);
+}
+.modal-container .react-datepicker__day--holidays,
+.modal-container .react-datepicker__day--holidays:hover {
+  background-color: var(--bb-color-amber-500);
+  color: var(--bb-color-ink-950);
+}
+.modal-container .react-datepicker__day--disabled {
+  color: rgba(16, 22, 24, 0.3);
+}
