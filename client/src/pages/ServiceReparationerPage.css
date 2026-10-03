@@ -840,3 +840,23 @@
     box-shadow: var(--bb-shadow-card);
   }
 }
+
+/* ---------- Felsökning: K object under the guidance heading (night run 2026-10-03) ----------
+   white-diagnosis lies on the page colour below the heading, lead and button; it dissolves from the top and the left,
+   and fills the height the long prose column needs (balance: heading column 271 px vs prose 559 px). */
+@media (min-width: 1025px) {
+  section[aria-labelledby="felsokning-guidance-title"] .bilservice__editorial-head::after {
+    content: '';
+    display: block;
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+    aspect-ratio: 2 / 1;
+    background: url('../assets/images/services/diagnostics/guidance-white-diagnosis.webp') right bottom / cover no-repeat;
+    mix-blend-mode: multiply;
+    filter: brightness(1.18) contrast(1.15) saturate(0.7);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 35%), linear-gradient(90deg, transparent 0, #000 25%, #000 92%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(180deg, transparent 0, #000 35%), linear-gradient(90deg, transparent 0, #000 25%, #000 92%, transparent 100%);
+    mask-composite: intersect;
+    pointer-events: none;
+  }
+}
